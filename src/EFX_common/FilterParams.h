@@ -27,7 +27,7 @@
 #define FILTER_PARAMS_H
 
 
-#include "global.h"
+#include "../global.h"
 
 class FilterParams
 {

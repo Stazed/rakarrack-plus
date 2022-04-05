@@ -27,7 +27,7 @@
 #define ALIENWAH_H
 
 #include "Effect.h"
-#include "../EffectLFO.h"
+#include "../EFX_common/EffectLFO.h"
 
 #define ALIENLV2_URI "https://github.com/Stazed/rakarrack-plus#awha"
 

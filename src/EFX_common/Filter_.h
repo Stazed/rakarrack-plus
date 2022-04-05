@@ -1,7 +1,11 @@
 /*
-  Rakarrack   Audio FX software
-  FPreset.h - Internal Preset Reader
-  by Josep Andreu
+  ZynAddSubFX - a software synthesizer
+
+  Filter_.h - This class is inherited by filter classes
+  Copyright (C) 2002-2005 Nasca Octavian Paul
+  Author: Nasca Octavian Paul
+
+  Modified for rakarrack by Josep Andreu
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of version 2 of the GNU General Public License
@@ -18,18 +22,25 @@
 
 */
 
-#ifndef FPRESET_H
-#define FPRESET_H
+#ifndef FILTER__H
+#define FILTER__H
 
-#include "global.h"
+#include "../global.h"
 
-class FPreset
+
+
+class Filter_
 {
 public:
+    Filter_() {outgain = 0.0;};
+    virtual ~ Filter_ ()  {};
+    virtual void filterout (float * /* smp */, uint32_t /* period */) { };
+    virtual void setfreq (float /* frequency */) {};
+    virtual void setfreq_and_q (float /* frequency */, float /* q_ */) { };
+    virtual void setq (float /* q_ */) { };
+    virtual void setgain (float /* dBgain */) {};
 
-    FPreset();
-    ~FPreset();
-    void ReadPreset(int eff, int num, int pdata[], char *filename = NULL);
+    float outgain;
 };
 
 

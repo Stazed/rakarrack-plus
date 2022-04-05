@@ -30,7 +30,7 @@
 #define ECHOVERSE_H
 
 #include "Effect.h"
-#include "../delayline.h"
+#include "../EFX_common/delayline.h"
 
 #define ECHOVERSELV2_URI "https://github.com/Stazed/rakarrack-plus#Echoverse"
 

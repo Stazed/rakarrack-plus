@@ -64,7 +64,7 @@
 #include "FX/Synthfilter.h"
 #include "FX/VaryBand.h"
 #include "FX/Convolotron.h"
-#include "Resample.h"
+#include "EFX_common/Resample.h"
 #include "FX/Looper.h"
 #include "FX/MuTroMojo.h"
 #include "FX/Echoverse.h"
@@ -83,7 +83,7 @@
 #include "FX/Vibe.h"
 #include "FX/Infinity.h"
 #include "FX/ParametricEQ.h"
-#include "beattracker.h"
+#include "EFX_common/beattracker.h"
 #include <jack/jack.h>
 #include <sstream>
 

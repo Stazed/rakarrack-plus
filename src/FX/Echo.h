@@ -28,7 +28,7 @@
 #define ECHO_H
 
 #include "Effect.h"
-#include "../delayline.h"
+#include "../EFX_common/delayline.h"
 
 #define ECHOLV2_URI "https://github.com/Stazed/rakarrack-plus#eco"
 

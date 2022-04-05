@@ -23,7 +23,7 @@
 #ifndef DLINE_H
 #define DLINE_H
 
-#include "global.h"
+#include "../global.h"
 
 
 class delayline

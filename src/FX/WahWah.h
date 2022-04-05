@@ -28,8 +28,8 @@
 #define WAHWAH_H
 
 #include "Effect.h"
-#include "../EffectLFO.h"
-#include "../Filter.h"
+#include "../EFX_common/EffectLFO.h"
+#include "../EFX_common/Filter.h"
 
 #define WAHLV2_URI "https://github.com/Stazed/rakarrack-plus#wha"
 

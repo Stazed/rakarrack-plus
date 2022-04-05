@@ -31,8 +31,8 @@
 #define DUAL_FLANGE_H
 
 #include "Effect.h"
-#include "../EffectLFO.h"
-#include "../delayline.h"
+#include "../EFX_common/EffectLFO.h"
+#include "../EFX_common/delayline.h"
 
 #define DFLANGELV2_URI "https://github.com/Stazed/rakarrack-plus#Dual_Flange"
 

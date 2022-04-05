@@ -27,8 +27,8 @@
 #include <sndfile.h>
 #include <vector>
 #include "Effect.h"
-#include "../Resample.h"
-#include "../mayer_fft.h"
+#include "../EFX_common/Resample.h"
+#include "../EFX_common/mayer_fft.h"
 
 #define CONVOLOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Convolotron"
 

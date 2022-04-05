@@ -28,8 +28,8 @@
 
 #include <vector>
 #include "Effect.h"
-#include "../smbPitchShift.h"
-#include "../Resample.h"
+#include "../EFX_common/smbPitchShift.h"
+#include "../EFX_common/Resample.h"
 
 #define STEROHARMLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm"
 #define SHARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid"

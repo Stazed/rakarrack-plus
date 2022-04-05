@@ -26,10 +26,10 @@
 
 #include <vector>
 #include "Effect.h"
-#include "../AnalogFilter.h"
-#include "../EffectLFO.h"
-#include "../delayline.h"
-#include "../RBFilter.h"
+#include "../EFX_common/AnalogFilter.h"
+#include "../EFX_common/EffectLFO.h"
+#include "../EFX_common/delayline.h"
+#include "../EFX_common/RBFilter.h"
 
 #define ECHOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Echotron"
 

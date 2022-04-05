@@ -26,7 +26,7 @@
 #ifndef FORMANT_FILTER_H
 #define FORMANT_FILTER_H
 
-#include "global.h"
+#include "../global.h"
 #include "Filter_.h"
 #include "AnalogFilter.h"
 #include "FilterParams.h"

@@ -26,7 +26,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Distorsion.h"
-#include "../FPreset.h"
 
 Distorsion::Distorsion(int wave_res, int wave_upq,
                        int wave_dnq, double samplerate,

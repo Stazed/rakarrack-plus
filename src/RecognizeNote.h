@@ -15,7 +15,7 @@
 
 #include <math.h>
 #include "global.h"
-#include "AnalogFilter.h"
+#include "EFX_common/AnalogFilter.h"
 #include "FX/Sustainer.h"
 
 class Recognize

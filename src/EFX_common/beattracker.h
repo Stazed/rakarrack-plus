@@ -23,7 +23,7 @@
 #ifndef BEAT_H
 #define BEAT_H
 
-#include "global.h"
+#include "../global.h"
 #include "RBFilter.h"
 
 

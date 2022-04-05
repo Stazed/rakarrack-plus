@@ -26,7 +26,7 @@
 #define PHASER_H
 
 #include "Effect.h"
-#include "../EffectLFO.h"
+#include "../EFX_common/EffectLFO.h"
 
 #define PHASELV2_URI "https://github.com/Stazed/rakarrack-plus#phas"
 

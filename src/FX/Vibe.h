@@ -27,7 +27,7 @@
 #define Vibe_H
 
 #include "Effect.h"
-#include "../EffectLFO.h"
+#include "../EFX_common/EffectLFO.h"
 
 #define VIBELV2_URI "https://github.com/Stazed/rakarrack-plus#Vibe"
 

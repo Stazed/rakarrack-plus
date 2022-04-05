@@ -26,7 +26,7 @@
 #ifndef EFFECT_LFO_H
 #define EFFECT_LFO_H
 
-#include "global.h"
+#include "../global.h"
 
 
 class EffectLFO

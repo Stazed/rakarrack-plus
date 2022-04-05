@@ -25,7 +25,7 @@
 #include <math.h>
 #include "Phaser.h"
 #include <stdio.h>
-#include "../FPreset.h"
+#include "../EFX_common/FPreset.h"
 #define PHASER_LFO_SHAPE 2
 
 Phaser::Phaser(double sample_rate, uint32_t intermediate_bufsize) :

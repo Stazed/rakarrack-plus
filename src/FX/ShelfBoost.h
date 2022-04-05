@@ -22,7 +22,7 @@
 #define SHELFBOOST_H
 
 #include "Effect.h"
-#include "../AnalogFilter.h"
+#include "../EFX_common/AnalogFilter.h"
 
 #define SHELFLV2_URI "https://github.com/Stazed/rakarrack-plus#ShelfBoost"
 

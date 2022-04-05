@@ -25,7 +25,7 @@
 #include <math.h>
 #include "Sequence.h"
 #include <time.h>
-#include "../f_sin.h"
+#include "../EFX_common/f_sin.h"
 
 Sequence::Sequence(long int Quality, int DS, int uq, int dq,
                    double sample_rate, uint32_t intermediate_bufsize) :

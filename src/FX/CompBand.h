@@ -32,7 +32,7 @@
 
 #include "Effect.h"
 #include "../Limiter.h"
-#include "../AnalogFilter.h"
+#include "../EFX_common/AnalogFilter.h"
 
 #define MBCOMPLV2_URI "https://github.com/Stazed/rakarrack-plus#CompBand"
 

@@ -25,7 +25,6 @@
 #include <math.h>
 #include "Chorus.h"
 #include <stdio.h>
-#include "../FPreset.h"
 
 Chorus::Chorus(double sample_rate, uint32_t intermediate_bufsize) :
     Effect(sample_rate, intermediate_bufsize),

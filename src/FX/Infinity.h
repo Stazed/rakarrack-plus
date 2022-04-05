@@ -24,7 +24,7 @@
 #define INFINITY_H
 
 #include "Effect.h"
-#include "../RBFilter.h"
+#include "../EFX_common/RBFilter.h"
 
 #define INFLV2_URI "https://github.com/Stazed/rakarrack-plus#Infinity"
 

@@ -31,7 +31,7 @@
 #define SYNTHFILTER_H
 
 #include "Effect.h"
-#include "../EffectLFO.h"
+#include "../EFX_common/EffectLFO.h"
 
 #define SYNTHLV2_URI "https://github.com/Stazed/rakarrack-plus#Synthfilter"
 

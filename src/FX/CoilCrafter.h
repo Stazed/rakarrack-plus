@@ -24,8 +24,8 @@
 #define COILCRAFTER_H
 
 #include "Effect.h"
-#include "../HarmonicEnhancer.h"
-#include "../AnalogFilter.h"
+#include "../EFX_common/HarmonicEnhancer.h"
+#include "../EFX_common/AnalogFilter.h"
 
 #define COILLV2_URI "https://github.com/Stazed/rakarrack-plus#CoilCrafter"
 

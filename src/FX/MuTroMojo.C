@@ -26,7 +26,7 @@
 
 #include <math.h>
 #include "MuTroMojo.h"        // Mutromojo
-#include "../AnalogFilter.h"
+#include "../EFX_common/AnalogFilter.h"
 #include <stdio.h>
 
 MuTroMojo::MuTroMojo(double sample_rate, uint32_t intermediate_bufsize) :

@@ -28,9 +28,9 @@
 
 #include <vector>
 #include "Effect.h"
-#include "../AnalogFilter.h"
-#include "../smbPitchShift.h"
-#include "../Resample.h"
+#include "../EFX_common/AnalogFilter.h"
+#include "../EFX_common/smbPitchShift.h"
+#include "../EFX_common/Resample.h"
 
 #define HARMLV2_URI "https://github.com/Stazed/rakarrack-plus#har"
 #define HARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#har_no_mid"

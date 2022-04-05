@@ -25,11 +25,11 @@
 
 #include <vector>
 #include "Effect.h"
-#include "../RBFilter.h"
-#include "../smbPitchShift.h"
-#include "../beattracker.h"
-#include "../delayline.h"
-#include "../Resample.h"
+#include "../EFX_common/RBFilter.h"
+#include "../EFX_common/smbPitchShift.h"
+#include "../EFX_common/beattracker.h"
+#include "../EFX_common/delayline.h"
+#include "../EFX_common/Resample.h"
 
 #define SEQUENCELV2_URI "https://github.com/Stazed/rakarrack-plus#Sequence"
 

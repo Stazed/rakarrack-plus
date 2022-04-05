@@ -28,9 +28,9 @@
 #define MUTROMOJO_H
 
 #include "Effect.h"
-#include "../EffectLFO.h"
-#include "../RBFilter.h"
-#include "../AnalogFilter.h"
+#include "../EFX_common/EffectLFO.h"
+#include "../EFX_common/RBFilter.h"
+#include "../EFX_common/AnalogFilter.h"
 
 #define MUTROLV2_URI "https://github.com/Stazed/rakarrack-plus#MuTroMojo"
 

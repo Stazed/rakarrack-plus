@@ -24,8 +24,8 @@
 
 #include <vector>
 #include "Effect.h"
-#include "../AnalogFilter.h"
-#include "../Waveshaper.h"
+#include "../EFX_common/AnalogFilter.h"
+#include "../EFX_common/Waveshaper.h"
 
 #define STOMPLV2_URI "https://github.com/Stazed/rakarrack-plus#StompBox"
 

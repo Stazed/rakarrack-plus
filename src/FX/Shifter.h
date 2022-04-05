@@ -26,8 +26,8 @@
 
 #include <vector>
 #include "Effect.h"
-#include "../smbPitchShift.h"
-#include "../Resample.h"
+#include "../EFX_common/smbPitchShift.h"
+#include "../EFX_common/Resample.h"
 
 #define SHIFTERLV2_URI "https://github.com/Stazed/rakarrack-plus#Shifter"
 

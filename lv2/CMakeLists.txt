@@ -8,37 +8,37 @@ add_library(rakarrack-plus-lv2 SHARED
   rkrlv2.C
   ../src/FX/Effect.C
   ../src/FX/EQ.C
-  ../src/AnalogFilter.C
+  ../src/EFX_common/AnalogFilter.C
   ../src/FX/Compressor.C
   ../src/Limiter.C
   ../src/FX/Distorsion.C
   ../src/FX/Overdrive.C
-  ../src/Waveshaper.C
-  ../src/Resample.C
-  ../src/FPreset.C
+  ../src/EFX_common/Waveshaper.C
+  ../src/EFX_common/Resample.C
+  ../src/EFX_common/FPreset.C
   ../src/FX/Echo.C
-  ../src/delayline.C
+  ../src/EFX_common/delayline.C
   ../src/FX/Chorus.C
   ../src/FX/Flanger.C
-  ../src/EffectLFO.C
+  ../src/EFX_common/EffectLFO.C
   ../src/FX/APhaser.C
   ../src/FX/Harmonizer.C
   ../src/RecognizeNote.C
   ../src/RecChord.C
   ../src/FX/Sustainer.C
-  ../src/smbPitchShift.C
+  ../src/EFX_common/smbPitchShift.C
   ../src/FX/Exciter.C
-  ../src/HarmonicEnhancer.C
+  ../src/EFX_common/HarmonicEnhancer.C
   ../src/FX/Pan.C
   ../src/FX/Alienwah.C
   ../src/FX/Reverb.C
   ../src/FX/Cabinet.C
   ../src/FX/MusicDelay.C
   ../src/FX/WahWah.C
-  ../src/Filter.C
-  ../src/FilterParams.C
-  ../src/SVFilter.C
-  ../src/FormantFilter.C
+  ../src/EFX_common/Filter.C
+  ../src/EFX_common/FilterParams.C
+  ../src/EFX_common/SVFilter.C
+  ../src/EFX_common/FormantFilter.C
   ../src/FX/Derelict.C
   ../src/FX/Valve.C
   ../src/FX/Dual_Flange.C
@@ -49,14 +49,14 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/FX/Shuffle.C
   ../src/FX/Synthfilter.C
   ../src/FX/VaryBand.C
-  ../src/RBFilter.C
+  ../src/EFX_common/RBFilter.C
   ../src/FX/MuTroMojo.C
   ../src/FX/Echoverse.C
   ../src/FX/CoilCrafter.C
   ../src/FX/ShelfBoost.C
   ../src/FX/Vocoder.C
   ../src/FX/Sequence.C
-  ../src/beattracker.C
+  ../src/EFX_common/beattracker.C
   ../src/FX/Shifter.C
   ../src/FX/StompBox.C
   ../src/FX/Reverbtron.C
@@ -68,7 +68,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/FX/Infinity.C
   ../src/FX/Phaser.C
   ../src/FX/Gate.C
-  ../src/mayer_fft.C
+  ../src/EFX_common/mayer_fft.C
   ../src/FX/Convolotron.C
   ../src/FX/ParametricEQ.C
 )

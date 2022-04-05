@@ -20,7 +20,7 @@
 #define EFFECT_H
 
 #include "../global.h"
-#include "../FPreset.h"
+#include "../EFX_common/FPreset.h"
 
 struct User_Files
 {

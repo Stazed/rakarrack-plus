@@ -30,10 +30,10 @@
 #include <vector>
 
 #include "Effect.h"
-#include "../AnalogFilter.h"
-#include "../Waveshaper.h"
-#include "../FilterParams.h"
-#include "../Filter.h"
+#include "../EFX_common/AnalogFilter.h"
+#include "../EFX_common/Waveshaper.h"
+#include "../EFX_common/FilterParams.h"
+#include "../EFX_common/Filter.h"
 
 #define DERELV2_URI "https://github.com/Stazed/rakarrack-plus#dere"
 

@@ -90,12 +90,12 @@ set (ProgSources
     process.C
     fileio.C
     varios.C
-    FPreset.C
+    EFX_common/FPreset.C
     FX/Reverb.C
     FX/Chorus.C
     FX/Flanger.C
     FX/Effect.C
-    EffectLFO.C
+    EFX_common/EffectLFO.C
     FX/Echo.C
     FX/Phaser.C
     FX/Distorsion.C
@@ -103,20 +103,20 @@ set (ProgSources
     FX/EQ.C
     FX/Compressor.C
     Limiter.C
-    AnalogFilter.C
+    EFX_common/AnalogFilter.C
     FX/Alienwah.C
-    beattracker.C
-    delayline.C
-    Filter.C
-    HarmonicEnhancer.C
+    EFX_common/beattracker.C
+    EFX_common/delayline.C
+    EFX_common/Filter.C
+    EFX_common/HarmonicEnhancer.C
     FX/WahWah.C
-    SVFilter.C
-    RBFilter.C
-    FormantFilter.C
-    FilterParams.C
+    EFX_common/SVFilter.C
+    EFX_common/RBFilter.C
+    EFX_common/FormantFilter.C
+    EFX_common/FilterParams.C
     FX/Pan.C
     FX/Harmonizer.C
-    smbPitchShift.C
+    EFX_common/smbPitchShift.C
     Tuner.C
     FX/MusicDelay.C
     FX/Gate.C
@@ -133,19 +133,19 @@ set (ProgSources
     FX/Expander.C
     FX/Ring.C
     FX/Shuffle.C
-    mayer_fft.C
+    EFX_common/mayer_fft.C
     FX/VaryBand.C
     metronome.C
     FX/Convolotron.C
     FX/Synthfilter.C
-    Resample.C
+    EFX_common/Resample.C
     FX/Looper.C
     FX/MuTroMojo.C
     FX/Echoverse.C
     FX/CoilCrafter.C
     FX/ShelfBoost.C
     FX/Vocoder.C
-    Waveshaper.C
+    EFX_common/Waveshaper.C
     FX/Sustainer.C
     FX/Sequence.C
     FX/Shifter.C

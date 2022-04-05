@@ -36,7 +36,6 @@
 #include <math.h>
 #include "APhaser.h"
 #include <stdio.h>
-#include "../FPreset.h"
 #define PHASER_LFO_SHAPE 2
 #define ONE_  0.99999f        // To prevent LFO ever reaching 1.0 for filter stability purposes
 #define ZERO_ 0.00001f        // Same idea as above.

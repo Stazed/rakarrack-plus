@@ -25,7 +25,7 @@
 #ifndef SV_FILTER_H
 #define SV_FILTER_H
 
-#include "global.h"
+#include "../global.h"
 #include "Filter_.h"
 class SVFilter:public Filter_
 {

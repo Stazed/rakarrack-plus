@@ -23,7 +23,7 @@
 #define EXCITER_H
 
 #include "Effect.h"
-#include "../HarmonicEnhancer.h"
+#include "../EFX_common/HarmonicEnhancer.h"
 
 #define EXCITERLV2_URI "https://github.com/Stazed/rakarrack-plus#Exciter"
 

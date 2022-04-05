@@ -25,7 +25,7 @@
 #ifndef RB_FILTER_H
 #define RB_FILTER_H
 
-#include "global.h"
+#include "../global.h"
 #include "Filter_.h"
 class RBFilter:public Filter_
 {

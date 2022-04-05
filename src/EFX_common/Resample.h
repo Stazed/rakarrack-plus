@@ -26,7 +26,7 @@
 #define RESAMPLE_H
 
 #include <samplerate.h>
-#include "global.h"
+#include "../global.h"
 
 
 

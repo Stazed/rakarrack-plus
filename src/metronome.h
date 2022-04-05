@@ -26,7 +26,7 @@
 #ifndef EFFECT_METRONOME_H
 #define EFFECT_METRONOME_H
 #include "global.h"
-#include "AnalogFilter.h"
+#include "EFX_common/AnalogFilter.h"
 
 class metronome
 {

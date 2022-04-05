@@ -24,8 +24,8 @@
 
 #ifndef CHORUS_H
 #define CHORUS_H
-#include "../EffectLFO.h"
-#include "../delayline.h"
+#include "../EFX_common/EffectLFO.h"
+#include "../EFX_common/delayline.h"
 #include "Effect.h"
 
 #define CHORUSLV2_URI "https://github.com/Stazed/rakarrack-plus#chor"

@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <math.h>
 
-#include "global.h"
+#include "../global.h"
 #include "EffectLFO.h"
 #include "f_sin.h"
 

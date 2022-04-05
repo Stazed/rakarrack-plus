@@ -26,8 +26,8 @@
 
 #include <vector>
 #include "Effect.h"
-#include "../AnalogFilter.h"
-#include "../Resample.h"
+#include "../EFX_common/AnalogFilter.h"
+#include "../EFX_common/Resample.h"
 
 #define REVTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron"
 

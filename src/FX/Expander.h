@@ -32,7 +32,7 @@
 #define EXPANDER_H
 
 #include "Effect.h"
-#include "../AnalogFilter.h"
+#include "../EFX_common/AnalogFilter.h"
 
 #define EXPANDLV2_URI "https://github.com/Stazed/rakarrack-plus#Expander"
 
