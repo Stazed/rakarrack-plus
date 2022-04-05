@@ -16,7 +16,7 @@
 #include <math.h>
 #include "global.h"
 #include "AnalogFilter.h"
-#include "Sustainer.h"
+#include "FX/Sustainer.h"
 
 class Recognize
 {

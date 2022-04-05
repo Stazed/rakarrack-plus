@@ -23,7 +23,7 @@ decl {\#include "RKR_Scroll.h"} {public global
 decl {\#include "RKR_Value_Input.h"} {public global
 }
 
-decl {\#include "../Echotron.h"} {public global
+decl {\#include "../FX/Echotron.h"} {public global
 }
 
 decl {\#include "rakarrack.h"} {public global

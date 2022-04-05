@@ -6,77 +6,77 @@ project (rakarrack-plus-lv2)
 
 add_library(rakarrack-plus-lv2 SHARED
   rkrlv2.C
-  ../src/Effect.C
-  ../src/EQ.C
+  ../src/FX/Effect.C
+  ../src/FX/EQ.C
   ../src/AnalogFilter.C
-  ../src/Compressor.C
+  ../src/FX/Compressor.C
   ../src/Limiter.C
-  ../src/Distorsion.C
-  ../src/Overdrive.C
+  ../src/FX/Distorsion.C
+  ../src/FX/Overdrive.C
   ../src/Waveshaper.C
   ../src/Resample.C
   ../src/FPreset.C
-  ../src/Echo.C
+  ../src/FX/Echo.C
   ../src/delayline.C
-  ../src/Chorus.C
-  ../src/Flanger.C
+  ../src/FX/Chorus.C
+  ../src/FX/Flanger.C
   ../src/EffectLFO.C
-  ../src/APhaser.C
-  ../src/Harmonizer.C
+  ../src/FX/APhaser.C
+  ../src/FX/Harmonizer.C
   ../src/RecognizeNote.C
   ../src/RecChord.C
-  ../src/Sustainer.C
+  ../src/FX/Sustainer.C
   ../src/smbPitchShift.C
-  ../src/Exciter.C
+  ../src/FX/Exciter.C
   ../src/HarmonicEnhancer.C
-  ../src/Pan.C
-  ../src/Alienwah.C
-  ../src/Reverb.C
-  ../src/Cabinet.C
-  ../src/MusicDelay.C
-  ../src/WahWah.C
+  ../src/FX/Pan.C
+  ../src/FX/Alienwah.C
+  ../src/FX/Reverb.C
+  ../src/FX/Cabinet.C
+  ../src/FX/MusicDelay.C
+  ../src/FX/WahWah.C
   ../src/Filter.C
   ../src/FilterParams.C
   ../src/SVFilter.C
   ../src/FormantFilter.C
-  ../src/Derelict.C
-  ../src/Valve.C
-  ../src/Dual_Flange.C
-  ../src/Ring.C
-  ../src/DistBand.C
-  ../src/Arpie.C
-  ../src/Expander.C
-  ../src/Shuffle.C
-  ../src/Synthfilter.C
-  ../src/VaryBand.C
+  ../src/FX/Derelict.C
+  ../src/FX/Valve.C
+  ../src/FX/Dual_Flange.C
+  ../src/FX/Ring.C
+  ../src/FX/DistBand.C
+  ../src/FX/Arpie.C
+  ../src/FX/Expander.C
+  ../src/FX/Shuffle.C
+  ../src/FX/Synthfilter.C
+  ../src/FX/VaryBand.C
   ../src/RBFilter.C
-  ../src/MuTroMojo.C
-  ../src/Echoverse.C
-  ../src/CoilCrafter.C
-  ../src/ShelfBoost.C
-  ../src/Vocoder.C
-  ../src/Sequence.C
+  ../src/FX/MuTroMojo.C
+  ../src/FX/Echoverse.C
+  ../src/FX/CoilCrafter.C
+  ../src/FX/ShelfBoost.C
+  ../src/FX/Vocoder.C
+  ../src/FX/Sequence.C
   ../src/beattracker.C
-  ../src/Shifter.C
-  ../src/StompBox.C
-  ../src/Reverbtron.C
-  ../src/Echotron.C
-  ../src/StereoHarm.C
-  ../src/CompBand.C
-  ../src/Opticaltrem.C
-  ../src/Vibe.C
-  ../src/Infinity.C
-  ../src/Phaser.C
-  ../src/Gate.C
+  ../src/FX/Shifter.C
+  ../src/FX/StompBox.C
+  ../src/FX/Reverbtron.C
+  ../src/FX/Echotron.C
+  ../src/FX/StereoHarm.C
+  ../src/FX/CompBand.C
+  ../src/FX/Opticaltrem.C
+  ../src/FX/Vibe.C
+  ../src/FX/Infinity.C
+  ../src/FX/Phaser.C
+  ../src/FX/Gate.C
   ../src/mayer_fft.C
-  ../src/Convolotron.C
-  ../src/ParametricEQ.C
+  ../src/FX/Convolotron.C
+  ../src/FX/ParametricEQ.C
 )
 
-set_source_files_properties(../src/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
+set_source_files_properties(../src/FX/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
 
 target_sources(rakarrack-plus-lv2 PRIVATE
-  ../src/MIDIConverter.C
+  ../src/FX/MIDIConverter.C
 )
 
 target_compile_definitions(rakarrack-plus-lv2 PRIVATE LV2_SUPPORT=1)

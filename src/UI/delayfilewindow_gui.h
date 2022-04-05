@@ -10,7 +10,7 @@
 #include "RKR_Group.h"
 #include "RKR_Scroll.h"
 #include "RKR_Value_Input.h"
-#include "../Echotron.h"
+#include "../FX/Echotron.h"
 #include "rakarrack.h"
 #define DEFAULT_DLY_FILE_NAME "Delay File - Untitled"
 struct DelayLine

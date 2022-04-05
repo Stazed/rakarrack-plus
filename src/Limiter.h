@@ -34,7 +34,7 @@
 #ifndef LIMITER_H
 #define LIMITER_H
 
-#include "Compressor.h"
+#include "FX/Compressor.h"
 
 class Limiter : public Compressor
 {

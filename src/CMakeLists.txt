@@ -91,74 +91,74 @@ set (ProgSources
     fileio.C
     varios.C
     FPreset.C
-    Reverb.C
-    Chorus.C
-    Flanger.C
-    Effect.C
+    FX/Reverb.C
+    FX/Chorus.C
+    FX/Flanger.C
+    FX/Effect.C
     EffectLFO.C
-    Echo.C
-    Phaser.C
-    Distorsion.C
-    Overdrive.C
-    EQ.C
-    Compressor.C
+    FX/Echo.C
+    FX/Phaser.C
+    FX/Distorsion.C
+    FX/Overdrive.C
+    FX/EQ.C
+    FX/Compressor.C
     Limiter.C
     AnalogFilter.C
-    Alienwah.C
+    FX/Alienwah.C
     beattracker.C
     delayline.C
     Filter.C
     HarmonicEnhancer.C
-    WahWah.C
+    FX/WahWah.C
     SVFilter.C
     RBFilter.C
     FormantFilter.C
     FilterParams.C
-    Pan.C
-    Harmonizer.C
+    FX/Pan.C
+    FX/Harmonizer.C
     smbPitchShift.C
     Tuner.C
-    MusicDelay.C
-    Gate.C
+    FX/MusicDelay.C
+    FX/Gate.C
     RecognizeNote.C
     RecChord.C
     rkrMIDI.C
-    Derelict.C
-    APhaser.C
-    Dual_Flange.C
-    Exciter.C
-    DistBand.C
-    Valve.C
-    Arpie.C
-    Expander.C
-    Ring.C
-    Shuffle.C
+    FX/Derelict.C
+    FX/APhaser.C
+    FX/Dual_Flange.C
+    FX/Exciter.C
+    FX/DistBand.C
+    FX/Valve.C
+    FX/Arpie.C
+    FX/Expander.C
+    FX/Ring.C
+    FX/Shuffle.C
     mayer_fft.C
-    VaryBand.C
+    FX/VaryBand.C
     metronome.C
-    Convolotron.C
-    Synthfilter.C
+    FX/Convolotron.C
+    FX/Synthfilter.C
     Resample.C
-    Looper.C
-    MuTroMojo.C
-    Echoverse.C
-    CoilCrafter.C
-    ShelfBoost.C
-    Vocoder.C
+    FX/Looper.C
+    FX/MuTroMojo.C
+    FX/Echoverse.C
+    FX/CoilCrafter.C
+    FX/ShelfBoost.C
+    FX/Vocoder.C
     Waveshaper.C
-    Sustainer.C
-    Sequence.C
-    Shifter.C
-    StompBox.C
-    Reverbtron.C
-    Echotron.C
-    StereoHarm.C
-    CompBand.C
-    Opticaltrem.C
-    Vibe.C
-    Infinity.C
-    Cabinet.C
-    ParametricEQ.C
+    FX/Sustainer.C
+    FX/Sequence.C
+    FX/Shifter.C
+    FX/StompBox.C
+    FX/Reverbtron.C
+    FX/Echotron.C
+    FX/StereoHarm.C
+    FX/CompBand.C
+    FX/Opticaltrem.C
+    FX/Vibe.C
+    FX/Infinity.C
+    FX/Cabinet.C
+    FX/ParametricEQ.C
 )
 
 
@@ -207,9 +207,9 @@ target_include_directories (
 
 target_link_libraries (rakarrack-plus ${ExternLibraries})
 
-set_source_files_properties(MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
+set_source_files_properties(FX/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
 target_sources(rakarrack-plus PRIVATE
-  MIDIConverter.C
+  FX/MIDIConverter.C
 )
 
 install (TARGETS rakarrack-plus RUNTIME DESTINATION bin)
