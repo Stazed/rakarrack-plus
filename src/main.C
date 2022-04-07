@@ -14,8 +14,7 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License (version 2) for more details.
 
-  You should have received a copy of the GNU General Public License
-(version2)
+  You should have received a copy of the GNU General Public License (version2)
   along with this program; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
@@ -226,7 +225,7 @@ main(int argc, char *argv[])
     int needtoloadbank = 0;
     std::string banktoload;
     std::string filetoload;
-    std::string command_line_name = "rakarrack-plus";
+    std::string command_line_name = PACKAGE;
 
     // globals
     opterr = 0;

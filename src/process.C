@@ -32,7 +32,7 @@
 #include "process.h"
 
 int global_error_number = 0;
-char *jack_client_name = (char*) "rakarrack-plus";
+char *jack_client_name = (char*) PACKAGE;
 
 RKR::RKR(int gui) :
     efx_Tuner(NULL),
