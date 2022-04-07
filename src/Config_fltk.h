@@ -274,6 +274,7 @@ public:
 
     // NSM
 #ifdef NSM_SUPPORT
+    int NSM_single_state;
     int NSM_gui_status;
 #endif
 

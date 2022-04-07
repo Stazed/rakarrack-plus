@@ -738,6 +738,7 @@ public:
     void load_convolotron_vector();
     void load_echotron_vector();
     void load_reverbtron_vector();
+    bool does_file_exist(std::string fileName);
 
     // varios.C
     int Message (int prio, std::string labelwin, std::string message_text);

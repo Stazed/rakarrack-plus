@@ -388,15 +388,21 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     rakarrack.get(PrefNom("Aux MIDI"), Aux_MIDI, 1);
     rakarrack.get(PrefNom("Aux Minimum"), Aux_Minimum, 0);
     rakarrack.get(PrefNom("Aux Maximum"), Aux_Maximum, 127);
+
 #ifdef NSM_SUPPORT
-    rakarrack.get(PrefNom("NSM Gui Status"), NSM_gui_status, 0);
-    if(NSM_gui_status)
+    if(!nsm_preferences_file.empty())
     {
-        global_gui_show = CONST_GUI_SHOW;
-    }
-    else
-    {
-        global_gui_show = CONST_GUI_HIDE;
+        rakarrack.get(PrefNom("NSM Single State"), NSM_single_state, 0);
+
+        rakarrack.get(PrefNom("NSM Gui Status"), NSM_gui_status, 0);
+        if(NSM_gui_status)
+        {
+            global_gui_show = CONST_GUI_SHOW;
+        }
+        else
+        {
+            global_gui_show = CONST_GUI_HIDE;
+        }
     }
 #endif
 }

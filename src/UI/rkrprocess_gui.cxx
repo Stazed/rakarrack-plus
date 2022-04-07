@@ -1112,7 +1112,11 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Focus Delay"), m_process->Config.Focus_Delay);
         rakarrack.set(m_process->Config.PrefNom("MIDI Table File"), m_process->Config.custom_midi_table_file);
 #ifdef NSM_SUPPORT
-        rakarrack.set(m_process->Config.PrefNom("NSM Gui Status"), m_process->Gui_Shown);
+        if(!nsm_preferences_file.empty())
+        {
+            rakarrack.set(m_process->Config.PrefNom("NSM Single State"), m_process->Config.NSM_single_state);
+            rakarrack.set(m_process->Config.PrefNom("NSM Gui Status"), m_process->Gui_Shown);
+        }
 #endif
     }
 

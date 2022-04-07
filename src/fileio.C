@@ -22,6 +22,7 @@
 
 #include <errno.h>
 #include <algorithm>    // std::remove
+#include <fstream>
 #include "process.h"
 #include <FL/fl_ask.H> // for error pop up
 
@@ -2305,4 +2306,11 @@ RKR::load_reverbtron_vector()
     // Copy to the audio effect class
     Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
     Efx_Reverbtron->set_user_files(Reverbtron_RVB_Files);
+}
+
+bool
+RKR::does_file_exist(std::string fileName)
+{
+    std::ifstream infile(fileName.c_str());
+    return infile.good();
 }

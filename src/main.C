@@ -31,6 +31,8 @@
 
 // This is necessary for NSM, so if it is empty, then we are not in NSM session
 std::string nsm_preferences_file = "";
+// Use when nsm is using single state mode
+std::string nsm_preset_file = "";
 
 // Signal handlers
 static volatile int got_sigint = 0;
@@ -53,6 +55,11 @@ cb_nsm_open ( const char *save_file_path,   // See API Docs 2.2.2
 {
     nsm_preferences_file = save_file_path;
     nsm_preferences_file += ".prefs";
+
+    // single state mode
+    nsm_preset_file = save_file_path;
+    nsm_preset_file += ".rkr";
+    
     jack_client_name = strdup(client_id);
     wait_nsm = 0;
     return ERR_OK;
@@ -105,7 +112,6 @@ void sigterm_handler(int sig)
 
 bool install_signal_handlers()
 {
-    /*install signal handlers*/
     struct sigaction action;
     memset(&action, 0, sizeof (action));
     action.sa_handler = sigterm_handler;
@@ -359,6 +365,20 @@ main(int argc, char *argv[])
             global_gui_show = CONST_GUI_OFF;
             nsm_send_is_shown ( nsm );
         }
+        
+        if(process.Config.NSM_single_state)
+        {
+            if(!process.does_file_exist(nsm_preset_file))
+            {
+                process.save_preset(nsm_preset_file);
+            }
+            else
+            {
+                filetoload = nsm_preset_file;
+                needtoloadfile = 1;
+                commandline = 1;    // not really command line but works the same
+            }
+        }
     }
 #endif
 
@@ -388,7 +408,7 @@ main(int argc, char *argv[])
     // Set preset index from command line, if any
     process.Change_Preset = preset;
 
-    // Set flag to indicate a file from the command line, if any
+    // Set flag to indicate a file from the command line, or NSM single state mode
     process.Command_Line_File = commandline;
 
     // Launch GUI
@@ -444,6 +464,11 @@ main(int argc, char *argv[])
                 save_preferences = 0;
                 rgui->save_current_state(0);
                 
+                if ( process.Config.NSM_single_state && !nsm_preset_file.empty() )
+                {
+                    process.save_preset( nsm_preset_file );
+                }
+                
                 // For session use, the modified checks will not work on save and quit.
                 // NSM requires that the client must quit immediately, so the 
                 // shown modal windows are ignored. The user would need to do 
@@ -498,6 +523,11 @@ main(int argc, char *argv[])
             {
                 save_preferences = 0;
                 rgui->save_current_state(0);
+                
+                if ( process.Config.NSM_single_state && !nsm_preset_file.empty() )
+                {
+                    process.save_preset( nsm_preset_file );
+                }
             }
         }
 
