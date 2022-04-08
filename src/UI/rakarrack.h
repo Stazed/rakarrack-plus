@@ -169,6 +169,10 @@ class RKRGUI {
    widget gets the focus.
   */
   int focus_delay_time; 
+  /**
+   Array to hold user selections for random preset generation.
+  */
+  char FX_Not_Selected[C_NUMBER_EFFECTS]; 
   Fl_Help_Dialog *visor; 
 public:
   void make_window();

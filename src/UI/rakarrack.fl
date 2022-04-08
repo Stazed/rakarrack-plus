@@ -322,6 +322,9 @@ Array is indexed by EFX_Index.} private local
     comment {The amount of time to delay before the below mouse
 widget gets the focus.} private local
   }
+  decl {char FX_Not_Selected[C_NUMBER_EFFECTS];} {
+    comment {Array to hold user selections for random preset generation.} private local
+  }
   decl {Fl_Help_Dialog *visor;} {private local
   }
   Function {make_window()} {open return_type void

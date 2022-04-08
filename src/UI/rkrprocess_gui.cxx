@@ -57,6 +57,8 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     m_process = process_rkr = rkr_;
 
     back = NULL;
+    
+    memset(FX_Not_Selected, 0, sizeof (FX_Not_Selected));
 
     make_window();
 
@@ -3582,7 +3584,18 @@ void RKRGUI::RandomPreset()
     int Effect_Index[10];
     
     // Get the first one to compare for duplicates
-    Effect_Index[0] = (int) (RND * C_NUMBER_EFFECTS);
+    for (int h = 0; h < C_NUMBER_EFFECTS; h++)
+    {
+        Effect_Index[0] = (int) (RND * C_NUMBER_EFFECTS);
+        if (h == Effect_Index[0])
+        {
+            // Did the user want this to be selected
+            if(!FX_Not_Selected[h])
+            {
+                break;  // it is a good one
+            }
+        }
+    }
 
     // Get random selection of effect index
     for (int i = 1; i < 10; i++)
@@ -3600,7 +3613,30 @@ void RKRGUI::RandomPreset()
                     break;
                 }
                 else
-                    l = 1;  // got a new selection, break from while()
+                {
+                    bool dont_use = false;
+
+                    // Check if the user wants this effect chosen
+                    for (int k = 0; k < C_NUMBER_EFFECTS; k++)
+                    {
+                        if (k == Effect_Index[i])
+                        {
+                            if(FX_Not_Selected[k])
+                            {
+                                l = 0;  // user does not want this one
+                                dont_use = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if(dont_use)
+                    {
+                        break;
+                    }
+
+                    l = 1;  // got a valid new selection, break from while()
+                }
             }
         }
     }
