@@ -1897,9 +1897,10 @@ o->hide();} open
       class DelayFileWindowGui size_range {400 132 1600 1060}
     } {}
     Fl_Window RandomEdit {open
-      xywh {1115 486 385 350} type Double box NO_BOX color 4 selection_color 7 hide resizable
+      xywh {890 520 385 350} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "randomedit_gui.h"}
       code1 {o->hide();}
+      code2 {o->initialize(this);}
       class RandomEditGui size_range {400 132 1600 1060}
     } {}
     code {char tmp[64];

@@ -2,7 +2,7 @@
 version 1.0308
 header_name {.h}
 code_name {.cxx}
-widget_class RandomEditGui {open selected
+widget_class RandomEditGui {open
   xywh {1495 634 240 235} type Double resizable
   code0 {\#include "rakarrack.h"}
   class Fl_Double_Window visible
@@ -10,9 +10,15 @@ widget_class RandomEditGui {open selected
   Fl_Box Fondo14 {
     xywh {0 1 240 234}
   }
+  decl {RKRGUI* m_parent;} {selected private local
+  }
   Fl_Scroll RandomScroll {
     label {Effect Status} open
     tooltip {Check any effects that should NOT be included for random selection.} xywh {13 25 215 185} type VERTICAL_ALWAYS
     class RKR_Scroll
   } {}
+  Function {initialize(RKRGUI *_rgui)} {open return_type void
+  } {
+    code {m_parent = _rgui;} {}
+  }
 }

@@ -14,6 +14,10 @@ public:
   RandomEditGui(int W, int H, const char *L = 0);
   RandomEditGui();
   Fl_Box *Fondo14;
+private:
+  RKRGUI* m_parent; 
+public:
   RKR_Scroll *RandomScroll;
+  void initialize(RKRGUI *_rgui);
 };
 #endif

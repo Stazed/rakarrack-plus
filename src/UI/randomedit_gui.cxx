@@ -47,3 +47,7 @@ this->when(FL_WHEN_RELEASE);
 end();
 resizable(this);
 }
+
+void RandomEditGui::initialize(RKRGUI *_rgui) {
+  m_parent = _rgui;
+}
