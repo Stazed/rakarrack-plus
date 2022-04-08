@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0307
+version 1.0308
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {1144 344 530 580} type Double
+  xywh {660 206 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1435,7 +1435,7 @@ else JackIn->deactivate();}
       }
     }
     Fl_Group MISC_SET {
-      label Misc
+      label Misc open
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo10 {
@@ -1488,6 +1488,16 @@ Fl_Tooltip::enable(m_process->Config.ena_tool);}
         label Long
         xywh {362 205 69 17} align 24
         class RKR_Box
+      }
+      Fl_Check_Button NSM_SINGLE_STATE {
+        label {NSM Single State}
+        callback {\#ifdef NSM_SUPPORT
+m_process->Config.NSM_single_state=(int) o->value();
+\#endif}
+        tooltip {Check this if you want NSM session to always save the last state of the acitve preset.
+ This will save all changes to effects including MIDI control changes.} xywh {30 250 124 16} down_box DOWN_BOX labelsize 12 labelcolor 7
+        code0 {o->set_label_offset(2);}
+        class RKR_Check_Button
       }
     }
     Fl_Group USER_SET {

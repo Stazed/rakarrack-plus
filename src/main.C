@@ -463,11 +463,12 @@ main(int argc, char *argv[])
             {
                 save_preferences = 0;
                 rgui->save_current_state(0);
-                
+#ifdef NSM_SUPPORT
                 if ( process.Config.NSM_single_state && !nsm_preset_file.empty() )
                 {
                     process.save_preset( nsm_preset_file );
                 }
+#endif
                 
                 // For session use, the modified checks will not work on save and quit.
                 // NSM requires that the client must quit immediately, so the 
@@ -523,11 +524,12 @@ main(int argc, char *argv[])
             {
                 save_preferences = 0;
                 rgui->save_current_state(0);
-                
+#ifdef NSM_SUPPORT
                 if ( process.Config.NSM_single_state && !nsm_preset_file.empty() )
                 {
                     process.save_preset( nsm_preset_file );
                 }
+#endif
             }
         }
 

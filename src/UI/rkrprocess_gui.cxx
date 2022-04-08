@@ -1797,7 +1797,9 @@ void RKRGUI::MiraConfig()
     Settings->ENA_TOOL->value(m_process->Config.ena_tool);
     Settings->Focus_Slider->value(m_process->Config.Focus_Delay);
     Settings->T_TIMEOUT->value(m_process->t_timeout);
-
+#ifdef NSM_SUPPORT
+    Settings->NSM_SINGLE_STATE->value((m_process->Config.NSM_single_state));
+#endif
     Settings->Upr_Amo->value(m_process->Config.UpAmo);
     Settings->L_SIZE->value(m_process->Config.looper_size);
     Settings->D_A_Connect->value(m_process->Config.aconnect_MI);
@@ -1810,6 +1812,10 @@ void RKRGUI::MiraConfig()
     {
         Settings->D_J_Connect->deactivate ();
         Settings->D_IJ_Connect->deactivate ();
+    }
+    else    // Not is NSM so make this inactive
+    {
+        Settings->NSM_SINGLE_STATE->deactivate();
     }
 
     Settings->Midi_In_Counter->value(m_process->Config.MIDI_In_Channel + 1);
