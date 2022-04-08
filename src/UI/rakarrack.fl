@@ -276,6 +276,9 @@ decl {class TrigWindowGui; // forward declaration} {public global
 decl {class DelayFileWindowGui; // forward declaration} {public global
 }
 
+decl {class RandomEditGui; // forward declaration} {public global
+}
+
 decl {Fl_Tiled_Image *back = NULL;} {private global
 }
 
@@ -343,7 +346,7 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {229 191 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {607 93 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1555,8 +1558,18 @@ if(m_process->Config.Tap_Updated)
         }
         Fl_Button RandomP {
           label Random
-          callback {RandomPreset();}
-          tooltip {Random Preset selection - Shortcut 'F7'} xywh {175 141 59 14} shortcut 0xffc4 color 62 labelsize 10 align 80 when 6
+          callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+    if (!RandomEdit->visible())
+    {
+        RandomEdit->show();
+    }
+    return;
+}
+
+RandomPreset();}
+          tooltip {Random Preset selection - Shortcut 'F7'
+Right mouse to set random button preferences.} xywh {175 141 59 14} shortcut 0xffc4 color 62 labelsize 10 align 80 when 6
           class RKR_Button
         }
         Fl_Button Open_Order {
@@ -1882,6 +1895,12 @@ o->hide();} open
       code1 {o->initialize(m_process, this);}
       code2 {o->hide();}
       class DelayFileWindowGui size_range {400 132 1600 1060}
+    } {}
+    Fl_Window RandomEdit {open
+      xywh {1115 486 385 350} type Double box NO_BOX color 4 selection_color 7 hide resizable
+      code0 {\#include "randomedit_gui.h"}
+      code1 {o->hide();}
+      class RandomEditGui size_range {400 132 1600 1060}
     } {}
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);

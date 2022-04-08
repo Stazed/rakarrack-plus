@@ -739,7 +739,16 @@ void RKRGUI::cb_Preset_Counter(RKR_Counter* o, void* v) {
 }
 
 void RKRGUI::cb_RandomP_i(RKR_Button*, void*) {
-  RandomPreset();
+  if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+    if (!RandomEdit->visible())
+    {
+        RandomEdit->show();
+    }
+    return;
+}
+
+RandomPreset();
 }
 void RKRGUI::cb_RandomP(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_RandomP_i(o,v);
@@ -2578,7 +2587,8 @@ void RKRGUI::make_window() {
         DAuthor->when(FL_WHEN_RELEASE);
       } // RKR_Box* DAuthor
       { RandomP = new RKR_Button(175, 141, 59, 14, "Random");
-        RandomP->tooltip("Random Preset selection - Shortcut \'F7\'");
+        RandomP->tooltip("Random Preset selection - Shortcut \'F7\'\nRight mouse to set random button p\
+references.");
         RandomP->box(FL_UP_BOX);
         RandomP->shortcut(0xffc4);
         RandomP->color((Fl_Color)62);
@@ -2896,6 +2906,22 @@ void RKRGUI::make_window() {
     DelayFile->end();
     DelayFile->resizable(DelayFile);
   } // DelayFileWindowGui* DelayFile
+  { RandomEditGui* o = RandomEdit = new RandomEditGui(0, 0, 385, 350);
+    RandomEdit->box(FL_NO_BOX);
+    RandomEdit->color((Fl_Color)4);
+    RandomEdit->selection_color(FL_BACKGROUND2_COLOR);
+    RandomEdit->labeltype(FL_NO_LABEL);
+    RandomEdit->labelfont(0);
+    RandomEdit->labelsize(14);
+    RandomEdit->labelcolor(FL_FOREGROUND_COLOR);
+    RandomEdit->user_data((void*)(this));
+    RandomEdit->align(Fl_Align(FL_ALIGN_TOP));
+    RandomEdit->when(FL_WHEN_RELEASE);
+    o->hide();
+    RandomEdit->size_range(400, 132, 1600, 1060);
+    RandomEdit->end();
+    RandomEdit->resizable(RandomEdit);
+  } // RandomEditGui* RandomEdit
   char tmp[64];
   sprintf(tmp,"Version %s",VERSION);
   AboutWin->About_Version->copy_label(tmp);

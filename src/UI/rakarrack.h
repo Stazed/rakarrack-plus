@@ -86,6 +86,7 @@ class MidiLearnWindowGui; // forward declaration
 class AboutWindowGui; // forward declaration
 class TrigWindowGui; // forward declaration
 class DelayFileWindowGui; // forward declaration
+class RandomEditGui; // forward declaration
 #include <FL/Fl_Double_Window.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Button.H>
@@ -147,6 +148,7 @@ class DelayFileWindowGui; // forward declaration
 #include "aboutwindow_gui.h"
 #include "trigwindow_gui.h"
 #include "delayfilewindow_gui.h"
+#include "randomedit_gui.h"
 
 class RKRGUI {
   RKR *m_process; 
@@ -573,6 +575,7 @@ private:
   static void cb_Trigger(TrigWindowGui*, void*);
 public:
   DelayFileWindowGui *DelayFile;
+  RandomEditGui *RandomEdit;
   RKRGUI(int argc, char**argv,RKR *rkr_);
 private:
   static void TimeoutStatic(void* ptr);

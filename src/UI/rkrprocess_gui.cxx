@@ -2321,6 +2321,7 @@ void RKRGUI::PutBackground()
     BankWindow->MenuB->image(InOut->image());
     
     DelayFile->Fondo13->image(InOut->image());
+    RandomEdit->Fondo14->image(InOut->image());
 
     Fl::redraw();
 }

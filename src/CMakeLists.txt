@@ -85,6 +85,7 @@ set (ProgSources
     UI/aboutwindow_gui.cxx
     UI/trigwindow_gui.cxx
     UI/delayfilewindow_gui.cxx
+    UI/randomedit_gui.cxx
     UI/rkrprocess_gui.cxx
     PresetBankStruct.C
     process.C

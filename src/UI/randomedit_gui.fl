@@ -1,0 +1,18 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0308
+header_name {.h}
+code_name {.cxx}
+widget_class RandomEditGui {open selected
+  xywh {1495 634 240 235} type Double resizable
+  code0 {\#include "rakarrack.h"}
+  class Fl_Double_Window visible
+} {
+  Fl_Box Fondo14 {
+    xywh {0 1 240 234}
+  }
+  Fl_Scroll RandomScroll {
+    label {Effect Status} open
+    tooltip {Check any effects that should NOT be included for random selection.} xywh {13 25 215 185} type VERTICAL_ALWAYS
+    class RKR_Scroll
+  } {}
+}
