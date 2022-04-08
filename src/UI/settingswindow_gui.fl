@@ -1494,7 +1494,7 @@ Fl_Tooltip::enable(m_process->Config.ena_tool);}
         callback {\#ifdef NSM_SUPPORT
 m_process->Config.NSM_single_state=(int) o->value();
 \#endif}
-        tooltip {Check this if you want NSM session to always save the last state of the acitve preset.
+        tooltip {Check if you want NSM session to always save the last state of the active preset.
  This will save all changes to effects including MIDI control changes.} xywh {30 250 124 16} down_box DOWN_BOX labelsize 12 labelcolor 7
         code0 {o->set_label_offset(2);}
         class RKR_Check_Button

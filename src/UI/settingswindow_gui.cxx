@@ -3040,9 +3040,8 @@ this->when(FL_WHEN_RELEASE);
       o->when(FL_WHEN_RELEASE);
     } // RKR_Box* o
     { RKR_Check_Button* o = NSM_SINGLE_STATE = new RKR_Check_Button(30, 250, 124, 16, "NSM Single State");
-      NSM_SINGLE_STATE->tooltip("Check this if you want NSM session to always save the last state of the acitv\
-e preset.\n This will save all changes to effects including MIDI control chang\
-es.");
+      NSM_SINGLE_STATE->tooltip("Check if you want NSM session to always save the last state of the active pre\
+set.\n This will save all changes to effects including MIDI control changes.");
       NSM_SINGLE_STATE->box(FL_NO_BOX);
       NSM_SINGLE_STATE->down_box(FL_DOWN_BOX);
       NSM_SINGLE_STATE->color(FL_BACKGROUND_COLOR);
