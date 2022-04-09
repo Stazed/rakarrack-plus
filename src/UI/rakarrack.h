@@ -636,6 +636,8 @@ public:
   inline void bank_click_i(Fl_Choice* o, void*);
   static void p_click(Fl_Choice* o, void* v);
   inline void p_click_i(Fl_Choice* o, void*);
+  static void Set_effect(RKR_Check_Button *o, void* v);
+  inline void cb_Set_effect_i(RKR_Check_Button*, void*);
   void RandomPreset();
   void drag_effect();
   void set_bank_file();

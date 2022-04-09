@@ -100,4 +100,21 @@ resizable(this);
 
 void RandomEditGui::initialize(RKRGUI *_rgui) {
   m_parent = _rgui;
+  make_effect_scroller();
+}
+
+void RandomEditGui::make_effect_scroller()
+{
+    RandomScroll->clear();
+  
+    RandomScroll->begin();
+    
+    for (intptr_t i = 0; i < (int) vctFX_Name.size(); ++i)
+    {
+        RKR_Check_Button *b = new RKR_Check_Button(15,i*20+22,100,20, vctFX_Name[i].c_str());
+        b->user_data((void *) i);
+        b->callback((Fl_Callback *)m_parent->Set_effect);
+    }
+    
+    RandomScroll->end();
 }

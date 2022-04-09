@@ -2029,6 +2029,10 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {p_click_i(Fl_Choice* o, void*)} {open C return_type {inline void}
   } {}
+  Function {Set_effect(RKR_Check_Button *o, void* v)} {open return_type {static void}
+  } {}
+  Function {cb_Set_effect_i(RKR_Check_Button*, void*)} {open C return_type {inline void}
+  } {}
   Function {RandomPreset()} {open
   } {}
   Function {drag_effect()} {open

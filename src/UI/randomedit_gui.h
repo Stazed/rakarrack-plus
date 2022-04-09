@@ -19,5 +19,6 @@ private:
 public:
   RKR_Scroll *RandomScroll;
   void initialize(RKRGUI *_rgui);
+  void make_effect_scroller();
 };
 #endif

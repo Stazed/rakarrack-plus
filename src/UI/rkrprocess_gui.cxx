@@ -3576,6 +3576,18 @@ inline void RKRGUI::p_click_i(Fl_Choice* o, void*)
     m_process->PG_table_modified = 1;
 }
 
+void RKRGUI::Set_effect(RKR_Check_Button* o, void* v)
+{
+    ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Set_effect_i(o,v);
+}
+
+inline void RKRGUI::cb_Set_effect_i(RKR_Check_Button* o, void* v)
+{
+    long long ud= (long long) v;
+
+    FX_Not_Selected[ud]= (char) o->value();
+}
+
 void RKRGUI::RandomPreset()
 {
     // Reset all effects to defaults
