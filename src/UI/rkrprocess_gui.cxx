@@ -58,7 +58,7 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
 
     back = NULL;
     
-    memset(FX_Not_Selected, 0, sizeof (FX_Not_Selected));
+    memset(FX_Excluded, 0, sizeof (FX_Excluded));
 
     make_window();
 
@@ -3587,7 +3587,7 @@ inline void RKRGUI::cb_Set_effect_i(RKR_Check_Button* o, void* v)
 {
     long long ud= (long long) v;
 
-    FX_Not_Selected[ud]= (char) o->value();
+    FX_Excluded[ud] = (char) o->value();
 }
 
 void RKRGUI::RandomPreset()
@@ -3596,7 +3596,7 @@ void RKRGUI::RandomPreset()
     int excluded = 0;
     for(unsigned e = 0; e < C_NUMBER_EFFECTS; ++e)
     {
-        if(FX_Not_Selected[e])
+        if(FX_Excluded[e])
             excluded++;
     }
 
@@ -3618,7 +3618,7 @@ void RKRGUI::RandomPreset()
         Effect_Index[0] = (int) (RND * C_NUMBER_EFFECTS);
 
         // Did the user want this to be selected
-        if(!FX_Not_Selected[Effect_Index[0]])
+        if(!FX_Excluded[Effect_Index[0]])
         {
             break;  // it is a good one
         }
@@ -3648,7 +3648,7 @@ void RKRGUI::RandomPreset()
                     {
                         if (k == Effect_Index[i])
                         {
-                            if(FX_Not_Selected[k])
+                            if(FX_Excluded[k])
                             {
                                 l = 0;  // user does not want this one
                                 dont_use = true;
