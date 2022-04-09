@@ -65,7 +65,7 @@ widget_class RandomEditGui {open selected
   decl {RKRGUI* m_parent;} {private local
   }
   Fl_Scroll RandomScroll {
-    label {Effect Status} open
+    label {Exclude Effect} open
     tooltip {Check any effects that should NOT be included for random selection.} xywh {13 25 100 185} type VERTICAL_ALWAYS labelcolor 7
     class RKR_Scroll
   } {}

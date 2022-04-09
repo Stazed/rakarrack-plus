@@ -46,6 +46,7 @@ void RKR_Scroll::draw()
     {
         m_look_changed = global_look_changed;
         color(fl_lighter(global_back_color));
+        labelcolor(global_label_color);
     }
     
     int y_pos = yposition();

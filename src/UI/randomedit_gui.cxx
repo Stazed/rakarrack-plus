@@ -80,7 +80,7 @@ this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
 { Fondo14 = new Fl_Box(0, 1, 125, 234);
 } // Fl_Box* Fondo14
-{ RandomScroll = new RKR_Scroll(13, 25, 100, 185, "Effect Status");
+{ RandomScroll = new RKR_Scroll(13, 25, 100, 185, "Exclude Effect");
   RandomScroll->tooltip("Check any effects that should NOT be included for random selection.");
   RandomScroll->type(6);
   RandomScroll->box(FL_NO_BOX);
