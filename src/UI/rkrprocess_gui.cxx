@@ -3955,6 +3955,7 @@ void RKRGUI::NSM_gui_hide()
     Trigger->hide();
     Principal->hide();
     DelayFile->hide();
+    RandomEdit->hide();
     Fl::flush();
     global_gui_show = CONST_GUI_OFF;
 #endif
