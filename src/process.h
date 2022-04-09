@@ -644,6 +644,11 @@ const int C_MC_UNUSED_PARAMETERS = 25;
  */
 const int C_MC_RANGE = C_MC_PARAMETER_SIZE + C_MC_UNUSED_PARAMETERS;
 
+/**
+ * For the random preset generator, the maximum allowed excluded effects.
+ */
+const int C_MAX_EXCLUDED = 36;
+
 #ifdef SYSEX_SUPPORT
 const unsigned char  EVENT_SYSEX            = 0xF0;
 const unsigned char  EVENT_SYSEX_END        = 0xF7;

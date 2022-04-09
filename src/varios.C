@@ -274,6 +274,12 @@ RKR::Handle_Message(int num, std::string strMessage)
                     "It will be ignored on export...\n", effect_name.c_str());
         }
             break;
+        case 49:
+        {
+            sprintf(error_msg, "Invalid number of excluded effects = %s\n"
+                    "You cannot have more than %d excluded effects\n"
+                    "to generate the random preset\n", strMessage.c_str(), C_MAX_EXCLUDED);
+        }
     }
 
     Message(message_type, meslabel, error_msg);

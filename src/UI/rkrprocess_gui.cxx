@@ -3592,6 +3592,20 @@ inline void RKRGUI::cb_Set_effect_i(RKR_Check_Button* o, void* v)
 
 void RKRGUI::RandomPreset()
 {
+    // Check if invalid number of effects are excluded
+    int excluded = 0;
+    for(unsigned e = 0; e < C_NUMBER_EFFECTS; ++e)
+    {
+        if(FX_Not_Selected[e])
+            excluded++;
+    }
+
+    if(excluded > C_MAX_EXCLUDED)
+    {
+        m_process->Handle_Message(49, NTS(excluded));
+        return; // don't generate until they fix it
+    }
+    
     // Reset all effects to defaults
     S_new->do_callback();
 
