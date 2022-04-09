@@ -3652,17 +3652,19 @@ void RKRGUI::RandomPreset()
                             {
                                 l = 0;  // user does not want this one
                                 dont_use = true;
-                                break;
                             }
+                            break;
                         }
                     }
 
                     if(dont_use)
                     {
-                        break;
+                        break; // from for loop
                     }
-
-                    l = 1;  // got a valid new selection, break from while()
+                    else
+                    {
+                        l = 1;  // got all valid new selections, break from while()
+                    }
                 }
             }
         }
