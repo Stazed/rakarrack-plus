@@ -744,6 +744,7 @@ void RKRGUI::cb_RandomP_i(RKR_Button*, void*) {
     if (!RandomEdit->visible())
     {
         RandomEdit->show();
+        put_icon(RandomEdit);
     }
     return;
 }
@@ -2906,7 +2907,7 @@ references.");
     DelayFile->end();
     DelayFile->resizable(DelayFile);
   } // DelayFileWindowGui* DelayFile
-  { RandomEditGui* o = RandomEdit = new RandomEditGui(0, 0, 385, 350);
+  { RandomEditGui* o = RandomEdit = new RandomEditGui(0, 0, 125, 235);
     RandomEdit->box(FL_NO_BOX);
     RandomEdit->color((Fl_Color)4);
     RandomEdit->selection_color(FL_BACKGROUND2_COLOR);

@@ -100,6 +100,8 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     MIDILearn->copy_label(tmp);
     sprintf(tmp, "%s   v%s - ACI", m_process->jackcliname, VERSION);
     Trigger->copy_label(tmp);
+    sprintf(tmp, "%s   v%s - Random", m_process->jackcliname, VERSION);
+    RandomEdit->copy_label(tmp);
     
     load_previous_state();
     

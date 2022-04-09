@@ -51,26 +51,42 @@ decl {const std::vector<std::string> vctFX_Name
     "Opticaltrem",
     "Vibe",
     "Infinity"
-};} {selected private global
+};} {private global
 }
 
-widget_class RandomEditGui {open
-  xywh {1495 634 240 235} type Double resizable
+widget_class RandomEditGui {open selected
+  xywh {1495 634 125 235} type Double resizable
   code0 {\#include "rakarrack.h"}
   class Fl_Double_Window visible
 } {
   Fl_Box Fondo14 {
-    xywh {0 1 240 234}
+    xywh {0 1 125 234}
   }
   decl {RKRGUI* m_parent;} {private local
   }
   Fl_Scroll RandomScroll {
     label {Effect Status} open
-    tooltip {Check any effects that should NOT be included for random selection.} xywh {13 25 215 185} type VERTICAL_ALWAYS
+    tooltip {Check any effects that should NOT be included for random selection.} xywh {13 25 100 185} type VERTICAL_ALWAYS labelcolor 7
     class RKR_Scroll
   } {}
   Function {initialize(RKRGUI *_rgui)} {open return_type void
   } {
-    code {m_parent = _rgui;} {}
+    code {m_parent = _rgui;
+make_effect_scroller();} {}
+  }
+  Function {make_effect_scroller()} {open private return_type void
+  } {
+    code {RandomScroll->clear();
+  
+    RandomScroll->begin();
+    
+    for (intptr_t i = 0; i < (int) vctFX_Name.size(); ++i)
+    {
+        RKR_Check_Button *b = new RKR_Check_Button(15,i*20+22,100,20, vctFX_Name[i].c_str());
+        b->user_data((void *) i);
+        b->callback((Fl_Callback *)m_parent->Set_effect);
+    }
+    
+    RandomScroll->end();} {}
   }
 }

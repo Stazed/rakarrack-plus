@@ -346,7 +346,7 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {607 93 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {252 274 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1563,6 +1563,7 @@ if(m_process->Config.Tap_Updated)
     if (!RandomEdit->visible())
     {
         RandomEdit->show();
+        put_icon(RandomEdit);
     }
     return;
 }
@@ -1897,7 +1898,7 @@ o->hide();} open
       class DelayFileWindowGui size_range {400 132 1600 1060}
     } {}
     Fl_Window RandomEdit {open
-      xywh {890 520 385 350} type Double box NO_BOX color 4 selection_color 7 hide resizable
+      xywh {890 520 125 235} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "randomedit_gui.h"}
       code1 {o->hide();}
       code2 {o->initialize(this);}

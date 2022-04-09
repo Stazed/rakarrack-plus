@@ -63,7 +63,7 @@ RandomEditGui::RandomEditGui(int W, int H, const char *L)
 }
 
 RandomEditGui::RandomEditGui()
-  : Fl_Double_Window(0, 0, 240, 235, 0) {
+  : Fl_Double_Window(0, 0, 125, 235, 0) {
   clear_flag(16);
   _RandomEditGui();
 }
@@ -78,9 +78,9 @@ this->labelsize(14);
 this->labelcolor(FL_FOREGROUND_COLOR);
 this->align(Fl_Align(FL_ALIGN_TOP));
 this->when(FL_WHEN_RELEASE);
-{ Fondo14 = new Fl_Box(0, 1, 240, 234);
+{ Fondo14 = new Fl_Box(0, 1, 125, 234);
 } // Fl_Box* Fondo14
-{ RandomScroll = new RKR_Scroll(13, 25, 215, 185, "Effect Status");
+{ RandomScroll = new RKR_Scroll(13, 25, 100, 185, "Effect Status");
   RandomScroll->tooltip("Check any effects that should NOT be included for random selection.");
   RandomScroll->type(6);
   RandomScroll->box(FL_NO_BOX);
@@ -89,7 +89,7 @@ this->when(FL_WHEN_RELEASE);
   RandomScroll->labeltype(FL_NORMAL_LABEL);
   RandomScroll->labelfont(0);
   RandomScroll->labelsize(14);
-  RandomScroll->labelcolor(FL_FOREGROUND_COLOR);
+  RandomScroll->labelcolor(FL_BACKGROUND2_COLOR);
   RandomScroll->align(Fl_Align(FL_ALIGN_TOP));
   RandomScroll->when(FL_WHEN_RELEASE);
   RandomScroll->end();
@@ -103,18 +103,17 @@ void RandomEditGui::initialize(RKRGUI *_rgui) {
   make_effect_scroller();
 }
 
-void RandomEditGui::make_effect_scroller()
-{
-    RandomScroll->clear();
-  
-    RandomScroll->begin();
+void RandomEditGui::make_effect_scroller() {
+  RandomScroll->clear();
     
-    for (intptr_t i = 0; i < (int) vctFX_Name.size(); ++i)
-    {
-        RKR_Check_Button *b = new RKR_Check_Button(15,i*20+22,100,20, vctFX_Name[i].c_str());
-        b->user_data((void *) i);
-        b->callback((Fl_Callback *)m_parent->Set_effect);
-    }
-    
-    RandomScroll->end();
+      RandomScroll->begin();
+      
+      for (intptr_t i = 0; i < (int) vctFX_Name.size(); ++i)
+      {
+          RKR_Check_Button *b = new RKR_Check_Button(15,i*20+22,100,20, vctFX_Name[i].c_str());
+          b->user_data((void *) i);
+          b->callback((Fl_Callback *)m_parent->Set_effect);
+      }
+      
+      RandomScroll->end();
 }
