@@ -16,9 +16,10 @@ public:
   Fl_Box *Fondo14;
 private:
   RKRGUI* m_parent; 
+  RKR* m_process; 
 public:
   RKR_Scroll *RandomScroll;
-  void initialize(RKRGUI *_rgui);
+  void initialize(RKR * _rkr, RKRGUI *_rgui);
 private:
   void make_effect_scroller();
 };

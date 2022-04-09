@@ -2919,7 +2919,7 @@ references.");
     RandomEdit->align(Fl_Align(FL_ALIGN_TOP));
     RandomEdit->when(FL_WHEN_RELEASE);
     o->hide();
-    o->initialize(this);
+    o->initialize(m_process, this);
     RandomEdit->size_range(400, 132, 1600, 1060);
     RandomEdit->end();
     RandomEdit->resizable(RandomEdit);
