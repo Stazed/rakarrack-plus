@@ -2,6 +2,58 @@
 version 1.0308
 header_name {.h}
 code_name {.cxx}
+decl {const std::vector<std::string> vctFX_Name
+{
+    "Equalizer",
+    "Compressor",
+    "Distortion",
+    "Overdrive",
+    "Echo",
+    "Chorus",
+    "Phaser",
+    "Flanger",
+    "Reverb",
+    "Parametric",
+    "WahWah",
+    "Alienwah",
+    "Cabinet",
+    "Pan",
+    "Harmonizer",
+    "Musical Delay",
+    "Noisegate",
+    "Derelict",
+    "Analog Phaser",
+    "Valve",
+    "Dual Flange",
+    "Ring",
+    "Exciter",
+    "Distband",
+    "Arpie",
+    "Expander",
+    "Shuffle",
+    "Synthfilter",
+    "Varyband",
+    "Convolotron",
+    "Looper",
+    "MuTroMojo",
+    "Echoverse",
+    "Coilcrafter",
+    "Shelfboost",
+    "Vocoder",
+    "Sustainer",
+    "Sequence",
+    "Shifter",
+    "Stompbox",
+    "Reverbtron",
+    "Echotron",
+    "Stereoharm",
+    "Compband",
+    "Opticaltrem",
+    "Vibe",
+    "Infinity"
+};} {selected private global
+}
+
 widget_class RandomEditGui {open
   xywh {1495 634 240 235} type Double resizable
   code0 {\#include "rakarrack.h"}
@@ -10,7 +62,7 @@ widget_class RandomEditGui {open
   Fl_Box Fondo14 {
     xywh {0 1 240 234}
   }
-  decl {RKRGUI* m_parent;} {selected private local
+  decl {RKRGUI* m_parent;} {private local
   }
   Fl_Scroll RandomScroll {
     label {Effect Status} open
