@@ -3597,18 +3597,16 @@ void RKRGUI::RandomPreset()
 
     // Array to hold selected effect index
     int Effect_Index[10];
-    
+
     // Get the first one to compare for duplicates
-    for (int h = 0; h < C_NUMBER_EFFECTS; h++)
+    while(1)
     {
         Effect_Index[0] = (int) (RND * C_NUMBER_EFFECTS);
-        if (h == Effect_Index[0])
+
+        // Did the user want this to be selected
+        if(!FX_Not_Selected[Effect_Index[0]])
         {
-            // Did the user want this to be selected
-            if(!FX_Not_Selected[h])
-            {
-                break;  // it is a good one
-            }
+            break;  // it is a good one
         }
     }
 
