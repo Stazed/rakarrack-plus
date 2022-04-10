@@ -156,6 +156,57 @@ Alienwah::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Alienwah::set_random_parameters()
+{
+    for(int i = 0; i < C_ALIENWAH_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Alien_LFO_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Alien_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+            
+            case Alien_Pan:
+            case Alien_LFO_Random:
+            case Alien_LFO_Stereo:
+            case Alien_Depth:
+            case Alien_Feedback:
+            case Alien_LR_Cross:
+            case Alien_Phase:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Alien_DryWet: 
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Alien_Delay:
+            {
+                int value = (int) (RND * 100);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
+void
 Alienwah::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_ALIENWAH_PARAMETERS; i++)
