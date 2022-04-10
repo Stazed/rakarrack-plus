@@ -135,6 +135,7 @@ public:
     int getpar (int npar);
     void cleanup ();
     int get_number_efx_parameters () {return C_ECHOTRON_PARAMETERS;};
+    void set_random_parameters();
     
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);

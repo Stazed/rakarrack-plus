@@ -154,6 +154,82 @@ Echotron::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Echotron::set_random_parameters()
+{
+    for(int i = 0; i < C_ECHOTRON_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Echotron_Pan:
+            case Echotron_LFO_Width:
+            case Echotron_Damp:
+            case Echotron_LFO_Stereo:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Echotron_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Echotron_Feedback:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case Echotron_LR_Cross:
+            case Echotron_Depth:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case Echotron_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case Echotron_Mod_Delay:
+            case Echotron_Mod_Filter:
+            case Echotron_Filters:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Echotron_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Echotron_Set_File:
+            {
+                int value = (int) (RND * 11);
+                changepar (i, value);
+            }
+            break;
+
+            case Echotron_Taps:
+            case Echotron_User_File:
+                break;
+        }
+    }
+}
+
+void
 Echotron::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
@@ -178,7 +254,7 @@ Echotron::LV2_parameters(std::string &s_buf)
                     s_buf += ":";
             }
             break;
-            
+
             // Special cases
             // wet/dry -> dry/wet reversal
             case Echotron_DryWet:
@@ -206,7 +282,7 @@ Echotron::LV2_parameters(std::string &s_buf)
                 param_case_offset++;    // skip user file
             }
             break;
-            
+
             // Offset & skip Set file
             case Echotron_LR_Cross:
             {
