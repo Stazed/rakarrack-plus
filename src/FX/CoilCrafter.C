@@ -135,6 +135,58 @@ CoilCrafter::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+CoilCrafter::set_random_parameters()
+{
+    for(int i = 0; i < C_COIL_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Coil_Gain:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Coil_Tone:
+            {
+                int value = (int) (RND * 4380);
+                changepar (i, value + 20);
+            }
+            break;
+
+            // Skip these
+            case Coil_Origin:
+            case Coil_Destiny:
+                break;
+
+            case Coil_Freq_1:
+            case Coil_Freq_2:
+            {
+                int value = (int) (RND * 1900);
+                changepar (i, value + 2600);
+            }
+            break;
+            
+            case Coil_Q_1:
+            case Coil_Q_2:
+            {
+                int value = (int) (RND * 55);
+                changepar (i, value + 10);
+            }
+            break;
+            
+            case Coil_NeckMode:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
+void
 CoilCrafter::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
