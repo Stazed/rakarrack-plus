@@ -107,6 +107,56 @@ Echoverse::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Echoverse::set_random_parameters()
+{
+    for(int i = 0; i < C_ECHOVERSE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Echoverse_Pan:
+            case Echoverse_LR_Delay:
+            case Echoverse_Feedback:
+            case Echoverse_Damp:
+            case Echoverse_Reverse:
+            case Echoverse_Ext_Stereo:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Echoverse_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Echoverse_Angle:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case Echoverse_Subdivision:
+            {
+                int value = (int) (RND * 6);
+                changepar (i, value);
+            }
+            break;
+
+            case Echoverse_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Echoverse::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_ECHOVERSE_PARAMETERS; i++)
