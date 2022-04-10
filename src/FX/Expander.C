@@ -95,6 +95,65 @@ Expander::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Expander::set_random_parameters()
+{
+    for(int i = 0; i < C_EXPANDER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Expander_Threshold:
+            {
+                int value = (int) (RND * 80);
+                changepar (i, value - 80);
+            }
+            break;
+
+            case Expander_Shape:
+            {
+                int value = (int) (RND * 49);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Expander_Attack:
+            {
+                int value = (int) (RND * 4999);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Expander_Release:
+            {
+                int value = (int) (RND * 990);
+                changepar (i, value + 10);
+            }
+            break;
+
+            case Expander_LPF:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Expander_HPF:
+            {
+                int value = (int) (RND * 19980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Expander_Gain:
+            {
+                int value = (int) (RND * 126);
+                changepar (i, value + 1);
+            }
+            break;
+        }
+    }
+}
+
+void
 Expander::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_EXPANDER_PARAMETERS; i++)
