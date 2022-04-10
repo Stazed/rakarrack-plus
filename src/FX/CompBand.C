@@ -159,9 +159,75 @@ CompBand::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+CompBand::set_random_parameters()
+{
+    for(int i = 0; i < C_COMPBAND_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case CompBand_Low_Ratio:
+            case CompBand_Mid_1_Ratio:
+            case CompBand_Mid_2_Ratio:
+            case CompBand_High_Ratio:
+            {
+                int value = (int) (RND * 40);
+                changepar (i, value + 2);
+            }
+            break;
+
+            case CompBand_Low_Thresh:
+            case CompBand_Mid_1_Thresh:
+            case CompBand_Mid_2_Thresh:
+            case CompBand_High_Thresh:
+            {
+                int value = (int) (RND * 94);
+                changepar (i, value - 70);
+            }
+            break;
+
+            case CompBand_Cross_1:
+            {
+                int value = (int) (RND * 980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case CompBand_Cross_2:
+            {
+                int value = (int) (RND * 7000);
+                changepar (i, value + 1000);
+            }
+            break;
+
+            case CompBand_Cross_3:
+            {
+                int value = (int) (RND * 24000);
+                changepar (i, value + 2000);
+            }
+            break;
+
+            case CompBand_Gain:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case CompBand_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 CompBand::LV2_parameters(std::string &s_buf)
 {
-    for(int i; i < C_COMPBAND_PARAMETERS; i++)
+    for(int i = 0; i < C_COMPBAND_PARAMETERS; i++)
     {
         switch(i)
         {
