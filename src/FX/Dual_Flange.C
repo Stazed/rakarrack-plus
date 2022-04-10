@@ -176,6 +176,91 @@ Dflange::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Dflange::set_random_parameters()
+{
+    for(int i = 0; i < C_DFLANGE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case DFlange_Pan:
+            case DFlange_Feedback:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case DFlange_LR_Cross:
+            case DFlange_LFO_Stereo:
+            case DFlange_LFO_Random:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case DFlange_Depth:
+            {
+                int value = (int) (RND * 2480);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case DFlange_Width:
+            {
+                int value = (int) (RND * 6000);
+                changepar (i, value);
+            }
+            break;
+
+            case DFlange_Offset:
+            {
+                int value = (int) (RND * 100);
+                changepar (i, value);
+            }
+            break;
+
+            case DFlange_LPF:
+            {
+                int value = (int) (RND * 19980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case DFlange_Subtract:
+            case DFlange_Zero:
+            case DFlange_Intense:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case DFlange_LFO_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case DFlange_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case DFlange_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Dflange::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_DFLANGE_PARAMETERS; i++)
