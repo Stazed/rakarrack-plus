@@ -137,10 +137,71 @@ Distorsion::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Distorsion::set_random_parameters()
+{
+    for(int i = 0; i < C_DIST_PARAMETERS; i++)    // -1 for skipped parameter 11
+    {
+        switch(i)
+        {
+            case Dist_Pan:
+            case Dist_LR_Cross:
+            case Dist_Drive:
+            case Dist_Level:
+            case Dist_Suboctave:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Dist_Type:
+            {
+                int value = (int) (RND * 30);
+                changepar (i, value);
+            }
+            break;
+
+            case Dist_Negate:
+            case Dist_Stereo:
+            case Dist_Prefilter:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Dist_LPF:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Dist_HPF:
+            {
+                int value = (int) (RND * 19980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Dist_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Dist_SKIP_11:
+                break;
+        }
+    }
+}
+
+void
 Distorsion::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
-    
+
     for(int i = 0; i < (C_DIST_PARAMETERS - 1); i++)    // -1 for skipped parameter 11
     {
         switch(param_case_offset)
@@ -162,7 +223,7 @@ Distorsion::LV2_parameters(std::string &s_buf)
                     s_buf += ":";
             }
             break;
-            
+
             // Special cases
             // wet/dry -> dry/wet reversal
             case Dist_DryWet:
@@ -171,7 +232,7 @@ Distorsion::LV2_parameters(std::string &s_buf)
                 s_buf += ":";
             }
             break;
-            
+
             // Offset
             case Dist_Pan:
             {
@@ -179,7 +240,7 @@ Distorsion::LV2_parameters(std::string &s_buf)
                 s_buf += ":";
             }
             break;
-            
+
             // Skip 1 parameter after this
             case Dist_Prefilter:
             {
@@ -190,12 +251,11 @@ Distorsion::LV2_parameters(std::string &s_buf)
                 param_case_offset++;
             }
             break;
-            
+
         }
         // increment offset
         param_case_offset++;
     }
-    
 }
 
 /*
