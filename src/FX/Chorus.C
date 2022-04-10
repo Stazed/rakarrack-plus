@@ -252,6 +252,61 @@ Chorus::lv2_update_params(uint32_t period)
 #endif // 0
 
 void
+Chorus::set_random_parameters()
+{   
+    for(int i = 0; i < C_CHORUS_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Chorus_LFO_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Chorus_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case Chorus_Pan:
+            case Chorus_LFO_Random:
+            case Chorus_LFO_Stereo:
+            case Chorus_Depth:
+            case Chorus_Delay:
+            case Chorus_Feedback:
+            case Chorus_LR_Cross:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Chorus_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Chorus_Subtract:
+            case Chorus_Intense:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Chorus_SKIP_Flange_10:
+                break;
+        }
+    }
+}
+
+void
 Chorus::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
