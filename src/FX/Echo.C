@@ -104,6 +104,49 @@ Echo::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Echo::set_random_parameters()
+{
+    for(int i = 0; i < C_ECHO_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Echo_Pan:
+            case Echo_LR_Delay:
+            case Echo_LR_Cross:
+            case Echo_Feedback:
+            case Echo_Damp:
+            case Echo_Reverse:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Echo_Delay:
+            {
+                int value = (int) (RND * 1980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Echo_Direct:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Echo_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Echo::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_ECHO_PARAMETERS; i++)
