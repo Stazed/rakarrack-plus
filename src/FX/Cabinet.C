@@ -205,6 +205,16 @@ Cabinet::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Cabinet::set_random_parameters()
+{
+    int value = (int) (RND * 127);
+    change_parameters(0, value);    // Gain
+    
+    value = (int) (RND * 11);       // preset
+    setpreset(value);
+}
+
+void
 Cabinet::LV2_parameters(std::string &s_buf)
 {
     // The parameters for gain and preset are reversed for LV2
