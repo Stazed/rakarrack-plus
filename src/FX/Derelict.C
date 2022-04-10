@@ -151,6 +151,70 @@ Derelict::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Derelict::set_random_parameters()
+{
+    for(int i = 0; i < C_DERE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Dere_LR_Cross:
+            case Dere_Level:
+            case Dere_Color:
+            case Dere_Suboctave:
+            case Dere_Pan:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Dere_Drive:
+            {
+                int value = (int) (RND * 126);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Dere_Type:
+            {
+                int value = (int) (RND * 30);
+                changepar (i, value);
+            }
+            break;
+            
+            case Dere_Negate:
+            case Dere_Prefilter:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Dere_LPF:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Dere_HPF:
+            {
+                int value = (int) (RND * 19980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Dere_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Derelict::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_DERE_PARAMETERS; i++)
