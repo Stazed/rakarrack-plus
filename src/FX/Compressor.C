@@ -117,6 +117,67 @@ Compressor::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Compressor::set_random_parameters()
+{
+    for(int i = 0; i < C_COMPRESS_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Compress_Threshold:
+            {
+                int value = (int) (RND * 57);
+                changepar (i, value - 60);
+            }
+            break;
+
+            case Compress_Ratio:
+            {
+                int value = (int) (RND * 40);
+                changepar (i, value + 2);
+            }
+            break;
+
+            case Compress_Output:
+            {
+                int value = (int) (RND * 40);
+                changepar (i, value - 40);
+            }
+            break;
+
+            case Compress_Attack:
+            {
+                int value = (int) (RND * 240);
+                changepar (i, value + 10);
+            }
+            break;
+
+            case Compress_Release:
+            {
+                int value = (int) (RND * 490);
+                changepar (i, value + 10);
+            }
+            break;
+
+            case Compress_Knee:
+            {
+                int value = (int) (RND * 100);
+                changepar (i, value);
+            }
+            break;
+                
+            case Compress_Auto_Out:
+            case Compress_Stereo:
+            case Compress_Peak:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
+void
 Compressor::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_COMPRESS_PARAMETERS; i++)
