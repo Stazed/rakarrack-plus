@@ -173,6 +173,66 @@ Convolotron::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Convolotron::set_random_parameters()
+{
+    for(int i = 0; i < C_CONVO_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Convo_User_File:
+            case Convo_SKIP_5:
+            case Convo_SKIP_9:
+                break;
+            
+            case Convo_Pan:
+            case Convo_Level:
+            case Convo_Damp:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Convo_Safe:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Convo_Feedback:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case Convo_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Convo_Length:
+            {
+                int value = (int) (RND * 245);
+                changepar (i, value + 5);
+            }
+            break;
+
+            case Convo_Set_File:
+            {
+                int value = (int) (RND * 9);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+
+}
+
+void
 Convolotron::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
