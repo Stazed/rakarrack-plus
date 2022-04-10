@@ -64,6 +64,53 @@ Exciter::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Exciter::set_random_parameters()
+{
+    for(int i = 0; i < C_EXCITER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Exciter_Gain:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Exciter_Harm_1:
+            case Exciter_Harm_2:
+            case Exciter_Harm_3:
+            case Exciter_Harm_4:
+            case Exciter_Harm_5:
+            case Exciter_Harm_6:
+            case Exciter_Harm_7:
+            case Exciter_Harm_8:
+            case Exciter_Harm_9:
+            case Exciter_Harm_10:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64 );
+            }
+            break;
+
+            case Exciter_LPF:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Exciter_HPF:
+            {
+                int value = (int) (RND * 19980);
+                changepar (i, value + 20);
+            }
+            break;
+        }
+    }
+}
+
+void
 Exciter::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_EXCITER_PARAMETERS; i++)
