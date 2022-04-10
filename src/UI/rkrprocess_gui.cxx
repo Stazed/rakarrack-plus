@@ -3372,11 +3372,13 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
 
     // Need to shut off below mouse or it tries to modify the fl_input widget and crash.
     m_process->Shut_Off_Below_Mouse = 1;
-    std::string name = fl_input("Preset Name?", "");
+    const char *buf = fl_input("Preset Name?", "");
     m_process->Shut_Off_Below_Mouse = 0;
 
-    if (name.empty ())
+    if (!buf)
         return;
+    
+    std::string name = buf;
 
     name.insert (0, "*" );
 
