@@ -83,6 +83,7 @@ public:
     void change_parameters (int npar, int value);
     int get_parameters (int npar);
     int get_number_efx_parameters () {return C_EQ_PARAMETERS;};
+    void set_random_parameters();
     
 #ifdef LV2_SUPPORT
     virtual void lv2_update_params(uint32_t period);

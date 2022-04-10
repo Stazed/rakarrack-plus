@@ -166,6 +166,34 @@ EQ::setvolume(int _Pvolume)
 }
 
 void
+EQ::set_random_parameters()
+{
+    for(int i = 0; i < C_EQ_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case EQ_31_HZ:
+            case EQ_63_HZ:
+            case EQ_125_HZ:
+            case EQ_250_HZ:
+            case EQ_500_HZ:
+            case EQ_1_KHZ:
+            case EQ_2_KHZ:
+            case EQ_4_KHZ:
+            case EQ_8_KHZ:
+            case EQ_16_KHZ:
+            case EQ_Gain:
+            case EQ_Q:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
+void
 EQ::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 10;
