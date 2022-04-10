@@ -3729,8 +3729,12 @@ void RKRGUI::set_random_parameters(int effect)
 
     m_process->Rack_Effects[efx]->set_random_parameters();
 
-    // needed for some cases to refresh gui (Cabinet)
-    m_process->refresh_active_preset();
+    // needed for cabinet because cabinet uses Active_Preset for parameter_refresh()
+    if (efx == EFX_CABINET)
+    {
+        m_process->Active_Preset.Effect_Params[EFX_CABINET][0] = m_process->Rack_Effects[EFX_CABINET]->getpar(0);
+        m_process->Active_Preset.Effect_Params[EFX_CABINET][1] = m_process->Rack_Effects[EFX_CABINET]->getpar(1);
+    }
 
     for(int i = 0; i < m_process->Rack_Effects[efx]->get_number_efx_parameters(); ++i)
     {
