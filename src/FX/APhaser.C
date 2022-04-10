@@ -300,7 +300,6 @@ Analog_Phaser::set_random_parameters()
             {
                 int value = (int) (RND * 127);
                 changepar (i, value);
- 
             }
             break;
 

@@ -114,6 +114,57 @@ Arpie::cleanup()
     harmonic = 1;
 }
 
+void
+Arpie::set_random_parameters()
+{
+    for(int i = 0; i < C_ARPIE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Arpie_Pan:
+            case Arpie_LR_Delay:
+            case Arpie_LR_Cross:
+            case Arpie_Feedback:
+            case Arpie_Damp:
+            case Arpie_ArpeWD:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Arpie_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Arpie_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Arpie_Subdivision:
+            case Arpie_Pattern:
+            {
+                int value = (int) (RND * 6);
+                changepar (i, value);
+            }
+            break;
+
+            case Arpie_Harm:
+            {
+                int value = (int) (RND * 8);
+                changepar (i, value + 1);
+            }
+            break;
+        }
+    }
+}
+
 #ifdef LV2_SUPPORT
 void
 Arpie::lv2_update_params(uint32_t period)
