@@ -40,6 +40,7 @@ public:
     RKR_Box(int X, int Y, int W, int H, const char *label=0);
     void draw();
     void resize(int,int,int,int);
+    int handle(int);
     int get_start_height(){return m_start_height;};
     int get_start_width(){return m_start_width;};
     int get_start_x(){return m_start_x;};

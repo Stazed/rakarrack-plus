@@ -60,6 +60,7 @@ public:
     virtual void out (float *, float *) = 0;
     virtual void cleanup () = 0;
     virtual int get_number_efx_parameters () = 0;
+    virtual void set_random_parameters() {};    // TODO FIXME
     
     virtual void Dry_Wet_Mix(int efx_index, float volume,
         float *efxoutl, float *efxoutr, float *smpl, float *smpr);

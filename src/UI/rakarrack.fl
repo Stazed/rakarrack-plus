@@ -346,7 +346,7 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {386 226 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {548 122 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -688,6 +688,7 @@ Fl::focus(Open_Order);}
       Fl_Box L1 {
         label label
         user_data UD_Label_1
+        callback {set_random_parameters(0);}
         xywh {2 195 158 17} labelfont 1 labelcolor 7 align 64
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -695,6 +696,7 @@ Fl::focus(Open_Order);}
       Fl_Box L2 {
         label label
         user_data UD_Label_2
+        callback {set_random_parameters(1);}
         xywh {162 195 158 17} labelfont 1 labelcolor 7 align 64
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -702,6 +704,7 @@ Fl::focus(Open_Order);}
       Fl_Box L3 {
         label label
         user_data UD_Label_3
+        callback {set_random_parameters(2);}
         xywh {322 195 158 17} labelfont 1 labelcolor 7
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -709,6 +712,7 @@ Fl::focus(Open_Order);}
       Fl_Box L4 {
         label label
         user_data UD_Label_4
+        callback {set_random_parameters(3);}
         xywh {482 195 158 17} labelfont 1 labelcolor 7
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -716,6 +720,7 @@ Fl::focus(Open_Order);}
       Fl_Box L5 {
         label label
         user_data UD_Label_5
+        callback {set_random_parameters(4);}
         xywh {642 195 157 17} labelfont 1 labelcolor 7
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -723,6 +728,7 @@ Fl::focus(Open_Order);}
       Fl_Box L6 {
         label label
         user_data UD_Label_6
+        callback {set_random_parameters(5);}
         xywh {1 396 158 17} labelfont 1 labelcolor 7
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -730,6 +736,7 @@ Fl::focus(Open_Order);}
       Fl_Box L7 {
         label label
         user_data UD_Label_7
+        callback {set_random_parameters(6);}
         xywh {162 396 158 17} labelfont 1 labelcolor 7
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -737,6 +744,7 @@ Fl::focus(Open_Order);}
       Fl_Box L8 {
         label label
         user_data UD_Label_8
+        callback {set_random_parameters(7);}
         xywh {322 396 158 17} labelfont 1 labelcolor 7
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -744,6 +752,7 @@ Fl::focus(Open_Order);}
       Fl_Box L9 {
         label label
         user_data UD_Label_9
+        callback {set_random_parameters(8);}
         xywh {482 396 158 17} labelfont 1 labelcolor 7
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -751,6 +760,7 @@ Fl::focus(Open_Order);}
       Fl_Box L10 {
         label label
         user_data UD_Label_10
+        callback {set_random_parameters(9);}
         xywh {642 396 154 17} labelfont 1 labelcolor 7
         code0 {o->set_box_type(BOX_LIGHT);}
         class RKR_Box
@@ -1898,11 +1908,11 @@ o->hide();} open
       class DelayFileWindowGui size_range {400 132 1600 1060}
     } {}
     Fl_Window RandomEdit {open
-      xywh {890 520 125 235} type Double box NO_BOX color 4 selection_color 7 resizable
+      xywh {890 520 125 235} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "randomedit_gui.h"}
       code1 {o->hide();}
       code2 {o->initialize(m_process, this);}
-      class RandomEditGui size_range {400 132 1600 1060} visible
+      class RandomEditGui size_range {400 132 1600 1060}
     } {}
     code {char tmp[64];
 sprintf(tmp,"Version %s",VERSION);
@@ -2035,6 +2045,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {cb_Set_effect_i(RKR_Check_Button*, void*)} {open C return_type {inline void}
   } {}
   Function {RandomPreset()} {open
+  } {}
+  Function {set_random_parameters(int effect)} {open return_type void
   } {}
   Function {drag_effect()} {open
   } {}

@@ -3721,6 +3721,18 @@ void RKRGUI::RandomPreset()
     ActivarGeneral->do_callback();
 }
 
+void RKRGUI::set_random_parameters(int effect)
+{
+    int efx = m_process->efx_order[effect];
+
+    m_process->Rack_Effects[efx]->set_random_parameters();
+
+    for(int i = 0; i < m_process->Rack_Effects[efx]->get_number_efx_parameters(); ++i)
+    {
+        Efx_Gui_Base[efx]->parameter_refresh (i);
+    }
+}
+
 void RKRGUI::drag_effect()
 {
     if ((drag != C_NO_DRAG) && (Fl::event_button1() == 0))

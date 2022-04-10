@@ -353,6 +353,76 @@ void RKRGUI::cb_TITTLE_L(Fl_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_TITTLE_L_i(o,v);
 }
 
+void RKRGUI::cb_L1_i(RKR_Box*, void*) {
+  set_random_parameters(0);
+}
+void RKRGUI::cb_L1(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L1_i(o,v);
+}
+
+void RKRGUI::cb_L2_i(RKR_Box*, void*) {
+  set_random_parameters(1);
+}
+void RKRGUI::cb_L2(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L2_i(o,v);
+}
+
+void RKRGUI::cb_L3_i(RKR_Box*, void*) {
+  set_random_parameters(2);
+}
+void RKRGUI::cb_L3(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L3_i(o,v);
+}
+
+void RKRGUI::cb_L4_i(RKR_Box*, void*) {
+  set_random_parameters(3);
+}
+void RKRGUI::cb_L4(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L4_i(o,v);
+}
+
+void RKRGUI::cb_L5_i(RKR_Box*, void*) {
+  set_random_parameters(4);
+}
+void RKRGUI::cb_L5(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L5_i(o,v);
+}
+
+void RKRGUI::cb_L6_i(RKR_Box*, void*) {
+  set_random_parameters(5);
+}
+void RKRGUI::cb_L6(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L6_i(o,v);
+}
+
+void RKRGUI::cb_L7_i(RKR_Box*, void*) {
+  set_random_parameters(6);
+}
+void RKRGUI::cb_L7(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L7_i(o,v);
+}
+
+void RKRGUI::cb_L8_i(RKR_Box*, void*) {
+  set_random_parameters(7);
+}
+void RKRGUI::cb_L8(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L8_i(o,v);
+}
+
+void RKRGUI::cb_L9_i(RKR_Box*, void*) {
+  set_random_parameters(8);
+}
+void RKRGUI::cb_L9(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L9_i(o,v);
+}
+
+void RKRGUI::cb_L10_i(RKR_Box*, void*) {
+  set_random_parameters(9);
+}
+void RKRGUI::cb_L10(RKR_Box* o, void* v) {
+  ((RKRGUI*)(o->parent()->user_data()))->cb_L10_i(o,v);
+}
+
 void RKRGUI::cb_tuner_activar_i(RKR_Light_Button* o, void*) {
   m_process->Tuner_Active=(int)o->value();
 tuner_bar->value(-32);
@@ -1192,7 +1262,7 @@ void RKRGUI::make_window() {
       L1->labelfont(1);
       L1->labelsize(14);
       L1->labelcolor(FL_BACKGROUND2_COLOR);
-      L1->user_data((void*)(UD_Label_1));
+      L1->callback((Fl_Callback*)cb_L1, (void*)(UD_Label_1));
       L1->align(Fl_Align(FL_ALIGN_CLIP));
       L1->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);
@@ -1205,7 +1275,7 @@ void RKRGUI::make_window() {
       L2->labelfont(1);
       L2->labelsize(14);
       L2->labelcolor(FL_BACKGROUND2_COLOR);
-      L2->user_data((void*)(UD_Label_2));
+      L2->callback((Fl_Callback*)cb_L2, (void*)(UD_Label_2));
       L2->align(Fl_Align(FL_ALIGN_CLIP));
       L2->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);
@@ -1218,7 +1288,7 @@ void RKRGUI::make_window() {
       L3->labelfont(1);
       L3->labelsize(14);
       L3->labelcolor(FL_BACKGROUND2_COLOR);
-      L3->user_data((void*)(UD_Label_3));
+      L3->callback((Fl_Callback*)cb_L3, (void*)(UD_Label_3));
       L3->align(Fl_Align(FL_ALIGN_CENTER));
       L3->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);
@@ -1231,7 +1301,7 @@ void RKRGUI::make_window() {
       L4->labelfont(1);
       L4->labelsize(14);
       L4->labelcolor(FL_BACKGROUND2_COLOR);
-      L4->user_data((void*)(UD_Label_4));
+      L4->callback((Fl_Callback*)cb_L4, (void*)(UD_Label_4));
       L4->align(Fl_Align(FL_ALIGN_CENTER));
       L4->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);
@@ -1244,7 +1314,7 @@ void RKRGUI::make_window() {
       L5->labelfont(1);
       L5->labelsize(14);
       L5->labelcolor(FL_BACKGROUND2_COLOR);
-      L5->user_data((void*)(UD_Label_5));
+      L5->callback((Fl_Callback*)cb_L5, (void*)(UD_Label_5));
       L5->align(Fl_Align(FL_ALIGN_CENTER));
       L5->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);
@@ -1257,7 +1327,7 @@ void RKRGUI::make_window() {
       L6->labelfont(1);
       L6->labelsize(14);
       L6->labelcolor(FL_BACKGROUND2_COLOR);
-      L6->user_data((void*)(UD_Label_6));
+      L6->callback((Fl_Callback*)cb_L6, (void*)(UD_Label_6));
       L6->align(Fl_Align(FL_ALIGN_CENTER));
       L6->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);
@@ -1270,7 +1340,7 @@ void RKRGUI::make_window() {
       L7->labelfont(1);
       L7->labelsize(14);
       L7->labelcolor(FL_BACKGROUND2_COLOR);
-      L7->user_data((void*)(UD_Label_7));
+      L7->callback((Fl_Callback*)cb_L7, (void*)(UD_Label_7));
       L7->align(Fl_Align(FL_ALIGN_CENTER));
       L7->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);
@@ -1283,7 +1353,7 @@ void RKRGUI::make_window() {
       L8->labelfont(1);
       L8->labelsize(14);
       L8->labelcolor(FL_BACKGROUND2_COLOR);
-      L8->user_data((void*)(UD_Label_8));
+      L8->callback((Fl_Callback*)cb_L8, (void*)(UD_Label_8));
       L8->align(Fl_Align(FL_ALIGN_CENTER));
       L8->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);
@@ -1296,7 +1366,7 @@ void RKRGUI::make_window() {
       L9->labelfont(1);
       L9->labelsize(14);
       L9->labelcolor(FL_BACKGROUND2_COLOR);
-      L9->user_data((void*)(UD_Label_9));
+      L9->callback((Fl_Callback*)cb_L9, (void*)(UD_Label_9));
       L9->align(Fl_Align(FL_ALIGN_CENTER));
       L9->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);
@@ -1309,7 +1379,7 @@ void RKRGUI::make_window() {
       L10->labelfont(1);
       L10->labelsize(14);
       L10->labelcolor(FL_BACKGROUND2_COLOR);
-      L10->user_data((void*)(UD_Label_10));
+      L10->callback((Fl_Callback*)cb_L10, (void*)(UD_Label_10));
       L10->align(Fl_Align(FL_ALIGN_CENTER));
       L10->when(FL_WHEN_RELEASE);
       o->set_box_type(BOX_LIGHT);

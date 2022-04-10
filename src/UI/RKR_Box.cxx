@@ -93,3 +93,15 @@ void RKR_Box::resize(int X, int Y, int W, int H)
 
     Fl_Box::resize(X, Y, W, H);
 }
+
+int RKR_Box::handle(int event)
+{
+    if(event == FL_PUSH)
+    {
+        if (Fl::event_button() == 3)
+        {
+            do_callback();
+        }
+    }
+    return Fl_Box::handle(event);
+}

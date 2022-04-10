@@ -298,15 +298,55 @@ public:
   Fl_Box *E9;
   Fl_Box *E10;
   RKR_Box *L1;
+private:
+  inline void cb_L1_i(RKR_Box*, void*);
+  static void cb_L1(RKR_Box*, void*);
+public:
   RKR_Box *L2;
+private:
+  inline void cb_L2_i(RKR_Box*, void*);
+  static void cb_L2(RKR_Box*, void*);
+public:
   RKR_Box *L3;
+private:
+  inline void cb_L3_i(RKR_Box*, void*);
+  static void cb_L3(RKR_Box*, void*);
+public:
   RKR_Box *L4;
+private:
+  inline void cb_L4_i(RKR_Box*, void*);
+  static void cb_L4(RKR_Box*, void*);
+public:
   RKR_Box *L5;
+private:
+  inline void cb_L5_i(RKR_Box*, void*);
+  static void cb_L5(RKR_Box*, void*);
+public:
   RKR_Box *L6;
+private:
+  inline void cb_L6_i(RKR_Box*, void*);
+  static void cb_L6(RKR_Box*, void*);
+public:
   RKR_Box *L7;
+private:
+  inline void cb_L7_i(RKR_Box*, void*);
+  static void cb_L7(RKR_Box*, void*);
+public:
   RKR_Box *L8;
+private:
+  inline void cb_L8_i(RKR_Box*, void*);
+  static void cb_L8(RKR_Box*, void*);
+public:
   RKR_Box *L9;
+private:
+  inline void cb_L9_i(RKR_Box*, void*);
+  static void cb_L9(RKR_Box*, void*);
+public:
   RKR_Box *L10;
+private:
+  inline void cb_L10_i(RKR_Box*, void*);
+  static void cb_L10(RKR_Box*, void*);
+public:
   EqGui *EQ;
   CompressGui *COMPRESS;
   DistGui *DIST;
@@ -639,6 +679,7 @@ public:
   static void Set_effect(RKR_Check_Button *o, void* v);
   inline void cb_Set_effect_i(RKR_Check_Button*, void*);
   void RandomPreset();
+  void set_random_parameters(int effect);
   void drag_effect();
   void set_bank_file();
   void set_save_file();
