@@ -2988,9 +2988,17 @@ void RKRGUI::ActACI()
     }
 }
 
+/**
+ * Look up effect number from efx_names structure array by EFX_Index.
+ *
+ * @param num
+ *      The EFX_Index number for the requested name.
+ *
+ * @return
+ *      The index position for the effect name.
+ */
 int RKRGUI::Busca_Eff(int num)
 {
-    // Busca_Eff
     int i = 0;
 
     for (i = 0; i < C_NUMBER_EFFECTS; i++)
