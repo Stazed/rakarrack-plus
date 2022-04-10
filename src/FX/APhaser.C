@@ -270,6 +270,72 @@ Analog_Phaser::cleanup()
     };
 };
 
+void
+Analog_Phaser::set_random_parameters()
+{
+    for(int i = 0; i < C_APHASER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case APhase_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case APhase_LFO_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case APhase_Distortion:
+            case APhase_LFO_Random:
+            case APhase_LFO_Stereo:
+            case APhase_Width:
+            case APhase_Mismatch:
+            case APhase_Depth:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+ 
+            }
+            break;
+
+            case APhase_DryWet: 
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case APhase_Feedback:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case APhase_Stages:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case APhase_Subtract:
+            case APhase_Hyper:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
 #ifdef LV2_SUPPORT
 void
 Analog_Phaser::lv2_update_params(uint32_t period)
