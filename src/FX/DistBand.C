@@ -161,6 +161,73 @@ DistBand::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+DistBand::set_random_parameters()
+{
+    for(int i = 0; i < C_DBAND_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case DistBand_Pan:
+            case DistBand_LR_Cross:
+            case DistBand_Drive:
+            case DistBand_Level:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case DistBand_Type_Low:
+            case DistBand_Type_Mid:
+            case DistBand_Type_Hi:
+            {
+                int value = (int) (RND * 30);
+                changepar (i, value);
+            }
+            break;
+
+            case DistBand_Gain_Low:
+            case DistBand_Gain_Mid:
+            case DistBand_Gain_Hi:
+            {
+                int value = (int) (RND * 100);
+                changepar (i, value);
+            }
+            break;
+
+            case DistBand_Negate:
+            case DistBand_Stereo:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case DistBand_Cross_1:
+            {
+                int value = (int) (RND * 980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case DistBand_Cross_2:
+            {
+                int value = (int) (RND * 11200);
+                changepar (i, value + 800);
+            }
+            break;
+
+            case DistBand_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 DistBand::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_DBAND_PARAMETERS; i++)
