@@ -139,7 +139,7 @@ Distorsion::lv2_update_params(uint32_t period)
 void
 Distorsion::set_random_parameters()
 {
-    for(int i = 0; i < C_DIST_PARAMETERS; i++)    // -1 for skipped parameter 11
+    for(int i = 0; i < C_DIST_PARAMETERS; i++)
     {
         switch(i)
         {

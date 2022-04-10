@@ -37,6 +37,67 @@ Overdrive::Overdrive(int wave_res, int wave_upq, int wave_dnq, double samplerate
 }
 
 void
+Overdrive::set_random_parameters()
+{
+    for(int i = 0; i < C_OVERDRIVE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Overdrive_Pan:
+            case Overdrive_LR_Cross:
+            case Overdrive_Drive:
+            case Overdrive_Level:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Overdrive_Type:
+            {
+                int value = (int) (RND * 30);
+                changepar (i, value);
+            }
+            break;
+
+            case Overdrive_Negate:
+            case Overdrive_Stereo:
+            case Overdrive_Prefilter:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Overdrive_LPF:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Overdrive_HPF:
+            {
+                int value = (int) (RND * 19980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Overdrive_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Overdrive_SKIP_11:
+            case Overdrive_Suboctave:
+                break;
+        }
+    }
+}
+
+void
 Overdrive::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < (C_OVERDRIVE_PARAMETERS - 2); i++)   // -2 for Skipped param 11 and Suboctave
@@ -60,7 +121,7 @@ Overdrive::LV2_parameters(std::string &s_buf)
                     s_buf += ":";
             }
             break;
-            
+
             //Special cases
             // wet/dry -> dry/wet reversal
             case Overdrive_DryWet:
