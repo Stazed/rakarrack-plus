@@ -183,6 +183,64 @@ Phaser::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Phaser::set_random_parameters()
+{
+    for(int i = 0; i < C_PHASER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Phaser_LFO_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Phaser_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case Phaser_LFO_Stereo:
+            case Phaser_Depth:
+            case Phaser_Feedback:
+            case Phaser_Phase:
+            case Phaser_Pan:
+            case Phaser_LFO_Random:
+            case Phaser_LR_Cross:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Phaser_Stages:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Phaser_Subtract:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Phaser_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Phaser::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_PHASER_PARAMETERS; i++)
