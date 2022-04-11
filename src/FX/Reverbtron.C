@@ -205,6 +205,82 @@ Reverbtron::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Reverbtron::set_random_parameters()
+{
+    for(int i = 0; i < C_REVTRON_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Revtron_Pan:
+            case Revtron_Level:
+            case Revtron_Damp:
+            case Revtron_Fade:
+            case Revtron_Diffusion:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Revtron_Safe:
+            case Revtron_Ex_Stereo:
+            case Revtron_Shuffle:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Revtron_I_Delay:
+            {
+                int value = (int) (RND * 500);
+                changepar (i, value);
+            }
+            break;
+
+            case Revtron_Stretch:
+            case Revtron_Feedback:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case Revtron_LPF:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Revtron_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Revtron_Length:
+            {
+                int value = (int) (RND * 1480);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Revtron_Set_File:
+            {
+                int value = (int) (RND * 10);
+                changepar (i, value);
+            }
+            break;
+
+            case Revtron_User_File:
+                break;
+        }
+    }
+}
+
+void
 Reverbtron::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
@@ -262,7 +338,7 @@ Reverbtron::LV2_parameters(std::string &s_buf)
 
         param_case_offset++;
     }
-    
+
     s_buf += "\" :filename \"";
     s_buf += Filename;
 }
