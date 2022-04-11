@@ -109,6 +109,69 @@ Shuffle::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Shuffle::set_random_parameters()
+{
+    for(int i = 0; i < C_SHUFFLE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Shuffle_Gain_L:
+            case Shuffle_Gain_ML:
+            case Shuffle_Gain_MH:
+            case Shuffle_Gain_H:
+            case Shuffle_Width:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case Shuffle_Freq_L:
+            {
+                int value = (int) (RND * 980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Shuffle_Freq_ML:
+            {
+                int value = (int) (RND * 3600);
+                changepar (i, value + 400);
+            }
+            break;
+
+            case Shuffle_Freq_MH:
+            {
+                int value = (int) (RND * 6800);
+                changepar (i, value + 1200);
+            }
+            break;
+
+            case Shuffle_Freq_H:
+            {
+                int value = (int) (RND * 20000);
+                changepar (i, value + 6000);
+            }
+            break;
+
+            case Shuffle_F_Band:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Shuffle_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Shuffle::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_SHUFFLE_PARAMETERS; i++)
