@@ -197,6 +197,79 @@ Sequence::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Sequence::set_random_parameters()
+{
+    for(int i = 0; i < C_SEQUENCE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Sequence_Step_1:
+            case Sequence_Step_2:
+            case Sequence_Step_3:
+            case Sequence_Step_4:
+            case Sequence_Step_5:
+            case Sequence_Step_6:
+            case Sequence_Step_7:
+            case Sequence_Step_8:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Sequence_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Sequence_Amp:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Sequence_Stdf:
+            {
+                int value = (int) (RND * 8);
+                changepar (i, value);
+            }
+            break;
+
+            case Sequence_Mode:
+            {
+                int value = (int) (RND * 9);
+                changepar (i, value);
+            }
+            break;
+
+            case Sequence_Range:
+            {
+                int value = (int) (RND * 8);
+                changepar (i, value);
+            }
+            break;
+
+            case Sequence_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Sequence_Resonance:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
+void
 Sequence::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_SEQUENCE_PARAMETERS; i++)
@@ -224,7 +297,7 @@ Sequence::LV2_parameters(std::string &s_buf)
                     s_buf += ":";
             }
             break;
-            
+
             // Special cases
             // wet/dry -> dry/wet reversal
             case Sequence_DryWet:
