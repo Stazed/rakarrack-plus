@@ -102,14 +102,14 @@ Opticaltrem::set_random_parameters()
             case Optical_LFO_Stereo:
             case Optical_Pan:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Optical_LFO_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;

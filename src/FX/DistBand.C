@@ -172,7 +172,7 @@ DistBand::set_random_parameters()
             case DistBand_Drive:
             case DistBand_Level:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -219,7 +219,7 @@ DistBand::set_random_parameters()
 
             case DistBand_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

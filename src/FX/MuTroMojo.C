@@ -234,7 +234,7 @@ MuTroMojo::set_random_parameters()
         {
             case MuTro_LFO_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
@@ -253,7 +253,7 @@ MuTroMojo::set_random_parameters()
             case MuTro_LFO_Random:
             case MuTro_LFO_Stereo:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -263,7 +263,7 @@ MuTroMojo::set_random_parameters()
             case MuTro_HighPass:
             case MuTro_Env_Sens:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value - 64);
             }
             break;
@@ -305,7 +305,7 @@ MuTroMojo::set_random_parameters()
 
             case MuTro_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

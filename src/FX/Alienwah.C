@@ -164,7 +164,7 @@ Alienwah::set_random_parameters()
         {
             case Alien_LFO_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
@@ -184,14 +184,14 @@ Alienwah::set_random_parameters()
             case Alien_LR_Cross:
             case Alien_Phase:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Alien_DryWet: 
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

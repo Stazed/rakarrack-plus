@@ -191,7 +191,7 @@ Phaser::set_random_parameters()
         {
             case Phaser_LFO_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
@@ -211,7 +211,7 @@ Phaser::set_random_parameters()
             case Phaser_LFO_Random:
             case Phaser_LR_Cross:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -232,7 +232,7 @@ Phaser::set_random_parameters()
 
             case Phaser_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

@@ -188,7 +188,7 @@ Convolotron::set_random_parameters()
             case Convo_Level:
             case Convo_Damp:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -202,14 +202,14 @@ Convolotron::set_random_parameters()
 
             case Convo_Feedback:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value - 64);
             }
             break;
 
             case Convo_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

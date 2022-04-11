@@ -120,21 +120,21 @@ Echoverse::set_random_parameters()
             case Echoverse_Reverse:
             case Echoverse_Ext_Stereo:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Echoverse_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
 
             case Echoverse_Angle:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value);
             }
             break;
@@ -148,7 +148,7 @@ Echoverse::set_random_parameters()
 
             case Echoverse_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

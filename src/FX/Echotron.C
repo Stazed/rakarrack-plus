@@ -165,21 +165,21 @@ Echotron::set_random_parameters()
             case Echotron_Damp:
             case Echotron_LFO_Stereo:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Echotron_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
 
             case Echotron_Feedback:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value - 64);
             }
             break;
@@ -187,7 +187,7 @@ Echotron::set_random_parameters()
             case Echotron_LR_Cross:
             case Echotron_Depth:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value);
             }
             break;
@@ -210,7 +210,7 @@ Echotron::set_random_parameters()
 
             case Echotron_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

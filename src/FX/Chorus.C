@@ -260,7 +260,7 @@ Chorus::set_random_parameters()
         {
             case Chorus_LFO_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
@@ -280,14 +280,14 @@ Chorus::set_random_parameters()
             case Chorus_Feedback:
             case Chorus_LR_Cross:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Chorus_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

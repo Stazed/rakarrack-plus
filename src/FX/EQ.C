@@ -185,7 +185,7 @@ EQ::set_random_parameters()
             case EQ_Gain:
             case EQ_Q:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;

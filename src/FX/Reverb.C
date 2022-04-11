@@ -187,7 +187,7 @@ Reverb::set_random_parameters()
             case Reverb_I_Delay:
             case Reverb_Delay_FB:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -229,7 +229,7 @@ Reverb::set_random_parameters()
 
             case Reverb_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

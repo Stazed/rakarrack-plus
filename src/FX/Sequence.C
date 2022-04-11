@@ -212,14 +212,14 @@ Sequence::set_random_parameters()
             case Sequence_Step_7:
             case Sequence_Step_8:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Sequence_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
@@ -254,14 +254,14 @@ Sequence::set_random_parameters()
 
             case Sequence_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;
 
             case Sequence_Resonance:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value);
             }
             break;

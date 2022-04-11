@@ -153,14 +153,14 @@ MusicDelay::set_random_parameters()
             case Music_Gain_1:
             case Music_Gain_2:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Music_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

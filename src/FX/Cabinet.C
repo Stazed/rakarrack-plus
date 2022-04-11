@@ -207,7 +207,7 @@ Cabinet::lv2_update_params(uint32_t period)
 void
 Cabinet::set_random_parameters()
 {
-    int value = (int) (RND * 127);
+    int value = (int) (RND * 128);
     change_parameters(0, value);    // Gain
     
     value = (int) (RND * 11);       // preset

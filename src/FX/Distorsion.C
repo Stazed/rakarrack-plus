@@ -149,7 +149,7 @@ Distorsion::set_random_parameters()
             case Dist_Level:
             case Dist_Suboctave:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -186,7 +186,7 @@ Distorsion::set_random_parameters()
 
             case Dist_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

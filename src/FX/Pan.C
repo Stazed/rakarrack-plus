@@ -84,7 +84,7 @@ Pan::set_random_parameters()
             case Pan_LFO_Stereo:
             case Pan_Ex_St_Amt:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -98,7 +98,7 @@ Pan::set_random_parameters()
 
             case Pan_LFO_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
@@ -113,7 +113,7 @@ Pan::set_random_parameters()
 
             case Pan_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

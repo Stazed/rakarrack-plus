@@ -163,7 +163,7 @@ Derelict::set_random_parameters()
             case Dere_Suboctave:
             case Dere_Pan:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -206,7 +206,7 @@ Derelict::set_random_parameters()
 
             case Dere_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

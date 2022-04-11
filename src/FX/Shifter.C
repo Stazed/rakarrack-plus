@@ -189,23 +189,17 @@ Shifter::set_random_parameters()
             break;
 
             case Shifter_Whammy:
+            case Shifter_Pan:
+            case Shifter_Gain:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Shifter_DryWet:
             {
-                int value = (int) (RND * 127);
-                changepar (i, Dry_Wet(value));
-            }
-            break;
-
-            case Shifter_Pan:
-            case Shifter_Gain:
-            {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

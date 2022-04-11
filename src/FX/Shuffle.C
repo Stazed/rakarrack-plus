@@ -121,7 +121,7 @@ Shuffle::set_random_parameters()
             case Shuffle_Gain_H:
             case Shuffle_Width:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value - 64);
             }
             break;
@@ -163,7 +163,7 @@ Shuffle::set_random_parameters()
 
             case Shuffle_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

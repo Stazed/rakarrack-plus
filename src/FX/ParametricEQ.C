@@ -55,7 +55,7 @@ ParametricEQ::set_random_parameters()
             case Parametric_High_Q:
             case Parametric_Gain:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;

@@ -48,7 +48,7 @@ Overdrive::set_random_parameters()
             case Overdrive_Drive:
             case Overdrive_Level:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -85,7 +85,7 @@ Overdrive::set_random_parameters()
 
             case Overdrive_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

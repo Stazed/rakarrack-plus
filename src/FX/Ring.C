@@ -123,7 +123,7 @@ Ring::set_random_parameters()
             case Ring_Pan:
             case Ring_LR_Cross:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value - 64);
             }
             break;
@@ -157,14 +157,14 @@ Ring::set_random_parameters()
             case Ring_Level:
             case Ring_Input:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Ring_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

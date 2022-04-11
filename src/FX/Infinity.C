@@ -305,7 +305,7 @@ Infinity::set_random_parameters()
             case Infinity_Band_8:
             case Infinity_LR_Delay:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value - 64);
             }
             break;
@@ -321,14 +321,14 @@ Infinity::set_random_parameters()
             case Infinity_End:
             case Infinity_AutoPan:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Infinity_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
@@ -356,7 +356,7 @@ Infinity::set_random_parameters()
 
             case Infinity_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

@@ -143,7 +143,7 @@ CoilCrafter::set_random_parameters()
         {
             case Coil_Gain:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;

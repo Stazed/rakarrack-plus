@@ -217,7 +217,7 @@ Reverbtron::set_random_parameters()
             case Revtron_Fade:
             case Revtron_Diffusion:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -241,7 +241,7 @@ Reverbtron::set_random_parameters()
             case Revtron_Stretch:
             case Revtron_Feedback:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value - 64);
             }
             break;
@@ -255,7 +255,7 @@ Reverbtron::set_random_parameters()
 
             case Revtron_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

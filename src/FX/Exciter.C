@@ -72,7 +72,7 @@ Exciter::set_random_parameters()
         {
             case Exciter_Gain:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -88,7 +88,7 @@ Exciter::set_random_parameters()
             case Exciter_Harm_9:
             case Exciter_Harm_10:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value - 64 );
             }
             break;

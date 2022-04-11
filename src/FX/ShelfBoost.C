@@ -90,14 +90,14 @@ ShelfBoost::set_random_parameters()
         {
             case Shelf_Gain:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Shelf_Presence:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value - 64);
             }
             break;

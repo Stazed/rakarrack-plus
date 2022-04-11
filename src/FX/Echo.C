@@ -117,7 +117,7 @@ Echo::set_random_parameters()
             case Echo_Damp:
             case Echo_Reverse:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
@@ -138,7 +138,7 @@ Echo::set_random_parameters()
 
             case Echo_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;

@@ -286,7 +286,7 @@ Analog_Phaser::set_random_parameters()
 
             case APhase_LFO_Tempo:
             {
-                int value = (int) (RND * 599);
+                int value = (int) (RND * 600);
                 changepar (i, value + 1);
             }
             break;
@@ -298,21 +298,21 @@ Analog_Phaser::set_random_parameters()
             case APhase_Mismatch:
             case APhase_Depth:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case APhase_DryWet: 
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;
 
             case APhase_Feedback:
             {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 129);
                 changepar (i, value);
             }
             break;
