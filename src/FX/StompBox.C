@@ -158,6 +158,40 @@ StompBox::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+StompBox::set_random_parameters()
+{
+    for(int i = 0; i < C_STOMP_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Stomp_Level:
+            case Stomp_Gain:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case Stomp_Tone:
+            case Stomp_Mid:
+            case Stomp_Bias:
+            {
+                int value = (int) (RND * 129);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case Stomp_Mode:
+            {
+                int value = (int) (RND * 8);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
+void
 StompBox::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_STOMP_PARAMETERS; i++)
