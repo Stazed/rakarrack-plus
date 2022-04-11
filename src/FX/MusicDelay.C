@@ -123,6 +123,59 @@ MusicDelay::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+MusicDelay::set_random_parameters()
+{
+    for(int i = 0; i < C_MUSIC_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Music_Delay_1:
+            case Music_Delay_2:
+            {
+                int value = (int) (RND * 6);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Music_Del_Offset:
+            {
+                int value = (int) (RND * 7);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Music_LR_Cross:
+            case Music_Pan_1:
+            case Music_Pan_2:
+            case Music_Feedback_1:
+            case Music_Damp:
+            case Music_Feedback_2:
+            case Music_Gain_1:
+            case Music_Gain_2:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Music_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Music_Tempo:
+            {
+                int value = (int) (RND * 470);
+                changepar (i, value + 10);
+            }
+            break;
+        }
+    }
+}
+
+void
 MusicDelay::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_MUSIC_PARAMETERS; i++)
