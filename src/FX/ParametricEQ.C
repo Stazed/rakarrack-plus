@@ -41,6 +41,50 @@ ParametricEQ::initialize()
 }
 
 void
+ParametricEQ::set_random_parameters()
+{
+    for(int i = 0; i < C_PARAMETRIC_EQ_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Parametric_Low_Gain:
+            case Parametric_Low_Q:
+            case Parametric_Mid_Gain:
+            case Parametric_Mid_Q:
+            case Parametric_High_Gain:
+            case Parametric_High_Q:
+            case Parametric_Gain:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Parametric_Low_Freq:
+            {
+                int value = (int) (RND * 980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Parametric_Mid_Freq:
+            {
+                int value = (int) (RND * 7200);
+                changepar (i, value + 800);
+            }
+            break;
+
+            case Parametric_High_Freq:
+            {
+                int value = (int) (RND * 20000);
+                changepar (i, value + 6000);
+            }
+            break;
+        }
+    }
+}
+
+void
 ParametricEQ::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = Parametric_Gain;

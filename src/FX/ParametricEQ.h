@@ -52,6 +52,7 @@ public:
     void changepar (int npar, int value);
     int getpar (int npar);
     int get_number_efx_parameters () {return C_PARAMETRIC_EQ_PARAMETERS;};
+    void set_random_parameters();
     
     void initialize();
 
