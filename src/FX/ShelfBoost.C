@@ -82,6 +82,51 @@ ShelfBoost::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+ShelfBoost::set_random_parameters()
+{
+    for(int i = 0; i < C_SHELF_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Shelf_Gain:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Shelf_Presence:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case Shelf_Tone:
+            {
+                int value = (int) (RND * 15780);
+                changepar (i, value + 220);
+            }
+            break;
+
+            case Shelf_Stereo:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Shelf_Level:
+            {
+                int value = (int) (RND * 126);
+                changepar (i, value + 1);
+            }
+            break;
+        }
+    }
+}
+
+void
 ShelfBoost::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_SHELF_PARAMETERS; i++)
