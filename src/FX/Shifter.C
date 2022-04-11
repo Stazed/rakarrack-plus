@@ -146,6 +146,74 @@ Shifter::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Shifter::set_random_parameters()
+{
+    for(int i = 0; i < C_SHIFTER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Shifter_Attack:
+            case Shifter_Decay:
+            {
+                int value = (int) (RND * 1999);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Shifter_Threshold:
+            {
+                int value = (int) (RND * 90);
+                changepar (i, value - 70);
+            }
+            break;
+
+            case Shifter_Interval:
+            {
+                int value = (int) (RND * 13);
+                changepar (i, value);
+            }
+            break;
+
+            case Shifter_Shift:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Shifter_Mode:
+            {
+                int value = (int) (RND * 3);
+                changepar (i, value);
+            }
+            break;
+
+            case Shifter_Whammy:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Shifter_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Shifter_Pan:
+            case Shifter_Gain:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Shifter::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_SHIFTER_PARAMETERS; i++)
@@ -167,7 +235,7 @@ Shifter::LV2_parameters(std::string &s_buf)
                     s_buf += ":";
             }
             break;
-            
+
             // Special cases
             // wet/dry -> dry/wet reversal
             case Shifter_DryWet:
