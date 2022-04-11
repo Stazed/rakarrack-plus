@@ -226,6 +226,94 @@ MuTroMojo::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+MuTroMojo::set_random_parameters()
+{
+    for(int i = 0; i < C_MUTRO_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case MuTro_LFO_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case MuTro_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case MuTro_Resonance:
+            case MuTro_Depth:
+            case MuTro_Wah:
+            case MuTro_Env_Smooth:
+            case MuTro_LFO_Random:
+            case MuTro_LFO_Stereo:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+    
+            case MuTro_LowPass:
+            case MuTro_BandPass:
+            case MuTro_HighPass:
+            case MuTro_Env_Sens:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case MuTro_Stages:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case MuTro_Range:
+            {
+                int value = (int) (RND * 5990);
+                changepar (i, value + 10);
+            }
+            break;
+
+            case MuTro_St_Freq:
+            {
+                int value = (int) (RND * 770);
+                changepar (i, value + 30);
+            }
+            break;
+
+            case MuTro_Mod_Res:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Mutro_Mode_Legacy:
+            {
+                int value = (int) (RND * 3);
+                changepar (i, value);
+            }
+            break;
+
+            case MuTro_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 MuTroMojo::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
