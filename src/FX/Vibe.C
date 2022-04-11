@@ -147,6 +147,63 @@ Vibe::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Vibe::set_random_parameters()
+{
+    for(int i = 0; i < C_VIBE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Vibe_Width:
+            case Vibe_LFO_Random:
+            case Vibe_Depth:
+            case Vibe_LFO_Stereo:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case Vibe_LFO_Tempo:
+            {
+                int value = (int) (RND * 600);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Vibe_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case Vibe_Stereo:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Vibe_DryWet:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Vibe_LR_Cross:
+            case Vibe_Pan:
+            case Vibe_Feedback:
+            {
+                int value = (int) (RND * 129);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
+void
 Vibe::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_VIBE_PARAMETERS; i++)
