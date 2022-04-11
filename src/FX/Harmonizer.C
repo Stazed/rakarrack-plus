@@ -171,14 +171,14 @@ Harmonizer::set_random_parameters()
 
             case Harm_Chord:
             {
-                int value = (int) (RND * 33);
+                int value = (int) (RND * 34);
                 changepar (i, value);
             }
             break;
 
             case Harm_DryWet:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, Dry_Wet(value));
             }
             break;
@@ -188,14 +188,14 @@ Harmonizer::set_random_parameters()
             case Harm_Filter_Gain:
             case Harm_Filter_Q:
             {
-                int value = (int) (RND * 127);
+                int value = (int) (RND * 128);
                 changepar (i, value);
             }
             break;
 
             case Harm_Interval:
             {
-                int value = (int) (RND * 24);
+                int value = (int) (RND * 25);
                 changepar (i, value);
             }
             break;

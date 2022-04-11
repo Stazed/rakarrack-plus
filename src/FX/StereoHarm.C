@@ -156,6 +156,78 @@ StereoHarm::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+StereoHarm::set_random_parameters()
+{
+    for(int i = 0; i < C_SHARM_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Sharm_L_Chroma:
+            case Sharm_R_Chroma:
+            {
+                int value = (int) (RND * 4001);
+                changepar (i, value - 2000);
+            }
+            break;
+
+            case Sharm_Select:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Sharm_Note:
+            {
+                int value = (int) (RND * 24);
+                changepar (i, value);
+            }
+            break;
+
+            case Sharm_LR_Cross:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case Sharm_DryWet:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Sharm_L_Gain:
+            case Sharm_R_Gain:
+            {
+                int value = (int) (RND * 129);
+                changepar (i, value);
+            }
+            break;
+
+            case Sharm_L_Interval:
+            case Sharm_R_Interval:
+            {
+                int value = (int) (RND * 25);
+                changepar (i, value);
+            }
+            break;
+
+            case Sharm_Chord:
+            {
+                int value = (int) (RND * 34);
+                changepar (i, value);
+            }
+            break;
+
+            case Sharm_MIDI:
+                break;
+        }
+    }
+}
+
+void
 StereoHarm::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
