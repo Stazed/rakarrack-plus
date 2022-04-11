@@ -155,6 +155,81 @@ VaryBand::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+VaryBand::set_random_parameters()
+{
+    for(int i = 0; i < (C_VARYBAND_PARAMETERS + 4); i++)    // + 4 parameters un-combined volume bands
+    {
+        switch(i)
+        {
+            case VaryBand_LFO_Tempo_1:
+            case VaryBand_LFO_Tempo_2:
+            {
+                int value = (int) (RND * 600);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case VaryBand_LFO_Type_1:
+            case VaryBand_LFO_Type_2:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case VaryBand_LFO_Stereo_1:
+            case VaryBand_LFO_Stereo_2:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case VaryBand_Cross_1:
+            {
+                int value = (int) (RND * 980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case VaryBand_Cross_2:
+            {
+                int value = (int) (RND * 7000);
+                changepar (i, value + 1000);
+            }
+            break;
+
+            case VaryBand_Cross_3:
+            {
+                int value = (int) (RND * 24000);
+                changepar (i, value + 2000);
+            }
+            break;
+
+            case VaryBand_Low_Band:
+            case VaryBand_Mid_Band_1:
+            case VaryBand_Mid_Band_2:
+            case VaryBand_High_Band:
+            {
+                int value = (int) (RND * 4);
+                changepar (i, value);
+            }
+            break;
+
+            case VaryBand_DryWet:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case VaryBand_Combination:
+                break;
+        }
+    }
+}
+
+void
 VaryBand::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
