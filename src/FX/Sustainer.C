@@ -87,6 +87,30 @@ Sustainer::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Sustainer::set_random_parameters()
+{
+    for(int i = 0; i < C_SUSTAIN_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Sustain_Gain:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case Sustain_Sustain:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value + 1);
+            }
+            break;
+        }
+    }
+}
+
+void
 Sustainer::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_SUSTAIN_PARAMETERS; i++)
