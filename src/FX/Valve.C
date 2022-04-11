@@ -129,6 +129,65 @@ Valve::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Valve::set_random_parameters()
+{
+    for(int i = 0; i < C_VALVE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Valve_LR_Cross:
+            case Valve_Pan:
+            case Valve_Drive:
+            case Valve_Level:
+            case Valve_Distortion:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case Valve_LPF:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Valve_HPF:
+            {
+                int value = (int) (RND * 19980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Valve_Negate:
+            case Valve_Stereo:
+            case Valve_Prefilter:
+            case Valve_Ex_Dist:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Valve_Presence:
+            {
+                int value = (int) (RND * 101);
+                changepar (i, value);
+            }
+            break;
+
+            case Valve_DryWet:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Valve::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_VALVE_PARAMETERS; i++)
