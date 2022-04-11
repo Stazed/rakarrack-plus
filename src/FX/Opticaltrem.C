@@ -91,6 +91,47 @@ Opticaltrem::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Opticaltrem::set_random_parameters()
+{
+    for(int i = 0; i < C_OPTICAL_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Optical_Depth:
+            case Optical_LFO_Random:
+            case Optical_LFO_Stereo:
+            case Optical_Pan:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Optical_LFO_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Optical_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case Optical_Invert:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
+void
 Opticaltrem::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_OPTICAL_PARAMETERS; i++)
