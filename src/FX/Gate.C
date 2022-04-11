@@ -96,6 +96,65 @@ Gate::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Gate::set_random_parameters()
+{
+    for(int i = 0; i < C_GATE_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Gate_Threshold:
+            {
+                int value = (int) (RND * 90);
+                changepar (i, value - 70);
+            }
+            break;
+
+            case Gate_Range:
+            {
+                int value = (int) (RND * 90);
+                changepar (i, value - 90);
+            }
+            break;
+
+            case Gate_Attack:
+            {
+                int value = (int) (RND * 249);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Gate_Release:
+            {
+                int value = (int) (RND * 248);
+                changepar (i, value + 2);
+            }
+            break;
+
+            case Gate_LPF:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Gate_HPF:
+            {
+                int value = (int) (RND * 19980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Gate_Hold:
+            {
+                int value = (int) (RND * 498);
+                changepar (i, value + 2);
+            }
+            break;
+        }
+    }
+}
+
+void
 Gate::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_GATE_PARAMETERS; i++)
