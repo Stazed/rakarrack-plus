@@ -289,6 +289,82 @@ Infinity::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Infinity::set_random_parameters()
+{
+    for(int i = 0; i < C_INFINITY_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Infinity_Band_1:
+            case Infinity_Band_2:
+            case Infinity_Band_3:
+            case Infinity_Band_4:
+            case Infinity_Band_5:
+            case Infinity_Band_6:
+            case Infinity_Band_7:
+            case Infinity_Band_8:
+            case Infinity_LR_Delay:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case Infinity_Resonance:
+            {
+                int value = (int) (RND * 2000);
+                changepar (i, value - 1000);
+            }
+            break;
+
+            case Infinity_Start:
+            case Infinity_End:
+            case Infinity_AutoPan:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Infinity_Tempo:
+            {
+                int value = (int) (RND * 599);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Infinity_Subdivision:
+            {
+                int value = (int) (RND * 32);
+                changepar (i, value - 16);
+            }
+            break;
+
+            case Infinity_Reverse:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Infinity_Stages:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Infinity_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Infinity::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_INFINITY_PARAMETERS; i++)
