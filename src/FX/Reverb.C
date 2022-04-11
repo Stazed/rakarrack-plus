@@ -176,6 +176,72 @@ Reverb::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Reverb::set_random_parameters()
+{
+    for(int i = 0; i < C_REVERB_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Reverb_Pan:
+            case Reverb_Time:
+            case Reverb_I_Delay:
+            case Reverb_Delay_FB:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Reverb_LPF:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Reverb_HPF:
+            {
+                int value = (int) (RND * 19980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Reverb_Damp:
+            {
+                int value = (int) (RND * 63);
+                changepar (i, value + 64);
+            }
+            break;
+
+            case Reverb_Type:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Reverb_Room:
+            {
+                int value = (int) (RND * 126);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Reverb_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Reverb_SKIP_5:
+            case Reverb_SKIP_6:
+                break;
+        }
+    }
+}
+
+void
 Reverb::LV2_parameters(std::string &s_buf)
 {
     int param_case_offset = 0;
@@ -225,10 +291,9 @@ Reverb::LV2_parameters(std::string &s_buf)
             }
             break;
         }
-        
+
         param_case_offset++;
     }
-
 }
 
 void
