@@ -182,6 +182,53 @@ Vocoder::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Vocoder::set_random_parameters()
+{
+    for(int i = 0; i < C_VOCODER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Vocoder_DryWet:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Vocoder_Pan:
+            {
+                int value = (int) (RND * 129);
+                changepar (i, value);
+            }
+            break;
+
+            case Vocoder_Smear:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Vocoder_Q:
+            {
+                int value = (int) (RND * 130);
+                changepar (i, value + 40);
+            }
+            break;
+
+            case Vocoder_Input:
+            case Vocoder_Level:
+            case Vocoder_Ring:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+        }
+    }
+}
+
+void
 Vocoder::initialize()
 {
     filterbank = (fbank *) malloc(sizeof (fbank) * VOC_BANDS);
