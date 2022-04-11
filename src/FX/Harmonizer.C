@@ -142,6 +142,71 @@ Harmonizer::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Harmonizer::set_random_parameters()
+{
+    for(int i = 0; i < C_HARM_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Harm_Filter_Freq:
+            {
+                int value = (int) (RND * 25980);
+                changepar (i, value + 20);
+            }
+            break;
+
+            case Harm_Select:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Harm_Note:
+            {
+                int value = (int) (RND * 24);
+                changepar (i, value);
+            }
+            break;
+
+            case Harm_Chord:
+            {
+                int value = (int) (RND * 33);
+                changepar (i, value);
+            }
+            break;
+
+            case Harm_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+
+            case Harm_Pan:
+            case Harm_Gain:
+            case Harm_Filter_Gain:
+            case Harm_Filter_Q:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Harm_Interval:
+            {
+                int value = (int) (RND * 24);
+                changepar (i, value);
+            }
+            break;
+
+            case Harm_MIDI:
+                break;
+        }
+    }
+}
+
+void
 Harmonizer::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < (C_HARM_PARAMETERS - 1); i++)    // -1 for Harm_MIDI - since this is no MIDI
