@@ -284,6 +284,86 @@ Synthfilter::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Synthfilter::set_random_parameters()
+{
+    for(int i = 0; i < C_SYNTHFILTER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Synthfilter_Distort:
+            case Synthfilter_LFO_Random:
+            case Synthfilter_LFO_Stereo:
+            case Synthfilter_Width:
+            case Synthfilter_Depth:
+            case Synthfilter_Offset:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value);
+            }
+            break;
+
+            case Synthfilter_LFO_Tempo:
+            {
+                int value = (int) (RND * 600);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Synthfilter_LFO_Type:
+            {
+                int value = (int) (RND * 12);
+                changepar (i, value);
+            }
+            break;
+
+            case Synthfilter_Feedback:
+            case Synthfilter_Env_Sens:
+            {
+                int value = (int) (RND * 129);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case Synthfilter_LPF_Stages:
+            case Synthfilter_HPF_Stages:
+            {
+                int value = (int) (RND * 13);
+                changepar (i, value);
+            }
+            break;
+
+            case Synthfilter_Subtract:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Synthfilter_Attack:
+            {
+                int value = (int) (RND * 995);
+                changepar (i, value + 5);
+            }
+            break;
+
+            case Synthfilter_Release:
+            {
+                int value = (int) (RND * 495);
+                changepar (i, value + 5);
+            }
+            break;
+
+            case Synthfilter_DryWet:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Synthfilter::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_SYNTHFILTER_PARAMETERS; i++)
