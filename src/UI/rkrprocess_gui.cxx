@@ -3735,8 +3735,13 @@ void RKRGUI::set_random_parameters(int effect)
         m_process->Active_Preset.Effect_Params[EFX_CABINET][0] = m_process->Rack_Effects[EFX_CABINET]->getpar(0);
         m_process->Active_Preset.Effect_Params[EFX_CABINET][1] = m_process->Rack_Effects[EFX_CABINET]->getpar(1);
     }
+    
+    int parameters = m_process->Rack_Effects[efx]->get_number_efx_parameters();
+    
+    if (efx == EFX_VARYBAND)
+        parameters += 4;    // For un-combined volume bands 
 
-    for(int i = 0; i < m_process->Rack_Effects[efx]->get_number_efx_parameters(); ++i)
+    for(int i = 0; i < parameters; ++i)
     {
         Efx_Gui_Base[efx]->parameter_refresh (i);
     }
