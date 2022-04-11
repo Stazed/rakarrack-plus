@@ -114,6 +114,65 @@ Ring::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
+Ring::set_random_parameters()
+{
+    for(int i = 0; i < C_RING_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            case Ring_Pan:
+            case Ring_LR_Cross:
+            {
+                int value = (int) (RND * 128);
+                changepar (i, value - 64);
+            }
+            break;
+
+            case Ring_Freq:
+            {
+                int value = (int) (RND * 19999);
+                changepar (i, value + 1);
+            }
+            break;
+
+            case Ring_Stereo:
+            case Ring_Auto_Freq:
+            {
+                int value = (int) (RND * 2);
+                changepar (i, value);
+            }
+            break;
+
+            case Ring_Depth:
+            case Ring_Sine:
+            case Ring_Triangle:
+            case Ring_Saw:
+            case Ring_Square:
+            {
+                int value = (int) (RND * 100);
+                changepar (i, value);
+            }
+            break;
+
+            case Ring_Level:
+            case Ring_Input:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value);
+            }
+            break;
+
+            case Ring_DryWet:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, Dry_Wet(value));
+            }
+            break;
+        }
+    }
+}
+
+void
 Ring::LV2_parameters(std::string &s_buf)
 {
     for(int i = 0; i < C_RING_PARAMETERS; i++)
