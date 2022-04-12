@@ -37,6 +37,8 @@
 #include <sstream>  // NTS
 #include <FL/Fl_Tiled_Image.H>
 
+// un-comment to activate stress test - to toggle stress testing, middle mouse click
+// the random button. This should only be activated for testing purposes.
 //#define STRESS_TEST_CHECK 1
 
 class RKRGUI;   // forward declaration
