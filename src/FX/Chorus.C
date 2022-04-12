@@ -272,6 +272,7 @@ Chorus::set_random_parameters()
             }
             break;
 
+            case Chorus_DryWet:
             case Chorus_Pan:
             case Chorus_LFO_Random:
             case Chorus_LFO_Stereo:
@@ -282,13 +283,6 @@ Chorus::set_random_parameters()
             {
                 int value = (int) (RND * 128);
                 changepar (i, value);
-            }
-            break;
-
-            case Chorus_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

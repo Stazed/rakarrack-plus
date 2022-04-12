@@ -211,6 +211,7 @@ Reverbtron::set_random_parameters()
     {
         switch(i)
         {
+            case Revtron_DryWet:
             case Revtron_Pan:
             case Revtron_Level:
             case Revtron_Damp:
@@ -233,7 +234,7 @@ Reverbtron::set_random_parameters()
 
             case Revtron_I_Delay:
             {
-                int value = (int) (RND * 500);
+                int value = (int) (RND * 501);
                 changepar (i, value);
             }
             break;
@@ -250,13 +251,6 @@ Reverbtron::set_random_parameters()
             {
                 int value = (int) (RND * 25980);
                 changepar (i, value + 20);
-            }
-            break;
-
-            case Revtron_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

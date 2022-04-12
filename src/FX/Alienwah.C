@@ -175,7 +175,8 @@ Alienwah::set_random_parameters()
                 changepar (i, value);
             }
             break;
-            
+
+            case Alien_DryWet:
             case Alien_Pan:
             case Alien_LFO_Random:
             case Alien_LFO_Stereo:
@@ -189,16 +190,9 @@ Alienwah::set_random_parameters()
             }
             break;
 
-            case Alien_DryWet: 
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
-            }
-            break;
-
             case Alien_Delay:
             {
-                int value = (int) (RND * 100);
+                int value = (int) (RND * 101);
                 changepar (i, value);
             }
             break;

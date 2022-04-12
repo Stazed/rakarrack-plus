@@ -246,6 +246,7 @@ MuTroMojo::set_random_parameters()
             }
             break;
 
+            case MuTro_DryWet:
             case MuTro_Resonance:
             case MuTro_Depth:
             case MuTro_Wah:
@@ -300,13 +301,6 @@ MuTroMojo::set_random_parameters()
             {
                 int value = (int) (RND * 3);
                 changepar (i, value);
-            }
-            break;
-
-            case MuTro_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

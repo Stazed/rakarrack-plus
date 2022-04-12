@@ -167,6 +167,7 @@ DistBand::set_random_parameters()
     {
         switch(i)
         {
+            case DistBand_DryWet:
             case DistBand_Pan:
             case DistBand_LR_Cross:
             case DistBand_Drive:
@@ -214,13 +215,6 @@ DistBand::set_random_parameters()
             {
                 int value = (int) (RND * 11200);
                 changepar (i, value + 800);
-            }
-            break;
-
-            case DistBand_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

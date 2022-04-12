@@ -130,7 +130,7 @@ Ring::set_random_parameters()
 
             case Ring_Freq:
             {
-                int value = (int) (RND * 19999);
+                int value = (int) (RND * 20000);
                 changepar (i, value + 1);
             }
             break;
@@ -149,23 +149,23 @@ Ring::set_random_parameters()
             case Ring_Saw:
             case Ring_Square:
             {
-                int value = (int) (RND * 100);
-                changepar (i, value);
-            }
-            break;
-
-            case Ring_Level:
-            case Ring_Input:
-            {
-                int value = (int) (RND * 128);
+                int value = (int) (RND * 101);
                 changepar (i, value);
             }
             break;
 
             case Ring_DryWet:
+            case Ring_Level:
             {
                 int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
+                changepar (i, value);
+            }
+            break;
+
+            case Ring_Input:
+            {
+                int value = (int) (RND * 127);
+                changepar (i, value + 1);
             }
             break;
         }

@@ -207,17 +207,11 @@ CompBand::set_random_parameters()
             }
             break;
 
+            case CompBand_DryWet:
             case CompBand_Gain:
             {
                 int value = (int) (RND * 128);
                 changepar (i, value);
-            }
-            break;
-
-            case CompBand_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

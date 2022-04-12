@@ -203,6 +203,7 @@ Phaser::set_random_parameters()
             }
             break;
 
+            case Phaser_DryWet:
             case Phaser_LFO_Stereo:
             case Phaser_Depth:
             case Phaser_Feedback:
@@ -227,13 +228,6 @@ Phaser::set_random_parameters()
             {
                 int value = (int) (RND * 2);
                 changepar (i, value);
-            }
-            break;
-
-            case Phaser_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

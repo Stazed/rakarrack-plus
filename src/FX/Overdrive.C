@@ -43,6 +43,7 @@ Overdrive::set_random_parameters()
     {
         switch(i)
         {
+            case Overdrive_DryWet:
             case Overdrive_Pan:
             case Overdrive_LR_Cross:
             case Overdrive_Drive:
@@ -80,13 +81,6 @@ Overdrive::set_random_parameters()
             {
                 int value = (int) (RND * 19980);
                 changepar (i, value + 20);
-            }
-            break;
-
-            case Overdrive_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

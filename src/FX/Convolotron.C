@@ -183,7 +183,8 @@ Convolotron::set_random_parameters()
             case Convo_SKIP_5:
             case Convo_SKIP_9:
                 break;
-            
+
+            case Convo_DryWet:
             case Convo_Pan:
             case Convo_Level:
             case Convo_Damp:
@@ -207,13 +208,6 @@ Convolotron::set_random_parameters()
             }
             break;
 
-            case Convo_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
-            }
-            break;
-
             case Convo_Length:
             {
                 int value = (int) (RND * 245);
@@ -229,7 +223,6 @@ Convolotron::set_random_parameters()
             break;
         }
     }
-
 }
 
 void

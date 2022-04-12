@@ -177,12 +177,6 @@ Harmonizer::set_random_parameters()
             break;
 
             case Harm_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
-            }
-            break;
-
             case Harm_Pan:
             case Harm_Gain:
             case Harm_Filter_Gain:

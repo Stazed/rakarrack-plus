@@ -110,6 +110,7 @@ Echo::set_random_parameters()
     {
         switch(i)
         {
+            case Echo_DryWet:
             case Echo_Pan:
             case Echo_LR_Delay:
             case Echo_LR_Cross:
@@ -133,13 +134,6 @@ Echo::set_random_parameters()
             {
                 int value = (int) (RND * 2);
                 changepar (i, value);
-            }
-            break;
-
-            case Echo_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

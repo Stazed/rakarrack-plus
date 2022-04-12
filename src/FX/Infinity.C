@@ -312,11 +312,12 @@ Infinity::set_random_parameters()
 
             case Infinity_Resonance:
             {
-                int value = (int) (RND * 2000);
+                int value = (int) (RND * 2001);
                 changepar (i, value - 1000);
             }
             break;
 
+            case Infinity_DryWet:
             case Infinity_Start:
             case Infinity_End:
             case Infinity_AutoPan:
@@ -335,7 +336,7 @@ Infinity::set_random_parameters()
 
             case Infinity_Subdivision:
             {
-                int value = (int) (RND * 32);
+                int value = (int) (RND * 33);
                 changepar (i, value - 16);
             }
             break;
@@ -351,13 +352,6 @@ Infinity::set_random_parameters()
             {
                 int value = (int) (RND * 12);
                 changepar (i, value + 1);
-            }
-            break;
-
-            case Infinity_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

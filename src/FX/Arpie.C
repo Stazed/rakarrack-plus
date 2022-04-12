@@ -121,6 +121,7 @@ Arpie::set_random_parameters()
     {
         switch(i)
         {
+            case Arpie_DryWet:
             case Arpie_Pan:
             case Arpie_LR_Delay:
             case Arpie_LR_Cross:
@@ -130,13 +131,6 @@ Arpie::set_random_parameters()
             {
                 int value = (int) (RND * 128);
                 changepar (i, value);
-            }
-            break;
-
-            case Arpie_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

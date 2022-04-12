@@ -290,6 +290,7 @@ Synthfilter::set_random_parameters()
     {
         switch(i)
         {
+            case Synthfilter_DryWet:
             case Synthfilter_Distort:
             case Synthfilter_LFO_Random:
             case Synthfilter_LFO_Stereo:
@@ -350,13 +351,6 @@ Synthfilter::set_random_parameters()
             {
                 int value = (int) (RND * 495);
                 changepar (i, value + 5);
-            }
-            break;
-
-            case Synthfilter_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

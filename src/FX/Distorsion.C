@@ -143,6 +143,7 @@ Distorsion::set_random_parameters()
     {
         switch(i)
         {
+            case Dist_DryWet:
             case Dist_Pan:
             case Dist_LR_Cross:
             case Dist_Drive:
@@ -181,13 +182,6 @@ Distorsion::set_random_parameters()
             {
                 int value = (int) (RND * 19980);
                 changepar (i, value + 20);
-            }
-            break;
-
-            case Dist_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

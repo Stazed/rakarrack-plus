@@ -113,6 +113,7 @@ Echoverse::set_random_parameters()
     {
         switch(i)
         {
+            case Echoverse_DryWet:
             case Echoverse_Pan:
             case Echoverse_LR_Delay:
             case Echoverse_Feedback:
@@ -146,12 +147,6 @@ Echoverse::set_random_parameters()
             }
             break;
 
-            case Echoverse_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
-            }
-            break;
         }
     }
 }

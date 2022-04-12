@@ -157,6 +157,7 @@ Derelict::set_random_parameters()
     {
         switch(i)
         {
+            case Dere_DryWet:
             case Dere_LR_Cross:
             case Dere_Level:
             case Dere_Color:
@@ -170,7 +171,7 @@ Derelict::set_random_parameters()
 
             case Dere_Drive:
             {
-                int value = (int) (RND * 126);
+                int value = (int) (RND * 127);
                 changepar (i, value + 1);
             }
             break;
@@ -181,7 +182,7 @@ Derelict::set_random_parameters()
                 changepar (i, value);
             }
             break;
-            
+
             case Dere_Negate:
             case Dere_Prefilter:
             {
@@ -201,13 +202,6 @@ Derelict::set_random_parameters()
             {
                 int value = (int) (RND * 19980);
                 changepar (i, value + 20);
-            }
-            break;
-
-            case Dere_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

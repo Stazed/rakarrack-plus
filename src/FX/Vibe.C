@@ -153,6 +153,7 @@ Vibe::set_random_parameters()
     {
         switch(i)
         {
+            case Vibe_DryWet:
             case Vibe_Width:
             case Vibe_LFO_Random:
             case Vibe_Depth:
@@ -181,13 +182,6 @@ Vibe::set_random_parameters()
             {
                 int value = (int) (RND * 2);
                 changepar (i, value);
-            }
-            break;
-
-            case Vibe_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

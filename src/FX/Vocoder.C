@@ -189,9 +189,12 @@ Vocoder::set_random_parameters()
         switch(i)
         {
             case Vocoder_DryWet:
+            case Vocoder_Input:
+            case Vocoder_Level:
+            case Vocoder_Ring:
             {
                 int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
+                changepar (i, value);
             }
             break;
 
@@ -213,15 +216,6 @@ Vocoder::set_random_parameters()
             {
                 int value = (int) (RND * 130);
                 changepar (i, value + 40);
-            }
-            break;
-
-            case Vocoder_Input:
-            case Vocoder_Level:
-            case Vocoder_Ring:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, value);
             }
             break;
         }

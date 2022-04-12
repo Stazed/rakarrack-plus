@@ -203,6 +203,7 @@ Sequence::set_random_parameters()
     {
         switch(i)
         {
+            case Sequence_DryWet:
             case Sequence_Step_1:
             case Sequence_Step_2:
             case Sequence_Step_3:
@@ -232,6 +233,7 @@ Sequence::set_random_parameters()
             break;
 
             case Sequence_Stdf:
+            case Sequence_Range:
             {
                 int value = (int) (RND * 8);
                 changepar (i, value);
@@ -242,20 +244,6 @@ Sequence::set_random_parameters()
             {
                 int value = (int) (RND * 9);
                 changepar (i, value);
-            }
-            break;
-
-            case Sequence_Range:
-            {
-                int value = (int) (RND * 8);
-                changepar (i, value);
-            }
-            break;
-
-            case Sequence_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

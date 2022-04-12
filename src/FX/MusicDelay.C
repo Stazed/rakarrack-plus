@@ -144,6 +144,7 @@ MusicDelay::set_random_parameters()
             }
             break;
 
+            case Music_DryWet:
             case Music_LR_Cross:
             case Music_Pan_1:
             case Music_Pan_2:
@@ -155,13 +156,6 @@ MusicDelay::set_random_parameters()
             {
                 int value = (int) (RND * 128);
                 changepar (i, value);
-            }
-            break;
-
-            case Music_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

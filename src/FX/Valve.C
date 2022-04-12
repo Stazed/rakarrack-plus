@@ -135,6 +135,7 @@ Valve::set_random_parameters()
     {
         switch(i)
         {
+            case Valve_DryWet:
             case Valve_LR_Cross:
             case Valve_Pan:
             case Valve_Drive:
@@ -174,13 +175,6 @@ Valve::set_random_parameters()
             {
                 int value = (int) (RND * 101);
                 changepar (i, value);
-            }
-            break;
-
-            case Valve_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

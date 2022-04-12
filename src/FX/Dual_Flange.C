@@ -190,6 +190,7 @@ Dflange::set_random_parameters()
             }
             break;
 
+            case DFlange_DryWet:
             case DFlange_LR_Cross:
             case DFlange_LFO_Stereo:
             case DFlange_LFO_Random:
@@ -208,14 +209,14 @@ Dflange::set_random_parameters()
 
             case DFlange_Width:
             {
-                int value = (int) (RND * 6000);
+                int value = (int) (RND * 6001);
                 changepar (i, value);
             }
             break;
 
             case DFlange_Offset:
             {
-                int value = (int) (RND * 100);
+                int value = (int) (RND * 101);
                 changepar (i, value);
             }
             break;
@@ -247,13 +248,6 @@ Dflange::set_random_parameters()
             {
                 int value = (int) (RND * 12);
                 changepar (i, value);
-            }
-            break;
-
-            case DFlange_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }

@@ -177,6 +177,7 @@ VaryBand::set_random_parameters()
             }
             break;
 
+            case VaryBand_DryWet:
             case VaryBand_LFO_Stereo_1:
             case VaryBand_LFO_Stereo_2:
             {
@@ -213,13 +214,6 @@ VaryBand::set_random_parameters()
             {
                 int value = (int) (RND * 4);
                 changepar (i, value);
-            }
-            break;
-
-            case VaryBand_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

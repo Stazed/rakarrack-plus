@@ -182,6 +182,7 @@ Reverb::set_random_parameters()
     {
         switch(i)
         {
+            case Reverb_DryWet:
             case Reverb_Pan:
             case Reverb_Time:
             case Reverb_I_Delay:
@@ -222,15 +223,8 @@ Reverb::set_random_parameters()
 
             case Reverb_Room:
             {
-                int value = (int) (RND * 126);
+                int value = (int) (RND * 127);
                 changepar (i, value + 1);
-            }
-            break;
-
-            case Reverb_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

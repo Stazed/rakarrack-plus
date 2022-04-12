@@ -291,6 +291,7 @@ Analog_Phaser::set_random_parameters()
             }
             break;
 
+            case APhase_DryWet:
             case APhase_Distortion:
             case APhase_LFO_Random:
             case APhase_LFO_Stereo:
@@ -300,13 +301,6 @@ Analog_Phaser::set_random_parameters()
             {
                 int value = (int) (RND * 128);
                 changepar (i, value);
-            }
-            break;
-
-            case APhase_DryWet: 
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

@@ -184,17 +184,11 @@ StereoHarm::set_random_parameters()
             }
             break;
 
+            case Sharm_DryWet:
             case Sharm_LR_Cross:
             {
                 int value = (int) (RND * 128);
                 changepar (i, value);
-            }
-            break;
-
-            case Sharm_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

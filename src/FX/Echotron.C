@@ -160,6 +160,7 @@ Echotron::set_random_parameters()
     {
         switch(i)
         {
+            case Echotron_DryWet:
             case Echotron_Pan:
             case Echotron_LFO_Width:
             case Echotron_Damp:
@@ -205,13 +206,6 @@ Echotron::set_random_parameters()
             {
                 int value = (int) (RND * 2);
                 changepar (i, value);
-            }
-            break;
-
-            case Echotron_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
 

@@ -157,6 +157,7 @@ WahWah::set_random_parameters()
     {
         switch(i)
         {
+            case WahWah_DryWet:
             case WahWah_Pan:
             case WahWah_LFO_Random:
             case WahWah_LFO_Stereo:
@@ -194,13 +195,6 @@ WahWah::set_random_parameters()
             {
                 int value = (int) (RND * 5);
                 changepar (i, value);
-            }
-            break;
-
-            case WahWah_DryWet:
-            {
-                int value = (int) (RND * 128);
-                changepar (i, Dry_Wet(value));
             }
             break;
         }
