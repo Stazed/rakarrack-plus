@@ -16,7 +16,7 @@ widget_class RandomEditGui {open selected
   }
   Fl_Scroll RandomScroll {
     label {Exclude Effect} open
-    tooltip {Check any effects that should NOT be included for random selection.} xywh {13 25 100 185} type VERTICAL_ALWAYS labelcolor 7
+    xywh {13 25 100 185} type VERTICAL_ALWAYS labelcolor 7
     class RKR_Scroll
   } {}
   Function {initialize(RKR * _rkr, RKRGUI *_rgui)} {open return_type void
@@ -36,7 +36,8 @@ make_effect_scroller();} {}
         RKR_Check_Button *b = new RKR_Check_Button(15, (i * 20) + 22, 100, 20,
              m_process->efx_names[m_parent->Busca_Eff(i)].Nom);
 
-        b->user_data((void *) i);
+        intptr_t ud = i + UD_random_edit;
+        b->user_data((void *) ud);
         b->callback((Fl_Callback *)m_parent->Set_effect);
     }
     
