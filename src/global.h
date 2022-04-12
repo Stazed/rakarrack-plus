@@ -37,6 +37,7 @@
 #include <sstream>  // NTS
 #include <FL/Fl_Tiled_Image.H>
 
+//#define STRESS_TEST_CHECK 1
 
 class RKRGUI;   // forward declaration
 class RKR;      // forward declaration

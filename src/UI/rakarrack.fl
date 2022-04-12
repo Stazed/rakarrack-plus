@@ -325,6 +325,9 @@ Array is indexed by EFX_Index.} private local
     comment {The amount of time to delay before the below mouse
 widget gets the focus.} private local
   }
+  decl {int stress_test_time;} {
+    comment {Timeout variable for random stress testing} private local
+  }
   decl {char FX_Excluded[C_NUMBER_EFFECTS];} {
     comment {Array to hold user selections for random preset generation.} private local
   }
@@ -346,7 +349,7 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {548 122 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {339 436 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1578,6 +1581,21 @@ if(m_process->Config.Tap_Updated)
     return;
 }
 
+\#ifdef STRESS_TEST_CHECK
+if(Fl::event_button()==FL_MIDDLE_MOUSE)
+{
+    if(stress_test_time)
+    {
+        stress_test_time = 0;
+    }
+    else
+    {
+      stress_test_time = 1;
+    }
+    return;
+}
+\#endif
+
 RandomPreset();}
           tooltip {Random Preset selection - Shortcut 'F7'
 Right mouse to set random button preferences.} xywh {175 141 59 14} shortcut 0xffc4 color 62 labelsize 10 align 80 when 6
@@ -2067,5 +2085,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {NSM_gui_show(int hold_preset)} {open return_type int
   } {}
   Function {NSM_gui_hide()} {open return_type void
+  } {}
+  Function {stress_test()} {open return_type void
   } {}
 }

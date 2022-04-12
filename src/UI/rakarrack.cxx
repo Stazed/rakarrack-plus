@@ -819,6 +819,21 @@ void RKRGUI::cb_RandomP_i(RKR_Button*, void*) {
     return;
 }
 
+#ifdef STRESS_TEST_CHECK
+if(Fl::event_button()==FL_MIDDLE_MOUSE)
+{
+    if(stress_test_time)
+    {
+        stress_test_time = 0;
+    }
+    else
+    {
+      stress_test_time = 1;
+    }
+    return;
+}
+#endif
+
 RandomPreset();
 }
 void RKRGUI::cb_RandomP(RKR_Button* o, void* v) {

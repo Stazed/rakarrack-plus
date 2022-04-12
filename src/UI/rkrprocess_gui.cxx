@@ -43,7 +43,8 @@ RKR * process_rkr;
 
 RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     made(0),
-    focus_delay_time(25)    // Every 25 count is about 1 second
+    focus_delay_time(25),    // Every 25 count is about 1 second
+    stress_test_time(0)
 {
     // Initialize Gui
     Fl::args(argc, argv);
@@ -145,6 +146,19 @@ void RKRGUI::GuiTimeout(void)
     // Main gui process on timeout
     below_mouse_highlight_and_focus();
     drag_effect();
+    
+#ifdef STRESS_TEST_CHECK
+    if(stress_test_time)
+    {
+        if(stress_test_time > 25)
+        {
+            stress_test();
+            stress_test_time = 1;
+        }
+        
+        stress_test_time++;
+    }
+#endif
 
     if (m_process->Tuner_Active)
     {
@@ -3716,13 +3730,14 @@ void RKRGUI::RandomPreset()
         preset_widget->value(preset_selection);
         preset_widget->do_callback(w, widget_user_data);
     }
-
+#ifndef STRESS_TEST_CHECK
     FillML();
     Prepare_Order();
     Put_Loaded();
 
     ActivarGeneral->value(1);
     ActivarGeneral->do_callback();
+#endif
 }
 
 void RKRGUI::set_random_parameters(int effect)
@@ -4010,5 +4025,30 @@ void RKRGUI::NSM_gui_hide()
     RandomEdit->hide();
     Fl::flush();
     global_gui_show = CONST_GUI_OFF;
+#endif
+}
+
+void RKRGUI::stress_test()
+{
+#ifdef STRESS_TEST_CHECK
+    RandomPreset();
+    
+    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS ; ++i)
+    {
+        set_random_parameters(i);
+        
+        int rack_effect = m_process->efx_order[i];
+
+        // Set the all main window effects active
+        m_process->EFX_Active[rack_effect] = 1;
+        Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Active[rack_effect]);
+    }
+    
+    FillML();
+    Prepare_Order();
+    Put_Loaded();
+
+    ActivarGeneral->value(1);
+    ActivarGeneral->do_callback();
 #endif
 }

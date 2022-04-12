@@ -172,6 +172,10 @@ class RKRGUI {
   */
   int focus_delay_time; 
   /**
+   Timeout variable for random stress testing
+  */
+  int stress_test_time; 
+  /**
    Array to hold user selections for random preset generation.
   */
   char FX_Excluded[C_NUMBER_EFFECTS]; 
@@ -690,5 +694,6 @@ public:
   void set_focus_timer(int time);
   int NSM_gui_show(int hold_preset);
   void NSM_gui_hide();
+  void stress_test();
 };
 #endif
