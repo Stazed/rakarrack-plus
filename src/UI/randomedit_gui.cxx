@@ -64,7 +64,8 @@ void RandomEditGui::make_effect_scroller() {
           RKR_Check_Button *b = new RKR_Check_Button(15, (i * 20) + 22, 100, 20,
                m_process->efx_names[m_parent->Busca_Eff(i)].Nom);
   
-          b->user_data((void *) i);
+          intptr_t ud = i + UD_random_edit;
+          b->user_data((void *) ud);
           b->callback((Fl_Callback *)m_parent->Set_effect);
       }
       

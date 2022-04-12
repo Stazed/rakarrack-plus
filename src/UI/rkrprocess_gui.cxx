@@ -3595,7 +3595,9 @@ void RKRGUI::Set_effect(RKR_Check_Button* o, void* v)
 
 inline void RKRGUI::cb_Set_effect_i(RKR_Check_Button* o, void* v)
 {
-    long long ud= (long long) v;
+    long long ud = (long long) v;
+    
+    ud -= UD_random_edit;
 
     FX_Excluded[ud] = (char) o->value();
 }

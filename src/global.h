@@ -418,6 +418,10 @@ enum USER_DATA_index
     // Echotron Delay file window group
     UD_delay_group          = 4000,
     
+    UD_random_edit          = 5000,
+    // Everything between here is used by random editor
+    UD_random_end           = (5000 + 47), //  C_NUMBER_EFFECTS = 47
+    
     // The user_data for RKR_Choice 'Preset' widgets. For use in identifying
     // the correct widget when user 'Insert' or 'Delete' key is used. For
     // adding or deleting effect user defined presets. The range is the same
