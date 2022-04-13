@@ -410,6 +410,12 @@ Convolotron::out(float * efxoutl, float * efxoutr)
         feedback = fb * lyn;
         templ[i] = lyn * levpanl;
         tempr[i] = lyn * levpanr;
+        
+        if(isnan(templ[i]) || isnan(tempr[i]))
+        {
+            templ[i] = tempr[i] = 0.0;
+            cleanup();
+        }
 
         if (++offset > maxx_size)
             offset = 0;

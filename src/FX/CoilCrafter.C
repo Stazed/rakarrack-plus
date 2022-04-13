@@ -262,6 +262,12 @@ CoilCrafter::out(float * efxoutl, float * efxoutr)
             efxoutl[i] *= .5f;
             efxoutr[i] *= .5f;
         }
+        
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            cleanup();
+        }
     }
 }
 

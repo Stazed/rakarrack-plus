@@ -119,6 +119,12 @@ Alienwah::out(float * efxoutl, float * efxoutr)
         //LRcross
         efxoutl[i] = l * (1.0f - lrcross) + r * lrcross;
         efxoutr[i] = r * (1.0f - lrcross) + l * lrcross;
+        
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            cleanup();
+        }
     };
 
     oldclfol.a = clfol.a;

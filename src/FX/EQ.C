@@ -146,6 +146,12 @@ EQ::out(float * efxoutl, float * efxoutr)
     {
         efxoutl[i] = efxoutl[i] * outvolume;
         efxoutr[i] = efxoutr[i] * outvolume;
+        
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            cleanup();
+        }
     }
 }
 

@@ -316,6 +316,12 @@ Arpie::out(float * efxoutl, float * efxoutr)
             efxoutl[i] = ldl;
             efxoutr[i] = rdl;
         }
+        
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            cleanup();
+        }
 
         //LowPass Filter
         ldelay[kl] = ldl = ldl * hidamp + oldl * (1.0f - hidamp);
