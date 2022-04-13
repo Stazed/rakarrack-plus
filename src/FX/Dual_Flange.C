@@ -370,6 +370,12 @@ Dflange::out(float * efxoutl, float * efxoutr)
                 efxoutl[i] = ldl = ldl * flrcross + rdl * frlcross;
                 efxoutr[i] = rdl = rdl * flrcross + ldl * frlcross;
 
+                if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+                {
+                    efxoutl[i] = efxoutr[i] = ldl = rdl = 0.0;
+                    cleanup();
+                }
+
                 // Increment LFO
                 drA += rx0;
                 drB += rx1;
@@ -404,6 +410,12 @@ Dflange::out(float * efxoutl, float * efxoutr)
 
                 efxoutl[i] = ldl = ldl * flrcross + rdl * frlcross;
                 efxoutr[i] = rdl = rdl * flrcross + ldl * frlcross;
+
+                if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+                {
+                    efxoutl[i] = efxoutr[i] = ldl = rdl = 0.0;
+                    cleanup();
+                }
 
                 // Increment LFO
                 drA += rx0;
@@ -544,6 +556,13 @@ Dflange::out(float * efxoutl, float * efxoutr)
             {
                 efxoutl[i] = dry * efxoutl[i] + wet * fsubtract * (lsA + lsB); // Make final FX out mix
                 efxoutr[i] = dry * efxoutr[i] + wet * fsubtract * (rsA + rsB);
+            }
+            
+            if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+            {
+                efxoutl[i] = ldl = lsA = lsB = zdl = 0.0;
+                efxoutr[i] = rdl = rsA = rsB = zdr = 0.0;
+                cleanup();
             }
 
             if (--kl < 0) //Cycle delay buffer in reverse so delay time can be indexed directly with addition
