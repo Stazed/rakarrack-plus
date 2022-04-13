@@ -58,7 +58,9 @@ Filter::Filter(FilterParams * pars) :
 
 Filter::~Filter()
 {
-    delete filter;
+    if(filter != NULL)
+        delete filter;
+
     delete[] interpbuf;
 }
 
