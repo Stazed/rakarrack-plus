@@ -102,6 +102,12 @@ WahWah::out(float * efxoutl, float * efxoutr)
 
     float frl = filterl->getrealfreq(freq + lfol + rms);
     float frr = filterr->getrealfreq(freq + lfor + rms);
+    
+    if(isnan(frl))
+        frl = freq;
+
+    if(isnan(frr))
+        frr = freq;
 
     filterl->setfreq_and_q(frl, q);
     filterr->setfreq_and_q(frr, q);
