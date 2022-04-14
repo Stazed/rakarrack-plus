@@ -228,6 +228,8 @@ Echoverse::initdelays()
 void
 Echoverse::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     for (unsigned int i = 0; i < PERIOD; i++)
     {
         //LowPass Filter
@@ -271,7 +273,16 @@ Echoverse::out(float * efxoutl, float * efxoutr)
         //efxoutr[i] = (ipingpong*rdl + pingpong *rdelay->delay_simple(0.0f, rtime, 2, 0, 0)) * rpanning;
         efxoutl[i] = (ipingpong * ldl + pingpong * ldelay->delay_simple(0.0f, ltime, 2, 0, 0)) * rpanning;
         efxoutr[i] = (ipingpong * rdl + pingpong * rdelay->delay_simple(0.0f, rtime, 2, 0, 0)) * lpanning;
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 /*

@@ -343,6 +343,8 @@ Echotron::clear_initialize()
 void
 Echotron::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     int length = Plength;
 
     if ((Pmoddly) || (Pmodfilts)) modulate_delay();
@@ -404,7 +406,15 @@ Echotron::out(float * efxoutl, float * efxoutr)
         lfeedback *= fb;
         rfeedback *= fb;
 
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 
     if (initparams) init_params();
 }

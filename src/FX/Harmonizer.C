@@ -289,6 +289,8 @@ Harmonizer::applyfilters(float * efxoutl, uint32_t period)
 void
 Harmonizer::out(float *efxoutl, float *efxoutr)
 {
+    bool have_nans = false;
+
     if (DS_state != 0)
     {
         /* copy to temp then replace efxoutl and efxoutr with up sample */
@@ -336,7 +338,16 @@ Harmonizer::out(float *efxoutl, float *efxoutr)
     {
         efxoutl[i] = templ[i] * gain * (1.0f - panning);
         efxoutr[i] = templ[i] * gain * panning;
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 void

@@ -125,6 +125,7 @@ float Chorus::getdelay(float xlfo)
 void
 Chorus::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
 
     dl1 = dl2;
     dr1 = dr2;
@@ -158,6 +159,12 @@ Chorus::out(float * efxoutl, float * efxoutr)
             tmp = efxoutr[i] + oldr*fb;
             efxoutr[i] = tmpsub * rdelay->delay(tmp, mdel, 0, 1, 0);
             oldr = efxoutr[i];
+
+            if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+            {
+                efxoutl[i] = efxoutr[i] = 0.0;
+                have_nans = true;
+            }
         }
     }
     else
@@ -224,8 +231,17 @@ Chorus::out(float * efxoutl, float * efxoutr)
         {
             efxoutl[i] *= (1.0f - panning);
             efxoutr[i] *= panning;
+
+            if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+            {
+                efxoutl[i] = efxoutr[i] = 0.0;
+                have_nans = true;
+            }
         }
     } //end awesome_mode test
+
+    if(have_nans)
+        cleanup();
 }
 
 /*

@@ -206,6 +206,8 @@ Echo::initdelays()
 void
 Echo::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     for (unsigned i = 0; i < PERIOD; i++)
     {
         float ldl = ldelay->delay_simple(oldl, ltime, 0, 1, 0);
@@ -246,7 +248,16 @@ Echo::out(float * efxoutl, float * efxoutr)
         oldr = rdl * hidamp + oldr * (1.0f - hidamp);
         oldl += DENORMAL_GUARD;
         oldr += DENORMAL_GUARD;
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 /*
