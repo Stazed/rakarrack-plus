@@ -233,6 +233,8 @@ HarmEnhancer::calcula_mag(float *Rmag)
 void
 HarmEnhancer::harm_out(float *efxoutl, float *efxoutr)
 {
+    bool have_nans = false;
+
     memcpy(inputl, efxoutl, sizeof (float)*PERIOD);
     memcpy(inputr, efxoutr, sizeof (float)*PERIOD);
 
@@ -276,5 +278,14 @@ HarmEnhancer::harm_out(float *efxoutl, float *efxoutr)
     {
         efxoutl[i] = (efxoutl[i] + inputl[i] * vol);
         efxoutr[i] = (efxoutr[i] + inputr[i] * vol);
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
