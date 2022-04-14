@@ -72,7 +72,7 @@ Expander::cleanup()
     hpfl->cleanup();
     lpfr->cleanup();
     hpfr->cleanup();
-    oldgain = 0.0f;
+    oldgain = env = 0.0f;
 }
 
 #ifdef LV2_SUPPORT
@@ -219,6 +219,8 @@ Expander::sethpf(int value)
 void
 Expander::out(float *efxoutl, float *efxoutr)
 {
+    bool have_nans = false;
+
     lpfl->filterout(efxoutl, PERIOD);
     hpfl->filterout(efxoutl, PERIOD);
     lpfr->filterout(efxoutr, PERIOD);
@@ -257,7 +259,16 @@ Expander::out(float *efxoutl, float *efxoutr)
             efxoutl[i] *= gain*level;
             efxoutr[i] *= gain*level;
         }
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 void
