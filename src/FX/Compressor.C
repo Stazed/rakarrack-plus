@@ -100,12 +100,16 @@ Compressor::~Compressor()
 void
 Compressor::cleanup()
 {
-    lgain = rgain = 1.0f;
+    lgain = rgain = lgain_t = rgain_t = 1.0f;
     lgain_old = rgain_old = 1.0f;
     rpeak = 0.0f;
     lpeak = 0.0f;
     limit = 0;
     clipping = 0;
+    eratio = 0.0f;
+    lvolume = lvolume_db = 0.0f;
+    rvolume = rvolume_db = 0.0f;
+    attr = relr = rell = 1.0f;
 }
 
 #ifdef LV2_SUPPORT
@@ -207,6 +211,8 @@ Compressor::LV2_parameters(std::string &s_buf)
 void
 Compressor::out(float *efxoutl, float *efxoutr)
 {
+    bool have_nans = false;
+
     for (unsigned i = 0; i < PERIOD; i++)
     {
         //Right Channel
@@ -402,7 +408,16 @@ Compressor::out(float *efxoutl, float *efxoutr)
             }
             //highly probably there is a more elegant way to do that, but what the hey...
         }
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 void
