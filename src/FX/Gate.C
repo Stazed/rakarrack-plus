@@ -74,6 +74,7 @@ Gate::cleanup()
     hpfl->cleanup();
     lpfr->cleanup();
     hpfr->cleanup();
+    env = 0.0f;
 }
 
 #ifdef LV2_SUPPORT
@@ -222,6 +223,8 @@ Gate::sethpf(int value)
 void
 Gate::out(float *efxoutl, float *efxoutr)
 {
+    bool have_nans = false;
+
     lpfl->filterout(efxoutl, PERIOD);
     hpfl->filterout(efxoutl, PERIOD);
     lpfr->filterout(efxoutr, PERIOD);
@@ -287,7 +290,16 @@ Gate::out(float *efxoutl, float *efxoutr)
 
         efxoutl[i] *= (cut * (1.0f - gate) + gate);
         efxoutr[i] *= (cut * (1.0f - gate) + gate);
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 void
