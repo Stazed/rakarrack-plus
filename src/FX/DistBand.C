@@ -347,6 +347,8 @@ DistBand::clear_initialize()
 void
 DistBand::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     float inputvol = powf(5.0f, ((float) Pdrive - 32.0f) / 127.0f);
     
     if (Pnegate != 0)
@@ -427,7 +429,15 @@ DistBand::out(float * efxoutl, float * efxoutr)
         efxoutl[i] = l * 2.0f * level * (1.0f - panning);
         efxoutr[i] = r * 2.0f * level * panning;
 
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 
     DCr->filterout(efxoutr, PERIOD);
     DCl->filterout(efxoutl, PERIOD);

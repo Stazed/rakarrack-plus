@@ -340,6 +340,8 @@ Derelict::applyfilters(float * efxoutl, float * efxoutr, uint32_t period)
 void
 Derelict::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     float inputvol = powf(5.0f, ((float) Pdrive - 32.0f) / 127.0f);
 
     if (Pnegate != 0)
@@ -415,7 +417,16 @@ Derelict::out(float * efxoutl, float * efxoutr)
 
         efxoutl[i] = lout * level * (1.0f - panning);
         efxoutr[i] = rout * level * panning;
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 
     DCr->filterout(efxoutr, PERIOD);
     DCl->filterout(efxoutl, PERIOD);

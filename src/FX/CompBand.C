@@ -318,6 +318,8 @@ CompBand::clear_initialize()
 void
 CompBand::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     memcpy(lowl, efxoutl, sizeof (float) * PERIOD);
     memcpy(midll, efxoutl, sizeof (float) * PERIOD);
     memcpy(midhl, efxoutl, sizeof (float) * PERIOD);
@@ -351,7 +353,16 @@ CompBand::out(float * efxoutl, float * efxoutr)
     {
         efxoutl[i] = (lowl[i] + midll[i] + midhl[i] + highl[i]) * level;
         efxoutr[i] = (lowr[i] + midlr[i] + midhr[i] + highr[i]) * level;
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 /*
