@@ -114,6 +114,8 @@ Synthfilter::~Synthfilter()
 void
 Synthfilter::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
     
@@ -233,7 +235,16 @@ Synthfilter::out(float * efxoutl, float * efxoutr)
 
         efxoutl[i] = lxn;
         efxoutr[i] = rxn;
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 
     oldlgain = lmod;
     oldrgain = rmod;

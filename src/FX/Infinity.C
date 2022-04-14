@@ -212,6 +212,7 @@ Infinity::oscillator()
 void
 Infinity::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
     float tmpr, tmpl;   // initialize o.k.
 
     for (unsigned i = 0; i < PERIOD; i++)
@@ -240,7 +241,16 @@ Infinity::out(float * efxoutl, float * efxoutr)
 
         efxoutl[i] = (1.0f + autopan * mcos) * volmaster*tmpl;
         efxoutr[i] = (1.0f - autopan * mcos) * volmaster*tmpr;
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 /*

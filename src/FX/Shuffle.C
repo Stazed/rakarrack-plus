@@ -240,6 +240,8 @@ Shuffle::clear_initialize()
 void
 Shuffle::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     for (unsigned int i = 0; i < PERIOD; i++)
     {
 
@@ -266,7 +268,16 @@ Shuffle::out(float * efxoutl, float * efxoutr)
     {
         efxoutl[i] = (inputl[i] + inputr[i] - efxoutl[i])*.333333f;
         efxoutr[i] = (inputl[i] - inputr[i] - efxoutr[i])*.333333f;
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 /*

@@ -351,6 +351,7 @@ Shifter::adjust(int DS, double SAMPLE_RATE)
 void
 Shifter::out(float *efxoutl, float *efxoutr)
 {
+    bool have_nans = false;
     if (DS_state != 0)
     {
         memcpy(templ, efxoutl, sizeof (float)*PERIOD);
@@ -424,7 +425,16 @@ Shifter::out(float *efxoutl, float *efxoutr)
         {
             outi[i] = -1.0f;
         }
+        
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 
     float use = 0.0f;
     if (Pmode == 1)

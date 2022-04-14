@@ -271,6 +271,7 @@ MusicDelay::initdelays()
 void
 MusicDelay::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
     for (unsigned int i = 0; i < PERIOD; i++)
     {
         float ldl1 = ldelay1[kl1];
@@ -295,6 +296,12 @@ MusicDelay::out(float * efxoutl, float * efxoutr)
 
         efxoutl[i] = (ldl1 + ldl2) * 2.0f;
         efxoutr[i] = (rdl1 + rdl2) * 2.0f;
+        
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
 
         //LowPass Filter
         ldelay1[kl1] = ldl1 = ldl1 * hidamp + oldl1 * (1.0f - hidamp);
@@ -319,6 +326,9 @@ MusicDelay::out(float * efxoutl, float * efxoutr)
         if (++kr2 >= dr2)
             kr2 = 0;
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 /*

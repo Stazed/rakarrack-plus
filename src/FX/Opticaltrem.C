@@ -167,6 +167,8 @@ Opticaltrem::LV2_parameters(std::string &s_buf)
 void
 Opticaltrem::out(float *efxoutl, float *efxoutr)
 {
+    bool have_nans = false;
+
     float lfol, lfor;
     lfo->effectlfoout(&lfol, &lfor);
 
@@ -254,7 +256,16 @@ Opticaltrem::out(float *efxoutl, float *efxoutr)
 
         gl += ldiff;
         gr += rdiff; //linear interpolation of LFO
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 void
