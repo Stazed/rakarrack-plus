@@ -83,6 +83,8 @@ Alienwah::out(float * efxoutl, float * efxoutr)
     clfor.a = cosf(lfor + phase) * fb;
     clfor.b = sinf(lfor + phase) * fb;
 
+    bool have_nans = false;
+
     for (unsigned i = 0; i < PERIOD; i++)
     {
         float x = (float) i / fPERIOD;
@@ -123,7 +125,7 @@ Alienwah::out(float * efxoutl, float * efxoutr)
         if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
         {
             efxoutl[i] = efxoutr[i] = 0.0;
-            cleanup();
+            have_nans = true;
         }
     };
 
@@ -131,6 +133,9 @@ Alienwah::out(float * efxoutl, float * efxoutr)
     oldclfol.b = clfol.b;
     oldclfor.a = clfor.a;
     oldclfor.b = clfor.b;
+    
+    if(have_nans)
+        cleanup();
 
 }
 

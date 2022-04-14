@@ -268,6 +268,8 @@ Arpie::initdelays()
 void
 Arpie::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     for (unsigned i = 0; i < PERIOD; i++)
     {
         float ldl = ldelay[kl];
@@ -320,7 +322,7 @@ Arpie::out(float * efxoutl, float * efxoutr)
         if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
         {
             efxoutl[i] = efxoutr[i] = 0.0;
-            cleanup();
+            have_nans = true;
         }
 
         //LowPass Filter
@@ -370,6 +372,9 @@ Arpie::out(float * efxoutl, float * efxoutr)
         if (rvfr >= (dr))
             rvfr = rvfr % (dr);
     }
+    
+    if(have_nans)
+        cleanup();
 }
 
 /*

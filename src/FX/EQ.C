@@ -133,6 +133,8 @@ EQ::clear_initialize()
 void
 EQ::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     for (unsigned i = 0; i < MAX_EQ_BANDS; i++)
     {
         if (filter[i].Ptype == 0)
@@ -150,9 +152,12 @@ EQ::out(float * efxoutl, float * efxoutr)
         if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
         {
             efxoutl[i] = efxoutr[i] = 0.0;
-            cleanup();
+            have_nans = true;
         }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 void

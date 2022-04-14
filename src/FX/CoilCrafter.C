@@ -232,6 +232,8 @@ CoilCrafter::LV2_parameters(std::string &s_buf)
 void
 CoilCrafter::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     if (Ppo > 0)
     {
         RB1l->filterout(efxoutl, PERIOD);
@@ -266,9 +268,12 @@ CoilCrafter::out(float * efxoutl, float * efxoutr)
         if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
         {
             efxoutl[i] = efxoutr[i] = 0.0;
-            cleanup();
+            have_nans = true;
         }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 void

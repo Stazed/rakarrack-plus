@@ -380,6 +380,8 @@ Convolotron::adjust(int DS, uint32_t period)
 void
 Convolotron::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     if (DS_state != 0)
     {
         memcpy(templ, efxoutl, sizeof (float)*PERIOD);
@@ -414,12 +416,15 @@ Convolotron::out(float * efxoutl, float * efxoutr)
         if(isnan(templ[i]) || isnan(tempr[i]))
         {
             templ[i] = tempr[i] = 0.0;
-            cleanup();
+            have_nans = true;
         }
 
         if (++offset > maxx_size)
             offset = 0;
     }
+
+    if(have_nans)
+        cleanup();
 
     if (DS_state != 0)
     {

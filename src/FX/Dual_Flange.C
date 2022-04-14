@@ -317,6 +317,8 @@ Dflange::out(float * efxoutl, float * efxoutr)
     {
         rmod = lfor;
     }
+    
+    bool have_nans = false;
 
     if (Pintense)
     {
@@ -373,7 +375,7 @@ Dflange::out(float * efxoutl, float * efxoutr)
                 if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
                 {
                     efxoutl[i] = efxoutr[i] = ldl = rdl = 0.0;
-                    cleanup();
+                    have_nans = true;
                 }
 
                 // Increment LFO
@@ -414,7 +416,7 @@ Dflange::out(float * efxoutl, float * efxoutr)
                 if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
                 {
                     efxoutl[i] = efxoutr[i] = ldl = rdl = 0.0;
-                    cleanup();
+                    have_nans = true;
                 }
 
                 // Increment LFO
@@ -562,7 +564,7 @@ Dflange::out(float * efxoutl, float * efxoutr)
             {
                 efxoutl[i] = ldl = lsA = lsB = zdl = 0.0;
                 efxoutr[i] = rdl = rsA = rsB = zdr = 0.0;
-                cleanup();
+                have_nans = true;
             }
 
             if (--kl < 0) //Cycle delay buffer in reverse so delay time can be indexed directly with addition
@@ -579,6 +581,9 @@ Dflange::out(float * efxoutl, float * efxoutr)
 
         } //end for loop
     } //end intense if statement
+    
+    if(have_nans)
+        cleanup();
 }
 
 void
