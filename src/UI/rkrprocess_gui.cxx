@@ -156,10 +156,10 @@ void RKRGUI::GuiTimeout(void)
     {
         if(stress_test_time > 25)
         {
-            stress_test();
+            RandomPreset();
             stress_test_time = 1;
         }
-        
+
         stress_test_time++;
     }
 #endif
@@ -3772,14 +3772,13 @@ void RKRGUI::RandomPreset()
             preset_widget->do_callback(w, widget_user_data);
         }
     }
-#ifndef STRESS_TEST_CHECK
+
     FillML();
     Prepare_Order();
     Put_Loaded();
 
     ActivarGeneral->value(1);
     ActivarGeneral->do_callback();
-#endif
 }
 
 void RKRGUI::set_random_parameters(int effect)
@@ -4087,48 +4086,5 @@ void RKRGUI::NSM_gui_hide()
     RandomEdit->hide();
     Fl::flush();
     global_gui_show = CONST_GUI_OFF;
-#endif
-}
-
-void RKRGUI::stress_test()
-{
-#ifdef STRESS_TEST_CHECK
-
-    bool single = true; // change this for different method
-
-    if (single)
-    {
-        // set random parameters for only active effects (set manually)
-        for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS ; ++i)
-        {
-            int rack_effect = m_process->efx_order[i];
-            
-            if(m_process->EFX_Active[rack_effect])
-                set_random_parameters(i);
-        }
-    }
-    else    // all
-    {
-        // generate all random effects, set all to active, all parameters random.
-        RandomPreset();
-
-        for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS ; ++i)
-        {
-            set_random_parameters(i);
-
-            int rack_effect = m_process->efx_order[i];
-
-            // Set the all main window effects active
-            m_process->EFX_Active[rack_effect] = 1;
-            Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Active[rack_effect]);
-        }
-
-        FillML();
-        Prepare_Order();
-        Put_Loaded();
-
-        ActivarGeneral->value(1);
-        ActivarGeneral->do_callback();
-    }
 #endif
 }

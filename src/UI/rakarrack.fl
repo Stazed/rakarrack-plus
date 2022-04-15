@@ -2110,6 +2110,4 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {NSM_gui_hide()} {open return_type void
   } {}
-  Function {stress_test()} {open return_type void
-  } {}
 }
