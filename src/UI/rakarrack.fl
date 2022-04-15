@@ -365,7 +365,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {90 505 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {90 479 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -2087,6 +2087,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {set_all_random_active(int value)} {open return_type void
   } {}
   Function {set_random_current(int value)} {open return_type void
+  } {}
+  Function {set_max_random(int value)} {open return_type void
   } {}
   Function {drag_effect()} {open
   } {}

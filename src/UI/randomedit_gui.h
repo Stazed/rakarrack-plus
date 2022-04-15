@@ -28,6 +28,11 @@ public:
 private:
   inline void cb_random_current_i(RKR_Check_Button*, void*);
   static void cb_random_current(RKR_Check_Button*, void*);
+public:
+  RKR_Counter *random_max;
+private:
+  inline void cb_random_max_i(RKR_Counter*, void*);
+  static void cb_random_max(RKR_Counter*, void*);
   RKRGUI* m_parent; 
   RKR* m_process; 
 public:

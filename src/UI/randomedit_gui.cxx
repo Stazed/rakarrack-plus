@@ -22,6 +22,13 @@ void RandomEditGui::cb_random_current_i(RKR_Check_Button* o, void*) {
 void RandomEditGui::cb_random_current(RKR_Check_Button* o, void* v) {
   ((RandomEditGui*)(o->parent()))->cb_random_current_i(o,v);
 }
+
+void RandomEditGui::cb_random_max_i(RKR_Counter* o, void*) {
+  m_parent->set_max_random((int) o->value());
+}
+void RandomEditGui::cb_random_max(RKR_Counter* o, void* v) {
+  ((RandomEditGui*)(o->parent()))->cb_random_max_i(o,v);
+}
 RandomEditGui::RandomEditGui(int X, int Y, int W, int H, const char *L)
   : Fl_Double_Window(X, Y, W, H, L) {
   _RandomEditGui();
@@ -93,6 +100,25 @@ this->when(FL_WHEN_RELEASE);
   random_current->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   random_current->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* random_current
+{ RKR_Counter* o = random_max = new RKR_Counter(10, 299, 46, 15, "Max Active Effects");
+  random_max->type(1);
+  random_max->box(FL_UP_BOX);
+  random_max->color(FL_BACKGROUND_COLOR);
+  random_max->selection_color(FL_INACTIVE_COLOR);
+  random_max->labeltype(FL_NORMAL_LABEL);
+  random_max->labelfont(0);
+  random_max->labelsize(10);
+  random_max->labelcolor(FL_BACKGROUND2_COLOR);
+  random_max->minimum(1);
+  random_max->maximum(10);
+  random_max->step(1);
+  random_max->value(6);
+  random_max->textsize(9);
+  random_max->callback((Fl_Callback*)cb_random_max);
+  random_max->align(Fl_Align(FL_ALIGN_RIGHT));
+  random_max->when(FL_WHEN_CHANGED);
+  o->set_text_offset(-1);
+} // RKR_Counter* random_max
 { RandomScroll = new RKR_Scroll(13, 25, 215, 185, "Exclude Effect");
   RandomScroll->type(6);
   RandomScroll->box(FL_NO_BOX);

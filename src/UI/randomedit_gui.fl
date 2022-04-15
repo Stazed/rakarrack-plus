@@ -3,7 +3,7 @@ version 1.0308
 header_name {.h}
 code_name {.cxx}
 widget_class RandomEditGui {open selected
-  xywh {1564 231 240 320} type Double resizable
+  xywh {1065 115 240 320} type Double resizable
   code0 {\#include "rakarrack.h"}
   class Fl_Double_Window visible
 } {
@@ -27,6 +27,13 @@ widget_class RandomEditGui {open selected
     callback {m_parent->set_random_current((int) o->value());}
     tooltip {Use only active effects already on the main rack} xywh {10 278 115 20} down_box DOWN_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
+  }
+  Fl_Counter random_max {
+    label {Max Active Effects}
+    callback {m_parent->set_max_random((int) o->value());}
+    xywh {10 299 46 15} type Simple labelsize 10 labelcolor 7 align 8 minimum 1 maximum 10 step 1 value 6 textsize 9
+    code0 {o->set_text_offset(-1);}
+    class RKR_Counter
   }
   decl {RKRGUI* m_parent;} {private local
   }

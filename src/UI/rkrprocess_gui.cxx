@@ -3737,7 +3737,7 @@ void RKRGUI::RandomPreset()
     int number_active_effects = max_random_active;
     if(!efx_always_active)
     {
-        number_active_effects = (int) (RND * 6) + 1;
+        number_active_effects = (int) (RND * max_random_active) + 1;
     }
 
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
@@ -3819,6 +3819,11 @@ void RKRGUI::set_all_random_active(int value)
 void RKRGUI::set_random_current(int value)
 {
     use_current_active_efx = value;
+}
+
+void RKRGUI::set_max_random(int value)
+{
+    max_random_active = value;
 }
 
 void RKRGUI::drag_effect()

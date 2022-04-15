@@ -707,6 +707,7 @@ public:
   void set_parameters_random(int value);
   void set_all_random_active(int value);
   void set_random_current(int value);
+  void set_max_random(int value);
   void drag_effect();
   void set_bank_file();
   void set_save_file();
