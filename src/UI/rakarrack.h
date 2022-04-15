@@ -704,6 +704,9 @@ public:
   inline void cb_Set_effect_i(RKR_Check_Button*, void*);
   void RandomPreset();
   void set_random_parameters(int effect);
+  void set_parameters_random(int value);
+  void set_all_random_active(int value);
+  void set_random_current(int value);
   void drag_effect();
   void set_bank_file();
   void set_save_file();

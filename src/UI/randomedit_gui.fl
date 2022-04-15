@@ -3,12 +3,30 @@ version 1.0308
 header_name {.h}
 code_name {.cxx}
 widget_class RandomEditGui {open selected
-  xywh {1495 634 125 235} type Double resizable
+  xywh {1564 231 240 320} type Double resizable
   code0 {\#include "rakarrack.h"}
   class Fl_Double_Window visible
 } {
   Fl_Box Fondo14 {
-    xywh {0 1 125 234}
+    xywh {0 1 240 319}
+  }
+  Fl_Check_Button random_params {
+    label {Random Parameters}
+    callback {m_parent->set_parameters_random((int) o->value());}
+    tooltip {Random button will set all efx parameters randomly} xywh {10 233 115 20} down_box DOWN_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
+  }
+  Fl_Check_Button random_all_active {
+    label {Always Active}
+    callback {m_parent->set_all_random_active((int) o->value());}
+    tooltip {Set all random generated effects as active} xywh {10 257 115 20} down_box DOWN_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
+  }
+  Fl_Check_Button random_current {
+    label {Use Current Active}
+    callback {m_parent->set_random_current((int) o->value());}
+    tooltip {Use only active effects already on the main rack} xywh {10 278 115 20} down_box DOWN_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
   }
   decl {RKRGUI* m_parent;} {private local
   }
@@ -16,7 +34,7 @@ widget_class RandomEditGui {open selected
   }
   Fl_Scroll RandomScroll {
     label {Exclude Effect} open
-    xywh {13 25 100 185} type VERTICAL_ALWAYS labelcolor 7
+    xywh {13 25 215 185} type VERTICAL_ALWAYS labelcolor 7
     class RKR_Scroll
   } {}
   Function {initialize(RKR * _rkr, RKRGUI *_rgui)} {open return_type void

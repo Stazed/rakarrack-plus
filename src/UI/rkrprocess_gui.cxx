@@ -3806,6 +3806,21 @@ void RKRGUI::set_random_parameters(int effect)
     }
 }
 
+void RKRGUI::set_parameters_random(int value)
+{
+    random_parameters = value;
+}
+
+void RKRGUI::set_all_random_active(int value)
+{
+    efx_always_active = value;
+}
+
+void RKRGUI::set_random_current(int value)
+{
+    use_current_active_efx = value;
+}
+
 void RKRGUI::drag_effect()
 {
     if ((drag != C_NO_DRAG) && (Fl::event_button1() == 0))

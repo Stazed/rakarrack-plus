@@ -2992,7 +2992,7 @@ references.");
     DelayFile->end();
     DelayFile->resizable(DelayFile);
   } // DelayFileWindowGui* DelayFile
-  { RandomEditGui* o = RandomEdit = new RandomEditGui(0, 0, 125, 235);
+  { RandomEditGui* o = RandomEdit = new RandomEditGui(0, 0, 240, 320);
     RandomEdit->box(FL_NO_BOX);
     RandomEdit->color((Fl_Color)4);
     RandomEdit->selection_color(FL_BACKGROUND2_COLOR);
@@ -3005,7 +3005,7 @@ references.");
     RandomEdit->when(FL_WHEN_RELEASE);
     o->hide();
     o->initialize(m_process, this);
-    RandomEdit->size_range(400, 132, 1600, 1060);
+    RandomEdit->size_range(240, 320, 960, 1280);
     RandomEdit->end();
     RandomEdit->resizable(RandomEdit);
   } // RandomEditGui* RandomEdit

@@ -14,7 +14,20 @@ public:
   RandomEditGui(int W, int H, const char *L = 0);
   RandomEditGui();
   Fl_Box *Fondo14;
+  RKR_Check_Button *random_params;
 private:
+  inline void cb_random_params_i(RKR_Check_Button*, void*);
+  static void cb_random_params(RKR_Check_Button*, void*);
+public:
+  RKR_Check_Button *random_all_active;
+private:
+  inline void cb_random_all_active_i(RKR_Check_Button*, void*);
+  static void cb_random_all_active(RKR_Check_Button*, void*);
+public:
+  RKR_Check_Button *random_current;
+private:
+  inline void cb_random_current_i(RKR_Check_Button*, void*);
+  static void cb_random_current(RKR_Check_Button*, void*);
   RKRGUI* m_parent; 
   RKR* m_process; 
 public:
