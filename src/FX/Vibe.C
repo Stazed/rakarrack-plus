@@ -245,6 +245,8 @@ Vibe::LV2_parameters(std::string &s_buf)
 void
 Vibe::out(float *efxoutl, float *efxoutr)
 {
+    bool have_nans = false;
+
     float cvolt, ocvolt, evolt, input;
     input = cvolt = ocvolt = evolt = 0.0f;
 
@@ -455,13 +457,28 @@ Vibe::out(float *efxoutl, float *efxoutr)
 
             efxoutl[i] = outl * fcross + outr*flrcross;
             efxoutr[i] = outr * fcross + outl*flrcross;
+
+            if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+            {
+                efxoutl[i] = efxoutr[i] = 0.0;
+                have_nans = true;
+            }
         }
         else
         { //if(Pstereo)
             efxoutl[i] = outl;
             efxoutr[i] = outl;
+
+            if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+            {
+                efxoutl[i] = efxoutr[i] = 0.0;
+                have_nans = true;
+            }
         }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 float

@@ -343,6 +343,8 @@ VaryBand::clear_initialize()
 void
 VaryBand::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     memcpy(lowl, efxoutl, sizeof (float) * PERIOD);
     memcpy(midll, efxoutl, sizeof (float) * PERIOD);
     memcpy(midhl, efxoutl, sizeof (float) * PERIOD);
@@ -381,7 +383,16 @@ VaryBand::out(float * efxoutl, float * efxoutr)
 
         efxoutl[i] = lowl[i] * volL + midll[i] * volML + midhl[i] * volMH + highl[i] * volH;
         efxoutr[i] = lowr[i] * volLr + midlr[i] * volMLr + midhr[i] * volMHr + highr[i] * volHr;
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 /*

@@ -320,6 +320,8 @@ StereoHarm::clear_initialize()
 void
 StereoHarm::out(float *efxoutl, float *efxoutr)
 {
+    bool have_nans = false;
+
     if (DS_state != 0)
     {
         U_Resample->out(efxoutl, efxoutr, templ, tempr, PERIOD, u_up);
@@ -388,7 +390,16 @@ StereoHarm::out(float *efxoutl, float *efxoutr)
     {
         efxoutl[i] = templ[i] * gainl * (1.0f - lrcross) + tempr[i] * gainr * lrcross;
         efxoutr[i] = tempr[i] * gainr * (1.0f - lrcross) + templ[i] * gainl * lrcross;
+        
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 }
 
 void
