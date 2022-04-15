@@ -44,7 +44,11 @@ RKR * process_rkr;
 RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     made(0),
     focus_delay_time(25),    // Every 25 count is about 1 second
-    stress_test_time(0)
+    stress_test_time(0),
+    random_parameters(0),
+    efx_always_active(0),
+    use_current_active_efx(0),
+    max_random_active(6)
 {
     // Initialize Gui
     Fl::args(argc, argv);
@@ -3618,6 +3622,33 @@ inline void RKRGUI::cb_Set_effect_i(RKR_Check_Button* o, void* v)
 
 void RKRGUI::RandomPreset()
 {
+    if(use_current_active_efx)
+    {
+        for(int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
+        {
+            int rack_effect = m_process->efx_order[i];
+            if(m_process->EFX_Active[rack_effect])
+            {
+                if(random_parameters)
+                {
+                    set_random_parameters(i);
+                }
+                else
+                {
+                    // Get the effect preset size and select a random effect preset
+                    Fl_Widget *w = find_effect_preset_widget(rack_effect);
+                    RKR_Choice *preset_widget = static_cast<RKR_Choice *> (w);
+
+                    long long widget_user_data = (long long) preset_widget->user_data();
+                    int preset_selection = (int) (RND * preset_widget->size());
+                    preset_widget->value(preset_selection);
+                    preset_widget->do_callback(w, widget_user_data);
+                }
+            }
+        }
+        return;
+    }
+    
     // Check if invalid number of effects are excluded
     int excluded = 0;
     for(unsigned e = 0; e < C_NUMBER_EFFECTS; ++e)
@@ -3651,7 +3682,7 @@ void RKRGUI::RandomPreset()
     }
 
     // Get random selection of effect index
-    for (int i = 1; i < 10; i++)
+    for (int i = 1; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
         int l = 0;
         while (l == 0)
@@ -3703,7 +3734,11 @@ void RKRGUI::RandomPreset()
     }
     
     // Get random number of active effects, max of six
-    int number_active_effects = (int) (RND * 6) + 1;
+    int number_active_effects = max_random_active;
+    if(!efx_always_active)
+    {
+        number_active_effects = (int) (RND * 6) + 1;
+    }
 
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
@@ -3720,15 +3755,22 @@ void RKRGUI::RandomPreset()
         }
         
         Efx_Gui_Base[rack_effect]->activate_effect->value (m_process->EFX_Active[rack_effect]);
+        
+        if(random_parameters)
+        {
+            set_random_parameters(i);
+        }
+        else
+        {
+            // Get the effect preset size and select a random effect preset
+            Fl_Widget *w = find_effect_preset_widget(Effect_Index[i]);
+            RKR_Choice *preset_widget = static_cast<RKR_Choice *> (w);
 
-        // Get the effect preset size and select a random effect preset
-        Fl_Widget *w = find_effect_preset_widget(Effect_Index[i]);
-        RKR_Choice *preset_widget = static_cast<RKR_Choice *> (w);
-
-        long long widget_user_data = (long long) preset_widget->user_data();
-        int preset_selection = (int) (RND * preset_widget->size());
-        preset_widget->value(preset_selection);
-        preset_widget->do_callback(w, widget_user_data);
+            long long widget_user_data = (long long) preset_widget->user_data();
+            int preset_selection = (int) (RND * preset_widget->size());
+            preset_widget->value(preset_selection);
+            preset_widget->do_callback(w, widget_user_data);
+        }
     }
 #ifndef STRESS_TEST_CHECK
     FillML();

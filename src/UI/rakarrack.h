@@ -176,6 +176,26 @@ class RKRGUI {
   */
   int stress_test_time; 
   /**
+   Random button will set all efx parameters randomly
+  */
+  int random_parameters; 
+  /**
+   Set all random generated effects as active.
+  */
+  int efx_always_active; 
+  /**
+   Random button does not generate random effects for main window.
+   Use only active effects already on the main rack.
+  */
+  int use_current_active_efx; 
+  /**
+   The maximum number or randomly selected efx that can be set as active.
+   The user can set between 1 and 10, default is six. 
+   If the efx_always_active is checked, then always the max.
+   If efx_always_active is not checked, then the actual is randomly generated.
+  */
+  int max_random_active; 
+  /**
    Array to hold user selections for random preset generation.
   */
   char FX_Excluded[C_NUMBER_EFFECTS]; 

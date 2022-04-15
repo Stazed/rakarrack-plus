@@ -328,6 +328,22 @@ widget gets the focus.} private local
   decl {int stress_test_time;} {
     comment {Timeout variable for random stress testing} private local
   }
+  decl {int random_parameters;} {
+    comment {Random button will set all efx parameters randomly} private local
+  }
+  decl {int efx_always_active;} {
+    comment {Set all random generated effects as active.} private local
+  }
+  decl {int use_current_active_efx;} {
+    comment {Random button does not generate random effects for main window.
+Use only active effects already on the main rack.} private local
+  }
+  decl {int max_random_active;} {
+    comment {The maximum number or randomly selected efx that can be set as active.
+The user can set between 1 and 10, default is six. 
+If the efx_always_active is checked, then always the max.
+If efx_always_active is not checked, then the actual is randomly generated.} private local
+  }
   decl {char FX_Excluded[C_NUMBER_EFFECTS];} {
     comment {Array to hold user selections for random preset generation.} private local
   }
@@ -349,7 +365,7 @@ widget gets the focus.} private local
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {339 436 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {76 134 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
