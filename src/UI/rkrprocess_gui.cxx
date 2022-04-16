@@ -3490,6 +3490,10 @@ void RKRGUI::read_insert_presets()
     if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
     {
         insert_preset_location = m_process->Config.UDirFilename;
+        
+        if(insert_preset_location[insert_preset_location.size() - 1] != '/')
+            insert_preset_location += "/";
+
         insert_preset_location += "InsertPresets.rkis";
     }
     else

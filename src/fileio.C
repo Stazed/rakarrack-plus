@@ -1706,6 +1706,10 @@ RKR::save_insert_preset(int num, std::string name)
     if(strcmp(Config.UDirFilename, DATADIR) != 0)
     {
         insert_preset_location = Config.UDirFilename;
+        
+        if(insert_preset_location[insert_preset_location.size() - 1] != '/')
+            insert_preset_location += "/";
+        
         insert_preset_location += "InsertPresets.rkis";
     }
     else
@@ -1825,6 +1829,9 @@ RKR::merge_insert_presets(std::string filename)
     if(strcmp(Config.UDirFilename, DATADIR) != 0)
     {
         insert_preset_location = Config.UDirFilename;
+        if(insert_preset_location[insert_preset_location.size() - 1] != '/')
+            insert_preset_location += "/";
+        
         insert_preset_location += "InsertPresets.rkis";
     }
     else
