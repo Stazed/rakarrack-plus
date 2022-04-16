@@ -172,6 +172,8 @@ ShelfBoost::clear_initialize()
 void
 ShelfBoost::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     RB1l->filterout(efxoutl, PERIOD);
     
     if (Pstereo)
@@ -187,7 +189,16 @@ ShelfBoost::out(float * efxoutl, float * efxoutr)
         {
             efxoutr[i] *= outvolume * u_gain;
         }
+
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
     }
+
+    if(have_nans)
+        cleanup();
 
     if (!Pstereo)
     {
