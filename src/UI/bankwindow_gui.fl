@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0308
 header_name {.h}
 code_name {.cxx}
 decl {\#include <vector>} {public global
@@ -136,28 +136,28 @@ m_parent->put_icon(m_parent->AboutWin);}
   Fl_Button B_B1 {
     label 1
     callback {m_parent->L_B1->do_callback();}
-    tooltip {Set the active bank to Default - Shortcut '1'} xywh {340 14 32 24} shortcut 0x31 color 62 labelsize 10
+    tooltip {Set the active bank to Default - Shortcut '1'} xywh {310 14 32 24} shortcut 0x31 color 62 labelsize 10
     code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B2 {
     label 2
     callback {m_parent->L_B2->do_callback();}
-    tooltip {Set the active bank to Extra - Shortcut '2'} xywh {380 14 32 24} shortcut 0x32 color 62 labelsize 10
+    tooltip {Set the active bank to Extra - Shortcut '2'} xywh {350 14 32 24} shortcut 0x32 color 62 labelsize 10
     code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B3 {
     label 3
     callback {m_parent->L_B3->do_callback();}
-    tooltip {Set the active bank to Extra1 - Shortcut '3'} xywh {420 14 32 24} shortcut 0x33 color 62 labelsize 10
+    tooltip {Set the active bank to Extra1 - Shortcut '3'} xywh {390 14 32 24} shortcut 0x33 color 62 labelsize 10
     code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Button B_B4 {
     label U
     callback {m_parent->L_B4->do_callback();}
-    tooltip {Set the active bank to User bank default - Shortcut 'U'} xywh {460 14 32 24} shortcut 0x75 color 62 labelsize 10
+    tooltip {Set the active bank to User bank default - Shortcut 'U'} xywh {430 14 32 24} shortcut 0x75 color 62 labelsize 10
     code0 {o->set_label_offset(2);}
     class RKR_Button
   }
@@ -180,9 +180,16 @@ m_parent->put_icon(m_parent->AboutWin);}
     };}
     tooltip {Refresh User Banks. 
 WARNING: This will re-load the currently active bank.
- All modifications to the current active bank will be lost!} xywh {502 14 32 24} color 88 labelsize 10
+ All modifications to the current active bank will be lost!} xywh {470 14 32 24} color 88 labelsize 10
     code0 {o->set_label_offset(2);}
     code1 {o->set_button_type(BUTTON_BANK_RESET);}
+    class RKR_Button
+  }
+  Fl_Button B_S {
+    label S
+    callback {sort_bank(m_process->active_bank);}
+    tooltip {Sort the current bank by name} xywh {510 14 32 24} color 62 labelsize 10
+    code0 {o->set_label_offset(2);}
     class RKR_Button
   }
   Fl_Choice CH_UB {
@@ -328,6 +335,41 @@ CH_UB->font_resize(CH_UB->get_width(), CH_UB->get_height());} {}
   Function {clear_menu()} {return_type void
   } {
     code {m_bank_menu.clear();} {}
+  }
+  Function {sort_bank(int a_bank)} {open return_type void
+  } {
+    code {PresetBankStruct current_bank[62];
+    m_process->copy_bank(current_bank, m_process->Bank_Vector[a_bank].Bank);
+    unsigned j = 0;
+    bool swap = true;
+    PresetBankStruct temp_preset;
+    while (swap)
+    {
+        swap = false;
+        j++;
+        // We start at 1 because the first item is used by the compare button
+        // and should not be sorted
+        for (unsigned i = 1; i < 61 - j; i++)
+        {
+            std::string first_name = current_bank[i].Preset_Name;
+            std::string second_name = current_bank[i + 1].Preset_Name;
+            if (first_name > second_name)
+            {
+                temp_preset = current_bank[i];
+                current_bank[i] = current_bank[i + 1];
+                current_bank[i + 1] = temp_preset;
+                swap = true;
+            }
+        }
+    }
+
+    m_process->copy_bank(m_process->Bank, current_bank);
+
+    m_parent->Put_Loaded_Bank();
+    unlight_preset(m_process->Selected_Preset);
+    redraw();
+
+    m_process->bank_modified = 1;} {}
   }
   decl {RKR* m_process} {private local
   }
