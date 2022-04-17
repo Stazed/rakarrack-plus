@@ -326,6 +326,16 @@ Arpie::out(float * efxoutl, float * efxoutr)
         }
 
         //LowPass Filter
+        if(kl >= maxx_delay)
+        {
+            kl = 0;
+        }
+        
+        if(kr >= maxx_delay)
+        {
+            kr = 0;
+        }
+        
         ldelay[kl] = ldl = ldl * hidamp + oldl * (1.0f - hidamp);
         rdelay[kr] = rdl = rdl * hidamp + oldr * (1.0f - hidamp);
         oldl = ldl + DENORMAL_GUARD;
