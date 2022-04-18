@@ -393,8 +393,27 @@ facet.</p>
 <p> The "1", "2", "3", "U" buttons are for fast bank loading. These buttons
 load the Default.rkrb, Extra.rkrb, Extra1.rkrb and the user setting defined bank
 set in <a href="#bprefs">User preferences</a>.</p>
+<p>In addition three addition special effects banks are also included and can
+    be selected from the bank window "User Banks" choice menu.</p>
 
-<p> The "Random" button generates a random preset</p>
+<p><b>Random</b></p>
+<p>The "Random" button generates a random preset. Right mouse button
+on the random button will show a configure window. You can adjust how the random button
+will generate a preset. By default the random button will select from all rack effects
+and randomly choose an individual effect preset. Also the number of active effects will
+be randomly determined to a maximum of six. These settings can be changed from the 
+random configure window. You can choose to have all parameters of the rack effect
+to be set randomly, and exclude any effect from the selection process. In addition,
+the number of chosen effects can be set, as well as whether they all should be active
+or randomly set as active.</p>
+<p>You can also set the parameters to any individual rack effect randomly by right
+    mouse button on the effect name from the main window rack.</p>
+<p><b>CAUTION!!!</b></p>
+<p>When setting any parameters randomly or using the random button,
+    you should always set your speaker volume to minimum or off before setting.
+    Then apply sound to Rakarrack-plus and watch the output volume meter.
+    Setting parameters randomly can result in feedback as well as other issues
+    that will maximize the volume!!!</p>
 
 <p><b>Bank Window</b><p/>
 <p><img src="imagenes/bank_mgmt.jpg" alt="rakarrack Bank Window" align="bottom" border="1" height="500" width="640"></p>
@@ -438,17 +457,17 @@ example, from a second rakarrack-plus instance.</p>
 directory specified by <a href="#bprefs">User Directory</a> in User preferences.</p>
 <p>User banks are loaded on program start by scan of the user directory. The files
 are selected by .rkrb extension and will appear in the choice display in alpha
-numeric order. The first three CC 0 Bank Select parameters are reserved for
-the program provided default banks. From CC 0, parameters 3~127 can be used
+numeric order. The first six CC 0 Bank Select parameters are reserved for
+the program provided default banks. From CC 0, parameters 6~127 can be used
 for user banks. For best results, files could be named using CC parameter value (PV).</p>
 
     <p>For example:</p>
   <ul>
       <li>
-          <p> PV_03_Mybank.rkrb</p>
+          <p> PV_06_Mybank.rkrb</p>
       </li>
       <li>
-          <p> PV_04_Another.rkrb</p>
+          <p> PV_07_Another.rkrb</p>
       </li>
   </ul>
 
