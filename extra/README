@@ -1,0 +1,18 @@
+This directory contains three additional special effects banks:
+    CC_03_SFX.rkrb
+    CC_04_SFX.rkrb
+    CC_05_SFX.rkrb
+
+To use the SFX banks, copy and place in your user directory.
+If rakarrack-plus is already started, then from the Bank Manager window,
+press the R button. The SFX banks will then be listed in the drop
+down User Banks menu. Otherwise the SFX banks will be automatically
+loaded on program start.
+
+Also included are additional individual effect presets in the file:
+    InsertPresets.rkis
+
+To use the InsertPresets.rkis, from the main window, File/Import Inserted Presets.
+Then use the file chooser to select the InsertPresets.rkis file.
+You must quit and restart. Then the new individual effect presets will
+be listed with a * from the effect Preset menu.
