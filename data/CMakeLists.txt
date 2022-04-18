@@ -5,6 +5,9 @@ install (FILES rakarrack-plus.desktop
 install (FILES Default.rkrb
     Extra.rkrb
     Extra1.rkrb
+    SFX_CC_03.rkrb
+    SFX_CC_04.rkrb
+    SFX_CC_05.rkrb
     1.wav 
     2.wav 
     3.wav 
