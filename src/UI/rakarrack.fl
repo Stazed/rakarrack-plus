@@ -514,7 +514,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
           MenuItem salir {
             label Exit
             callback {Principal->do_callback();}
-            xywh {2 2 36 21} shortcut 0x78 labelcolor 7
+            xywh {2 2 36 21} shortcut 0x40078 labelcolor 7
           }
         }
         MenuItem Bank_Menu {

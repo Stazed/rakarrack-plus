@@ -309,7 +309,7 @@ Fl_Menu_Item RKRGUI::menu_MenuP[] = {
  {"Save MIDI Table", 0,  (Fl_Callback*)RKRGUI::cb_Save_MTable, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"&Convert Reverb IR File", 0,  (Fl_Callback*)RKRGUI::cb_ConvertReverb, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Import Inserted Presets", 0,  (Fl_Callback*)RKRGUI::cb_ImportPresets, 0, 128, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Exit", 0x78,  (Fl_Callback*)RKRGUI::cb_salir, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
+ {"Exit", 0x40078,  (Fl_Callback*)RKRGUI::cb_salir, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 7},
  {0,0,0,0,0,0,0,0,0},
  {"&Bank", 0x62,  (Fl_Callback*)RKRGUI::cb_Bank_Menu, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"&Settings", 0,  0, 0, 64, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
