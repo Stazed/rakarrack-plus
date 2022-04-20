@@ -536,7 +536,7 @@ void BankWindowGui::sort_bank(int a_bank) {
           {
               std::string first_name = current_bank[i].Preset_Name;
               std::string second_name = current_bank[i + 1].Preset_Name;
-              if (first_name > second_name)
+              if (first_name > second_name && !second_name.empty())
               {
                   temp_preset = current_bank[i];
                   current_bank[i] = current_bank[i + 1];

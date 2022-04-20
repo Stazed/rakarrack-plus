@@ -336,7 +336,7 @@ CH_UB->font_resize(CH_UB->get_width(), CH_UB->get_height());} {}
   } {
     code {m_bank_menu.clear();} {}
   }
-  Function {sort_bank(int a_bank)} {open return_type void
+  Function {sort_bank(int a_bank)} {return_type void
   } {
     code {PresetBankStruct current_bank[62];
     m_process->copy_bank(current_bank, m_process->Bank_Vector[a_bank].Bank);
@@ -353,7 +353,7 @@ CH_UB->font_resize(CH_UB->get_width(), CH_UB->get_height());} {}
         {
             std::string first_name = current_bank[i].Preset_Name;
             std::string second_name = current_bank[i + 1].Preset_Name;
-            if (first_name > second_name)
+            if (first_name > second_name && !second_name.empty())
             {
                 temp_preset = current_bank[i];
                 current_bank[i] = current_bank[i + 1];
