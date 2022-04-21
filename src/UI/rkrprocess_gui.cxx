@@ -3562,9 +3562,19 @@ void RKRGUI::read_insert_presets(std::string location)
 
             if(!check_insert_duplicate(w, name))
             {
-                add_insert_preset_name(w, name);
+                if(!location.empty())
+                {
+                    // merge insert presets must be saved
+                    if(m_process->save_insert_preset(effect, name))
+                        add_insert_preset_name(w, name);
+                }
+                else
+                {
+                    // normal loading, no save, already in file
+                    add_insert_preset_name(w, name);
+                }
             }
-            else
+            else    // duplicate name, don't load or save
             {
                 std::string message = m_process->efx_names[Busca_Eff(effect)].Nom;
                 message += " ";
