@@ -4,5 +4,9 @@ Included are additional individual effect presets in the file:
 
 To use the InsertPresets.rkis, from the main window, File/Import Inserted Presets.
 Then use the file chooser to select the InsertPresets.rkis file.
-You must quit and restart. Then the new individual effect presets will
-be listed with a * from the effect Preset menu.
+The new individual effect presets will be listed with a * from the effect Preset menu.
+
+To use the CC_06_Extra_SFX.rkrb bank, copy to your user directory.
+If Rakarrack-plus is already running, press the "R" button from the bank window.
+Otherwise it will be loaded on program start.
+The bank can be selected in the User Banks menu from the bank window.
