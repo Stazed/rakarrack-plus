@@ -154,6 +154,8 @@ Dflange::cleanup()
     r = 0.0f;
     ldl = 0.0f;
     rdl = 0.0f;
+    zdr = 0.0f;
+    zdl = 0.0f;
     rflange0 = 0.0f;
     lflange0 = 0.0f;
     rflange1 = 0.0f;
@@ -164,6 +166,7 @@ Dflange::cleanup()
     oldlflange1 = 0.0f;
     kl = kr = zl = zr = 0;
     oldl = oldr = 0.0f;
+    rsA = rsB = lsA = lsB = 0.0f;
 }
 
 #ifdef LV2_SUPPORT
