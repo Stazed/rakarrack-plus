@@ -694,7 +694,7 @@ public:
   void add_insert_preset_name(Fl_Widget *w, std::string name);
   bool check_insert_duplicate(Fl_Widget *w, std::string name);
   Fl_Widget * find_effect_preset_widget(int effect);
-  void read_insert_presets();
+  void read_insert_presets(std::string location = "");
   inline void delete_insert_preset(Fl_Widget *w, int effect);
   void Prep_Reorden(int source, int dest);
   static void bank_click(Fl_Choice* o, void* v);

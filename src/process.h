@@ -732,7 +732,6 @@ public:
     void convert_reverb_file(std::string filename);
     int save_insert_preset(int num, std::string name);
     void delete_insert_preset(int num, std::string name);
-    bool merge_insert_presets(std::string filename);
     void save_MIDI_table (std::string filename);
     void load_MIDI_table (std::string filename);
     void load_MIDI_table_vector();

@@ -3513,8 +3513,12 @@ Fl_Widget * RKRGUI::find_effect_preset_widget(int effect)
 /**
  * Reads the insert presets file : "InsertPresets.rkis" in user directory
  * and adds them to the effect preset list.
+ * 
+ * @param location
+ *      The file location to read from. Only used when importing/merging from
+ *      another user file.
  */
-void RKRGUI::read_insert_presets()
+void RKRGUI::read_insert_presets(std::string location)
 {
     std::string insert_preset_location = "";
     
@@ -3533,6 +3537,10 @@ void RKRGUI::read_insert_presets()
         printf("No User Directory Set. Cannot load insert presets!\n");
         return;
     }
+    
+    // This would be from import/merge file. If empty we are loading from the user directory default
+    if(!location.empty())
+        insert_preset_location = location;
 
     // Read in user presets
     FILE *fn;

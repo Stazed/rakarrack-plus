@@ -365,7 +365,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {243 511 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {243 479 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -377,7 +377,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
         class RKR_Menu_Bar
       } {
         Submenu Archivo {
-          label {&File}
+          label {&File} open
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Import_Preset {
@@ -505,10 +505,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
 
     if (filename == NULL) return;
 
-    if(m_process->merge_insert_presets(filename))
-    {
-        Show_Next_Time();
-    }}
+    read_insert_presets(filename);}
             xywh {0 0 36 21} divider
           }
           MenuItem salir {
@@ -2062,7 +2059,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {find_effect_preset_widget(int effect)} {open return_type {Fl_Widget *}
   } {}
-  Function {read_insert_presets()} {open
+  Function {read_insert_presets(std::string location = "")} {open return_type void
   } {}
   Function {delete_insert_preset(Fl_Widget *w, int effect)} {open return_type {inline void}
   } {}

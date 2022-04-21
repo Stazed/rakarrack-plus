@@ -196,10 +196,7 @@ void RKRGUI::cb_ImportPresets_i(Fl_Menu_*, void*) {
 
     if (filename == NULL) return;
 
-    if(m_process->merge_insert_presets(filename))
-    {
-        Show_Next_Time();
-    };
+    read_insert_presets(filename);
 }
 void RKRGUI::cb_ImportPresets(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_ImportPresets_i(o,v);
