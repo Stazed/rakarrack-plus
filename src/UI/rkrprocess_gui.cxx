@@ -3404,10 +3404,17 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
     {
         name.resize (64);
     }
-
-    if(m_process->save_insert_preset(effect, name))
+    
+    if(!check_insert_duplicate(w, name))
     {
-        add_insert_preset_name(w, name);
+        if(m_process->save_insert_preset(effect, name))
+        {
+            add_insert_preset_name(w, name);
+        }
+    }
+    else
+    {
+        m_process->Handle_Message(50, name);
     }
 }
 
@@ -3423,7 +3430,7 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
 void RKRGUI::add_insert_preset_name(Fl_Widget *w, std::string name)
 {
     RKR_Choice *s = static_cast<RKR_Choice *> (w);
-    
+
     s->add(name.c_str ());
 
     Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (s->menu ());
@@ -3434,7 +3441,7 @@ void RKRGUI::add_insert_preset_name(Fl_Widget *w, std::string name)
     for (int i = 0; i < m->size(); i++)
     {
         p = m->next(i);
-        
+
         if (i == 0)
         {
             font_size = p->labelsize();
@@ -3443,6 +3450,31 @@ void RKRGUI::add_insert_preset_name(Fl_Widget *w, std::string name)
         p->labelsize(font_size);
         p->labelfont (global_font_type);
     }
+}
+
+bool RKRGUI::check_insert_duplicate(Fl_Widget *w, std::string name)
+{
+    RKR_Choice *s = static_cast<RKR_Choice *> (w);
+
+    Fl_Menu_Item *m0 = const_cast<Fl_Menu_Item*>  (s->menu ());
+    Fl_Menu_Item *p0;
+
+    bool is_duplicate = false;
+
+    for (int i = 0; i < m0->size(); i++)
+    {
+        p0 = m0->next(i);
+        
+        if(p0->label() != NULL)
+        {
+            if(strcmp(p0->label(), name.c_str ()) == 0)
+            {
+                is_duplicate = true;
+            }
+        }
+    }
+
+    return is_duplicate;
 }
 
 /**
@@ -3517,7 +3549,21 @@ void RKRGUI::read_insert_presets()
             sscanf(buf, "%d", &effect);
             name = strsep(&sbuf, ",");
             name = strsep(&sbuf, ",");
-            add_insert_preset_name(find_effect_preset_widget(effect), name);
+
+            Fl_Widget * w = find_effect_preset_widget(effect);
+
+            if(!check_insert_duplicate(w, name))
+            {
+                add_insert_preset_name(w, name);
+            }
+            else
+            {
+                std::string message = m_process->efx_names[Busca_Eff(effect)].Nom;
+                message += " ";
+                message += name;
+                
+                m_process->Handle_Message(50, message);
+            }
         }
 
         fclose(fn);

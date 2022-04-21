@@ -692,6 +692,7 @@ public:
   void PrepareML();
   inline void get_insert_preset_name(Fl_Widget *w, int effect);
   void add_insert_preset_name(Fl_Widget *w, std::string name);
+  bool check_insert_duplicate(Fl_Widget *w, std::string name);
   Fl_Widget * find_effect_preset_widget(int effect);
   void read_insert_presets();
   inline void delete_insert_preset(Fl_Widget *w, int effect);

@@ -280,6 +280,13 @@ RKR::Handle_Message(int num, std::string strMessage)
                     "You cannot have more than %d excluded effects\n"
                     "to generate the random preset\n", strMessage.c_str(), C_MAX_EXCLUDED);
         }
+            break;
+        case 50:
+        {
+            sprintf(error_msg, "Duplicate preset label: %s\n"
+                    "Please try another name for your preset.\n", strMessage.c_str());
+        }
+            break;
     }
 
     Message(message_type, meslabel, error_msg);
