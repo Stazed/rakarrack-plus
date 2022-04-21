@@ -78,6 +78,8 @@ WahWah::out(float * efxoutl, float * efxoutr)
         cleanup();
     }
 
+    bool have_nans = false;
+
     float lfol, lfor;   // initialize o.k.
     lfo->effectlfoout(&lfol, &lfor);
     lfol *= depth * 5.0f;
@@ -87,12 +89,18 @@ WahWah::out(float * efxoutl, float * efxoutr)
 
     for (uint32_t i = 0; i < PERIOD; i++)
     {
-        efxoutl[i] = efxoutl[i];
-        efxoutr[i] = efxoutr[i];
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
 
         float x = (fabsf(efxoutl[i]) + fabsf(efxoutr[i])) * 0.5f;
         ms1 = ms1 * (1.0f - ampsmooth) + x * ampsmooth + 1e-10f;
     }
+
+    if(have_nans)
+        cleanup();
 
     float ampsmooth2 = powf(ampsmooth, 0.2f) * 0.3f;
     ms2 = ms2 * (1.0f - ampsmooth2) + ms1 * ampsmooth2;
@@ -102,12 +110,6 @@ WahWah::out(float * efxoutl, float * efxoutr)
 
     float frl = filterl->getrealfreq(freq + lfol + rms);
     float frr = filterr->getrealfreq(freq + lfor + rms);
-    
-    if(isnan(frl))
-        frl = freq;
-
-    if(isnan(frr))
-        frr = freq;
 
     filterl->setfreq_and_q(frl, q);
     filterr->setfreq_and_q(frr, q);
