@@ -367,6 +367,8 @@ Reverbtron::clear_initialize()
 void
 Reverbtron::out(float * efxoutl, float * efxoutr)
 {
+    bool have_nans = false;
+
     int length = Llength;
     hlength = Pdiff;
 
@@ -380,6 +382,12 @@ Reverbtron::out(float * efxoutl, float * efxoutr)
 
     for (int i = 0; i < nPERIOD; i++)
     {
+        if(isnan(efxoutl[i]) || isnan(efxoutr[i]))
+        {
+            efxoutl[i] = efxoutr[i] = 0.0;
+            have_nans = true;
+        }
+        
         float l = 0.5f * (efxoutr[i] + efxoutl[i]);
         oldl = l * hidamp + oldl * (alpha_hidamp); //apply damping while I'm in the loop
         if (Prv)
@@ -469,6 +477,9 @@ Reverbtron::out(float * efxoutl, float * efxoutr)
 
         xindex = offset + roomsize;
     }
+    
+    if(have_nans)
+        convert_time();
 
     if (DS_state != 0)
     {
