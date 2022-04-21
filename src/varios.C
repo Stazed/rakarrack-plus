@@ -272,6 +272,7 @@ RKR::Handle_Message(int num, std::string strMessage)
             
             sprintf(error_msg, "Non-mixer does not support %s plugin type.\n"
                     "It will be ignored on export...\n", effect_name.c_str());
+            message_type = 0;
         }
             break;
         case 49:
@@ -285,6 +286,7 @@ RKR::Handle_Message(int num, std::string strMessage)
         {
             sprintf(error_msg, "Duplicate preset label: %s\n"
                     "Please try another name for your preset.\n", strMessage.c_str());
+            message_type = 0;
         }
             break;
     }
