@@ -3398,6 +3398,15 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
     
     std::string name = buf;
 
+    // check for commas in the name, since the file is comma delimited
+    std::size_t found = name.find_first_of(",");
+
+    if(found != std::string::npos)
+    {
+        m_process->Handle_Message(51, name);
+        return;
+    }
+
     name.insert (0, "*" );
 
     if(name.length () > 64)

@@ -289,6 +289,11 @@ RKR::Handle_Message(int num, std::string strMessage)
             message_type = 0;
         }
             break;
+        case 51:
+        {
+            sprintf(error_msg, "You cannot use commas in the preset name: %s\n", strMessage.c_str());
+        }
+            break;
     }
 
     Message(message_type, meslabel, error_msg);
