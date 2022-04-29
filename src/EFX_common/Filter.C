@@ -67,7 +67,10 @@ Filter::~Filter()
 void
 Filter::filterout(float * smp, uint32_t period)
 {
-    filter->filterout(smp, period);
+    if(filter)
+    {
+        filter->filterout(smp, period);
+    }
 }
 
 void

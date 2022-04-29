@@ -76,6 +76,7 @@ WahWah::out(float * efxoutl, float * efxoutr)
     {
         filterpars->changed = false;
         cleanup();
+        return;
     }
 
     bool have_nans = false;
@@ -100,7 +101,10 @@ WahWah::out(float * efxoutl, float * efxoutr)
     }
 
     if(have_nans)
+    {
         cleanup();
+        return;
+    }
 
     float ampsmooth2 = powf(ampsmooth, 0.2f) * 0.3f;
     ms2 = ms2 * (1.0f - ampsmooth2) + ms1 * ampsmooth2;
