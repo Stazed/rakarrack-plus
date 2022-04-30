@@ -3,10 +3,8 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
-@prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix atom:  <http://lv2plug.in/ns/ext/atom#> .
+@prefix urid:  <http://lv2plug.in/ns/ext/urid#> .
 @prefix lv2midi: <http://lv2plug.in/ns/ext/midi#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -27,6 +25,8 @@
         lv2:microVersion 0 ;
         rdfs:comment "An experimental monophonic midi converter." ;
         lv2:optionalFeature lv2:hardRTCapable ;
+        lv2:requiredFeature urid:map ;
+
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#midi_converter_ui> ;
 
         lv2:port [
@@ -59,7 +59,7 @@
                 lv2:symbol "MIDI_IN" ;
                 lv2:name "MIDI In" ;
                 atom:bufferType atom:Sequence ;
-                lv2:designation lv2:control ;
+                atom:supports lv2midi:MidiEvent ;
         ] ;        
         lv2:port [
                 a lv2:OutputPort, atom:AtomPort ;
