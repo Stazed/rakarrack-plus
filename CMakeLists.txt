@@ -97,6 +97,14 @@ if (EnableNSM)
     endif (LIBLO_FOUND)
 endif (EnableNSM)
 
+if (BuildCarlaPresets)
+    find_package(
+            Python3
+            REQUIRED
+            COMPONENTS Interpreter
+    )
+endif (BuildCarlaPresets)
+
 find_program(ACONNECT aconnect)
 if (ACONNECT)
     message (STATUS "Found aconnect in ${ACONNECT}")
