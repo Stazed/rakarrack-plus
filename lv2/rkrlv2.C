@@ -5469,7 +5469,7 @@ LV2_Handle init_midiclv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 
     getFeatures(plug,host_features);
 
-    if(!plug->scheduler || !plug->urid_map)
+    if(!plug->urid_map)
     {
     //a required feature was not supported by host
     	free(plug);

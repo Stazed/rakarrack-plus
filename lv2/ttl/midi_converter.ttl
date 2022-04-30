@@ -7,6 +7,7 @@
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
 @prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix atom:  <http://lv2plug.in/ns/ext/atom#> .
+@prefix urid:  <http://lv2plug.in/ns/ext/urid#> .
 @prefix lv2midi: <http://lv2plug.in/ns/ext/midi#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -26,6 +27,7 @@
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "An experimental monophonic midi converter." ;
+        lv2:requiredFeature urid:map ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#midi_converter_ui> ;
 
