@@ -30,6 +30,7 @@
 #include "../EFX_common/EffectLFO.h"
 
 #define OPTTREMLV2_URI "https://github.com/Stazed/rakarrack-plus#Otrem"
+#define OPTTREM_NAME "RakarrackPlus OpticalTrem"
 
 const int C_OPTICAL_PARAMETERS = 7;
 
@@ -42,6 +43,17 @@ enum Optical_Index
     Optical_LFO_Stereo,
     Optical_Pan,
     Optical_Invert
+};
+
+static const char *optical_parameters[] = 
+{
+    NTS(Optical_Depth).c_str(), "Depth",  "DEPTH", 
+    NTS(Optical_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Optical_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(Optical_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(Optical_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDF", 
+    NTS(Optical_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Optical_Invert).c_str(), "Invert",  "INV"
 };
 
 class Opticaltrem : public Effect
@@ -68,6 +80,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return OPTTREMLV2_URI; };
+    virtual std::string get_name() {return OPTTREM_NAME; };
     
 private:
     float cSAMPLE_RATE;

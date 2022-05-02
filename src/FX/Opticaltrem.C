@@ -146,18 +146,32 @@ Opticaltrem::LV2_parameters(std::string &s_buf, int type)
             case Optical_LFO_Stereo:
             case Optical_Invert:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), optical_parameters[i * 3 + 1], optical_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Optical_Invert )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Optical_Invert )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case Optical_Pan:
             {
-                s_buf += NTS( getpar( Optical_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Optical_Pan ) - 64, optical_parameters[i * 3 + 1], optical_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Optical_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }
