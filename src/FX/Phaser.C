@@ -235,7 +235,7 @@ Phaser::set_random_parameters()
 }
 
 void
-Phaser::LV2_parameters(std::string &s_buf)
+Phaser::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_PHASER_PARAMETERS; i++)
     {

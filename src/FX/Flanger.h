@@ -62,7 +62,7 @@ public:
     void setpreset (int npreset);
     int get_number_efx_parameters () {return C_FLANGER_PARAMETERS;};
 
-    virtual void LV2_parameters(std::string &s_buf);
+    virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return FLANGELV2_URI; };
 
 private:

@@ -202,7 +202,7 @@ Shifter::set_random_parameters()
 }
 
 void
-Shifter::LV2_parameters(std::string &s_buf)
+Shifter::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_SHIFTER_PARAMETERS; i++)
     {

@@ -156,7 +156,7 @@ Gate::set_random_parameters()
 }
 
 void
-Gate::LV2_parameters(std::string &s_buf)
+Gate::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_GATE_PARAMETERS; i++)
     {

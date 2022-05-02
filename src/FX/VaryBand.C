@@ -224,7 +224,7 @@ VaryBand::set_random_parameters()
 }
 
 void
-VaryBand::LV2_parameters(std::string &s_buf)
+VaryBand::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
     for(int i = 0; i < (C_VARYBAND_PARAMETERS + 3); i++)    // +3 for the 4 LV2 parameters added - 1 for legacy pcombi

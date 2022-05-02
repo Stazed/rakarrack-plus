@@ -116,7 +116,7 @@ Pan::set_random_parameters()
 }
 
 void
-Pan::LV2_parameters(std::string &s_buf)
+Pan::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_PAN_PARAMETERS; i++)
     {

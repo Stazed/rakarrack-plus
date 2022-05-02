@@ -111,7 +111,7 @@ Sustainer::set_random_parameters()
 }
 
 void
-Sustainer::LV2_parameters(std::string &s_buf)
+Sustainer::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_SUSTAIN_PARAMETERS; i++)
     {

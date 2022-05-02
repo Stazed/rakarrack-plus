@@ -317,7 +317,7 @@ Chorus::set_random_parameters()
 }
 
 void
-Chorus::LV2_parameters(std::string &s_buf)
+Chorus::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
     

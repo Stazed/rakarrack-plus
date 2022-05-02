@@ -275,7 +275,7 @@ Reverbtron::set_random_parameters()
 }
 
 void
-Reverbtron::LV2_parameters(std::string &s_buf)
+Reverbtron::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
     for(int i = 0; i < (C_REVTRON_PARAMETERS - 2); i++) // -2 Revtron_User_File, Revtron_Set_File

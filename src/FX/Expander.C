@@ -154,7 +154,7 @@ Expander::set_random_parameters()
 }
 
 void
-Expander::LV2_parameters(std::string &s_buf)
+Expander::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_EXPANDER_PARAMETERS; i++)
     {

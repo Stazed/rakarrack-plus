@@ -192,7 +192,7 @@ Distorsion::set_random_parameters()
 }
 
 void
-Distorsion::LV2_parameters(std::string &s_buf)
+Distorsion::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
 

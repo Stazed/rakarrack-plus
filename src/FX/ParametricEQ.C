@@ -85,7 +85,7 @@ ParametricEQ::set_random_parameters()
 }
 
 void
-ParametricEQ::LV2_parameters(std::string &s_buf)
+ParametricEQ::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = Parametric_Gain;
 

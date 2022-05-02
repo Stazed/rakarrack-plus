@@ -173,7 +173,7 @@ Ring::set_random_parameters()
 }
 
 void
-Ring::LV2_parameters(std::string &s_buf)
+Ring::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_RING_PARAMETERS; i++)
     {

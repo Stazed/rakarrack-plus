@@ -215,7 +215,7 @@ Cabinet::set_random_parameters()
 }
 
 void
-Cabinet::LV2_parameters(std::string &s_buf)
+Cabinet::LV2_parameters(std::string &s_buf, int type)
 {
     // The parameters for gain and preset are reversed for LV2
     s_buf += NTS( getpar( Cabinet_Gain ) - 64);

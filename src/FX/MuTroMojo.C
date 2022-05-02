@@ -308,7 +308,7 @@ MuTroMojo::set_random_parameters()
 }
 
 void
-MuTroMojo::LV2_parameters(std::string &s_buf)
+MuTroMojo::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
     for(int i = 0; i < (C_MUTRO_PARAMETERS + 1); i++)   // -1 for Mutro_Mode_Legacy, +2 for MuTro_AG_Mode, MuTro_Exp_Wah

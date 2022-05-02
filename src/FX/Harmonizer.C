@@ -201,7 +201,7 @@ Harmonizer::set_random_parameters()
 }
 
 void
-Harmonizer::LV2_parameters(std::string &s_buf)
+Harmonizer::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < (C_HARM_PARAMETERS - 1); i++)    // -1 for Harm_MIDI - since this is no MIDI
     {

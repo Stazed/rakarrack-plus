@@ -111,7 +111,7 @@ Exciter::set_random_parameters()
 }
 
 void
-Exciter::LV2_parameters(std::string &s_buf)
+Exciter::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_EXCITER_PARAMETERS; i++)
     {

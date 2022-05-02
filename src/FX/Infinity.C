@@ -369,7 +369,7 @@ Infinity::set_random_parameters()
 }
 
 void
-Infinity::LV2_parameters(std::string &s_buf)
+Infinity::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_INFINITY_PARAMETERS; i++)
     {

@@ -47,7 +47,7 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    virtual void LV2_parameters(std::string &s_buf);
+    virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return SUSTAINLV2_URI; };
     
     void out (float * efxoutl, float * efxoutr);

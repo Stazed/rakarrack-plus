@@ -168,7 +168,7 @@ Arpie::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-Arpie::LV2_parameters(std::string &s_buf)
+Arpie::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_ARPIE_PARAMETERS; i++)
     {

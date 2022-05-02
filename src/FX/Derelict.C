@@ -209,7 +209,7 @@ Derelict::set_random_parameters()
 }
 
 void
-Derelict::LV2_parameters(std::string &s_buf)
+Derelict::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_DERE_PARAMETERS; i++)
     {

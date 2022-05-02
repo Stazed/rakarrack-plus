@@ -192,7 +192,7 @@ StompBox::set_random_parameters()
 }
 
 void
-StompBox::LV2_parameters(std::string &s_buf)
+StompBox::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_STOMP_PARAMETERS; i++)
     {

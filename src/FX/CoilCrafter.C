@@ -187,7 +187,7 @@ CoilCrafter::set_random_parameters()
 }
 
 void
-CoilCrafter::LV2_parameters(std::string &s_buf)
+CoilCrafter::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
     

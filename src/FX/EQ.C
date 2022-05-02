@@ -205,7 +205,7 @@ EQ::set_random_parameters()
 }
 
 void
-EQ::LV2_parameters(std::string &s_buf)
+EQ::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 10;
     for(int i = 0; i < C_EQ_PARAMETERS; i++)

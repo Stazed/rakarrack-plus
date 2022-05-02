@@ -222,7 +222,7 @@ StereoHarm::set_random_parameters()
 }
 
 void
-StereoHarm::LV2_parameters(std::string &s_buf)
+StereoHarm::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
     for(int i = 0; i < (C_SHARM_PARAMETERS - 1); i++)   // -1 for no midi

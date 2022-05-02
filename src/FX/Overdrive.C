@@ -92,7 +92,7 @@ Overdrive::set_random_parameters()
 }
 
 void
-Overdrive::LV2_parameters(std::string &s_buf)
+Overdrive::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < (C_OVERDRIVE_PARAMETERS - 2); i++)   // -2 for Skipped param 11 and Suboctave
     {

@@ -198,7 +198,7 @@ Vibe::set_random_parameters()
 }
 
 void
-Vibe::LV2_parameters(std::string &s_buf)
+Vibe::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_VIBE_PARAMETERS; i++)
     {

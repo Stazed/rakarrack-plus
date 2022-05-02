@@ -224,7 +224,7 @@ Echotron::set_random_parameters()
 }
 
 void
-Echotron::LV2_parameters(std::string &s_buf)
+Echotron::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
     for(int i = 0; i < (C_ECHOTRON_PARAMETERS - 2); i++)    // -2 for skip user file and set file

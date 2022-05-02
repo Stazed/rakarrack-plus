@@ -226,7 +226,7 @@ Convolotron::set_random_parameters()
 }
 
 void
-Convolotron::LV2_parameters(std::string &s_buf)
+Convolotron::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
 

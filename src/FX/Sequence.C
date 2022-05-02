@@ -258,7 +258,7 @@ Sequence::set_random_parameters()
 }
 
 void
-Sequence::LV2_parameters(std::string &s_buf)
+Sequence::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_SEQUENCE_PARAMETERS; i++)
     {

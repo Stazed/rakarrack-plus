@@ -152,7 +152,7 @@ Echoverse::set_random_parameters()
 }
 
 void
-Echoverse::LV2_parameters(std::string &s_buf)
+Echoverse::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_ECHOVERSE_PARAMETERS; i++)
     {

@@ -219,7 +219,7 @@ CompBand::set_random_parameters()
 }
 
 void
-CompBand::LV2_parameters(std::string &s_buf)
+CompBand::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_COMPBAND_PARAMETERS; i++)
     {

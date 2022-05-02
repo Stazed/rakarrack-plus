@@ -214,7 +214,7 @@ WahWah::set_random_parameters()
 }
 
 void
-WahWah::LV2_parameters(std::string &s_buf)
+WahWah::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_WAHWAH_PARAMETERS; i++)
     {

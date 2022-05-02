@@ -236,7 +236,7 @@ Reverb::set_random_parameters()
 }
 
 void
-Reverb::LV2_parameters(std::string &s_buf)
+Reverb::LV2_parameters(std::string &s_buf, int type)
 {
     int param_case_offset = 0;
     for(int i = 0; i < (C_REVERB_PARAMETERS - 2); i++)  // -2 skips 5 & 6 unused

@@ -141,7 +141,7 @@ Echo::set_random_parameters()
 }
 
 void
-Echo::LV2_parameters(std::string &s_buf)
+Echo::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_ECHO_PARAMETERS; i++)
     {
