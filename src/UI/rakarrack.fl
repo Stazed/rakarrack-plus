@@ -365,7 +365,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {243 479 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {120 470 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1477,11 +1477,8 @@ Put_Loaded();}
     // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
     m_process->Shut_Off_Below_Mouse = 1;
 
-    switch ( fl_choice("Export type", "Cancel", "Rakarrack+", "Non-Mixer") )
+    switch ( fl_choice("Export type", "Non-Mixer", "Rakarrack+", "Carla") )
     {
-        case 0: return;
-            break;
-
         case 1:  // Default
         {
             char *filename;
@@ -1497,7 +1494,7 @@ Put_Loaded();}
         }
         break;
 
-        case 2:
+        case 0:
         {
             char *filename;
 
@@ -1510,6 +1507,22 @@ Put_Loaded();}
 \#undef EXT
 
             m_process->export_to_nsm_mixer(filename);
+        }
+        break;
+
+        case 2:
+        {
+            char *filename;
+
+\#define EXT ".carxp"
+            filename = fl_file_chooser("Export Carla:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            if (filename == NULL)
+                return;
+
+            filename = fl_filename_setext(filename,EXT);
+\#undef EXT
+
+            m_process->export_to_carla(filename);
         }
         break;
     }

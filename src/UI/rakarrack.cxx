@@ -704,11 +704,8 @@ void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
     // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
     m_process->Shut_Off_Below_Mouse = 1;
 
-    switch ( fl_choice("Export type", "Cancel", "Rakarrack+", "Non-Mixer") )
+    switch ( fl_choice("Export type", "Non-Mixer", "Rakarrack+", "Carla") )
     {
-        case 0: return;
-            break;
-
         case 1:  // Default
         {
             char *filename;
@@ -724,7 +721,7 @@ void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
         }
         break;
 
-        case 2:
+        case 0:
         {
             char *filename;
 
@@ -737,6 +734,22 @@ void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
 #undef EXT
 
             m_process->export_to_nsm_mixer(filename);
+        }
+        break;
+
+        case 2:
+        {
+            char *filename;
+
+#define EXT ".carxp"
+            filename = fl_file_chooser("Export Carla:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            if (filename == NULL)
+                return;
+
+            filename = fl_filename_setext(filename,EXT);
+#undef EXT
+
+            m_process->export_to_carla(filename);
         }
         break;
     }
