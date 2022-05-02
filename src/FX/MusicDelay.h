@@ -28,6 +28,7 @@
 #include "Effect.h"
 
 #define MDELLV2_URI "https://github.com/Stazed/rakarrack-plus#delm"
+#define MDEL_NAME "RakarrackPlus Musical Delay"
 
 const int C_MUSIC_PARAMETERS = 13;
 
@@ -48,6 +49,23 @@ enum Music_Index
     Music_Gain_2
 };
 
+static const char *mdel_parameters[] = 
+{
+    NTS(Music_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Music_Pan_1).c_str(), "Panning 1",  "PAN1", 
+    NTS(Music_Delay_1).c_str(), "Delay 1",  "DEL1", 
+    NTS(Music_Del_Offset).c_str(), "Delay Offset",  "OFFS", 
+    NTS(Music_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
+    NTS(Music_Feedback_1).c_str(), "Feedback 1",  "FB1", 
+    NTS(Music_Damp).c_str(), "Damping",  "DAMP", 
+    NTS(Music_Pan_2).c_str(), "Panning 2",  "PAN2", 
+    NTS(Music_Delay_2).c_str(), "Delay 2",  "DEL2", 
+    NTS(Music_Feedback_2).c_str(), "Feedback 2",  "FB2", 
+    NTS(Music_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Music_Gain_1).c_str(), "Gain 1",  "GAIN1", 
+    NTS(Music_Gain_2).c_str(), "Gain 2",  "GAIN2"
+};
+
 class MusicDelay : public Effect
 {
 public:
@@ -66,6 +84,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return MDELLV2_URI; };
+    virtual std::string get_name() {return MDEL_NAME; };
 
 private:
 
