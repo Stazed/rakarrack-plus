@@ -333,10 +333,17 @@ MuTroMojo::LV2_parameters(std::string &s_buf, int type)
             case MuTro_AG_Mode:
             case MuTro_Exp_Wah:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), mutro_parameters[i * 3 + 1], mutro_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  MuTro_Exp_Wah)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  MuTro_Exp_Wah)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
             
@@ -344,24 +351,45 @@ MuTroMojo::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case MuTro_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( MuTro_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( MuTro_DryWet )), mutro_parameters[i * 3 + 1], mutro_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( MuTro_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case MuTro_LFO_Stereo:
             {
-                s_buf += NTS( getpar( MuTro_LFO_Stereo ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( MuTro_LFO_Stereo ) - 64, mutro_parameters[i * 3 + 1], mutro_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( MuTro_LFO_Stereo ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
 
             // Skip after
             case MuTro_Mod_Res:
             {
-                s_buf += NTS( getpar( MuTro_Mod_Res ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( MuTro_Mod_Res ), mutro_parameters[i * 3 + 1], mutro_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( MuTro_Mod_Res ) );
+                    s_buf += ":";
+                }
 
                 param_case_offset += 1; // Skip: Mutro_Mode_Legacy
             }

@@ -33,6 +33,7 @@
 #include "../EFX_common/AnalogFilter.h"
 
 #define MUTROLV2_URI "https://github.com/Stazed/rakarrack-plus#MuTroMojo"
+#define MUTRO_NAME "RakarrackPlus MuTroMojo"
 
 /**
  * This is the amount for File saving and presets Rakarrack-plus.
@@ -66,6 +67,29 @@ enum MuTro_Index
 //#endif
 };
 
+static const char *mutro_parameters[] = 
+{
+    NTS(MuTro_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(MuTro_Resonance).c_str(), "Resonance",  "Q", 
+    NTS(MuTro_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(MuTro_LFO_Random).c_str(), "LFO Randomness",  "RND", 
+    NTS(MuTro_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(MuTro_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
+    NTS(MuTro_Depth).c_str(), "Depth",  "DEPTH", 
+    NTS(MuTro_Env_Sens).c_str(), "Envelope Sensitivity",  "SENSE", 
+    NTS(MuTro_Wah).c_str(), "Wah",  "WAH", 
+    NTS(MuTro_Env_Smooth).c_str(), "Envelope Smoothing",  "SMOOTH", 
+    NTS(MuTro_LowPass).c_str(), "Lowpass Level",  "LP", 
+    NTS(MuTro_BandPass).c_str(), "Bandpass Level",  "BP", 
+    NTS(MuTro_HighPass).c_str(), "Highpass Level",  "HP", 
+    NTS(MuTro_Stages).c_str(), "Filter Stages",  "STAGES", 
+    NTS(MuTro_Range).c_str(), "Sweep Range",  "RANGE", 
+    NTS(MuTro_St_Freq).c_str(), "Starting Frequency",  "MINFREQ", 
+    NTS(MuTro_Mod_Res).c_str(), "Modulate Resonance",  "VARIQ", 
+    NTS(MuTro_AG_Mode).c_str(), "Analog Gain Mode",  "QMODE", 
+    NTS(MuTro_Exp_Wah).c_str(), "Exponential Wah",  "AMODE"
+};
+
 class MuTroMojo : public Effect
 {
 public:
@@ -85,6 +109,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return MUTROLV2_URI; };
+    virtual std::string get_name() {return MUTRO_NAME; };
 
     void initialize();
     void clear_initialize();
