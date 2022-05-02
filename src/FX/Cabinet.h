@@ -26,6 +26,7 @@
 #include "EQ.h"
 
 #define CABLV2_URI "https://github.com/Stazed/rakarrack-plus#cabe"
+#define CAB_NAME "RakarrackPlus Cabinet"
 
 /* Used for Gain and Preset setting */
 const int C_CABINET_PARAMETERS = 2;
@@ -34,6 +35,12 @@ enum Cabinet_Index
 {
     Cabinet_Preset_Idx = 0,
     Cabinet_Gain
+};
+
+static const char *cab_parameters[] = 
+{
+    NTS(Cabinet_Preset_Idx).c_str(), "Preset",  "PRESET",
+    NTS(Cabinet_Gain).c_str(), "Gain",  "GAIN",
 };
 
 class Cabinet :public EQ
@@ -56,6 +63,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return CABLV2_URI; };
+    virtual std::string get_name() {return CAB_NAME; };
 
 };
 

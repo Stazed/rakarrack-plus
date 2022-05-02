@@ -218,8 +218,17 @@ void
 Cabinet::LV2_parameters(std::string &s_buf, int type)
 {
     // The parameters for gain and preset are reversed for LV2
-    s_buf += NTS( getpar( Cabinet_Gain ) - 64);
-    s_buf += ":";
+    if(type == CARLA)
+    {
+        Carla_LV2_port(s_buf, 1, getpar( Cabinet_Gain ) - 64, cab_parameters[Cabinet_Gain * 3 + 1], cab_parameters[Cabinet_Gain * 3 + 2]);
 
-    s_buf += NTS( getpar( Cabinet_Preset_Idx ));
+        Carla_LV2_port(s_buf, 2, getpar( Cabinet_Preset_Idx ), cab_parameters[Cabinet_Preset_Idx * 3 + 1], cab_parameters[Cabinet_Preset_Idx * 3 + 2]);
+    }
+    else
+    {
+        s_buf += NTS( getpar( Cabinet_Gain ) - 64);
+        s_buf += ":";
+
+        s_buf += NTS( getpar( Cabinet_Preset_Idx ));
+    }
 }
