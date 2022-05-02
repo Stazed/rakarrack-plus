@@ -167,10 +167,17 @@ Echoverse::LV2_parameters(std::string &s_buf, int type)
             case Echoverse_Subdivision:
             case Echoverse_Ext_Stereo:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), echoverse_parameters[i * 3 + 1], echoverse_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Echoverse_Ext_Stereo )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Echoverse_Ext_Stereo )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -178,8 +185,15 @@ Echoverse::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Echoverse_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Echoverse_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Echoverse_DryWet )), echoverse_parameters[i * 3 + 1], echoverse_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Echoverse_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -187,8 +201,15 @@ Echoverse::LV2_parameters(std::string &s_buf, int type)
             case Echoverse_Pan:
             case Echoverse_Angle:
             {
-                s_buf += NTS( getpar( i ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, echoverse_parameters[i * 3 + 1], echoverse_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }

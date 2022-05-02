@@ -33,6 +33,7 @@
 #include "../EFX_common/delayline.h"
 
 #define ECHOVERSELV2_URI "https://github.com/Stazed/rakarrack-plus#Echoverse"
+#define ECHOVERSE_NAME "RakarrackPlus Echoverse"
 
 const int C_ECHOVERSE_PARAMETERS = 10;
 
@@ -48,6 +49,20 @@ enum Echoverse_Index
     Echoverse_Reverse,
     Echoverse_Subdivision,
     Echoverse_Ext_Stereo
+};
+
+static const char *echoverse_parameters[] = 
+{
+    NTS(Echoverse_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Echoverse_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Echoverse_Tempo).c_str(), "Tempo",  "DELAY", 
+    NTS(Echoverse_LR_Delay).c_str(), "Left/Right Delay Offset",  "LR_DELAY", 
+    NTS(Echoverse_Angle).c_str(), "Angle",  "ANGLE", 
+    NTS(Echoverse_Feedback).c_str(), "Feedback",  "FEEDBACK", 
+    NTS(Echoverse_Damp).c_str(), "Damping",  "DAMP", 
+    NTS(Echoverse_Reverse).c_str(), "Reverse",  "REV", 
+    NTS(Echoverse_Subdivision).c_str(), "Subdivision",  "SUBD", 
+    NTS(Echoverse_Ext_Stereo).c_str(), "Extra Stereo",  "ES"
 };
 
 class Echoverse : public Effect
@@ -68,6 +83,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return ECHOVERSELV2_URI; };
+    virtual std::string get_name() {return ECHOVERSE_NAME; };
 
 private:
 
