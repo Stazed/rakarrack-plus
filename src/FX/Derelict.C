@@ -227,10 +227,17 @@ Derelict::LV2_parameters(std::string &s_buf, int type)
             case Dere_Prefilter:
             case Dere_Suboctave:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), dere_parameters[i * 3 + 1], dere_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Dere_Suboctave )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Dere_Suboctave )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
             
@@ -238,16 +245,30 @@ Derelict::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Dere_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Dere_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Dere_DryWet )), dere_parameters[i * 3 + 1], dere_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Dere_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
             
             // Offset
             case Dere_Pan:
             {
-                s_buf += NTS( getpar( Dere_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Dere_Pan ) - 64, dere_parameters[i * 3 + 1], dere_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Dere_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }

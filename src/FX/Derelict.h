@@ -36,6 +36,7 @@
 #include "../EFX_common/Filter.h"
 
 #define DERELV2_URI "https://github.com/Stazed/rakarrack-plus#dere"
+#define DERE_NAME "RakarrackPlus Derelict"
 
 const int C_DERE_PARAMETERS = 12;
 
@@ -54,6 +55,23 @@ enum Dere_Index
     Dere_Prefilter,
     Dere_Suboctave
 };
+
+static const char *dere_parameters[] = 
+{
+    NTS(Dere_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Dere_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Dere_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
+    NTS(Dere_Drive).c_str(), "Drive",  "DRIVE", 
+    NTS(Dere_Level).c_str(), "Level",  "LEVEL", 
+    NTS(Dere_Type).c_str(), "Type",  "TYPE", 
+    NTS(Dere_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
+    NTS(Dere_LPF).c_str(), "Lowpass Filter",  "LPF", 
+    NTS(Dere_HPF).c_str(), "Highpass Filter",  "HPF", 
+    NTS(Dere_Color).c_str(), "Color",  "COLOR", 
+    NTS(Dere_Prefilter).c_str(), "Prefilter",  "PREFILTER", 
+    NTS(Dere_Suboctave).c_str(), "Suboctave",  "OCT"
+};
+
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)
 // void waveshapesmps (int n, float * smps, int type,
 // 		    int drive);
@@ -76,6 +94,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return DERELV2_URI; };
+    virtual std::string get_name() {return DERE_NAME; };
     
     void initialize();
     void clear_initialize();
