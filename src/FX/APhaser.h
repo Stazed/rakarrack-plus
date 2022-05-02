@@ -52,7 +52,7 @@ enum APhaser_Index
     APhase_Hyper
 };
 
-static const char *parameters[] = 
+static const char *aphase_parameters[] = 
 {
     NTS(APhase_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
     NTS(APhase_Distortion).c_str(), "Distort",  "DISTORT", 

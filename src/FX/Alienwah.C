@@ -229,10 +229,17 @@ Alienwah::LV2_parameters(std::string &s_buf, int type)
             case Alien_LR_Cross:
             case Alien_Phase:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), alien_parameters[i * 3 + 1], alien_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Alien_Phase )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Alien_Phase )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
             
@@ -240,16 +247,30 @@ Alienwah::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Alien_DryWet: 
             {
-                s_buf += NTS( Dry_Wet(getpar( Alien_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( i )), alien_parameters[i * 3 + 1], alien_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Alien_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
             
             // Offset
             case Alien_Pan:
             {
-                s_buf += NTS( getpar( Alien_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, alien_parameters[i * 3 + 1], alien_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Alien_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }

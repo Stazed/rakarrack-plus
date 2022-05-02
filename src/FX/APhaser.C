@@ -373,7 +373,7 @@ Analog_Phaser::LV2_parameters(std::string &s_buf, int type)
             {
                 if(type == CARLA)
                 {
-                    Carla_LV2_port(s_buf, i + 1, getpar( i ), parameters[i * 3 + 1], parameters[i * 3 + 2]);
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), aphase_parameters[i * 3 + 1], aphase_parameters[i * 3 + 2]);
                 }
                 else
                 {
@@ -391,7 +391,7 @@ Analog_Phaser::LV2_parameters(std::string &s_buf, int type)
             {
                 if(type == CARLA)
                 {
-                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( APhase_DryWet )), parameters[i * 3 + 1], parameters[i * 3 + 2]);
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( i )), aphase_parameters[i * 3 + 1], aphase_parameters[i * 3 + 2]);
                 }
                 else
                 {
@@ -406,7 +406,7 @@ Analog_Phaser::LV2_parameters(std::string &s_buf, int type)
             {
                 if(type == CARLA)
                 {
-                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, parameters[i * 3 + 1], parameters[i * 3 + 2]);
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, aphase_parameters[i * 3 + 1], aphase_parameters[i * 3 + 2]);
                 }
                 else
                 {

@@ -30,6 +30,7 @@
 #include "../EFX_common/EffectLFO.h"
 
 #define ALIENLV2_URI "https://github.com/Stazed/rakarrack-plus#awha"
+#define ALIEN_NAME "RakarrackPlus AlienWah"
 
 const int C_ALIENWAH_PARAMETERS = 11;
 
@@ -46,6 +47,21 @@ enum AlienWah_Index
     Alien_Delay,
     Alien_LR_Cross,
     Alien_Phase
+};
+
+static const char *alien_parameters[] = 
+{
+    NTS(Alien_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Alien_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Alien_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Alien_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(Alien_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(Alien_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
+    NTS(Alien_Depth).c_str(), "Depth",  "DEPTH", 
+    NTS(Alien_Feedback).c_str(), "Feedback",  "FB", 
+    NTS(Alien_Delay).c_str(), "Delay",  "DELAY", 
+    NTS(Alien_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
+    NTS(Alien_Phase).c_str(), "Phase",  "PHASE"
 };
 
 struct COMPLEXTYPE
@@ -76,6 +92,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return ALIENLV2_URI; };
+    virtual std::string get_name() {return ALIEN_NAME; };
 
 private:
     
