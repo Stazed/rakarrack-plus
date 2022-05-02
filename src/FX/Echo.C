@@ -156,10 +156,17 @@ Echo::LV2_parameters(std::string &s_buf, int type)
             case Echo_Reverse:
             case Echo_Direct:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), echo_parameters[i * 3 + 1], echo_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Echo_Direct )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Echo_Direct )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -167,16 +174,30 @@ Echo::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Echo_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Echo_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Echo_DryWet )), echo_parameters[i * 3 + 1], echo_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Echo_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case Echo_Pan:
             {
-                s_buf += NTS( getpar( Echo_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Echo_Pan ) - 64, echo_parameters[i * 3 + 1], echo_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Echo_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
         }
     }

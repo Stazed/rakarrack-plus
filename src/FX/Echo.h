@@ -31,6 +31,7 @@
 #include "../EFX_common/delayline.h"
 
 #define ECHOLV2_URI "https://github.com/Stazed/rakarrack-plus#eco"
+#define ECHO_NAME "RakarrackPlus Echo"
 
 const int C_ECHO_PARAMETERS = 9;
 
@@ -45,6 +46,19 @@ enum Echo_Index
     Echo_Damp,
     Echo_Reverse,
     Echo_Direct
+};
+
+static const char *echo_parameters[] = 
+{
+    NTS(Echo_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Echo_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Echo_Delay).c_str(), "Delay",  "DELAY", 
+    NTS(Echo_LR_Delay).c_str(), "Left/Right Delay Offset",  "LR_DELAY", 
+    NTS(Echo_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
+    NTS(Echo_Feedback).c_str(), "Feedback",  "FEEDBACK", 
+    NTS(Echo_Damp).c_str(), "Damping",  "DAMP", 
+    NTS(Echo_Reverse).c_str(), "Reverse",  "REV", 
+    NTS(Echo_Direct).c_str(), "Direct",  "DIRECT"
 };
 
 class Echo : public Effect
@@ -65,6 +79,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return ECHOLV2_URI; };
+    virtual std::string get_name() {return ECHO_NAME; };
 
     void Tempo2Delay(int delay);
 
