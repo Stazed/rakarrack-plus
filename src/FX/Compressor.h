@@ -31,6 +31,7 @@
 #include "Effect.h"
 
 #define COMPLV2_URI "https://github.com/Stazed/rakarrack-plus#comp"
+#define COMP_NAME "RakarrackPlus Compressor"
 
 const int C_COMPRESS_PARAMETERS = 9;
 
@@ -45,6 +46,19 @@ enum Compress_Index
     Compress_Knee,
     Compress_Stereo,
     Compress_Peak
+};
+
+static const char *comp_parameters[] = 
+{
+    NTS(Compress_Threshold).c_str(), "Threshold",  "THRESHOLD", 
+    NTS(Compress_Ratio).c_str(), "Ratio",  "RATIO", 
+    NTS(Compress_Output).c_str(), "Output Gain",  "OUTPUT", 
+    NTS(Compress_Attack).c_str(), "Attack Time",  "ATTACK", 
+    NTS(Compress_Release).c_str(), "Release Time",  "RELEASE", 
+    NTS(Compress_Auto_Out).c_str(), "Auto Output",  "AUTOOUT", 
+    NTS(Compress_Knee).c_str(), "Knee",  "KNEE", 
+    NTS(Compress_Stereo).c_str(), "Stereo",  "STEREO", 
+    NTS(Compress_Peak).c_str(), "Peak",  "PEAK"
 };
 
 class Compressor : public Effect
@@ -71,6 +85,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return COMPLV2_URI; };
+    virtual std::string get_name() {return COMP_NAME; };
     
     // Compressor
 

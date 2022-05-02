@@ -198,10 +198,17 @@ Compressor::LV2_parameters(std::string &s_buf, int type)
             case Compress_Stereo:
             case Compress_Peak:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), comp_parameters[i * 3 + 1], comp_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Compress_Peak)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Compress_Peak)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
         }
