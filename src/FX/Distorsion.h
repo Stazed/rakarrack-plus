@@ -31,6 +31,7 @@
 #include "../EFX_common/Waveshaper.h"
 
 #define DISTLV2_URI "https://github.com/Stazed/rakarrack-plus#dist"
+#define DIST_NAME "RakarrackPlus Distorsion"
 
 const int C_DIST_PARAMETERS = 13;
 
@@ -51,6 +52,22 @@ enum Dist_Index
     Dist_Suboctave
 };
 
+static const char *dist_parameters[] = 
+{
+    NTS(Dist_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Dist_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Dist_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
+    NTS(Dist_Drive).c_str(), "Drive",  "DRIVE", 
+    NTS(Dist_Level).c_str(), "Level",  "LEVEL", 
+    NTS(Dist_Type).c_str(), "Type",  "TYPE", 
+    NTS(Dist_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
+    NTS(Dist_LPF).c_str(), "Lowpass Filter",  "LPF", 
+    NTS(Dist_HPF).c_str(), "Highpass Filter",  "HPF", 
+    NTS(Dist_Stereo).c_str(), "Stereo",  "STEREO", 
+    NTS(Dist_Prefilter).c_str(), "Prefilter",  "PREFILTER", 
+    NTS(Dist_Suboctave).c_str(), "Suboctave",  "OCT"
+};
+
 class Distorsion :public Effect
 {
 public:
@@ -69,6 +86,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return DISTLV2_URI; };
+    virtual std::string get_name() {return DIST_NAME; };
     
     void applyfilters (float * efxoutl, float * efxoutr);
     void initialize ();

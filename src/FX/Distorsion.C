@@ -211,10 +211,17 @@ Distorsion::LV2_parameters(std::string &s_buf, int type)
             case Dist_Stereo:
             case Dist_Suboctave:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), dist_parameters[i * 3 + 1], dist_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Dist_Suboctave)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  Dist_Suboctave)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -222,24 +229,45 @@ Distorsion::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Dist_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Dist_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Dist_DryWet )), dist_parameters[i * 3 + 1], dist_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Dist_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case Dist_Pan:
             {
-                s_buf += NTS( getpar( Dist_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Dist_Pan ) - 64, dist_parameters[i * 3 + 1], dist_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Dist_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
 
             // Skip 1 parameter after this
             case Dist_Prefilter:
             {
-                s_buf += NTS( getpar( Dist_Prefilter ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Dist_Prefilter ), dist_parameters[i * 3 + 1], dist_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Dist_Prefilter ) );
+                    s_buf += ":";
+                }
 
                 // increment for skipped Dist_SKIP_11
                 param_case_offset++;
