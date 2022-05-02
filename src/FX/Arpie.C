@@ -185,10 +185,17 @@ Arpie::LV2_parameters(std::string &s_buf, int type)
             case Arpie_Pattern:
             case Arpie_Subdivision:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), arpie_parameters[i * 3 + 1], arpie_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Arpie_Subdivision )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Arpie_Subdivision )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
             
@@ -196,16 +203,30 @@ Arpie::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Arpie_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Arpie_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( i )), arpie_parameters[i * 3 + 1], arpie_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Arpie_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
             
             // Offset
             case Arpie_Pan:
             {
-                s_buf += NTS( getpar( Arpie_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, arpie_parameters[i * 3 + 1], arpie_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Arpie_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }

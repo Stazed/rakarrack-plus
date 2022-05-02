@@ -29,6 +29,7 @@
 #include "../global.h"
 
 #define ARPIELV2_URI "https://github.com/Stazed/rakarrack-plus#Arpie"
+#define ARPIE_NAME "RakarrackPlus Arpie"
 
 const int C_ARPIE_PARAMETERS = 11;
 
@@ -45,6 +46,21 @@ enum Arpie_Index
     Arpie_Harm,
     Arpie_Pattern,
     Arpie_Subdivision
+};
+
+static const char *arpie_parameters[] = 
+{
+    NTS(Arpie_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Arpie_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Arpie_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Arpie_LR_Delay).c_str(), "Left/Right Delay Offset",  "LR_DELAY", 
+    NTS(Arpie_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
+    NTS(Arpie_Feedback).c_str(), "Feedback",  "FEEDBACK", 
+    NTS(Arpie_Damp).c_str(), "Damping",  "DAMP", 
+    NTS(Arpie_ArpeWD).c_str(), "Arpe's Wet/Dry",  "ARP", 
+    NTS(Arpie_Harm).c_str(), "Harmonics",  "HARM", 
+    NTS(Arpie_Pattern).c_str(), "Pattern",  "PATTERN", 
+    NTS(Arpie_Subdivision).c_str(), "Subdivision",  "SUBD"
 };
 
 class Arpie : public Effect
@@ -65,6 +81,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return ARPIELV2_URI; };
+    virtual std::string get_name() {return ARPIE_NAME; };
     
 private:
     
