@@ -35,6 +35,7 @@
 #include "../EFX_common/Waveshaper.h"
 
 #define DISTBANDLV2_URI "https://github.com/Stazed/rakarrack-plus#DistBand"
+#define DISTBAND_NAME "RakarrackPlus DistBand"
 
 const int C_DBAND_PARAMETERS = 15;
 
@@ -57,6 +58,25 @@ enum DistBand_Index
     DistBand_Stereo
 };
 
+static const char *distband_parameters[] = 
+{
+    NTS(DistBand_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(DistBand_Pan).c_str(), "Panning",  "PAN", 
+    NTS(DistBand_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
+    NTS(DistBand_Drive).c_str(), "Drive",  "DRIVE", 
+    NTS(DistBand_Level).c_str(), "Level",  "LEVEL", 
+    NTS(DistBand_Type_Low).c_str(), "Low Band Type",  "TYPEL", 
+    NTS(DistBand_Type_Mid).c_str(), "Mid Band Type",  "TYPEM", 
+    NTS(DistBand_Type_Hi).c_str(), "High Band Type",  "TYPEH", 
+    NTS(DistBand_Gain_Low).c_str(), "Low Gain",  "LVOL", 
+    NTS(DistBand_Gain_Mid).c_str(), "Mid Gain",  "MVOL", 
+    NTS(DistBand_Gain_Hi).c_str(), "High Gain",  "HVOL", 
+    NTS(DistBand_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
+    NTS(DistBand_Cross_1).c_str(), "Low/Mid Crossover",  "LMCR", 
+    NTS(DistBand_Cross_2).c_str(), "Mid/High Crossover",  "MHCR", 
+    NTS(DistBand_Stereo).c_str(), "Stereo",  "STEREO"
+};
+
 class DistBand : public Effect
 {
 public:
@@ -75,6 +95,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return DISTBANDLV2_URI; };
+    virtual std::string get_name() {return DISTBAND_NAME; };
     
     void initialize ();
     void clear_initialize();
