@@ -29,6 +29,7 @@
 #include "../EFX_common/AnalogFilter.h"
 
 #define EQLV2_URI "https://github.com/Stazed/rakarrack-plus#eql"
+#define EQ_NAME "RakarrackPlus EQ"
 
 const int C_EQ_PARAMETERS = 12;
 
@@ -48,6 +49,23 @@ enum EQ_Index
     EQ_Gain,    // 10
     EQ_Q        // 11
 };
+
+static const char *eq_parameters[] = 
+{
+    NTS(EQ_Gain).c_str(), "Gain",  "GAIN", 
+    NTS(EQ_Q).c_str(), "Q",  "Q", 
+    NTS(EQ_31_HZ).c_str(), "31 Hz",  "HZ31", 
+    NTS(EQ_63_HZ).c_str(), "63 Hz",  "HZ63", 
+    NTS(EQ_125_HZ).c_str(), "125 Hz",  "HZ125", 
+    NTS(EQ_250_HZ).c_str(), "250 Hz",  "HZ250", 
+    NTS(EQ_500_HZ).c_str(), "500 Hz",  "HZ500", 
+    NTS(EQ_1_KHZ).c_str(), "1 kHz",  "KHZ1", 
+    NTS(EQ_2_KHZ).c_str(), "2 kHz",  "KHZ2", 
+    NTS(EQ_4_KHZ).c_str(), "4 kHz",  "KHZ4", 
+    NTS(EQ_8_KHZ).c_str(), "8 kHz",  "KHZ8", 
+    NTS(EQ_16_KHZ).c_str(), "16 kHz",  "KHZ16", 
+};
+
 #if 0
 enum EQ_Index
 {
@@ -90,6 +108,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return EQLV2_URI; };
+    virtual std::string get_name() {return EQ_NAME; };
     
     void init_filters();
     virtual void initialize();

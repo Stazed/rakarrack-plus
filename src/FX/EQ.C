@@ -214,16 +214,32 @@ EQ::LV2_parameters(std::string &s_buf, int type)
         {
             case EQ_Gain:   // 0
             {
-                s_buf += NTS( getpar(EQ_Gain) - 64 );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, 1, getpar( EQ_Gain ) - 64, eq_parameters[0 * 3 + 1], eq_parameters[0 * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar(EQ_Gain) - 64 );
+                    s_buf += ":";
+                }
+                
                 param_case_offset = EQ_Q; // set for EQ_Q
             }
             break;
 
             case EQ_Q:      // 1
             {
-                s_buf += NTS( getpar(EQ_Q) - 64 );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, 2, getpar( EQ_Q ) - 64, eq_parameters[1 * 3 + 1], eq_parameters[1 * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar(EQ_Q) - 64 );
+                    s_buf += ":";
+                }
+    
                 param_case_offset = EQ_31_HZ;   // set for EQ_31_HZ
             }
             break;
@@ -239,10 +255,17 @@ EQ::LV2_parameters(std::string &s_buf, int type)
             case EQ_8_KHZ:
             case EQ_16_KHZ: // 9
             {
-                s_buf += NTS( getpar(param_case_offset) - 64 );
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, param_case_offset + 2, getpar( param_case_offset ) - 64, eq_parameters[(param_case_offset + 2) * 3 + 1], eq_parameters[(param_case_offset + 2) * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar(param_case_offset) - 64 );
 
-                if ( param_case_offset !=  EQ_16_KHZ)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  EQ_16_KHZ)   // last one no need for delimiter
+                        s_buf += ":";
+                }
 
                 param_case_offset++;     // next parameter
             }
