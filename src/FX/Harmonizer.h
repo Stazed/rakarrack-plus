@@ -34,6 +34,7 @@
 
 #define HARMLV2_URI "https://github.com/Stazed/rakarrack-plus#har"
 #define HARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#har_no_mid"
+#define HARM_NAME "RakarrackPlus Harmonizer (no midi)"
 
 const int C_HARM_PARAMETERS = 11;
 
@@ -50,6 +51,21 @@ enum Harm_Index
     Harm_Filter_Gain,
     Harm_Filter_Q,
     Harm_MIDI
+};
+
+static const char *harm_parameters[] = 
+{
+    NTS(Harm_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Harm_Pan).c_str(), "Pan",  "PAN", 
+    NTS(Harm_Gain).c_str(), "Gain",  "GAIN", 
+    NTS(Harm_Interval).c_str(), "Interval",  "INT", 
+    NTS(Harm_Filter_Freq).c_str(), "Filter Frequency",  "FREQ", 
+    NTS(Harm_Select).c_str(), "Select Chord Mode",  "SELECT", 
+    NTS(Harm_Note).c_str(), "Note",  "NOTE", 
+    NTS(Harm_Chord).c_str(), "Chord",  "CHORD", 
+    NTS(Harm_Filter_Gain).c_str(), "Filter Gain",  "FGAIN", 
+    NTS(Harm_Filter_Q).c_str(), "Filter Q",  "FQ", 
+    NTS(Harm_MIDI).c_str(), "MIDI Mode",  "MIDI"
 };
 
 class Harmonizer :public Effect
@@ -71,6 +87,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return HARMNOMIDLV2_URI; };
+    virtual std::string get_name() {return HARM_NAME; };
     
     void initialize();
     void clear_initialize();

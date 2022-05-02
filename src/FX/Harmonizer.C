@@ -213,8 +213,15 @@ Harmonizer::LV2_parameters(std::string &s_buf, int type)
             case Harm_Note:
             case Harm_Chord:
             {
-                s_buf += NTS( getpar( i ));
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), harm_parameters[i * 3 + 1], harm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -222,8 +229,15 @@ Harmonizer::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Harm_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Harm_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Harm_DryWet )), harm_parameters[i * 3 + 1], harm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Harm_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -233,18 +247,32 @@ Harmonizer::LV2_parameters(std::string &s_buf, int type)
             case Harm_Filter_Gain:
             case Harm_Filter_Q:
             {
-                s_buf += NTS( getpar( i ) - 64);
-                
-                if ( i !=  Harm_Filter_Q)   // last one no need for delimiter
-                    s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, harm_parameters[i * 3 + 1], harm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ) - 64);
+
+                    if ( i !=  Harm_Filter_Q)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
             // Offset 12
             case Harm_Interval:
             {
-                s_buf += NTS( getpar( i ) - 12);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 12, harm_parameters[i * 3 + 1], harm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ) - 12);
+                    s_buf += ":";
+                }
             }
             break;
         }
