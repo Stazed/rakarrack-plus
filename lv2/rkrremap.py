@@ -257,8 +257,8 @@ def remap(efxindex, paramindex):
          (11, 11) : (-1,) ,
 
          (12, -1) : ('RakarrackPlus Cabinet', 'https://github.com/Stazed/rakarrack-plus#cabe') ,
-         (12, 0) : (1, 'Preset', 'PRESET', 0) ,
-         (12, 1) : (2, 'Gain', 'GAIN', -64) ,
+         (12, 0) : (2, 'Preset', 'PRESET', 0) ,
+         (12, 1) : (1, 'Gain', 'GAIN', -64) ,
          (12, 2) : (-1,) ,
 
          (13, -1) : ('RakarrackPlus Pan', 'https://github.com/Stazed/rakarrack-plus#pan') ,
