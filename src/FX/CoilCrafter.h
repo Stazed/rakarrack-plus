@@ -28,6 +28,7 @@
 #include "../EFX_common/AnalogFilter.h"
 
 #define COILLV2_URI "https://github.com/Stazed/rakarrack-plus#CoilCrafter"
+#define COIL_NAME "RakarrackPlus Coil Crafter"
 
 const int C_COIL_PARAMETERS = 9;
 
@@ -42,6 +43,17 @@ enum Coil_Index
     Coil_Q_2,
     Coil_Tone,
     Coil_NeckMode
+};
+
+static const char *coil_parameters[] = 
+{
+    NTS(Coil_Gain).c_str(), "Gain",  "GAIN", 
+    NTS(Coil_Freq_1).c_str(), "Origin Pickup Frequency",  "F1", 
+    NTS(Coil_Q_1).c_str(), "Origin Pickup Resonance",  "Q1", 
+    NTS(Coil_Freq_2).c_str(), "Destination Pickup Frequency",  "F2", 
+    NTS(Coil_Q_2).c_str(), "Destination Pickup Resonance",  "Q2", 
+    NTS(Coil_Tone).c_str(), "Tone",  "TONE", 
+    NTS(Coil_NeckMode).c_str(), "Neck Pickup",  "MODE"
 };
 
 class CoilCrafter : public Effect
@@ -64,6 +76,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return COILLV2_URI; };
+    virtual std::string get_name() {return COIL_NAME; };
 
 private:
 

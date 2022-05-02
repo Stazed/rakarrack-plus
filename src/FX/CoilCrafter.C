@@ -203,18 +203,32 @@ CoilCrafter::LV2_parameters(std::string &s_buf, int type)
             case Coil_Tone:
             case Coil_NeckMode:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), coil_parameters[i * 3 + 1], coil_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Coil_NeckMode )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  Coil_NeckMode )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
             
             //  Coil_Origin, Coil_Destiny, are skipped after gain
             case Coil_Gain:
             {
-                s_buf += NTS( getpar( Coil_Gain ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Coil_Gain ), coil_parameters[i * 3 + 1], coil_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Coil_Gain ) );
+                    s_buf += ":";
+                }
 
                 // skip Coil_Origin, Coil_Destiny
                 param_case_offset += 2;
