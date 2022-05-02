@@ -252,10 +252,17 @@ Phaser::LV2_parameters(std::string &s_buf, int type)
             case Phaser_Subtract:
             case Phaser_Phase:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), phase_parameters[i * 3 + 1], phase_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Phaser_Phase )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Phaser_Phase )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -263,8 +270,15 @@ Phaser::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Phaser_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Phaser_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Phaser_DryWet )), phase_parameters[i * 3 + 1], phase_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Phaser_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -272,8 +286,15 @@ Phaser::LV2_parameters(std::string &s_buf, int type)
             case Phaser_Pan:
             case Phaser_LR_Cross:
             {
-                s_buf += NTS( getpar( i ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, phase_parameters[i * 3 + 1], phase_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }

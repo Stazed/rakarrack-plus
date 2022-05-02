@@ -29,6 +29,7 @@
 #include "../EFX_common/EffectLFO.h"
 
 #define PHASELV2_URI "https://github.com/Stazed/rakarrack-plus#phas"
+#define PHASE_NAME "RakarrackPlus Phaser"
 
 const int C_PHASER_PARAMETERS = 12;
 
@@ -46,6 +47,22 @@ enum Phaser_Index
     Phaser_LR_Cross,
     Phaser_Subtract,
     Phaser_Phase
+};
+
+static const char *phase_parameters[] = 
+{
+    NTS(Phaser_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Phaser_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Phaser_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Phaser_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(Phaser_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(Phaser_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
+    NTS(Phaser_Depth).c_str(), "Phase Depth",  "DEPTH", 
+    NTS(Phaser_Feedback).c_str(), "Feedback",  "FB", 
+    NTS(Phaser_Stages).c_str(), "Stages",  "STAGES", 
+    NTS(Phaser_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
+    NTS(Phaser_Subtract).c_str(), "Subtract",  "SUB", 
+    NTS(Phaser_Phase).c_str(), "Phase",  "PHASE"
 };
 
 class Phaser : public Effect
@@ -66,6 +83,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return PHASELV2_URI; };
+    virtual std::string get_name() {return PHASE_NAME; };
 
 private:
     void setvolume (int _Pvolume);
