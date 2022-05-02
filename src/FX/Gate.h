@@ -34,6 +34,7 @@
 #include "../EFX_common/AnalogFilter.h"
 
 #define GATELV2_URI "https://github.com/Stazed/rakarrack-plus#gate"
+#define GATE_NAME "RakarrackPlus NoiseGate"
 
 const int C_GATE_PARAMETERS = 7;
 
@@ -46,6 +47,17 @@ enum Gate_Index
     Gate_LPF,
     Gate_HPF,
     Gate_Hold
+};
+
+static const char *gate_parameters[] = 
+{
+    NTS(Gate_Threshold).c_str(), "Threshold",  "THRESHOLD", 
+    NTS(Gate_Range).c_str(), "Range",  "RANGE", 
+    NTS(Gate_Attack).c_str(), "Attack Time",  "ATTACK", 
+    NTS(Gate_Release).c_str(), "Release Time",  "RELEASE", 
+    NTS(Gate_LPF).c_str(), "Lowpass Filter",  "LPF", 
+    NTS(Gate_HPF).c_str(), "Highpass Filter",  "HPF", 
+    NTS(Gate_Hold).c_str(), "Hold",  "HOLD"
 };
 
 class Gate : public Effect
@@ -71,6 +83,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return GATELV2_URI; };
+    virtual std::string get_name() {return GATE_NAME; };
     
     void initialize();
     void clear_initialize();
