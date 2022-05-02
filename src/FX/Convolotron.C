@@ -240,10 +240,17 @@ Convolotron::LV2_parameters(std::string &s_buf, int type)
             case Convo_Damp:
             case Convo_Feedback:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), convo_parameters[i * 3 + 1], convo_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Convo_Feedback )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  Convo_Feedback )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -251,16 +258,30 @@ Convolotron::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Convo_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Convo_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Convo_DryWet )), convo_parameters[i * 3 + 1], convo_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Convo_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
             
             // Offset
             case Convo_Pan:
             {
-                s_buf += NTS( getpar( Convo_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Convo_Pan ) - 64, convo_parameters[i * 3 + 1], convo_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Convo_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
             
@@ -268,8 +289,15 @@ Convolotron::LV2_parameters(std::string &s_buf, int type)
             case Convo_Length:
             case Convo_Level:
             {
-                s_buf += NTS( getpar( param_case_offset ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), convo_parameters[i * 3 + 1], convo_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ) );
+                    s_buf += ":";
+                }
 
                 // increment for two skipped parameters
                 param_case_offset += 2;
@@ -279,8 +307,23 @@ Convolotron::LV2_parameters(std::string &s_buf, int type)
         param_case_offset++;
     }
 
-    s_buf += "\" :filename \"";
-    s_buf += Filename;
+    if(type == CARLA)
+    {
+        s_buf += "   <CustomData>\n";
+        s_buf += "    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n";
+        s_buf += "    <Key>https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile</Key>\n";
+        s_buf += "    <Value>";
+        s_buf += DATADIR;
+        s_buf += "/";
+        s_buf += convo_files[Filenum];
+        s_buf += "</Value>\n";
+        s_buf += "   </CustomData>\n";
+    }
+    else
+    {
+        s_buf += "\" :filename \"";
+        s_buf += Filename;
+    }
 }
 
 void

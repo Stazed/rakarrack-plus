@@ -31,6 +31,7 @@
 #include "../EFX_common/mayer_fft.h"
 
 #define CONVOLOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Convolotron"
+#define CONVOLOTRON_NAME "RakarrackPlus Convolotron"
 
 const int C_CONVO_PARAMETERS = 11;
 
@@ -47,6 +48,30 @@ enum Convo_Index
     Convo_Set_File,
     Convo_SKIP_9,
     Convo_Feedback
+};
+
+static const char *convo_parameters[] = 
+{
+    NTS(Convo_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Convo_Pan).c_str(), "Pan",  "PAN", 
+    NTS(Convo_Safe).c_str(), "Safe",  "SAFE", 
+    NTS(Convo_Length).c_str(), "Length",  "LENGTH", 
+    NTS(Convo_Damp).c_str(), "Dampening",  "DAMP", 
+    NTS(Convo_Level).c_str(), "Level",  "LEVEL", 
+    NTS(Convo_Feedback).c_str(), "Feedback",  "FB"
+};
+
+static const char *convo_files[] =
+{
+    "Marshall_JCM200.wav" ,
+    "Fender_Superchamp.wav" ,
+    "Mesa_Boogie.wav" ,
+    "Mesa_Boogie-2.wav" ,
+    "Marshall_Plexi.wav" ,
+    "Bassman.wav" ,
+    "JCM2000.wav" ,
+    "Ampeg.wav" ,
+    "Marshall-2.wav" 
 };
 
 class Convolotron :public Effect
@@ -67,6 +92,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return CONVOLOTRONLV2_URI; };
+    virtual std::string get_name() {return CONVOLOTRON_NAME; };
     
     void initialize();
     void clear_initialize();
