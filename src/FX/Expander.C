@@ -169,10 +169,17 @@ Expander::LV2_parameters(std::string &s_buf, int type)
             case Expander_HPF:
             case Expander_Gain:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), expand_parameters[i * 3 + 1], expand_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Expander_Gain)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Expander_Gain)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
         }
