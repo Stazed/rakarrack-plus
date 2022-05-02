@@ -35,6 +35,7 @@
 #include "../EFX_common/AnalogFilter.h"
 
 #define MBCOMPLV2_URI "https://github.com/Stazed/rakarrack-plus#CompBand"
+#define MBCOMP_NAME "RakarrackPlus CompBand"
 
 const int C_COMPBAND_PARAMETERS = 13;
 
@@ -55,6 +56,23 @@ enum CompBand_Index
     CompBand_Gain
 };
 
+static const char *compband_parameters[] = 
+{
+    NTS(CompBand_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(CompBand_Low_Ratio).c_str(), "Low Band Ratio",  "LR", 
+    NTS(CompBand_Mid_1_Ratio).c_str(), "Mid Band 1 Ratio",  "M1R", 
+    NTS(CompBand_Mid_2_Ratio).c_str(), "Mid Band 2 Ratio",  "M2R", 
+    NTS(CompBand_High_Ratio).c_str(), "High Band Ratio",  "HR", 
+    NTS(CompBand_Low_Thresh).c_str(), "Low Band Threshold",  "LT", 
+    NTS(CompBand_Mid_1_Thresh).c_str(), "Mid Band 1 Threshold",  "M1T", 
+    NTS(CompBand_Mid_2_Thresh).c_str(), "Mid Band 2 Threshold",  "M2T", 
+    NTS(CompBand_High_Thresh).c_str(), "High Threshold",  "HT", 
+    NTS(CompBand_Cross_1).c_str(), "Low/Mid1 Crossover",  "LMCR", 
+    NTS(CompBand_Cross_2).c_str(), "Mid1/Mid2 Crossover",  "MMCR", 
+    NTS(CompBand_Cross_3).c_str(), "Mid2/High Crossover",  "MHCR", 
+    NTS(CompBand_Gain).c_str(), "Gain",  "GAIN"
+};
+
 class CompBand : public Effect
 {
 public:
@@ -73,6 +91,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return MBCOMPLV2_URI; };
+    virtual std::string get_name() {return MBCOMP_NAME; };
     
     void initialize();
     void clear_initialize();
