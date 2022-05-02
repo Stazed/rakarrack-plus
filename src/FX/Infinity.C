@@ -394,10 +394,17 @@ Infinity::LV2_parameters(std::string &s_buf, int type)
             case Infinity_Reverse:
             case Infinity_Stages:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), inf_parameters[i * 3 + 1], inf_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Infinity_Stages )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Infinity_Stages )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -405,8 +412,15 @@ Infinity::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Infinity_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Infinity_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Infinity_DryWet )), inf_parameters[i * 3 + 1], inf_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Infinity_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
         }
