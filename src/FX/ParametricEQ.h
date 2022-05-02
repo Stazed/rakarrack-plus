@@ -26,6 +26,7 @@
 #include "EQ.h"
 
 #define EQPLV2_URI "https://github.com/Stazed/rakarrack-plus#eqp"
+#define EQP_NAME "RakarrackPlus Parametric EQ"
 
 const int C_PARAMETRIC_EQ_PARAMETERS = 10;
 
@@ -43,6 +44,19 @@ enum ParametricEQ_Index
     Parametric_Gain         // 9
 };
 
+static const char *eqp_parameters[] = 
+{
+    NTS(Parametric_Gain).c_str(), "Gain",  "GAIN", 
+    NTS(Parametric_Low_Freq).c_str(), "Low Frequency",  "LFREQ", 
+    NTS(Parametric_Low_Gain).c_str(), "Low Gain",  "LGAIN", 
+    NTS(Parametric_Low_Q).c_str(), "Low Width",  "LQ", 
+    NTS(Parametric_Mid_Freq).c_str(), "Mid Frequency",  "MFREQ", 
+    NTS(Parametric_Mid_Gain).c_str(), "Mid Gain",  "MGAIN", 
+    NTS(Parametric_Mid_Q).c_str(), "Mid Width",  "MQ", 
+    NTS(Parametric_High_Freq).c_str(), "High Frequency",  "HFREQ", 
+    NTS(Parametric_High_Gain).c_str(), "High Gain",  "HGAIN", 
+    NTS(Parametric_High_Q).c_str(), "High Width",  "HQ"
+};
 
 class ParametricEQ :public EQ
 {
@@ -58,6 +72,7 @@ public:
 
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return EQPLV2_URI; };
+    virtual std::string get_name() {return EQP_NAME; };
 
 private:
 

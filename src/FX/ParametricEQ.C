@@ -95,8 +95,15 @@ ParametricEQ::LV2_parameters(std::string &s_buf, int type)
         {
             case Parametric_Gain:
             {
-                s_buf += NTS( getpar( Parametric_Gain ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, 1, getpar( Parametric_Gain ) - 64, eqp_parameters[0 * 3 + 1], eqp_parameters[0 * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Parametric_Gain ) - 64);
+                    s_buf += ":";
+                }
 
                 // the subsequent parameters start at 0, we add one on break
                 param_case_offset = -1;
@@ -107,8 +114,15 @@ ParametricEQ::LV2_parameters(std::string &s_buf, int type)
             case Parametric_Mid_Freq:
             case Parametric_High_Freq:
             {
-                s_buf += NTS( getpar( param_case_offset ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), eqp_parameters[i * 3 + 1], eqp_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ) );
+                    s_buf += ":";
+                }
             }
             break;
                 
@@ -119,10 +133,17 @@ ParametricEQ::LV2_parameters(std::string &s_buf, int type)
             case Parametric_High_Gain:
             case Parametric_High_Q:
             {
-                s_buf += NTS( getpar( param_case_offset ) - 64);
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ) - 64, eqp_parameters[i * 3 + 1], eqp_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ) - 64);
 
-                if ( param_case_offset !=  Parametric_High_Q)   // last one no need for delimiter
-                s_buf += ":";
+                    if ( param_case_offset !=  Parametric_High_Q)   // last one no need for delimiter
+                    s_buf += ":";
+                }
             }
             break;
         }
