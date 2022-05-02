@@ -336,10 +336,17 @@ Chorus::LV2_parameters(std::string &s_buf, int type)
             case Chorus_Subtract:
             case Chorus_Intense:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), chorus_parameters[i * 3 + 1], chorus_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Chorus_Intense )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  Chorus_Intense )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
             
@@ -347,24 +354,45 @@ Chorus::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Chorus_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Chorus_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Chorus_DryWet )), chorus_parameters[i * 3 + 1], chorus_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Chorus_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
             
             // Offset
             case Chorus_Pan:
             {
-                s_buf += NTS( getpar( Chorus_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Chorus_Pan ) - 64, chorus_parameters[i * 3 + 1], chorus_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Chorus_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
             
             // Skip after this one
             case Chorus_LR_Cross:
             {
-                s_buf += NTS( getpar( Chorus_LR_Cross ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Chorus_LR_Cross ), chorus_parameters[i * 3 + 1], chorus_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Chorus_LR_Cross ) );
+                    s_buf += ":";
+                }
 
                 // increment for skipped parameter
                 param_case_offset++;

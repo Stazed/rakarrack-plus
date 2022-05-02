@@ -29,6 +29,7 @@
 #include "Effect.h"
 
 #define CHORUSLV2_URI "https://github.com/Stazed/rakarrack-plus#chor"
+#define CHORUS_NAME "RakarrackPlus Chorus"
 
 const int C_CHORUS_PARAMETERS = 13;
 
@@ -47,6 +48,22 @@ enum Chorus_Index
     Chorus_SKIP_Flange_10,
     Chorus_Subtract,
     Chorus_Intense
+};
+
+static const char *chorus_parameters[] = 
+{
+    NTS(Chorus_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Chorus_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Chorus_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Chorus_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(Chorus_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(Chorus_LFO_Stereo).c_str(), "LFO L/R Delay",  "WIDTH", 
+    NTS(Chorus_Depth).c_str(), "Depth",  "DEPTH", 
+    NTS(Chorus_Delay).c_str(), "Delay",  "DELAY", 
+    NTS(Chorus_Feedback).c_str(), "Feedback",  "FB", 
+    NTS(Chorus_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
+    NTS(Chorus_Subtract).c_str(), "Subtract",  "SUB", 
+    NTS(Chorus_Intense).c_str(), "Intense",  "INTENSE"
 };
 
 class Chorus :public Effect
@@ -68,6 +85,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return CHORUSLV2_URI; };
+    virtual std::string get_name() {return CHORUS_NAME; };
 
     float fSAMPLE_RATE;
     uint32_t PERIOD;
