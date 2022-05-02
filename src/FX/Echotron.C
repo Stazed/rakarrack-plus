@@ -332,7 +332,7 @@ Echotron::LV2_parameters(std::string &s_buf, int type)
         s_buf += "    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n";
         s_buf += "    <Key>https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile</Key>\n";
         s_buf += "    <Value>";
-        s_buf += DATADIR;
+        s_buf += DATADIR;   // FIXME this is not the same as LV2 DATADIR
         s_buf += "/";
         s_buf += echotron_files[Filenum];
         s_buf += "</Value>\n";
