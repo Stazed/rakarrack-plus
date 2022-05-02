@@ -35,6 +35,7 @@
 #include "Distorsion.h"
 
 #define OVERDRIVELV2_URI "https://github.com/Stazed/rakarrack-plus#Overdrive"
+#define OVERDRIVE_NAME "RakarrackPlus Overdrive"
 
 const int C_OVERDRIVE_PARAMETERS = 13;
 
@@ -55,6 +56,21 @@ enum Overdrive_Index
     Overdrive_Suboctave
 };
 
+static const char *overdrive_parameters[] = 
+{
+    NTS(Overdrive_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Overdrive_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Overdrive_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
+    NTS(Overdrive_Drive).c_str(), "Drive",  "DRIVE", 
+    NTS(Overdrive_Level).c_str(), "Level",  "LEVEL", 
+    NTS(Overdrive_Type).c_str(), "Type",  "TYPE", 
+    NTS(Overdrive_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
+    NTS(Overdrive_LPF).c_str(), "Lowpass Filter",  "LPF", 
+    NTS(Overdrive_HPF).c_str(), "Highpass Filter",  "HPF", 
+    NTS(Overdrive_Stereo).c_str(), "Stereo",  "STEREO", 
+    NTS(Overdrive_Prefilter).c_str(), "Prefilter",  "PREFILTER"
+};
+
 class Overdrive: public Distorsion
 {
 public:
@@ -66,6 +82,7 @@ public:
     
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return OVERDRIVELV2_URI; };
+    virtual std::string get_name() {return OVERDRIVE_NAME; };
 
 };
 

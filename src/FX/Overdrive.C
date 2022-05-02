@@ -109,10 +109,17 @@ Overdrive::LV2_parameters(std::string &s_buf, int type)
             case Overdrive_Stereo:
             case Overdrive_Prefilter:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), overdrive_parameters[i * 3 + 1], overdrive_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i != Overdrive_Prefilter ) // last one
-                    s_buf += ":";
+                    if ( i != Overdrive_Prefilter ) // last one
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -120,16 +127,30 @@ Overdrive::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Overdrive_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Overdrive_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Overdrive_DryWet )), overdrive_parameters[i * 3 + 1], overdrive_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Overdrive_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case Overdrive_Pan:
             {
-                s_buf += NTS( getpar( Overdrive_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Overdrive_Pan ) - 64, overdrive_parameters[i * 3 + 1], overdrive_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Overdrive_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }
