@@ -279,10 +279,17 @@ Dflange::LV2_parameters(std::string &s_buf, int type)
             case DFlange_LFO_Random:
             case DFlange_Intense:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), dflange_parameters[i * 3 + 1], dflange_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  DFlange_Intense)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  DFlange_Intense)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
             
@@ -290,8 +297,15 @@ Dflange::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case DFlange_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( DFlange_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( DFlange_DryWet )), dflange_parameters[i * 3 + 1], dflange_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( DFlange_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
         }
