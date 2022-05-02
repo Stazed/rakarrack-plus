@@ -35,6 +35,7 @@
 #include "Chorus.h"
 
 #define FLANGELV2_URI "https://github.com/Stazed/rakarrack-plus#Flange"
+#define FLANGE_NAME "RakarrackPlus Flanger"
 
 const int C_FLANGER_PARAMETERS = 13;
 
@@ -55,6 +56,22 @@ enum Flanger_Index
     Flanger_Intense
 };
 
+static const char *flange_parameters[] = 
+{
+    NTS(Flanger_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Flanger_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Flanger_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Flanger_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(Flanger_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(Flanger_LFO_Stereo).c_str(), "LFO L/R Delay",  "WIDTH", 
+    NTS(Flanger_Depth).c_str(), "Depth",  "DEPTH", 
+    NTS(Flanger_Delay).c_str(), "Delay",  "DELAY", 
+    NTS(Flanger_Feedback).c_str(), "Feedback",  "FB", 
+    NTS(Flanger_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
+    NTS(Flanger_Subtract).c_str(), "Subtract",  "SUB", 
+    NTS(Flanger_Intense).c_str(), "Intense",  "INTENSE"
+};
+
 class Flanger :public Chorus
 {
 public:
@@ -64,6 +81,7 @@ public:
 
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return FLANGELV2_URI; };
+    virtual std::string get_name() {return FLANGE_NAME; };
 
 private:
 

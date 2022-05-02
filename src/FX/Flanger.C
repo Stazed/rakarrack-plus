@@ -92,10 +92,17 @@ Flanger::LV2_parameters(std::string &s_buf, int type)
             case Flanger_Subtract:
             case Flanger_Intense:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), flange_parameters[i * 3 + 1], flange_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Flanger_Intense )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  Flanger_Intense )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
             
@@ -103,24 +110,45 @@ Flanger::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Flanger_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Flanger_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Flanger_DryWet )), flange_parameters[i * 3 + 1], flange_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Flanger_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
             
             // Offset
             case Flanger_Pan:
             {
-                s_buf += NTS( getpar( Flanger_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Flanger_Pan ) - 64, flange_parameters[i * 3 + 1], flange_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Flanger_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
             
             // Skip after this one
             case Flanger_LR_Cross:
             {
-                s_buf += NTS( getpar( Flanger_LR_Cross ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Flanger_LR_Cross ), flange_parameters[i * 3 + 1], flange_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Flanger_LR_Cross ) );
+                    s_buf += ":";
+                }
 
                 // increment for skipped parameter
                 param_case_offset++;
