@@ -26,6 +26,7 @@
 #include "../EFX_common/HarmonicEnhancer.h"
 
 #define EXCITERLV2_URI "https://github.com/Stazed/rakarrack-plus#Exciter"
+#define EXCITER_NAME "RakarrackPlus Exciter"
 
 const int C_EXCITER_PARAMETERS = 13;
 
@@ -44,6 +45,23 @@ enum Exciter_index
     Exciter_Harm_10,
     Exciter_LPF,
     Exciter_HPF
+};
+
+static const char *exciter_parameters[] = 
+{
+    NTS(Exciter_Gain).c_str(), "Gain",  "GAIN", 
+    NTS(Exciter_Harm_1).c_str(), "1st Harmonic",  "HAR1", 
+    NTS(Exciter_Harm_2).c_str(), "2nd Harmonic",  "HAR2", 
+    NTS(Exciter_Harm_3).c_str(), "3rd Harmonic",  "HAR3", 
+    NTS(Exciter_Harm_4).c_str(), "4th Harmonic",  "HAR4", 
+    NTS(Exciter_Harm_5).c_str(), "5th Harmonic",  "HAR5", 
+    NTS(Exciter_Harm_6).c_str(), "6th Harmonic",  "HAR6", 
+    NTS(Exciter_Harm_7).c_str(), "7th Harmonic",  "HAR7", 
+    NTS(Exciter_Harm_8).c_str(), "8th Harmonic",  "HAR8", 
+    NTS(Exciter_Harm_9).c_str(), "9th Harmonic",  "HAR9", 
+    NTS(Exciter_Harm_10).c_str(), "10th Harmonic",  "HAR10", 
+    NTS(Exciter_LPF).c_str(), "Low-Pass Filter Cutoff",  "LPF", 
+    NTS(Exciter_HPF).c_str(), "High-Pass Filter Cutoff",  "HPF"
 };
 
 class Exciter : public Effect
@@ -66,6 +84,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return EXCITERLV2_URI; };
+    virtual std::string get_name() {return EXCITER_NAME; };
 
 private:
 

@@ -132,10 +132,17 @@ Exciter::LV2_parameters(std::string &s_buf, int type)
             case Exciter_LPF:
             case Exciter_HPF:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), exciter_parameters[i * 3 + 1], exciter_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Exciter_HPF )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Exciter_HPF )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
         }
