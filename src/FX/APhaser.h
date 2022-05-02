@@ -31,6 +31,7 @@
 #include "../EFX_common/EffectLFO.h"
 
 #define APHASELV2_URI "https://github.com/Stazed/rakarrack-plus#aphas"
+#define APHASE_NAME "RakarrackPlus Analog Phaser"
 
 const int C_APHASER_PARAMETERS = 13;
 
@@ -51,6 +52,23 @@ enum APhaser_Index
     APhase_Hyper
 };
 
+static const char *parameters[] = 
+{
+    NTS(APhase_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(APhase_Distortion).c_str(), "Distort",  "DISTORT", 
+    NTS(APhase_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(APhase_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(APhase_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(APhase_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
+    NTS(APhase_Width).c_str(), "Width",  "WIDTH", 
+    NTS(APhase_Feedback).c_str(), "Feedback",  "FB", 
+    NTS(APhase_Stages).c_str(), "Stages",  "STAGES", 
+    NTS(APhase_Mismatch).c_str(), "Mismatch",  "MISMATCH", 
+    NTS(APhase_Subtract).c_str(), "Subtract",  "SUB", 
+    NTS(APhase_Depth).c_str(), "Phase Depth",  "DEPTH", 
+    NTS(APhase_Hyper).c_str(), "Hyper",  "HYPER"
+};
+
 class Analog_Phaser : public Effect
 {
 public:
@@ -67,8 +85,9 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
-    virtual void LV2_parameters(std::string &s_buf);
+    virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return APHASELV2_URI; };
+    virtual std::string get_name() {return APHASE_NAME; };
 
 private:
     float fPERIOD;

@@ -352,7 +352,7 @@ Analog_Phaser::lv2_update_params(uint32_t period)
 #endif // LV2
 
 void
-Analog_Phaser::LV2_parameters(std::string &s_buf)
+Analog_Phaser::LV2_parameters(std::string &s_buf, int type)
 {
     for(int i = 0; i < C_APHASER_PARAMETERS; i++)
     {
@@ -371,10 +371,17 @@ Analog_Phaser::LV2_parameters(std::string &s_buf)
             case APhase_Depth:
             case APhase_Hyper:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), parameters[i * 3 + 1], parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  APhase_Hyper)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  APhase_Hyper)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -382,16 +389,30 @@ Analog_Phaser::LV2_parameters(std::string &s_buf)
             // wet/dry -> dry/wet reversal
             case APhase_DryWet: 
             {
-                s_buf += NTS( Dry_Wet(getpar( APhase_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( APhase_DryWet )), parameters[i * 3 + 1], parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( APhase_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case APhase_Feedback:
             {
-                s_buf += NTS( getpar( APhase_Feedback ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, parameters[i * 3 + 1], parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( APhase_Feedback ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }

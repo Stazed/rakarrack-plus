@@ -29,6 +29,12 @@ struct User_Files
     std::string User_File_Name_Clean;   // File name w/o path
 };
 
+enum
+{
+    NON_MIXER = 0,
+    CARLA
+};
+
 class Effect
 {
 public:
@@ -60,7 +66,7 @@ public:
     virtual void out (float *, float *) = 0;
     virtual void cleanup () = 0;
     virtual int get_number_efx_parameters () = 0;
-    virtual void set_random_parameters() {};    // TODO FIXME
+    virtual void set_random_parameters() {};
     
     virtual void Dry_Wet_Mix(int efx_index, float volume,
         float *efxoutl, float *efxoutr, float *smpl, float *smpr);
@@ -72,8 +78,10 @@ public:
 #ifdef LV2_SUPPORT
     virtual void lv2_update_params(uint32_t)  = 0;
 #endif // LV2
-    virtual void LV2_parameters(std::string &) {};
+    virtual void LV2_parameters(std::string &, int type = NON_MIXER) {};
     virtual std::string get_URI() { return ""; };
+    virtual std::string get_name() { return ""; };
+    void Carla_LV2_port(std::string &, int index, int value, std::string name, std::string symbol);
 
     uint32_t period_master;
     float outvolume;

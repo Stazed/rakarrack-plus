@@ -385,6 +385,102 @@ RKR::export_to_nsm_mixer(std::string filename)
     fclose(fn);
 }
 
+void 
+RKR::export_to_carla(std::string filename)
+{
+    FILE *fn;
+
+    std::string s_buf;
+
+    fn = fopen(filename.c_str(), "w");
+
+    if (errno == EACCES)
+    {
+        Handle_Message(3);
+        fclose(fn);
+        return;
+    }
+
+    // Update active preset for any user changes
+    refresh_active_preset();
+
+    // Copy active preset for file operations
+    PresetBankStruct Save_Preset = Active_Preset;
+
+    // .carxp header items
+    s_buf = "<?xml version='1.0' encoding='UTF-8'?>\n";
+    s_buf += "<!DOCTYPE CARLA-PROJECT>\n";
+    s_buf += "<CARLA-PROJECT VERSION='2.0'>\n";
+    s_buf += "<!-- converted by a Rakarrack-plus script -->\n\n";
+
+    fputs(s_buf.c_str(), fn);
+
+    // Effect parameters
+    for (int order = 0; order < C_NUMBER_ORDERED_EFFECTS; order++)
+    {
+        int effect = Save_Preset.Effect_Params[EFX_ORDER][order];
+
+        if ( !EFX_Active[effect] )  // ignore inactive effects
+            continue;
+
+        // Not supported by Carla
+        if(effect == EFX_VOCODER)
+        {
+            Handle_Message(48, NTS(effect));
+            continue;
+        }
+
+        s_buf.clear();
+
+        // Effect Header
+        s_buf = "\n";
+        s_buf += " <!-- ";
+        s_buf += Rack_Effects[effect]->get_name();
+        s_buf += " -->\n";
+        s_buf += " <Plugin>\n";
+        s_buf += "  <Info>\n";
+        s_buf += "   <Type>LV2</Type>\n";
+        s_buf += "   <Name>";
+        s_buf += Rack_Effects[effect]->get_name();
+        s_buf += "</Name>\n";
+        s_buf += "   <URI>";
+        s_buf +=  Rack_Effects[effect]->get_URI();
+        s_buf +=  "</URI>\n";
+        s_buf += "  </Info>\n";
+        s_buf += "\n";
+        s_buf += "  <Data>\n";
+        s_buf += "   <Active>Yes</Active>\n";
+        s_buf += "   <ControlChannel>1</ControlChannel>\n";
+        s_buf += "   <Options>0x0</Options>\n";
+        s_buf += "\n";
+
+        // Effect Bypass - always on
+        s_buf += "   <Parameter>\n";
+        s_buf += "    <Index>0</Index>\n";
+        s_buf += "    <Name>Bypass</Name>\n";
+        s_buf += "    <Symbol>BYPASS</Symbol>\n";
+        s_buf += "    <Value>0</Value>\n";
+        s_buf += "   </Parameter>\n";
+        s_buf += "\n";
+
+        // Add the individual effects parameters
+        Rack_Effects[effect]->LV2_parameters(s_buf, CARLA);
+
+        // Effect footer
+        s_buf += "  </Data>\n";
+        s_buf += " </Plugin>\n";
+
+        fputs(s_buf.c_str(), fn);
+    }
+    // End effect modules & parameters
+
+    // Footer
+    s_buf = "</CARLA-PROJECT>";
+    fputs(s_buf.c_str(), fn);
+    
+    fclose(fn);
+}
+
 /**
  * This parses the preset files *.rkr types, from the menu File/Load Preset
  * and the Load button from the main window.
