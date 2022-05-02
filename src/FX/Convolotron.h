@@ -63,14 +63,14 @@ static const char *convo_parameters[] =
 
 static const char *convo_files[] =
 {
-    "Marshall_JCM200.wav" ,
-    "Fender_Superchamp.wav" ,
-    "Mesa_Boogie.wav" ,
-    "Mesa_Boogie-2.wav" ,
-    "Marshall_Plexi.wav" ,
-    "Bassman.wav" ,
-    "JCM2000.wav" ,
-    "Ampeg.wav" ,
+    "Marshall_JCM200.wav",
+    "Fender_Superchamp.wav",
+    "Mesa_Boogie.wav",
+    "Mesa_Boogie-2.wav",
+    "Marshall_Plexi.wav",
+    "Bassman.wav",
+    "JCM2000.wav",
+    "Ampeg.wav",
     "Marshall-2.wav" 
 };
 

@@ -32,6 +32,7 @@
 #include "../EFX_common/RBFilter.h"
 
 #define ECHOTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Echotron"
+#define ECHOTRON_NAME "RakarrackPlus Echotron"
 
 #define  ECHOTRON_F_SIZE   128       //Allow up to 150 points in the file
 #define  ECHOTRON_MAXFILTERS  32      //filters available
@@ -56,6 +57,40 @@ enum Echotron_Index
     Echotron_Mod_Filter,
     Echotron_LFO_Type,
     Echotron_Filters
+};
+
+static const char *echotron_parameters[] = 
+{
+    NTS(Echotron_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Echotron_Depth).c_str(), "Filter Depth",  "DEPTH", 
+    NTS(Echotron_LFO_Width).c_str(), "LFO Width",  "WIDTH", 
+    NTS(Echotron_Taps).c_str(), "Number of Taps",  "LENGTH", 
+    NTS(Echotron_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Echotron_Damp).c_str(), "Dampening",  "DAMP", 
+    NTS(Echotron_LR_Cross).c_str(), "Left/Right Crossover",  "LRC", 
+    NTS(Echotron_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDF", 
+    NTS(Echotron_Feedback).c_str(), "Feedback",  "FB", 
+    NTS(Echotron_Pan).c_str(), "Pan",  "PAN", 
+    NTS(Echotron_Mod_Delay).c_str(), "Modulate Delays",  "MD", 
+    NTS(Echotron_Mod_Filter).c_str(), "Modulate Filters",  "MF", 
+    NTS(Echotron_LFO_Type).c_str(), "LFO Type",  "LFOTYPE", 
+    NTS(Echotron_Filters).c_str(), "Activate Filters",  "AF"
+};
+
+static const char *echotron_files[] =
+{
+    "SwingPong.dly",
+    "Short_Delays.dly",
+    "Flange_plus_Echo.dly",
+    "Comb.dly",
+    "EchoFlange.dly",
+    "Filtered_Echo.dly",
+    "Notch-Wah.dly",
+    "Multi-Chorus.dly",
+    "PingPong.dly",
+    "90-Shifter.dly",
+    "Basic_LR_Delay.dly",
+    "PingPong.dly"
 };
 
 class DlyFile
@@ -142,6 +177,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return ECHOTRONLV2_URI; };
+    virtual std::string get_name() {return ECHOTRON_NAME; };
     
     void initialize();
     void clear_initialize();

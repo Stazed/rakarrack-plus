@@ -242,10 +242,17 @@ Echotron::LV2_parameters(std::string &s_buf, int type)
             case Echotron_LFO_Type:
             case Echotron_Filters:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), echotron_parameters[i * 3 + 1], echotron_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Echotron_Filters )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  Echotron_Filters )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -253,8 +260,15 @@ Echotron::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Echotron_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Echotron_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Echotron_DryWet )), echotron_parameters[i * 3 + 1], echotron_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Echotron_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -262,16 +276,30 @@ Echotron::LV2_parameters(std::string &s_buf, int type)
             case Echotron_Depth:
             case Echotron_Pan:
             {
-                s_buf += NTS( getpar( param_case_offset ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ) - 64, echotron_parameters[i * 3 + 1], echotron_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
 
             // Skip user file
             case Echotron_Taps:
             {
-                s_buf += NTS( getpar( Echotron_Taps ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Echotron_Taps ), echotron_parameters[i * 3 + 1], echotron_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Echotron_Taps ) );
+                    s_buf += ":";
+                }
 
                 param_case_offset++;    // skip user file
             }
@@ -280,8 +308,15 @@ Echotron::LV2_parameters(std::string &s_buf, int type)
             // Offset & skip Set file
             case Echotron_LR_Cross:
             {
-                s_buf += NTS( getpar( Echotron_LR_Cross ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Echotron_LR_Cross ) - 64, echotron_parameters[i * 3 + 1], echotron_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Echotron_LR_Cross ) - 64);
+                    s_buf += ":";
+                }
 
                 param_case_offset++;    // skip set file
             }
@@ -291,8 +326,23 @@ Echotron::LV2_parameters(std::string &s_buf, int type)
         param_case_offset++;
     }
 
-    s_buf += "\" :filename \"";
-    s_buf += Filename;
+    if(type == CARLA)
+    {
+        s_buf += "   <CustomData>\n";
+        s_buf += "    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n";
+        s_buf += "    <Key>https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile</Key>\n";
+        s_buf += "    <Value>";
+        s_buf += DATADIR;
+        s_buf += "/";
+        s_buf += echotron_files[Filenum];
+        s_buf += "</Value>\n";
+        s_buf += "   </CustomData>\n";
+    }
+    else
+    {
+        s_buf += "\" :filename \"";
+        s_buf += Filename;
+    }
 }
 
 void
