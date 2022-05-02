@@ -131,10 +131,17 @@ Pan::LV2_parameters(std::string &s_buf, int type)
             case Pan_AutoPan:
             case Pan_Enable_Extra:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), pan_parameters[i * 3 + 1], pan_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Pan_Enable_Extra)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Pan_Enable_Extra)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -142,16 +149,30 @@ Pan::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Pan_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Pan_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Pan_DryWet )), pan_parameters[i * 3 + 1], pan_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Pan_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case Pan_Pan:
             {
-                s_buf += NTS( getpar( Pan_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Pan_Pan ) - 64, pan_parameters[i * 3 + 1], pan_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Pan_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }

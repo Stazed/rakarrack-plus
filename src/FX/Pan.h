@@ -28,6 +28,7 @@
 #include "../EFX_common/EffectLFO.h"
 
 #define PANLV2_URI "https://github.com/Stazed/rakarrack-plus#pan"
+#define PAN_NAME "RakarrackPlus Pan"
 
 const int C_PAN_PARAMETERS = 9;
 
@@ -42,6 +43,19 @@ enum Pan_Index
     Pan_Ex_St_Amt,
     Pan_AutoPan,
     Pan_Enable_Extra
+};
+
+static const char *pan_parameters[] = 
+{
+    NTS(Pan_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Pan_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Pan_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Pan_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(Pan_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(Pan_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
+    NTS(Pan_Ex_St_Amt).c_str(), "Extra Stereo Amount",  "EXTRA_AMOUNT", 
+    NTS(Pan_AutoPan).c_str(), "Autopan",  "AUTO", 
+    NTS(Pan_Enable_Extra).c_str(), "Extra Stereo Enable",  "EXTRA_ON"
 };
 
 class Pan : public Effect
@@ -63,6 +77,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return PANLV2_URI; };
+    virtual std::string get_name() {return PAN_NAME; };
 
 private:
     uint32_t PERIOD;
