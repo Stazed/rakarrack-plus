@@ -30,6 +30,7 @@
 #include "../EFX_common/Resample.h"
 
 #define SHIFTERLV2_URI "https://github.com/Stazed/rakarrack-plus#Shifter"
+#define SHIFTER_NAME "RakarrackPlus Shifter"
 
 
 #define IDLE 0
@@ -53,6 +54,20 @@ enum Shifter_Index
     Shifter_Whammy
 };
 
+static const char *shift_parameters[] = 
+{
+    NTS(Shifter_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Shifter_Pan).c_str(), "Pan",  "PAN", 
+    NTS(Shifter_Gain).c_str(), "Gain",  "GAIN", 
+    NTS(Shifter_Attack).c_str(), "Attack",  "ATACK", 
+    NTS(Shifter_Decay).c_str(), "Decay",  "DECAY", 
+    NTS(Shifter_Threshold).c_str(), "Threshold",  "THRESH", 
+    NTS(Shifter_Interval).c_str(), "Interval",  "INT", 
+    NTS(Shifter_Shift).c_str(), "Shift Down",  "DN", 
+    NTS(Shifter_Mode).c_str(), "Mode",  "MODE", 
+    NTS(Shifter_Whammy).c_str(), "Whammy",  "WHAMMY"
+};
+
 class Shifter : public Effect
 {
 
@@ -72,6 +87,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return SHIFTERLV2_URI; };
+    virtual std::string get_name() {return SHIFTER_NAME; };
     
     void initialize();
     void clear_initialize();

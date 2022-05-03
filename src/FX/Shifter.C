@@ -217,10 +217,17 @@ Shifter::LV2_parameters(std::string &s_buf, int type)
             case Shifter_Mode:
             case Shifter_Whammy:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), shift_parameters[i * 3 + 1], shift_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Shifter_Whammy )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Shifter_Whammy )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -228,8 +235,15 @@ Shifter::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Shifter_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Shifter_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Shifter_DryWet )), shift_parameters[i * 3 + 1], shift_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Shifter_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -237,8 +251,15 @@ Shifter::LV2_parameters(std::string &s_buf, int type)
             case Shifter_Pan:
             case Shifter_Gain:
             {
-                s_buf += NTS( getpar( i ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, shift_parameters[i * 3 + 1], shift_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }
