@@ -206,10 +206,17 @@ StompBox::LV2_parameters(std::string &s_buf, int type)
             case Stomp_Gain:
             case Stomp_Mode:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), stomp_parameters[i * 3 + 1], stomp_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Stomp_Mode )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Stomp_Mode )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
         }

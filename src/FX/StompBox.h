@@ -28,6 +28,7 @@
 #include "../EFX_common/Waveshaper.h"
 
 #define STOMPLV2_URI "https://github.com/Stazed/rakarrack-plus#StompBox"
+#define STOMP_NAME "RakarrackPlus StompBox"
 
 const int C_STOMP_PARAMETERS = 6;
 
@@ -39,6 +40,16 @@ enum Stomp_Index
     Stomp_Bias,
     Stomp_Gain,
     Stomp_Mode
+};
+
+static const char *stomp_parameters[] = 
+{
+    NTS(Stomp_Level).c_str(), "Level",  "LEVEL", 
+    NTS(Stomp_Tone).c_str(), "Tone",  "HI", 
+    NTS(Stomp_Mid).c_str(), "Mid",  "MID", 
+    NTS(Stomp_Bias).c_str(), "Bias",  "LO", 
+    NTS(Stomp_Gain).c_str(), "Gain",  "GAIN", 
+    NTS(Stomp_Mode).c_str(), "Mode",  "MODE"
 };
 
 class StompBox : public Effect
@@ -61,6 +72,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return STOMPLV2_URI; };
+    virtual std::string get_name() {return STOMP_NAME; };
     
     void initialize();
     void clear_initialize();
