@@ -332,9 +332,15 @@ Echotron::LV2_parameters(std::string &s_buf, int type)
         s_buf += "    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n";
         s_buf += "    <Key>https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile</Key>\n";
         s_buf += "    <Value>";
-        s_buf += DATADIR;   // FIXME this is not the same as LV2 DATADIR
+
+#ifdef LV2_DATADIR
+        s_buf += LV2_DATADIR;
         s_buf += "/";
         s_buf += echotron_files[Filenum];
+#else
+        s_buf += Filename;
+#endif
+
         s_buf += "</Value>\n";
         s_buf += "   </CustomData>\n";
     }
@@ -680,6 +686,8 @@ Echotron::loadfile(char* Filename)
         error = Dly_Open;
 #ifndef LV2_SUPPORT
         global_error_number = error;
+#else
+        fprintf(stderr, "Echotron file open error #%d - %s\n", error, Filename);
 #endif
         return loaddefault();
     }

@@ -61,6 +61,7 @@ static const char *convo_parameters[] =
     NTS(Convo_Feedback).c_str(), "Feedback",  "FB"
 };
 
+#ifdef LV2_DATADIR
 static const char *convo_files[] =
 {
     "Marshall_JCM200.wav",
@@ -73,6 +74,7 @@ static const char *convo_files[] =
     "Ampeg.wav",
     "Marshall-2.wav" 
 };
+#endif
 
 class Convolotron :public Effect
 {

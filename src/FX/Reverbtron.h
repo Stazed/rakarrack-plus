@@ -72,6 +72,7 @@ static const char *revtron_parameters[] =
     NTS(Revtron_Diffusion).c_str(), "Diffusion",  "DIFFUSE"
 };
 
+#ifdef LV2_DATADIR
 static const char *reverbtron_files[] =
 {
     "Chamber.rvb",
@@ -85,6 +86,7 @@ static const char *reverbtron_files[] =
     "Twilight.rvb" ,
     "Santa_Lucia.rvb"
 };
+#endif
 
 class RvbFile
 {

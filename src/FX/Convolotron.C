@@ -313,9 +313,15 @@ Convolotron::LV2_parameters(std::string &s_buf, int type)
         s_buf += "    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n";
         s_buf += "    <Key>https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile</Key>\n";
         s_buf += "    <Value>";
-        s_buf += DATADIR;   // FIXME this is not the same as LV2 DATADIR
+
+#ifdef LV2_DATADIR
+        s_buf += LV2_DATADIR;
         s_buf += "/";
         s_buf += convo_files[Filenum];
+#else
+        s_buf += Filename;
+#endif
+        
         s_buf += "</Value>\n";
         s_buf += "   </CustomData>\n";
     }
