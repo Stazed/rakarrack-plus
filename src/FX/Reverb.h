@@ -29,6 +29,7 @@
 #include "../EFX_common/AnalogFilter.h"
 
 #define REVELV2_URI "https://github.com/Stazed/rakarrack-plus#reve"
+#define REVE_NAME "RakarrackPlus Reverb"
 
 const int C_REVERB_PARAMETERS = 12;
 
@@ -46,6 +47,20 @@ enum Reverb_Index
     Reverb_Damp,
     Reverb_Type,
     Reverb_Room
+};
+
+static const char *reverb_parameters[] = 
+{
+    NTS(Reverb_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Reverb_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Reverb_Time).c_str(), "Time",  "TIME", 
+    NTS(Reverb_I_Delay).c_str(), "Initial Delay",  "IDEL", 
+    NTS(Reverb_Delay_FB).c_str(), "Initial Delay Feedback",  "IDELFB", 
+    NTS(Reverb_LPF).c_str(), "Lowpass Filter",  "LPF", 
+    NTS(Reverb_HPF).c_str(), "Highpass Filter",  "HPF", 
+    NTS(Reverb_Damp).c_str(), "Damping",  "DAMP", 
+    NTS(Reverb_Type).c_str(), "Type",  "TYPE", 
+    NTS(Reverb_Room).c_str(), "Room Size",  "RS"
 };
 
 class Reverb : public Effect
@@ -66,6 +81,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return REVELV2_URI; };
+    virtual std::string get_name() {return REVE_NAME; };
     
     void initialize();
     void clear_initialize();

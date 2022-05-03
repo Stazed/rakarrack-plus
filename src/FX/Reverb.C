@@ -252,34 +252,62 @@ Reverb::LV2_parameters(std::string &s_buf, int type)
             case Reverb_Type:
             case Reverb_Room:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), reverb_parameters[i * 3 + 1], reverb_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Reverb_Room )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  Reverb_Room )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
             // wet/dry -> dry/wet reversal
             case Reverb_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Reverb_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Reverb_DryWet )), reverb_parameters[i * 3 + 1], reverb_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Reverb_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case Reverb_Pan:
             {
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Reverb_Pan ) - 64, reverb_parameters[i * 3 + 1], reverb_parameters[i * 3 + 2]);
+                }
+                else
+                {
                     s_buf += NTS( getpar( Reverb_Pan ) - 64);
                     s_buf += ":";
+                }
             }
             break;
 
             // Skip after
             case Reverb_Delay_FB:
             {
-                s_buf += NTS( getpar( param_case_offset ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Reverb_Delay_FB ), reverb_parameters[i * 3 + 1], reverb_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ) );
+                    s_buf += ":";
+                }
 
                 param_case_offset += 2; // Skip 5 & 6
             }
