@@ -140,10 +140,17 @@ ShelfBoost::LV2_parameters(std::string &s_buf, int type)
             case Shelf_Stereo:
             case Shelf_Level:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), shelf_parameters[i * 3 + 1], shelf_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Shelf_Level )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Shelf_Level )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
         }

@@ -25,6 +25,7 @@
 #include "../EFX_common/AnalogFilter.h"
 
 #define SHELFLV2_URI "https://github.com/Stazed/rakarrack-plus#ShelfBoost"
+#define SHELF_NAME "RakarrackPlus Shelf Boost"
 
 const int C_SHELF_PARAMETERS = 5;
 
@@ -35,6 +36,15 @@ enum Shelf_Index
     Shelf_Tone,
     Shelf_Stereo,
     Shelf_Level
+};
+
+static const char *shelf_parameters[] = 
+{
+    NTS(Shelf_Gain).c_str(), "Gain",  "GAIN", 
+    NTS(Shelf_Presence).c_str(), "Presence",  "PRES", 
+    NTS(Shelf_Tone).c_str(), "Tone",  "TONE", 
+    NTS(Shelf_Stereo).c_str(), "Stereo",  "STEREO", 
+    NTS(Shelf_Level).c_str(), "Level",  "LEVEL"
 };
 
 class ShelfBoost : public Effect
@@ -57,6 +67,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return SHELFLV2_URI; };
+    virtual std::string get_name() {return SHELF_NAME; };
     
     void initialize();
     void clear_initialize();
