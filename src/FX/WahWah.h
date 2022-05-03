@@ -32,6 +32,7 @@
 #include "../EFX_common/Filter.h"
 
 #define WAHLV2_URI "https://github.com/Stazed/rakarrack-plus#wha"
+#define WAH_NAME "RakarrackPlus WahWah"
 
 const int C_WAHWAH_PARAMETERS = 11;
 
@@ -48,6 +49,21 @@ enum WahWah_Index
     WahWah_ASI,
     WahWah_Smooth,
     WahWah_Mode
+};
+
+static const char *wah_parameters[] = 
+{
+    NTS(WahWah_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(WahWah_Pan).c_str(), "Panning",  "PAN", 
+    NTS(WahWah_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(WahWah_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(WahWah_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(WahWah_LFO_Stereo).c_str(), "LFO L/R Delay",  "WIDTH", 
+    NTS(WahWah_Depth).c_str(), "Depth",  "DEPTH", 
+    NTS(WahWah_Sense).c_str(), "Sensitivity",  "SENSE", 
+    NTS(WahWah_ASI).c_str(), "Invert",  "INV", 
+    NTS(WahWah_Smooth).c_str(), "Smooth",  "SMOOTH", 
+    NTS(WahWah_Mode).c_str(), "Filter Type",  "MODE"
 };
 
 class WahWah : public Effect
@@ -69,6 +85,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return WAHLV2_URI; };
+    virtual std::string get_name() {return WAH_NAME; };
 
 private:
     
