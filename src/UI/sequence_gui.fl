@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0308
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -368,7 +368,7 @@ m_process->Rack_Effects[EFX_SEQUENCE]->changepar(Sequence_Stdf,(int)o->value());
         seq_mode->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Mode));
         break;
     case Sequence_Range:
-        seq_range->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Range));
+        seq_range->value(m_process->Rack_Effects[EFX_SEQUENCE]->getpar(Sequence_Range) - 1);
         break;
     }} {}
   }
