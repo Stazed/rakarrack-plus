@@ -29,6 +29,7 @@
 #include "../EFX_common/HarmonicEnhancer.h"
 
 #define VALVELV2_URI "https://github.com/Stazed/rakarrack-plus#Valve"
+#define VALVE_NAME "RakarrackPlus Valve"
 
 const int C_VALVE_PARAMETERS = 13;
 
@@ -47,6 +48,23 @@ enum Valve_Index
     Valve_Distortion,
     Valve_Ex_Dist,
     Valve_Presence
+};
+
+static const char *valve_parameters[] = 
+{
+    NTS(Valve_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Valve_Pan).c_str(), "Panning",  "PAN", 
+    NTS(Valve_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
+    NTS(Valve_Drive).c_str(), "Drive",  "DRIVE", 
+    NTS(Valve_Level).c_str(), "Level",  "LEVEL", 
+    NTS(Valve_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
+    NTS(Valve_LPF).c_str(), "Lowpass Filter",  "LPF", 
+    NTS(Valve_HPF).c_str(), "Highpass Filter",  "HPF", 
+    NTS(Valve_Stereo).c_str(), "Stereo",  "STEREO", 
+    NTS(Valve_Prefilter).c_str(), "Prefilter",  "PREFILTER", 
+    NTS(Valve_Distortion).c_str(), "Distortion",  "DIST", 
+    NTS(Valve_Ex_Dist).c_str(), "Extra Distortion",  "ED", 
+    NTS(Valve_Presence).c_str(), "Presence",  "PRES"
 };
 
 class Valve : public Effect
@@ -68,6 +86,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return VALVELV2_URI; };
+    virtual std::string get_name() {return VALVE_NAME; };
     
     void initialize();
     void clear_initialize();

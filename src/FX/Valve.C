@@ -201,10 +201,17 @@ Valve::LV2_parameters(std::string &s_buf, int type)
             case Valve_Ex_Dist:
             case Valve_Presence:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), valve_parameters[i * 3 + 1], valve_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Valve_Presence)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Valve_Presence)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -212,16 +219,30 @@ Valve::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Valve_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Valve_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Valve_DryWet )), valve_parameters[i * 3 + 1], valve_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Valve_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case Valve_Pan:
             {
-                s_buf += NTS( getpar( Valve_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Valve_Pan ) - 64, valve_parameters[i * 3 + 1], valve_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Valve_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }
