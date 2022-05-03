@@ -26,6 +26,7 @@
 #include "Effect.h"
 
 #define SUSTAINLV2_URI "https://github.com/Stazed/rakarrack-plus#Sustainer"
+#define SUSTAIN_NAME "RakarrackPlus Sustainer"
 
 const int C_SUSTAIN_PARAMETERS = 2;
 
@@ -33,6 +34,12 @@ enum Sustain_Index
 {
     Sustain_Gain = 0,
     Sustain_Sustain
+};
+
+static const char *sus_parameters[] = 
+{
+    NTS(Sustain_Gain).c_str(), "Gain",  "GAIN", 
+    NTS(Sustain_Sustain).c_str(), "Sustain",  "SUS"
 };
 
 class Sustainer : public Effect
@@ -49,6 +56,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return SUSTAINLV2_URI; };
+    virtual std::string get_name() {return SUSTAIN_NAME; };
     
     void out (float * efxoutl, float * efxoutr);
     void Dry_Wet_Mix(int NumEffect, float volume,
