@@ -392,10 +392,17 @@ Synthfilter::LV2_parameters(std::string &s_buf, int type)
             case Synthfilter_Release:
             case Synthfilter_Offset:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), synth_parameters[i * 3 + 1], synth_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Synthfilter_Offset )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Synthfilter_Offset )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -403,8 +410,15 @@ Synthfilter::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Synthfilter_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Synthfilter_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Synthfilter_DryWet )), synth_parameters[i * 3 + 1], synth_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Synthfilter_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
         }

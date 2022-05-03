@@ -34,6 +34,7 @@
 #include "../EFX_common/EffectLFO.h"
 
 #define SYNTHLV2_URI "https://github.com/Stazed/rakarrack-plus#Synthfilter"
+#define SYNTH_NAME "RakarrackPlus Synthfilter"
 
 const int C_SYNTHFILTER_PARAMETERS = 16;
 
@@ -57,6 +58,26 @@ enum Synthfilter_Index
     Synthfilter_Offset
 };
 
+static const char *synth_parameters[] = 
+{
+    NTS(Synthfilter_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Synthfilter_Distort).c_str(), "Distort",  "DIST", 
+    NTS(Synthfilter_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Synthfilter_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(Synthfilter_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(Synthfilter_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
+    NTS(Synthfilter_Width).c_str(), "Width",  "WIDTH", 
+    NTS(Synthfilter_Feedback).c_str(), "Feedback",  "FB", 
+    NTS(Synthfilter_LPF_Stages).c_str(), "Lowpass Stages",  "LSTAGES", 
+    NTS(Synthfilter_HPF_Stages).c_str(), "Highpass Stages",  "HSTAGES", 
+    NTS(Synthfilter_Subtract).c_str(), "Subtract Output",  "SUB", 
+    NTS(Synthfilter_Depth).c_str(), "Depth",  "DEPTH", 
+    NTS(Synthfilter_Env_Sens).c_str(), "Envelope Sensitivity",  "SENSE", 
+    NTS(Synthfilter_Attack).c_str(), "Attack Time",  "ATIME", 
+    NTS(Synthfilter_Release).c_str(), "Release Time",  "RTIME", 
+    NTS(Synthfilter_Offset).c_str(), "HPF/LPF Offset",  "OFFSET"
+};
+
 class Synthfilter : public Effect
 {
 public:
@@ -75,6 +96,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return SYNTHLV2_URI; };
+    virtual std::string get_name() {return SYNTH_NAME; };
 
 private:
 
