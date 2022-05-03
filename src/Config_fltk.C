@@ -355,7 +355,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     rakarrack.get(PrefNom("Booster"), booster, 1.0f);   // On/Off
 
     // Last bank and preset selected
-    rakarrack.get(PrefNom("Bank Selected"), active_bank, 3);
+    rakarrack.get(PrefNom("Bank Selected"), active_bank, 0);
     rakarrack.get(PrefNom("Preset Num"), Preset_Number, 1);
 
     // MIDIConverter
