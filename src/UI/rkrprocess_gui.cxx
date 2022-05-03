@@ -3543,7 +3543,7 @@ void RKRGUI::read_insert_presets(std::string location)
     }
     else
     {
-        printf("No User Directory Set. Cannot load insert presets!\n");
+        printf("Custom User Directory is not set: Go to Settings/Preferences/User to change.\n");
         return;
     }
     
