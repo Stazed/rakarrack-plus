@@ -245,10 +245,17 @@ VaryBand::LV2_parameters(std::string &s_buf, int type)
             case VaryBand_Mid_Band_2:
             case VaryBand_High_Band:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), vary_parameters[i * 3 + 1], vary_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  VaryBand_High_Band )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  VaryBand_High_Band )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -256,16 +263,30 @@ VaryBand::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case VaryBand_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( VaryBand_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( VaryBand_DryWet )), vary_parameters[i * 3 + 1], vary_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( VaryBand_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Skip after
             case VaryBand_Cross_3:
             {
-                s_buf += NTS( getpar( VaryBand_Cross_3 ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( VaryBand_Cross_3 ), vary_parameters[i * 3 + 1], vary_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( VaryBand_Cross_3 ) );
+                    s_buf += ":";
+                }
  
                 param_case_offset++;    // skip VaryBand_Combination (legacy)
             }

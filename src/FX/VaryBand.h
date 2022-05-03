@@ -33,6 +33,7 @@
 #include "../EFX_common/AnalogFilter.h"
 
 #define VARYBANDLV2_URI "https://github.com/Stazed/rakarrack-plus#VaryBand"
+#define VARY_NAME "RakarrackPlus VaryBand"
 
 /**
  * This is the Rakarrack-plus parameters number for presets and file saving
@@ -59,6 +60,24 @@ enum VaryBand_Index
     VaryBand_High_Band
 };
 
+static const char *vary_parameters[] = 
+{
+    NTS(VaryBand_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(VaryBand_LFO_Tempo_1).c_str(), "Tempo 1",  "TEMPO1", 
+    NTS(VaryBand_LFO_Type_1).c_str(), "LFO Type 1",  "TYPE1", 
+    NTS(VaryBand_LFO_Stereo_1).c_str(), "LFO L/R Delay 1",  "STDL1", 
+    NTS(VaryBand_LFO_Tempo_2).c_str(), "Tempo 2",  "TEMPO2", 
+    NTS(VaryBand_LFO_Type_2).c_str(), "LFO Type 2",  "TYPE2", 
+    NTS(VaryBand_LFO_Stereo_2).c_str(), "LFO L/R Delay 2",  "STDL2", 
+    NTS(VaryBand_Cross_1).c_str(), "Low/Mid1 Crossover",  "LMCR", 
+    NTS(VaryBand_Cross_2).c_str(), "Mid1/Mid2 Crossover",  "MMCR", 
+    NTS(VaryBand_Cross_3).c_str(), "Mid2/High Crossover",  "MHCR", 
+    NTS(VaryBand_Low_Band).c_str(), "Low Band Volume",  "LB", 
+    NTS(VaryBand_Mid_Band_1).c_str(), "Mid Band 1 Volume",  "M1B", 
+    NTS(VaryBand_Mid_Band_2).c_str(), "Mid Band 2 Volume",  "M2B", 
+    NTS(VaryBand_High_Band).c_str(), "High Band Volume",  "HB"
+};
+
 class VaryBand : public Effect
 {
 public:
@@ -77,6 +96,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return VARYBANDLV2_URI; };
+    virtual std::string get_name() {return VARY_NAME; };
     
     void initialize ();
     void clear_initialize();
