@@ -193,20 +193,33 @@ Ring::LV2_parameters(std::string &s_buf, int type)
             case Ring_Input:
             case Ring_Auto_Freq:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), ring_parameters[i * 3 + 1], ring_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Ring_Auto_Freq )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Ring_Auto_Freq )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
             // Special cases
-
             // wet/dry -> dry/wet reversal
             case Ring_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Ring_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Ring_DryWet )), ring_parameters[i * 3 + 1], ring_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Ring_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
         }

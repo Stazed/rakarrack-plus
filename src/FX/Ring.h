@@ -27,6 +27,7 @@
 #include "Effect.h"
 
 #define RINGLV2_URI "https://github.com/Stazed/rakarrack-plus#Ring"
+#define RING_NAME "RakarrackPlus Ring"
 
 const int C_RING_PARAMETERS = 13;
 
@@ -45,6 +46,23 @@ enum Ring_Index
     Ring_Square,
     Ring_Input,
     Ring_Auto_Freq
+};
+
+static const char *ring_parameters[] = 
+{
+    NTS(Ring_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Ring_Pan).c_str(), "Pan",  "PAN", 
+    NTS(Ring_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
+    NTS(Ring_Level).c_str(), "Level",  "LEVEL", 
+    NTS(Ring_Depth).c_str(), "Depth",  "DEPTH", 
+    NTS(Ring_Freq).c_str(), "Frequency",  "FREQ", 
+    NTS(Ring_Stereo).c_str(), "Stereo",  "STEREO", 
+    NTS(Ring_Sine).c_str(), "Sine",  "SIN", 
+    NTS(Ring_Triangle).c_str(), "Triangle",  "TRI", 
+    NTS(Ring_Saw).c_str(), "Sawtooth",  "SAW", 
+    NTS(Ring_Square).c_str(), "Square",  "SQUARE", 
+    NTS(Ring_Input).c_str(), "Input Gain",  "INPUT", 
+    NTS(Ring_Auto_Freq).c_str(), "Auto-Frequency",  "AFREQ"
 };
 
 class Ring : public Effect
@@ -66,6 +84,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return RINGLV2_URI; };
+    virtual std::string get_name() {return RING_NAME; };
     
     void Create_Tables(float sample_rate);
 
