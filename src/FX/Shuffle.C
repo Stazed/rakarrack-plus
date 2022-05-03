@@ -190,10 +190,17 @@ Shuffle::LV2_parameters(std::string &s_buf, int type)
             case Shuffle_Width:
             case Shuffle_F_Band:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), shuffle_parameters[i * 3 + 1], shuffle_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Shuffle_F_Band )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Shuffle_F_Band )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -201,8 +208,15 @@ Shuffle::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Shuffle_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Shuffle_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Shuffle_DryWet )), shuffle_parameters[i * 3 + 1], shuffle_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Shuffle_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
         }

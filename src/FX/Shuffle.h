@@ -30,6 +30,7 @@
 #include "../EFX_common/AnalogFilter.h"
 
 #define SHUFFLELV2_URI "https://github.com/Stazed/rakarrack-plus#Shuffle"
+#define SHUFFLE_NAME "RakarrackPlus Shuffle"
 
 const int C_SHUFFLE_PARAMETERS = 11;
 
@@ -48,6 +49,20 @@ enum Shuffle_Index
     Shuffle_F_Band
 };
 
+static const char *shuffle_parameters[] = 
+{
+    NTS(Shuffle_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Shuffle_Gain_L).c_str(), "Low Gain",  "LGAIN", 
+    NTS(Shuffle_Gain_ML).c_str(), "Mid Low Gain",  "M1GAIN", 
+    NTS(Shuffle_Gain_MH).c_str(), "Mid High Gain",  "M2GAIN", 
+    NTS(Shuffle_Gain_H).c_str(), "High Gain",  "HGAIN", 
+    NTS(Shuffle_Freq_L).c_str(), "Low Frequency",  "LFREQ", 
+    NTS(Shuffle_Freq_ML).c_str(), "Mid Low Frequency",  "M1FREQ", 
+    NTS(Shuffle_Freq_MH).c_str(), "Mid High Frequency",  "M2FREQ", 
+    NTS(Shuffle_Freq_H).c_str(), "High Frequency",  "HFREQ", 
+    NTS(Shuffle_Width).c_str(), "Width",  "Q", 
+    NTS(Shuffle_F_Band).c_str(), "Filtered Band",  "BAND"
+};
 
 class Shuffle : public Effect
 {
@@ -67,6 +82,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return SHUFFLELV2_URI; };
+    virtual std::string get_name() {return SHUFFLE_NAME; };
     
     void initialize();
     void clear_initialize();
