@@ -214,10 +214,17 @@ Vibe::LV2_parameters(std::string &s_buf, int type)
             case Vibe_LR_Cross:
             case Vibe_Stereo:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), vibe_parameters[i * 3 + 1], vibe_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Vibe_Stereo )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Vibe_Stereo )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -225,8 +232,15 @@ Vibe::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Vibe_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Vibe_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Vibe_DryWet )), vibe_parameters[i * 3 + 1], vibe_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Vibe_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -234,8 +248,15 @@ Vibe::LV2_parameters(std::string &s_buf, int type)
             case Vibe_Pan:
             case Vibe_Feedback:
             {
-                s_buf += NTS( getpar( i ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, vibe_parameters[i * 3 + 1], vibe_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }

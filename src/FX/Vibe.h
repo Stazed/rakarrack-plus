@@ -30,6 +30,7 @@
 #include "../EFX_common/EffectLFO.h"
 
 #define VIBELV2_URI "https://github.com/Stazed/rakarrack-plus#Vibe"
+#define VIBE_NAME "RakarrackPlus Vibe"
 
 //#define VIBE_INLINE 1     // uncomment for inline
 
@@ -48,6 +49,21 @@ enum Vibe_Index
     Vibe_Depth,
     Vibe_LR_Cross,
     Vibe_Stereo
+};
+
+static const char *vibe_parameters[] = 
+{
+    NTS(Vibe_Width).c_str(), "Width",  "WIDTH", 
+    NTS(Vibe_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Vibe_LFO_Random).c_str(), "Randomness",  "RND", 
+    NTS(Vibe_LFO_Type).c_str(), "LFO Type",  "TYPE", 
+    NTS(Vibe_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
+    NTS(Vibe_Pan).c_str(), "Pan",  "PAN", 
+    NTS(Vibe_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Vibe_Feedback).c_str(), "Feedback",  "FB", 
+    NTS(Vibe_Depth).c_str(), "Depth",  "DEPTH", 
+    NTS(Vibe_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
+    NTS(Vibe_Stereo).c_str(), "Stereo",  "STEREO"
 };
 
 class Vibe : public Effect
@@ -73,6 +89,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return VIBELV2_URI; };
+    virtual std::string get_name() {return VIBE_NAME; };
 
 private:
     
