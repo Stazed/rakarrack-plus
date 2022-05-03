@@ -223,6 +223,63 @@ Vocoder::set_random_parameters()
 }
 
 void
+Vocoder::LV2_parameters(std::string &s_buf, int type)
+{
+    for(int i = 0; i < C_VOCODER_PARAMETERS; i++)
+    {
+        switch(i)
+        {
+            // Normal processing
+            case Vocoder_Smear:
+            case Vocoder_Q:
+            case Vocoder_Input:
+            case Vocoder_Level:
+            case Vocoder_Ring:
+            {
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), vocoder_parameters[i * 3 + 1], vocoder_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    // not used NON-MIXER
+                }
+            }
+            break;
+
+            // Special cases
+            // wet/dry -> dry/wet reversal
+            case Vocoder_DryWet:
+            {
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Vocoder_DryWet )), vocoder_parameters[i * 3 + 1], vocoder_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    // not used NON-MIXER
+                }
+            }
+            break;
+
+            // Offset
+            case Vocoder_Pan:
+            {
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Vocoder_Pan ) - 64, vocoder_parameters[i * 3 + 1], vocoder_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    // not used NON-MIXER
+                }
+            }
+            break;
+        }
+    }
+}
+
+void
 Vocoder::initialize()
 {
     filterbank = (fbank *) malloc(sizeof (fbank) * VOC_BANDS);

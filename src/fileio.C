@@ -424,7 +424,7 @@ RKR::export_to_carla(std::string filename)
             continue;
 
         // Not supported by Carla
-        if(effect == EFX_VOCODER)
+        if(effect == EFX_LOOPER)
         {
             Handle_Message(48, NTS(effect));
             continue;

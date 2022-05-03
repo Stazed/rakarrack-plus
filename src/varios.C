@@ -270,7 +270,7 @@ RKR::Handle_Message(int num, std::string strMessage)
                 break;
             }
             
-            sprintf(error_msg, "Non-mixer does not support %s plugin type.\n"
+            sprintf(error_msg, "Export of %s plugin is not supported.\n"
                     "It will be ignored on export...\n", effect_name.c_str());
             message_type = 0;
         }

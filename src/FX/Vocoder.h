@@ -30,6 +30,7 @@
 #include "../EFX_common/Resample.h"
 
 #define VOCODERLV2_URI "https://github.com/Stazed/rakarrack-plus#Vocoder"
+#define VOCODER_NAME "RakarrackPlus Vocoder"
 
 const int C_VOCODER_PARAMETERS = 7;
 
@@ -42,6 +43,17 @@ enum Vocoder_Index
     Vocoder_Input,
     Vocoder_Level,
     Vocoder_Ring
+};
+
+static const char *vocoder_parameters[] = 
+{
+    NTS(Vocoder_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Vocoder_Pan).c_str(), "Pan",  "PAN", 
+    NTS(Vocoder_Smear).c_str(), "Smear",  "MUF", 
+    NTS(Vocoder_Q).c_str(), "Q",  "Q", 
+    NTS(Vocoder_Input).c_str(), "Input Gain",  "INGAIN", 
+    NTS(Vocoder_Level).c_str(), "Level",  "LEVEL", 
+    NTS(Vocoder_Ring).c_str(), "Ring Mod. Depth",  "RING"
 };
 
 class Vocoder : public Effect
@@ -60,6 +72,9 @@ public:
 #ifdef LV2_SUPPORT
     void lv2_update_params(uint32_t period);
 #endif // LV2
+    virtual void LV2_parameters(std::string &s_buf, int type);
+    virtual std::string get_URI() { return VOCODERLV2_URI; };
+    virtual std::string get_name() {return VOCODER_NAME; };
     
     void initialize();
     void clear_initialize();
