@@ -294,10 +294,17 @@ Reverbtron::LV2_parameters(std::string &s_buf, int type)
             case Revtron_LPF:
             case Revtron_Diffusion:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), revtron_parameters[i * 3 + 1], revtron_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Revtron_Diffusion )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  Revtron_Diffusion )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -305,16 +312,30 @@ Reverbtron::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Revtron_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Revtron_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Revtron_DryWet )), revtron_parameters[i * 3 + 1], revtron_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Revtron_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case Revtron_Pan:
             {
-                s_buf += NTS( getpar( Revtron_Pan ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Revtron_Pan ) - 64, revtron_parameters[i * 3 + 1], revtron_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Revtron_Pan ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -322,8 +343,15 @@ Reverbtron::LV2_parameters(std::string &s_buf, int type)
             case Revtron_Length:
             case Revtron_Level:
             {
-                s_buf += NTS( getpar( param_case_offset ) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), revtron_parameters[i * 3 + 1], revtron_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ) );
+                    s_buf += ":";
+                }
 
                 param_case_offset++;    // skips Revtron_User_File, Revtron_Set_File
             }
@@ -333,8 +361,23 @@ Reverbtron::LV2_parameters(std::string &s_buf, int type)
         param_case_offset++;
     }
 
-    s_buf += "\" :filename \"";
-    s_buf += Filename;
+    if(type == CARLA)
+    {
+        s_buf += "   <CustomData>\n";
+        s_buf += "    <Type>http://lv2plug.in/ns/ext/atom#Path</Type>\n";
+        s_buf += "    <Key>https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile</Key>\n";
+        s_buf += "    <Value>";
+        s_buf += DATADIR;   // FIXME this is not the same as LV2 DATADIR
+        s_buf += "/";
+        s_buf += reverbtron_files[Filenum];
+        s_buf += "</Value>\n";
+        s_buf += "   </CustomData>\n";
+    }
+    else
+    {
+        s_buf += "\" :filename \"";
+        s_buf += Filename;
+    }
 }
 
 void

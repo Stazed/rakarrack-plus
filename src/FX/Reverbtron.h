@@ -30,6 +30,7 @@
 #include "../EFX_common/Resample.h"
 
 #define REVTRONLV2_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron"
+#define REVTRON_NAME "RakarrackPlus Reverbtron"
 
 const int C_REVTRON_PARAMETERS = 16;
 
@@ -51,6 +52,38 @@ enum Revtron_Index
     Revtron_Shuffle,
     Revtron_LPF,
     Revtron_Diffusion
+};
+
+static const char *revtron_parameters[] = 
+{
+    NTS(Revtron_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Revtron_Fade).c_str(), "Fade",  "FADE", 
+    NTS(Revtron_Safe).c_str(), "Safe",  "SAFE", 
+    NTS(Revtron_Length).c_str(), "Length",  "LENGTH", 
+    NTS(Revtron_I_Delay).c_str(), "Initial Delay",  "DELAY", 
+    NTS(Revtron_Damp).c_str(), "Dampening",  "DAMP", 
+    NTS(Revtron_Level).c_str(), "Level",  "LEVEL", 
+    NTS(Revtron_Stretch).c_str(), "Time Stretch",  "STRETCH", 
+    NTS(Revtron_Feedback).c_str(), "Feedback",  "FB", 
+    NTS(Revtron_Pan).c_str(), "Pan",  "PAN", 
+    NTS(Revtron_Ex_Stereo).c_str(), "Extra Stereo",  "ES", 
+    NTS(Revtron_Shuffle).c_str(), "Shuffle",  "SH", 
+    NTS(Revtron_LPF).c_str(), "Lowpass Filter",  "LPF", 
+    NTS(Revtron_Diffusion).c_str(), "Diffusion",  "DIFFUSE"
+};
+
+static const char *reverbtron_files[] =
+{
+    "Chamber.rvb",
+    "Concrete_Stairwell.rvb",
+    "Hall.rvb",
+    "Med_Hall.rvb",
+    "Large_Room.rvb",
+    "Large_Hall.rvb",
+    "Guitar_Ambience.rvb",
+    "Studio.rvb",
+    "Twilight.rvb" ,
+    "Santa_Lucia.rvb"
 };
 
 class RvbFile
@@ -90,6 +123,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return REVTRONLV2_URI; };
+    virtual std::string get_name() {return REVTRON_NAME; };
     
     void initialize();
     void clear_initialize();
