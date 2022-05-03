@@ -32,6 +32,7 @@
 #include "../EFX_common/Resample.h"
 
 #define SEQUENCELV2_URI "https://github.com/Stazed/rakarrack-plus#Sequence"
+#define SEQUENCE_NAME "RakarrackPlus Sequence"
 
 const int C_SEQUENCE_PARAMETERS = 15;
 
@@ -54,6 +55,25 @@ enum Sequence_Index
     Sequence_Range
 };
 
+static const char *sequence_parameters[] = 
+{
+    NTS(Sequence_Step_1).c_str(), "Step 1",  "S1", 
+    NTS(Sequence_Step_2).c_str(), "Step 2",  "S2", 
+    NTS(Sequence_Step_3).c_str(), "Step 3",  "S3", 
+    NTS(Sequence_Step_4).c_str(), "Step 4",  "S4", 
+    NTS(Sequence_Step_5).c_str(), "Step 5",  "S5", 
+    NTS(Sequence_Step_6).c_str(), "Step 6",  "S6", 
+    NTS(Sequence_Step_7).c_str(), "Step 7",  "S7", 
+    NTS(Sequence_Step_8).c_str(), "Step 8",  "S8", 
+    NTS(Sequence_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Sequence_Tempo).c_str(), "Tempo",  "TEMPO", 
+    NTS(Sequence_Resonance).c_str(), "Q",  "Q", 
+    NTS(Sequence_Amp).c_str(), "Amplitude/Alt. Mode",  "AMP", 
+    NTS(Sequence_Stdf).c_str(), "Right Channel Step Lag",  "LAG", 
+    NTS(Sequence_Mode).c_str(), "Modulation Mode",  "MODE", 
+    NTS(Sequence_Range).c_str(), "Step Adjustment Range",  "RANGE"
+};
+
 class Sequence : public Effect
 {
 public:
@@ -68,6 +88,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return SEQUENCELV2_URI; };
+    virtual std::string get_name() {return SEQUENCE_NAME; };
     
     void initialize();
     void clear_initialize();

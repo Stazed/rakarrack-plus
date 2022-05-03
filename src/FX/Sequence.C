@@ -279,10 +279,17 @@ Sequence::LV2_parameters(std::string &s_buf, int type)
             case Sequence_Mode:
             case Sequence_Range:
             {
-                s_buf += NTS( getpar( i ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), sequence_parameters[i * 3 + 1], sequence_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( i ));
 
-                if ( i !=  Sequence_Range )   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( i !=  Sequence_Range )   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -290,16 +297,30 @@ Sequence::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Sequence_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Sequence_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Sequence_DryWet )), sequence_parameters[i * 3 + 1], sequence_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Sequence_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
             // Offset
             case Sequence_Resonance:
             {
-                s_buf += NTS( getpar( Sequence_Resonance ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Sequence_Resonance ) - 64, sequence_parameters[i * 3 + 1], sequence_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Sequence_Resonance ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
         }
