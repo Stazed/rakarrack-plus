@@ -236,10 +236,17 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
             case Sharm_Note:
             case Sharm_LR_Cross:
             {
-                s_buf += NTS( getpar( param_case_offset ));
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ));
 
-                if ( param_case_offset !=  Sharm_LR_Cross)   // last one no need for delimiter
-                    s_buf += ":";
+                    if ( param_case_offset !=  Sharm_LR_Cross)   // last one no need for delimiter
+                        s_buf += ":";
+                }
             }
             break;
 
@@ -247,8 +254,15 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
             // wet/dry -> dry/wet reversal
             case Sharm_DryWet:
             {
-                s_buf += NTS( Dry_Wet(getpar( Sharm_DryWet )) );
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, Dry_Wet(getpar( Sharm_DryWet )), sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( Dry_Wet(getpar( Sharm_DryWet )) );
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -256,8 +270,15 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
             case Sharm_L_Gain:
             case Sharm_R_Gain:
             {
-                s_buf += NTS( getpar( param_case_offset ) - 64);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ) - 64, sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ) - 64);
+                    s_buf += ":";
+                }
             }
             break;
 
@@ -265,15 +286,29 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
             case Sharm_L_Interval:
             case Sharm_R_Interval:
             {
-                s_buf += NTS( getpar( param_case_offset ) - 12);
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ) - 12, sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( param_case_offset ) - 12);
+                    s_buf += ":";
+                }
             }
             break;
 
             case Sharm_Chord:
             {
-                s_buf += NTS( getpar( Sharm_Chord ));
-                s_buf += ":";
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Sharm_Chord ), sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    s_buf += NTS( getpar( Sharm_Chord ));
+                    s_buf += ":";
+                }
 
                 param_case_offset++;    // skip Sharm_MIDI
             }

@@ -33,6 +33,7 @@
 
 #define STEROHARMLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm"
 #define SHARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid"
+#define SHARM_NAME "RakarrackPlus StereoHarmonizer (no midi)"
 
 const int C_SHARM_PARAMETERS = 12;
 
@@ -50,6 +51,21 @@ enum Sharm_Index
     Sharm_Chord,
     Sharm_MIDI,
     Sharm_LR_Cross
+};
+
+static const char *sharm_parameters[] = 
+{
+    NTS(Sharm_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
+    NTS(Sharm_L_Gain).c_str(), "Left Gain",  "GAINL", 
+    NTS(Sharm_L_Interval).c_str(), "Left Interval",  "INTL", 
+    NTS(Sharm_L_Chroma).c_str(), "Left Chroma",  "CHRML", 
+    NTS(Sharm_R_Gain).c_str(), "Right Gain",  "GAINR", 
+    NTS(Sharm_R_Interval).c_str(), "Right Interval",  "INTR", 
+    NTS(Sharm_R_Chroma).c_str(), "Right Chroma",  "CHR", 
+    NTS(Sharm_Select).c_str(), "Select Chord Mode",  "SELECT", 
+    NTS(Sharm_Note).c_str(), "Note",  "NOTE", 
+    NTS(Sharm_Chord).c_str(), "Chord",  "CHORD",  
+    NTS(Sharm_LR_Cross).c_str(), "Left/Right Crossover",  "LRC"
 };
 
 class StereoHarm : public Effect
@@ -71,6 +87,7 @@ public:
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
     virtual std::string get_URI() { return SHARMNOMIDLV2_URI; };
+    virtual std::string get_name() {return SHARM_NAME; };
     
     void initialize();
     void clear_initialize();
