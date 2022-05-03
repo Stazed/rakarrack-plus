@@ -204,9 +204,6 @@ endif (BuildForDebug)
 if (BuildLV2Plugins)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
     if (LV2_FOUND)
-        # For Rakarrack-plus export files for Carla and NON-Mixer
-        add_definitions(-D'LV2_DATADIR="${CMAKE_INSTALL_PREFIX}/share/RakarrackPlus.lv2"')
-
         if (DEFINED LV2_PATH)
             set(LV2_INSTALL_DIR "${LV2_PATH}/RakarrackPlus.lv2" CACHE PATH
             "Specifies where the LV2 libraries should be installed")

@@ -72,22 +72,6 @@ static const char *revtron_parameters[] =
     NTS(Revtron_Diffusion).c_str(), "Diffusion",  "DIFFUSE"
 };
 
-#ifdef LV2_DATADIR
-static const char *reverbtron_files[] =
-{
-    "Chamber.rvb",
-    "Concrete_Stairwell.rvb",
-    "Hall.rvb",
-    "Med_Hall.rvb",
-    "Large_Room.rvb",
-    "Large_Hall.rvb",
-    "Guitar_Ambience.rvb",
-    "Studio.rvb",
-    "Twilight.rvb" ,
-    "Santa_Lucia.rvb"
-};
-#endif
-
 class RvbFile
 {
 public:

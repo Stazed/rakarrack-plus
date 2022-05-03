@@ -77,24 +77,6 @@ static const char *echotron_parameters[] =
     NTS(Echotron_Filters).c_str(), "Activate Filters",  "AF"
 };
 
-#ifdef LV2_DATADIR
-static const char *echotron_files[] =
-{
-    "SwingPong.dly",
-    "Short_Delays.dly",
-    "Flange_plus_Echo.dly",
-    "Comb.dly",
-    "EchoFlange.dly",
-    "Filtered_Echo.dly",
-    "Notch-Wah.dly",
-    "Multi-Chorus.dly",
-    "PingPong.dly",
-    "90-Shifter.dly",
-    "Basic_LR_Delay.dly",
-    "PingPong.dly"
-};
-#endif
-
 class DlyFile
 {
 public:
