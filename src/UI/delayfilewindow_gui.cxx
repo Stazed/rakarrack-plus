@@ -35,7 +35,7 @@ void DelayFileWindowGui::cb_Load_i(RKR_Button*, void*) {
   // If nothing previously set, then default location
     std::string chooser_start_location = "";
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }
@@ -63,7 +63,7 @@ void DelayFileWindowGui::cb_Save_i(RKR_Button*, void*) {
   // If nothing previously set, then default location
     std::string chooser_start_location = "";
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }

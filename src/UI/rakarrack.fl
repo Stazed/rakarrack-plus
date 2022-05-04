@@ -405,7 +405,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
             callback {// If nothing previously set, then default location
     std::string chooser_start_location = "";
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }
@@ -430,7 +430,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     std::string chooser_start_location = "";
 
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }
@@ -473,7 +473,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     std::string chooser_start_location = "";
 
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }
@@ -1445,7 +1445,7 @@ Put_Loaded();}
     std::string chooser_start_location = "";
 
     // If the user set a User Directory then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }
@@ -1470,7 +1470,7 @@ Put_Loaded();}
     std::string chooser_start_location = "";
 
     // Did the user set a User Directory
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }

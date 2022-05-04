@@ -111,6 +111,8 @@ std::string NTS ( T Number )
     return ss.str();
 }
 
+#define UD_NOT_SET "   "
+
 #define D_PI 6.283185f
 #define PI 3.141598f
 #define LOG_10 2.302585f

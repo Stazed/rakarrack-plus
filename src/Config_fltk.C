@@ -306,7 +306,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     
     // Get user bank directory
     memset(temp, 0, sizeof (temp));
-    sprintf(temp, "%s", DATADIR);
+    sprintf(temp, "%s", UD_NOT_SET);
     rakarrack.get(PrefNom("User Directory"), UDirFilename, temp, 127);
     global_user_directory = UDirFilename;
     

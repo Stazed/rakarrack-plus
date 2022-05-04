@@ -1264,7 +1264,7 @@ RKR::load_bank_vector()
     file_name.clear();
     
     // The user bank directory if set
-    if(strcmp(Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(Config.UDirFilename, DATADIR) != 0) && (strcmp(Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         dir = opendir(Config.UDirFilename);
         if (dir == NULL)
@@ -1799,7 +1799,7 @@ RKR::save_insert_preset(int num, std::string name)
     std::string insert_preset_location = "";
     
     // Did the user set a User Directory
-    if(strcmp(Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(Config.UDirFilename, DATADIR) != 0) && (strcmp(Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         insert_preset_location = Config.UDirFilename;
         
@@ -1840,7 +1840,7 @@ RKR::delete_insert_preset(int num, std::string name)
     std::string insert_preset_location = "";
     
     // Did the user set a User Directory
-    if(strcmp(global_user_directory.c_str(), DATADIR) != 0)
+    if( (strcmp(global_user_directory.c_str(), DATADIR) != 0) && (strcmp(global_user_directory.c_str(), UD_NOT_SET) != 0) )
     {
         insert_preset_location = global_user_directory;
         insert_preset_location += "InsertPresets.rkis";
@@ -1970,7 +1970,7 @@ RKR::load_MIDI_table_vector()
     struct dirent *fs;
     
     // Has a user directory been set?
-    if(strcmp(Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(Config.UDirFilename, DATADIR) != 0) && (strcmp(Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         dir = opendir(Config.UDirFilename);
 
@@ -2158,7 +2158,7 @@ RKR::load_convolotron_vector()
     struct dirent *fs;
 
     // Has a user directory been set?
-    if(strcmp(Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(Config.UDirFilename, DATADIR) != 0) && (strcmp(Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         dir = opendir(Config.UDirFilename);
 
@@ -2223,7 +2223,7 @@ RKR::load_echotron_vector()
     struct dirent *fs;
 
     // Has a user directory been set?
-    if(strcmp(Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(Config.UDirFilename, DATADIR) != 0) && (strcmp(Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         dir = opendir(Config.UDirFilename);
 
@@ -2288,7 +2288,7 @@ RKR::load_reverbtron_vector()
     struct dirent *fs;
 
     // Has a user directory been set?
-    if(strcmp(Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(Config.UDirFilename, DATADIR) != 0) && (strcmp(Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         dir = opendir(Config.UDirFilename);
 

@@ -265,12 +265,12 @@ void RKRGUI::GuiTimeout(void)
         update_looper();
         m_process->Gui_Refresh = GUI_Refresh_Off;
     }
-    
+
     if (m_process->Gui_Refresh == GUI_Refresh_CTRL_S)
     {
         std::string filename = m_process->Bank_Vector[m_process->active_bank].Bank_File_Name;
         int ok = m_process->save_bank(filename, m_process->Bank);
-    
+
         if (ok)
         {
             // Reload the bank vector for the new file or update the existing
@@ -280,7 +280,7 @@ void RKRGUI::GuiTimeout(void)
             filename = filename.insert(0, "File Saved: ", 12);
             BankWindow->Alert_Message->copy_label (filename.c_str());
             BankWindow->Alert_Message->redraw ();
-            
+
             // Start the counter for timed message clearing
             m_process->Alert_Count = 1;
         }
@@ -3532,7 +3532,7 @@ void RKRGUI::read_insert_presets(std::string location)
     std::string insert_preset_location = "";
     
     // Did the user set a User Directory
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         insert_preset_location = m_process->Config.UDirFilename;
         
@@ -3938,7 +3938,7 @@ void RKRGUI::set_bank_file()
     std::string chooser_start_location = "";
     
     // Did the user set a User Directory
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }
@@ -3967,7 +3967,7 @@ void RKRGUI::set_save_file()
     if(chooser_start_location.empty ())
     {
         // Did the user set a User Directory
-        if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+        if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
         {
             chooser_start_location = m_process->Config.UDirFilename;
         }
@@ -4040,7 +4040,7 @@ void RKRGUI::Load_Midi_Program_Change_Table()
     std::string chooser_start_location = "";
     
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }
@@ -4076,7 +4076,7 @@ void RKRGUI::Save_Midi_Program_Change_Table()
     std::string chooser_start_location = "";
     
     // If the user set a User Directory, then use it
-    if(strcmp(m_process->Config.UDirFilename, DATADIR) != 0)
+    if( (strcmp(m_process->Config.UDirFilename, DATADIR) != 0) && (strcmp(m_process->Config.UDirFilename, UD_NOT_SET) != 0) )
     {
         chooser_start_location = m_process->Config.UDirFilename;
 

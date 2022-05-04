@@ -36,7 +36,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
     std::string insert_preset_location = "";
     
     // Did the user set a User Directory
-    if(strcmp(global_user_directory.c_str(), DATADIR) != 0)
+    if( (strcmp(global_user_directory.c_str(), DATADIR) != 0) && (strcmp(global_user_directory.c_str(), UD_NOT_SET) != 0) )
     {
         insert_preset_location = global_user_directory;
         insert_preset_location += "InsertPresets.rkis";
