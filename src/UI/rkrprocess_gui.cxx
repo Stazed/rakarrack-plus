@@ -268,22 +268,26 @@ void RKRGUI::GuiTimeout(void)
 
     if (m_process->Gui_Refresh == GUI_Refresh_CTRL_S)
     {
-        std::string filename = m_process->Bank_Vector[m_process->active_bank].Bank_File_Name;
-        int ok = m_process->save_bank(filename, m_process->Bank);
-
-        if (ok)
+        if( (int) m_process->Bank_Vector.size() > m_process->active_bank )
         {
-            // Reload the bank vector for the new file or update the existing
-            Scan_Bank_Dir(1);
+            std::string filename = m_process->Bank_Vector[m_process->active_bank].Bank_File_Name;
+            int ok = m_process->save_bank(filename, m_process->Bank);
 
-            // Set the bank window alert message
-            filename = filename.insert(0, "File Saved: ", 12);
-            BankWindow->Alert_Message->copy_label (filename.c_str());
-            BankWindow->Alert_Message->redraw ();
+            if (ok)
+            {
+                // Reload the bank vector for the new file or update the existing
+                Scan_Bank_Dir(1);
 
-            // Start the counter for timed message clearing
-            m_process->Alert_Count = 1;
+                // Set the bank window alert message
+                filename = filename.insert(0, "File Saved: ", 12);
+                BankWindow->Alert_Message->copy_label (filename.c_str());
+                BankWindow->Alert_Message->redraw ();
+
+                // Start the counter for timed message clearing
+                m_process->Alert_Count = 1;
+            }
         }
+
         m_process->Gui_Refresh = GUI_Refresh_Off;
     }
 
