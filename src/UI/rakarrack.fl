@@ -365,19 +365,19 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {120 470 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {1092 308 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {
+      Fl_Menu_Bar MenuP {open
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->set_label_offset(4);}
         code1 {o->set_submenu_paths(main_submenu_paths);}
         class RKR_Menu_Bar
       } {
         Submenu Archivo {
-          label {&File} open
+          label {&File}
           xywh {0 0 100 20} labelcolor 7
         } {
           MenuItem Import_Preset {
@@ -387,7 +387,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
           }
           MenuItem Export_Preset {
             label {Export Preset}
-            callback {export_preset->do_callback();}
+            callback {export_preset_choice->do_callback();}
             tooltip {Export Preset to file *.rkr type} xywh {0 0 45 26} shortcut 0x65 divider
           }
           MenuItem {BankWindow->Load_Bank_M} {
@@ -1463,9 +1463,10 @@ Put_Loaded();}
           code0 {o->set_label_offset(2);}
           class RKR_Button
         }
-        Fl_Button export_preset {
+        Fl_Choice export_preset_choice {
           label Export
-          callback {// If nothing previously set, then default location
+          callback {int choice = o->value();
+  // If nothing previously set, then default location
     std::string chooser_start_location = "";
 
     // Did the user set a User Directory
@@ -1476,10 +1477,10 @@ Put_Loaded();}
 
     // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
     m_process->Shut_Off_Below_Mouse = 1;
-
-    switch ( fl_choice("Export type", "Non-Mixer", "Rakarrack+", "Carla") )
+    
+    switch ( choice )
     {
-        case 1:  // Default
+        case 0:  // Default
         {
             char *filename;
 
@@ -1494,7 +1495,7 @@ Put_Loaded();}
         }
         break;
 
-        case 0:
+        case 2:
         {
             char *filename;
 
@@ -1510,7 +1511,7 @@ Put_Loaded();}
         }
         break;
 
-        case 2:
+        case 1:
         {
             char *filename;
 
@@ -1527,10 +1528,22 @@ Put_Loaded();}
         break;
     }
 
-    m_process->Shut_Off_Below_Mouse = 0;}
-          tooltip {Export preset to file, *.rkr type - Shortcut 'E'} xywh {306 50 64 18} shortcut 0x65 color 62 labelsize 12
-          code0 {o->set_label_offset(2);}
-          class RKR_Button
+    m_process->Shut_Off_Below_Mouse = 0;} open
+          tooltip {Export preset to file - Shortcut 'E'} xywh {306 50 64 18} down_box BORDER_BOX color 2 selection_color 0 align 1 when 6
+          class RKR_Choice
+        } {
+          MenuItem {} {
+            label {Rakarrack+}
+            tooltip {Export native Rakarrack+ format} xywh {0 0 34 24}
+          }
+          MenuItem {} {
+            label Carla
+            tooltip {Export Carla format} xywh {0 0 34 24}
+          }
+          MenuItem {} {
+            label {Non-Mixer}
+            tooltip {Export to NON-Mixer format} xywh {0 0 34 24}
+          }
         }
         Fl_Light_Button Compare {
           label Compare

@@ -62,7 +62,7 @@ void RKRGUI::cb_Import_Preset(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_Export_Preset_i(Fl_Menu_*, void*) {
-  export_preset->do_callback();
+  export_preset_choice->do_callback();
 }
 void RKRGUI::cb_Export_Preset(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_Export_Preset_i(o,v);
@@ -691,7 +691,8 @@ void RKRGUI::cb_import_preset(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_import_preset_i(o,v);
 }
 
-void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
+void RKRGUI::cb_export_preset_choice_i(RKR_Choice* o, void*) {
+  int choice = o->value();
   // If nothing previously set, then default location
     std::string chooser_start_location = "";
 
@@ -703,10 +704,10 @@ void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
 
     // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
     m_process->Shut_Off_Below_Mouse = 1;
-
-    switch ( fl_choice("Export type", "Non-Mixer", "Rakarrack+", "Carla") )
+    
+    switch ( choice )
     {
-        case 1:  // Default
+        case 0:  // Default
         {
             char *filename;
 
@@ -721,7 +722,7 @@ void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
         }
         break;
 
-        case 0:
+        case 2:
         {
             char *filename;
 
@@ -737,7 +738,7 @@ void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
         }
         break;
 
-        case 2:
+        case 1:
         {
             char *filename;
 
@@ -756,9 +757,16 @@ void RKRGUI::cb_export_preset_i(RKR_Button*, void*) {
 
     m_process->Shut_Off_Below_Mouse = 0;
 }
-void RKRGUI::cb_export_preset(RKR_Button* o, void* v) {
-  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_export_preset_i(o,v);
+void RKRGUI::cb_export_preset_choice(RKR_Choice* o, void* v) {
+  ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_export_preset_choice_i(o,v);
 }
+
+Fl_Menu_Item RKRGUI::menu_export_preset_choice[] = {
+ {"Rakarrack+", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Carla", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Non-Mixer", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {0,0,0,0,0,0,0,0,0}
+};
 
 void RKRGUI::cb_Compare_i(RKR_Light_Button* o, void*) {
   if ((int) o->value())
@@ -2588,21 +2596,21 @@ void RKRGUI::make_window() {
         import_preset->when(FL_WHEN_RELEASE);
         o->set_label_offset(2);
       } // RKR_Button* import_preset
-      { RKR_Button* o = export_preset = new RKR_Button(306, 50, 64, 18, "Export");
-        export_preset->tooltip("Export preset to file, *.rkr type - Shortcut \'E\'");
-        export_preset->box(FL_UP_BOX);
-        export_preset->shortcut(0x65);
-        export_preset->color((Fl_Color)62);
-        export_preset->selection_color(FL_BACKGROUND_COLOR);
-        export_preset->labeltype(FL_NORMAL_LABEL);
-        export_preset->labelfont(0);
-        export_preset->labelsize(12);
-        export_preset->labelcolor(FL_FOREGROUND_COLOR);
-        export_preset->callback((Fl_Callback*)cb_export_preset);
-        export_preset->align(Fl_Align(FL_ALIGN_CENTER));
-        export_preset->when(FL_WHEN_RELEASE);
-        o->set_label_offset(2);
-      } // RKR_Button* export_preset
+      { export_preset_choice = new RKR_Choice(306, 50, 64, 18, "Export");
+        export_preset_choice->tooltip("Export preset to file - Shortcut \'E\'");
+        export_preset_choice->box(FL_FLAT_BOX);
+        export_preset_choice->down_box(FL_BORDER_BOX);
+        export_preset_choice->color((Fl_Color)2);
+        export_preset_choice->selection_color(FL_FOREGROUND_COLOR);
+        export_preset_choice->labeltype(FL_NORMAL_LABEL);
+        export_preset_choice->labelfont(0);
+        export_preset_choice->labelsize(14);
+        export_preset_choice->labelcolor(FL_FOREGROUND_COLOR);
+        export_preset_choice->callback((Fl_Callback*)cb_export_preset_choice);
+        export_preset_choice->align(Fl_Align(FL_ALIGN_TOP));
+        export_preset_choice->when(FL_WHEN_RELEASE_ALWAYS);
+        export_preset_choice->menu(menu_export_preset_choice);
+      } // RKR_Choice* export_preset_choice
       { RKR_Light_Button* o = Compare = new RKR_Light_Button(373, 50, 72, 18, "Compare");
         Compare->tooltip("Compare to bank preset - Shortcut \'P\'");
         Compare->box(FL_UP_BOX);

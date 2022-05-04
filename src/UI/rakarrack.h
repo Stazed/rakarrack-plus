@@ -522,10 +522,11 @@ private:
   inline void cb_import_preset_i(RKR_Button*, void*);
   static void cb_import_preset(RKR_Button*, void*);
 public:
-  RKR_Button *export_preset;
+  RKR_Choice *export_preset_choice;
 private:
-  inline void cb_export_preset_i(RKR_Button*, void*);
-  static void cb_export_preset(RKR_Button*, void*);
+  inline void cb_export_preset_choice_i(RKR_Choice*, void*);
+  static void cb_export_preset_choice(RKR_Choice*, void*);
+  static Fl_Menu_Item menu_export_preset_choice[];
 public:
   RKR_Light_Button *Compare;
 private:
