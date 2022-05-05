@@ -53,6 +53,10 @@ for fn in files:
         pindex += 1
         p = data.find("lv2:symbol ",p)
         #prints as (carla index, parameter name, parameter URI, offset)
+        #print("        ", "NTS(",(pindex-1),").c_str()",",","\"", (pname),"\"", ",", "\"", (psymbol),"\"",",")
         print("        ", (fxindex,pindex-1),":",(pindex, pname, psymbol, 0),",")
     print("        ", (fxindex,pindex),":",(-1, ),",") # mark end of effect
+    #print("         ")
 print("    }[(efxindex,paramindex)]")
+
+#./ttlcrunch.py > out.txt

@@ -72,7 +72,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
         fprintf(stderr, "Invalid font type, reverting to default\n");
         font_type = 0;   // reset to default
     }
-    
+
     rakarrack.get(PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
     rakarrack.get(PrefNom("Foreground Color"), fore_color, RKR_buttons_color);      // FL_DARK3 - Buttons
     rakarrack.get(PrefNom("Labels Color"), label_color, RKR_labels_color);          // FL_WHITE
@@ -84,7 +84,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     char temp[256];
     sprintf(temp, "%s/blackbg.png", DATADIR);
     rakarrack.get(PrefNom("Background Image"), BackgroundImage, temp, 256);
-    
+
     // Check if valid file. Revert to default if error.
     FILE *fn;
     if ((fn = fopen(BackgroundImage, "r")) == NULL)
@@ -137,7 +137,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     // ************ Settings/Quality ******************
     rakarrack.get(PrefNom("Harmonizer Quality"), HarQual, 4);
     rakarrack.get(PrefNom("StereoHarm Quality"), SteQual, 4);
-    
+
     rakarrack.get(PrefNom("Sequence Quality"), SeqQual, 4);
     rakarrack.get(PrefNom("Shifter Quality"), ShiQual, 4);
 
@@ -212,7 +212,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
 
     // Custom MIDI Table used On/OFF
     rakarrack.get(PrefNom("MIDI Table"), custom_midi_table, 0);
-    
+
     // Custom MIDI Table last used file
     rakarrack.get(PrefNom("MIDI Table File"), custom_midi_table_file, -1);
     // End Settings/MIDI
@@ -231,7 +231,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     }
 
     rakarrack.get(PrefNom("Auto Connect Num"), cuan_jack, 2);       // Out
-    
+
     memset(temp, 0, sizeof (temp));
 
     char j_names[128];
@@ -242,7 +242,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     {
         memset(temp, 0, sizeof (temp));
         sprintf(temp, "Jack Port %d", i + 1);
-        
+
         if (i < 2)
         {
             strcpy(j_names, jack_names[i]);
@@ -251,7 +251,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
         {
             strcpy(j_names, "");
         }
-        
+
         rakarrack.get(PrefNom(temp), jack_po[i].name, j_names, 128);
     }
 
@@ -277,7 +277,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     {
         memset(temp, 0, sizeof (temp));
         sprintf(temp, "Jack Port In %d", i + 1);
-        
+
         if (i < 1)
         {
             strcpy(j_names, jack_inames[i]);
@@ -286,7 +286,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
         {
             strcpy(j_names, "");
         }
-        
+
         rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
     }
     // End Settings/Jack
@@ -303,13 +303,13 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     memset(temp, 0, sizeof (temp));
     sprintf(temp, "%s/Default.rkrb", DATADIR);
     rakarrack.get(PrefNom("Bank Filename"), BankFilename, temp, 127);
-    
+
     // Get user bank directory
     memset(temp, 0, sizeof (temp));
     sprintf(temp, "%s", UD_NOT_SET);
     rakarrack.get(PrefNom("User Directory"), UDirFilename, temp, 127);
     global_user_directory = UDirFilename;
-    
+
     rakarrack.get(PrefNom("UserName"), UserRealName, "", 127);
     // End Settings/User
 
