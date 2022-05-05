@@ -58,7 +58,7 @@ m_parent= _rgui;} {}
     class RKR_Tabs
   } {
     Fl_Group Look {
-      label Look open
+      label Look
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -1435,7 +1435,7 @@ else JackIn->deactivate();}
       }
     }
     Fl_Group MISC_SET {
-      label Misc open
+      label Misc
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo10 {
@@ -1530,7 +1530,9 @@ m_process->Config.NSM_single_state=(int) o->value();
 
     m_process->load_MIDI_table_vector();
     m_parent->Scan_Bank_Dir(1);}
-        xywh {415 65 65 20}
+        tooltip {You must make and set a User Directory if  you want to make custom changes.
+The user directory is where all custom banks and files must be placed to be loaded by the program.
+See F1 help under General/Preferences for additional information.} xywh {415 65 65 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button
       }
@@ -1586,7 +1588,7 @@ m_process->Config.NSM_single_state=(int) o->value();
         m_process->Handle_Message(40, filename);
         BFiname->value(m_process->Config.BankFilename);
     }}
-        xywh {415 135 65 20}
+        tooltip {Choose a default user bank in your User Directory that you want the 'U' button to select.} xywh {415 135 65 20}
         code0 {o->set_label_offset(4);}
         class RKR_Button
       }

@@ -3082,6 +3082,10 @@ ks must be stored in this directory.");
       o->set_text_offset(4);
     } // RKR_File_Input* Udir
     { RKR_Button* o = UD_Browser = new RKR_Button(415, 65, 65, 20, "Browse");
+      UD_Browser->tooltip("You must make and set a User Directory if  you want to make custom changes.\n\
+The user directory is where all custom banks and files must be placed to be lo\
+aded by the program.\nSee F1 help under General/Preferences for additional inf\
+ormation.");
       UD_Browser->box(FL_UP_BOX);
       UD_Browser->color(FL_BACKGROUND_COLOR);
       UD_Browser->selection_color(FL_BACKGROUND_COLOR);
@@ -3111,6 +3115,8 @@ ndow or the Bank window.");
       o->set_text_offset(4);
     } // RKR_File_Input* BFiname
     { RKR_Button* o = BF_Browser = new RKR_Button(415, 135, 65, 20, "Browse");
+      BF_Browser->tooltip("Choose a default user bank in your User Directory that you want the \'U\' but\
+ton to select.");
       BF_Browser->box(FL_UP_BOX);
       BF_Browser->color(FL_BACKGROUND_COLOR);
       BF_Browser->selection_color(FL_BACKGROUND_COLOR);
