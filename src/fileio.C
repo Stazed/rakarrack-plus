@@ -356,7 +356,7 @@ RKR::export_to_nsm_mixer(std::string filename)
         s_buf += "0x";
         s_buf += NTS(mixer_module_index);
         s_buf += " create :lv2_plugin_uri \"";        
-        s_buf += Rack_Effects[effect]->get_URI();
+        s_buf += Rack_Effects[effect]->get_URI(NON_MIXER);
         s_buf += "\" :plugin_ins 2 :plugin_outs 2 :parameter_values \"";
         
         // Add the individual effects parameters
@@ -435,16 +435,16 @@ RKR::export_to_carla(std::string filename)
         // Effect Header
         s_buf = "\n";
         s_buf += " <!-- ";
-        s_buf += Rack_Effects[effect]->get_name();
+        s_buf += Rack_Effects[effect]->get_name(CARLA);
         s_buf += " -->\n";
         s_buf += " <Plugin>\n";
         s_buf += "  <Info>\n";
         s_buf += "   <Type>LV2</Type>\n";
         s_buf += "   <Name>";
-        s_buf += Rack_Effects[effect]->get_name();
+        s_buf += Rack_Effects[effect]->get_name(CARLA);
         s_buf += "</Name>\n";
         s_buf += "   <URI>";
-        s_buf +=  Rack_Effects[effect]->get_URI();
+        s_buf +=  Rack_Effects[effect]->get_URI(CARLA);
         s_buf +=  "</URI>\n";
         s_buf += "  </Info>\n";
         s_buf += "\n";

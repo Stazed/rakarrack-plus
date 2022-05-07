@@ -34,7 +34,8 @@
 
 #define HARMLV2_URI "https://github.com/Stazed/rakarrack-plus#har"
 #define HARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#har_no_mid"
-#define HARM_NAME "RakarrackPlus Harmonizer (no midi)"
+#define HARM_NAME_NO_MIDI "RakarrackPlus Harmonizer (no midi)"
+#define HARM_NAME "RakarrackPlus Harmonizer"
 
 const int C_HARM_PARAMETERS = 11;
 
@@ -86,8 +87,8 @@ public:
     void lv2_update_params(uint32_t period);
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
-    virtual std::string get_URI() { return HARMNOMIDLV2_URI; };
-    virtual std::string get_name() {return HARM_NAME; };
+    virtual std::string get_URI(int);
+    virtual std::string get_name(int);
     
     void initialize();
     void clear_initialize();

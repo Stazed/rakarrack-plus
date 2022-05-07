@@ -79,8 +79,8 @@ public:
     virtual void lv2_update_params(uint32_t)  = 0;
 #endif // LV2
     virtual void LV2_parameters(std::string &, int) {};
-    virtual std::string get_URI() { return ""; };
-    virtual std::string get_name() { return ""; };
+    virtual std::string get_URI(int) { return ""; };
+    virtual std::string get_name(int) { return ""; };
     void Carla_LV2_port(std::string &, int index, int value, std::string name, std::string symbol);
 
     uint32_t period_master;

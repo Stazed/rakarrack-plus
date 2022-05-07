@@ -224,10 +224,9 @@ StereoHarm::set_random_parameters()
 void
 StereoHarm::LV2_parameters(std::string &s_buf, int type)
 {
-    int param_case_offset = 0;
-    for(int i = 0; i < (C_SHARM_PARAMETERS - 1); i++)   // -1 for no midi
+    for(int i = 0; i < C_SHARM_PARAMETERS; i++)
     {
-        switch(param_case_offset)
+        switch(i)
         {
             // Normal processing
             case Sharm_L_Chroma:
@@ -238,13 +237,13 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
             {
                 if(type == CARLA)
                 {
-                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ), sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
                 }
                 else
                 {
-                    s_buf += NTS( getpar( param_case_offset ));
+                    s_buf += NTS( getpar( i ));
 
-                    if ( param_case_offset !=  Sharm_LR_Cross)   // last one no need for delimiter
+                    if ( i !=  Sharm_LR_Cross)   // last one no need for delimiter
                         s_buf += ":";
                 }
             }
@@ -272,11 +271,11 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
             {
                 if(type == CARLA)
                 {
-                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ) - 64, sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 64, sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
                 }
                 else
                 {
-                    s_buf += NTS( getpar( param_case_offset ) - 64);
+                    s_buf += NTS( getpar( i ) - 64);
                     s_buf += ":";
                 }
             }
@@ -288,11 +287,11 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
             {
                 if(type == CARLA)
                 {
-                    Carla_LV2_port(s_buf, i + 1, getpar( param_case_offset ) - 12, sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ) - 12, sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
                 }
                 else
                 {
-                    s_buf += NTS( getpar( param_case_offset ) - 12);
+                    s_buf += NTS( getpar( i ) - 12);
                     s_buf += ":";
                 }
             }
@@ -309,15 +308,40 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
                     s_buf += NTS( getpar( Sharm_Chord ));
                     s_buf += ":";
                 }
-
-                param_case_offset++;    // skip Sharm_MIDI
             }
             break;
+            
+            case Sharm_MIDI:
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( Sharm_Chord ), sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    // non-mixer does not have midi
+                }
+            break;
         }
-
-        param_case_offset++;
     }
 }
+
+std::string
+StereoHarm::get_URI(int type)
+{
+    if(type == NON_MIXER)
+        return SHARMNOMIDLV2_URI;
+
+    return STEROHARMLV2_URI;
+};
+
+std::string
+StereoHarm::get_name(int type)
+{
+    if(type == NON_MIXER)
+        return SHARM_NAME_NO_MIDI;
+
+    return SHARM_NAME;
+};
 
 void
 StereoHarm::initialize()

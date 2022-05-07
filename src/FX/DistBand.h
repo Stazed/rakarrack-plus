@@ -94,8 +94,8 @@ public:
     void lv2_update_params(uint32_t period);
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
-    virtual std::string get_URI() { return DISTBANDLV2_URI; };
-    virtual std::string get_name() {return DISTBAND_NAME; };
+    virtual std::string get_URI(int) { return DISTBANDLV2_URI; };
+    virtual std::string get_name(int) {return DISTBAND_NAME; };
     
     void initialize ();
     void clear_initialize();

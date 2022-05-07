@@ -71,8 +71,8 @@ public:
     void initialize();
 
     virtual void LV2_parameters(std::string &s_buf, int type);
-    virtual std::string get_URI() { return EQPLV2_URI; };
-    virtual std::string get_name() {return EQP_NAME; };
+    virtual std::string get_URI(int) { return EQPLV2_URI; };
+    virtual std::string get_name(int) {return EQP_NAME; };
 
 private:
 

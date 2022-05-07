@@ -203,7 +203,7 @@ Harmonizer::set_random_parameters()
 void
 Harmonizer::LV2_parameters(std::string &s_buf, int type)
 {
-    for(int i = 0; i < (C_HARM_PARAMETERS - 1); i++)    // -1 for Harm_MIDI - since this is no MIDI
+    for(int i = 0; i < C_HARM_PARAMETERS; i++)
     {
         switch(i)
         {
@@ -275,9 +275,38 @@ Harmonizer::LV2_parameters(std::string &s_buf, int type)
                 }
             }
             break;
+
+            case Harm_MIDI:
+                if(type == CARLA)
+                {
+                    Carla_LV2_port(s_buf, i + 1, getpar( i ), harm_parameters[i * 3 + 1], harm_parameters[i * 3 + 2]);
+                }
+                else
+                {
+                    // NON_MIXER does not have midi
+                }
+            break;
         }
     }
 }
+
+std::string
+Harmonizer::get_URI(int type)
+{
+    if(type == NON_MIXER)
+        return HARMNOMIDLV2_URI;
+    
+    return HARMLV2_URI;
+};
+
+std::string
+Harmonizer::get_name(int type)
+{
+    if(type == NON_MIXER)
+        return HARM_NAME_NO_MIDI;
+
+    return HARM_NAME;
+};
 
 void Harmonizer::initialize()
 {

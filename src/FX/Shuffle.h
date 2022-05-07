@@ -81,8 +81,8 @@ public:
     void lv2_update_params(uint32_t period);
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
-    virtual std::string get_URI() { return SHUFFLELV2_URI; };
-    virtual std::string get_name() {return SHUFFLE_NAME; };
+    virtual std::string get_URI(int) { return SHUFFLELV2_URI; };
+    virtual std::string get_name(int) {return SHUFFLE_NAME; };
     
     void initialize();
     void clear_initialize();

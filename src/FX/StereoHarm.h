@@ -33,7 +33,8 @@
 
 #define STEROHARMLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm"
 #define SHARMNOMIDLV2_URI "https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid"
-#define SHARM_NAME "RakarrackPlus StereoHarmonizer (no midi)"
+#define SHARM_NAME "RakarrackPlus StereoHarmonizer"
+#define SHARM_NAME_NO_MIDI "RakarrackPlus StereoHarmonizer (no midi)"
 
 const int C_SHARM_PARAMETERS = 12;
 
@@ -64,7 +65,8 @@ static const char *sharm_parameters[] =
     NTS(Sharm_R_Chroma).c_str(), "Right Chroma",  "CHR", 
     NTS(Sharm_Select).c_str(), "Select Chord Mode",  "SELECT", 
     NTS(Sharm_Note).c_str(), "Note",  "NOTE", 
-    NTS(Sharm_Chord).c_str(), "Chord",  "CHORD",  
+    NTS(Sharm_Chord).c_str(), "Chord",  "CHORD",
+    NTS(Sharm_MIDI).c_str() , " MIDI Mode " , " MIDI ",
     NTS(Sharm_LR_Cross).c_str(), "Left/Right Crossover",  "LRC"
 };
 
@@ -86,8 +88,8 @@ public:
     void lv2_update_params(uint32_t period);
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
-    virtual std::string get_URI() { return SHARMNOMIDLV2_URI; };
-    virtual std::string get_name() {return SHARM_NAME; };
+    virtual std::string get_URI(int type);
+    virtual std::string get_name(int type);
     
     void initialize();
     void clear_initialize();

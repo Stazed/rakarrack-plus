@@ -81,8 +81,8 @@ public:
     void set_random_parameters();
     
     virtual void LV2_parameters(std::string &s_buf, int type);
-    virtual std::string get_URI() { return OVERDRIVELV2_URI; };
-    virtual std::string get_name() {return OVERDRIVE_NAME; };
+    virtual std::string get_URI(int) { return OVERDRIVELV2_URI; };
+    virtual std::string get_name(int) {return OVERDRIVE_NAME; };
 
 };
 

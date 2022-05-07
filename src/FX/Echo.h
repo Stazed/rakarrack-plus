@@ -78,8 +78,8 @@ public:
     void lv2_update_params(uint32_t period);
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);
-    virtual std::string get_URI() { return ECHOLV2_URI; };
-    virtual std::string get_name() {return ECHO_NAME; };
+    virtual std::string get_URI(int) { return ECHOLV2_URI; };
+    virtual std::string get_name(int) {return ECHO_NAME; };
 
     void Tempo2Delay(int delay);
 
