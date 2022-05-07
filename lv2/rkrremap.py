@@ -305,7 +305,7 @@ def remap(efxindex, paramindex):
 
          (16, -1) : ('RakarrackPlus NoiseGate', 'https://github.com/Stazed/rakarrack-plus#gate') ,
          (16, 0) : (1, 'Threshold', 'THRESHOLD', 0) ,
-         (16, 1) : (2, 'Rang', 'RANGE', 0) ,
+         (16, 1) : (2, 'Range', 'RANGE', 0) ,
          (16, 2) : (3, 'Attack Time', 'ATTACK', 0) ,
          (16, 3) : (4, 'Release Time', 'RELEASE', 0) ,
          (16, 4) : (5, 'Lowpass Filter', 'LPF', 0) ,
