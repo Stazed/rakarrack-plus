@@ -66,7 +66,7 @@ static const char *sharm_parameters[] =
     NTS(Sharm_Select).c_str(), "Select Chord Mode",  "SELECT", 
     NTS(Sharm_Note).c_str(), "Note",  "NOTE", 
     NTS(Sharm_Chord).c_str(), "Chord",  "CHORD",
-    NTS(Sharm_MIDI).c_str() , "MIDI Mode" , "MIDI",
+    NTS(Sharm_MIDI).c_str() , "MIDI Mode", "MIDI",
     NTS(Sharm_LR_Cross).c_str(), "Left/Right Crossover",  "LRC"
 };
 
