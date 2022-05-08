@@ -1,9 +1,9 @@
-#CMake file for Rakarrack & LV2
+#CMake file for Rakarrack-plus & LV2
 
 cmake_minimum_required(VERSION 3.1)
 project (rakarrack-plus)
 
-set (PACKAGE_VERSION "1.2.0")
+set (PACKAGE_VERSION "1.2.1")
 
 set (CMAKE_SKIP_RULE_DEPENDENCY OFF)
 
