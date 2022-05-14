@@ -640,6 +640,10 @@ private:
   static void cb_Trigger(TrigWindowGui*, void*);
 public:
   DelayFileWindowGui *DelayFile;
+private:
+  inline void cb_DelayFile_i(DelayFileWindowGui*, void*);
+  static void cb_DelayFile(DelayFileWindowGui*, void*);
+public:
   RandomEditGui *RandomEdit;
 private:
   inline void cb_RandomEdit_i(RandomEditGui*, void*);

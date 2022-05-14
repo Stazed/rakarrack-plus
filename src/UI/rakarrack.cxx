@@ -1069,6 +1069,14 @@ void RKRGUI::cb_Trigger(TrigWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Trigger_i(o,v);
 }
 
+void RKRGUI::cb_DelayFile_i(DelayFileWindowGui* o, void*) {
+  save_current_state(7);
+o->hide();
+}
+void RKRGUI::cb_DelayFile(DelayFileWindowGui* o, void* v) {
+  ((RKRGUI*)(o->user_data()))->cb_DelayFile_i(o,v);
+}
+
 void RKRGUI::cb_RandomEdit_i(RandomEditGui* o, void*) {
   save_current_state(4);
 o->hide();
@@ -3009,7 +3017,7 @@ references.");
     DelayFile->labelfont(0);
     DelayFile->labelsize(14);
     DelayFile->labelcolor(FL_FOREGROUND_COLOR);
-    DelayFile->user_data((void*)(this));
+    DelayFile->callback((Fl_Callback*)cb_DelayFile, (void*)(this));
     DelayFile->align(Fl_Align(FL_ALIGN_TOP));
     DelayFile->when(FL_WHEN_RELEASE);
     o->initialize(m_process, this);

@@ -349,11 +349,16 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     rakarrack.get(PrefNom("Help W"), Help_W, 640);
     rakarrack.get(PrefNom("Help H"), Help_H, 480);
     rakarrack.get(PrefNom("Help TextSize"), Help_TextSize, 11);
-    
+
     rakarrack.get(PrefNom("Random X"), Random_X, 1);
     rakarrack.get(PrefNom("Random Y"), Random_Y, 1);
     rakarrack.get(PrefNom("Random W"), Random_W, 240);
     rakarrack.get(PrefNom("Random H"), Random_H, 320);
+
+    rakarrack.get(PrefNom("Delay X"), Delay_X, 1);
+    rakarrack.get(PrefNom("Delay Y"), Delay_Y, 1);
+    rakarrack.get(PrefNom("Delay W"), Delay_W, 800);
+    rakarrack.get(PrefNom("Delay H"), Delay_H, 265);
     
     // End Window Sizes
 

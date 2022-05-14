@@ -236,6 +236,11 @@ public:
     int Random_Y;
     int Random_W;
     int Random_H;
+    
+    int Delay_X;
+    int Delay_Y;
+    int Delay_W;
+    int Delay_H;
 
     // Main window booster button
     float booster;

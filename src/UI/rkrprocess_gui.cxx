@@ -747,6 +747,9 @@ void RKRGUI::load_previous_state()
     RandomEdit->resize(m_process->Config.Random_X, m_process->Config.Random_Y,
                      m_process->Config.Random_W, m_process->Config.Random_H);
 
+    DelayFile->resize(m_process->Config.Delay_X, m_process->Config.Delay_Y,
+                     m_process->Config.Delay_W, m_process->Config.Delay_H);
+
     PutBackground();
 
     Settings->scheme_ch->value(m_process->Config.Schema);
@@ -955,7 +958,6 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         //Tuner
         rakarrack.set(m_process->Config.PrefNom("Tuner On/Off"), (int) m_process->Tuner_Active);
 
-
         //MIDIConverter
         rakarrack.set(m_process->Config.PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Active);
         rakarrack.set(m_process->Config.PrefNom("Midi Out Channel"), (int) MIDI->Midi_out_Counter->value());
@@ -974,13 +976,11 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         //Booster
         rakarrack.set(m_process->Config.PrefNom("Booster"), m_process->booster);
 
-
         //Tap Tempo
         rakarrack.set(m_process->Config.PrefNom("TapTempo On/Off"), (int) m_process->Tap_Active);
         rakarrack.set(m_process->Config.PrefNom("TapTempo Input"), (int) m_process->Tap_Selection);
         rakarrack.set(m_process->Config.PrefNom("TapTempo Set"), (int) m_process->Tap_SetValue);
     }
-
 
     if (whati == 1)
     {
@@ -989,7 +989,23 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("BankWindow W"), BankWindow->w());
         rakarrack.set(m_process->Config.PrefNom("BankWindow H"), BankWindow->h());
     }
-    
+
+    if (whati == 2)
+    {
+        rakarrack.set(m_process->Config.PrefNom("Order X"), Order->x());
+        rakarrack.set(m_process->Config.PrefNom("Order Y"), Order->y());
+        rakarrack.set(m_process->Config.PrefNom("Order W"), Order->w());
+        rakarrack.set(m_process->Config.PrefNom("Order H"), Order->h());
+    }
+
+    if (whati == 3)
+    {
+        rakarrack.set(m_process->Config.PrefNom("Settings X"), Settings->x());
+        rakarrack.set(m_process->Config.PrefNom("Settings Y"), Settings->y());
+        rakarrack.set(m_process->Config.PrefNom("Settings W"), Settings->w());
+        rakarrack.set(m_process->Config.PrefNom("Settings H"), Settings->h());
+    }
+
     if (whati == 4)
     {
         rakarrack.set(m_process->Config.PrefNom("Random X"), RandomEdit->x());
@@ -1006,7 +1022,6 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("MIDI Learn H"), MIDILearn->h());
     }
 
-
     if (whati == 6)
     {
         rakarrack.set(m_process->Config.PrefNom("Trigger X"), Trigger->x());
@@ -1022,23 +1037,12 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Aux Maximum"), m_process->Aux_Maximum);
     }
 
-
-
-
-    if (whati == 2)
+    if (whati == 7)
     {
-        rakarrack.set(m_process->Config.PrefNom("Order X"), Order->x());
-        rakarrack.set(m_process->Config.PrefNom("Order Y"), Order->y());
-        rakarrack.set(m_process->Config.PrefNom("Order W"), Order->w());
-        rakarrack.set(m_process->Config.PrefNom("Order H"), Order->h());
-    }
-
-    if (whati == 3)
-    {
-        rakarrack.set(m_process->Config.PrefNom("Settings X"), Settings->x());
-        rakarrack.set(m_process->Config.PrefNom("Settings Y"), Settings->y());
-        rakarrack.set(m_process->Config.PrefNom("Settings W"), Settings->w());
-        rakarrack.set(m_process->Config.PrefNom("Settings H"), Settings->h());
+        rakarrack.set(m_process->Config.PrefNom("Delay X"), DelayFile->x());
+        rakarrack.set(m_process->Config.PrefNom("Delay Y"), DelayFile->y());
+        rakarrack.set(m_process->Config.PrefNom("Delay W"), DelayFile->w());
+        rakarrack.set(m_process->Config.PrefNom("Delay H"), DelayFile->h());
     }
 
     if ((whati == 3) || (whati == 0))
@@ -1157,7 +1161,6 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
 #endif
     }
 
-
     if (whati == 3)
     {
         int k = 1;
@@ -1203,6 +1206,7 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
  *      4 = Random edit
  *      5 = MIDI Learn
  *      6 = Trigger window (ACI)
+ *      7 = Echotron Delay file window
  */
 void RKRGUI::save_current_state(int whati)
 {

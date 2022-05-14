@@ -1957,7 +1957,9 @@ o->hide();} open
       code2 {o->hide();}
       class TrigWindowGui
     } {}
-    Fl_Window DelayFile {open
+    Fl_Window DelayFile {
+      callback {save_current_state(7);
+o->hide();} open
       xywh {831 639 800 265} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "delayfilewindow_gui.h"}
       code1 {o->initialize(m_process, this);}
