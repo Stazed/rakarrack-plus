@@ -365,7 +365,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} open selected
-      xywh {1092 308 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {378 183 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1964,7 +1964,9 @@ o->hide();} open
       code2 {o->hide();}
       class DelayFileWindowGui size_range {400 132 1600 1060}
     } {}
-    Fl_Window RandomEdit {open
+    Fl_Window RandomEdit {
+      callback {save_current_state(4);
+o->hide();} open
       xywh {890 520 240 320} type Double box NO_BOX color 4 selection_color 7 hide resizable
       code0 {\#include "randomedit_gui.h"}
       code1 {o->hide();}

@@ -232,6 +232,11 @@ public:
     int Help_H;
     int Help_TextSize;
 
+    int Random_X;
+    int Random_Y;
+    int Random_W;
+    int Random_H;
+
     // Main window booster button
     float booster;
 

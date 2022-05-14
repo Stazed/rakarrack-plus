@@ -1069,6 +1069,14 @@ void RKRGUI::cb_Trigger(TrigWindowGui* o, void* v) {
   ((RKRGUI*)(o->user_data()))->cb_Trigger_i(o,v);
 }
 
+void RKRGUI::cb_RandomEdit_i(RandomEditGui* o, void*) {
+  save_current_state(4);
+o->hide();
+}
+void RKRGUI::cb_RandomEdit(RandomEditGui* o, void* v) {
+  ((RKRGUI*)(o->user_data()))->cb_RandomEdit_i(o,v);
+}
+
 void RKRGUI::make_window() {
   { Principal = new Fl_Double_Window(800, 600);
     Principal->box(FL_DOWN_BOX);
@@ -3018,7 +3026,7 @@ references.");
     RandomEdit->labelfont(0);
     RandomEdit->labelsize(14);
     RandomEdit->labelcolor(FL_FOREGROUND_COLOR);
-    RandomEdit->user_data((void*)(this));
+    RandomEdit->callback((Fl_Callback*)cb_RandomEdit, (void*)(this));
     RandomEdit->align(Fl_Align(FL_ALIGN_TOP));
     RandomEdit->when(FL_WHEN_RELEASE);
     o->hide();

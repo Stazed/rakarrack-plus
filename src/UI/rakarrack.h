@@ -641,6 +641,10 @@ private:
 public:
   DelayFileWindowGui *DelayFile;
   RandomEditGui *RandomEdit;
+private:
+  inline void cb_RandomEdit_i(RandomEditGui*, void*);
+  static void cb_RandomEdit(RandomEditGui*, void*);
+public:
   RKRGUI(int argc, char**argv,RKR *rkr_);
 private:
   static void TimeoutStatic(void* ptr);

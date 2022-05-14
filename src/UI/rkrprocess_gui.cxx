@@ -743,6 +743,9 @@ void RKRGUI::load_previous_state()
 
     Settings->resize(m_process->Config.Settings_X, m_process->Config.Settings_Y,
                      m_process->Config.Settings_W, m_process->Config.Settings_H);
+    
+    RandomEdit->resize(m_process->Config.Random_X, m_process->Config.Random_Y,
+                     m_process->Config.Random_W, m_process->Config.Random_H);
 
     PutBackground();
 
@@ -986,6 +989,14 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("BankWindow W"), BankWindow->w());
         rakarrack.set(m_process->Config.PrefNom("BankWindow H"), BankWindow->h());
     }
+    
+    if (whati == 4)
+    {
+        rakarrack.set(m_process->Config.PrefNom("Random X"), RandomEdit->x());
+        rakarrack.set(m_process->Config.PrefNom("Random Y"), RandomEdit->y());
+        rakarrack.set(m_process->Config.PrefNom("Random W"), RandomEdit->w());
+        rakarrack.set(m_process->Config.PrefNom("Random H"), RandomEdit->h());
+    }
 
     if (whati == 5)
     {
@@ -1189,7 +1200,7 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
  *      1 = Bank window
  *      2 = Order window
  *      3 = Settings window & User settings
- *      4 = Not used
+ *      4 = Random edit
  *      5 = MIDI Learn
  *      6 = Trigger window (ACI)
  */
