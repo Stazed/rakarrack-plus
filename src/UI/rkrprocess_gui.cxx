@@ -943,12 +943,19 @@ void RKRGUI::load_previous_state()
     for (int i = 0; i < RandomEdit->RandomScroll->children(); i++)
     {
         Fl_Widget *w = RandomEdit->RandomScroll->child(i);
-        RKR_Check_Button *b = (RKR_Check_Button * ) w;
 
-        if(FX_Excluded[i])
-            b->value(1);
-        else
-            b->value(0);
+        long long ud = (long long) w->user_data();
+        ud -= UD_random_edit;
+
+        if(ud >= 0 && ud <= 46)
+        {
+            RKR_Check_Button *b = (RKR_Check_Button * ) w;
+
+            if(FX_Excluded[ud])
+            {
+                b->value(1);
+            }
+        }
     }
 }
 

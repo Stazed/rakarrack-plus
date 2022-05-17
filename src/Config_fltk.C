@@ -407,8 +407,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     rakarrack.get(PrefNom("Rand Max"), Rand_Max, 6);
 
     memset(temp, 0, sizeof (temp));
-    memset(Rand_Exclude, 0, sizeof(Rand_Exclude));
-    rakarrack.get(PrefNom("Rand Exclude"), Rand_Exclude, temp, 127);
+    rakarrack.get(PrefNom("Rand Exclude"), Rand_Exclude, temp, C_NUMBER_EFFECTS + 1);
 
 #ifdef NSM_SUPPORT
     if(!nsm_preferences_file.empty())

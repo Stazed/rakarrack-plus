@@ -292,7 +292,7 @@ public:
     int Rand_Active;
     int Rand_Current;
     int Rand_Max;
-    char Rand_Exclude[128];
+    char Rand_Exclude[C_NUMBER_EFFECTS + 1];
 
     // NSM
 #ifdef NSM_SUPPORT
