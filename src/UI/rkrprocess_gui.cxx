@@ -945,7 +945,8 @@ void RKRGUI::load_previous_state()
         Fl_Widget *w = RandomEdit->RandomScroll->child(i);
         RKR_Check_Button *b = (RKR_Check_Button * ) w;
 
-        b->value((int) FX_Excluded[i]);
+        if(FX_Excluded[i])
+            b->value(1);
     }
 }
 
