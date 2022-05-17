@@ -947,6 +947,8 @@ void RKRGUI::load_previous_state()
 
         if(FX_Excluded[i])
             b->value(1);
+        else
+            b->value(0);
     }
 }
 
