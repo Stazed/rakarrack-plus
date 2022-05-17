@@ -918,6 +918,35 @@ void RKRGUI::load_previous_state()
 
     m_process->Aux_Maximum = m_process->Config.Aux_Maximum;
     Trigger->aux_max->value(m_process->Aux_Maximum);
+
+    // Random window
+    random_parameters = m_process->Config.Rand_Parameters;
+    RandomEdit->random_params->value(random_parameters);
+
+    efx_always_active = m_process->Config.Rand_Active;
+    RandomEdit->random_all_active->value(efx_always_active);
+
+    use_current_active_efx = m_process->Config.Rand_Current;
+    RandomEdit->random_current->value(use_current_active_efx);
+
+    max_random_active = m_process->Config.Rand_Max;
+    RandomEdit->random_max->value(max_random_active);
+
+    // Set any excluded effects
+    for(int i = 0; i < C_NUMBER_EFFECTS; ++i)
+    {
+        if( m_process->Config.Rand_Exclude[i] == 1)
+            FX_Excluded[i] = m_process->Config.Rand_Exclude[i];
+    }
+
+    // Set the scroll buttons
+    for (int i = 0; i < RandomEdit->RandomScroll->children(); i++)
+    {
+        Fl_Widget *w = RandomEdit->RandomScroll->child(i);
+        RKR_Check_Button *b = (RKR_Check_Button * ) w;
+
+        b->value((int) FX_Excluded[i]);
+    }
 }
 
 void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
@@ -1012,6 +1041,20 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Random Y"), RandomEdit->y());
         rakarrack.set(m_process->Config.PrefNom("Random W"), RandomEdit->w());
         rakarrack.set(m_process->Config.PrefNom("Random H"), RandomEdit->h());
+
+        rakarrack.set(m_process->Config.PrefNom("Rand Parameters"), random_parameters);
+        rakarrack.set(m_process->Config.PrefNom("Rand Active"), efx_always_active);
+        rakarrack.set(m_process->Config.PrefNom("Rand Current"), use_current_active_efx);
+        rakarrack.set(m_process->Config.PrefNom("Rand Max"), max_random_active);
+
+        // convert the asci char to string for the set 
+        std::string s;
+        for(int i = 0; i < C_NUMBER_EFFECTS; ++i)
+        {
+            s +=  NTS((int) FX_Excluded[i]);
+        }
+
+        rakarrack.set(m_process->Config.PrefNom("Rand Exclude"), s.c_str());
     }
 
     if (whati == 5)

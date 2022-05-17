@@ -30,11 +30,6 @@
 #include "global.h"
 
 /**
- * The number of rack effects.
- */
-const int C_NUMBER_EFFECTS = 47;
-
-/**
  * The maximum number of effect parameters for the audio class
  */
 const int C_NUMBER_PARAMETERS = 19;

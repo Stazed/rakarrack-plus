@@ -400,6 +400,26 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     rakarrack.get(PrefNom("Aux Minimum"), Aux_Minimum, 0);
     rakarrack.get(PrefNom("Aux Maximum"), Aux_Maximum, 127);
 
+    // Random
+    rakarrack.get(PrefNom("Rand Parameters"), Rand_Parameters, 0);
+    rakarrack.get(PrefNom("Rand Active"), Rand_Active, 0);
+    rakarrack.get(PrefNom("Rand Current"), Rand_Current, 0);
+    rakarrack.get(PrefNom("Rand Max"), Rand_Max, 6);
+
+    memset(temp, 0, sizeof (temp));
+    memset(Rand_Exclude, 0, sizeof(Rand_Exclude));
+    char _Rand_Exclude[128];
+    rakarrack.get(PrefNom("Rand Exclude"), _Rand_Exclude, temp, 127);
+
+    for(int i = 0; i < C_NUMBER_EFFECTS; ++i)
+    {
+        if( (int)_Rand_Exclude[i] >= 48)
+        {
+            // convert from asci int to char
+            Rand_Exclude[i] =  _Rand_Exclude[i] - 48;
+        }
+    }
+
 #ifdef NSM_SUPPORT
     if(!nsm_preferences_file.empty())
     {
