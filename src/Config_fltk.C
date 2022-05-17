@@ -408,17 +408,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
 
     memset(temp, 0, sizeof (temp));
     memset(Rand_Exclude, 0, sizeof(Rand_Exclude));
-    char _Rand_Exclude[128];
-    rakarrack.get(PrefNom("Rand Exclude"), _Rand_Exclude, temp, 127);
-
-    for(int i = 0; i < C_NUMBER_EFFECTS; ++i)
-    {
-        if( (int)_Rand_Exclude[i] >= 48)
-        {
-            // convert from asci int to char
-            Rand_Exclude[i] =  _Rand_Exclude[i] - 48;
-        }
-    }
+    rakarrack.get(PrefNom("Rand Exclude"), Rand_Exclude, temp, 127);
 
 #ifdef NSM_SUPPORT
     if(!nsm_preferences_file.empty())

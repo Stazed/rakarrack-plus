@@ -935,8 +935,8 @@ void RKRGUI::load_previous_state()
     // Set any excluded effects
     for(int i = 0; i < C_NUMBER_EFFECTS; ++i)
     {
-        if( m_process->Config.Rand_Exclude[i] == 1)
-            FX_Excluded[i] = m_process->Config.Rand_Exclude[i];
+        if( m_process->Config.Rand_Exclude[i] == ASCII_One)
+            FX_Excluded[i] = (char) 1;
     }
 
     // Set the scroll buttons
