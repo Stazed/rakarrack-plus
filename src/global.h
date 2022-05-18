@@ -282,10 +282,10 @@ std::string FTSP(T value, int digits)
 
 enum RKR_Default_Colors
 {
-    RKR_background_color = 56,      // FL_BLACK
-    RKR_labels_color = 255,         // FL_WHITE
-    RKR_buttons_color = 1397969664, // FL_DARK3 - Buttons
-    RKR_leds_color = 2140209152     // FL_DARK_YELLOW
+    RKR_background_color = 926365440,       // Dark grey
+    RKR_labels_color = 255,                 // White
+    RKR_buttons_color = 56,                 // Black
+    RKR_leds_color = 12660480               // Light green
 };
 
 /**
