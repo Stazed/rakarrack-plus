@@ -216,7 +216,7 @@ RKR::save_preset(std::string filename)
     }
     else
     {
-        if (Config.UserRealName != NULL)
+        if (strlen(Config.UserRealName) != 0)
         {
             s_buf = Config.UserRealName;
             s_buf += "\n";

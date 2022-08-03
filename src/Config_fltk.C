@@ -310,7 +310,8 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     rakarrack.get(PrefNom("User Directory"), UDirFilename, temp, 127);
     global_user_directory = UDirFilename;
 
-    rakarrack.get(PrefNom("UserName"), UserRealName, "", 127);
+    memset(temp, 0, sizeof (temp));
+    rakarrack.get(PrefNom("UserName"), UserRealName, temp, 127);
     // End Settings/User
 
     // ************** Window Sizes *****************
