@@ -4191,6 +4191,11 @@ int RKRGUI::NSM_gui_show(int hold_preset)
 {
 #ifdef NSM_SUPPORT
     // To update the Gui for any MIDI changes
+
+    /* For cabinet we need to update active preset on return from hide to refresh the gui */
+    m_process->Active_Preset.Effect_Params[EFX_CABINET][0] = m_process->Rack_Effects[EFX_CABINET]->getpar(0);
+    m_process->Active_Preset.Effect_Params[EFX_CABINET][1] = m_process->Rack_Effects[EFX_CABINET]->getpar(1);
+
     Put_Loaded();
     Put_Loaded_Bank();
 
