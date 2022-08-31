@@ -3,7 +3,6 @@ Type=Application
 Categories=AudioVideo;Audio;Music;
 Exec=rakarrack-plus
 Name=Rakarrack-Plus
-GenericName=Rakarrack-Plus
 Comment=Guitar Effects Processor
 Comment[fr]=Processeur d'effets de guitare
 Terminal=false
