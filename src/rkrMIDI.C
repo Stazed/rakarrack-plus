@@ -1066,7 +1066,7 @@ RKR::conectaaconnect()
 {
     char tempi[128];
 
-    if (Config.MID != NULL)
+    if (strlen(Config.MID) != 0)
     {
         memset(tempi, 0, sizeof (tempi));
         sprintf(tempi, "aconnect %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
@@ -1085,7 +1085,7 @@ RKR::disconectaaconnect()
 {
     char tempi[128];
 
-    if (Config.MID != NULL)
+    if (strlen(Config.MID) != 0)
     {
         memset(tempi, 0, sizeof (tempi));
         sprintf(tempi, "aconnect -d %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);

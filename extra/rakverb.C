@@ -10,7 +10,7 @@
 
 
 #define PERIOD 128
-#define RND ( rand()/((RAND_MAX)+1.0f))
+#define RND ( rand()/((RAND_MAX)+1.0))
  
  /* For file .wav extension size for removing the extension from file names */
 const unsigned c_wav_ext_size = 4;
