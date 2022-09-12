@@ -60,21 +60,21 @@ enum DistBand_Index
 
 static const char *distband_parameters[] = 
 {
-    NTS(DistBand_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(DistBand_Pan).c_str(), "Panning",  "PAN", 
-    NTS(DistBand_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
-    NTS(DistBand_Drive).c_str(), "Drive",  "DRIVE", 
-    NTS(DistBand_Level).c_str(), "Level",  "LEVEL", 
-    NTS(DistBand_Type_Low).c_str(), "Low Band Type",  "TYPEL", 
-    NTS(DistBand_Type_Mid).c_str(), "Mid Band Type",  "TYPEM", 
-    NTS(DistBand_Type_Hi).c_str(), "High Band Type",  "TYPEH", 
-    NTS(DistBand_Gain_Low).c_str(), "Low Gain",  "LVOL", 
-    NTS(DistBand_Gain_Mid).c_str(), "Mid Gain",  "MVOL", 
-    NTS(DistBand_Gain_Hi).c_str(), "High Gain",  "HVOL", 
-    NTS(DistBand_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
-    NTS(DistBand_Cross_1).c_str(), "Low/Mid Crossover",  "LMCR", 
-    NTS(DistBand_Cross_2).c_str(), "Mid/High Crossover",  "MHCR", 
-    NTS(DistBand_Stereo).c_str(), "Stereo",  "STEREO"
+    strdup(NTS(DistBand_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(DistBand_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(DistBand_LR_Cross).c_str()), "Left/Right Crossover",  "LRCr", 
+    strdup(NTS(DistBand_Drive).c_str()), "Drive",  "DRIVE", 
+    strdup(NTS(DistBand_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(DistBand_Type_Low).c_str()), "Low Band Type",  "TYPEL", 
+    strdup(NTS(DistBand_Type_Mid).c_str()), "Mid Band Type",  "TYPEM", 
+    strdup(NTS(DistBand_Type_Hi).c_str()), "High Band Type",  "TYPEH", 
+    strdup(NTS(DistBand_Gain_Low).c_str()), "Low Gain",  "LVOL", 
+    strdup(NTS(DistBand_Gain_Mid).c_str()), "Mid Gain",  "MVOL", 
+    strdup(NTS(DistBand_Gain_Hi).c_str()), "High Gain",  "HVOL", 
+    strdup(NTS(DistBand_Negate).c_str()), "Negate (Polarity Switch)",  "NEG", 
+    strdup(NTS(DistBand_Cross_1).c_str()), "Low/Mid Crossover",  "LMCR", 
+    strdup(NTS(DistBand_Cross_2).c_str()), "Mid/High Crossover",  "MHCR", 
+    strdup(NTS(DistBand_Stereo).c_str()), "Stereo",  "STEREO"
 };
 
 class DistBand : public Effect

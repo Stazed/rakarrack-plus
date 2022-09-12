@@ -57,24 +57,24 @@ enum Infinity_Index
 
 static const char *inf_parameters[] = 
 {
-    NTS(Infinity_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Infinity_Band_1).c_str(), "Band 1 Gain",  "B1", 
-    NTS(Infinity_Band_2).c_str(), "Band 2 Gain",  "B2", 
-    NTS(Infinity_Band_3).c_str(), "Band 3 Gain",  "B3", 
-    NTS(Infinity_Band_4).c_str(), "Band 4 Gain",  "B4", 
-    NTS(Infinity_Band_5).c_str(), "Band 5 Gain",  "B5", 
-    NTS(Infinity_Band_6).c_str(), "Band 6 Gain",  "B6", 
-    NTS(Infinity_Band_7).c_str(), "Band 7 Gain",  "B7", 
-    NTS(Infinity_Band_8).c_str(), "Band 8 Gain",  "B8", 
-    NTS(Infinity_Resonance).c_str(), "Resonance",  "RES", 
-    NTS(Infinity_Start).c_str(), "Sweep Start",  "START", 
-    NTS(Infinity_End).c_str(), "Sweep End",  "END", 
-    NTS(Infinity_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Infinity_LR_Delay).c_str(), "Sweep L/R Delay",  "STDF", 
-    NTS(Infinity_Subdivision).c_str(), "Sweep Tempo Subdivision",  "SUBD", 
-    NTS(Infinity_AutoPan).c_str(), "AutoPan Amount",  "AUTOPAN", 
-    NTS(Infinity_Reverse).c_str(), "Reverse Left Channel Sweep",  "REV", 
-    NTS(Infinity_Stages).c_str(), "Stages",  "STAGE"
+    strdup(NTS(Infinity_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Infinity_Band_1).c_str()), "Band 1 Gain",  "B1", 
+    strdup(NTS(Infinity_Band_2).c_str()), "Band 2 Gain",  "B2", 
+    strdup(NTS(Infinity_Band_3).c_str()), "Band 3 Gain",  "B3", 
+    strdup(NTS(Infinity_Band_4).c_str()), "Band 4 Gain",  "B4", 
+    strdup(NTS(Infinity_Band_5).c_str()), "Band 5 Gain",  "B5", 
+    strdup(NTS(Infinity_Band_6).c_str()), "Band 6 Gain",  "B6", 
+    strdup(NTS(Infinity_Band_7).c_str()), "Band 7 Gain",  "B7", 
+    strdup(NTS(Infinity_Band_8).c_str()), "Band 8 Gain",  "B8", 
+    strdup(NTS(Infinity_Resonance).c_str()), "Resonance",  "RES", 
+    strdup(NTS(Infinity_Start).c_str()), "Sweep Start",  "START", 
+    strdup(NTS(Infinity_End).c_str()), "Sweep End",  "END", 
+    strdup(NTS(Infinity_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Infinity_LR_Delay).c_str()), "Sweep L/R Delay",  "STDF", 
+    strdup(NTS(Infinity_Subdivision).c_str()), "Sweep Tempo Subdivision",  "SUBD", 
+    strdup(NTS(Infinity_AutoPan).c_str()), "AutoPan Amount",  "AUTOPAN", 
+    strdup(NTS(Infinity_Reverse).c_str()), "Reverse Left Channel Sweep",  "REV", 
+    strdup(NTS(Infinity_Stages).c_str()), "Stages",  "STAGE"
 };
 
 class Infinity : public Effect

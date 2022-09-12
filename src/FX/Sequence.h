@@ -57,21 +57,21 @@ enum Sequence_Index
 
 static const char *sequence_parameters[] = 
 {
-    NTS(Sequence_Step_1).c_str(), "Step 1",  "S1", 
-    NTS(Sequence_Step_2).c_str(), "Step 2",  "S2", 
-    NTS(Sequence_Step_3).c_str(), "Step 3",  "S3", 
-    NTS(Sequence_Step_4).c_str(), "Step 4",  "S4", 
-    NTS(Sequence_Step_5).c_str(), "Step 5",  "S5", 
-    NTS(Sequence_Step_6).c_str(), "Step 6",  "S6", 
-    NTS(Sequence_Step_7).c_str(), "Step 7",  "S7", 
-    NTS(Sequence_Step_8).c_str(), "Step 8",  "S8", 
-    NTS(Sequence_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Sequence_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Sequence_Resonance).c_str(), "Q",  "Q", 
-    NTS(Sequence_Amp).c_str(), "Amplitude/Alt. Mode",  "AMP", 
-    NTS(Sequence_Stdf).c_str(), "Right Channel Step Lag",  "LAG", 
-    NTS(Sequence_Mode).c_str(), "Modulation Mode",  "MODE", 
-    NTS(Sequence_Range).c_str(), "Step Adjustment Range",  "RANGE"
+    strdup(NTS(Sequence_Step_1).c_str()), "Step 1",  "S1", 
+    strdup(NTS(Sequence_Step_2).c_str()), "Step 2",  "S2", 
+    strdup(NTS(Sequence_Step_3).c_str()), "Step 3",  "S3", 
+    strdup(NTS(Sequence_Step_4).c_str()), "Step 4",  "S4", 
+    strdup(NTS(Sequence_Step_5).c_str()), "Step 5",  "S5", 
+    strdup(NTS(Sequence_Step_6).c_str()), "Step 6",  "S6", 
+    strdup(NTS(Sequence_Step_7).c_str()), "Step 7",  "S7", 
+    strdup(NTS(Sequence_Step_8).c_str()), "Step 8",  "S8", 
+    strdup(NTS(Sequence_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Sequence_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Sequence_Resonance).c_str()), "Q",  "Q", 
+    strdup(NTS(Sequence_Amp).c_str()), "Amplitude/Alt. Mode",  "AMP", 
+    strdup(NTS(Sequence_Stdf).c_str()), "Right Channel Step Lag",  "LAG", 
+    strdup(NTS(Sequence_Mode).c_str()), "Modulation Mode",  "MODE", 
+    strdup(NTS(Sequence_Range).c_str()), "Step Adjustment Range",  "RANGE"
 };
 
 class Sequence : public Effect

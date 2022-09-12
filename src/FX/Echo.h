@@ -50,15 +50,15 @@ enum Echo_Index
 
 static const char *echo_parameters[] = 
 {
-    NTS(Echo_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Echo_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Echo_Delay).c_str(), "Delay",  "DELAY", 
-    NTS(Echo_LR_Delay).c_str(), "Left/Right Delay Offset",  "LR_DELAY", 
-    NTS(Echo_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
-    NTS(Echo_Feedback).c_str(), "Feedback",  "FEEDBACK", 
-    NTS(Echo_Damp).c_str(), "Damping",  "DAMP", 
-    NTS(Echo_Reverse).c_str(), "Reverse",  "REV", 
-    NTS(Echo_Direct).c_str(), "Direct",  "DIRECT"
+    strdup(NTS(Echo_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Echo_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Echo_Delay).c_str()), "Delay",  "DELAY", 
+    strdup(NTS(Echo_LR_Delay).c_str()), "Left/Right Delay Offset",  "LR_DELAY", 
+    strdup(NTS(Echo_LR_Cross).c_str()), "Left/Right Crossover",  "LRCr", 
+    strdup(NTS(Echo_Feedback).c_str()), "Feedback",  "FEEDBACK", 
+    strdup(NTS(Echo_Damp).c_str()), "Damping",  "DAMP", 
+    strdup(NTS(Echo_Reverse).c_str()), "Reverse",  "REV", 
+    strdup(NTS(Echo_Direct).c_str()), "Direct",  "DIRECT"
 };
 
 class Echo : public Effect

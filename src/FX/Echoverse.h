@@ -53,16 +53,16 @@ enum Echoverse_Index
 
 static const char *echoverse_parameters[] = 
 {
-    NTS(Echoverse_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Echoverse_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Echoverse_Tempo).c_str(), "Tempo",  "DELAY", 
-    NTS(Echoverse_LR_Delay).c_str(), "Left/Right Delay Offset",  "LR_DELAY", 
-    NTS(Echoverse_Angle).c_str(), "Angle",  "ANGLE", 
-    NTS(Echoverse_Feedback).c_str(), "Feedback",  "FEEDBACK", 
-    NTS(Echoverse_Damp).c_str(), "Damping",  "DAMP", 
-    NTS(Echoverse_Reverse).c_str(), "Reverse",  "REV", 
-    NTS(Echoverse_Subdivision).c_str(), "Subdivision",  "SUBD", 
-    NTS(Echoverse_Ext_Stereo).c_str(), "Extra Stereo",  "ES"
+    strdup(NTS(Echoverse_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Echoverse_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Echoverse_Tempo).c_str()), "Tempo",  "DELAY", 
+    strdup(NTS(Echoverse_LR_Delay).c_str()), "Left/Right Delay Offset",  "LR_DELAY", 
+    strdup(NTS(Echoverse_Angle).c_str()), "Angle",  "ANGLE", 
+    strdup(NTS(Echoverse_Feedback).c_str()), "Feedback",  "FEEDBACK", 
+    strdup(NTS(Echoverse_Damp).c_str()), "Damping",  "DAMP", 
+    strdup(NTS(Echoverse_Reverse).c_str()), "Reverse",  "REV", 
+    strdup(NTS(Echoverse_Subdivision).c_str()), "Subdivision",  "SUBD", 
+    strdup(NTS(Echoverse_Ext_Stereo).c_str()), "Extra Stereo",  "ES"
 };
 
 class Echoverse : public Effect

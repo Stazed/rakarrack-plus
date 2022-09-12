@@ -53,17 +53,17 @@ enum WahWah_Index
 
 static const char *wah_parameters[] = 
 {
-    NTS(WahWah_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(WahWah_Pan).c_str(), "Panning",  "PAN", 
-    NTS(WahWah_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(WahWah_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(WahWah_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(WahWah_LFO_Stereo).c_str(), "LFO L/R Delay",  "WIDTH", 
-    NTS(WahWah_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(WahWah_Sense).c_str(), "Sensitivity",  "SENSE", 
-    NTS(WahWah_ASI).c_str(), "Invert",  "INV", 
-    NTS(WahWah_Smooth).c_str(), "Smooth",  "SMOOTH", 
-    NTS(WahWah_Mode).c_str(), "Filter Type",  "MODE"
+    strdup(NTS(WahWah_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(WahWah_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(WahWah_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(WahWah_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(WahWah_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(WahWah_LFO_Stereo).c_str()), "LFO L/R Delay",  "WIDTH", 
+    strdup(NTS(WahWah_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(WahWah_Sense).c_str()), "Sensitivity",  "SENSE", 
+    strdup(NTS(WahWah_ASI).c_str()), "Invert",  "INV", 
+    strdup(NTS(WahWah_Smooth).c_str()), "Smooth",  "SMOOTH", 
+    strdup(NTS(WahWah_Mode).c_str()), "Filter Type",  "MODE"
 };
 
 class WahWah : public Effect

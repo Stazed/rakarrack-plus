@@ -52,18 +52,18 @@ enum Chorus_Index
 
 static const char *chorus_parameters[] = 
 {
-    NTS(Chorus_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Chorus_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Chorus_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Chorus_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(Chorus_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(Chorus_LFO_Stereo).c_str(), "LFO L/R Delay",  "WIDTH", 
-    NTS(Chorus_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(Chorus_Delay).c_str(), "Delay",  "DELAY", 
-    NTS(Chorus_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(Chorus_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
-    NTS(Chorus_Subtract).c_str(), "Subtract",  "SUB", 
-    NTS(Chorus_Intense).c_str(), "Intense",  "INTENSE"
+    strdup(NTS(Chorus_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Chorus_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Chorus_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Chorus_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(Chorus_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(Chorus_LFO_Stereo).c_str()), "LFO L/R Delay",  "WIDTH", 
+    strdup(NTS(Chorus_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(Chorus_Delay).c_str()), "Delay",  "DELAY", 
+    strdup(NTS(Chorus_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(Chorus_LR_Cross).c_str()), "Left/Right Crossover",  "LRCR", 
+    strdup(NTS(Chorus_Subtract).c_str()), "Subtract",  "SUB", 
+    strdup(NTS(Chorus_Intense).c_str()), "Intense",  "INTENSE"
 };
 
 class Chorus :public Effect

@@ -58,17 +58,17 @@ enum Overdrive_Index
 
 static const char *overdrive_parameters[] = 
 {
-    NTS(Overdrive_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Overdrive_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Overdrive_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
-    NTS(Overdrive_Drive).c_str(), "Drive",  "DRIVE", 
-    NTS(Overdrive_Level).c_str(), "Level",  "LEVEL", 
-    NTS(Overdrive_Type).c_str(), "Type",  "TYPE", 
-    NTS(Overdrive_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
-    NTS(Overdrive_LPF).c_str(), "Lowpass Filter",  "LPF", 
-    NTS(Overdrive_HPF).c_str(), "Highpass Filter",  "HPF", 
-    NTS(Overdrive_Stereo).c_str(), "Stereo",  "STEREO", 
-    NTS(Overdrive_Prefilter).c_str(), "Prefilter",  "PREFILTER"
+    strdup(NTS(Overdrive_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Overdrive_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Overdrive_LR_Cross).c_str()), "Left/Right Crossover",  "LRCr", 
+    strdup(NTS(Overdrive_Drive).c_str()), "Drive",  "DRIVE", 
+    strdup(NTS(Overdrive_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(Overdrive_Type).c_str()), "Type",  "TYPE", 
+    strdup(NTS(Overdrive_Negate).c_str()), "Negate (Polarity Switch)",  "NEG", 
+    strdup(NTS(Overdrive_LPF).c_str()), "Lowpass Filter",  "LPF", 
+    strdup(NTS(Overdrive_HPF).c_str()), "Highpass Filter",  "HPF", 
+    strdup(NTS(Overdrive_Stereo).c_str()), "Stereo",  "STEREO", 
+    strdup(NTS(Overdrive_Prefilter).c_str()), "Prefilter",  "PREFILTER"
 };
 
 class Overdrive: public Distorsion

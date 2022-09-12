@@ -52,13 +52,13 @@ enum Convo_Index
 
 static const char *convo_parameters[] = 
 {
-    NTS(Convo_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Convo_Pan).c_str(), "Pan",  "PAN", 
-    NTS(Convo_Safe).c_str(), "Safe",  "SAFE", 
-    NTS(Convo_Length).c_str(), "Length",  "LENGTH", 
-    NTS(Convo_Damp).c_str(), "Dampening",  "DAMP", 
-    NTS(Convo_Level).c_str(), "Level",  "LEVEL", 
-    NTS(Convo_Feedback).c_str(), "Feedback",  "FB"
+    strdup(NTS(Convo_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Convo_Pan).c_str()), "Pan",  "PAN", 
+    strdup(NTS(Convo_Safe).c_str()), "Safe",  "SAFE", 
+    strdup(NTS(Convo_Length).c_str()), "Length",  "LENGTH", 
+    strdup(NTS(Convo_Damp).c_str()), "Dampening",  "DAMP", 
+    strdup(NTS(Convo_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(Convo_Feedback).c_str()), "Feedback",  "FB"
 };
 
 class Convolotron :public Effect

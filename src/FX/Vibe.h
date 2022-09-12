@@ -53,17 +53,17 @@ enum Vibe_Index
 
 static const char *vibe_parameters[] = 
 {
-    NTS(Vibe_Width).c_str(), "Width",  "WIDTH", 
-    NTS(Vibe_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Vibe_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(Vibe_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(Vibe_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
-    NTS(Vibe_Pan).c_str(), "Pan",  "PAN", 
-    NTS(Vibe_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Vibe_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(Vibe_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(Vibe_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
-    NTS(Vibe_Stereo).c_str(), "Stereo",  "STEREO"
+    strdup(NTS(Vibe_Width).c_str()), "Width",  "WIDTH", 
+    strdup(NTS(Vibe_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Vibe_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(Vibe_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(Vibe_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDL", 
+    strdup(NTS(Vibe_Pan).c_str()), "Pan",  "PAN", 
+    strdup(NTS(Vibe_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Vibe_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(Vibe_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(Vibe_LR_Cross).c_str()), "Left/Right Crossover",  "LRCR", 
+    strdup(NTS(Vibe_Stereo).c_str()), "Stereo",  "STEREO"
 };
 
 class Vibe : public Effect

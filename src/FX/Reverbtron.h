@@ -56,20 +56,20 @@ enum Revtron_Index
 
 static const char *revtron_parameters[] = 
 {
-    NTS(Revtron_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Revtron_Fade).c_str(), "Fade",  "FADE", 
-    NTS(Revtron_Safe).c_str(), "Safe",  "SAFE", 
-    NTS(Revtron_Length).c_str(), "Length",  "LENGTH", 
-    NTS(Revtron_I_Delay).c_str(), "Initial Delay",  "DELAY", 
-    NTS(Revtron_Damp).c_str(), "Dampening",  "DAMP", 
-    NTS(Revtron_Level).c_str(), "Level",  "LEVEL", 
-    NTS(Revtron_Stretch).c_str(), "Time Stretch",  "STRETCH", 
-    NTS(Revtron_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(Revtron_Pan).c_str(), "Pan",  "PAN", 
-    NTS(Revtron_Ex_Stereo).c_str(), "Extra Stereo",  "ES", 
-    NTS(Revtron_Shuffle).c_str(), "Shuffle",  "SH", 
-    NTS(Revtron_LPF).c_str(), "Lowpass Filter",  "LPF", 
-    NTS(Revtron_Diffusion).c_str(), "Diffusion",  "DIFFUSE"
+    strdup(NTS(Revtron_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Revtron_Fade).c_str()), "Fade",  "FADE", 
+    strdup(NTS(Revtron_Safe).c_str()), "Safe",  "SAFE", 
+    strdup(NTS(Revtron_Length).c_str()), "Length",  "LENGTH", 
+    strdup(NTS(Revtron_I_Delay).c_str()), "Initial Delay",  "DELAY", 
+    strdup(NTS(Revtron_Damp).c_str()), "Dampening",  "DAMP", 
+    strdup(NTS(Revtron_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(Revtron_Stretch).c_str()), "Time Stretch",  "STRETCH", 
+    strdup(NTS(Revtron_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(Revtron_Pan).c_str()), "Pan",  "PAN", 
+    strdup(NTS(Revtron_Ex_Stereo).c_str()), "Extra Stereo",  "ES", 
+    strdup(NTS(Revtron_Shuffle).c_str()), "Shuffle",  "SH", 
+    strdup(NTS(Revtron_LPF).c_str()), "Lowpass Filter",  "LPF", 
+    strdup(NTS(Revtron_Diffusion).c_str()), "Diffusion",  "DIFFUSE"
 };
 
 class RvbFile

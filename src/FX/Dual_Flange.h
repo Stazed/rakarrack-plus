@@ -60,21 +60,21 @@ enum DFlange_Index
 
 static const char *dflange_parameters[] = 
 {
-    NTS(DFlange_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(DFlange_Pan).c_str(), "Pan",  "PAN", 
-    NTS(DFlange_LR_Cross).c_str(), "Left/Right Crossover",  "LRC", 
-    NTS(DFlange_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(DFlange_Width).c_str(), "Sweep Width",  "WIDTH", 
-    NTS(DFlange_Offset).c_str(), "Offset Delays",  "OFFS", 
-    NTS(DFlange_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(DFlange_LPF).c_str(), "Lowpass Filter",  "LPF", 
-    NTS(DFlange_Subtract).c_str(), "Subtract",  "SUB", 
-    NTS(DFlange_Zero).c_str(), "Sweep Through Zero",  "THZ", 
-    NTS(DFlange_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(DFlange_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
-    NTS(DFlange_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(DFlange_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(DFlange_Intense).c_str(), "Intense",  "INTENSE"
+    strdup(NTS(DFlange_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(DFlange_Pan).c_str()), "Pan",  "PAN", 
+    strdup(NTS(DFlange_LR_Cross).c_str()), "Left/Right Crossover",  "LRC", 
+    strdup(NTS(DFlange_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(DFlange_Width).c_str()), "Sweep Width",  "WIDTH", 
+    strdup(NTS(DFlange_Offset).c_str()), "Offset Delays",  "OFFS", 
+    strdup(NTS(DFlange_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(DFlange_LPF).c_str()), "Lowpass Filter",  "LPF", 
+    strdup(NTS(DFlange_Subtract).c_str()), "Subtract",  "SUB", 
+    strdup(NTS(DFlange_Zero).c_str()), "Sweep Through Zero",  "THZ", 
+    strdup(NTS(DFlange_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(DFlange_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDL", 
+    strdup(NTS(DFlange_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(DFlange_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(DFlange_Intense).c_str()), "Intense",  "INTENSE"
 };
 
 class Dflange : public Effect

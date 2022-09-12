@@ -50,17 +50,17 @@ enum Arpie_Index
 
 static const char *arpie_parameters[] = 
 {
-    NTS(Arpie_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Arpie_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Arpie_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Arpie_LR_Delay).c_str(), "Left/Right Delay Offset",  "LR_DELAY", 
-    NTS(Arpie_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
-    NTS(Arpie_Feedback).c_str(), "Feedback",  "FEEDBACK", 
-    NTS(Arpie_Damp).c_str(), "Damping",  "DAMP", 
-    NTS(Arpie_ArpeWD).c_str(), "Arpe's Wet/Dry",  "ARP", 
-    NTS(Arpie_Harm).c_str(), "Harmonics",  "HARM", 
-    NTS(Arpie_Pattern).c_str(), "Pattern",  "PATTERN", 
-    NTS(Arpie_Subdivision).c_str(), "Subdivision",  "SUBD"
+    strdup(NTS(Arpie_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Arpie_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Arpie_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Arpie_LR_Delay).c_str()), "Left/Right Delay Offset",  "LR_DELAY", 
+    strdup(NTS(Arpie_LR_Cross).c_str()), "Left/Right Crossover",  "LRCr", 
+    strdup(NTS(Arpie_Feedback).c_str()), "Feedback",  "FEEDBACK", 
+    strdup(NTS(Arpie_Damp).c_str()), "Damping",  "DAMP", 
+    strdup(NTS(Arpie_ArpeWD).c_str()), "Arpe's Wet/Dry",  "ARP", 
+    strdup(NTS(Arpie_Harm).c_str()), "Harmonics",  "HARM", 
+    strdup(NTS(Arpie_Pattern).c_str()), "Pattern",  "PATTERN", 
+    strdup(NTS(Arpie_Subdivision).c_str()), "Subdivision",  "SUBD"
 };
 
 class Arpie : public Effect

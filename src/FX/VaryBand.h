@@ -62,20 +62,20 @@ enum VaryBand_Index
 
 static const char *vary_parameters[] = 
 {
-    NTS(VaryBand_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(VaryBand_LFO_Tempo_1).c_str(), "Tempo 1",  "TEMPO1", 
-    NTS(VaryBand_LFO_Type_1).c_str(), "LFO Type 1",  "TYPE1", 
-    NTS(VaryBand_LFO_Stereo_1).c_str(), "LFO L/R Delay 1",  "STDL1", 
-    NTS(VaryBand_LFO_Tempo_2).c_str(), "Tempo 2",  "TEMPO2", 
-    NTS(VaryBand_LFO_Type_2).c_str(), "LFO Type 2",  "TYPE2", 
-    NTS(VaryBand_LFO_Stereo_2).c_str(), "LFO L/R Delay 2",  "STDL2", 
-    NTS(VaryBand_Cross_1).c_str(), "Low/Mid1 Crossover",  "LMCR", 
-    NTS(VaryBand_Cross_2).c_str(), "Mid1/Mid2 Crossover",  "MMCR", 
-    NTS(VaryBand_Cross_3).c_str(), "Mid2/High Crossover",  "MHCR", 
-    NTS(VaryBand_Low_Band).c_str(), "Low Band Volume",  "LB", 
-    NTS(VaryBand_Mid_Band_1).c_str(), "Mid Band 1 Volume",  "M1B", 
-    NTS(VaryBand_Mid_Band_2).c_str(), "Mid Band 2 Volume",  "M2B", 
-    NTS(VaryBand_High_Band).c_str(), "High Band Volume",  "HB"
+    strdup(NTS(VaryBand_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(VaryBand_LFO_Tempo_1).c_str()), "Tempo 1",  "TEMPO1", 
+    strdup(NTS(VaryBand_LFO_Type_1).c_str()), "LFO Type 1",  "TYPE1", 
+    strdup(NTS(VaryBand_LFO_Stereo_1).c_str()), "LFO L/R Delay 1",  "STDL1", 
+    strdup(NTS(VaryBand_LFO_Tempo_2).c_str()), "Tempo 2",  "TEMPO2", 
+    strdup(NTS(VaryBand_LFO_Type_2).c_str()), "LFO Type 2",  "TYPE2", 
+    strdup(NTS(VaryBand_LFO_Stereo_2).c_str()), "LFO L/R Delay 2",  "STDL2", 
+    strdup(NTS(VaryBand_Cross_1).c_str()), "Low/Mid1 Crossover",  "LMCR", 
+    strdup(NTS(VaryBand_Cross_2).c_str()), "Mid1/Mid2 Crossover",  "MMCR", 
+    strdup(NTS(VaryBand_Cross_3).c_str()), "Mid2/High Crossover",  "MHCR", 
+    strdup(NTS(VaryBand_Low_Band).c_str()), "Low Band Volume",  "LB", 
+    strdup(NTS(VaryBand_Mid_Band_1).c_str()), "Mid Band 1 Volume",  "M1B", 
+    strdup(NTS(VaryBand_Mid_Band_2).c_str()), "Mid Band 2 Volume",  "M2B", 
+    strdup(NTS(VaryBand_High_Band).c_str()), "High Band Volume",  "HB"
 };
 
 class VaryBand : public Effect

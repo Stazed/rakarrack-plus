@@ -51,18 +51,18 @@ enum Phaser_Index
 
 static const char *phase_parameters[] = 
 {
-    NTS(Phaser_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Phaser_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Phaser_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Phaser_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(Phaser_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(Phaser_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
-    NTS(Phaser_Depth).c_str(), "Phase Depth",  "DEPTH", 
-    NTS(Phaser_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(Phaser_Stages).c_str(), "Stages",  "STAGES", 
-    NTS(Phaser_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
-    NTS(Phaser_Subtract).c_str(), "Subtract",  "SUB", 
-    NTS(Phaser_Phase).c_str(), "Phase",  "PHASE"
+    strdup(NTS(Phaser_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Phaser_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Phaser_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Phaser_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(Phaser_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(Phaser_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDL", 
+    strdup(NTS(Phaser_Depth).c_str()), "Phase Depth",  "DEPTH", 
+    strdup(NTS(Phaser_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(Phaser_Stages).c_str()), "Stages",  "STAGES", 
+    strdup(NTS(Phaser_LR_Cross).c_str()), "Left/Right Crossover",  "LRCR", 
+    strdup(NTS(Phaser_Subtract).c_str()), "Subtract",  "SUB", 
+    strdup(NTS(Phaser_Phase).c_str()), "Phase",  "PHASE"
 };
 
 class Phaser : public Effect

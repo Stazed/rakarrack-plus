@@ -56,17 +56,17 @@ enum Harm_Index
 
 static const char *harm_parameters[] = 
 {
-    NTS(Harm_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Harm_Pan).c_str(), "Pan",  "PAN", 
-    NTS(Harm_Gain).c_str(), "Gain",  "GAIN", 
-    NTS(Harm_Interval).c_str(), "Interval",  "INT", 
-    NTS(Harm_Filter_Freq).c_str(), "Filter Frequency",  "FREQ", 
-    NTS(Harm_Select).c_str(), "Select Chord Mode",  "SELECT", 
-    NTS(Harm_Note).c_str(), "Note",  "NOTE", 
-    NTS(Harm_Chord).c_str(), "Chord",  "CHORD", 
-    NTS(Harm_Filter_Gain).c_str(), "Filter Gain",  "FGAIN", 
-    NTS(Harm_Filter_Q).c_str(), "Filter Q",  "FQ", 
-    NTS(Harm_MIDI).c_str(), "MIDI Mode",  "MIDI"
+    strdup(NTS(Harm_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Harm_Pan).c_str()), "Pan",  "PAN", 
+    strdup(NTS(Harm_Gain).c_str()), "Gain",  "GAIN", 
+    strdup(NTS(Harm_Interval).c_str()), "Interval",  "INT", 
+    strdup(NTS(Harm_Filter_Freq).c_str()), "Filter Frequency",  "FREQ", 
+    strdup(NTS(Harm_Select).c_str()), "Select Chord Mode",  "SELECT", 
+    strdup(NTS(Harm_Note).c_str()), "Note",  "NOTE", 
+    strdup(NTS(Harm_Chord).c_str()), "Chord",  "CHORD", 
+    strdup(NTS(Harm_Filter_Gain).c_str()), "Filter Gain",  "FGAIN", 
+    strdup(NTS(Harm_Filter_Q).c_str()), "Filter Q",  "FQ", 
+    strdup(NTS(Harm_MIDI).c_str()), "MIDI Mode",  "MIDI"
 };
 
 class Harmonizer :public Effect

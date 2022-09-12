@@ -52,19 +52,19 @@ enum Valve_Index
 
 static const char *valve_parameters[] = 
 {
-    NTS(Valve_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Valve_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Valve_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
-    NTS(Valve_Drive).c_str(), "Drive",  "DRIVE", 
-    NTS(Valve_Level).c_str(), "Level",  "LEVEL", 
-    NTS(Valve_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
-    NTS(Valve_LPF).c_str(), "Lowpass Filter",  "LPF", 
-    NTS(Valve_HPF).c_str(), "Highpass Filter",  "HPF", 
-    NTS(Valve_Stereo).c_str(), "Stereo",  "STEREO", 
-    NTS(Valve_Prefilter).c_str(), "Prefilter",  "PREFILTER", 
-    NTS(Valve_Distortion).c_str(), "Distortion",  "DIST", 
-    NTS(Valve_Ex_Dist).c_str(), "Extra Distortion",  "ED", 
-    NTS(Valve_Presence).c_str(), "Presence",  "PRES"
+    strdup(NTS(Valve_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Valve_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Valve_LR_Cross).c_str()), "Left/Right Crossover",  "LRCr", 
+    strdup(NTS(Valve_Drive).c_str()), "Drive",  "DRIVE", 
+    strdup(NTS(Valve_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(Valve_Negate).c_str()), "Negate (Polarity Switch)",  "NEG", 
+    strdup(NTS(Valve_LPF).c_str()), "Lowpass Filter",  "LPF", 
+    strdup(NTS(Valve_HPF).c_str()), "Highpass Filter",  "HPF", 
+    strdup(NTS(Valve_Stereo).c_str()), "Stereo",  "STEREO", 
+    strdup(NTS(Valve_Prefilter).c_str()), "Prefilter",  "PREFILTER", 
+    strdup(NTS(Valve_Distortion).c_str()), "Distortion",  "DIST", 
+    strdup(NTS(Valve_Ex_Dist).c_str()), "Extra Distortion",  "ED", 
+    strdup(NTS(Valve_Presence).c_str()), "Presence",  "PRES"
 };
 
 class Valve : public Effect

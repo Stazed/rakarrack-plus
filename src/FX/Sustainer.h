@@ -38,8 +38,8 @@ enum Sustain_Index
 
 static const char *sus_parameters[] = 
 {
-    NTS(Sustain_Gain).c_str(), "Gain",  "GAIN", 
-    NTS(Sustain_Sustain).c_str(), "Sustain",  "SUS"
+    strdup(NTS(Sustain_Gain).c_str()), "Gain",  "GAIN", 
+    strdup(NTS(Sustain_Sustain).c_str()), "Sustain",  "SUS"
 };
 
 class Sustainer : public Effect

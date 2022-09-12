@@ -50,15 +50,15 @@ enum Compress_Index
 
 static const char *comp_parameters[] = 
 {
-    NTS(Compress_Threshold).c_str(), "Threshold",  "THRESHOLD", 
-    NTS(Compress_Ratio).c_str(), "Ratio",  "RATIO", 
-    NTS(Compress_Output).c_str(), "Output Gain",  "OUTPUT", 
-    NTS(Compress_Attack).c_str(), "Attack Time",  "ATTACK", 
-    NTS(Compress_Release).c_str(), "Release Time",  "RELEASE", 
-    NTS(Compress_Auto_Out).c_str(), "Auto Output",  "AUTOOUT", 
-    NTS(Compress_Knee).c_str(), "Knee",  "KNEE", 
-    NTS(Compress_Stereo).c_str(), "Stereo",  "STEREO", 
-    NTS(Compress_Peak).c_str(), "Peak",  "PEAK"
+    strdup(NTS(Compress_Threshold).c_str()), "Threshold",  "THRESHOLD", 
+    strdup(NTS(Compress_Ratio).c_str()), "Ratio",  "RATIO", 
+    strdup(NTS(Compress_Output).c_str()), "Output Gain",  "OUTPUT", 
+    strdup(NTS(Compress_Attack).c_str()), "Attack Time",  "ATTACK", 
+    strdup(NTS(Compress_Release).c_str()), "Release Time",  "RELEASE", 
+    strdup(NTS(Compress_Auto_Out).c_str()), "Auto Output",  "AUTOOUT", 
+    strdup(NTS(Compress_Knee).c_str()), "Knee",  "KNEE", 
+    strdup(NTS(Compress_Stereo).c_str()), "Stereo",  "STEREO", 
+    strdup(NTS(Compress_Peak).c_str()), "Peak",  "PEAK"
 };
 
 class Compressor : public Effect

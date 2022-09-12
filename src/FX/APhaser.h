@@ -54,19 +54,19 @@ enum APhaser_Index
 
 static const char *aphase_parameters[] = 
 {
-    NTS(APhase_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(APhase_Distortion).c_str(), "Distort",  "DISTORT", 
-    NTS(APhase_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(APhase_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(APhase_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(APhase_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
-    NTS(APhase_Width).c_str(), "Width",  "WIDTH", 
-    NTS(APhase_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(APhase_Stages).c_str(), "Stages",  "STAGES", 
-    NTS(APhase_Mismatch).c_str(), "Mismatch",  "MISMATCH", 
-    NTS(APhase_Subtract).c_str(), "Subtract",  "SUB", 
-    NTS(APhase_Depth).c_str(), "Phase Depth",  "DEPTH", 
-    NTS(APhase_Hyper).c_str(), "Hyper",  "HYPER"
+    strdup(NTS(APhase_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(APhase_Distortion).c_str()), "Distort",  "DISTORT", 
+    strdup(NTS(APhase_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(APhase_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(APhase_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(APhase_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDL", 
+    strdup(NTS(APhase_Width).c_str()), "Width",  "WIDTH", 
+    strdup(NTS(APhase_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(APhase_Stages).c_str()), "Stages",  "STAGES", 
+    strdup(NTS(APhase_Mismatch).c_str()), "Mismatch",  "MISMATCH", 
+    strdup(NTS(APhase_Subtract).c_str()), "Subtract",  "SUB", 
+    strdup(NTS(APhase_Depth).c_str()), "Phase Depth",  "DEPTH", 
+    strdup(NTS(APhase_Hyper).c_str()), "Hyper",  "HYPER"
 };
 
 class Analog_Phaser : public Effect

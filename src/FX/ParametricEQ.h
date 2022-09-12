@@ -46,16 +46,16 @@ enum ParametricEQ_Index
 
 static const char *eqp_parameters[] = 
 {
-    NTS(Parametric_Gain).c_str(), "Gain",  "GAIN", 
-    NTS(Parametric_Low_Freq).c_str(), "Low Frequency",  "LFREQ", 
-    NTS(Parametric_Low_Gain).c_str(), "Low Gain",  "LGAIN", 
-    NTS(Parametric_Low_Q).c_str(), "Low Width",  "LQ", 
-    NTS(Parametric_Mid_Freq).c_str(), "Mid Frequency",  "MFREQ", 
-    NTS(Parametric_Mid_Gain).c_str(), "Mid Gain",  "MGAIN", 
-    NTS(Parametric_Mid_Q).c_str(), "Mid Width",  "MQ", 
-    NTS(Parametric_High_Freq).c_str(), "High Frequency",  "HFREQ", 
-    NTS(Parametric_High_Gain).c_str(), "High Gain",  "HGAIN", 
-    NTS(Parametric_High_Q).c_str(), "High Width",  "HQ"
+    strdup(NTS(Parametric_Gain).c_str()), "Gain",  "GAIN", 
+    strdup(NTS(Parametric_Low_Freq).c_str()), "Low Frequency",  "LFREQ", 
+    strdup(NTS(Parametric_Low_Gain).c_str()), "Low Gain",  "LGAIN", 
+    strdup(NTS(Parametric_Low_Q).c_str()), "Low Width",  "LQ", 
+    strdup(NTS(Parametric_Mid_Freq).c_str()), "Mid Frequency",  "MFREQ", 
+    strdup(NTS(Parametric_Mid_Gain).c_str()), "Mid Gain",  "MGAIN", 
+    strdup(NTS(Parametric_Mid_Q).c_str()), "Mid Width",  "MQ", 
+    strdup(NTS(Parametric_High_Freq).c_str()), "High Frequency",  "HFREQ", 
+    strdup(NTS(Parametric_High_Gain).c_str()), "High Gain",  "HGAIN", 
+    strdup(NTS(Parametric_High_Q).c_str()), "High Width",  "HQ"
 };
 
 class ParametricEQ :public EQ

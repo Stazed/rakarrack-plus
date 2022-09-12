@@ -51,17 +51,17 @@ enum AlienWah_Index
 
 static const char *alien_parameters[] = 
 {
-    NTS(Alien_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Alien_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Alien_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Alien_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(Alien_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(Alien_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
-    NTS(Alien_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(Alien_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(Alien_Delay).c_str(), "Delay",  "DELAY", 
-    NTS(Alien_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
-    NTS(Alien_Phase).c_str(), "Phase",  "PHASE"
+    strdup(NTS(Alien_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Alien_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Alien_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Alien_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(Alien_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(Alien_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDL", 
+    strdup(NTS(Alien_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(Alien_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(Alien_Delay).c_str()), "Delay",  "DELAY", 
+    strdup(NTS(Alien_LR_Cross).c_str()), "Left/Right Crossover",  "LRCR", 
+    strdup(NTS(Alien_Phase).c_str()), "Phase",  "PHASE"
 };
 
 struct COMPLEXTYPE

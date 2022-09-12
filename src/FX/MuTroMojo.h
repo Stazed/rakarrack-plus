@@ -69,25 +69,25 @@ enum MuTro_Index
 
 static const char *mutro_parameters[] = 
 {
-    NTS(MuTro_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(MuTro_Resonance).c_str(), "Resonance",  "Q", 
-    NTS(MuTro_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(MuTro_LFO_Random).c_str(), "LFO Randomness",  "RND", 
-    NTS(MuTro_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(MuTro_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
-    NTS(MuTro_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(MuTro_Env_Sens).c_str(), "Envelope Sensitivity",  "SENSE", 
-    NTS(MuTro_Wah).c_str(), "Wah",  "WAH", 
-    NTS(MuTro_Env_Smooth).c_str(), "Envelope Smoothing",  "SMOOTH", 
-    NTS(MuTro_LowPass).c_str(), "Lowpass Level",  "LP", 
-    NTS(MuTro_BandPass).c_str(), "Bandpass Level",  "BP", 
-    NTS(MuTro_HighPass).c_str(), "Highpass Level",  "HP", 
-    NTS(MuTro_Stages).c_str(), "Filter Stages",  "STAGES", 
-    NTS(MuTro_Range).c_str(), "Sweep Range",  "RANGE", 
-    NTS(MuTro_St_Freq).c_str(), "Starting Frequency",  "MINFREQ", 
-    NTS(MuTro_Mod_Res).c_str(), "Modulate Resonance",  "VARIQ", 
-    NTS(MuTro_AG_Mode).c_str(), "Analog Gain Mode",  "QMODE", 
-    NTS(MuTro_Exp_Wah).c_str(), "Exponential Wah",  "AMODE"
+    strdup(NTS(MuTro_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(MuTro_Resonance).c_str()), "Resonance",  "Q", 
+    strdup(NTS(MuTro_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(MuTro_LFO_Random).c_str()), "LFO Randomness",  "RND", 
+    strdup(NTS(MuTro_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(MuTro_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDL", 
+    strdup(NTS(MuTro_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(MuTro_Env_Sens).c_str()), "Envelope Sensitivity",  "SENSE", 
+    strdup(NTS(MuTro_Wah).c_str()), "Wah",  "WAH", 
+    strdup(NTS(MuTro_Env_Smooth).c_str()), "Envelope Smoothing",  "SMOOTH", 
+    strdup(NTS(MuTro_LowPass).c_str()), "Lowpass Level",  "LP", 
+    strdup(NTS(MuTro_BandPass).c_str()), "Bandpass Level",  "BP", 
+    strdup(NTS(MuTro_HighPass).c_str()), "Highpass Level",  "HP", 
+    strdup(NTS(MuTro_Stages).c_str()), "Filter Stages",  "STAGES", 
+    strdup(NTS(MuTro_Range).c_str()), "Sweep Range",  "RANGE", 
+    strdup(NTS(MuTro_St_Freq).c_str()), "Starting Frequency",  "MINFREQ", 
+    strdup(NTS(MuTro_Mod_Res).c_str()), "Modulate Resonance",  "VARIQ", 
+    strdup(NTS(MuTro_AG_Mode).c_str()), "Analog Gain Mode",  "QMODE", 
+    strdup(NTS(MuTro_Exp_Wah).c_str()), "Exponential Wah",  "AMODE"
 };
 
 class MuTroMojo : public Effect

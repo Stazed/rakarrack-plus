@@ -58,18 +58,18 @@ enum Dere_Index
 
 static const char *dere_parameters[] = 
 {
-    NTS(Dere_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Dere_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Dere_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
-    NTS(Dere_Drive).c_str(), "Drive",  "DRIVE", 
-    NTS(Dere_Level).c_str(), "Level",  "LEVEL", 
-    NTS(Dere_Type).c_str(), "Type",  "TYPE", 
-    NTS(Dere_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
-    NTS(Dere_LPF).c_str(), "Lowpass Filter",  "LPF", 
-    NTS(Dere_HPF).c_str(), "Highpass Filter",  "HPF", 
-    NTS(Dere_Color).c_str(), "Color",  "COLOR", 
-    NTS(Dere_Prefilter).c_str(), "Prefilter",  "PREFILTER", 
-    NTS(Dere_Suboctave).c_str(), "Suboctave",  "OCT"
+    strdup(NTS(Dere_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Dere_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Dere_LR_Cross).c_str()), "Left/Right Crossover",  "LRCr", 
+    strdup(NTS(Dere_Drive).c_str()), "Drive",  "DRIVE", 
+    strdup(NTS(Dere_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(Dere_Type).c_str()), "Type",  "TYPE", 
+    strdup(NTS(Dere_Negate).c_str()), "Negate (Polarity Switch)",  "NEG", 
+    strdup(NTS(Dere_LPF).c_str()), "Lowpass Filter",  "LPF", 
+    strdup(NTS(Dere_HPF).c_str()), "Highpass Filter",  "HPF", 
+    strdup(NTS(Dere_Color).c_str()), "Color",  "COLOR", 
+    strdup(NTS(Dere_Prefilter).c_str()), "Prefilter",  "PREFILTER", 
+    strdup(NTS(Dere_Suboctave).c_str()), "Suboctave",  "OCT"
 };
 
 //Waveshaping(called by Distorsion effect and waveshape from OscilGen)

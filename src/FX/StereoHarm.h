@@ -56,18 +56,18 @@ enum Sharm_Index
 
 static const char *sharm_parameters[] = 
 {
-    NTS(Sharm_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Sharm_L_Gain).c_str(), "Left Gain",  "GAINL", 
-    NTS(Sharm_L_Interval).c_str(), "Left Interval",  "INTL", 
-    NTS(Sharm_L_Chroma).c_str(), "Left Chroma",  "CHRML", 
-    NTS(Sharm_R_Gain).c_str(), "Right Gain",  "GAINR", 
-    NTS(Sharm_R_Interval).c_str(), "Right Interval",  "INTR", 
-    NTS(Sharm_R_Chroma).c_str(), "Right Chroma",  "CHR", 
-    NTS(Sharm_Select).c_str(), "Select Chord Mode",  "SELECT", 
-    NTS(Sharm_Note).c_str(), "Note",  "NOTE", 
-    NTS(Sharm_Chord).c_str(), "Chord",  "CHORD",
-    NTS(Sharm_MIDI).c_str() , "MIDI Mode", "MIDI",
-    NTS(Sharm_LR_Cross).c_str(), "Left/Right Crossover",  "LRC"
+    strdup(NTS(Sharm_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Sharm_L_Gain).c_str()), "Left Gain",  "GAINL", 
+    strdup(NTS(Sharm_L_Interval).c_str()), "Left Interval",  "INTL", 
+    strdup(NTS(Sharm_L_Chroma).c_str()), "Left Chroma",  "CHRML", 
+    strdup(NTS(Sharm_R_Gain).c_str()), "Right Gain",  "GAINR", 
+    strdup(NTS(Sharm_R_Interval).c_str()), "Right Interval",  "INTR", 
+    strdup(NTS(Sharm_R_Chroma).c_str()), "Right Chroma",  "CHR", 
+    strdup(NTS(Sharm_Select).c_str()), "Select Chord Mode",  "SELECT", 
+    strdup(NTS(Sharm_Note).c_str()), "Note",  "NOTE", 
+    strdup(NTS(Sharm_Chord).c_str()), "Chord",  "CHORD",
+    strdup(NTS(Sharm_MIDI).c_str()) , "MIDI Mode", "MIDI",
+    strdup(NTS(Sharm_LR_Cross).c_str()), "Left/Right Crossover",  "LRC"
 };
 
 class StereoHarm : public Effect

@@ -58,19 +58,19 @@ enum CompBand_Index
 
 static const char *compband_parameters[] = 
 {
-    NTS(CompBand_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(CompBand_Low_Ratio).c_str(), "Low Band Ratio",  "LR", 
-    NTS(CompBand_Mid_1_Ratio).c_str(), "Mid Band 1 Ratio",  "M1R", 
-    NTS(CompBand_Mid_2_Ratio).c_str(), "Mid Band 2 Ratio",  "M2R", 
-    NTS(CompBand_High_Ratio).c_str(), "High Band Ratio",  "HR", 
-    NTS(CompBand_Low_Thresh).c_str(), "Low Band Threshold",  "LT", 
-    NTS(CompBand_Mid_1_Thresh).c_str(), "Mid Band 1 Threshold",  "M1T", 
-    NTS(CompBand_Mid_2_Thresh).c_str(), "Mid Band 2 Threshold",  "M2T", 
-    NTS(CompBand_High_Thresh).c_str(), "High Threshold",  "HT", 
-    NTS(CompBand_Cross_1).c_str(), "Low/Mid1 Crossover",  "LMCR", 
-    NTS(CompBand_Cross_2).c_str(), "Mid1/Mid2 Crossover",  "MMCR", 
-    NTS(CompBand_Cross_3).c_str(), "Mid2/High Crossover",  "MHCR", 
-    NTS(CompBand_Gain).c_str(), "Gain",  "GAIN"
+    strdup(NTS(CompBand_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(CompBand_Low_Ratio).c_str()), "Low Band Ratio",  "LR", 
+    strdup(NTS(CompBand_Mid_1_Ratio).c_str()), "Mid Band 1 Ratio",  "M1R", 
+    strdup(NTS(CompBand_Mid_2_Ratio).c_str()), "Mid Band 2 Ratio",  "M2R", 
+    strdup(NTS(CompBand_High_Ratio).c_str()), "High Band Ratio",  "HR", 
+    strdup(NTS(CompBand_Low_Thresh).c_str()), "Low Band Threshold",  "LT", 
+    strdup(NTS(CompBand_Mid_1_Thresh).c_str()), "Mid Band 1 Threshold",  "M1T", 
+    strdup(NTS(CompBand_Mid_2_Thresh).c_str()), "Mid Band 2 Threshold",  "M2T", 
+    strdup(NTS(CompBand_High_Thresh).c_str()), "High Threshold",  "HT", 
+    strdup(NTS(CompBand_Cross_1).c_str()), "Low/Mid1 Crossover",  "LMCR", 
+    strdup(NTS(CompBand_Cross_2).c_str()), "Mid1/Mid2 Crossover",  "MMCR", 
+    strdup(NTS(CompBand_Cross_3).c_str()), "Mid2/High Crossover",  "MHCR", 
+    strdup(NTS(CompBand_Gain).c_str()), "Gain",  "GAIN"
 };
 
 class CompBand : public Effect

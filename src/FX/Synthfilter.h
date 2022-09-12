@@ -60,22 +60,22 @@ enum Synthfilter_Index
 
 static const char *synth_parameters[] = 
 {
-    NTS(Synthfilter_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Synthfilter_Distort).c_str(), "Distort",  "DIST", 
-    NTS(Synthfilter_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Synthfilter_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(Synthfilter_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(Synthfilter_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
-    NTS(Synthfilter_Width).c_str(), "Width",  "WIDTH", 
-    NTS(Synthfilter_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(Synthfilter_LPF_Stages).c_str(), "Lowpass Stages",  "LSTAGES", 
-    NTS(Synthfilter_HPF_Stages).c_str(), "Highpass Stages",  "HSTAGES", 
-    NTS(Synthfilter_Subtract).c_str(), "Subtract Output",  "SUB", 
-    NTS(Synthfilter_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(Synthfilter_Env_Sens).c_str(), "Envelope Sensitivity",  "SENSE", 
-    NTS(Synthfilter_Attack).c_str(), "Attack Time",  "ATIME", 
-    NTS(Synthfilter_Release).c_str(), "Release Time",  "RTIME", 
-    NTS(Synthfilter_Offset).c_str(), "HPF/LPF Offset",  "OFFSET"
+    strdup(NTS(Synthfilter_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Synthfilter_Distort).c_str()), "Distort",  "DIST", 
+    strdup(NTS(Synthfilter_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Synthfilter_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(Synthfilter_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(Synthfilter_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDL", 
+    strdup(NTS(Synthfilter_Width).c_str()), "Width",  "WIDTH", 
+    strdup(NTS(Synthfilter_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(Synthfilter_LPF_Stages).c_str()), "Lowpass Stages",  "LSTAGES", 
+    strdup(NTS(Synthfilter_HPF_Stages).c_str()), "Highpass Stages",  "HSTAGES", 
+    strdup(NTS(Synthfilter_Subtract).c_str()), "Subtract Output",  "SUB", 
+    strdup(NTS(Synthfilter_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(Synthfilter_Env_Sens).c_str()), "Envelope Sensitivity",  "SENSE", 
+    strdup(NTS(Synthfilter_Attack).c_str()), "Attack Time",  "ATIME", 
+    strdup(NTS(Synthfilter_Release).c_str()), "Release Time",  "RTIME", 
+    strdup(NTS(Synthfilter_Offset).c_str()), "HPF/LPF Offset",  "OFFSET"
 };
 
 class Synthfilter : public Effect

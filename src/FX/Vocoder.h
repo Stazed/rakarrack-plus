@@ -47,13 +47,13 @@ enum Vocoder_Index
 
 static const char *vocoder_parameters[] = 
 {
-    NTS(Vocoder_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Vocoder_Pan).c_str(), "Pan",  "PAN", 
-    NTS(Vocoder_Smear).c_str(), "Smear",  "MUF", 
-    NTS(Vocoder_Q).c_str(), "Q",  "Q", 
-    NTS(Vocoder_Input).c_str(), "Input Gain",  "INGAIN", 
-    NTS(Vocoder_Level).c_str(), "Level",  "LEVEL", 
-    NTS(Vocoder_Ring).c_str(), "Ring Mod. Depth",  "RING"
+    strdup(NTS(Vocoder_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Vocoder_Pan).c_str()), "Pan",  "PAN", 
+    strdup(NTS(Vocoder_Smear).c_str()), "Smear",  "MUF", 
+    strdup(NTS(Vocoder_Q).c_str()), "Q",  "Q", 
+    strdup(NTS(Vocoder_Input).c_str()), "Input Gain",  "INGAIN", 
+    strdup(NTS(Vocoder_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(Vocoder_Ring).c_str()), "Ring Mod. Depth",  "RING"
 };
 
 class Vocoder : public Effect

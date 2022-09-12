@@ -47,13 +47,13 @@ enum Coil_Index
 
 static const char *coil_parameters[] = 
 {
-    NTS(Coil_Gain).c_str(), "Gain",  "GAIN", 
-    NTS(Coil_Freq_1).c_str(), "Origin Pickup Frequency",  "F1", 
-    NTS(Coil_Q_1).c_str(), "Origin Pickup Resonance",  "Q1", 
-    NTS(Coil_Freq_2).c_str(), "Destination Pickup Frequency",  "F2", 
-    NTS(Coil_Q_2).c_str(), "Destination Pickup Resonance",  "Q2", 
-    NTS(Coil_Tone).c_str(), "Tone",  "TONE", 
-    NTS(Coil_NeckMode).c_str(), "Neck Pickup",  "MODE"
+    strdup(NTS(Coil_Gain).c_str()), "Gain",  "GAIN", 
+    strdup(NTS(Coil_Freq_1).c_str()), "Origin Pickup Frequency",  "F1", 
+    strdup(NTS(Coil_Q_1).c_str()), "Origin Pickup Resonance",  "Q1", 
+    strdup(NTS(Coil_Freq_2).c_str()), "Destination Pickup Frequency",  "F2", 
+    strdup(NTS(Coil_Q_2).c_str()), "Destination Pickup Resonance",  "Q2", 
+    strdup(NTS(Coil_Tone).c_str()), "Tone",  "TONE", 
+    strdup(NTS(Coil_NeckMode).c_str()), "Neck Pickup",  "MODE"
 };
 
 class CoilCrafter : public Effect

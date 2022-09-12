@@ -44,12 +44,12 @@ enum Stomp_Index
 
 static const char *stomp_parameters[] = 
 {
-    NTS(Stomp_Level).c_str(), "Level",  "LEVEL", 
-    NTS(Stomp_Tone).c_str(), "Tone",  "HI", 
-    NTS(Stomp_Mid).c_str(), "Mid",  "MID", 
-    NTS(Stomp_Bias).c_str(), "Bias",  "LO", 
-    NTS(Stomp_Gain).c_str(), "Gain",  "GAIN", 
-    NTS(Stomp_Mode).c_str(), "Mode",  "MODE"
+    strdup(NTS(Stomp_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(Stomp_Tone).c_str()), "Tone",  "HI", 
+    strdup(NTS(Stomp_Mid).c_str()), "Mid",  "MID", 
+    strdup(NTS(Stomp_Bias).c_str()), "Bias",  "LO", 
+    strdup(NTS(Stomp_Gain).c_str()), "Gain",  "GAIN", 
+    strdup(NTS(Stomp_Mode).c_str()), "Mode",  "MODE"
 };
 
 class StompBox : public Effect

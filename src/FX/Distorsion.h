@@ -54,18 +54,18 @@ enum Dist_Index
 
 static const char *dist_parameters[] = 
 {
-    NTS(Dist_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Dist_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Dist_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
-    NTS(Dist_Drive).c_str(), "Drive",  "DRIVE", 
-    NTS(Dist_Level).c_str(), "Level",  "LEVEL", 
-    NTS(Dist_Type).c_str(), "Type",  "TYPE", 
-    NTS(Dist_Negate).c_str(), "Negate (Polarity Switch)",  "NEG", 
-    NTS(Dist_LPF).c_str(), "Lowpass Filter",  "LPF", 
-    NTS(Dist_HPF).c_str(), "Highpass Filter",  "HPF", 
-    NTS(Dist_Stereo).c_str(), "Stereo",  "STEREO", 
-    NTS(Dist_Prefilter).c_str(), "Prefilter",  "PREFILTER", 
-    NTS(Dist_Suboctave).c_str(), "Suboctave",  "OCT"
+    strdup(NTS(Dist_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Dist_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Dist_LR_Cross).c_str()), "Left/Right Crossover",  "LRCr", 
+    strdup(NTS(Dist_Drive).c_str()), "Drive",  "DRIVE", 
+    strdup(NTS(Dist_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(Dist_Type).c_str()), "Type",  "TYPE", 
+    strdup(NTS(Dist_Negate).c_str()), "Negate (Polarity Switch)",  "NEG", 
+    strdup(NTS(Dist_LPF).c_str()), "Lowpass Filter",  "LPF", 
+    strdup(NTS(Dist_HPF).c_str()), "Highpass Filter",  "HPF", 
+    strdup(NTS(Dist_Stereo).c_str()), "Stereo",  "STEREO", 
+    strdup(NTS(Dist_Prefilter).c_str()), "Prefilter",  "PREFILTER", 
+    strdup(NTS(Dist_Suboctave).c_str()), "Suboctave",  "OCT"
 };
 
 class Distorsion :public Effect

@@ -56,16 +56,16 @@ enum Shifter_Index
 
 static const char *shift_parameters[] = 
 {
-    NTS(Shifter_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Shifter_Pan).c_str(), "Pan",  "PAN", 
-    NTS(Shifter_Gain).c_str(), "Gain",  "GAIN", 
-    NTS(Shifter_Attack).c_str(), "Attack",  "ATACK", 
-    NTS(Shifter_Decay).c_str(), "Decay",  "DECAY", 
-    NTS(Shifter_Threshold).c_str(), "Threshold",  "THRESH", 
-    NTS(Shifter_Interval).c_str(), "Interval",  "INT", 
-    NTS(Shifter_Shift).c_str(), "Shift Down",  "DN", 
-    NTS(Shifter_Mode).c_str(), "Mode",  "MODE", 
-    NTS(Shifter_Whammy).c_str(), "Whammy",  "WHAMMY"
+    strdup(NTS(Shifter_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Shifter_Pan).c_str()), "Pan",  "PAN", 
+    strdup(NTS(Shifter_Gain).c_str()), "Gain",  "GAIN", 
+    strdup(NTS(Shifter_Attack).c_str()), "Attack",  "ATACK", 
+    strdup(NTS(Shifter_Decay).c_str()), "Decay",  "DECAY", 
+    strdup(NTS(Shifter_Threshold).c_str()), "Threshold",  "THRESH", 
+    strdup(NTS(Shifter_Interval).c_str()), "Interval",  "INT", 
+    strdup(NTS(Shifter_Shift).c_str()), "Shift Down",  "DN", 
+    strdup(NTS(Shifter_Mode).c_str()), "Mode",  "MODE", 
+    strdup(NTS(Shifter_Whammy).c_str()), "Whammy",  "WHAMMY"
 };
 
 class Shifter : public Effect

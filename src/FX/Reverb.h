@@ -51,16 +51,16 @@ enum Reverb_Index
 
 static const char *reverb_parameters[] = 
 {
-    NTS(Reverb_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Reverb_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Reverb_Time).c_str(), "Time",  "TIME", 
-    NTS(Reverb_I_Delay).c_str(), "Initial Delay",  "IDEL", 
-    NTS(Reverb_Delay_FB).c_str(), "Initial Delay Feedback",  "IDELFB", 
-    NTS(Reverb_LPF).c_str(), "Lowpass Filter",  "LPF", 
-    NTS(Reverb_HPF).c_str(), "Highpass Filter",  "HPF", 
-    NTS(Reverb_Damp).c_str(), "Damping",  "DAMP", 
-    NTS(Reverb_Type).c_str(), "Type",  "TYPE", 
-    NTS(Reverb_Room).c_str(), "Room Size",  "RS"
+    strdup(NTS(Reverb_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Reverb_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Reverb_Time).c_str()), "Time",  "TIME", 
+    strdup(NTS(Reverb_I_Delay).c_str()), "Initial Delay",  "IDEL", 
+    strdup(NTS(Reverb_Delay_FB).c_str()), "Initial Delay Feedback",  "IDELFB", 
+    strdup(NTS(Reverb_LPF).c_str()), "Lowpass Filter",  "LPF", 
+    strdup(NTS(Reverb_HPF).c_str()), "Highpass Filter",  "HPF", 
+    strdup(NTS(Reverb_Damp).c_str()), "Damping",  "DAMP", 
+    strdup(NTS(Reverb_Type).c_str()), "Type",  "TYPE", 
+    strdup(NTS(Reverb_Room).c_str()), "Room Size",  "RS"
 };
 
 class Reverb : public Effect
@@ -141,7 +141,7 @@ private:
     int Proomsize;
 
     //Parametrii 2
-    int lohidamptype;		//0=disable,1=highdamp(lowpass),2=lowdamp(highpass)
+    int lohidamptype;		//0=disable,1=highdamp(lowpass),2=lowdamp(highpass))
     int idelaylen, rdelaylen;
     int idelayk;
     int comblen[REV_COMBS * 2];

@@ -51,17 +51,17 @@ enum Shuffle_Index
 
 static const char *shuffle_parameters[] = 
 {
-    NTS(Shuffle_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Shuffle_Gain_L).c_str(), "Low Gain",  "LGAIN", 
-    NTS(Shuffle_Gain_ML).c_str(), "Mid Low Gain",  "M1GAIN", 
-    NTS(Shuffle_Gain_MH).c_str(), "Mid High Gain",  "M2GAIN", 
-    NTS(Shuffle_Gain_H).c_str(), "High Gain",  "HGAIN", 
-    NTS(Shuffle_Freq_L).c_str(), "Low Frequency",  "LFREQ", 
-    NTS(Shuffle_Freq_ML).c_str(), "Mid Low Frequency",  "M1FREQ", 
-    NTS(Shuffle_Freq_MH).c_str(), "Mid High Frequency",  "M2FREQ", 
-    NTS(Shuffle_Freq_H).c_str(), "High Frequency",  "HFREQ", 
-    NTS(Shuffle_Width).c_str(), "Width",  "Q", 
-    NTS(Shuffle_F_Band).c_str(), "Filtered Band",  "BAND"
+    strdup(NTS(Shuffle_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Shuffle_Gain_L).c_str()), "Low Gain",  "LGAIN", 
+    strdup(NTS(Shuffle_Gain_ML).c_str()), "Mid Low Gain",  "M1GAIN", 
+    strdup(NTS(Shuffle_Gain_MH).c_str()), "Mid High Gain",  "M2GAIN", 
+    strdup(NTS(Shuffle_Gain_H).c_str()), "High Gain",  "HGAIN", 
+    strdup(NTS(Shuffle_Freq_L).c_str()), "Low Frequency",  "LFREQ", 
+    strdup(NTS(Shuffle_Freq_ML).c_str()), "Mid Low Frequency",  "M1FREQ", 
+    strdup(NTS(Shuffle_Freq_MH).c_str()), "Mid High Frequency",  "M2FREQ", 
+    strdup(NTS(Shuffle_Freq_H).c_str()), "High Frequency",  "HFREQ", 
+    strdup(NTS(Shuffle_Width).c_str()), "Width",  "Q", 
+    strdup(NTS(Shuffle_F_Band).c_str()), "Filtered Band",  "BAND"
 };
 
 class Shuffle : public Effect

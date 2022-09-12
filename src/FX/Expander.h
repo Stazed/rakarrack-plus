@@ -52,13 +52,13 @@ enum Expander_Index
 
 static const char *expand_parameters[] = 
 {
-    NTS(Expander_Threshold).c_str(), "Threshold",  "THRESHOLD", 
-    NTS(Expander_Shape).c_str(), "Shape",  "SHAPE", 
-    NTS(Expander_Attack).c_str(), "Attack Time",  "ATTACK", 
-    NTS(Expander_Release).c_str(), "Release Time",  "RELEASE", 
-    NTS(Expander_LPF).c_str(), "Lowpass Filter",  "LPF", 
-    NTS(Expander_HPF).c_str(), "Highpass Filter",  "HPF", 
-    NTS(Expander_Gain).c_str(), "Output Gain",  "OUTPUT"
+    strdup(NTS(Expander_Threshold).c_str()), "Threshold",  "THRESHOLD", 
+    strdup(NTS(Expander_Shape).c_str()), "Shape",  "SHAPE", 
+    strdup(NTS(Expander_Attack).c_str()), "Attack Time",  "ATTACK", 
+    strdup(NTS(Expander_Release).c_str()), "Release Time",  "RELEASE", 
+    strdup(NTS(Expander_LPF).c_str()), "Lowpass Filter",  "LPF", 
+    strdup(NTS(Expander_HPF).c_str()), "Highpass Filter",  "HPF", 
+    strdup(NTS(Expander_Gain).c_str()), "Output Gain",  "OUTPUT"
 };
 
 class Expander : public Effect

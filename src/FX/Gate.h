@@ -51,13 +51,13 @@ enum Gate_Index
 
 static const char *gate_parameters[] = 
 {
-    NTS(Gate_Threshold).c_str(), "Threshold",  "THRESHOLD", 
-    NTS(Gate_Range).c_str(), "Range",  "RANGE", 
-    NTS(Gate_Attack).c_str(), "Attack Time",  "ATTACK", 
-    NTS(Gate_Release).c_str(), "Release Time",  "RELEASE", 
-    NTS(Gate_LPF).c_str(), "Lowpass Filter",  "LPF", 
-    NTS(Gate_HPF).c_str(), "Highpass Filter",  "HPF", 
-    NTS(Gate_Hold).c_str(), "Hold",  "HOLD"
+    strdup(NTS(Gate_Threshold).c_str()), "Threshold",  "THRESHOLD", 
+    strdup(NTS(Gate_Range).c_str()), "Range",  "RANGE", 
+    strdup(NTS(Gate_Attack).c_str()), "Attack Time",  "ATTACK", 
+    strdup(NTS(Gate_Release).c_str()), "Release Time",  "RELEASE", 
+    strdup(NTS(Gate_LPF).c_str()), "Lowpass Filter",  "LPF", 
+    strdup(NTS(Gate_HPF).c_str()), "Highpass Filter",  "HPF", 
+    strdup(NTS(Gate_Hold).c_str()), "Hold",  "HOLD"
 };
 
 class Gate : public Effect

@@ -51,19 +51,19 @@ enum Music_Index
 
 static const char *mdel_parameters[] = 
 {
-    NTS(Music_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Music_Pan_1).c_str(), "Panning 1",  "PAN1", 
-    NTS(Music_Delay_1).c_str(), "Delay 1",  "DEL1", 
-    NTS(Music_Del_Offset).c_str(), "Delay Offset",  "OFFS", 
-    NTS(Music_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
-    NTS(Music_Feedback_1).c_str(), "Feedback 1",  "FB1", 
-    NTS(Music_Damp).c_str(), "Damping",  "DAMP", 
-    NTS(Music_Pan_2).c_str(), "Panning 2",  "PAN2", 
-    NTS(Music_Delay_2).c_str(), "Delay 2",  "DEL2", 
-    NTS(Music_Feedback_2).c_str(), "Feedback 2",  "FB2", 
-    NTS(Music_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Music_Gain_1).c_str(), "Gain 1",  "GAIN1", 
-    NTS(Music_Gain_2).c_str(), "Gain 2",  "GAIN2"
+    strdup(NTS(Music_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Music_Pan_1).c_str()), "Panning 1",  "PAN1", 
+    strdup(NTS(Music_Delay_1).c_str()), "Delay 1",  "DEL1", 
+    strdup(NTS(Music_Del_Offset).c_str()), "Delay Offset",  "OFFS", 
+    strdup(NTS(Music_LR_Cross).c_str()), "Left/Right Crossover",  "LRCr", 
+    strdup(NTS(Music_Feedback_1).c_str()), "Feedback 1",  "FB1", 
+    strdup(NTS(Music_Damp).c_str()), "Damping",  "DAMP", 
+    strdup(NTS(Music_Pan_2).c_str()), "Panning 2",  "PAN2", 
+    strdup(NTS(Music_Delay_2).c_str()), "Delay 2",  "DEL2", 
+    strdup(NTS(Music_Feedback_2).c_str()), "Feedback 2",  "FB2", 
+    strdup(NTS(Music_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Music_Gain_1).c_str()), "Gain 1",  "GAIN1", 
+    strdup(NTS(Music_Gain_2).c_str()), "Gain 2",  "GAIN2"
 };
 
 class MusicDelay : public Effect

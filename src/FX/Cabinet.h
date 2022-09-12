@@ -39,8 +39,8 @@ enum Cabinet_Index
 
 static const char *cab_parameters[] = 
 {
-    NTS(Cabinet_Preset_Idx).c_str(), "Preset",  "PRESET",
-    NTS(Cabinet_Gain).c_str(), "Gain",  "GAIN"
+    strdup(NTS(Cabinet_Preset_Idx).c_str()), "Preset",  "PRESET",
+    strdup(NTS(Cabinet_Gain).c_str()), "Gain",  "GAIN"
 };
 
 class Cabinet :public EQ

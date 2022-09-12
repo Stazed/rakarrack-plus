@@ -40,11 +40,11 @@ enum Shelf_Index
 
 static const char *shelf_parameters[] = 
 {
-    NTS(Shelf_Gain).c_str(), "Gain",  "GAIN", 
-    NTS(Shelf_Presence).c_str(), "Presence",  "PRES", 
-    NTS(Shelf_Tone).c_str(), "Tone",  "TONE", 
-    NTS(Shelf_Stereo).c_str(), "Stereo",  "STEREO", 
-    NTS(Shelf_Level).c_str(), "Level",  "LEVEL"
+    strdup(NTS(Shelf_Gain).c_str()), "Gain",  "GAIN", 
+    strdup(NTS(Shelf_Presence).c_str()), "Presence",  "PRES", 
+    strdup(NTS(Shelf_Tone).c_str()), "Tone",  "TONE", 
+    strdup(NTS(Shelf_Stereo).c_str()), "Stereo",  "STEREO", 
+    strdup(NTS(Shelf_Level).c_str()), "Level",  "LEVEL"
 };
 
 class ShelfBoost : public Effect

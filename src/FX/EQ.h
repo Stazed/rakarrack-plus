@@ -52,18 +52,18 @@ enum EQ_Index
 
 static const char *eq_parameters[] = 
 {
-    NTS(EQ_Gain).c_str(), "Gain",  "GAIN", 
-    NTS(EQ_Q).c_str(), "Q",  "Q", 
-    NTS(EQ_31_HZ).c_str(), "31 Hz",  "HZ31", 
-    NTS(EQ_63_HZ).c_str(), "63 Hz",  "HZ63", 
-    NTS(EQ_125_HZ).c_str(), "125 Hz",  "HZ125", 
-    NTS(EQ_250_HZ).c_str(), "250 Hz",  "HZ250", 
-    NTS(EQ_500_HZ).c_str(), "500 Hz",  "HZ500", 
-    NTS(EQ_1_KHZ).c_str(), "1 kHz",  "KHZ1", 
-    NTS(EQ_2_KHZ).c_str(), "2 kHz",  "KHZ2", 
-    NTS(EQ_4_KHZ).c_str(), "4 kHz",  "KHZ4", 
-    NTS(EQ_8_KHZ).c_str(), "8 kHz",  "KHZ8", 
-    NTS(EQ_16_KHZ).c_str(), "16 kHz",  "KHZ16", 
+    strdup(NTS(EQ_Gain).c_str()), "Gain",  "GAIN", 
+    strdup(NTS(EQ_Q).c_str()), "Q",  "Q", 
+    strdup(NTS(EQ_31_HZ).c_str()), "31 Hz",  "HZ31", 
+    strdup(NTS(EQ_63_HZ).c_str()), "63 Hz",  "HZ63", 
+    strdup(NTS(EQ_125_HZ).c_str()), "125 Hz",  "HZ125", 
+    strdup(NTS(EQ_250_HZ).c_str()), "250 Hz",  "HZ250", 
+    strdup(NTS(EQ_500_HZ).c_str()), "500 Hz",  "HZ500", 
+    strdup(NTS(EQ_1_KHZ).c_str()), "1 kHz",  "KHZ1", 
+    strdup(NTS(EQ_2_KHZ).c_str()), "2 kHz",  "KHZ2", 
+    strdup(NTS(EQ_4_KHZ).c_str()), "4 kHz",  "KHZ4", 
+    strdup(NTS(EQ_8_KHZ).c_str()), "8 kHz",  "KHZ8", 
+    strdup(NTS(EQ_16_KHZ).c_str()), "16 kHz",  "KHZ16", 
 };
 
 #if 0

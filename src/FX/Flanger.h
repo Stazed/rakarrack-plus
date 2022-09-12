@@ -58,18 +58,18 @@ enum Flanger_Index
 
 static const char *flange_parameters[] = 
 {
-    NTS(Flanger_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Flanger_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Flanger_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Flanger_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(Flanger_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(Flanger_LFO_Stereo).c_str(), "LFO L/R Delay",  "WIDTH", 
-    NTS(Flanger_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(Flanger_Delay).c_str(), "Delay",  "DELAY", 
-    NTS(Flanger_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(Flanger_LR_Cross).c_str(), "Left/Right Crossover",  "LRCR", 
-    NTS(Flanger_Subtract).c_str(), "Subtract",  "SUB", 
-    NTS(Flanger_Intense).c_str(), "Intense",  "INTENSE"
+    strdup(NTS(Flanger_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Flanger_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Flanger_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Flanger_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(Flanger_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(Flanger_LFO_Stereo).c_str()), "LFO L/R Delay",  "WIDTH", 
+    strdup(NTS(Flanger_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(Flanger_Delay).c_str()), "Delay",  "DELAY", 
+    strdup(NTS(Flanger_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(Flanger_LR_Cross).c_str()), "Left/Right Crossover",  "LRCR", 
+    strdup(NTS(Flanger_Subtract).c_str()), "Subtract",  "SUB", 
+    strdup(NTS(Flanger_Intense).c_str()), "Intense",  "INTENSE"
 };
 
 class Flanger :public Chorus

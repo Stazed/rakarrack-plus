@@ -61,20 +61,20 @@ enum Echotron_Index
 
 static const char *echotron_parameters[] = 
 {
-    NTS(Echotron_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Echotron_Depth).c_str(), "Filter Depth",  "DEPTH", 
-    NTS(Echotron_LFO_Width).c_str(), "LFO Width",  "WIDTH", 
-    NTS(Echotron_Taps).c_str(), "Number of Taps",  "LENGTH", 
-    NTS(Echotron_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Echotron_Damp).c_str(), "Dampening",  "DAMP", 
-    NTS(Echotron_LR_Cross).c_str(), "Left/Right Crossover",  "LRC", 
-    NTS(Echotron_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDF", 
-    NTS(Echotron_Feedback).c_str(), "Feedback",  "FB", 
-    NTS(Echotron_Pan).c_str(), "Pan",  "PAN", 
-    NTS(Echotron_Mod_Delay).c_str(), "Modulate Delays",  "MD", 
-    NTS(Echotron_Mod_Filter).c_str(), "Modulate Filters",  "MF", 
-    NTS(Echotron_LFO_Type).c_str(), "LFO Type",  "LFOTYPE", 
-    NTS(Echotron_Filters).c_str(), "Activate Filters",  "AF"
+    strdup(NTS(Echotron_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Echotron_Depth).c_str()), "Filter Depth",  "DEPTH", 
+    strdup(NTS(Echotron_LFO_Width).c_str()), "LFO Width",  "WIDTH", 
+    strdup(NTS(Echotron_Taps).c_str()), "Number of Taps",  "LENGTH", 
+    strdup(NTS(Echotron_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Echotron_Damp).c_str()), "Dampening",  "DAMP", 
+    strdup(NTS(Echotron_LR_Cross).c_str()), "Left/Right Crossover",  "LRC", 
+    strdup(NTS(Echotron_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDF", 
+    strdup(NTS(Echotron_Feedback).c_str()), "Feedback",  "FB", 
+    strdup(NTS(Echotron_Pan).c_str()), "Pan",  "PAN", 
+    strdup(NTS(Echotron_Mod_Delay).c_str()), "Modulate Delays",  "MD", 
+    strdup(NTS(Echotron_Mod_Filter).c_str()), "Modulate Filters",  "MF", 
+    strdup(NTS(Echotron_LFO_Type).c_str()), "LFO Type",  "LFOTYPE", 
+    strdup(NTS(Echotron_Filters).c_str()), "Activate Filters",  "AF"
 };
 
 class DlyFile

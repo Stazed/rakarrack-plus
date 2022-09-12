@@ -50,19 +50,19 @@ enum Ring_Index
 
 static const char *ring_parameters[] = 
 {
-    NTS(Ring_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Ring_Pan).c_str(), "Pan",  "PAN", 
-    NTS(Ring_LR_Cross).c_str(), "Left/Right Crossover",  "LRCr", 
-    NTS(Ring_Level).c_str(), "Level",  "LEVEL", 
-    NTS(Ring_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(Ring_Freq).c_str(), "Frequency",  "FREQ", 
-    NTS(Ring_Stereo).c_str(), "Stereo",  "STEREO", 
-    NTS(Ring_Sine).c_str(), "Sine",  "SIN", 
-    NTS(Ring_Triangle).c_str(), "Triangle",  "TRI", 
-    NTS(Ring_Saw).c_str(), "Sawtooth",  "SAW", 
-    NTS(Ring_Square).c_str(), "Square",  "SQUARE", 
-    NTS(Ring_Input).c_str(), "Input Gain",  "INPUT", 
-    NTS(Ring_Auto_Freq).c_str(), "Auto-Frequency",  "AFREQ"
+    strdup(NTS(Ring_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Ring_Pan).c_str()), "Pan",  "PAN", 
+    strdup(NTS(Ring_LR_Cross).c_str()), "Left/Right Crossover",  "LRCr", 
+    strdup(NTS(Ring_Level).c_str()), "Level",  "LEVEL", 
+    strdup(NTS(Ring_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(Ring_Freq).c_str()), "Frequency",  "FREQ", 
+    strdup(NTS(Ring_Stereo).c_str()), "Stereo",  "STEREO", 
+    strdup(NTS(Ring_Sine).c_str()), "Sine",  "SIN", 
+    strdup(NTS(Ring_Triangle).c_str()), "Triangle",  "TRI", 
+    strdup(NTS(Ring_Saw).c_str()), "Sawtooth",  "SAW", 
+    strdup(NTS(Ring_Square).c_str()), "Square",  "SQUARE", 
+    strdup(NTS(Ring_Input).c_str()), "Input Gain",  "INPUT", 
+    strdup(NTS(Ring_Auto_Freq).c_str()), "Auto-Frequency",  "AFREQ"
 };
 
 class Ring : public Effect

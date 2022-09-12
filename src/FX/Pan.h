@@ -47,15 +47,15 @@ enum Pan_Index
 
 static const char *pan_parameters[] = 
 {
-    NTS(Pan_DryWet).c_str(), "Dry/Wet",  "DRYWET", 
-    NTS(Pan_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Pan_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Pan_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(Pan_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(Pan_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDL", 
-    NTS(Pan_Ex_St_Amt).c_str(), "Extra Stereo Amount",  "EXTRA_AMOUNT", 
-    NTS(Pan_AutoPan).c_str(), "Autopan",  "AUTO", 
-    NTS(Pan_Enable_Extra).c_str(), "Extra Stereo Enable",  "EXTRA_ON"
+    strdup(NTS(Pan_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
+    strdup(NTS(Pan_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Pan_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Pan_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(Pan_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(Pan_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDL", 
+    strdup(NTS(Pan_Ex_St_Amt).c_str()), "Extra Stereo Amount",  "EXTRA_AMOUNT", 
+    strdup(NTS(Pan_AutoPan).c_str()), "Autopan",  "AUTO", 
+    strdup(NTS(Pan_Enable_Extra).c_str()), "Extra Stereo Enable",  "EXTRA_ON"
 };
 
 class Pan : public Effect

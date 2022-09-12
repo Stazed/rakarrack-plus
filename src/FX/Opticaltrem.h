@@ -47,13 +47,13 @@ enum Optical_Index
 
 static const char *optical_parameters[] = 
 {
-    NTS(Optical_Depth).c_str(), "Depth",  "DEPTH", 
-    NTS(Optical_LFO_Tempo).c_str(), "Tempo",  "TEMPO", 
-    NTS(Optical_LFO_Random).c_str(), "Randomness",  "RND", 
-    NTS(Optical_LFO_Type).c_str(), "LFO Type",  "TYPE", 
-    NTS(Optical_LFO_Stereo).c_str(), "LFO L/R Delay",  "STDF", 
-    NTS(Optical_Pan).c_str(), "Panning",  "PAN", 
-    NTS(Optical_Invert).c_str(), "Invert",  "INV"
+    strdup(NTS(Optical_Depth).c_str()), "Depth",  "DEPTH", 
+    strdup(NTS(Optical_LFO_Tempo).c_str()), "Tempo",  "TEMPO", 
+    strdup(NTS(Optical_LFO_Random).c_str()), "Randomness",  "RND", 
+    strdup(NTS(Optical_LFO_Type).c_str()), "LFO Type",  "TYPE", 
+    strdup(NTS(Optical_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDF", 
+    strdup(NTS(Optical_Pan).c_str()), "Panning",  "PAN", 
+    strdup(NTS(Optical_Invert).c_str()), "Invert",  "INV"
 };
 
 class Opticaltrem : public Effect
