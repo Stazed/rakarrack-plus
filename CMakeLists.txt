@@ -45,15 +45,24 @@ set (BuildOptions_SSE2
     CACHE STRING "SSE2 compiler options"
 )
 
-set(BuildOptions_Vectorization
-    "-ftree-vectorize -fvect-cost-model"
-    CACHE STRING "Vectorization compiler options"
-)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    MESSAGE("USING CLANG OPTIMIZATIONS")
+    set(BuildOptions_Vectorization
+        "-ftree-vectorize"
+        CACHE STRING "Vectorization compiler options"
+    )
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    MESSAGE("USING GNU OPTIMIZATIONS")
+    set(BuildOptions_Vectorization
+        "-ftree-vectorize -fvect-cost-model"
+        CACHE STRING "Vectorization compiler options"
+    )
 
-set(BuildOptions_Altivec
-    "-maltivec"
-    CACHE STRING "Altivec compiler options"
-)
+    set(BuildOptions_Altivec
+        "-maltivec"
+        CACHE STRING "Altivec compiler options"
+    )
+endif()
 
 set (BuildOptionsBasic
     "-std=c++11 -Wno-unused-parameter -O3 -ffast-math -pipe -fsigned-char"
