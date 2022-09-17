@@ -94,9 +94,9 @@ Recognize::schmittInit(int size, double SAMPLE_RATE)
 }
 
 void
-Recognize::schmittS16LE(signed short int *indata)
+Recognize::schmittS16LE(const signed short int *indata)
 {
-    int j = 0;
+    int j;  // initialize ok.
 
     for (unsigned int i = 0; i < PERIOD; i++)
     {
@@ -123,7 +123,7 @@ Recognize::schmittS16LE(signed short int *indata)
             int t1 = lrintf((float) A1 * trigfact + 0.5f);
             int t2 = -lrintf((float) A2 * trigfact + 0.5f);
             
-            for (j = 1; schmittBuffer[j] <= t1 && j < blockSize; j++);
+            for (j = 1; j < blockSize && schmittBuffer[j] <= t1; j++);
             
             for (; !(schmittBuffer[j] >= t2 &&
                  schmittBuffer[j + 1] < t2) && j < blockSize; j++);
@@ -218,11 +218,10 @@ Recognize::displayFrequency(float freq)
     }
     
     float mldf = LOG_D_NOTE;
-    float ldf = 0;
 
     for (int i = 0; i < 12; i++)
     {
-        ldf = fabsf(lfreq - lfreqs[i]);
+        float ldf = fabsf(lfreq - lfreqs[i]);
         
         if (ldf < mldf)
         {

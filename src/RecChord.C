@@ -328,7 +328,6 @@ RecChord::cleanup()
 void
 RecChord::IniciaChords()
 {
-    int notas = 1;
     int numno[6];
 
     NumChord3 = 0;
@@ -337,7 +336,7 @@ RecChord::IniciaChords()
 
     for (int i = 0; i <= 33; i++)
     {
-        notas = 1;
+        int notas = 1;
         memset(numno, 0, sizeof (numno));
 
         for (int j = 1; j <= 11; j++)
@@ -591,6 +590,9 @@ sigue:
                 return;
             }
         }
+
+        nnotes = 3;
+        goto sigue;
     }
 
     if (nnotes == 5)
@@ -628,28 +630,13 @@ sigue:
                 return;
             }
         }
-    }
 
-    if (nnotes == 5)
-    {
         bass = anote[0] % 12;
 
         for (i = 1; i <= 4; i++)
             anote[i - 1] = anote[i];
-        
-        nnotes = 4;
-        goto sigue;
-    }
 
-    if (nnotes == 5)
-    {
         nnotes = 4;
-        goto sigue;
-    }
-
-    if (nnotes == 4)
-    {
-        nnotes = 3;
         goto sigue;
     }
 }
@@ -754,7 +741,7 @@ RecChord::Vamos(int voz, int interval, int reconota)
     case 3:
         tengo = 0;
 
-        if ((Ch[ctipo][hp1] != 0) && (tengo == 0))
+        if ((Ch[ctipo][hp1] != 0))
         {
             ninterval = interval + 1;
             tengo = 1;
@@ -784,7 +771,6 @@ RecChord::Vamos(int voz, int interval, int reconota)
         if ((Ch[ctipo][hm3] != 0) && (tengo == 0))
         {
             ninterval = interval - 1;
-            tengo = 1;
         }
         break;
     }

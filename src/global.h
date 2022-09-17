@@ -237,8 +237,6 @@ static const float ipw2[25] = {1.0, 5.0e-01, 2.5e-01, 1.25e-01, 6.25e-02, 3.125e
 
 static inline float f_pow2(float x)
 {
-    float y = 0.0f;
-
     if(x >=24)
     {
         return pw2[24];
@@ -249,6 +247,7 @@ static inline float f_pow2(float x)
     }
     else
     {
+        float y;
         float whole =  ceilf(x);
         int xint = (int) whole;
         x = x - whole;

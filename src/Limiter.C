@@ -41,8 +41,6 @@ Limiter::Limiter(double sample_rate, uint32_t intermediate_bufsize) :
 void
 Limiter::setpreset(int npreset)
 {
-    if (npreset > 3) return;
-
     const int PRESET_SIZE = C_COMPRESS_PARAMETERS;
     const int NUM_PRESETS = 4;
     
