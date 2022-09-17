@@ -469,11 +469,13 @@ RecChord::IniciaChords()
     }
 }
 
+/**
+ *  Midi chord recognization for harmonizer effects.
+ */
 void
 RecChord::MiraChord()
 {
-    int i = 0;
-    int j = 0;
+    int i, j;
     int anote[POLY];
     int nnotes = 0;
     char AName[21];
@@ -518,127 +520,133 @@ RecChord::MiraChord()
     
     int di1, di2, di3, di4;
 
-sigue:
-
-    if (nnotes == 3)
+    /* loops through the midi notes */
+    while(1)
     {
-        di1 = anote[1] - anote[0];
-        di2 = anote[2] - anote[1];
-
-        j = -1;
-
-        while (j <= NumChord3)
+        if (nnotes == 3)
         {
-            j++;
-            
-            if ((Chord3[j].di1 == di1) && (Chord3[j].di2 == di2))
+            di1 = anote[1] - anote[0];
+            di2 = anote[2] - anote[1];
+
+            j = -1;
+
+            while (j <= NumChord3)
             {
-                ctipo = Chord3[j].tipo;
-                int elke = anote[Chord3[j].fund - 1];
-                fundi = elke % 12;
-                sprintf(AName, "%s%s", NC[fundi].Nom, Chord3[j].Nom);
+                j++;
 
-                if (bass != fundi)
+                if ((Chord3[j].di1 == di1) && (Chord3[j].di2 == di2))
                 {
-                    memset(AName, 0, sizeof (AName));
-                    sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord3[j].Nom,
-                            NCE[bass + plus(fundi)].Nom);
-                }
+                    ctipo = Chord3[j].tipo;
+                    int elke = anote[Chord3[j].fund - 1];
+                    fundi = elke % 12;
+                    sprintf(AName, "%s%s", NC[fundi].Nom, Chord3[j].Nom);
 
-                if (strcmp(AName, NombreAcorde) != 0)
-                {
-                    strcpy(NombreAcorde, AName);
-                    cc = 1;
+                    if (bass != fundi)
+                    {
+                        memset(AName, 0, sizeof (AName));
+                        sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord3[j].Nom,
+                                NCE[bass + plus(fundi)].Nom);
+                    }
+
+                    if (strcmp(AName, NombreAcorde) != 0)
+                    {
+                        strcpy(NombreAcorde, AName);
+                        cc = 1;
+                    }
+
+                    return;
                 }
-                
-                return;
             }
-        }
-    }
 
-    if (nnotes == 4)
-    {
-        di1 = anote[1] - anote[0];
-        di2 = anote[2] - anote[1];
-        di3 = anote[3] - anote[2];
-        j = -1;
-
-        while (j <= NumChord4)
-        {
-            j++;
-            
-            if ((Chord4[j].di1 == di1) && (Chord4[j].di2 == di2)
-                && (Chord4[j].di3 == di3))
-            {
-                ctipo = Chord4[j].tipo;
-                int elke = anote[Chord4[j].fund - 1];
-                fundi = elke % 12;
-                sprintf(AName, "%s%s", NC[fundi].Nom, Chord4[j].Nom);
-                
-                if (bass != fundi)
-                {
-                    memset(AName, 0, sizeof (AName));
-                    sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord4[j].Nom,
-                            NCE[bass + plus(fundi)].Nom);
-                }
-
-                if (strcmp(AName, NombreAcorde) != 0)
-                {
-                    strcpy(NombreAcorde, AName);
-                    cc = 1;
-                }
-                return;
-            }
+            break;
         }
 
-        nnotes = 3;
-        goto sigue;
-    }
-
-    if (nnotes == 5)
-    {
-        di1 = anote[1] - anote[0];
-        di2 = anote[2] - anote[1];
-        di3 = anote[3] - anote[2];
-        di4 = anote[4] - anote[3];
-        j = -1;
-
-        while (j < NumChord5)
+        if (nnotes == 4)
         {
-            j++;
-            
-            if ((Chord5[j].di1 == di1) && (Chord5[j].di2 == di2)
-                && (Chord5[j].di3 == di3) && (Chord5[j].di4 == di4))
+            di1 = anote[1] - anote[0];
+            di2 = anote[2] - anote[1];
+            di3 = anote[3] - anote[2];
+            j = -1;
+
+            while (j <= NumChord4)
             {
-                ctipo = Chord5[j].tipo;
-                int elke = anote[Chord5[j].fund - 1];
-                fundi = elke % 12;
-                sprintf(AName, "%s%s", NC[fundi].Nom, Chord5[j].Nom);
-                
-                if (bass != fundi)
+                j++;
+
+                if ((Chord4[j].di1 == di1) && (Chord4[j].di2 == di2)
+                    && (Chord4[j].di3 == di3))
                 {
-                    memset(AName, 0, sizeof (AName));
-                    sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord5[j].Nom,
-                            NCE[bass + plus(fundi)].Nom);
-                }
+                    ctipo = Chord4[j].tipo;
+                    int elke = anote[Chord4[j].fund - 1];
+                    fundi = elke % 12;
+                    sprintf(AName, "%s%s", NC[fundi].Nom, Chord4[j].Nom);
 
-                if (strcmp(AName, NombreAcorde) != 0)
+                    if (bass != fundi)
+                    {
+                        memset(AName, 0, sizeof (AName));
+                        sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord4[j].Nom,
+                                NCE[bass + plus(fundi)].Nom);
+                    }
+
+                    if (strcmp(AName, NombreAcorde) != 0)
+                    {
+                        strcpy(NombreAcorde, AName);
+                        cc = 1;
+                    }
+                    return;
+                }
+            }   // while (j <= NumChord4)
+
+            nnotes = 3;
+            continue;   // check the three nnotes
+        }       // if (nnotes == 4)
+
+        if (nnotes == 5)
+        {
+            di1 = anote[1] - anote[0];
+            di2 = anote[2] - anote[1];
+            di3 = anote[3] - anote[2];
+            di4 = anote[4] - anote[3];
+            j = -1;
+
+            while (j < NumChord5)
+            {
+                j++;
+
+                if ((Chord5[j].di1 == di1) && (Chord5[j].di2 == di2)
+                    && (Chord5[j].di3 == di3) && (Chord5[j].di4 == di4))
                 {
-                    strcpy(NombreAcorde, AName);
-                    cc = 1;
+                    ctipo = Chord5[j].tipo;
+                    int elke = anote[Chord5[j].fund - 1];
+                    fundi = elke % 12;
+                    sprintf(AName, "%s%s", NC[fundi].Nom, Chord5[j].Nom);
+
+                    if (bass != fundi)
+                    {
+                        memset(AName, 0, sizeof (AName));
+                        sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord5[j].Nom,
+                                NCE[bass + plus(fundi)].Nom);
+                    }
+
+                    if (strcmp(AName, NombreAcorde) != 0)
+                    {
+                        strcpy(NombreAcorde, AName);
+                        cc = 1;
+                    }
+                    return;
                 }
-                return;
-            }
-        }
+            }   // while (j < NumChord5)
 
-        bass = anote[0] % 12;
+            bass = anote[0] % 12;
 
-        for (i = 1; i <= 4; i++)
-            anote[i - 1] = anote[i];
+            for (i = 1; i <= 4; i++)
+                anote[i - 1] = anote[i];
 
-        nnotes = 4;
-        goto sigue;
-    }
+            nnotes = 4;
+            continue;   // check the 4 nnotes
+        }       // if (nnotes == 5)
+
+        break;
+    }   // while(1)
 }
 
 int
