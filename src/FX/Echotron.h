@@ -171,7 +171,7 @@ public:
     void applyfile(DlyFile);
     int get_file_length() {return File.fLength;};
     char *get_file_name() {return File.Filename;};
-    void set_user_files(std::vector<User_Files>dly_files){DLY_Files = dly_files;};
+    void set_user_files(const std::vector<User_Files>dly_files){DLY_Files = dly_files;};
 
     char Filename[128];
     DlyFile File;

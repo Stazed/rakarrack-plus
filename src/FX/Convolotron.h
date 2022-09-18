@@ -86,7 +86,7 @@ public:
     int setfile (int value);
     void adjust(int DS, uint32_t period);
     void loaddefault();
-    void set_user_files(std::vector<User_Files>wav_files){WAV_Files = wav_files;};
+    void set_user_files(const std::vector<User_Files>wav_files){WAV_Files = wav_files;};
 
     /* Change quality */
     std::vector<int> save_parameters();

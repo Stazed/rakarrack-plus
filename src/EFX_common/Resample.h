@@ -34,7 +34,7 @@
 class Resample
 {
 public:
-    Resample(int type);
+    explicit Resample(int type);
     /*
     Types:
               SRC_SINC_BEST_QUALITY       = 0,
