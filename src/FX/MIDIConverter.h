@@ -35,7 +35,6 @@ struct _RKRLV2;     // Forward declaration
 #include <jack/midiport.h>
 #include <jack/ringbuffer.h>
 #include <alsa/asoundlib.h>
-#include "../process.h"
 
 #endif // LV2_SUPPORT
 

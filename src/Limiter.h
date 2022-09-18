@@ -41,7 +41,7 @@ class Limiter : public Compressor
 public:
     Limiter (double sample_rate, uint32_t intermediate_bufsize);
     
-    void setpreset (int npreset) override;
+    void setpreset (int npreset);
 
 };
 

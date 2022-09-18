@@ -32,7 +32,7 @@
 class EffectLFO
 {
 public:
-    EffectLFO (double sample_rate);
+    explicit EffectLFO (double sample_rate);
     ~EffectLFO ();
     void effectlfoout (float * outl, float * outr);
     void updateparams (uint32_t period);

@@ -20,7 +20,7 @@
 class Tuner
 {
 public:
-    Tuner (double sample_rate);
+    explicit Tuner (double sample_rate);
     ~Tuner ();
     void schmittFloat (int nframes, float *indatal, float *indatar, float *freqs, float *lfreqs);
 
