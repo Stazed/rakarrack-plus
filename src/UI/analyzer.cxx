@@ -38,19 +38,14 @@ void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE, RKRG
 void Analyzer::draw()
 {
     int ox = x(), oy = y(), lx = w(), ly = h();
-    int i, j;
-    int px, py;
-    double y = 0.0;
-    double t = 0.0;
+    int px;
     double nsp = 1.0 / (double) ns;
     double dsr = (double) sr;
     double udsr = 1.0 / dsr;
     double acoeff = udsr / (0.005 + udsr);
-    double image = 0.0;
-    double oldimage = 0.0;
     double factor = (double) ns / 64.0;
     char buf[4];
-    double xscale[] = {22.0, 31.0, 39.0, 62.0, 79.0, 125.0, 158.0, 200.0, 251.0, 317.0, 400.0,
+    const double xscale[] = {22.0, 31.0, 39.0, 62.0, 79.0, 125.0, 158.0, 200.0, 251.0, 317.0, 400.0,
                        503.0, 634.0, 800.0, 1000.0, 1200.0, 1500.0, 2000.0, 2500.0, 3200.0, 4000.0,
                         5000.0, 6000.0, 8000.0, 10000.0, 12000.0, 16000.0, 20000.0};
 
@@ -66,16 +61,16 @@ void Analyzer::draw()
 
         fl_color(global_leds_color);
 
-        for (i = 0; i < 28; i++)
+        for (int i = 0; i < 28; i++)
         {
-            y = 0.0;
+            double y = 0.0;
             double coeff = xscale[i] * udsr;
 
-            for (j = 0; j < ns; j++)
+            for (int j = 0; j < ns; j++)
             {
-                t = cos(D_PI * (double) j * coeff);
-                image = t * ((spl[j] + spr[j]) * 0.5) ;
-                oldimage = acoeff * image + (1.0 - acoeff) * oldimage;
+                double t = cos(D_PI * (double) j * coeff);
+                double image = t * ((spl[j] + spr[j]) * 0.5) ;
+                double oldimage = acoeff * image + (1.0 - acoeff) * oldimage;
 
                 y += fabs(oldimage);
             }
@@ -85,7 +80,7 @@ void Analyzer::draw()
             if (y < 0.0) y = 0.0;
             if (y > 1.0) y = 1.0;
 
-            py = lrint(y * scale);
+            int py = lrint(y * scale);
 
 
             fl_color(global_leds_color);

@@ -454,7 +454,7 @@ void ConvoGui::parameter_refresh(int index) {
       }
 }
 
-void ConvoGui::add_convolotron_file(std::string name) {
+void ConvoGui::add_convolotron_file(const std::string &name) {
   convo_fnum->add(name.c_str ());
   
       Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (convo_fnum->menu ());

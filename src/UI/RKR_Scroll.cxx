@@ -78,7 +78,7 @@ void RKR_Scroll::resize(int X, int Y, int W, int H)
             
             if(ud == UD_delay_group)
             {
-                RKR_Group *g_group = (RKR_Group *) c;
+                RKR_Group *g_group = static_cast<RKR_Group *>(c);
                 
                 g_group->resize
                 (

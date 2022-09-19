@@ -45,17 +45,16 @@ int RKR_Slider::handle(int event)
     }
 
     int sxx = x(), syy = y(), sww = w(), shh = h();
-    int bww = w(), bhh = h();
-    
+
     if (horizontal())
     {
-        bww = w() * .30;        // value box width (magic number % of total width)
+        int bww = w() * .30;        // value box width (magic number % of total width)
         sxx += bww;             // adjust slider x location based on above box width
         sww -= bww;             // reduce slider width by box width
     }
     else
     {
-        bhh = h() * .18;        // value box height (magic number % of total height)
+        int bhh = h() * .18;        // value box height (magic number % of total height)
         syy += bhh;             // adjust slider y location based on above box height
         shh -= bhh;             // reduce slider height by box height
     }
@@ -267,9 +266,6 @@ void RKR_Slider::draw()
     int xx, S;
 
     S = int(.25 * ww + .5) + 1;
-    int T = (horizontal() ? H : W) / 2 + 1;
-    T += 12;
-
 
     xx = int(val * (ww - S) + .5);
 

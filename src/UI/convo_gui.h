@@ -74,7 +74,7 @@ private:
 public:
   void add_user_files();
   void parameter_refresh(int index);
-  void add_convolotron_file(std::string name);
+  void add_convolotron_file(const std::string &name);
   void scan_for_new_wav_files();
 };
 #endif

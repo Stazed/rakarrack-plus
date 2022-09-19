@@ -134,7 +134,7 @@ void RKR_Value_Input::resize(int X, int Y, int W, int H)
 
 void RKR_Value_Input::input_cb(Fl_Widget*, void* v)
 {
-    RKR_Value_Input& t = *(RKR_Value_Input*) v;
+    RKR_Value_Input& t = * static_cast<RKR_Value_Input *>(v);
     double nv;
     if ((t.step() - floor(t.step())) > 0.0 || t.step() == 0.0) nv = strtod(t.input.value(), 0);
     else nv = strtol(t.input.value(), 0, 0);
