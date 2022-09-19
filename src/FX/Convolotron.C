@@ -670,10 +670,7 @@ Convolotron::process_rbuf()
         IRpowa += fabsf(rbuf[j]);
         if (maxamp < fabsf(buf[j])) maxamp = fabsf(buf[j]); //find maximum level to normalize
 
-        if (j < length)
-        {
-            IRpowb += fabsf(buf[j]);
-        }
+        IRpowb += fabsf(buf[j]);
     }
 
     //if(maxamp < 0.3f) maxamp = 0.3f;

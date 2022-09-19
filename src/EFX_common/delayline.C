@@ -54,8 +54,8 @@ delayline::delayline(float maxdelay, int maxtaps_, double samplerate) :
     newtime = (int *) malloc(sizeof (int) * maxtaps);
     crossfade = (int *) malloc(sizeof (int) * maxtaps);
 
-    pstruct = (phasevars *) malloc(sizeof (struct phasevars) * maxtaps);
-    tapstruct = (tapvars *) malloc(sizeof (struct tapvars) * maxtaps);
+    pstruct = static_cast<phasevars *> (malloc(sizeof (struct phasevars) * maxtaps));
+    tapstruct = static_cast<tapvars *> (malloc(sizeof (struct tapvars) * maxtaps));
 
     float dt = 1.0f / fSAMPLE_RATE;
     alpha = dt / (0.15f + dt);

@@ -38,10 +38,10 @@ RKR::Message(int prio, const std::string &labelwin, const std::string &message_t
     {
         Fl_Widget *w = fl_message_icon();
 
-        Fl_Image *a = new Fl_Pixmap(icono_rakarrack_32x32);
+        Fl_Image *img = new Fl_Pixmap(icono_rakarrack_32x32);
         w->color(FL_WHITE);
         w->label("");
-        w->image(a);
+        w->image(img);
         w->align(FL_ALIGN_TOP | FL_ALIGN_INSIDE);
         w->parent()->copy_label(labelwin.c_str());
 
@@ -344,7 +344,7 @@ RKR::Get_Bogomips()
         
         if (maxx_len < 5)
         {
-            if (maxx_len < 2) maxx_len = 2;
+            // if (maxx_len < 2) maxx_len = 2;
             
             Handle_Message(32);            
         }

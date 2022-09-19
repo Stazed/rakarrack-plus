@@ -282,7 +282,7 @@ Vocoder::LV2_parameters(std::string &s_buf, int type)
 void
 Vocoder::initialize()
 {
-    filterbank = (fbank *) malloc(sizeof (fbank) * VOC_BANDS);
+    filterbank = static_cast<fbank *> (malloc(sizeof (fbank) * VOC_BANDS));
     tmpl = (float *) malloc(sizeof (float) * nPERIOD);
     tmpr = (float *) malloc(sizeof (float) * nPERIOD);
     tsmpsl = (float *) malloc(sizeof (float) * nPERIOD);
