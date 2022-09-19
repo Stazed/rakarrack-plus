@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0304
+version 1.0308
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -66,9 +66,7 @@ m_parent->Fill_Avail(m_process->Effect_Type_Filter);}
   }
   Fl_Button Sube {
     label {@$2->}
-    callback {int x,x1;
-
-int i = Order_Bro->value();
+    callback {int i = Order_Bro->value();
 
 Order_Bro->move(i,i-1);
 
@@ -76,11 +74,11 @@ i--;
 
 if (i>0) 
 {
-x=m_process->new_order[i];
-x1=m_process->new_order[i-1];
+    int x=m_process->new_order[i];
+    int x1=m_process->new_order[i-1];
 
-m_process->new_order[i]=x1;
-m_process->new_order[i-1]=x;
+    m_process->new_order[i]=x1;
+    m_process->new_order[i-1]=x;
 }}
     xywh {442 120 50 25} labelsize 18
     code0 {o->set_label_offset(8);}
@@ -88,9 +86,7 @@ m_process->new_order[i-1]=x;
   }
   Fl_Button Baja {
     label {@$8->}
-    callback {int x,x1;
-
-int i = Order_Bro->value();
+    callback {int i = Order_Bro->value();
 
 Order_Bro->move(i,i+1);
 
@@ -98,11 +94,11 @@ i--;
 
 if (i<9)
 {
-x=m_process->new_order[i];
-x1=m_process->new_order[i+1];
+    int x=m_process->new_order[i];
+    int x1=m_process->new_order[i+1];
 
-m_process->new_order[i]=x1;
-m_process->new_order[i+1]=x;
+    m_process->new_order[i]=x1;
+    m_process->new_order[i+1]=x;
 }}
     xywh {442 160 50 25} labelsize 18
     code0 {o->set_label_offset(8);}

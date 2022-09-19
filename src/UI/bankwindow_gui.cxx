@@ -422,9 +422,7 @@ void BankWindowGui::make_window_banks() {
       float y = (float) 40 * h_ratio ;
       intptr_t num=1;
       
-      // Program change number before the preset name
-      std::string add_pg_change = "";
-      
+      // Program change number before the preset name    
       for (int i = 1; i < 16; i++)
       {
           y += elh + (2.0f * h_ratio);
@@ -432,7 +430,7 @@ void BankWindowGui::make_window_banks() {
           for (int j=1; j<5; j++)
           {
               // Add the Program Change value
-              add_pg_change = "[";
+              std::string add_pg_change = "[";
               add_pg_change += NTS(num);
               add_pg_change += "] ";
               add_pg_change += m_process->Bank[num].Preset_Name;

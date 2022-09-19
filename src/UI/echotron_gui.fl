@@ -443,7 +443,7 @@ Files preceded by a '*' are user supplied files in the User Directory.} xywh {88
   } {
     code {echotron_tempo->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));} {}
   }
-  Function {add_echotron_file(std::string name)} {return_type void
+  Function {add_echotron_file(const std::string &name)} {return_type void
   } {
     code {echotron_fnum->add(name.c_str ());
   

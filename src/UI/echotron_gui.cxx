@@ -690,7 +690,7 @@ void EchotronGui::tap_tempo_update() {
   echotron_tempo->value(m_process->Rack_Effects[EFX_ECHOTRON]->getpar(Echotron_Tempo));
 }
 
-void EchotronGui::add_echotron_file(std::string name) {
+void EchotronGui::add_echotron_file(const std::string &name) {
   echotron_fnum->add(name.c_str ());
     
         Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (echotron_fnum->menu ());

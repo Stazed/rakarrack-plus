@@ -15,7 +15,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class RevtronGui {open selected
-  xywh {1550 57 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1550 59 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -403,7 +403,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_LPF,(int)o->value());
         break;
     }} {}
   }
-  Function {add_reverbtron_file(std::string name)} {return_type void
+  Function {add_reverbtron_file(const std::string &name)} {return_type void
   } {
     code {revtron_fnum->add(name.c_str ());
     

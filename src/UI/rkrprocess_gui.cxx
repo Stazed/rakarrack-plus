@@ -949,7 +949,7 @@ void RKRGUI::load_previous_state()
 
         if(ud >= 0 && ud <= 46)
         {
-            RKR_Check_Button *b = (RKR_Check_Button * ) w;
+            RKR_Check_Button *b = static_cast<RKR_Check_Button *>(w);
 
             if(FX_Excluded[ud])
             {

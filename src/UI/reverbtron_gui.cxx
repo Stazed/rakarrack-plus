@@ -658,7 +658,7 @@ void RevtronGui::parameter_refresh(int index) {
       }
 }
 
-void RevtronGui::add_reverbtron_file(std::string name) {
+void RevtronGui::add_reverbtron_file(const std::string &name) {
   revtron_fnum->add(name.c_str ());
       
       Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (revtron_fnum->menu ());

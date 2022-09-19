@@ -484,7 +484,7 @@ DlyFile DelayFileWindowGui::get_current_settings() {
       for(int i = 0; i < m_file_size; ++i)
       {
         Fl_Widget *c = dly_scroll->child(i);
-        dlyFileGroup *c_choice = (dlyFileGroup *) c;
+        dlyFileGroup *c_choice = static_cast<dlyFileGroup *>(c);
   
         // Gotta range check all of these!!
         delay_file.fPan[i] = (double) strtod(c_choice->dly_pan->value(), NULL);               // -1.0 -- + 1.0
@@ -553,7 +553,7 @@ void DelayFileWindowGui::update_scroll(int group, int type) {
     for(int i = 0; i < m_file_size; ++i)
     {
         Fl_Widget *c = dly_scroll->child(i);
-        dlyFileGroup *c_choice = (dlyFileGroup *) c;
+        dlyFileGroup *c_choice = static_cast<dlyFileGroup *>(c);
         
         switch(type)
         {
@@ -681,7 +681,7 @@ void DelayFileWindowGui::process_scroll_update() {
 
 void dlyFileGroup::cb_dly_copy_i(RKR_Button* o, void*) {
   Fl_Widget * P = o->parent();
-    dlyFileGroup *c_choice = (dlyFileGroup *) P;
+    dlyFileGroup *c_choice = static_cast<dlyFileGroup *>(P);
 
     m_parent->copy_group_to_delay_line(m_parent->m_paste_item, c_choice);
 }
@@ -691,7 +691,7 @@ void dlyFileGroup::cb_dly_copy(RKR_Button* o, void* v) {
 
 void dlyFileGroup::cb_dly_paste_i(RKR_Button* o, void*) {
   Fl_Widget * P = o->parent();
-    dlyFileGroup *ADDG = (dlyFileGroup *) P;
+    dlyFileGroup *ADDG = static_cast<dlyFileGroup *>(P);
 
     m_parent->copy_delay_line_to_group(ADDG, m_parent->m_paste_item);
 }
@@ -702,7 +702,7 @@ void dlyFileGroup::cb_dly_paste(RKR_Button* o, void* v) {
 void dlyFileGroup::cb_dly_delete_i(RKR_Button* o, void*) {
   Fl_Widget * P = o->parent();
   
-dlyFileGroup *Choice = (dlyFileGroup *) P;
+dlyFileGroup *Choice = static_cast<dlyFileGroup *>(P);
 
 std::stringstream strValue;
 strValue << Choice->dly_occur->label();
@@ -724,7 +724,7 @@ void dlyFileGroup::cb_dly_insert_i(RKR_Button* o, void*) {
 
 Fl_Widget * P = o->parent();
 
-dlyFileGroup *Choice = (dlyFileGroup *) P;
+dlyFileGroup *Choice = static_cast<dlyFileGroup *>(P);
 
 std::stringstream strValue;
 strValue << Choice->dly_occur->label();
@@ -743,7 +743,7 @@ void dlyFileGroup::cb_dly_insert(RKR_Button* o, void* v) {
 void dlyFileGroup::cb_dly_up_i(RKR_Button* o, void*) {
   Fl_Widget * P = o->parent();
   
-dlyFileGroup *Choice = (dlyFileGroup *) P;
+dlyFileGroup *Choice = static_cast<dlyFileGroup *>(P);
 
 std::stringstream strValue;
 strValue << Choice->dly_occur->label();
@@ -766,7 +766,7 @@ void dlyFileGroup::cb_dly_up(RKR_Button* o, void* v) {
 void dlyFileGroup::cb_dly_down_i(RKR_Button* o, void*) {
   Fl_Widget * P = o->parent();
   
-dlyFileGroup *Choice = (dlyFileGroup *) P;
+dlyFileGroup *Choice = static_cast<dlyFileGroup *>(P);
 
 std::stringstream strValue;
 strValue << Choice->dly_occur->label();
