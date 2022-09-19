@@ -49,7 +49,16 @@
         Time Fourier Transform.
         Author: (c)1999-2006 Stephan M. Bernsee <smb [AT] dspdimension [DOT] com>
  */
-PitchShifter::PitchShifter(long fftFrameSize, long osamp, float sampleRate)
+PitchShifter::PitchShifter(long fftFrameSize, long osamp, float sampleRate) :
+gSynFreq(),
+gSynMagn(),
+magn(),
+phase(),
+tmp(),
+real(),
+imag(),
+qpd(),
+index()
 {
     /* set up some handy variables */
     fftFrameSize2 = fftFrameSize / 2;

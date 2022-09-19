@@ -168,7 +168,10 @@ fft_filter::fft_filter (float * efxoutl_, float * efxoutr_, float size)
 
 }
  */
-fft_filter::fft_filter()
+fft_filter::fft_filter() :
+outvolume(),
+efxoutl(),
+efxoutr()
 {
 
 }
