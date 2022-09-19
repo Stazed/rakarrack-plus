@@ -505,8 +505,8 @@ Arpie::setpattern(int _Ppattern)
     };
 
 
-    if (_Ppattern >= PATTERN_SIZE)
-        _Ppattern = PATTERN_SIZE - 1;
+    if (_Ppattern >= NUM_PATTERNS)
+        _Ppattern = NUM_PATTERNS - 1;
     for (int ii = 0; ii < PATTERN_SIZE; ii++)
         pattern[ii] = setpatterns[_Ppattern][ii];
 }
