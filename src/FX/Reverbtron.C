@@ -722,6 +722,7 @@ Reverbtron::loadfile(char* filename)
     {
         f = loaddefault();
         error = 2;
+        fclose(fs);
         return (f);
     }
 
@@ -732,6 +733,7 @@ Reverbtron::loadfile(char* filename)
     {
         f = loaddefault();
         error = 2;
+        fclose(fs);
         return (f);
     }
 
@@ -746,6 +748,7 @@ Reverbtron::loadfile(char* filename)
     {
         f = loaddefault();
         error = 2;
+        fclose(fs);
         return (f);
     }
     
@@ -762,6 +765,7 @@ Reverbtron::loadfile(char* filename)
         {
             f = loaddefault();
             error = 2;
+            fclose(fs);
             return (f);
         }
         sscanf(wbuf, "%f,%f\n", &f.ftime[i], &f.tdata[i]);

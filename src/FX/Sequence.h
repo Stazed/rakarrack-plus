@@ -122,7 +122,7 @@ private:
     int Pstdiff;       // 1 2 3 4 5 6 7 8
     int Pmode;
     int Prange;
-    int tcount, scount, dscount, intperiod;
+    unsigned int tcount, scount, dscount, intperiod;
     int subdiv;
     int rndflag;
     unsigned int nPERIOD;
