@@ -39,7 +39,7 @@ public:
     RKR_Menu_Bar(int X, int Y, int W, int H, const char *label=0);
     void draw();
     void resize(int,int,int,int);
-    void set_submenu_paths(std::vector<std::string> submenu){m_submenu_paths = submenu;};
+    void set_submenu_paths(const std::vector<std::string> &submenu){m_submenu_paths = submenu;};
     void set_label_offset(int offset){m_label_offset = offset;};
 
 private:

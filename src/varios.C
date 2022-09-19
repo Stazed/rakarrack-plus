@@ -30,7 +30,7 @@
 #include "process.h"
 
 int
-RKR::Message(int prio, std::string labelwin, std::string message_text)
+RKR::Message(int prio, const std::string &labelwin, const std::string &message_text)
 {
     if ((Config.Disable_Warnings) && (prio == 0)) return (0);
     

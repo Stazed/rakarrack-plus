@@ -543,7 +543,7 @@ RKR::put_order_in_rack()
  *      0 =  bank not found in user directory.
  */
 int
-RKR::load_bank_from_vector(const std::string filename)
+RKR::load_bank_from_vector(const std::string &filename)
 {
     for(unsigned i = 0; i < Bank_Vector.size (); i++)
     {
