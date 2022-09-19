@@ -1586,11 +1586,9 @@ RKR::big_endian()
 void
 RKR::fix_endianess(struct PresetBankStruct _bank[])
 {
-    unsigned int data;
-
     for (int i = 0; i < 62; i++)
     {
-        data = _bank[i].FX_Master_Active;
+        unsigned int data = _bank[i].FX_Master_Active;
         data = SwapFourBytes(data);
         _bank[i].FX_Master_Active = data;
 
@@ -1748,13 +1746,12 @@ RKR::dump_preset_names(void)
 int
 RKR::CheckOldBank(const std::string &filename)
 {
-    long Length = 0;
     FILE *fs;
 
     if ((fs = fopen(filename.c_str(), "r")) != NULL)
     {
         fseek(fs, 0L, SEEK_END);
-        Length = ftell(fs);
+        long Length = ftell(fs);
         fclose(fs);
         
         if (Length == 993488) return (31);
@@ -1883,7 +1880,7 @@ RKR::delete_insert_preset(int num, const std::string &name)
             memset(rbuf, 0, sizeof (rbuf));
             sprintf(rbuf, "%s", buf);
             sscanf(buf, "%d", &eff);
-            rname = strsep(&sbuf, ",");
+            rname = strsep(&sbuf, ","); // return not used, next delimiter
             rname = strsep(&sbuf, ",");
             if ((eff == num)&&(strcmp(rname, name.c_str()) == 0))
             {

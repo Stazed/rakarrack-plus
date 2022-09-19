@@ -42,7 +42,7 @@ Tuner::~Tuner()
 }
 
 void
-Tuner::displayFrequency(float ffreq, float *freqs, float *lfreqs)
+Tuner::displayFrequency(float ffreq, const float *freqs, const float *lfreqs)
 {
     if (ffreq < 1E-15)
     {
@@ -62,11 +62,10 @@ Tuner::displayFrequency(float ffreq, float *freqs, float *lfreqs)
     }
     
     float mldf = LOG_D_NOTE;
-    float ldf = 0.0f;
     
     for (int i = 0; i < 12; i++)
     {
-        ldf = fabsf(lfreq - lfreqs[i]);
+        float ldf = fabsf(lfreq - lfreqs[i]);
         
         if (ldf < mldf)
         {
@@ -110,7 +109,7 @@ Tuner::schmittInit(int size)
 
 // FIXME code duplication
 void
-Tuner::schmittS16LE(int nframes, signed short int *indata, float *freqs, float *lfreqs)
+Tuner::schmittS16LE(int nframes, const signed short int *indata, float *freqs, float *lfreqs)
 {
     int j = 0.0f;
     float trigfact = 0.5f;
@@ -140,7 +139,7 @@ Tuner::schmittS16LE(int nframes, signed short int *indata, float *freqs, float *
             t2 = -lrintf((float) A2 * trigfact + 0.5f);
             startpoint = 0;
             
-            for (j = 1; schmittBuffer[j] <= t1 && j < blockSize; j++);
+            for (j = 1; j < blockSize && schmittBuffer[j] <= t1; j++);
             
             for (; !(schmittBuffer[j] >= t2 &&
                  schmittBuffer[j + 1] < t2) && j < blockSize; j++);
@@ -179,7 +178,7 @@ Tuner::schmittFree()
 }
 
 void
-Tuner::schmittFloat(int nframes, float *indatal, float *indatar, float *freqs, float *lfreqs)
+Tuner::schmittFloat(int nframes, const float *indatal, const float *indatar, float *freqs, float *lfreqs)
 {
     signed short int buf[nframes];
     

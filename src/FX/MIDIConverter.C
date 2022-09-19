@@ -311,7 +311,7 @@ MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freq
             int t1 = lrintf((float) A1 * trigfact + 0.5f);
             int t2 = -lrintf((float) A2 * trigfact + 0.5f);
 
-            for (j = 1; schmittBuffer[j] <= t1 && j < blockSize; j++);
+            for (j = 1; j < blockSize && schmittBuffer[j] <= t1; j++);
 
             for (; !(schmittBuffer[j] >= t2 &&
                  schmittBuffer[j + 1] < t2) && j < blockSize; j++);

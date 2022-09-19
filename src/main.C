@@ -135,7 +135,7 @@ void check_signals(void *usrPtr)
 {
     // process signals
     RKR *process = NULL;
-    process = (RKR*) usrPtr;
+    process = static_cast<RKR *>(usrPtr);
 
     if (!process)
         return;

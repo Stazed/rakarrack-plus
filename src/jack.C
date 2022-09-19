@@ -113,7 +113,7 @@ JACKstart(RKR * rkr_)
 int
 jackprocess(jack_nframes_t nframes, void *arg)
 {
-    RKR *JackOUT = (RKR *) arg;
+    RKR *JackOUT = static_cast<RKR *>(arg);
     
     jack_midi_event_t midievent;
     jack_position_t pos;
@@ -277,7 +277,7 @@ JACKfinish(RKR * JackOUT)
 void
 jackshutdown(void *arg)
 {
-    RKR *JackOUT = (RKR *) arg;
+    RKR *JackOUT = static_cast<RKR *>(arg);
     if (!JackOUT->Gui_Shown)
     {
         printf("Jack Shut Down, sorry.\n");
@@ -291,7 +291,7 @@ jackshutdown(void *arg)
 int
 timebase(jack_transport_state_t state, jack_position_t *pos, void *arg)
 {
-    RKR *JackOUT = (RKR *) arg;
+    RKR *JackOUT = static_cast<RKR *>(arg);
     
     JackOUT->jt_state = state;
 
