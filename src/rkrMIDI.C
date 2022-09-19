@@ -1055,9 +1055,10 @@ RKR::Conecta()
                 }
             }
         }
+
+        fclose(fp);
     }
 
-    fclose(fp);
     conectaaconnect();
 };
 

@@ -668,7 +668,7 @@ public:
     void instantiate_effects();
     void initialize_arrays();
     void put_order_in_rack();
-    int load_bank_from_vector(std::string filename);
+    int load_bank_from_vector(const std::string filename);
     void Adjust_Upsample();
     void add_metro();
     void calculavol (int i);
@@ -700,18 +700,18 @@ public:
     // fileio.C
     void apply_effect_parameters (std::string s_buf, int fx_index, PresetBankStruct &preset_loaded);
     void get_effect_parameters (std::string &s_buf, int fx_index);
-    void export_to_nsm_mixer(std::string filename);
-    void export_to_carla(std::string filename);
-    void save_preset (std::string filename);
-    void load_preset (std::string filename);
+    void export_to_nsm_mixer(const std::string filename);
+    void export_to_carla(const std::string filename);
+    void save_preset (const std::string filename);
+    void load_preset (const std::string filename);
     void set_audio_paramters ();
     void load_custom_MIDI_table_preset_names();
     void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
-    int load_bank (std::string filename);
-    int save_bank (std::string filename, PresetBankStruct _Bank[]);
+    int load_bank (const std::string filename);
+    int save_bank (const std::string filename, PresetBankStruct _Bank[]);
     void load_bank_vector();
-    void add_bank_item(std::string filename);
+    void add_bank_item(const std::string filename);
     void copy_bank(struct PresetBankStruct dest[], struct PresetBankStruct source[]);
     void new_preset ();
     void new_bank (struct PresetBankStruct _bank[] );
@@ -722,28 +722,28 @@ public:
     void convert_IO(struct PresetBankStruct _bank[]);
     int big_endian();
     void fix_endianess(struct PresetBankStruct _bank[]);
-    void save_skin (std::string filename);
-    bool load_skin (std::string filename);
+    void save_skin (const std::string filename);
+    bool load_skin (const std::string filename);
     void load_skin_error(FILE *fn);
     void dump_preset_names ();
 
-    int CheckOldBank(std::string filename);
-    void ConvertOldFile(std::string filename);
+    int CheckOldBank(const std::string filename);
+    void ConvertOldFile(const std::string filename);
 
-    void convert_reverb_file(std::string filename);
-    int save_insert_preset(int num, std::string name);
-    void delete_insert_preset(int num, std::string name);
-    void save_MIDI_table (std::string filename);
-    void load_MIDI_table (std::string filename);
+    void convert_reverb_file(const std::string filename);
+    int save_insert_preset(int num, const std::string name);
+    void delete_insert_preset(int num, const std::string name);
+    void save_MIDI_table (const std::string filename);
+    void load_MIDI_table (const std::string filename);
     void load_MIDI_table_vector();
-    void add_table_item(std::string filename);
+    void add_table_item(const std::string filename);
     int set_midi_table(int item);
     void load_default_midi_table();
-    int file_in_midi_table_vector(std::string filename);
+    int file_in_midi_table_vector(const std::string filename);
     void load_convolotron_vector();
     void load_echotron_vector();
     void load_reverbtron_vector();
-    bool does_file_exist(std::string fileName);
+    bool does_file_exist(const std::string fileName);
 
     // varios.C
     int Message (int prio, std::string labelwin, std::string message_text);

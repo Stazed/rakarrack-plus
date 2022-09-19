@@ -181,7 +181,7 @@ void RKR::get_effect_parameters(std::string &s_buf, int fx_index)
  *      The user defined file name for the preset to be saved.
  */
 void
-RKR::save_preset(std::string filename)
+RKR::save_preset(const std::string filename)
 {
     FILE *fn;
 
@@ -296,7 +296,7 @@ RKR::save_preset(std::string filename)
 }
 
 void
-RKR::export_to_nsm_mixer(std::string filename)
+RKR::export_to_nsm_mixer(const std::string filename)
 {
     FILE *fn;
 
@@ -386,7 +386,7 @@ RKR::export_to_nsm_mixer(std::string filename)
 }
 
 void 
-RKR::export_to_carla(std::string filename)
+RKR::export_to_carla(const std::string filename)
 {
     FILE *fn;
 
@@ -489,7 +489,7 @@ RKR::export_to_carla(std::string filename)
  *      The user selected filename.
  */
 void
-RKR::load_preset(std::string filename)
+RKR::load_preset(const std::string filename)
 {
     FILE *fn;
     char buf[256];
@@ -1120,7 +1120,7 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
  *      One (1) if successful parsing.
  */
 int
-RKR::load_bank(std::string filename)
+RKR::load_bank(const std::string filename)
 {
     int error_number = CheckOldBank(filename);
     
@@ -1180,7 +1180,7 @@ RKR::load_bank(std::string filename)
 };
 
 int
-RKR::save_bank(std::string filename, PresetBankStruct _Bank[])
+RKR::save_bank(const std::string filename, PresetBankStruct _Bank[])
 {
     FILE *fn;
     
@@ -1302,9 +1302,9 @@ RKR::load_bank_vector()
 }
 
 void
-RKR::add_bank_item(std::string filename)
+RKR::add_bank_item(const std::string filename)
 {
-    int error_number = CheckOldBank(filename.c_str());
+    int error_number = CheckOldBank(filename);
     
     if(error_number)
     {
@@ -1617,7 +1617,7 @@ RKR::fix_endianess(struct PresetBankStruct _bank[])
 }
 
 void
-RKR::save_skin(std::string filename)
+RKR::save_skin(const std::string filename)
 {
     FILE *fn;
     char buf[256];
@@ -1655,7 +1655,7 @@ RKR::save_skin(std::string filename)
 }
 
 bool
-RKR::load_skin(std::string filename)
+RKR::load_skin(const std::string filename)
 {
     char buf[256];
     FILE *fn;
@@ -1746,7 +1746,7 @@ RKR::dump_preset_names(void)
 }
 
 int
-RKR::CheckOldBank(std::string filename)
+RKR::CheckOldBank(const std::string filename)
 {
     long Length = 0;
     FILE *fs;
@@ -1767,7 +1767,7 @@ RKR::CheckOldBank(std::string filename)
 }
 
 void
-RKR::ConvertOldFile(std::string filename)
+RKR::ConvertOldFile(const std::string filename)
 {
     char buff[255];
     memset(buff, 0, sizeof (buff));
@@ -1780,7 +1780,7 @@ RKR::ConvertOldFile(std::string filename)
 }
 
 void
-RKR::convert_reverb_file(std::string filename)
+RKR::convert_reverb_file(const std::string filename)
 {
     char buff[255];
     memset(buff, 0, sizeof (buff));
@@ -1794,7 +1794,7 @@ RKR::convert_reverb_file(std::string filename)
 }
 
 int
-RKR::save_insert_preset(int num, std::string name)
+RKR::save_insert_preset(int num, const std::string name)
 {
     std::string insert_preset_location = "";
     
@@ -1835,7 +1835,7 @@ RKR::save_insert_preset(int num, std::string name)
 }
 
 void
-RKR::delete_insert_preset(int num, std::string name)
+RKR::delete_insert_preset(int num, const std::string name)
 {
     std::string insert_preset_location = "";
     
@@ -1892,10 +1892,11 @@ RKR::delete_insert_preset(int num, std::string name)
             else fputs(rbuf, fn);
             memset(buf, 0, sizeof (buf));
         }
+
+        fclose(fn);
     }
 
     fclose(fs);
-    fclose(fn);
 
     sprintf(orden, "mv %s %s\n", tempfile2, tempfile);
 
@@ -1906,7 +1907,7 @@ RKR::delete_insert_preset(int num, std::string name)
 }
 
 void
-RKR::save_MIDI_table(std::string filename)
+RKR::save_MIDI_table(const std::string filename)
 {
     FILE *fn;
     char buf[256];
@@ -1932,7 +1933,7 @@ RKR::save_MIDI_table(std::string filename)
 }
 
 void
-RKR::load_MIDI_table(std::string filename)
+RKR::load_MIDI_table(const std::string filename)
 {
     char buf[256];
     FILE *fn;
@@ -2012,7 +2013,7 @@ RKR::load_MIDI_table_vector()
 }
 
 void 
-RKR::add_table_item(std::string filename)
+RKR::add_table_item(const std::string filename)
 {
     // printf("Add table item %s\n", filename.c_str());
     char buf[256];
@@ -2131,7 +2132,7 @@ RKR::load_default_midi_table()
 }
 
 int
-RKR::file_in_midi_table_vector(std::string filename)
+RKR::file_in_midi_table_vector(const std::string filename)
 {
     for(unsigned i = 0; i < Midi_Table_Vector.size(); i++)
     {
@@ -2341,7 +2342,7 @@ RKR::load_reverbtron_vector()
 }
 
 bool
-RKR::does_file_exist(std::string fileName)
+RKR::does_file_exist(const std::string fileName)
 {
     std::ifstream infile(fileName.c_str());
     return infile.good();
