@@ -116,7 +116,7 @@ public:
     int setfile (int value);
     void adjust(int DS, double sample_rate);
     RvbFile loadfile(char* filename);
-    void applyfile(RvbFile file);
+    void applyfile(const RvbFile &file);
     void set_user_files(const std::vector<User_Files> &rvb_files){RVB_Files = rvb_files;};
     
     /* Change quality */

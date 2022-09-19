@@ -81,7 +81,7 @@ public:
     virtual void LV2_parameters(std::string &, int) {};
     virtual std::string get_URI(int) { return ""; };
     virtual std::string get_name(int) { return ""; };
-    void Carla_LV2_port(std::string &, int index, int value, std::string name, std::string symbol);
+    void Carla_LV2_port(std::string &, int index, int value, const std::string &name, const std::string &symbol);
 
     uint32_t period_master;
     float outvolume;

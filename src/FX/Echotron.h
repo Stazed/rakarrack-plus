@@ -168,7 +168,7 @@ public:
     int setfile (int value);
     bool check_delay_file_ranges(double value, int item);
     DlyFile loadfile(char* path);
-    void applyfile(DlyFile);
+    void applyfile(const DlyFile &);
     int get_file_length() {return File.fLength;};
     char *get_file_name() {return File.Filename;};
     void set_user_files(const std::vector<User_Files> &dly_files){DLY_Files = dly_files;};

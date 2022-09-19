@@ -777,7 +777,7 @@ Echotron::loadfile(char* Filename)
 }
 
 void
-Echotron::applyfile(DlyFile f)
+Echotron::applyfile(const DlyFile &f)
 {
     File = f;
     init_params();

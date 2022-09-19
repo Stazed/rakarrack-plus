@@ -125,7 +125,7 @@ Effect::Vol3_Efx(float *efxoutl, float *efxoutr, float *smpl, float *smpr)
 }
 
 void 
-Effect::Carla_LV2_port(std::string &s_buf, int index, int value, std::string name, std::string symbol)
+Effect::Carla_LV2_port(std::string &s_buf, int index, int value, const std::string &name, const std::string &symbol)
 {
     s_buf += "   <Parameter>\n";
     s_buf += "    <Index>";

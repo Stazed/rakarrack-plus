@@ -787,7 +787,7 @@ Reverbtron::loadfile(char* filename)
 }
 
 void
-Reverbtron::applyfile(RvbFile file)
+Reverbtron::applyfile(const RvbFile &file)
 {
     File = file;
     convert_time();
