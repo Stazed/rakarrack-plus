@@ -95,19 +95,16 @@ Tuner::displayFrequency(float ffreq, const float *freqs, const float *lfreqs)
     preparada = note;
 }
 
-// FIXME code duplication
 void
 Tuner::schmittInit(int size)
 {
     blockSize = SAMPLE_RATE / size;
-    /* +2 blovksize because valgrind bitches about invalid reads in schmittS16LE() */
-    schmittBuffer = (signed short int *) malloc(sizeof (signed short int) * (blockSize + 2)); 
+    schmittBuffer = (signed short int *) malloc(sizeof (signed short int) * (blockSize + 1));
 
-    memset(schmittBuffer, 0, sizeof (signed short int) * (blockSize + 2));
+    memset(schmittBuffer, 0, sizeof (signed short int) * (blockSize + 1));
     schmittPointer = schmittBuffer;
 }
 
-// FIXME code duplication
 void
 Tuner::schmittS16LE(int nframes, const signed short int *indata, float *freqs, float *lfreqs)
 {
@@ -141,8 +138,8 @@ Tuner::schmittS16LE(int nframes, const signed short int *indata, float *freqs, f
             
             for (j = 1; j < blockSize && schmittBuffer[j] <= t1; j++);
             
-            for (; !(schmittBuffer[j] >= t2 &&
-                 schmittBuffer[j + 1] < t2) && j < blockSize; j++);
+            for (; j < blockSize && !(schmittBuffer[j] >= t2 &&
+                 schmittBuffer[j + 1] < t2); j++);
             
             startpoint = j;
             schmittTriggered = 0;

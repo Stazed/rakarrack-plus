@@ -267,19 +267,16 @@ MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float 
     }
 }
 
-// FIXME code duplication
 void
 MIDIConverter::schmittInit(int size)
 {
     blockSize = SAMPLE_RATE / size;
-    /* blocksize +2 because valgrind bitches about invalid reads in schmittS16LE() */
-    schmittBuffer =  (signed short int *) malloc(sizeof (signed short int) * (blockSize + 2));
+    schmittBuffer =  (signed short int *) malloc(sizeof (signed short int) * (blockSize + 1));
 
-    memset(schmittBuffer, 0, sizeof (signed short int) * (blockSize + 2));
+    memset(schmittBuffer, 0, sizeof (signed short int) * (blockSize + 1));
     schmittPointer = schmittBuffer;
 }
 
-// FIXME code duplication with same function from RecognizeNote.C
 void
 MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freqs, float *lfreqs)
 {
@@ -313,8 +310,8 @@ MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freq
 
             for (j = 1; j < blockSize && schmittBuffer[j] <= t1; j++);
 
-            for (; !(schmittBuffer[j] >= t2 &&
-                 schmittBuffer[j + 1] < t2) && j < blockSize; j++);
+            for (; j < blockSize && !(schmittBuffer[j] >= t2 &&
+                 schmittBuffer[j + 1] < t2) && j; j++);
 
             int startpoint = j;
             int schmittTriggered = 0;
