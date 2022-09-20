@@ -3233,7 +3233,7 @@ void SettingsWindowGui::fill_mptable(int num,int value) {
           long long temp = (long long) w->user_data();
           if ((int)temp == num)
           {
-              RKR_Choice *p = (RKR_Choice * ) w;
+              RKR_Choice *p = static_cast<RKR_Choice *>(w);
               p->clear();
               for(int i=1; i<=60; i++)
               {
@@ -3269,7 +3269,7 @@ void SettingsWindowGui::mtfillvalue(int num,int value) {
           long long temp = (long long) w->user_data();
           if ((int)temp == num)
           {
-              RKR_Choice *p = (RKR_Choice * ) w;
+              RKR_Choice *p = static_cast<RKR_Choice *>(w);
               p->value(value);
               break;
           }

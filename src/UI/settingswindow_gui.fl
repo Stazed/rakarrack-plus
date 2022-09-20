@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {660 206 530 580} type Double
+  xywh {413 130 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -1681,7 +1681,7 @@ See F1 help under General/Preferences for additional information.} xywh {415 65 
         long long temp = (long long) w->user_data();
         if ((int)temp == num)
         {
-            RKR_Choice *p = (RKR_Choice * ) w;
+            RKR_Choice *p = static_cast<RKR_Choice *>(w);
             p->clear();
             for(int i=1; i<=60; i++)
             {
@@ -1716,7 +1716,7 @@ See F1 help under General/Preferences for additional information.} xywh {415 65 
         long long temp = (long long) w->user_data();
         if ((int)temp == num)
         {
-            RKR_Choice *p = (RKR_Choice * ) w;
+            RKR_Choice *p = static_cast<RKR_Choice *>(w);
             p->value(value);
             break;
         }

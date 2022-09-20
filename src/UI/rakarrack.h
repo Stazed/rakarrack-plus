@@ -673,7 +673,7 @@ public:
   void show_lic();
   void MiraClientes();
   void MiraConfig();
-  void BankWin_Label(std::string filename);
+  void BankWin_Label(const std::string &filename);
   void is_bank_modified();
   void is_PG_table_modified();
   void Put_Loaded_Bank();
@@ -700,10 +700,10 @@ public:
   void getMIDIControl(int num);
   void PrepareML();
   inline void get_insert_preset_name(Fl_Widget *w, int effect);
-  void add_insert_preset_name(Fl_Widget *w, std::string name);
-  bool check_insert_duplicate(Fl_Widget *w, std::string name);
+  void add_insert_preset_name(Fl_Widget *w, const std::string &name);
+  bool check_insert_duplicate(Fl_Widget *w, const std::string &name);
   Fl_Widget * find_effect_preset_widget(int effect);
-  void read_insert_presets(std::string location = "");
+  void read_insert_presets(const std::string &location = "");
   inline void delete_insert_preset(Fl_Widget *w, int effect);
   void Prep_Reorden(int source, int dest);
   static void bank_click(Fl_Choice* o, void* v);

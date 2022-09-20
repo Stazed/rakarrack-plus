@@ -2029,7 +2029,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {MiraConfig()} {open
   } {}
-  Function {BankWin_Label(std::string filename)} {open return_type void
+  Function {BankWin_Label(const std::string &filename)} {open return_type void
   } {}
   Function {is_bank_modified()} {open
   } {}
@@ -2083,13 +2083,13 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {get_insert_preset_name(Fl_Widget *w, int effect)} {open return_type {inline void}
   } {}
-  Function {add_insert_preset_name(Fl_Widget *w, std::string name)} {open
+  Function {add_insert_preset_name(Fl_Widget *w, const std::string &name)} {open
   } {}
-  Function {check_insert_duplicate(Fl_Widget *w, std::string name)} {open return_type bool
+  Function {check_insert_duplicate(Fl_Widget *w, const std::string &name)} {open return_type bool
   } {}
   Function {find_effect_preset_widget(int effect)} {open return_type {Fl_Widget *}
   } {}
-  Function {read_insert_presets(std::string location = "")} {open return_type void
+  Function {read_insert_presets(const std::string &location = "")} {open return_type void
   } {}
   Function {delete_insert_preset(Fl_Widget *w, int effect)} {open return_type {inline void}
   } {}

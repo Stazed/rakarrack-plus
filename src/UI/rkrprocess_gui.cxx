@@ -1649,10 +1649,6 @@ void RKRGUI::show_lic()
 void RKRGUI::MiraClientes()
 {
     // Find Audio and midi ports
-    char temp[128];
-    char temp1[128];
-    char *masque;
-    char *name;
     FILE *fp;
 
     Settings->BMidiIn->clear();
@@ -1660,15 +1656,18 @@ void RKRGUI::MiraClientes()
 
     if ((fp = fopen("/proc/asound/seq/clients", "r")) != NULL)
     {
+        char temp[128];
         memset(temp, 0, sizeof (temp));
 
         while (fgets(temp, sizeof temp, fp) != NULL)
         {
             if (strstr(temp, "Port") != NULL)
             {
+                char temp1[128];
+                char *masque;
                 strcpy(temp1, temp);
                 strtok(temp1, "\"");
-                name = strtok(NULL, "\"");
+                char *name = strtok(NULL, "\"");
                 masque = strtok(NULL, ")");
                 
                 std::string s_name = m_process->jackcliname;
@@ -2020,13 +2019,13 @@ void RKRGUI::MiraConfig()
         Settings->JackIn->deactivate();
     }
 
-    Fl_Menu_Item *p;
+    Fl_Menu_Item *item;
     Fl_Menu_Item *Har = Settings->get_menu_Har_Downsample();
     unsigned int SR_value = m_process->sample_rate;
 
     for (int j = 0; j < Har->size(); j++)
     {
-        p = Har->next(j);
+        item = Har->next(j);
 
         switch (j)
         {
@@ -2064,11 +2063,11 @@ void RKRGUI::MiraConfig()
 
         if ((j > 0) && ((unsigned int) m_process->sample_rate <= SR_value))
         {
-            p->deactivate();
+            item->deactivate();
         }
         else
         {
-            p->activate();
+            item->activate();
         }
     }
 
@@ -2087,18 +2086,18 @@ void RKRGUI::MiraConfig()
         // alpha search in RKR_Browser::handle() may need to be adjusted.
         if (t)
         {
-            char *p = buffer;
+            char *ptr = buffer;
             if (t & FL_BOLD)
             {
-                *p++ = '@';
-                *p++ = 'b';
+                *ptr++ = '@';
+                *ptr++ = 'b';
             }
             if (t & FL_ITALIC)
             {
-                *p++ = '@';
-                *p++ = 'i';
+                *ptr++ = '@';
+                *ptr++ = 'i';
             }
-            strcpy(p, name);
+            strcpy(ptr, name);
             name = buffer;
         }
 #else // this is neat, but really slow on some X servers:
@@ -2111,7 +2110,7 @@ void RKRGUI::MiraConfig()
     Settings->Font_Bro->value(global_font_type + 1);
 }
 
-void RKRGUI::BankWin_Label(std::string filename)
+void RKRGUI::BankWin_Label(const std::string &filename)
 {
     char tmp[256];
 
@@ -2178,15 +2177,13 @@ void RKRGUI::Put_Loaded_Bank()
     int k = 1;
 
     // Program change number before the preset name
-    std::string add_pg_change = "";
-
     for (int t = 0; t < BankWindow->ob->children(); t++)
     {
         Fl_Widget *w = BankWindow->ob->child(t);
         long long temp = (long long) w->user_data();
         if (temp > 0)
         {
-            add_pg_change = "[";
+            std::string add_pg_change = "[";
             add_pg_change += NTS(k);
             add_pg_change += "] ";
             add_pg_change += m_process->Bank[k].Preset_Name;
@@ -2315,10 +2312,10 @@ void RKRGUI::MIDI_control_gui_refresh()
  */
 void RKRGUI::ActOnOff()
 {
-    int miralo = 0;
-
     while (m_process->OnOffC > 0)
     {
+        int miralo;
+
         if (m_process->Mnumeff[m_process->OnOffC] > 2000)
         {
             miralo = m_process->Mnumeff[m_process->OnOffC] - 2000;
@@ -3508,43 +3505,42 @@ inline void RKRGUI::get_insert_preset_name(Fl_Widget *w, int effect)
  * @param name
  *      The user defined preset name to add.
  */
-void RKRGUI::add_insert_preset_name(Fl_Widget *w, std::string name)
+void RKRGUI::add_insert_preset_name(Fl_Widget *w, const std::string &name)
 {
     RKR_Choice *s = static_cast<RKR_Choice *> (w);
 
     s->add(name.c_str ());
 
     Fl_Menu_Item *m = const_cast<Fl_Menu_Item*>  (s->menu ());
-    Fl_Menu_Item *p;
+    Fl_Menu_Item *item;
     
     int font_size = C_DEFAULT_FONT_SIZE;
 
     for (int i = 0; i < m->size(); i++)
     {
-        p = m->next(i);
+        item = m->next(i);
 
         if (i == 0)
         {
-            font_size = p->labelsize();
+            font_size = item->labelsize();
         }
         
-        p->labelsize(font_size);
-        p->labelfont (global_font_type);
+        item->labelsize(font_size);
+        item->labelfont (global_font_type);
     }
 }
 
-bool RKRGUI::check_insert_duplicate(Fl_Widget *w, std::string name)
+bool RKRGUI::check_insert_duplicate(Fl_Widget *w, const std::string &name)
 {
     RKR_Choice *s = static_cast<RKR_Choice *> (w);
 
     Fl_Menu_Item *m0 = const_cast<Fl_Menu_Item*>  (s->menu ());
-    Fl_Menu_Item *p0;
 
     bool is_duplicate = false;
 
     for (int i = 0; i < m0->size(); i++)
     {
-        p0 = m0->next(i);
+        Fl_Menu_Item *p0 = m0->next(i);
         
         if(p0->label() != NULL)
         {
@@ -3599,7 +3595,7 @@ Fl_Widget * RKRGUI::find_effect_preset_widget(int effect)
  *      The file location to read from. Only used when importing/merging from
  *      another user file.
  */
-void RKRGUI::read_insert_presets(std::string location)
+void RKRGUI::read_insert_presets(const std::string &location)
 {
     std::string insert_preset_location = "";
     
@@ -3626,7 +3622,6 @@ void RKRGUI::read_insert_presets(std::string location)
     // Read in user presets
     FILE *fn;
     char buf[256];
-    char *name;
     char *sbuf;
     int effect = 0;
 
@@ -3636,7 +3631,7 @@ void RKRGUI::read_insert_presets(std::string location)
         {
             sbuf = buf;
             sscanf(buf, "%d", &effect);
-            name = strsep(&sbuf, ",");
+            char *name = strsep(&sbuf, ",");  // return not used, incrementing the buffer
             name = strsep(&sbuf, ",");
 
             Fl_Widget * w = find_effect_preset_widget(effect);
