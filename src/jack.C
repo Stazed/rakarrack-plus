@@ -218,7 +218,6 @@ jackprocess(jack_nframes_t nframes, void *arg)
     }
 
     /* For midi outgoing - MIDIConverter */
-    jack_midi_data_t *midiData;
     int space = 0;
 
     void *buffer = jack_port_get_buffer(jack_midi_out, nframes);
@@ -229,7 +228,7 @@ jackprocess(jack_nframes_t nframes, void *arg)
         while (jack_ringbuffer_read_space(JackOUT->efx_MIDIConverter->m_buffSize) > 0)
         {
             jack_ringbuffer_read(JackOUT->efx_MIDIConverter->m_buffSize, (char *) &space, (size_t) sizeof (space));
-            midiData = jack_midi_event_reserve(buffer, 0, space);
+            jack_midi_data_t *midiData = jack_midi_event_reserve(buffer, 0, space);
 
             jack_ringbuffer_read(JackOUT->efx_MIDIConverter->m_buffMessage, (char *) midiData, (size_t) space);
         }

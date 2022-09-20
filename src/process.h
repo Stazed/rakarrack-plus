@@ -674,7 +674,7 @@ public:
     void calculavol (int i);
     int checkforaux();
     void Control_Gain (float *origl, float *origr);
-    void Control_Volume (float *origl, float *origr);
+    void Control_Volume (const float *origl, const float *origr);
     void cleanup_efx ();
     void process_effects (float *origl, float *origr ,void *);
 
@@ -712,7 +712,7 @@ public:
     int save_bank (const std::string &filename, PresetBankStruct _Bank[]);
     void load_bank_vector();
     void add_bank_item(const std::string &filename);
-    void copy_bank(struct PresetBankStruct dest[], struct PresetBankStruct source[]);
+    void copy_bank(struct PresetBankStruct dest[], const struct PresetBankStruct source[]);
     void new_preset ();
     void new_bank (struct PresetBankStruct _bank[] );
     void active_bank_preset_to_main_window (int preset_number);

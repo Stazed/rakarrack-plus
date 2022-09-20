@@ -1010,16 +1010,16 @@ RKR::Conecta()
 
     int client = 0;
     int puerto = 0;
-    char temp[128];
-    char temp1[128];
-    char temp2[128];
-    char *nume;
 
     if (IsCoIn)
         disconectaaconnect();
 
     if ((fp = fopen("/proc/asound/seq/clients", "r")) != NULL)
     {
+        char temp[128];
+        char temp1[128];
+        char temp2[128];
+        char *nume;
         memset(temp, 0, sizeof (temp));
 
         while (fgets(temp, sizeof temp, fp) != NULL)
@@ -1065,10 +1065,9 @@ RKR::Conecta()
 void
 RKR::conectaaconnect()
 {
-    char tempi[128];
-
     if (strlen(Config.MID) != 0)
     {
+        char tempi[128];
         memset(tempi, 0, sizeof (tempi));
         sprintf(tempi, "aconnect %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
         
@@ -1084,10 +1083,9 @@ RKR::conectaaconnect()
 void
 RKR::disconectaaconnect()
 {
-    char tempi[128];
-
     if (strlen(Config.MID) != 0)
     {
+        char tempi[128];
         memset(tempi, 0, sizeof (tempi));
         sprintf(tempi, "aconnect -d %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
         if (system(tempi) == -1)

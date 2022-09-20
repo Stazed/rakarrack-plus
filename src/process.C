@@ -626,7 +626,6 @@ RKR::Control_Gain(float *origl, float *origr)
 {
     float il_sum = 1e-12f;
     float ir_sum = 1e-12f;
-    float a_sum = 1e-12f;
     float tmp = 0.0;
 
     if (upsample)
@@ -681,8 +680,7 @@ RKR::Control_Gain(float *origl, float *origr)
 
     if ((ACI_Active) && (Aux_Source == 0))
     {
-        temp_sum = 0.0;
-        tmp = 0.0;
+        float a_sum = 1e-12f;
         for (unsigned i = 0; i < period_master; i++)
         {
             tmp = fabsf(auxresampled[i]);
@@ -699,7 +697,7 @@ RKR::Control_Gain(float *origl, float *origr)
 }
 
 void
-RKR::Control_Volume(float *origl, float *origr)
+RKR::Control_Volume(const float *origl, const float *origr)
 {
     float il_sum = 1e-12f;
     float ir_sum = 1e-12f;

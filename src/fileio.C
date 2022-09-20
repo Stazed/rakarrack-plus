@@ -1370,7 +1370,7 @@ RKR::add_bank_item(const std::string &filename)
 }
 
 void
-RKR::copy_bank(struct PresetBankStruct dest[], struct PresetBankStruct source[])
+RKR::copy_bank(struct PresetBankStruct dest[], const struct PresetBankStruct source[])
 {
     new_bank(dest);
 

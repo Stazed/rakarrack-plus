@@ -77,12 +77,10 @@ void RKR_Menu_Bar::font_resize(int W, int H)
     {
         return;
     }
-    
-    Fl_Menu_Item *p;
-    
+
     for (int s = 0; s < m->size(); s++)
     {
-        p = m->next(s);
+        Fl_Menu_Item *p = m->next(s);
         if(p->label())
         {
             p->labelsize(adjusted_label_size);   /* Menu bar items */

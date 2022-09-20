@@ -311,13 +311,13 @@ RKR::Handle_Message(int num, std::string strMessage)
 int
 RKR::Get_Bogomips()
 {
-    char temp[256];
     char *tmp = NULL;
     char *tmp2 = NULL;
     FILE *fp;
 
     if ((fp = fopen("/proc/cpuinfo", "r")) != NULL)
     {
+        char temp[256];
         memset(temp, 0, sizeof (temp));
 
         while (fgets(temp, sizeof temp, fp) != NULL)
@@ -360,16 +360,16 @@ RKR::Get_Bogomips()
 int
 RKR::TapTempo()
 {
-    double latency = 0.04;
     gettimeofday(&timeA, NULL);
 
     double Aseconds = ((double) timeA.tv_sec + (double) timeA.tv_usec * 0.000001);
-    
+
     if (Tap_Selection == 0)
     {
+        double latency = 0.04;
         Aseconds += latency;
     }
-    
+
     double timediff = Aseconds - Tap_timeB;
 
     if (timediff < 3.0f)
@@ -378,7 +378,7 @@ RKR::TapTempo()
         {
             tempobuf[tempocnt] = 60.0f / ((double) timediff);
         }
-        
+
         if ((++tempocnt) >= 5)
         {
             tempocnt = 0;
@@ -386,7 +386,7 @@ RKR::TapTempo()
     }
 
     double AvTempo = 0.0;
-    
+
     for (int i = 0; i < 4; i++)
     {
         AvTempo += tempobuf[i];
@@ -401,11 +401,10 @@ RKR::TapTempo()
     {
         Tap_Display = 1;
     }
-    
-    Update_tempo();
-    
-    return (Tap_TempoSet);
 
+    Update_tempo();
+
+    return (Tap_TempoSet);
 }
 
 void

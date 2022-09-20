@@ -221,11 +221,9 @@ void RKR_Choice::font_resize(int W, int H)
         return;
     }
 
-    Fl_Menu_Item *p;
-
     for (int s = 0; s < m->size(); s++)
     {
-        p = m->next(s);
+        Fl_Menu_Item *p = m->next(s);
         p->labelsize(adjusted_text_size); /* Drop down menus - menu list items */
         p->labelfont (global_font_type);
     }

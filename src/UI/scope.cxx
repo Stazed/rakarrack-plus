@@ -37,13 +37,9 @@ void Scope::init(float *smpsl, float *smpsr, int PERIOD, RKRGUI *_rgui)
 void Scope::draw()
 {
     int ox = x(), oy = y(), lx = w(), ly = h();
-    int i;
     int Xl, Xr, Yl, Yr;
     int SW, SH;
-    int px, py, old_px, old_py, oldr_px, oldr_py;
-    int posx;
     double pP = (double) ns;
-    double value = 0.0;
 
     SW = lx / 2 - 5;
     SH = ly;
@@ -68,22 +64,22 @@ void Scope::draw()
         fl_color(global_leds_color);
 
 
-        old_px = Xl;
-        old_py = Yl;
-        oldr_px = Xr;
-        oldr_py = Yr;
+        int old_px = Xl;
+        int old_py = Yl;
+        int oldr_px = Xr;
+        int oldr_py = Yr;
 
-        for (i = 0; i < ns; i++)
+        for (int i = 0; i < ns; i++)
         {
-            posx = (int) ((double) i * coeff);
+            int posx = (int) ((double) i * coeff);
 
-            value = spl[i];
+            double value = spl[i];
             if (value > 1.0) value = 1.0;
             if (value<-1.0) value = -1.0;
 
 
-            px = Xl + posx;
-            py = Yl + lrint(value * .5 * SH);
+            int px = Xl + posx;
+            int py = Yl + lrint(value * .5 * SH);
 
             // printf("%d %d %d\n",i,px,py);
 
