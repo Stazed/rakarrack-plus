@@ -65,12 +65,13 @@ void Analyzer::draw()
         {
             double y = 0.0;
             double coeff = xscale[i] * udsr;
+            double oldimage = 0.0;
 
             for (int j = 0; j < ns; j++)
             {
                 double t = cos(D_PI * (double) j * coeff);
                 double image = t * ((spl[j] + spr[j]) * 0.5) ;
-                double oldimage = acoeff * image + (1.0 - acoeff) * oldimage;
+                oldimage = acoeff * image + (1.0 - acoeff) * oldimage;
 
                 y += fabs(oldimage);
             }

@@ -1679,9 +1679,9 @@ void RKRGUI::MiraClientes()
                 }
             }
         }
-    }
 
-    fclose(fp);
+        fclose(fp);
+    }
 
     Settings->JackCo->clear();
 
