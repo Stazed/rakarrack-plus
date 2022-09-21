@@ -402,7 +402,7 @@ RBFilter::filterout_s(float smp)
 }
 
 float inline
-RBFilter::singlefilterout_s(float smp, fstage & x, parameters & par)
+RBFilter::singlefilterout_s(float smp, fstage & x, const parameters & par)
 {
     float *out = NULL;
     switch (type)

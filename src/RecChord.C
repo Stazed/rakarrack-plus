@@ -687,9 +687,6 @@ RecChord::Vamos(int voz, int interval, int reconota)
         nota += 12;
 
     int harmo = (12 + nota + interval) % 12;
-    
-    if (harmo > 12)
-        harmo %= 12;
 
     int hm1 = harmo - 1;
     
@@ -697,9 +694,6 @@ RecChord::Vamos(int voz, int interval, int reconota)
         hm1 += 12;
     
     int hp1 = harmo + 1;
-    
-    if (hp1 > 12)
-        hp1 %= 12;
 
     int hm2 = harmo - 2;
     

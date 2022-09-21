@@ -72,7 +72,7 @@ private:
     } par, ipar;
 
     void singlefilterout (float * smp, fstage & x, parameters & par, uint32_t period);
-    float singlefilterout_s (float smp, fstage & x, parameters & par);
+    float singlefilterout_s (float smp, fstage & x, const parameters & par);
     void computefiltercoefs ();
     void computefiltercoefs_hiQ ();
     

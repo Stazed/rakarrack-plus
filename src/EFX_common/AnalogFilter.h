@@ -68,10 +68,10 @@ private:
     } x[MAX_FILTER_STAGES + 1], y[MAX_FILTER_STAGES + 1],
     oldx[MAX_FILTER_STAGES + 1], oldy[MAX_FILTER_STAGES + 1];
 
-    void singlefilterout (float * smp, fstage & x, fstage & y, float * c,
-                          float * d, uint32_t period);
-    float singlefilterout_s (float smp, fstage & x, fstage & y, float * c,
-                             float * d);
+    void singlefilterout (float * smp, fstage & x, fstage & y, const float * c,
+                          const float * d, uint32_t period);
+    float singlefilterout_s (float smp, fstage & x, fstage & y, const float * c,
+                             const float * d);
 
     void computefiltercoefs ();
     int type;			//The type of the filter (LPF1,HPF1,LPF2,HPF2...)

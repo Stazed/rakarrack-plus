@@ -162,7 +162,7 @@ HarmEnhancer::set_freql(int mode, float freq)
 /* Calculate Chebychev coefficents from partial magnitudes, adapted from
  * example in Num. Rec. */
 void
-HarmEnhancer::chebpc(float c[], float d[])
+HarmEnhancer::chebpc(const float c[], float d[])
 {
 
     float sv, dd[HARMONICS];    // initialize o.k.

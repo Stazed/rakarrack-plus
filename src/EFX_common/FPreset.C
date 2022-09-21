@@ -50,12 +50,13 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
     FILE *fn;
     char buf[256];
     char *sbuf;
-    int k = 0;
     int reff = 0;
     memset(pdata, 0, sizeof (int)*MAX_PDATA_SIZE);
     
     if ((fn = fopen(insert_preset_location.c_str(), "r")) != NULL)
     {
+        int k = 0;
+
         if (eff != EFX_CONVOLOTRON && eff != EFX_REVERBTRON && eff != EFX_ECHOTRON)
         {
             while (fgets(buf, sizeof buf, fn) != NULL)

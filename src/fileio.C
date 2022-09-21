@@ -1852,13 +1852,11 @@ RKR::delete_insert_preset(int num, const std::string &name)
 
     FILE *fn;
     FILE *fs;
-    char *rname;
     int eff = 0;
     char orden[1024];
     char tempfile[256];
     char tempfile2[256];
     char buf[256];
-    char rbuf[256];
 
     char *sbuf;
     memset(tempfile, 0, sizeof (tempfile));
@@ -1876,11 +1874,12 @@ RKR::delete_insert_preset(int num, const std::string &name)
         memset(buf, 0, sizeof (buf));
         while (fgets(buf, sizeof buf, fs) != NULL)
         {
+            char rbuf[256];
             sbuf = buf;
             memset(rbuf, 0, sizeof (rbuf));
             sprintf(rbuf, "%s", buf);
             sscanf(buf, "%d", &eff);
-            rname = strsep(&sbuf, ","); // return not used, next delimiter
+            char *rname = strsep(&sbuf, ","); // return not used, next delimiter
             rname = strsep(&sbuf, ",");
             if ((eff == num)&&(strcmp(rname, name.c_str()) == 0))
             {

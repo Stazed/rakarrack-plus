@@ -44,7 +44,7 @@ public:
     
     void initialize();
     void clear_initialize();
-    void chebpc(float c[], float d[]);
+    void chebpc(const float c[], float d[]);
     void calcula_mag(float *Rmag);
     void harm_out(float *efxoutl, float *efxoutr);
     void set_vol(int mode, float gain);

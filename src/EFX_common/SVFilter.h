@@ -66,7 +66,7 @@ private:
     } par, ipar;
 
 
-    void singlefilterout (float * smp, fstage & x, parameters & par, uint32_t period);
+    void singlefilterout (float * smp, fstage & x, const parameters & par, uint32_t period);
     void computefiltercoefs ();
     int type;			//The type of the filter (LPF1,HPF1,LPF2,HPF2...)
     unsigned int stages;//how many times the filter is applied (0->1,1->2,etc.)

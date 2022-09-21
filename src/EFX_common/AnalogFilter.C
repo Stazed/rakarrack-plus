@@ -277,7 +277,6 @@ AnalogFilter::computefiltercoefs()
             sn = sinf(omega);
             cs = cosf(omega);
             tmpq = sqrtf(tmpq);
-            alpha = sn / (2.0f * tmpq);
             beta = sqrtf(tmpgain) / tmpq;
             tmp = (tmpgain + 1.0f) + (tmpgain - 1.0f) * cs + beta * sn;
 
@@ -310,7 +309,6 @@ AnalogFilter::computefiltercoefs()
             sn = sinf(omega);
             cs = cosf(omega);
             tmpq = sqrtf(tmpq);
-            alpha = sn / (2.0f * tmpq);
             beta = sqrtf(tmpgain) / tmpq;
             tmp = (tmpgain + 1.0f) - (tmpgain - 1.0f) * cs + beta * sn;
 
@@ -435,7 +433,7 @@ AnalogFilter::setstages(int stages_)
 
 void
 AnalogFilter::singlefilterout(float * smp, fstage & x, fstage & y,
-                              float * c, float * d, uint32_t period)
+                              const float * c, const float * d, uint32_t period)
 {
     unsigned int i;
     float y0;
@@ -517,7 +515,7 @@ AnalogFilter::filterout_s(float smp)
 
 float
 AnalogFilter::singlefilterout_s(float smp, fstage & x, fstage & y,
-                                float * c, float * d)
+                                const float * c, const float * d)
 {
     float y0;
     

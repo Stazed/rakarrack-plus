@@ -166,7 +166,7 @@ SVFilter::setstages(int stages_)
 }
 
 void
-SVFilter::singlefilterout(float * smp, fstage & x, parameters & par, uint32_t period)
+SVFilter::singlefilterout(float * smp, fstage & x, const parameters & par, uint32_t period)
 {
     float *out = NULL;
     switch (type)
