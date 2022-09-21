@@ -80,7 +80,7 @@ beattracker::cleanup()
 }
 
 void
-beattracker::detect(float * smpsl, float * smpsr, uint32_t period)
+beattracker::detect(const float * smpsl, const float * smpsr, uint32_t period)
 {
     int idx = 0;
 

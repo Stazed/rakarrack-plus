@@ -565,11 +565,10 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
         {
             cratio = 1.0f - 0.25f * ws;
             ws = 1.5f * ws * CRUNCH_GAIN + 4.0f;
-            float tmpv = 0.0f;
 
             for (int i = 0; i < nn; i++)
             { //apply compression
-                tmpv = fabs(ws * temps[i]);
+                float tmpv = fabs(ws * temps[i]);
                 dyno += 0.01f * (1.0f - dynodecay) * tmpv;
                 dyno *= dynodecay;
                 tmpv += dyno;
@@ -708,7 +707,6 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
         case 24: // Hard Compression (used by stompboxes)
         {
             cratio = 0.05;
-            float tmpv = 0.0f;
 
             if (eff)
             {
@@ -721,7 +719,7 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
 
             for (int i = 0; i < nn; i++)
             { //apply compression
-                tmpv = fabs(ws * temps[i]);
+                float tmpv = fabs(ws * temps[i]);
 
                 if (tmpv > dthresh)
                 { //if envelope of signal exceeds thresh, then compress
@@ -757,11 +755,10 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
         case 25: // Op Amp limiting (used by stompboxes), needs to get a large signal to do something
         {
             cratio = 0.05;
-            float tmpv = 0.0f;
 
             for (int i = 0; i < nn; i++)
             { //apply compression
-                tmpv = fabs(temps[i]);
+                float tmpv = fabs(temps[i]);
 
                 if (tmpv > dthresh)
                 { //if envelope of signal exceeds thresh, then compress
@@ -815,11 +812,10 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
         case 27: //dyno JFET
         {
             ws = powf(85.0f, ws * ws) + 10.0f;
-            float tmpv = 0.0f;
 
             for (int i = 0; i < nn; i++)
             {
-                tmpv = fabs(temps[i]);
+                float tmpv = fabs(temps[i]);
 
                 if (tmpv > 0.15f)
                 { // -16dB crossover distortion... dyno only picks up the peaks above 16dB.  Good for nasty fuzz
@@ -841,7 +837,6 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
         case 28: //Valve 1
         {
             ws = powf(4.0f, ws * ws) - 0.98f;
-            float tmpv = 0.0f;
 
             for (int i = 0; i < nn; i++)
             {
@@ -853,7 +848,7 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
                 }
 
                 Ip = P * powf(Vg, Vfactor);
-                tmpv = Vsupp - (Vmin - (Vmin / (R * Ip + 1.0f))); //Here is the plate voltage
+                float tmpv = Vsupp - (Vmin - (Vmin / (R * Ip + 1.0f))); //Here is the plate voltage
                 tmpv = (tmpv - 106.243f) / 100.0f;
                 Vdyno += (1.0f - dynodecay) * tmpv;
                 Vdyno *= dynodecay;
@@ -890,11 +885,10 @@ Waveshaper::waveshapesmps(int n, float * smps, int type,
         case 30: //Diode clipper
         {
             ws = 5.0f + powf(110.0f, ws);
-            float tmpv = 0.0f;
 
             for (int i = 0; i < nn; i++)
             {
-                tmpv = ws * temps[i];
+                float tmpv = ws * temps[i];
 
                 if (tmpv > 0.0f)
                 {

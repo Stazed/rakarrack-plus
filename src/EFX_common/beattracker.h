@@ -54,7 +54,7 @@ public:
     beattracker (double sample_rate, uint32_t intermediate_bufsize);
     ~beattracker ();
     void cleanup ();
-    void detect (float * smpsl, float * smpsr, uint32_t period);
+    void detect (const float * smpsl, const float * smpsr, uint32_t period);
     float get_tempo();  //returns tempo in float beats per minute
     int *index;
 
