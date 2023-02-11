@@ -314,11 +314,12 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
             case Sharm_MIDI:
                 if(type == CARLA)
                 {
-                    Carla_LV2_port(s_buf, i + 1, getpar( Sharm_Chord ), sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
+                    Carla_LV2_port(s_buf, i + 1, getpar( Sharm_MIDI ), sharm_parameters[i * 3 + 1], sharm_parameters[i * 3 + 2]);
                 }
                 else
                 {
-                    // non-mixer does not have midi
+                    s_buf += NTS( getpar( Sharm_MIDI ));
+                    s_buf += ":";
                 }
             break;
         }
@@ -328,8 +329,8 @@ StereoHarm::LV2_parameters(std::string &s_buf, int type)
 std::string
 StereoHarm::get_URI(int type)
 {
-    if(type == NON_MIXER)
-        return SHARMNOMIDLV2_URI;
+    if(type == NON_MIXER_XT)
+        return STEROHARMLV2_URI;
 
     return STEROHARMLV2_URI;
 };
@@ -337,8 +338,8 @@ StereoHarm::get_URI(int type)
 std::string
 StereoHarm::get_name(int type)
 {
-    if(type == NON_MIXER)
-        return SHARM_NAME_NO_MIDI;
+    if(type == NON_MIXER_XT)
+        return SHARM_NAME;
 
     return SHARM_NAME;
 };

@@ -329,9 +329,6 @@ RKR::export_to_nsm_mixer(const std::string &filename)
 
     s_buf = "\tJACK_Module 0x3 create :parameter_values \"0.000000:2.000000\" :is_default 1 :chain 0x2 :active 1\n";
     fputs(s_buf.c_str(), fn);
-
-    s_buf = "\tGain_Module 0x4 create :parameter_values \"0.000000:0.000000\" :is_default 1 :chain 0x2 :active 1\n";
-    fputs(s_buf.c_str(), fn);
     
     int mixer_module_index = 7; // There are six defaults, so plugin modules start at 7
     
@@ -343,7 +340,7 @@ RKR::export_to_nsm_mixer(const std::string &filename)
         if ( !EFX_Active[effect] )  // ignore inactive effects
             continue;
 
-        // Not supported by non-mixer
+        // Not supported by non-mixer-xt
         if(effect == EFX_VOCODER || effect == EFX_LOOPER)
         {
             Handle_Message(48, NTS(effect));
@@ -352,18 +349,18 @@ RKR::export_to_nsm_mixer(const std::string &filename)
 
         s_buf.clear();
 
-        s_buf = "\tPlugin_Module ";
+        s_buf = "\tLV2_Plugin ";
         s_buf += "0x";
         s_buf += NTS(mixer_module_index);
         s_buf += " create :lv2_plugin_uri \"";        
-        s_buf += Rack_Effects[effect]->get_URI(NON_MIXER);
+        s_buf += Rack_Effects[effect]->get_URI(NON_MIXER_XT);
         s_buf += "\" :plugin_ins 2 :plugin_outs 2 :parameter_values \"";
         
         // Add the individual effects parameters
         s_buf += NTS( 0 );  // bypass - should be always 0
         s_buf += ":";
 
-        Rack_Effects[effect]->LV2_parameters(s_buf, NON_MIXER);
+        Rack_Effects[effect]->LV2_parameters(s_buf, NON_MIXER_XT);
 
         s_buf += "\" :is_default 0 :chain 0x2 :active 1 :number 0\n";
         fputs(s_buf.c_str(), fn);
@@ -373,6 +370,9 @@ RKR::export_to_nsm_mixer(const std::string &filename)
     // End effect modules & parameters
 
     // More defaults modules
+    s_buf = "\tGain_Module 0x4 create :parameter_values \"0.000000:0.000000\" :is_default 1 :chain 0x2 :active 1\n";
+    fputs(s_buf.c_str(), fn);
+
     s_buf = "\tMeter_Module 0x5 create :is_default 1 :chain 0x2 :active 1\n";
     fputs(s_buf.c_str(), fn);
 

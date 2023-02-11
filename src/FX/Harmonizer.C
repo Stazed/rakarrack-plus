@@ -254,9 +254,7 @@ Harmonizer::LV2_parameters(std::string &s_buf, int type)
                 else
                 {
                     s_buf += NTS( getpar( i ) - 64);
-
-                    if ( i !=  Harm_Filter_Q)   // last one no need for delimiter
-                        s_buf += ":";
+                    s_buf += ":";
                 }
             }
             break;
@@ -283,7 +281,8 @@ Harmonizer::LV2_parameters(std::string &s_buf, int type)
                 }
                 else
                 {
-                    // NON_MIXER does not have midi
+                    s_buf += NTS( getpar( i ) );
+                   // last one, no need for delimiter
                 }
             break;
         }
@@ -293,8 +292,8 @@ Harmonizer::LV2_parameters(std::string &s_buf, int type)
 std::string
 Harmonizer::get_URI(int type)
 {
-    if(type == NON_MIXER)
-        return HARMNOMIDLV2_URI;
+    if(type == NON_MIXER_XT)
+        return HARMLV2_URI;
     
     return HARMLV2_URI;
 };
@@ -302,8 +301,8 @@ Harmonizer::get_URI(int type)
 std::string
 Harmonizer::get_name(int type)
 {
-    if(type == NON_MIXER)
-        return HARM_NAME_NO_MIDI;
+    if(type == NON_MIXER_XT)
+        return HARM_NAME;
 
     return HARM_NAME;
 };

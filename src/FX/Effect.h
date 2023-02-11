@@ -31,7 +31,7 @@ struct User_Files
 
 enum
 {
-    NON_MIXER = 0,
+    NON_MIXER_XT = 0,
     CARLA
 };
 

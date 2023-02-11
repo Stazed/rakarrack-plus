@@ -727,7 +727,7 @@ void RKRGUI::cb_export_preset_choice_i(RKR_Choice* o, void*) {
             char *filename;
 
 #define EXT ".strip"
-            filename = fl_file_chooser("Export Non-Mixer:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            filename = fl_file_chooser("Export Non-Mixer-XT:", "(*" EXT")", chooser_start_location.c_str (), 0);
             if (filename == NULL)
                 return;
 
@@ -764,7 +764,7 @@ void RKRGUI::cb_export_preset_choice(RKR_Choice* o, void* v) {
 Fl_Menu_Item RKRGUI::menu_export_preset_choice[] = {
  {"Rakarrack+", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {"Carla", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
- {"Non-Mixer", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
+ {"Non-Mixer-XT", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 14, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

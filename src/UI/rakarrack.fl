@@ -364,8 +364,8 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     {
         global_gui_show = CONST_GUI_HIDE;
     }
-\#endif} open selected
-      xywh {378 183 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+\#endif} open
+      xywh {604 193 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1387,7 +1387,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
           class RKR_Box
         }
       }
-      Fl_Group Presets {
+      Fl_Group Presets {open
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1500,7 +1500,7 @@ Put_Loaded();}
             char *filename;
 
 \#define EXT ".strip"
-            filename = fl_file_chooser("Export Non-Mixer:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            filename = fl_file_chooser("Export Non-Mixer-XT:", "(*" EXT")", chooser_start_location.c_str (), 0);
             if (filename == NULL)
                 return;
 
@@ -1528,7 +1528,7 @@ Put_Loaded();}
         break;
     }
 
-    m_process->Shut_Off_Below_Mouse = 0;} open
+    m_process->Shut_Off_Below_Mouse = 0;}
           tooltip {Export preset to file - Shortcut 'E'} xywh {306 50 64 18} down_box BORDER_BOX color 2 selection_color 0 align 1 when 6
           class RKR_Choice
         } {
@@ -1541,8 +1541,8 @@ Put_Loaded();}
             tooltip {Export Carla format} xywh {0 0 34 24}
           }
           MenuItem {} {
-            label {Non-Mixer}
-            tooltip {Export to NON-Mixer format} xywh {0 0 34 24}
+            label {Non-Mixer-XT} selected
+            tooltip {Export to NON-Mixer-XT format} xywh {0 0 34 24}
           }
         }
         Fl_Light_Button Compare {
