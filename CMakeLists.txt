@@ -160,7 +160,7 @@ if(EnableSysex)
 endif (EnableSysex)
 
 if(BuildRakarrackPlus)
-    install(FILES COPYING AUTHORS ChangeLog NEWS README README.md PACKAGERS.README
+    install(FILES COPYING AUTHORS README README.md
         DESTINATION share/doc/rakarrack-plus)
 endif(BuildRakarrackPlus)
 #TODO move from /data to main
