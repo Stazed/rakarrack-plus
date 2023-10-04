@@ -188,7 +188,7 @@ add_executable (rakarrack-plus ${ProgSources} main.C)
 
 target_include_directories (
     rakarrack-plus PRIVATE
-    ${FLTK_INCLUDE_DIRS}
+    ${FLTK_INCLUDE_DIR}
     ${ALSA_INCLUDE_DIRS}
     ${JACK_INCLUDE_DIRS}
     ${FONTCONFIG_INCLUDE_DIRS}
