@@ -35,7 +35,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>  // NTS
-#include <FL/Fl_Tiled_Image.H>
 
 // un-comment to activate stress test - to toggle stress testing, middle mouse click
 // the random button. This should only be activated for testing purposes.
@@ -45,11 +44,15 @@ class RKRGUI;   // forward declaration
 class RKR;      // forward declaration
 
 // These are defined in rakarrack.cxx
-extern Fl_Tiled_Image *back; 
+#ifndef LV2_SUPPORT
+#include <FL/Fl_Tiled_Image.H>
+extern Fl_Tiled_Image *back;
 extern Fl_Color global_leds_color; 
 extern Fl_Color global_back_color; 
 extern Fl_Color global_fore_color; 
 extern Fl_Color global_label_color;
+#endif
+
 extern int global_font_type;
 extern int global_font_size;
 extern int global_look_changed;
