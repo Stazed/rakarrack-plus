@@ -8,6 +8,10 @@ install (FILES Default.rkrb
     SFX_CC_03.rkrb
     SFX_CC_04.rkrb
     SFX_CC_05.rkrb
+    SFX_CC_06.rkrb
+    SFX_CC_07.rkrb
+    SFX_CC_08.rkrb
+    SFX_CC_09.rkrb
     1.wav 
     2.wav 
     3.wav 
