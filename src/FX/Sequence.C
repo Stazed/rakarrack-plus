@@ -382,7 +382,7 @@ Sequence::out(float * efxoutl, float * efxoutr)
         avflag = 0;
     }
 
-    int hPERIOD = 0;
+    unsigned int hPERIOD = 0;
     if ((Pmode == 3) || (Pmode == 5) || (Pmode == 6))
     {
         hPERIOD = nPERIOD;
