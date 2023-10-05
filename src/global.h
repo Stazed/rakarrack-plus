@@ -40,18 +40,17 @@
 // the random button. This should only be activated for testing purposes.
 //#define STRESS_TEST_CHECK 1
 
+#ifndef LV2_SUPPORT
 class RKRGUI;   // forward declaration
 class RKR;      // forward declaration
 
-// These are defined in rakarrack.cxx
-#ifndef LV2_SUPPORT
 #include <FL/Fl_Tiled_Image.H>
+// These are defined in rakarrack.cxx
 extern Fl_Tiled_Image *back;
 extern Fl_Color global_leds_color; 
 extern Fl_Color global_back_color; 
 extern Fl_Color global_fore_color; 
 extern Fl_Color global_label_color;
-#endif
 
 extern int global_font_type;
 extern int global_font_size;
@@ -86,7 +85,6 @@ const unsigned C_NO_DRAG = 1000;
 extern int global_error_number;
 extern char *jack_client_name;
 
-
 /* Milliseconds - used for quality changes by usleep().
    The amounts are much greater than necessary for the 
    delete and re-initialize. But the delay is useful to
@@ -94,6 +92,7 @@ extern char *jack_client_name;
    is not real time safe. */
 const unsigned C_MILLISECONDS_25 = 250000;   // 1/4 second
 const unsigned C_MILLISECONDS_50 = 500000;   // 1/2 second
+#endif // ndef LV2_SUPPORT
 
 inline int Dry_Wet (int x) {return 127 - x;}
 
@@ -274,6 +273,7 @@ static inline float f_pow2(float x)
     }
 }
 
+#ifndef LV2_SUPPORT
 template <typename T>
 std::string FTSP(T value, int digits)
 {   // For conversion from float to string precision
@@ -289,6 +289,7 @@ enum RKR_Default_Colors
     RKR_buttons_color = 56,                 // Black
     RKR_leds_color = 12660480               // Light green
 };
+#endif // ndef LV2_SUPPORT
 
 /**
  * The effect index used by switch(): case: and order number.
@@ -361,6 +362,7 @@ enum EFX_Index
     EFX_MASTER_ON_OFF = 124
 };
 
+#ifndef LV2_SUPPORT
 enum ASCII_Index
 {
     ASCII_Space = 32,
@@ -492,8 +494,5 @@ enum USER_DATA_index
     UD_Bank_Number                 = 15000         // Custom MIDI table bank CC Number
 
 };
-
-
-#endif
-
-
+#endif  // ndef LV2_SUPPORT
+#endif  // DXEMU_H
