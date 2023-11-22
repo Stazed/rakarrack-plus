@@ -65,7 +65,7 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 endif()
 
 set (BuildOptionsBasic
-    "-std=c++11 -Wno-unused-parameter -O3 -ffast-math -pipe -fsigned-char"
+    "-std=c++11 -Wno-unused-parameter -O3 -ffast-math -pipe -fsigned-char -fvisibility=hidden"
     CACHE STRING "basic X86 complier options"
 )
 
