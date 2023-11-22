@@ -22,12 +22,11 @@ The dependencies are:
 *   cmake
 *   libfltk1.3
 *   libxpm
-*   libjack100.0
 *   libasound2
 *   libsamplerate0
 *   libsndfile1
 *   aconnect  (part of Debian Package alsa-utils, name may vary on other distributions)
-*   jackd
+*   jack (One of the following jack1, jack2, pipewire-jack, name may vary with different distributions)
 *   libxft2
 *   libfftw3
 *   lv2     (LV2 support)
@@ -37,7 +36,7 @@ If you want to compile you will also need the development packages:
 
 *   libxpm-dev 
 *   libfltk1.3-dev
-*   libjack-dev
+*   jack (The development package for jack1, jack2 or pipewire-jack, name may vary with different distributions)
 *   libsndfile1-dev
 *   libsamplerate0-dev
 *   libasound2-dev
