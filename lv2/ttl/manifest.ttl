@@ -5,6 +5,7 @@
 
 <https://github.com/Stazed/rakarrack-plus>
         a doap:Project;
+        doap:name "RakarrackPlus";
         doap:license <http://opensource.org/licenses/GPL-2.0> ;
         doap:maintainer [
                 foaf:name "Rakarrack-plus Team" ;
