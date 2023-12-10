@@ -38,6 +38,7 @@
 
 #include "../global.h"
 #include "smbPitchShift.h"
+#include <pthread.h>
 
 // -----------------------------------------------------------------------------------------------------------------
 
@@ -49,6 +50,9 @@
         Time Fourier Transform.
         Author: (c)1999-2006 Stephan M. Bernsee <smb [AT] dspdimension [DOT] com>
  */
+
+static pthread_mutex_t fftw_planner_lock = PTHREAD_MUTEX_INITIALIZER;
+
 PitchShifter::PitchShifter(long fftFrameSize, long osamp, float sampleRate) :
 gSynFreq(),
 gSynMagn(),
@@ -90,9 +94,11 @@ index()
     //create FFTW plan
     int nfftFrameSize = (int) fftFrameSize;
     //printf("nfs= %d, lfs= %ld\n", nfftFrameSize, fftFrameSize);
-
+    
+    pthread_mutex_lock (&fftw_planner_lock);
     ftPlanForward = fftw_plan_dft_1d(nfftFrameSize, fftw_in, fftw_out, FFTW_FORWARD, FFTW_MEASURE);
     ftPlanInverse = fftw_plan_dft_1d(nfftFrameSize, fftw_in, fftw_out, FFTW_BACKWARD, FFTW_MEASURE);
+    pthread_mutex_unlock (&fftw_planner_lock);
 
     //Pre-compute window function
     makeWindow(fftFrameSize);
@@ -100,8 +106,10 @@ index()
 
 PitchShifter::~PitchShifter()
 {
+    pthread_mutex_lock (&fftw_planner_lock);
     fftw_destroy_plan(ftPlanForward);
     fftw_destroy_plan(ftPlanInverse);
+    pthread_mutex_unlock (&fftw_planner_lock);
 }
 
 void
