@@ -30,8 +30,8 @@
 
 <https://github.com/Stazed/rakarrack-plus#delm>
         a lv2:Plugin, lv2:DelayPlugin ;
-        doap:name "RakarrackPlus Musical Delay" ;
-        mod:brand "RakarrackPlus";
+        doap:name "RKRP Musical Delay" ;
+        mod:brand "RKRP";
         mod:label "Musical Delay";
         doap:description "Tempo Selectable Dual Delay";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;

@@ -33,7 +33,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#Echotron>
     a lv2:Plugin, lv2:DelayPlugin ;
-    doap:name "RakarrackPlus Echotron" ;
+    doap:name "RKRP Echotron" ;
     doap:description "Extremely Configurable Delay" ;
     lv2:project <https://github.com/Stazed/rakarrack-plus>;
     lv2:minorVersion 0 ;

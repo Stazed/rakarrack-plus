@@ -18,7 +18,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#midi_converter>
         a lv2:Plugin, lv2:ConverterPlugin ;
-        doap:name "RakarrackPlus Midi Converter" ;
+        doap:name "RKRP Midi Converter" ;
         doap:description "Audio to Midi conversion";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

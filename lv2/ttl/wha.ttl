@@ -18,8 +18,8 @@
 
 <https://github.com/Stazed/rakarrack-plus#wha>
         a lv2:Plugin, lv2:FilterPlugin ;
-        doap:name "RakarrackPlus WahWah" ;
-        mod:brand "RakarrackPlus";
+        doap:name "RKRP WahWah" ;
+        mod:brand "RKRP";
         doap:description "Envelope/LFO Controlled Wah";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

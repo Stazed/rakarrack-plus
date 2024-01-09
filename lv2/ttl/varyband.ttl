@@ -30,7 +30,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#VaryBand>
         a lv2:Plugin, lv2:ModulatorPlugin ;
-        doap:name "RakarrackPlus VaryBand" ;
+        doap:name "RKRP VaryBand" ;
         mod:brand "Rakarrack" ;
         doap:description "Multi-Band Volume Modulator";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;

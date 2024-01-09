@@ -16,7 +16,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#eql>
         a lv2:Plugin, lv2:MultiEQPlugin ;
-        doap:name "RakarrackPlus EQ" ;
+        doap:name "RKRP EQ" ;
         doap:description "10 Band Graphical Eq";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:optionalFeature lv2:hardRTCapable ;

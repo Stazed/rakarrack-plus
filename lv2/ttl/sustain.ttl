@@ -18,7 +18,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#Sustainer>
         a lv2:Plugin, lv2:CompressorPlugin ;
-        doap:name "RakarrackPlus Sustainer" ;
+        doap:name "RKRP Sustainer" ;
         doap:description "Sustain-Enhancing Compression";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

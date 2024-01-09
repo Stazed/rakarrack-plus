@@ -16,7 +16,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#DistBand>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        doap:name "RakarrackPlus DistBand" ;
+        doap:name "RKRP DistBand" ;
         doap:description "Multi-Band Distortion";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

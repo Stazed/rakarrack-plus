@@ -16,7 +16,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#Echoverse>
         a lv2:Plugin, lv2:ReverbPlugin ;
-        doap:name "RakarrackPlus Echoverse" ;
+        doap:name "RKRP Echoverse" ;
         doap:description "Thick Echo";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

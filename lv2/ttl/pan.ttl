@@ -16,7 +16,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#pan>
         a lv2:Plugin, lv2:SpatialPlugin ;
-        doap:name "RakarrackPlus Pan" ;
+        doap:name "RKRP Pan" ;
         doap:description "Auto-panner/Stereo Tremelo";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

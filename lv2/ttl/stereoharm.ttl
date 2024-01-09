@@ -18,7 +18,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm>
         a lv2:Plugin, lv2:PitchPlugin ;
-        doap:name "RakarrackPlus StereoHarmonizer" ;
+        doap:name "RKRP StereoHarmonizer" ;
         doap:description "Dual Harmonizing Pitch Shifters";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

@@ -16,7 +16,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#comp>
         a lv2:Plugin, lv2:CompressorPlugin ;
-        doap:name "RakarrackPlus Compressor" ;
+        doap:name "RKRP Compressor" ;
         doap:description "compressor";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

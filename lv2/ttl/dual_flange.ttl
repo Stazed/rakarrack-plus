@@ -17,9 +17,9 @@
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange>
         a lv2:Plugin, lv2:FlangerPlugin ;
-        doap:name "RakarrackPlus Dual Flange" ;
+        doap:name "RKRP Dual Flange" ;
         doap:description "Dual Flanger";
-        mod:brand "RakarrackPlus";
+        mod:brand "RKRP";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;

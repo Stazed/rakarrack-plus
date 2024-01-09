@@ -17,8 +17,8 @@
 
 <https://github.com/Stazed/rakarrack-plus#aphas>
         a lv2:Plugin, lv2:PhaserPlugin ;
-        doap:name "RakarrackPlus Analog Phaser" ;
-        mod:brand "RakarrackPlus";
+        doap:name "RKRP Analog Phaser" ;
+        mod:brand "RKRP";
         mod:label "Analog Phaser";
         doap:description "Phaser";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;

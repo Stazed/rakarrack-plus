@@ -16,7 +16,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#cabe>
         a lv2:Plugin, lv2:FilterPlugin ;
-        doap:name "RakarrackPlus Cabinet" ;
+        doap:name "RKRP Cabinet" ;
         doap:description "Guitar Cabinet Emulation";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

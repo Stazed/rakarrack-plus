@@ -18,7 +18,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#Vocoder>
         a lv2:Plugin, lv2:ModulatorPlugin ;
-        doap:name "RakarrackPlus Vocoder" ;
+        doap:name "RKRP Vocoder" ;
         doap:description "32 Band Vocoder";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

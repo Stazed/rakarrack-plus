@@ -17,8 +17,8 @@
 
 <https://github.com/Stazed/rakarrack-plus#Valve>
         a lv2:Plugin, lv2:DistortionPlugin ;
-        doap:name "RakarrackPlus Valve" ;
-        mod:brand "RakarrackPlus";
+        doap:name "RKRP Valve" ;
+        mod:brand "RKRP";
         doap:description "Tube Distortion Emulator";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

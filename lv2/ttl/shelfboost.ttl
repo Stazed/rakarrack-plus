@@ -18,7 +18,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#ShelfBoost>
         a lv2:Plugin, lv2:FilterPlugin ;
-        doap:name "RakarrackPlus Shelf Boost" ;
+        doap:name "RKRP Shelf Boost" ;
         doap:description "Tone Booster";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

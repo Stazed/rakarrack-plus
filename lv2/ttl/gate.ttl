@@ -16,7 +16,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#gate>
         a lv2:Plugin, lv2:gatePlugin ;
-        doap:name "RakarrackPlus NoiseGate" ;
+        doap:name "RKRP NoiseGate" ;
         doap:description "Dynamic gate";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

@@ -17,8 +17,8 @@
 
 <https://github.com/Stazed/rakarrack-plus#awha>
         a lv2:Plugin, lv2:PhaserPlugin ;
-        doap:name "RakarrackPlus AlienWah" ;
-        mod:brand "RakarrackPlus";
+        doap:name "RKRP AlienWah" ;
+        mod:brand "RKRP";
         doap:description "Flaser";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

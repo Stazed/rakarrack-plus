@@ -16,7 +16,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid>
         a lv2:Plugin, lv2:PitchPlugin ;
-        doap:name "RakarrackPlus StereoHarmonizer (no midi)" ;
+        doap:name "RKRP StereoHarmonizer (no midi)" ;
         doap:description "Dual Harmonizing Pitch Shifters";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

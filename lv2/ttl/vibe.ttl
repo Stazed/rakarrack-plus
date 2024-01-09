@@ -16,7 +16,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#Vibe>
         a lv2:Plugin, lv2:ModulatorPlugin ;
-        doap:name "RakarrackPlus Vibe" ;
+        doap:name "RKRP Vibe" ;
         doap:description "UniVibe Emulation";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 0 ;

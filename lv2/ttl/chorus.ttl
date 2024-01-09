@@ -17,8 +17,8 @@
 
 <https://github.com/Stazed/rakarrack-plus#chor>
         a lv2:Plugin, lv2:ChorusPlugin ;
-        doap:name "RakarrackPlus Chorus" ;
-        mod:brand "RakarrackPlus";
+        doap:name "RKRP Chorus" ;
+        mod:brand "RKRP";
         mod:label "Chorus";
         doap:description "Chorus";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
