@@ -60,7 +60,7 @@ public:
     int Pstereo;	//"64"=0
     int ui_freq_min, ui_freq_max;   // this should be set by the FX code
     bool flip_l, flip_r;
-		bool static_wraparound;  // for stereo separation on static LFO
+    bool static_wraparound;  // for stereo separation on static LFO
 private:
     float getlfoshape (float x);
     
