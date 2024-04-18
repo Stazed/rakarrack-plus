@@ -40,11 +40,11 @@ widget_class CommonGuiMenu {open selected
   } {
     MenuItem {} {
       label Sine
-      xywh {102 102 36 21} labelsize 10
+      xywh {102 102 36 21} labelsize 9
     }
     MenuItem {} {
       label Triangle
-      xywh {102 102 36 21} labelsize 10
+      xywh {102 102 36 21} labelsize 9
     }
     MenuItem {} {
       label {Ramp Up}
@@ -85,6 +85,10 @@ widget_class CommonGuiMenu {open selected
     MenuItem {} {
       label {-Tri +Sine}
       xywh {100 100 36 21} labelsize 9
+    }
+    MenuItem {} {
+      label {Static}
+      xywh {110 100 36 21} labelsize 9
     }
   }
   Fl_Choice distortion_type {

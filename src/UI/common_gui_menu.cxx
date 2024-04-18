@@ -25,6 +25,7 @@ Fl_Menu_Item CommonGuiMenu::menu_lfo_type[] = {
  {"S/H Random", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"-Sine +Tri", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"-Tri +Sine", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
+ {"Static", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}
 };
 

@@ -80,6 +80,18 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_ANALOG_PHASER]; i++)
       label {Phaser 6}
       xywh {102 102 36 21} labelsize 10
     }
+    MenuItem {} {
+      label {Beefy Marshall}
+      xywh {92 92 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Euro Power Metal}
+      xywh {102 102 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Presence Boost}
+      xywh {102 102 36 21} labelsize 10
+    }
   }
   Fl_Value_Slider aphaser_WD {
     label {Dry/Wet}

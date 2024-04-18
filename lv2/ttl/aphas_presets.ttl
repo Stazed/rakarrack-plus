@@ -276,3 +276,138 @@
 		pset:value 1.0
 	] .
 
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:static_1> 
+	a pset:Preset ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
+	rdfs:label "Beefy Marshall" ;
+	lv2:port [
+		lv2:symbol "DRYWET" ;
+		pset:value 64
+	] , [
+		lv2:symbol "DISTORT" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "TEMPO" ;
+		pset:value 268.0
+	] , [
+		lv2:symbol "RND" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "TYPE" ;
+		pset:value 12.0
+	] , [
+		lv2:symbol "STDL" ;
+		pset:value 64.0
+	] , [
+		lv2:symbol "WIDTH" ;
+		pset:value 76.0
+	] , [
+		lv2:symbol "FB" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "STAGES" ;
+		pset:value 4.0
+	] , [
+		lv2:symbol "MISMATCH" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "SUB" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "DEPTH" ;
+		pset:value 127.0
+	] , [
+		lv2:symbol "HYPER" ;
+		pset:value 0.0
+	] .
+
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:static_2> 
+	a pset:Preset ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
+	rdfs:label "Euro Power Metal" ;
+	lv2:port [
+		lv2:symbol "DRYWET" ;
+		pset:value 35.0
+	] , [
+		lv2:symbol "DISTORT" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "TEMPO" ;
+		pset:value 335.0
+	] , [
+		lv2:symbol "RND" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "TYPE" ;
+		pset:value 12.0
+	] , [
+		lv2:symbol "STDL" ;
+		pset:value 64.0
+	] , [
+		lv2:symbol "WIDTH" ;
+		pset:value 72.0
+	] , [
+		lv2:symbol "FB" ;
+		pset:value 30.0
+	] , [
+		lv2:symbol "STAGES" ;
+		pset:value 8.0
+	] , [
+		lv2:symbol "MISMATCH" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "SUB" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "DEPTH" ;
+		pset:value 118.0
+	] , [
+		lv2:symbol "HYPER" ;
+		pset:value 0.0
+	] .
+
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:static_3> 
+	a pset:Preset ;
+	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
+	rdfs:label "Presence boost" ;
+	lv2:port [
+		lv2:symbol "DRYWET" ;
+		pset:value 90.0
+	] , [
+		lv2:symbol "DISTORT" ;
+		pset:value 127.0
+	] , [
+		lv2:symbol "TEMPO" ;
+		pset:value 48.0
+	] , [
+		lv2:symbol "RND" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "TYPE" ;
+		pset:value 12.0
+	] , [
+		lv2:symbol "STDL" ;
+		pset:value 80.0
+	] , [
+		lv2:symbol "WIDTH" ;
+		pset:value 27.0
+	] , [
+		lv2:symbol "FB" ;
+		pset:value 15.0
+	] , [
+		lv2:symbol "STAGES" ;
+		pset:value 6.0
+	] , [
+		lv2:symbol "MISMATCH" ;
+		pset:value 0.0
+	] , [
+		lv2:symbol "SUB" ;
+		pset:value 1.0
+	] , [
+		lv2:symbol "DEPTH" ;
+		pset:value 87.0
+	] , [
+		lv2:symbol "HYPER" ;
+		pset:value 0.0
+	] .
+

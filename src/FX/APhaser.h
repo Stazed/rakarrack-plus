@@ -33,6 +33,9 @@
 #define APHASELV2_URI "https://github.com/Stazed/rakarrack-plus#aphas"
 #define APHASE_NAME "RakarrackPlus Analog Phaser"
 
+#define APHASE_LFO_MIN 1
+#define APHASE_LFO_MAX 600 
+
 const int C_APHASER_PARAMETERS = 13;
 
 enum APhaser_Index

@@ -107,7 +107,7 @@
                 lv2:name "LFO Type" ;
                 lv2:default 1 ;
                 lv2:minimum 0 ;
-                lv2:maximum 11 ;
+                lv2:maximum 12 ;
                 lv2:portProperty lv2:integer ;
                 lv2:portProperty lv2:enumeration;
                 lv2:scalePoint [ rdfs:label "Sine"; rdf:value 0 ] ;
@@ -122,6 +122,7 @@
                 lv2:scalePoint [ rdfs:label "Random Sample and Hold"; rdf:value 9 ] ;
                 lv2:scalePoint [ rdfs:label "Triangle Topped Sine"; rdf:value 10 ] ;
                 lv2:scalePoint [ rdfs:label "Triangle Bottomed Sine"; rdf:value 11 ] ;
+                lv2:scalePoint [ rdfs:label "Static"; rdf:value 12 ] ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 10 ;
@@ -225,6 +226,21 @@
         rdfs:seeAlso <aphas_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#aphas:preset:phaser_6>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
+        rdfs:seeAlso <aphas_presets.ttl> .
+
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:static_1>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
+        rdfs:seeAlso <aphas_presets.ttl> .
+
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:static_2>
+        a pset:Preset ;
+        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
+        rdfs:seeAlso <aphas_presets.ttl> .
+
+<https://github.com/Stazed/rakarrack-plus#aphas:preset:static_3>
         a pset:Preset ;
         lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#aphas> ;
         rdfs:seeAlso <aphas_presets.ttl> .

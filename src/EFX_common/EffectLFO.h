@@ -28,6 +28,24 @@
 
 #include "../global.h"
 
+enum LFO_Type
+{
+    LFO_SINE = 0,
+    LFO_TRIANGLE,
+    LFO_RAMP_UP,
+    LFO_RAMP_DOWN,
+    LFO_ZIGZAG,
+    LFO_MOD_SQUARE,
+    LFO_MOD_SAW,
+    LFO_L_FRACTAL_XY,
+    LFO_L_FRACTAL,
+    LFO_SH_RANDOM,
+    LFO_TRI_TOP,
+    LFO_TRI_BOTTOM,
+    LFO_STATIC,
+    LFO_NUM_TYPES
+};
+
 
 class EffectLFO
 {
@@ -40,6 +58,9 @@ public:
     int Prandomness;
     int PLFOtype;
     int Pstereo;	//"64"=0
+    int ui_freq_min, ui_freq_max;   // this should be set by the FX code
+    bool flip_l, flip_r;
+		bool static_wraparound;  // for stereo separation on static LFO
 private:
     float getlfoshape (float x);
     
@@ -61,12 +82,13 @@ private:
     float c;
     float scale;
     float ratediv;
+    float lfostatic_l, lfostatic_r;
 
     //Sample/Hold
-    int holdflag;  //toggle left/right channel changes
+    int holdflag, chnflag;  //toggle left/right channel changes
     float tca, tcb, maxrate;
-    float rreg, lreg, xlreg,xrreg, oldrreg, oldlreg;
-
+    float rreg, lreg, xlreg, xrreg, oldrreg, oldlreg;
+    
 };
 
 
