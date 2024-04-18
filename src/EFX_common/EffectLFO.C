@@ -158,7 +158,7 @@ EffectLFO::updateparams(uint32_t period)
     
     float slider_range = ui_freq_max - ui_freq_min; // avoid div by zero
     if (slider_range < 1)  slider_range = 1;
-		float sep = CLAMP (((float) (Pstereo + 64.0f) / 128.0f) - 1.0f, -0.5, 0.5);
+    float sep = CLAMP (((float) (Pstereo + 64.0f) / 128.0f) - 1.0f, -0.5, 0.5);
 
     // we return these directly from effectlfoout ()
     if (static_wraparound)
