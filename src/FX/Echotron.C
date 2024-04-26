@@ -173,7 +173,7 @@ Echotron::set_random_parameters()
 
             case Echotron_Tempo:
             {
-                int value = (int) (RND * 600);
+                int value = (int) (RND * LFO_FREQ_MAX);
                 changepar (i, value + 1);
             }
             break;
@@ -195,7 +195,7 @@ Echotron::set_random_parameters()
 
             case Echotron_LFO_Type:
             {
-                int value = (int) (RND * 12);
+                int value = (int) (RND * LFO_NUM_TYPES);
                 changepar (i, value);
             }
             break;

@@ -164,7 +164,7 @@ VaryBand::set_random_parameters()
             case VaryBand_LFO_Tempo_1:
             case VaryBand_LFO_Tempo_2:
             {
-                int value = (int) (RND * 600);
+                int value = (int) (RND * LFO_FREQ_MAX);
                 changepar (i, value + 1);
             }
             break;
@@ -172,7 +172,7 @@ VaryBand::set_random_parameters()
             case VaryBand_LFO_Type_1:
             case VaryBand_LFO_Type_2:
             {
-                int value = (int) (RND * 12);
+                int value = (int) (RND * LFO_NUM_TYPES);
                 changepar (i, value);
             }
             break;
