@@ -27,9 +27,11 @@
 #include <FL/Fl_Preferences.H>
 
 /* MIDI control defines (Max - Min) / 127 - parameter ranges  */
+
+const float C_MC_LFO_RNGE       =  float(LFO_NUM_TYPES - 1) / 127.0;
+
 const float C_MC_7_RANGE        = 0.05511811f;      /* 7 / 127 = 0.055118110236 */
 const float C_MC_8_RANGE        = 0.06299f;         /* 8 / 127 = 0.062992125984252 */
-const float C_MC_11_RANGE       = 0.0866142f;       /* 11 / 127 = 0.0866141732283465*/
 const float C_MC_12_RANGE       = 0.094488189f;     /* 12 / 127 = 0.094488188976 */
 const float C_MC_23_RANGE       = 0.18110236f;      /* 23 / 127 = 0.1811023622047 */
 const float C_MC_24_RANGE       = 0.18897638f;      /* 24 / 127 = 0.188976377953  */
@@ -114,7 +116,7 @@ RKR::MIDI_control()
         "Alienwah Pan",             strdup( NTS(MC_Alien_Pan).c_str()),              strdup( NTS(EFX_ALIENWAH).c_str()),      strdup( NTS(Alien_Pan).c_str()),              "0",     "1.0",
         "Alienwah Tempo",           strdup( NTS(MC_Alien_LFO_Tempo).c_str()),        strdup( NTS(EFX_ALIENWAH).c_str()),      strdup( NTS(Alien_LFO_Tempo).c_str()),        "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Alienwah Random",          strdup( NTS(MC_Alien_LFO_Random).c_str()),       strdup( NTS(EFX_ALIENWAH).c_str()),      strdup( NTS(Alien_LFO_Random).c_str()),       "0",     "1.0",
-        "Alienwah LFO Type",        strdup( NTS(MC_Alien_LFO_Type).c_str()),         strdup( NTS(EFX_ALIENWAH).c_str()),      strdup( NTS(Alien_LFO_Type).c_str()),         "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Alienwah LFO Type",        strdup( NTS(MC_Alien_LFO_Type).c_str()),         strdup( NTS(EFX_ALIENWAH).c_str()),      strdup( NTS(Alien_LFO_Type).c_str()),         "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Alienwah Phase",           strdup( NTS(MC_Alien_Phase).c_str()),            strdup( NTS(EFX_ALIENWAH).c_str()),      strdup( NTS(Alien_Phase).c_str()),            "0",     "1.0",
         "Alienwah Stereo Df.",      strdup( NTS(MC_Alien_LFO_Stereo).c_str()),       strdup( NTS(EFX_ALIENWAH).c_str()),      strdup( NTS(Alien_LFO_Stereo).c_str()),       "0",     "1.0",
         "Alienwah Depth",           strdup( NTS(MC_Alien_Depth).c_str()),            strdup( NTS(EFX_ALIENWAH).c_str()),      strdup( NTS(Alien_Depth).c_str()),            "0",     "1.0",
@@ -123,7 +125,7 @@ RKR::MIDI_control()
         "Alienwah L/R Cross",       strdup( NTS(MC_Alien_LR_Cross).c_str()),         strdup( NTS(EFX_ALIENWAH).c_str()),      strdup( NTS(Alien_LR_Cross).c_str()),         "0",     "1.0",
 
         "Analog Phaser Dry/Wet",    strdup( NTS(MC_APhase_DryWet).c_str()),          strdup( NTS(EFX_ANALOG_PHASER).c_str()), strdup( NTS(APhase_DryWet).c_str()),        "127",     "-1.0",
-        "Analog Phaser LFO Type",   strdup( NTS(MC_APhase_LFO_Type).c_str()),        strdup( NTS(EFX_ANALOG_PHASER).c_str()), strdup( NTS(APhase_LFO_Type).c_str()),        "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Analog Phaser LFO Type",   strdup( NTS(MC_APhase_LFO_Type).c_str()),        strdup( NTS(EFX_ANALOG_PHASER).c_str()), strdup( NTS(APhase_LFO_Type).c_str()),        "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Analog Phaser Tempo",      strdup( NTS(MC_APhase_LFO_Tempo).c_str()),       strdup( NTS(EFX_ANALOG_PHASER).c_str()), strdup( NTS(APhase_LFO_Tempo).c_str()),       "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Analog Phaser P. Depth",   strdup( NTS(MC_APhase_Depth).c_str()),           strdup( NTS(EFX_ANALOG_PHASER).c_str()), strdup( NTS(APhase_Depth).c_str()),           "0",     "1.0",
         "Analog Phaser Width",      strdup( NTS(MC_APhase_Width).c_str()),           strdup( NTS(EFX_ANALOG_PHASER).c_str()), strdup( NTS(APhase_Width).c_str()),           "0",     "1.0",
@@ -150,7 +152,7 @@ RKR::MIDI_control()
         "Chorus Pan",               strdup( NTS(MC_Chorus_Pan).c_str()),             strdup( NTS(EFX_CHORUS).c_str()),        strdup( NTS(Chorus_Pan).c_str()),             "0",     "1.0",
         "Chorus Tempo",             strdup( NTS(MC_Chorus_LFO_Tempo).c_str()),       strdup( NTS(EFX_CHORUS).c_str()),        strdup( NTS(Chorus_LFO_Tempo).c_str()),       "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Chorus Random",            strdup( NTS(MC_Chorus_LFO_Random).c_str()),      strdup( NTS(EFX_CHORUS).c_str()),        strdup( NTS(Chorus_LFO_Random).c_str()),      "0",     "1.0",
-        "Chorus LFO Type",          strdup( NTS(MC_Chorus_LFO_Type).c_str()),        strdup( NTS(EFX_CHORUS).c_str()),        strdup( NTS(Chorus_LFO_Type).c_str()),        "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Chorus LFO Type",          strdup( NTS(MC_Chorus_LFO_Type).c_str()),        strdup( NTS(EFX_CHORUS).c_str()),        strdup( NTS(Chorus_LFO_Type).c_str()),        "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Chorus Stereo Df",         strdup( NTS(MC_Chorus_LFO_Stereo).c_str()),      strdup( NTS(EFX_CHORUS).c_str()),        strdup( NTS(Chorus_LFO_Stereo).c_str()),      "0",     "1.0",
         "Chorus Depth",             strdup( NTS(MC_Chorus_Depth).c_str()),           strdup( NTS(EFX_CHORUS).c_str()),        strdup( NTS(Chorus_Depth).c_str()),           "0",     "1.0",
         "Chorus Delay",             strdup( NTS(MC_Chorus_Delay).c_str()),           strdup( NTS(EFX_CHORUS).c_str()),        strdup( NTS(Chorus_Delay).c_str()),           "0",     "1.0",
@@ -237,7 +239,7 @@ RKR::MIDI_control()
         "Dual Flange LPF",          strdup( NTS(MC_DFlange_LPF).c_str()),            strdup( NTS(EFX_DUAL_FLANGE).c_str()),   strdup( NTS(DFlange_LPF).c_str()),           "20",     strdup( NTS(C_MC_19980_RANGE).c_str()),
         "Dual Flange Tempo",        strdup( NTS(MC_DFlange_LFO_Tempo).c_str()),      strdup( NTS(EFX_DUAL_FLANGE).c_str()),   strdup( NTS(DFlange_LFO_Tempo).c_str()),      "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Dual Flange Stereo Df",    strdup( NTS(MC_DFlange_LFO_Stereo).c_str()),     strdup( NTS(EFX_DUAL_FLANGE).c_str()),   strdup( NTS(DFlange_LFO_Stereo).c_str()),     "0",     "1.0",
-        "Dual Flange LFO Type",     strdup( NTS(MC_DFlange_LFO_Type).c_str()),       strdup( NTS(EFX_DUAL_FLANGE).c_str()),   strdup( NTS(DFlange_LFO_Type).c_str()),       "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Dual Flange LFO Type",     strdup( NTS(MC_DFlange_LFO_Type).c_str()),       strdup( NTS(EFX_DUAL_FLANGE).c_str()),   strdup( NTS(DFlange_LFO_Type).c_str()),       "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Dual Flange Random",       strdup( NTS(MC_DFlange_LFO_Random).c_str()),     strdup( NTS(EFX_DUAL_FLANGE).c_str()),   strdup( NTS(DFlange_LFO_Random).c_str()),     "0",     "1.0",
 
         "Echo Dry/Wet",             strdup( NTS(MC_Echo_DryWet).c_str()),            strdup( NTS(EFX_ECHO).c_str()),          strdup( NTS(Echo_DryWet).c_str()),          "127",     "-1.0",
@@ -258,7 +260,7 @@ RKR::MIDI_control()
         "Echotron Width",           strdup( NTS(MC_Echotron_LFO_Width).c_str()),     strdup( NTS(EFX_ECHOTRON).c_str()),      strdup( NTS(Echotron_LFO_Width).c_str()),     "0",     "1.0",
         "Echotron Depth",           strdup( NTS(MC_Echotron_Depth).c_str()),         strdup( NTS(EFX_ECHOTRON).c_str()),      strdup( NTS(Echotron_Depth).c_str()),         "0",     strdup( NTS(C_MC_128_RANGE).c_str()),
         "Echotron Stereo Df",       strdup( NTS(MC_Echotron_LFO_Stereo).c_str()),    strdup( NTS(EFX_ECHOTRON).c_str()),      strdup( NTS(Echotron_LFO_Stereo).c_str()),    "0",     "1.0",
-        "Echotron LFO Type",        strdup( NTS(MC_Echotron_LFO_Type).c_str()),      strdup( NTS(EFX_ECHOTRON).c_str()),      strdup( NTS(Echotron_LFO_Type).c_str()),      "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Echotron LFO Type",        strdup( NTS(MC_Echotron_LFO_Type).c_str()),      strdup( NTS(EFX_ECHOTRON).c_str()),      strdup( NTS(Echotron_LFO_Type).c_str()),      "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Echotron #",               strdup( NTS(MC_Echotron_Taps).c_str()),          strdup( NTS(EFX_ECHOTRON).c_str()),      strdup( NTS(Echotron_Taps).c_str()),          "1",     strdup( NTS(C_MC_126_RANGE).c_str()),
 
         "Echoverse Dry/Wet",        strdup( NTS(MC_Echoverse_DryWet).c_str()),       strdup( NTS(EFX_ECHOVERSE).c_str()),     strdup( NTS(Echoverse_DryWet).c_str()),     "127",     "-1.0",
@@ -310,7 +312,7 @@ RKR::MIDI_control()
         "Flanger Pan",              strdup( NTS(MC_Flanger_Pan).c_str()),            strdup( NTS(EFX_FLANGER).c_str()),       strdup( NTS(Flanger_Pan).c_str()),            "0",     "1.0",
         "Flanger Tempo",            strdup( NTS(MC_Flanger_LFO_Tempo).c_str()),      strdup( NTS(EFX_FLANGER).c_str()),       strdup( NTS(Flanger_LFO_Tempo).c_str()),      "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Flanger Random",           strdup( NTS(MC_Flanger_LFO_Random).c_str()),     strdup( NTS(EFX_FLANGER).c_str()),       strdup( NTS(Flanger_LFO_Random).c_str()),     "0",     "1.0",
-        "Flanger LFO Type",         strdup( NTS(MC_Flanger_LFO_Type).c_str()),       strdup( NTS(EFX_FLANGER).c_str()),       strdup( NTS(Flanger_LFO_Type).c_str()),       "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Flanger LFO Type",         strdup( NTS(MC_Flanger_LFO_Type).c_str()),       strdup( NTS(EFX_FLANGER).c_str()),       strdup( NTS(Flanger_LFO_Type).c_str()),       "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Flanger Stereo Df",        strdup( NTS(MC_Flanger_LFO_Stereo).c_str()),     strdup( NTS(EFX_FLANGER).c_str()),       strdup( NTS(Flanger_LFO_Stereo).c_str()),     "0",     "1.0",
         "Flanger Depth",            strdup( NTS(MC_Flanger_Depth).c_str()),          strdup( NTS(EFX_FLANGER).c_str()),       strdup( NTS(Flanger_Depth).c_str()),          "0",     "1.0",
         "Flanger Delay",            strdup( NTS(MC_Flanger_Delay).c_str()),          strdup( NTS(EFX_FLANGER).c_str()),       strdup( NTS(Flanger_Delay).c_str()),          "0",     "1.0",
@@ -379,7 +381,7 @@ RKR::MIDI_control()
         "MuTroMojo LP",             strdup( NTS(MC_MuTro_LowPass).c_str()),          strdup( NTS(EFX_MUTROMOJO).c_str()),     strdup( NTS(MuTro_LowPass).c_str()),        "-64",     "1.0",
         "MuTroMojo BP",             strdup( NTS(MC_MuTro_BandPass).c_str()),         strdup( NTS(EFX_MUTROMOJO).c_str()),     strdup( NTS(MuTro_BandPass).c_str()),       "-64",     "1.0",
         "MuTroMojo HP",             strdup( NTS(MC_MuTro_HighPass).c_str()),         strdup( NTS(EFX_MUTROMOJO).c_str()),     strdup( NTS(MuTro_HighPass).c_str()),       "-64",     "1.0",
-        "MuTroMojo LFO Type",       strdup( NTS(MC_MuTro_LFO_Type).c_str()),         strdup( NTS(EFX_MUTROMOJO).c_str()),     strdup( NTS(MuTro_LFO_Type).c_str()),         "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "MuTroMojo LFO Type",       strdup( NTS(MC_MuTro_LFO_Type).c_str()),         strdup( NTS(EFX_MUTROMOJO).c_str()),     strdup( NTS(MuTro_LFO_Type).c_str()),         "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "MuTroMojo Depth",          strdup( NTS(MC_MuTro_Depth).c_str()),            strdup( NTS(EFX_MUTROMOJO).c_str()),     strdup( NTS(MuTro_Depth).c_str()),            "0",     "1.0",
         "MuTroMojo Tempo",          strdup( NTS(MC_MuTro_LFO_Tempo).c_str()),        strdup( NTS(EFX_MUTROMOJO).c_str()),     strdup( NTS(MuTro_LFO_Tempo).c_str()),        "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "MuTroMojo Res",            strdup( NTS(MC_MuTro_Resonance).c_str()),        strdup( NTS(EFX_MUTROMOJO).c_str()),     strdup( NTS(MuTro_Resonance).c_str()),        "0",     "1.0",
@@ -402,7 +404,7 @@ RKR::MIDI_control()
         "Opticaltrem Depth",        strdup( NTS(MC_Optical_Depth).c_str()),          strdup( NTS(EFX_OPTICALTREM).c_str()),   strdup( NTS(Optical_Depth).c_str()),          "0",     "1.0",
         "Opticaltrem Tempo",        strdup( NTS(MC_Optical_LFO_Tempo).c_str()),      strdup( NTS(EFX_OPTICALTREM).c_str()),   strdup( NTS(Optical_LFO_Tempo).c_str()),      "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Opticaltrem Random",       strdup( NTS(MC_Optical_LFO_Random).c_str()),     strdup( NTS(EFX_OPTICALTREM).c_str()),   strdup( NTS(Optical_LFO_Random).c_str()),     "0",     "1.0",
-        "Opticaltrem LFO Type",     strdup( NTS(MC_Optical_LFO_Type).c_str()),       strdup( NTS(EFX_OPTICALTREM).c_str()),   strdup( NTS(Optical_LFO_Type).c_str()),       "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Opticaltrem LFO Type",     strdup( NTS(MC_Optical_LFO_Type).c_str()),       strdup( NTS(EFX_OPTICALTREM).c_str()),   strdup( NTS(Optical_LFO_Type).c_str()),       "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Opticaltrem Stereo Df",    strdup( NTS(MC_Optical_LFO_Stereo).c_str()),     strdup( NTS(EFX_OPTICALTREM).c_str()),   strdup( NTS(Optical_LFO_Stereo).c_str()),     "0",     "1.0",
         "Opticaltrem Pan",          strdup( NTS(MC_Optical_Pan).c_str()),            strdup( NTS(EFX_OPTICALTREM).c_str()),   strdup( NTS(Optical_Pan).c_str()),            "0",     "1.0",
 
@@ -421,7 +423,7 @@ RKR::MIDI_control()
         "Pan Pan",                  strdup( NTS(MC_Pan_Pan).c_str()),                strdup( NTS(EFX_PAN).c_str()),           strdup( NTS(Pan_Pan).c_str()),                "0",     "1.0",
         "Pan Tempo",                strdup( NTS(MC_Pan_LFO_Tempo).c_str()),          strdup( NTS(EFX_PAN).c_str()),           strdup( NTS(Pan_LFO_Tempo).c_str()),          "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Pan Random",               strdup( NTS(MC_Pan_LFO_Random).c_str()),         strdup( NTS(EFX_PAN).c_str()),           strdup( NTS(Pan_LFO_Random).c_str()),         "0",     "1.0",
-        "Pan LFO Type",             strdup( NTS(MC_Pan_LFO_Type).c_str()),           strdup( NTS(EFX_PAN).c_str()),           strdup( NTS(Pan_LFO_Type).c_str()),           "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Pan LFO Type",             strdup( NTS(MC_Pan_LFO_Type).c_str()),           strdup( NTS(EFX_PAN).c_str()),           strdup( NTS(Pan_LFO_Type).c_str()),           "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Pan Stereo Df",            strdup( NTS(MC_Pan_LFO_Stereo).c_str()),         strdup( NTS(EFX_PAN).c_str()),           strdup( NTS(Pan_LFO_Stereo).c_str()),         "0",     "1.0",
         "Pan E. Stereo",            strdup( NTS(MC_Pan_Ex_St_Amt).c_str()),          strdup( NTS(EFX_PAN).c_str()),           strdup( NTS(Pan_Ex_St_Amt).c_str()),          "0",     "1.0",
 
@@ -440,7 +442,7 @@ RKR::MIDI_control()
         "Phaser Pan",               strdup( NTS(MC_Phaser_Pan).c_str()),             strdup( NTS(EFX_PHASER).c_str()),        strdup( NTS(Phaser_Pan).c_str()),             "0",     "1.0",
         "Phaser Tempo",             strdup( NTS(MC_Phaser_LFO_Tempo).c_str()),       strdup( NTS(EFX_PHASER).c_str()),        strdup( NTS(Phaser_LFO_Tempo).c_str()),       "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Phaser Random",            strdup( NTS(MC_Phaser_LFO_Random).c_str()),      strdup( NTS(EFX_PHASER).c_str()),        strdup( NTS(Phaser_LFO_Random).c_str()),      "0",     "1.0",
-        "Phaser LFO Type",          strdup( NTS(MC_Phaser_LFO_Type).c_str()),        strdup( NTS(EFX_PHASER).c_str()),        strdup( NTS(Phaser_LFO_Type).c_str()),        "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Phaser LFO Type",          strdup( NTS(MC_Phaser_LFO_Type).c_str()),        strdup( NTS(EFX_PHASER).c_str()),        strdup( NTS(Phaser_LFO_Type).c_str()),        "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Phaser Phase",             strdup( NTS(MC_Phaser_Phase).c_str()),           strdup( NTS(EFX_PHASER).c_str()),        strdup( NTS(Phaser_Phase).c_str()),           "0",     "1.0",
         "Phaser Stereo Df",         strdup( NTS(MC_Phaser_LFO_Stereo).c_str()),      strdup( NTS(EFX_PHASER).c_str()),        strdup( NTS(Phaser_LFO_Stereo).c_str()),      "0",     "1.0",
         "Phaser Depth",             strdup( NTS(MC_Phaser_Depth).c_str()),           strdup( NTS(EFX_PHASER).c_str()),        strdup( NTS(Phaser_Depth).c_str()),           "0",     "1.0",
@@ -547,7 +549,7 @@ RKR::MIDI_control()
         "Synthfilter Distort",      strdup( NTS(MC_Synthfilter_Distort).c_str()),    strdup( NTS(EFX_SYNTHFILTER).c_str()),   strdup( NTS(Synthfilter_Distort).c_str()),    "0",     "1.0",
         "Synthfilter Tempo",        strdup( NTS(MC_Synthfilter_LFO_Tempo).c_str()),  strdup( NTS(EFX_SYNTHFILTER).c_str()),   strdup( NTS(Synthfilter_LFO_Tempo).c_str()),  "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Synthfilter Random",       strdup( NTS(MC_Synthfilter_LFO_Random).c_str()), strdup( NTS(EFX_SYNTHFILTER).c_str()),   strdup( NTS(Synthfilter_LFO_Random).c_str()), "0",     "1.0",
-        "Synthfilter LFO Type",     strdup( NTS(MC_Synthfilter_LFO_Type).c_str()),   strdup( NTS(EFX_SYNTHFILTER).c_str()),   strdup( NTS(Synthfilter_LFO_Type).c_str()),   "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Synthfilter LFO Type",     strdup( NTS(MC_Synthfilter_LFO_Type).c_str()),   strdup( NTS(EFX_SYNTHFILTER).c_str()),   strdup( NTS(Synthfilter_LFO_Type).c_str()),   "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Synthfilter Stereo Df",    strdup( NTS(MC_Synthfilter_LFO_Stereo).c_str()), strdup( NTS(EFX_SYNTHFILTER).c_str()),   strdup( NTS(Synthfilter_LFO_Stereo).c_str()), "0",     "1.0",
         "Synthfilter Width",        strdup( NTS(MC_Synthfilter_Width).c_str()),      strdup( NTS(EFX_SYNTHFILTER).c_str()),   strdup( NTS(Synthfilter_Width).c_str()),      "0",     "1.0",
         "Synthfilter Feedback",     strdup( NTS(MC_Synthfilter_Feedback).c_str()),   strdup( NTS(EFX_SYNTHFILTER).c_str()),   strdup( NTS(Synthfilter_Feedback).c_str()), "-64",     strdup( NTS(C_MC_128_RANGE).c_str()),
@@ -569,10 +571,10 @@ RKR::MIDI_control()
 
         "VaryBand Dry/Wet",         strdup( NTS(MC_VaryBand_DryWet).c_str()),        strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_DryWet).c_str()),      "127",     "-1.0",
         "VaryBand Tempo 1",         strdup( NTS(MC_VaryBand_LFO_Tempo_1).c_str()),   strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_LFO_Tempo_1).c_str()),   "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
-        "VaryBand LFO 1 Type",      strdup( NTS(MC_VaryBand_LFO_Type_1).c_str()),    strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_LFO_Type_1).c_str()),    "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "VaryBand LFO 1 Type",      strdup( NTS(MC_VaryBand_LFO_Type_1).c_str()),    strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_LFO_Type_1).c_str()),    "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "VaryBand St.df 1",         strdup( NTS(MC_VaryBand_LFO_Stereo_1).c_str()),  strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_LFO_Stereo_1).c_str()),  "0",     "1.0",
         "VaryBand Tempo 2",         strdup( NTS(MC_VaryBand_LFO_Tempo_2).c_str()),   strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_LFO_Tempo_2).c_str()),   "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
-        "VaryBand LFO 2 Type",      strdup( NTS(MC_VaryBand_LFO_Type_2).c_str()),    strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_LFO_Type_2).c_str()),    "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "VaryBand LFO 2 Type",      strdup( NTS(MC_VaryBand_LFO_Type_2).c_str()),    strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_LFO_Type_2).c_str()),    "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "VaryBand St.df 2",         strdup( NTS(MC_VaryBand_LFO_Stereo_2).c_str()),  strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_LFO_Stereo_2).c_str()),  "0",     "1.0",
         "VaryBand Cross 1",         strdup( NTS(MC_VaryBand_Cross_1).c_str()),       strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_Cross_1).c_str()),      "20",     strdup( NTS(C_MC_980_RANGE).c_str()),
         "VaryBand Cross 2",         strdup( NTS(MC_VaryBand_Cross_2).c_str()),       strdup( NTS(EFX_VARYBAND).c_str()),      strdup( NTS(VaryBand_Cross_2).c_str()),    "1000",     strdup( NTS(C_MC_7000_RANGE).c_str()),
@@ -583,7 +585,7 @@ RKR::MIDI_control()
         "Vibe Depth",               strdup( NTS(MC_Vibe_Depth).c_str()),             strdup( NTS(EFX_VIBE).c_str()),          strdup( NTS(Vibe_Depth).c_str()),             "0",     "1.0",
         "Vibe Tempo",               strdup( NTS(MC_Vibe_LFO_Tempo).c_str()),         strdup( NTS(EFX_VIBE).c_str()),          strdup( NTS(Vibe_LFO_Tempo).c_str()),         "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "Vibe Random",              strdup( NTS(MC_Vibe_LFO_Random).c_str()),        strdup( NTS(EFX_VIBE).c_str()),          strdup( NTS(Vibe_LFO_Random).c_str()),        "0",     "1.0",
-        "Vibe LFO Type",            strdup( NTS(MC_Vibe_LFO_Type).c_str()),          strdup( NTS(EFX_VIBE).c_str()),          strdup( NTS(Vibe_LFO_Type).c_str()),          "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "Vibe LFO Type",            strdup( NTS(MC_Vibe_LFO_Type).c_str()),          strdup( NTS(EFX_VIBE).c_str()),          strdup( NTS(Vibe_LFO_Type).c_str()),          "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "Vibe Stereo Df",           strdup( NTS(MC_Vibe_LFO_Stereo).c_str()),        strdup( NTS(EFX_VIBE).c_str()),          strdup( NTS(Vibe_LFO_Stereo).c_str()),        "0",     "1.0",
         "Vibe Feedback",            strdup( NTS(MC_Vibe_Feedback).c_str()),          strdup( NTS(EFX_VIBE).c_str()),          strdup( NTS(Vibe_Feedback).c_str()),          "0",     strdup( NTS(C_MC_128_RANGE).c_str()),
         "Vibe L/R Cross",           strdup( NTS(MC_Vibe_LR_Cross).c_str()),          strdup( NTS(EFX_VIBE).c_str()),          strdup( NTS(Vibe_LR_Cross).c_str()),          "0",     strdup( NTS(C_MC_128_RANGE).c_str()),
@@ -601,7 +603,7 @@ RKR::MIDI_control()
         "WahWah Pan",               strdup( NTS(MC_WahWah_Pan).c_str()),             strdup( NTS(EFX_WAHWAH).c_str()),        strdup( NTS(WahWah_Pan).c_str()),             "0",     "1.0",
         "WahWah Tempo",             strdup( NTS(MC_WahWah_LFO_Tempo).c_str()),       strdup( NTS(EFX_WAHWAH).c_str()),        strdup( NTS(WahWah_LFO_Tempo).c_str()),       "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
         "WahWah Random",            strdup( NTS(MC_WahWah_LFO_Random).c_str()),      strdup( NTS(EFX_WAHWAH).c_str()),        strdup( NTS(WahWah_LFO_Random).c_str()),      "0",     "1.0",
-        "WahWah LFO Type",          strdup( NTS(MC_WahWah_LFO_Type).c_str()),        strdup( NTS(EFX_WAHWAH).c_str()),        strdup( NTS(WahWah_LFO_Type).c_str()),        "0",     strdup( NTS(C_MC_11_RANGE).c_str()),
+        "WahWah LFO Type",          strdup( NTS(MC_WahWah_LFO_Type).c_str()),        strdup( NTS(EFX_WAHWAH).c_str()),        strdup( NTS(WahWah_LFO_Type).c_str()),        "0",     strdup( NTS(C_MC_LFO_RNGE).c_str()),
         "WahWah Stereo Df",         strdup( NTS(MC_WahWah_LFO_Stereo).c_str()),      strdup( NTS(EFX_WAHWAH).c_str()),        strdup( NTS(WahWah_LFO_Stereo).c_str()),      "0",     "1.0",
         "WahWah Depth",             strdup( NTS(MC_WahWah_Depth).c_str()),           strdup( NTS(EFX_WAHWAH).c_str()),        strdup( NTS(WahWah_Depth).c_str()),           "0",     "1.0",
         "WahWah Amp S.",            strdup( NTS(MC_WahWah_Sense).c_str()),           strdup( NTS(EFX_WAHWAH).c_str()),        strdup( NTS(WahWah_Sense).c_str()),           "0",     "1.0",
