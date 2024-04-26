@@ -290,14 +290,14 @@ Analog_Phaser::set_random_parameters()
         {
             case APhase_LFO_Type:
             {
-                int value = (int) (RND * 12);
+                int value = (int) (RND * LFO_NUM_TYPES);
                 changepar (i, value);
             }
             break;
 
             case APhase_LFO_Tempo:
             {
-                int value = (int) (RND * 600);
+                int value = (int) (RND * LFO_FREQ_MAX);
                 changepar (i, value + 1);
             }
             break;
@@ -482,7 +482,7 @@ void
 Analog_Phaser::setpreset(int npreset)
 {
     const int PRESET_SIZE = C_APHASER_PARAMETERS;
-    const int NUM_PRESETS = 6;
+    const int NUM_PRESETS = 9;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         //Phaser1
@@ -496,7 +496,13 @@ Analog_Phaser::setpreset(int npreset)
         //Phaser5
         {25, 20, 240, 10, 0, 64, 25, 16, 8, 100, 0, 25, 0},
         //Phaser6
-        {64, 20, 1, 10, 1, 64, 110, 40, 12, 10, 0, 70, 1}
+        {64, 20, 1, 10, 1, 64, 110, 40, 12, 10, 0, 70, 1},
+        // static 1 (beefy marshall)
+        {64, 0, 268, 0, 12, 64, 76, 64, 4, 0, 0, 127, 0},
+        // static 2 (euro prog/power metal)
+        {35, 0, 335, 0, 12, 64, 72, 94, 8, 0, 0, 118, 0},
+        // static 3 (presence boost)
+        {90, 127, 48, 0, 12, 80, 27, 79, 6, 0, 1, 87, 0}
     };
 
     if (npreset > NUM_PRESETS - 1)
@@ -539,7 +545,7 @@ Analog_Phaser::changepar(int npar, int value)
         lfo->PLFOtype = value;
         lfo->updateparams(PERIOD);
         barber = 0;
-        if (value == 2) barber = 1;
+        if (value == LFO_RAMP_UP) barber = 1;
         break;
     case APhase_LFO_Stereo:
         lfo->Pstereo = value;
