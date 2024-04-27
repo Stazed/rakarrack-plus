@@ -159,7 +159,7 @@ class RKRGUI {
    for() loops to eliminate redundant code.
    Array is indexed by EFX_Index.
   */
-  RKR_Gui_Effect *Efx_Gui_Base[C_NUMBER_EFFECTS]; 
+  RKR_Gui_Effect *Efx_Gui_Base[EFX_NUMBER_EFFECTS]; 
   CommonGuiMenu *m_looper_bar; 
   CommonGuiMenu *m_looper_ms; 
   /**
@@ -198,7 +198,7 @@ class RKRGUI {
   /**
    Array to hold user selections for random preset generation.
   */
-  char FX_Excluded[C_NUMBER_EFFECTS]; 
+  char FX_Excluded[EFX_NUMBER_EFFECTS]; 
   Fl_Help_Dialog *visor; 
 public:
   void make_window();

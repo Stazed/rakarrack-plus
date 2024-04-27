@@ -30,10 +30,6 @@
 
 #include <FL/Fl_Preferences.H>
 
-/**
- * The number of rack effects.
- */
-const int C_NUMBER_EFFECTS = 47;
 
 class Config_fltk {
 public:
@@ -292,7 +288,7 @@ public:
     int Rand_Active;
     int Rand_Current;
     int Rand_Max;
-    char Rand_Exclude[C_NUMBER_EFFECTS + 1];
+    char Rand_Exclude[EFX_NUMBER_EFFECTS + 1];
 
     // NSM
 #ifdef NSM_SUPPORT

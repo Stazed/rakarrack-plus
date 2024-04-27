@@ -929,9 +929,9 @@ RKR::ActiveUn(int value)
         Mnumeff[OnOffC] = 2000 + numef;
     }
     
-    if(miraque < C_NUMBER_EFFECTS)
+    if(miraque < EFX_NUMBER_EFFECTS)
     {
-        for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+        for(int i = 0; i < EFX_NUMBER_EFFECTS; i++)
         {
             if(miraque == i)
             {
@@ -968,9 +968,9 @@ RKR::ActiveUn(int value)
 int
 RKR::checkonoff(int miraque)
 {
-    if(miraque < C_NUMBER_EFFECTS)
+    if(miraque < EFX_NUMBER_EFFECTS)
     {
-        for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+        for(int i = 0; i < EFX_NUMBER_EFFECTS; i++)
         {
             if(miraque == i)
             {

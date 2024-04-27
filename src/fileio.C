@@ -57,7 +57,7 @@ void RKR::apply_effect_parameters(std::string s_buf, int fx_index, PresetBankStr
     }
 
     // Run through the effects for a match to the effect index
-    for (int effect = 0; effect < C_NUMBER_EFFECTS; effect++)
+    for (int effect = 0; effect < EFX_NUMBER_EFFECTS; effect++)
     {
         if (effect == fx_index)
         {
@@ -121,7 +121,7 @@ void RKR::apply_effect_parameters(std::string s_buf, int fx_index, PresetBankStr
 void RKR::get_effect_parameters(std::string &s_buf, int fx_index)
 {
      // Run through the effects for a match to the effect index
-    for (int effect = 0; effect < C_NUMBER_EFFECTS; effect++)
+    for (int effect = 0; effect < EFX_NUMBER_EFFECTS; effect++)
     {
         if (effect == fx_index)
         {
@@ -733,7 +733,7 @@ RKR::set_audio_paramters()
     // This is beneficial for User editing and feedback, but not for fast preset changes
     if(Gui_Shown)
     {
-        for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
+        for (int all_efx = 0; all_efx < EFX_NUMBER_EFFECTS; all_efx++)
         {
             EFX_Active[all_efx] = Active_Preset.Effect_Params[all_efx][C_BYPASS];
 
@@ -779,7 +779,7 @@ RKR::set_audio_paramters()
         // For each item on the main rack, check for a match to the efx_order
         for (int ordered_efx = 0; ordered_efx < C_NUMBER_ORDERED_EFFECTS; ordered_efx++)
         {
-            for (int all_efx = 0; all_efx < C_NUMBER_EFFECTS; all_efx++)
+            for (int all_efx = 0; all_efx < EFX_NUMBER_EFFECTS; all_efx++)
             {
                 // Is the effect one of the ordered?
                 if(efx_order[ordered_efx] == all_efx)
@@ -1499,7 +1499,7 @@ RKR::refresh_active_preset()
 {
     // Update all effect parameters into Active_Preset from audio classes
     // since they may have been changed by user.
-    for (int k = 0; k < C_NUMBER_EFFECTS; k++)
+    for (int k = 0; k < EFX_NUMBER_EFFECTS; k++)
     {
         for (int j = 0; j < EFX_Param_Size[k]; j++)
         {
@@ -1514,7 +1514,7 @@ RKR::refresh_active_preset()
     }
 
     // Copy the current bypass state
-    for(int j = 0; j < C_NUMBER_EFFECTS; j++)
+    for(int j = 0; j < EFX_NUMBER_EFFECTS; j++)
     {
         Active_Preset.Effect_Params[j][C_BYPASS] = EFX_Active[j];
     }

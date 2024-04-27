@@ -342,9 +342,8 @@ enum EFX_Index
     EFX_COMPBAND,
     EFX_OPTICALTREM,
     EFX_VIBE,
-    EFX_INFINITY,       // 46 - (0 to 46 = C_NUMBER_EFFECTS)
-    
-    // Indexes 47 - 68 are unused and can be used for expansion of rack effects.
+    EFX_INFINITY,       // 46
+    EFX_NUMBER_EFFECTS, // Insert new effects before this - max of 68
     
     // This is the main window effect order. Must be hard coded to 69,
     // the last item of lv[70][20] bank.
@@ -429,7 +428,7 @@ enum USER_DATA_index
     
     UD_random_edit          = 5000,
     // Everything between here is used by random editor
-    UD_random_end           = (5000 + 47), //  C_NUMBER_EFFECTS = 47
+    UD_random_end           = (5000 + EFX_NUMBER_EFFECTS),
     
     // The user_data for RKR_Choice 'Preset' widgets. For use in identifying
     // the correct widget when user 'Insert' or 'Delete' key is used. For

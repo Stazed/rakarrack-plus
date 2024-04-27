@@ -933,7 +933,7 @@ void RKRGUI::load_previous_state()
     RandomEdit->random_max->value(max_random_active);
 
     // Set any excluded effects
-    for(int i = 0; i < C_NUMBER_EFFECTS; ++i)
+    for(int i = 0; i < EFX_NUMBER_EFFECTS; ++i)
     {
         if( m_process->Config.Rand_Exclude[i] == ASCII_One)
             FX_Excluded[i] = (char) 1;
@@ -1059,7 +1059,7 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
 
         // convert the asci char to string for the set 
         std::string s;
-        for(int i = 0; i < C_NUMBER_EFFECTS; ++i)
+        for(int i = 0; i < EFX_NUMBER_EFFECTS; ++i)
         {
             s +=  NTS((int) FX_Excluded[i]);
         }
@@ -1319,7 +1319,7 @@ void RKRGUI::Put_Loaded()
         switch(m_process->efx_order[i]){
      */
 
-    for (int i = 0; i < C_NUMBER_EFFECTS; i++)
+    for (int i = 0; i < EFX_NUMBER_EFFECTS; i++)
     {
         // Cabinet is special
         if( i == EFX_CABINET)
@@ -1467,7 +1467,7 @@ void RKRGUI::reordena()
     y[9] = E10->y();
 
     // Hide All Effects
-    for (int i = 0; i < C_NUMBER_EFFECTS; i++)
+    for (int i = 0; i < EFX_NUMBER_EFFECTS; i++)
     {
         Efx_Gui_Base[i]->hide ();
     }
@@ -1475,7 +1475,7 @@ void RKRGUI::reordena()
     // Show effects with new order
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
     {
-        for (int j = 0; j < C_NUMBER_EFFECTS; j++)
+        for (int j = 0; j < EFX_NUMBER_EFFECTS; j++)
         {
             // Search the effects for the requested in main window order 
             if (j == m_process->efx_order[i])
@@ -2330,7 +2330,7 @@ void RKRGUI::ActOnOff()
         }
         
         // Check for rack effects
-        if (miralo < C_NUMBER_EFFECTS)
+        if (miralo < EFX_NUMBER_EFFECTS)
         {
             Efx_Gui_Base[miralo]->activate_effect->value (m_process->EFX_Active[miralo]);
             Efx_Gui_Base[miralo]->activate_effect->do_callback ();
@@ -2378,7 +2378,7 @@ void RKRGUI::PutBackground()
     InOut->image(back);
 
     // Rack effects
-    for (int i = 0; i < C_NUMBER_EFFECTS; i++)
+    for (int i = 0; i < EFX_NUMBER_EFFECTS; i++)
     {
         Efx_Gui_Base[i]->image (InOut->image());
     }
@@ -3003,7 +3003,7 @@ void RKRGUI::update_looper()
  */
 void RKRGUI::update_tap_tempo_GUI()
 {
-    for(int efx_index = 0; efx_index < C_NUMBER_EFFECTS; efx_index++)
+    for(int efx_index = 0; efx_index < EFX_NUMBER_EFFECTS; efx_index++)
     {
         if (m_process->EFX_Active[efx_index])
         {
@@ -3088,7 +3088,7 @@ int RKRGUI::Busca_Eff(int num)
 {
     int i = 0;
 
-    for (i = 0; i < C_NUMBER_EFFECTS; i++)
+    for (i = 0; i < EFX_NUMBER_EFFECTS; i++)
     {
         if (m_process->efx_names[i].Pos == num)
         {
@@ -3107,7 +3107,7 @@ void RKRGUI::Fill_Avail(int filter)
 
     int t = 1;
 
-    for (int i = 0; i < C_NUMBER_EFFECTS; i++)
+    for (int i = 0; i < EFX_NUMBER_EFFECTS; i++)
     {
         int k = 0;
         for (int j = 0; j < C_NUMBER_ORDERED_EFFECTS; j++)
@@ -3795,7 +3795,7 @@ void RKRGUI::RandomPreset()
     
     // Check if invalid number of effects are excluded
     int excluded = 0;
-    for(unsigned e = 0; e < C_NUMBER_EFFECTS; ++e)
+    for(unsigned e = 0; e < EFX_NUMBER_EFFECTS; ++e)
     {
         if(FX_Excluded[e])
             excluded++;
@@ -3816,7 +3816,7 @@ void RKRGUI::RandomPreset()
     // Get the first one to compare for duplicates
     while(1)
     {
-        Effect_Index[0] = (int) (RND * C_NUMBER_EFFECTS);
+        Effect_Index[0] = (int) (RND * EFX_NUMBER_EFFECTS);
 
         // Did the user want this to be selected
         if(!FX_Excluded[Effect_Index[0]])
@@ -3831,7 +3831,7 @@ void RKRGUI::RandomPreset()
         int l = 0;
         while (l == 0)
         {
-            Effect_Index[i] = (int) (RND * C_NUMBER_EFFECTS);
+            Effect_Index[i] = (int) (RND * EFX_NUMBER_EFFECTS);
             for (int j = 0; j < i; j++)
             {
                 // Check that there are no duplicate selections
@@ -3845,7 +3845,7 @@ void RKRGUI::RandomPreset()
                     bool dont_use = false;
 
                     // Check if the user wants this effect chosen
-                    for (int k = 0; k < C_NUMBER_EFFECTS; k++)
+                    for (int k = 0; k < EFX_NUMBER_EFFECTS; k++)
                     {
                         if (k == Effect_Index[i])
                         {

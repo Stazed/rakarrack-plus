@@ -256,7 +256,7 @@ RKR::~RKR()
     delete M_Metronome;
     delete efx_FLimiter;
     
-    for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+    for(int i = 0; i < EFX_NUMBER_EFFECTS; i++)
     {
         if(Rack_Effects[i])
             delete Rack_Effects[i];
@@ -422,7 +422,7 @@ RKR::instantiate_effects()
     StHarmRecNote->reconota = -1;
     RingRecNote->reconota = -1;
     
-    for (int i = 0; i < C_NUMBER_EFFECTS; i++)
+    for (int i = 0; i < EFX_NUMBER_EFFECTS; i++)
     {
         EFX_Param_Size[i] = Rack_Effects[i]->get_number_efx_parameters();
     }
@@ -522,7 +522,7 @@ RKR::put_order_in_rack()
         "WahWah", strdup( NTS(EFX_WAHWAH).c_str()), strdup( NTS(Type_Filters).c_str()),
     };
 
-    for (int i = 0; i < C_NUMBER_EFFECTS * 3; i += 3)
+    for (int i = 0; i < EFX_NUMBER_EFFECTS * 3; i += 3)
     {
         strcpy(efx_names[i / 3].Nom, los_names[i]);
         sscanf(los_names[i + 1], "%d", &efx_names[i / 3].Pos);
@@ -832,7 +832,7 @@ RKR::Control_Volume(const float *origl, const float *origr)
 void
 RKR::cleanup_efx()
 {
-    for(int i = 0; i < C_NUMBER_EFFECTS; i++)
+    for(int i = 0; i < EFX_NUMBER_EFFECTS; i++)
     {
         if(Rack_Effects[i])
             Rack_Effects[i]->cleanup();

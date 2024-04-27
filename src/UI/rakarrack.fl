@@ -307,7 +307,7 @@ class RKRGUI {open
 } {
   decl {RKR *m_process;} {private local
   }
-  decl {RKR_Gui_Effect *Efx_Gui_Base[C_NUMBER_EFFECTS];} {
+  decl {RKR_Gui_Effect *Efx_Gui_Base[EFX_NUMBER_EFFECTS];} {
     comment {Efx_Gui_Base:
 Array to hold pointer to the rack effect base class gui.
 This is used for common effect actions to allow use in
@@ -344,7 +344,7 @@ The user can set between 1 and 10, default is six.
 If the efx_always_active is checked, then always the max.
 If efx_always_active is not checked, then the actual is randomly generated.} private local
   }
-  decl {char FX_Excluded[C_NUMBER_EFFECTS];} {
+  decl {char FX_Excluded[EFX_NUMBER_EFFECTS];} {
     comment {Array to hold user selections for random preset generation.} private local
   }
   decl {Fl_Help_Dialog *visor;} {private local
