@@ -36,8 +36,6 @@ EffectLFO::EffectLFO(double sample_rate) :
     Prandomness(),
     PLFOtype(),
     Pstereo(96),
-    lfostatic_l (0.0f),
-    lfostatic_r (0.0f),
     ui_freq_min(LFO_FREQ_MIN),
     ui_freq_max(LFO_FREQ_MAX),
     fSAMPLE_RATE(sample_rate),
@@ -66,6 +64,8 @@ EffectLFO::EffectLFO(double sample_rate) :
     c(8.0f / 5.0f),
     scale(1.0f / 36.0f),
     ratediv(0.1f),
+    lfostatic_l (0.0f),
+    lfostatic_r (0.0f),
     holdflag(),
     tca(iperiod / (iperiod + 0.02)),    // 20ms default
     tcb(1.0f - tca),
