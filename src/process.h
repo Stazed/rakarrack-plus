@@ -601,11 +601,8 @@ enum MIDI_Learn_Index
     MC_Ressol_LFO_Stereo,
     MC_Ressol_Width,
     MC_Ressol_Feedback,
-    MC_Ressol_Stages,
     MC_Ressol_Mismatch,
-    MC_Ressol_Subtract,
-    MC_Ressol_Depth,               // 480
-    MC_Ressol_Hyper,
+    MC_Ressol_Depth,
     TOTAL_MC_Parameter_Size
 
 };
