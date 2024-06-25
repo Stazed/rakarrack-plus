@@ -451,6 +451,15 @@ RKR::MIDI_control()
 
         "Program Change Table",     strdup( NTS(MC_Program_Table).c_str()),          strdup( NTS(EFX_MASTER).c_str()),        "0",                                 "0",     "1.0",
 
+        "ResSolution Dry/Wet",      strdup( NTS(MC_Ressol_DryWet).c_str()),          strdup( NTS(EFX_RESSOLUTION).c_str()),   strdup( NTS(Ressol_DryWet).c_str()),        "127",     "-1.0",
+        "ResSolution Tempo",        strdup( NTS(MC_Ressol_LFO_Tempo).c_str()),       strdup( NTS(EFX_RESSOLUTION).c_str()),   strdup( NTS(Ressol_LFO_Tempo).c_str()),       "1",     strdup( NTS(C_MC_600_RANGE).c_str()),
+        "ResSolution P. Depth",     strdup( NTS(MC_Ressol_Depth).c_str()),           strdup( NTS(EFX_RESSOLUTION).c_str()),   strdup( NTS(Ressol_Depth).c_str()),           "0",     "1.0",
+        "ResSolution Width",        strdup( NTS(MC_Ressol_Width).c_str()),           strdup( NTS(EFX_RESSOLUTION).c_str()),   strdup( NTS(Ressol_Width).c_str()),           "0",     "1.0",
+        "ResSolution Feedback",     strdup( NTS(MC_Ressol_Feedback).c_str()),        strdup( NTS(EFX_RESSOLUTION).c_str()),   strdup( NTS(Ressol_Feedback).c_str()),        "0",     strdup( NTS(C_MC_128_RANGE).c_str()),
+        "ResSolution Mismatch",     strdup( NTS(MC_Ressol_Mismatch).c_str()),        strdup( NTS(EFX_RESSOLUTION).c_str()),   strdup( NTS(Ressol_Mismatch).c_str()),        "0",     "1.0",
+        "ResSolution Distortion",   strdup( NTS(MC_Ressol_Distortion).c_str()),      strdup( NTS(EFX_RESSOLUTION).c_str()),   strdup( NTS(Ressol_Distortion).c_str()),      "0",     "1.0",
+        "ResSolution Stereo Df.",   strdup( NTS(MC_Ressol_LFO_Stereo).c_str()),      strdup( NTS(EFX_RESSOLUTION).c_str()),   strdup( NTS(Ressol_LFO_Stereo).c_str()),      "0",     "1.0",
+        
         "Reverb Dry/Wet",           strdup( NTS(MC_Reverb_DryWet).c_str()),          strdup( NTS(EFX_REVERB).c_str()),        strdup( NTS(Reverb_DryWet).c_str()),        "127",     "-1.0",
         "Reverb Pan",               strdup( NTS(MC_Reverb_Pan).c_str()),             strdup( NTS(EFX_REVERB).c_str()),        strdup( NTS(Reverb_Pan).c_str()),             "0",     "1.0",
         "Reverb Time",              strdup( NTS(MC_Reverb_Time).c_str()),            strdup( NTS(EFX_REVERB).c_str()),        strdup( NTS(Reverb_Time).c_str()),            "0",     "1.0",

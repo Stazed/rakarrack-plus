@@ -605,7 +605,8 @@ enum MIDI_Learn_Index
     MC_Ressol_Mismatch,
     MC_Ressol_Subtract,
     MC_Ressol_Depth,               // 480
-    MC_Ressol_Hyper
+    MC_Ressol_Hyper,
+    TOTAL_MC_Parameter_Size
 
 };
 
@@ -638,13 +639,6 @@ enum GUI_Refresh_Index
 };
 
 /**
- * The total Number of MIDI controllable parameters.
- * This is the total of listed items in the MIDI learn window.
- * If any new parameters are added, this must be adjusted.
- */
-const int C_MC_PARAMETER_SIZE = 446;
-
-/**
  * Magic number 25 is Bank Select (CC 0) and the Unused cases from the default MIDI control
  * (0, 10, 11, 13, (15 > 19), (33 > 45), 64) = 23 -- Unused
  * plus 128, 129 also Unused  = 23 + 2 = 25.
@@ -652,6 +646,14 @@ const int C_MC_PARAMETER_SIZE = 446;
  * C_MC_PARAMETER_SIZE, this value must be adjusted.
  */
 const int C_MC_UNUSED_PARAMETERS = 25;
+
+/**
+ * The total Number of MIDI controllable parameters.
+ * This is the total of listed items in the MIDI learn window.
+ * If any new parameters are added, this must be adjusted.
+ */
+const int C_MC_PARAMETER_SIZE = TOTAL_MC_Parameter_Size - C_MC_UNUSED_PARAMETERS;
+
 
 /**
  * The total MIDI control range used in switch() case function.

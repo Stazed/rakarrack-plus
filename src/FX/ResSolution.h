@@ -38,8 +38,8 @@ enum Ressol_Index
     Ressol_DryWet = 0,
     Ressol_Distortion,
     Ressol_LFO_Tempo,
-    Ressol_SKIP_Ressol_3,       // LFO Random - bypassed with static
-    Ressol_SKIP_Ressol_4,       // LFO Type fixed to static
+    Ressol_LFO_Random,      // Not used here
+    Ressol_LFO_Type,        // Fixed to static
     Ressol_LFO_Stereo,
     Ressol_Width,
     Ressol_Feedback,

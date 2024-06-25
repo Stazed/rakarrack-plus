@@ -485,7 +485,7 @@ enum USER_DATA_index
     UD_PRESET_RESSOLUTION,         // 12047
     
     // The max number of effects based on bank file saving
-    // The range from 12047 to 12068 can be used for expansion
+    // The range from 12048 to 12068 can be used for expansion
     UD_PRESET_MAX_EFFECTS          = 12068,
     
     // End Highlighted Items - after (UD_Highlight_End)
