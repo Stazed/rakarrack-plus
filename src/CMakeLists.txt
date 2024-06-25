@@ -71,6 +71,7 @@ set (ProgSources
     UI/shifter_gui.cxx
     UI/stompbox_gui.cxx
     UI/reverbtron_gui.cxx
+    UI/ressol_gui.cxx
     UI/echotron_gui.cxx
     UI/stereoharm_gui.cxx
     UI/compband_gui.cxx

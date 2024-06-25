@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0308
+version 1.0309
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -252,6 +252,9 @@ decl {class VibeGui; // forward declaration} {public global
 decl {class InfinityGui; // forward declaration} {public global
 }
 
+decl {class RessolGui;// forward declaration} {public global
+}
+
 decl {class MidiGui; // forward declaration} {public global
 }
 
@@ -364,8 +367,8 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     {
         global_gui_show = CONST_GUI_HIDE;
     }
-\#endif} open
-      xywh {604 193 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+\#endif} open selected
+      xywh {140 478 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1113,6 +1116,13 @@ Fl::focus(Open_Order);}
         code2 {o->initialize(m_process, this);}
         class InfinityGui
       } {}
+      Fl_Group RESSOLUTION {
+        xywh {166 418 158 184} box UP_BOX color 0 selection_color 0 labelfont 1 align 112 hide
+        code0 {\#include "ressol_gui.h"}
+        code1 {Efx_Gui_Base[EFX_RESSOLUTION] = o;}
+        code2 {o->initialize(m_process, this);}
+        class RessolGui
+      } {}
       Fl_Group Tuner {
         xywh {520 24 276 58} box UP_BOX color 0 selection_color 0 align 112
       } {
@@ -1541,7 +1551,7 @@ Put_Loaded();}
             tooltip {Export Carla format} xywh {0 0 34 24}
           }
           MenuItem {} {
-            label {Non-Mixer-XT} selected
+            label {Non-Mixer-XT}
             tooltip {Export to NON-Mixer-XT format} xywh {0 0 34 24}
           }
         }

@@ -910,10 +910,11 @@ RKR::revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int siz
         EFX_COMPBAND,
         EFX_OPTICALTREM,
         EFX_VIBE,
-        EFX_INFINITY,       // 47
+        EFX_INFINITY,
+        EFX_RESSOLUTION,    // 48
 
         // offset by -1 for order moved to 69
-        47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+        48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
         60, 61, 62, 63, 64, 65, 66, 67, 68
     };
 
@@ -1017,7 +1018,8 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
         LV_COMPBAND,
         LV_OPTICALTREM,
         LV_VIBE,
-        LV_INFINITY        // 47
+        LV_INFINITY,
+        LV_RESSOLUTION     // 48
     };
 
     // Table to convert program EFX_Index to LV_File_Index.
@@ -1070,9 +1072,10 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
         LV_OPTICALTREM,
         LV_VIBE,
         LV_INFINITY,       // 46
+        LV_RESSOLUTION,    // 47
 
         // Offset by +1 for order inserted at 10
-        48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+        49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
         59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
 
         LV_ORDER           // 69

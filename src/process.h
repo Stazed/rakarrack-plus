@@ -82,6 +82,7 @@
 #include "FX/Opticaltrem.h"
 #include "FX/Vibe.h"
 #include "FX/Infinity.h"
+#include "FX/ResSolution.h"
 #include "FX/ParametricEQ.h"
 #include "EFX_common/beattracker.h"
 #include <jack/jack.h>
@@ -592,7 +593,20 @@ enum MIDI_Learn_Index
     MC_VaryBand_LFO_Type_1,
     MC_VaryBand_LFO_Type_2,
     MC_Vibe_LFO_Type,
-    MC_WahWah_LFO_Type          // 470
+    MC_WahWah_LFO_Type,         // 470
+            
+    MC_Ressol_DryWet,
+    MC_Ressol_Distortion,
+    MC_Ressol_LFO_Tempo,
+    MC_Ressol_LFO_Stereo,
+    MC_Ressol_Width,
+    MC_Ressol_Feedback,
+    MC_Ressol_Stages,
+    MC_Ressol_Mismatch,
+    MC_Ressol_Subtract,
+    MC_Ressol_Depth,               // 480
+    MC_Ressol_Hyper
+
 };
 
 /**

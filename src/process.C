@@ -400,6 +400,7 @@ RKR::instantiate_effects()
     Rack_Effects[EFX_OPTICALTREM] = new Opticaltrem(fSample_rate, period_master);
     Rack_Effects[EFX_VIBE] = new Vibe(fSample_rate, period_master);
     Rack_Effects[EFX_INFINITY] = new Infinity(fSample_rate, period_master);
+    Rack_Effects[EFX_RESSOLUTION] = new ResSolution(fSample_rate, period_master);
 
     U_Resample = new Resample(Config.UpQual);
     D_Resample = new Resample(Config.DownQual);
@@ -504,6 +505,7 @@ RKR::put_order_in_rack()
         "Pan", strdup( NTS(EFX_PAN).c_str()), strdup( NTS(Type_Processing_and_EQ).c_str()),
         "Parametric EQ", strdup( NTS(EFX_PARAMETRIC).c_str()), strdup( NTS(Type_Processing_and_EQ).c_str()),
         "Phaser", strdup( NTS(EFX_PHASER).c_str()), strdup( NTS(Type_Modulation).c_str()),
+        "ResSolution", strdup( NTS(EFX_RESSOLUTION).c_str()), strdup( NTS(Type_Modulation).c_str()),
         "Reverb", strdup( NTS(EFX_REVERB).c_str()), strdup( NTS(Type_Time).c_str()),
         "Reverbtron", strdup( NTS(EFX_REVERBTRON).c_str()), strdup( NTS(Type_Time).c_str()),
         "Ring", strdup( NTS(EFX_RING).c_str()), strdup( NTS(Type_Synthesis).c_str()),
@@ -519,7 +521,7 @@ RKR::put_order_in_rack()
         "VaryBand", strdup( NTS(EFX_VARYBAND).c_str()), strdup( NTS(Type_Modulation).c_str()),
         "Vibe", strdup( NTS(EFX_VIBE).c_str()), strdup( NTS(Type_Modulation).c_str()),
         "Vocoder", strdup( NTS(EFX_VOCODER).c_str()), strdup( NTS(Type_Synthesis).c_str()),
-        "WahWah", strdup( NTS(EFX_WAHWAH).c_str()), strdup( NTS(Type_Filters).c_str()),
+        "WahWah", strdup( NTS(EFX_WAHWAH).c_str()), strdup( NTS(Type_Filters).c_str())
     };
 
     for (int i = 0; i < EFX_NUMBER_EFFECTS * 3; i += 3)

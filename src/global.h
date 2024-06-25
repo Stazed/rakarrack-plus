@@ -342,7 +342,8 @@ enum EFX_Index
     EFX_COMPBAND,
     EFX_OPTICALTREM,
     EFX_VIBE,
-    EFX_INFINITY,       // 46
+    EFX_INFINITY,
+    EFX_RESSOLUTION,    // 47
     EFX_NUMBER_EFFECTS, // Insert new effects before this - max of 68
     
     // This is the main window effect order. Must be hard coded to 69,
@@ -480,7 +481,8 @@ enum USER_DATA_index
     UD_PRESET_COMPBAND,
     UD_PRESET_OPTICALTREM,
     UD_PRESET_VIBE,
-    UD_PRESET_INFINITY,            // 12046
+    UD_PRESET_INFINITY,
+    UD_PRESET_RESSOLUTION,         // 12047
     
     // The max number of effects based on bank file saving
     // The range from 12047 to 12068 can be used for expansion

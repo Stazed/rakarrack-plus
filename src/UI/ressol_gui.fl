@@ -1,0 +1,226 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0309
+header_name {.h}
+code_name {.cxx}
+decl {\#include "RKR_Light_Button.h"} {public global
+}
+
+decl {\#include "RKR_Check_Button.h"} {public global
+}
+
+decl {\#include "RKR_Choice.h"} {public global
+}
+
+decl {\#include "RKR_Counter.h"} {public global
+}
+
+decl {\#include "RKR_GUI_Effect.h"} {public global
+}
+
+widget_class {\#include "common_gui_menu.h"} RessolGui {open selected
+  xywh {281 544 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  code0 {\#include "RKR_Slider.h"}
+  code1 {\#include "../process.h"}
+  code2 {\#include "rakarrack.h"}
+  code3 {\#include "common_gui_menu.h"}
+  class RKR_Gui_Effect visible position_relative
+} {
+  Fl_Light_Button ressol_activar {
+    label On
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+ m_parent->getMIDIControl(MC_Multi_On_Off);
+ o->value(m_process->EFX_Active[EFX_RESSOLUTION]);
+ return;
+}
+m_process->EFX_Active[EFX_RESSOLUTION]=(int)o->value();
+if((int) o->value()==0)
+m_process->Rack_Effects[EFX_RESSOLUTION]->cleanup();
+m_parent->findpos(EFX_RESSOLUTION,(int)o->value(),o);}
+    xywh {5 4 34 18} shortcut 0x37 color 62 selection_color 1 labelsize 10 align 84 when 1
+    code0 {activate_effect = o;}
+    class RKR_Light_Button
+  }
+  Fl_Choice ressol_preset {
+    label Preset
+    user_data UD_PRESET_RESSOLUTION
+    callback {long long ud= (long long) v;
+if((ud==0)||(ud==UD_PRESET_RESSOLUTION))
+    m_process->Rack_Effects[EFX_RESSOLUTION]->setpreset((int) o->value());
+
+for (int i = 0; i < m_process->EFX_Param_Size[EFX_RESSOLUTION]; i++)
+{
+    parameter_refresh(i);
+};}
+    xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
+    code0 {preset_choice = o;}
+    class RKR_Choice
+  } {
+    MenuItem {} {
+      label {Beefy Marshall}
+      xywh {92 92 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Euro Power Metal}
+      xywh {102 102 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label {Presence Boost}
+      xywh {102 102 36 21} labelsize 10
+    }
+  }
+  Fl_Value_Slider ressol_WD {
+    label {Dry/Wet}
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+ m_parent->getMIDIControl(MC_Ressol_DryWet);
+ return;
+} 
+m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_DryWet,Dry_Wet((int)(o->value())));}
+    xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class RKR_Slider
+  }
+  Fl_Value_Slider ressol_distort {
+    label Distort
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+ m_parent->getMIDIControl(MC_Ressol_Distortion);
+ return;
+} 
+m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Distortion,(int)o->value());}
+    xywh {56 115 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class RKR_Slider
+  }
+  Fl_Value_Slider ressol_freq {
+    label Tempo
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+ m_parent->getMIDIControl(MC_Ressol_LFO_Tempo);
+ return;
+} 
+m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_LFO_Tempo,(int)o->value());}
+    xywh {56 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    class RKR_Slider
+  }
+  Fl_Value_Slider ressol_width {
+    label Width
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+ m_parent->getMIDIControl(MC_Ressol_Width);
+ return;
+} 
+m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Width,(int)o->value());}
+    xywh {56 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class RKR_Slider
+  }
+  Fl_Value_Slider ressol_depth {
+    label {P. Depth}
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+ m_parent->getMIDIControl(MC_Ressol_Depth);
+ return;
+} 
+m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Depth,(int)o->value());}
+    tooltip {Phase Depth} xywh {56 67 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class RKR_Slider
+  }
+  Fl_Value_Slider ressol_fb {
+    label Feedback
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+ m_parent->getMIDIControl(MC_Ressol_Feedback);
+ return;
+} 
+m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Feedback,(int)(o->value()+64));}
+    xywh {56 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    class RKR_Slider
+  }
+  Fl_Value_Slider ressol_mismatch {
+    label Mismatch
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+ m_parent->getMIDIControl(MC_Ressol_Mismatch);
+ return;
+} 
+m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Mismatch,(int)o->value());}
+    xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class RKR_Slider
+  }
+  Fl_Value_Slider ressol_stdf {
+    label {Stereo Df}
+    callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
+{
+ m_parent->getMIDIControl(MC_Ressol_LFO_Stereo);
+ return;
+} 
+m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_LFO_Stereo,(int)o->value());}
+    tooltip {LFO L/R Delay} xywh {56 138 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    class RKR_Slider
+  }
+  Fl_Counter ressol_stages {
+    label Stages
+    callback {m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Stages,(int)o->value());}
+    xywh {80 151 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
+    code0 {o->set_text_offset(-1);}
+    class RKR_Counter
+  }
+  Fl_Check_Button ressol_subs {
+    label Subtract
+    callback {m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Subtract,(int)o->value())}
+    xywh {18 165 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
+  }
+  Fl_Check_Button ressol_hyper {
+    label Hyper
+    callback {m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Hyper,(int)o->value())}
+    xywh {90 165 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    class RKR_Check_Button
+  }
+  decl {CommonGuiMenu *m_lfo_menu;} {private local
+  }
+  Function {parameter_refresh(int index)} {return_type void
+  } {
+    code {switch (index)
+    {
+    case Ressol_DryWet:
+        ressol_WD->value(Dry_Wet(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_DryWet)));
+        break;
+    case Ressol_Distortion:
+        ressol_distort->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_Distortion));
+        break;
+    case Ressol_LFO_Tempo:
+        ressol_freq->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_LFO_Tempo));
+        break;
+//    case Ressol_LFO_Random:
+//        ressol_rnd->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_LFO_Random));
+//        break;
+//    case Ressol_LFO_Type:
+//        ressol_lfotype->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_LFO_Type));
+//        break;
+    case Ressol_LFO_Stereo:
+        ressol_stdf->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_LFO_Stereo));
+        break;
+    case Ressol_Width:
+        ressol_width->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_Width));
+        break;
+    case Ressol_Feedback:
+        ressol_fb->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_Feedback)-64);
+        break;
+    case Ressol_Stages:
+        ressol_stages->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_Stages));
+        break;
+    case Ressol_Mismatch:
+        ressol_mismatch->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_Mismatch));
+        break;
+    case Ressol_Subtract:
+        ressol_subs->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_Subtract));
+        break;
+    case Ressol_Depth:
+        ressol_depth->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_Depth));
+        break;
+    case Ressol_Hyper:
+        ressol_hyper->value(m_process->Rack_Effects[EFX_RESSOLUTION]->getpar(Ressol_Hyper));
+        break;
+    }} {}
+  }
+}
