@@ -152,6 +152,7 @@ set (ProgSources
     FX/Shifter.C
     FX/StompBox.C
     FX/Reverbtron.C
+    FX/ResSolution.C
     FX/Echotron.C
     FX/StereoHarm.C
     FX/CompBand.C
