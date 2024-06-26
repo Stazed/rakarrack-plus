@@ -51,7 +51,7 @@ if((ud==0)||(ud==UD_PRESET_RESSOLUTION))
 for (int i = 0; i < m_process->EFX_Param_Size[EFX_RESSOLUTION]; i++)
 {
     parameter_refresh(i);
-};}
+};} open
     xywh {77 4 76 18} down_box BORDER_BOX selection_color 0 labelsize 10 labelcolor 7 when 6 textsize 10 textcolor 7
     code0 {preset_choice = o;}
     class RKR_Choice
@@ -67,6 +67,10 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_RESSOLUTION]; i++)
     MenuItem {} {
       label {Presence Boost}
       xywh {102 102 36 21} labelsize 10
+    }
+    MenuItem {} {
+      label Suppressor
+      xywh {112 112 36 21} labelsize 10
     }
   }
   Fl_Value_Slider ressol_WD {

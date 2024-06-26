@@ -34,7 +34,7 @@ void
 ResSolution::setpreset(int npreset)
 {
     const int PRESET_SIZE = C_RESSOL_PARAMETERS;
-    const int NUM_PRESETS = 3;
+    const int NUM_PRESETS = 4;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
         // (beefy marshall)
@@ -42,7 +42,9 @@ ResSolution::setpreset(int npreset)
         // (euro prog/power metal)
         {35, 0, 335, 0, 12, 64, 72, 94, 8, 0, 0, 118, 0},
         // (presence boost)
-        {90, 127, 48, 0, 12, 80, 27, 79, 6, 0, 1, 87, 0}
+        {90, 127, 48, 0, 12, 80, 27, 79, 6, 0, 1, 87, 0},
+        // (suppressor)
+        {64, 0, 175, 0, 12, 64, 45, 64, 8, 0, 0, 40, 0}
     };
 
     if (npreset > NUM_PRESETS - 1)
