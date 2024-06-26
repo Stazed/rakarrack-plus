@@ -28,9 +28,7 @@
 ResSolution::ResSolution(double sample_rate, uint32_t intermediate_bufsize):
     Analog_Phaser(sample_rate, intermediate_bufsize)
 {
-    // TODO set static
 }
-
 
 void
 ResSolution::setpreset(int npreset)
@@ -39,18 +37,18 @@ ResSolution::setpreset(int npreset)
     const int NUM_PRESETS = 3;
     int pdata[MAX_PDATA_SIZE];
     int presets[NUM_PRESETS][PRESET_SIZE] = {
-        // static 1 (beefy marshall)
+        // (beefy marshall)
         {64, 0, 268, 0, 12, 64, 76, 64, 4, 0, 0, 127, 0},
-        // static 2 (euro prog/power metal)
+        // (euro prog/power metal)
         {35, 0, 335, 0, 12, 64, 72, 94, 8, 0, 0, 118, 0},
-        // static 3 (presence boost)
+        // (presence boost)
         {90, 127, 48, 0, 12, 80, 27, 79, 6, 0, 1, 87, 0}
     };
 
     if (npreset > NUM_PRESETS - 1)
     {
 
-        Fpre->ReadPreset(EFX_ANALOG_PHASER, npreset - NUM_PRESETS + 1, pdata);
+        Fpre->ReadPreset(EFX_RESSOLUTION, npreset - NUM_PRESETS + 1, pdata);
         for (int n = 0; n < PRESET_SIZE; n++)
             changepar(n, pdata[n]);
     }
@@ -149,5 +147,77 @@ ResSolution::LV2_parameters(std::string &s_buf, int type)
         }
         
         param_case_offset++;
+    }
+}
+
+/**
+ * This override function is necessary to ensure that the LFO type and random parameters are
+ * set to fixed values. This is necessary when using bank presets since the ResSolution is a
+ * new effect that did not exist when the included banks were created. For these banks the
+ * effect slot has default values all set to zero. When loading the bank those defaults would
+ * then override the preset values as if loading from any bank file. So, for backwards compatibility,
+ * we override the LFO_Random and LFO_Type with fixed values here.
+ * @param npar
+ *      The parameter number.
+ * 
+ * @param value
+ *      The parameter value.
+ */
+
+void
+ResSolution::changepar(int npar, int value)
+{
+    switch (npar)
+    {
+    case Ressol_DryWet:
+        setvolume(value);
+        break;
+    case Ressol_Distortion:
+        setdistortion(value);
+        break;
+    case Ressol_LFO_Tempo:          // Label is shift for ResSolution
+        lfo->Pfreq = value;
+        lfo->updateparams(PERIOD);
+        break;
+    case Ressol_LFO_Random:
+        lfo->Prandomness = 0;       // always 0, not really needed since static bypasses random
+        lfo->updateparams(PERIOD);
+        break;
+    case Ressol_LFO_Type:
+        lfo->PLFOtype = LFO_STATIC; // always static for ResSolution
+        lfo->updateparams(PERIOD);
+        barber = 0;
+        break;
+    case Ressol_LFO_Stereo:
+        lfo->Pstereo = value;
+        lfo->updateparams(PERIOD);
+        break;
+    case Ressol_Width:
+        setwidth(value);
+        break;
+    case Ressol_Feedback:
+        setfb(value);
+        break;
+    case Ressol_Stages:
+        setstages(value);
+        break;
+    case Ressol_Mismatch:
+        setoffset(value);
+        break;
+    case Ressol_Subtract:
+        if (value > 1)
+            value = 1;
+        Poutsub = value;
+        break;
+    case Ressol_Depth:
+        setdepth(value);
+        break;
+    case Ressol_Hyper:
+        if (value > 1)
+            value = 1;
+        Phyper = value;
+        break;
+    default:
+        return;
     }
 }

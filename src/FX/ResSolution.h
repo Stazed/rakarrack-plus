@@ -37,7 +37,7 @@ enum Ressol_Index
 {
     Ressol_DryWet = 0,
     Ressol_Distortion,
-    Ressol_LFO_Tempo,
+    Ressol_LFO_Tempo,       // Label is shift for ResSolution
     Ressol_LFO_Random,      // Not used here
     Ressol_LFO_Type,        // Fixed to static
     Ressol_LFO_Stereo,
@@ -73,6 +73,7 @@ public:
     ResSolution (double sample_rate, uint32_t intermediate_bufsize);
 
     void setpreset (int npreset);
+    void changepar (int npar, int value);
     int get_number_efx_parameters () {return C_RESSOL_PARAMETERS;};
 
     virtual void LV2_parameters(std::string &s_buf, int type);
