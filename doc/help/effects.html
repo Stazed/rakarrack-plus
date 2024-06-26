@@ -30,12 +30,12 @@
       <a href="#Infinity">Infinity</a> <a href="#Looper">Looper</a> <a href="#delm">Musical Delay</a> 
       <a href="#MuTroMojo">MuTroMojo</a> <a href="#gate">Noise Gate</a> <a href="#Otrem">Opticaltrem</a>
       <a href="#ovrd">Overdrive</a> <a href="#pan">Pan/Stereo Expander</a> <a href="#eqp">Parametric EQ</a> 
-      <a href="#phas">Phaser</a> <a href="#reve">Reverb</a> <a href="#Reverbtron">Reverbtron</a> 
-      <a href="#Ring">Ring</a> <a href="#Sequence">Sequence</a> <a href="#ShelfBoost">ShelfBoost</a>
-      <a href="#Shifter">Shifter</a> <a href="#Shuffle">Shuffle</a> <a href="#StereoHarm">StereoHarm</a> 
-      <a href="#StompBox">StompBox</a> <a href="#Sustainer">Sustainer</a> <a href="#Synthfilter">Synthfilter</a>
-      <a href="#Valve">Valve</a> <a href="#VaryBand">VaryBand</a> <a href="#Vibe">Vibe</a>
-      <a href="#Vocoder">Vocoder</a> <a href="#wha">WahWah</a><br>
+      <a href="#phas">Phaser</a> <a href="#ressol">ResSolution</a> <a href="#reve">Reverb</a>
+      <a href="#Reverbtron">Reverbtron</a> <a href="#Ring">Ring</a> <a href="#Sequence">Sequence</a>
+      <a href="#ShelfBoost">ShelfBoost</a> <a href="#Shifter">Shifter</a> <a href="#Shuffle">Shuffle</a> 
+      <a href="#StereoHarm">StereoHarm</a> <a href="#StompBox">StompBox</a> <a href="#Sustainer">Sustainer</a>
+      <a href="#Synthfilter">Synthfilter</a> <a href="#Valve">Valve</a> <a href="#VaryBand">VaryBand</a>
+      <a href="#Vibe">Vibe</a> <a href="#Vocoder">Vocoder</a> <a href="#wha">WahWah</a><br>
       </p>
 
 <p>The program has many effects, you can select any
@@ -1757,6 +1757,68 @@ corresponds to zero feedback.</p>
 <p><a href="effects.html">Effects</a></p>
 
 <p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
+<h3><a name="ressol"</a> <ResSolution</h3>
+<table cellpadding="5" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">
+      <p><img src="imagenes/ressolution.jpg" alt="rakarrack ResSolution" align="bottom" border="1" height="250" width="185"></p>
+      </td>
+      <td bgcolor="#fbfbfb">
+
+      <p><b>Dry/Wet</b>: At 64, both the phase shifted signal and input
+signal are mixed equally. This creates the deepest notch filter. Why
+would you want to mix all Wet? Modulating the all-pass filter stages
+can create frequency shifting at faster modulation rates. This produces
+a chorus-like effect, and you may want the frequency bending without
+the notch filtering. Think UniVibe.</p>
+      <p><b>Shift</b>: TODO.</p>
+      <p><b>Depth</b>: How deep the phaser can sweep. It's an LFO offset. 64
+is dead center. If you want it to stay in the high range, set this
+higher than 64. If you want the phaser to spend more time carving out
+the lower frequency range, set this to some thing less than 64.</p>
+      <p><b>Width</b>: This is how far the LFO travels. It's the LFO amplitude.</p>
+      <p><b>Feedback</b>: Usually named 'Regen' on a phaser stompbox. For
+deeper notches keep Feedback negative for even number stages and positive for
+odd number stages.</p>
+      <p><b>Mismatch</b>: FET Phasers suffer from the manufacturing process of
+JFET transistors. These things generally vary over a very wide range of
+properties per batch. What does this mean to a Phaser? It means that
+the frequency where 45 degrees phase shift occurs varies from stage to
+stage. This mismatch makes the notches wider, but less deep. This
+parameter best aligns with reality at a setting of 5 to 10. Large
+settings may be used to obtain a better 'Vibe sound.</p>
+      <p><b>Distort</b>: FETs used as variable resistors are only linear over
+a certain range. This nonlinearity adds harmonics to the processed
+signal and somewhat warps the frequency response. This is a very subtle
+effect, but worthwhile to be able to zero it if you don't want it
+modeled.</p>
+      <p><b>Stereo Df.</b>: Stereo Difference. Delay the LFO in the right or
+left channel. This combined with the panner effect can make it sound
+like something is twirling in an elliptical orbit around your head.</p>
+      <p><b>Stages</b>: First order all-pass filter networks to be chained
+together. Set to one for a high pass filter (or low pass filter with
+subtract checked). 4 stages is very typical in the average stompbox.
+Bi-mode and Tri-mode phasers include switchable 6 and 8 stage filters.
+It's rare to see an analog phaser with more than 8 stages in stompbox
+form because parts get expensive, and noise becomes an expensive design
+problem to mitigate. In the digital world, adding more stages is just
+another time through the filter loop if you can spare the CPU time.</p>
+      <p><b>Subtract</b>: Subtract wet from dry instead of add.</p>
+      <p><b>Hyper</b>: Flattens out the lower end of the LFO. Used with a Tri
+wave, this emulates the "Hyper Sine" found in some analog phaser
+pedals. It was a clever way that analog filter designers contrived to
+make the LFO behave according to the human's perception of frequency.
+To our ears, musical pitch increases exponentially with frequency.</p>
+    </td>
+    </tr>
+  </tbody>
+</table>
+<p><a href="effects.html">Effects</a></p>
+<p><a href="help.html">Table of Contents</a> -  <a href="midilearn.html">MIDI Learn</a></p>
+
 
 <h3><a name="reve"></a>Reverb</h3>
 
