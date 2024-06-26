@@ -18,7 +18,7 @@ decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
 widget_class {\#include "common_gui_menu.h"} RessolGui {open selected
-  xywh {281 544 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {624 423 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -77,7 +77,7 @@ for (int i = 0; i < m_process->EFX_Param_Size[EFX_RESSOLUTION]; i++)
  return;
 } 
 m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_DryWet,Dry_Wet((int)(o->value())));}
-    xywh {56 25 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 28 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider ressol_distort {
@@ -92,14 +92,14 @@ m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Distortion,(int)o->va
     class RKR_Slider
   }
   Fl_Value_Slider ressol_freq {
-    label Tempo
+    label Shift
     callback {if(Fl::event_button()==FL_RIGHT_MOUSE)
 {
  m_parent->getMIDIControl(MC_Ressol_LFO_Tempo);
  return;
 } 
 m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_LFO_Tempo,(int)o->value());}
-    xywh {56 56 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
+    xywh {56 43 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum 1 maximum 600 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider ressol_width {
@@ -110,7 +110,7 @@ m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_LFO_Tempo,(int)o->val
  return;
 } 
 m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Width,(int)o->value());}
-    xywh {56 79 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 71 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider ressol_depth {
@@ -121,7 +121,7 @@ m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Width,(int)o->value()
  return;
 } 
 m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Depth,(int)o->value());}
-    tooltip {Phase Depth} xywh {56 67 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {Phase Depth} xywh {56 57 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider ressol_fb {
@@ -132,7 +132,7 @@ m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Depth,(int)o->value()
  return;
 } 
 m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Feedback,(int)(o->value()+64));}
-    xywh {56 91 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
+    xywh {56 85 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 minimum -64 maximum 64 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider ressol_mismatch {
@@ -143,7 +143,7 @@ m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Feedback,(int)(o->val
  return;
 } 
 m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Mismatch,(int)o->value());}
-    xywh {56 103 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    xywh {56 100 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Value_Slider ressol_stdf {
@@ -154,26 +154,26 @@ m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Mismatch,(int)o->valu
  return;
 } 
 m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_LFO_Stereo,(int)o->value());}
-    tooltip {LFO L/R Delay} xywh {56 138 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
+    tooltip {LFO L/R Delay} xywh {56 130 100 10} type {Horz Knob} box FLAT_BOX color 178 selection_color 62 labelsize 10 labelcolor 7 align 4 maximum 127 step 1 textcolor 7
     class RKR_Slider
   }
   Fl_Counter ressol_stages {
     label Stages
     callback {m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Stages,(int)o->value());}
-    xywh {80 151 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
+    xywh {80 145 52 12} type Simple box THIN_UP_BOX labelsize 10 labelcolor 7 align 4 minimum 1 maximum 12 step 1 value 1 textsize 9
     code0 {o->set_text_offset(-1);}
     class RKR_Counter
   }
   Fl_Check_Button ressol_subs {
     label Subtract
     callback {m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Subtract,(int)o->value())}
-    xywh {18 165 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    xywh {18 160 64 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   Fl_Check_Button ressol_hyper {
     label Hyper
     callback {m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_Hyper,(int)o->value())}
-    xywh {90 165 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
+    xywh {90 160 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
   decl {CommonGuiMenu *m_lfo_menu;} {private local

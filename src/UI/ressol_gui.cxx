@@ -197,7 +197,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_preset->menu(menu_ressol_preset);
   preset_choice = o;
 } // RKR_Choice* ressol_preset
-{ ressol_WD = new RKR_Slider(56, 25, 100, 10, "Dry/Wet");
+{ ressol_WD = new RKR_Slider(56, 28, 100, 10, "Dry/Wet");
   ressol_WD->type(5);
   ressol_WD->box(FL_FLAT_BOX);
   ressol_WD->color((Fl_Color)178);
@@ -229,7 +229,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_distort->align(Fl_Align(FL_ALIGN_LEFT));
   ressol_distort->when(FL_WHEN_CHANGED);
 } // RKR_Slider* ressol_distort
-{ ressol_freq = new RKR_Slider(56, 56, 100, 10, "Tempo");
+{ ressol_freq = new RKR_Slider(56, 43, 100, 10, "Shift");
   ressol_freq->type(5);
   ressol_freq->box(FL_FLAT_BOX);
   ressol_freq->color((Fl_Color)178);
@@ -246,7 +246,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_freq->align(Fl_Align(FL_ALIGN_LEFT));
   ressol_freq->when(FL_WHEN_CHANGED);
 } // RKR_Slider* ressol_freq
-{ ressol_width = new RKR_Slider(56, 79, 100, 10, "Width");
+{ ressol_width = new RKR_Slider(56, 71, 100, 10, "Width");
   ressol_width->type(5);
   ressol_width->box(FL_FLAT_BOX);
   ressol_width->color((Fl_Color)178);
@@ -262,7 +262,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_width->align(Fl_Align(FL_ALIGN_LEFT));
   ressol_width->when(FL_WHEN_CHANGED);
 } // RKR_Slider* ressol_width
-{ ressol_depth = new RKR_Slider(56, 67, 100, 10, "P. Depth");
+{ ressol_depth = new RKR_Slider(56, 57, 100, 10, "P. Depth");
   ressol_depth->tooltip("Phase Depth");
   ressol_depth->type(5);
   ressol_depth->box(FL_FLAT_BOX);
@@ -279,7 +279,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_depth->align(Fl_Align(FL_ALIGN_LEFT));
   ressol_depth->when(FL_WHEN_CHANGED);
 } // RKR_Slider* ressol_depth
-{ ressol_fb = new RKR_Slider(56, 91, 100, 10, "Feedback");
+{ ressol_fb = new RKR_Slider(56, 85, 100, 10, "Feedback");
   ressol_fb->type(5);
   ressol_fb->box(FL_FLAT_BOX);
   ressol_fb->color((Fl_Color)178);
@@ -296,7 +296,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_fb->align(Fl_Align(FL_ALIGN_LEFT));
   ressol_fb->when(FL_WHEN_CHANGED);
 } // RKR_Slider* ressol_fb
-{ ressol_mismatch = new RKR_Slider(56, 103, 100, 10, "Mismatch");
+{ ressol_mismatch = new RKR_Slider(56, 100, 100, 10, "Mismatch");
   ressol_mismatch->type(5);
   ressol_mismatch->box(FL_FLAT_BOX);
   ressol_mismatch->color((Fl_Color)178);
@@ -312,7 +312,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_mismatch->align(Fl_Align(FL_ALIGN_LEFT));
   ressol_mismatch->when(FL_WHEN_CHANGED);
 } // RKR_Slider* ressol_mismatch
-{ ressol_stdf = new RKR_Slider(56, 138, 100, 10, "Stereo Df");
+{ ressol_stdf = new RKR_Slider(56, 130, 100, 10, "Stereo Df");
   ressol_stdf->tooltip("LFO L/R Delay");
   ressol_stdf->type(5);
   ressol_stdf->box(FL_FLAT_BOX);
@@ -329,7 +329,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_stdf->align(Fl_Align(FL_ALIGN_LEFT));
   ressol_stdf->when(FL_WHEN_CHANGED);
 } // RKR_Slider* ressol_stdf
-{ RKR_Counter* o = ressol_stages = new RKR_Counter(80, 151, 52, 12, "Stages");
+{ RKR_Counter* o = ressol_stages = new RKR_Counter(80, 145, 52, 12, "Stages");
   ressol_stages->type(1);
   ressol_stages->box(FL_THIN_UP_BOX);
   ressol_stages->color(FL_BACKGROUND_COLOR);
@@ -348,7 +348,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_stages->when(FL_WHEN_CHANGED);
   o->set_text_offset(-1);
 } // RKR_Counter* ressol_stages
-{ ressol_subs = new RKR_Check_Button(18, 165, 64, 15, "Subtract");
+{ ressol_subs = new RKR_Check_Button(18, 160, 64, 15, "Subtract");
   ressol_subs->box(FL_NO_BOX);
   ressol_subs->down_box(FL_BORDER_BOX);
   ressol_subs->color(FL_BACKGROUND_COLOR);
@@ -361,7 +361,7 @@ this->when(FL_WHEN_RELEASE);
   ressol_subs->align(Fl_Align(FL_ALIGN_LEFT|FL_ALIGN_INSIDE));
   ressol_subs->when(FL_WHEN_RELEASE);
 } // RKR_Check_Button* ressol_subs
-{ ressol_hyper = new RKR_Check_Button(90, 165, 53, 15, "Hyper");
+{ ressol_hyper = new RKR_Check_Button(90, 160, 53, 15, "Hyper");
   ressol_hyper->box(FL_NO_BOX);
   ressol_hyper->down_box(FL_BORDER_BOX);
   ressol_hyper->color(FL_BACKGROUND_COLOR);
