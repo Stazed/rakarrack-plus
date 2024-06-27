@@ -947,7 +947,7 @@ void RKRGUI::load_previous_state()
         long long ud = (long long) w->user_data();
         ud -= UD_random_edit;
 
-        if(ud >= 0 && ud <= 46)
+        if(ud >= 0 && ud <= EFX_NUMBER_EFFECTS)
         {
             RKR_Check_Button *b = static_cast<RKR_Check_Button *>(w);
 
