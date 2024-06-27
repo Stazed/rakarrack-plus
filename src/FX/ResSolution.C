@@ -158,7 +158,9 @@ ResSolution::LV2_parameters(std::string &s_buf, int type)
  * new effect that did not exist when the included banks were created. For these banks the
  * effect slot has default values all set to zero. When loading the bank those defaults would
  * then override the preset values as if loading from any bank file. So, for backwards compatibility,
- * we override the LFO_Random and LFO_Type with fixed values here.
+ * we override the LFO_Random and LFO_Type with fixed values here. Also necessary when using
+ * random parameter changes.
+ * 
  * @param npar
  *      The parameter number.
  * 
