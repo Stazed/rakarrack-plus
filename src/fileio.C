@@ -743,7 +743,25 @@ RKR::set_audio_paramters()
 
             for (int efx_params = 0; efx_params < EFX_Param_Size[all_efx]; efx_params++)
             {
-                if(all_efx == EFX_LOOPER)
+                // For any effect after EFX_INFINITY, the effect parameters may all contain 0 if loaded from
+                // a bank file since they were unused prior to adding EFX_RESSOLUTION. For EFX_RESSOLUTION
+                // we can check the LF0_Type for 0, which is invalid. In this case, we can bypass loading all
+                // the 0 unused settings and keep the EFX_RESSOLUTION default settings.
+                // There is no need to make this same check for optimized audio (!Gui_Shown) since it is
+                // only for Active effects.
+                if(all_efx == EFX_RESSOLUTION)
+                {
+                    // Is this from a previously unused effect slot from a bank file?
+                    if(Active_Preset.Effect_Params[EFX_RESSOLUTION][Ressol_LFO_Type] == 0)
+                    {
+                        break;  // yes it is, so just bypass loading from the bank
+                    }
+                    else    // normal loading
+                    {
+                        Rack_Effects[all_efx]->changepar(efx_params, Active_Preset.Effect_Params[all_efx][efx_params]);
+                    }
+                }
+                else if(all_efx == EFX_LOOPER)
                 {
                     Efx_Looper->set_value(efx_params, Active_Preset.Effect_Params[EFX_LOOPER][efx_params]);
                 }
@@ -1400,7 +1418,7 @@ RKR::new_preset()
     }
 
     Active_Preset.new_preset();
-    
+
     // Copy the user name from settings
     strncpy(Active_Preset.Author, Config.UserRealName, sizeof(Active_Preset.Author) - 1);
 
