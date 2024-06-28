@@ -108,9 +108,7 @@ ResSolution::LV2_parameters(std::string &s_buf, int type)
                 else
                 {
                     s_buf += NTS( getpar( i ));
-
-                    if ( i !=  Ressol_Hyper)   // last one no need for delimiter
-                        s_buf += ":";
+                    s_buf += ":";
                 }
                 
                 // increment for skipped parameters, LFO_Random and LFO_Type
