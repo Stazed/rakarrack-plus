@@ -99,7 +99,7 @@ ResSolution::LV2_parameters(std::string &s_buf, int type)
 
             // Special cases
             // Skip 2 for LFO_Random and LFO_Type after this
-            case Ressol_LFO_Tempo:
+            case Ressol_LFO_Tempo:      // Labeled 'Shift'
             {
                 if(type == CARLA)
                 {

@@ -37,7 +37,7 @@ enum Ressol_Index
 {
     Ressol_DryWet = 0,
     Ressol_Distortion,
-    Ressol_LFO_Tempo,       // Label is shift for ResSolution
+    Ressol_LFO_Tempo,       // Label is 'Shift' for ResSolution
     Ressol_LFO_Random,      // Not used here
     Ressol_LFO_Type,        // Fixed to static
     Ressol_LFO_Stereo,
@@ -55,8 +55,6 @@ static const char *ressol_parameters[] =
     strdup(NTS(Ressol_DryWet).c_str()), "Dry/Wet",  "DRYWET", 
     strdup(NTS(Ressol_Distortion).c_str()), "Distort",  "DISTORT", 
     strdup(NTS(Ressol_LFO_Tempo).c_str()), "Shift",  "SHIFT", 
-//    strdup(NTS(Ressol_LFO_Random).c_str()), "Randomness",  "RND", 
-//    strdup(NTS(Ressol_LFO_Type).c_str()), "LFO Type",  "TYPE", 
     strdup(NTS(Ressol_LFO_Stereo).c_str()), "LFO L/R Delay",  "STDL", 
     strdup(NTS(Ressol_Width).c_str()), "Width",  "WIDTH", 
     strdup(NTS(Ressol_Feedback).c_str()), "Feedback",  "FB", 
