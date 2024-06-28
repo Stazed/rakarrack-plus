@@ -282,7 +282,7 @@
 	rdfs:label "Beefy Marshall" ;
 	lv2:port [
 		lv2:symbol "DRYWET" ;
-		pset:value 64
+		pset:value 63
 	] , [
 		lv2:symbol "DISTORT" ;
 		pset:value 0.0
@@ -327,7 +327,7 @@
 	rdfs:label "Euro Power Metal" ;
 	lv2:port [
 		lv2:symbol "DRYWET" ;
-		pset:value 35.0
+		pset:value 92.0
 	] , [
 		lv2:symbol "DISTORT" ;
 		pset:value 0.0
@@ -372,7 +372,7 @@
 	rdfs:label "Presence boost" ;
 	lv2:port [
 		lv2:symbol "DRYWET" ;
-		pset:value 90.0
+		pset:value 37.0
 	] , [
 		lv2:symbol "DISTORT" ;
 		pset:value 127.0
