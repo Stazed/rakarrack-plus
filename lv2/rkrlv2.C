@@ -6743,26 +6743,26 @@ void run_ressollv2(LV2_Handle handle, uint32_t nframes)
             case Ressol_Hyper:
             {
                 val = (int)*plug->param_p[i];
-                if(plug->ressol->getpar(i) != val)
+                if(plug->ressol->getpar(param_case_offset) != val)
                 {
-                    plug->ressol->changepar(i,val);
+                    plug->ressol->changepar(param_case_offset,val);
                 }
             }
             break;
             
             // Special cases
-
             // skip 2 after this one
             case Ressol_LFO_Tempo:      // This is labeled 'Shift' for the parameter
             {
                 val = (int)*plug->param_p[i];
-                if(plug->ressol->getpar(i) != val)
+                if(plug->ressol->getpar(param_case_offset) != val)
                 {
-                    plug->ressol->changepar(i,val);
+                    plug->ressol->changepar(param_case_offset,val);
                 }
                 // increment for skipped parameters, LFO_Random and LFO_Type
                 param_case_offset += 2;
             }
+            break;
             
             // wet/dry -> dry/wet reversal
             case Ressol_DryWet: 
