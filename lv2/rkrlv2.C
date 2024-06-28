@@ -6679,6 +6679,132 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     return;
 }
 
+///// ResSolution /////////
+LV2_Handle init_ressollv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
+{
+    RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    plug->nparams = C_RESSOL_PARAMETERS - 2; // -2 for LFO_Random and LFO_Type
+    plug->effectindex = IRESSOLUTION;
+    plug->prev_bypass = 1;
+    
+    getFeatures(plug,host_features);    // for period_max
+    
+    plug->ressol = new ResSolution(sample_freq, plug->period_max);
+    
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
+
+    return plug;
+}
+
+void run_ressollv2(LV2_Handle handle, uint32_t nframes)
+{
+    if( nframes == 0)
+        return;
+
+    RKRLV2* plug = (RKRLV2*)handle;
+    
+    check_shared_buf(plug,nframes);
+    inline_check(plug, nframes);
+    
+    // are we bypassing
+    if(*plug->bypass_p && plug->prev_bypass)
+    {
+        return;
+    }
+ 
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+        plug->ressol->lv2_update_params(nframes);
+    }
+    
+    // we are good to run now
+    
+    //check and set changed parameters
+    int val = 0;
+    int param_case_offset = 0;
+    
+    for(int i = 0; i < plug->nparams; i++)
+    {
+        switch(param_case_offset)
+        {
+            // Normal processing
+            case Ressol_Distortion:
+            case Ressol_LFO_Stereo:
+            case Ressol_Width:
+            case Ressol_Stages:
+            case Ressol_Mismatch:
+            case Ressol_Subtract:
+            case Ressol_Depth:
+            case Ressol_Hyper:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->ressol->getpar(i) != val)
+                {
+                    plug->ressol->changepar(i,val);
+                }
+            }
+            break;
+            
+            // Special cases
+
+            // skip 2 after this one
+            case Ressol_LFO_Tempo:      // This is labeled 'Shift' for the parameter
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->ressol->getpar(i) != val)
+                {
+                    plug->ressol->changepar(i,val);
+                }
+                // increment for skipped parameters, LFO_Random and LFO_Type
+                param_case_offset += 2;
+            }
+            
+            // wet/dry -> dry/wet reversal
+            case Ressol_DryWet: 
+            {
+                val = Dry_Wet((int)*plug->param_p[i]);
+                if(plug->ressol->getpar(Ressol_DryWet) != val)
+                {
+                    plug->ressol->changepar(Ressol_DryWet,val);
+                }
+            }
+            break;
+            
+            // Offset
+            case Ressol_Feedback:
+            {
+                val = (int)*plug->param_p[i] + 64;  // offset
+                if(plug->ressol->getpar(Ressol_Feedback) != val)
+                {
+                    plug->ressol->changepar(Ressol_Feedback,val);
+                }
+            }
+            break;
+        }
+        param_case_offset++;
+    }
+
+    //now run
+    plug->ressol->out(plug->output_l_p, plug->output_r_p);
+
+    //and for whatever reason we have to do the wet/dry mix ourselves
+    wetdry_mix(plug, plug->ressol->outvolume, nframes);
+
+    xfade_check(plug,nframes);
+
+    if(plug->prev_bypass)
+    {
+        plug->ressol->cleanup();
+    }
+
+    return;
+}
+
 /////////////////////////////////
 //       END OF FX
 /////////////////////////////////
@@ -6851,6 +6977,9 @@ void cleanup_rkrlv2(LV2_Handle handle)
         delete plug->chordID;
         delete plug->comp;
     	break;
+    case IRESSOLUTION:
+        delete plug->ressol;
+        break;
     }
     free(plug);
 }
@@ -7621,6 +7750,18 @@ static const LV2_Descriptor stereoharmlv2_descriptor=
     0//extension
 };
 
+static const LV2_Descriptor ressollv2_descriptor=
+{
+    RESSOLLV2_URI,
+    init_ressollv2,
+    connect_rkrlv2_ports,
+    0,//activate
+    run_ressollv2,
+    0,//deactivate
+    cleanup_rkrlv2,
+    0//extension
+};
+
 LV2_SYMBOL_EXPORT
 const LV2_Descriptor* lv2_descriptor(uint32_t index)
 {
@@ -7722,9 +7863,11 @@ const LV2_Descriptor* lv2_descriptor(uint32_t index)
         return &overdrivelv2_descriptor ;
     case IHARM:
         return &harmonizerlv2_descriptor ;
-    default:
     case ISTEREOHARM:
     	return &stereoharmlv2_descriptor ;
+    case IRESSOLUTION:
+        return &ressollv2_descriptor ;
+    default:
         return 0;
     }
 }

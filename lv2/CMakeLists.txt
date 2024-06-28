@@ -71,6 +71,7 @@ add_library(rakarrack-plus-lv2 SHARED
   ../src/EFX_common/mayer_fft.C
   ../src/FX/Convolotron.C
   ../src/FX/ParametricEQ.C
+  ../src/FX/ResSolution.C
 )
 
 set_source_files_properties(../src/FX/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)

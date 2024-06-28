@@ -86,6 +86,7 @@
 #include"FX/MIDIConverter.h"
 #include"FX/Convolotron.h"
 #include"FX/ParametricEQ.h"
+#include"FX/ResSolution.h"
 
 #define RVBFILE_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile"
 #define DLYFILE_URI "https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile"
@@ -175,7 +176,8 @@ enum RKRLV2_effects_
     IFLANGE,
     IOVERDRIVE,
     IHARM,
-    ISTEREOHARM
+    ISTEREOHARM,
+    IRESSOLUTION
 };
 
 typedef struct _RKRLV2
@@ -291,6 +293,7 @@ typedef struct _RKRLV2
     Convolotron* convol;  //45
     Flanger* flanger;     //46
     Overdrive* overdrive;   //47
+    ResSolution* ressol; // 48
 
     
 } RKRLV2;
