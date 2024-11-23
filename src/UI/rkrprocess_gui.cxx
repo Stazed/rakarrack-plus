@@ -325,7 +325,7 @@ void RKRGUI::GuiTimeout(void)
     {
         char tmp[8];
         memset(tmp, 0, sizeof (tmp));
-        sprintf(tmp, "%5.2f%%", m_process->cpuload);
+        snprintf(tmp, sizeof (tmp), "%5.2f%%", m_process->cpuload);
         CPULOAD->copy_label(tmp);
         m_process->cpufp = 0;
     }
