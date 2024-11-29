@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0308
+version 1.0309
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -39,7 +39,7 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {413 130 530 580} type Double
+  xywh {708 107 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -53,12 +53,12 @@ m_parent= _rgui;} {}
   Fl_Box Fondo2 {
     xywh {1 1 525 575}
   }
-  Fl_Tabs STabs {open
+  Fl_Tabs STabs {
     xywh {0 0 530 580}
     class RKR_Tabs
   } {
     Fl_Group Look {
-      label Look
+      label Look open
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -169,9 +169,9 @@ m_parent->font_type_change(font_type);}
     
     // Background image
     char filename[256];
-    sprintf(filename, "%s/blackbg.png", DATADIR);
+    snprintf(filename, sizeof(filename), "%s/blackbg.png", DATADIR);
     BackFiname->value(filename);
-    strcpy(m_process->Config.BackgroundImage,filename);
+    strlcpy(m_process->Config.BackgroundImage,filename, sizeof(m_process->Config.BackgroundImage));
     
     m_process->Config.EnableBackgroundImage = 0;
     m_parent->PutBackground();
@@ -275,7 +275,7 @@ filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
-strcpy(m_process->Config.BackgroundImage,filename);
+strlcpy(m_process->Config.BackgroundImage,filename, sizeof(m_process->Config.BackgroundImage));
 m_parent->PutBackground();}
         xywh {427 470 65 20}
         code0 {o->set_label_offset(4);}
@@ -1281,7 +1281,7 @@ else BMidiIn->deactivate();}
         callback {int valor;
 valor = (int) o->value();
 if(o->text(valor) != NULL)
-strcpy(m_process->Config.MID,o->text(valor));
+strlcpy(m_process->Config.MID,o->text(valor), sizeof(m_process->Config.MID));
 else return;
 o->select(valor,1);
 m_process->Conecta();}
@@ -1523,7 +1523,7 @@ m_process->Config.NSM_single_state=(int) o->value();
         return;
 
     Udir->value(dir);
-    strcpy(m_process->Config.UDirFilename, dir);
+    strlcpy(m_process->Config.UDirFilename, dir, sizeof(m_process->Config.UDirFilename));
 
     // Needed for FPreset
     global_user_directory = m_process->Config.UDirFilename;
@@ -1563,7 +1563,7 @@ See F1 help under General/Preferences for additional information.} xywh {415 65 
     filename = fl_filename_setext(filename, ".rkrb");
     
     BFiname->value(filename);
-    strcpy(m_process->Config.BankFilename,filename);
+    strlcpy(m_process->Config.BankFilename,filename, sizeof(m_process->Config.BankFilename));
 
     // If we do not find the Bank file, then the Default.rkrb file is loaded.
     int bank_found = -1;
@@ -1583,7 +1583,7 @@ See F1 help under General/Preferences for additional information.} xywh {415 65 
     {
         // Get user default bank file from Settings/Bank/ --Bank Filename
         memset(m_process->Config.BankFilename, 0, sizeof(m_process->Config.BankFilename));
-        sprintf(m_process->Config.BankFilename, "%s/Default.rkrb", DATADIR);
+        snprintf(m_process->Config.BankFilename, sizeof(m_process->Config.BankFilename), "%s/Default.rkrb", DATADIR);
         
         m_process->Handle_Message(40, filename);
         BFiname->value(m_process->Config.BankFilename);
@@ -1621,7 +1621,7 @@ See F1 help under General/Preferences for additional information.} xywh {415 65 
       for (intptr_t y=0; y<128; y++)
       {
           char buf[20];
-          sprintf(buf,"%d",(int)y);
+          snprintf(buf, sizeof(buf), "%d",(int)y);
           RKR_Box* b = new RKR_Box(6,y*25+22,40,25);
           b->box(FL_DOWN_BOX);
           b->copy_label(buf);
@@ -1691,14 +1691,14 @@ See F1 help under General/Preferences for additional information.} xywh {415 65 
                     // widget will eliminate into one. It does not allow duplicates and things
                     // will not align if eliminated.
                     char buf[128];
-                    sprintf(buf,"(%d) %s", i, m_process->MIDI_Table_Bank_Preset_Names[value][i].Preset_Name);
+                    snprintf(buf, sizeof(buf), "(%d) %s", i, m_process->MIDI_Table_Bank_Preset_Names[value][i].Preset_Name);
                     p->add(buf);
                     p->textfont (global_font_type);
                 }
                 else
                 {
                     char buf[128];
-                    sprintf(buf,"(%d) Untitled", i);
+                    snprintf(buf, sizeof(buf), "(%d) Untitled", i);
                     p->add(buf);
                     p->textfont (global_font_type);
                 }
@@ -1762,7 +1762,7 @@ Efx_Convolotron->reset_parameters(save_state);
 /* Check for user file and re-load if present */
 if(Efx_Convolotron->getpar(Convo_User_File))
 {
-    strcpy(Efx_Convolotron->Filename,filename.c_str());
+    strlcpy(Efx_Convolotron->Filename,filename.c_str(), sizeof(Efx_Convolotron->Filename));
     if(!Efx_Convolotron->setfile(USERFILE))
     {
         m_process->Handle_Message(14, filename);
@@ -1772,7 +1772,7 @@ if(Efx_Convolotron->getpar(Convo_User_File))
 /* Turn processing back on */
 m_process->quality_update = false;} {}
   }
-  Function {update_revtron_quality()} {return_type void
+  Function {update_revtron_quality()} {open return_type void
   } {
     code {/* shut off all processing */
 m_process->quality_update = true;
@@ -1803,7 +1803,7 @@ Efx_Reverbtron->reset_parameters(save_state);
 /* Check for user file and re-load if present */
 if(Efx_Reverbtron->getpar(Revtron_User_File))
 {
-    strcpy(Efx_Reverbtron->Filename,filename.c_str());
+    strlcpy(Efx_Reverbtron->Filename,filename.c_str(), sizeof(Efx_Reverbtron->Filename));
     if(!Efx_Reverbtron->setfile(USERFILE))
     {
         m_process->Handle_Message(14, filename);
