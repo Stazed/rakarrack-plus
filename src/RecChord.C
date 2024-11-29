@@ -250,7 +250,7 @@ RecChord::RecChord() :
         
         for (int i = 0; i <= 33; i++)
         {
-            strcpy(ChN[i].Nom, stnom[i]);
+            strlcpy(ChN[i].Nom, stnom[i], sizeof(ChN[i].Nom));
             ChN[i].tipo = i;
         }
     }
@@ -268,12 +268,12 @@ RecChord::RecChord() :
 
         for (int i = 0; i <= 11; i++)
         {
-            strcpy(NC[i].Nom, stnom[i]);
+            strlcpy(NC[i].Nom, stnom[i], sizeof(NC[i].Nom));
         }
         
         for (int i = 0; i <= 23; i++)
         {
-            strcpy(NCE[i].Nom, stnom[i]);
+            strlcpy(NCE[i].Nom, stnom[i], sizeof(NCE[i].Nom));
         }
     }
     
@@ -351,7 +351,7 @@ RecChord::IniciaChords()
         switch (notas)
         {
         case 3:
-            strcpy(Chord3[NumChord3].Nom, ChN[i].Nom);
+            strlcpy(Chord3[NumChord3].Nom, ChN[i].Nom, sizeof(Chord3[NumChord3].Nom));
             Chord3[NumChord3].di1 = numno[2];
             Chord3[NumChord3].di2 = numno[3] - numno[2];
             Chord3[NumChord3].fund = 1;
@@ -359,13 +359,13 @@ RecChord::IniciaChords()
             NumChord3++;
             if (ChN[i].num == 1)
                 break;
-            strcpy(Chord3[NumChord3].Nom, ChN[i].Nom);
+            strlcpy(Chord3[NumChord3].Nom, ChN[i].Nom, sizeof(Chord3[NumChord3].Nom));
             Chord3[NumChord3].di1 = numno[3] - numno[2];
             Chord3[NumChord3].di2 = 12 - numno[3];
             Chord3[NumChord3].fund = 3;
             Chord3[NumChord3].tipo = i;
             NumChord3++;
-            strcpy(Chord3[NumChord3].Nom, ChN[i].Nom);
+            strlcpy(Chord3[NumChord3].Nom, ChN[i].Nom, sizeof(Chord3[NumChord3].Nom));
             Chord3[NumChord3].di1 = 12 - numno[3];
             Chord3[NumChord3].di2 = numno[2];
             Chord3[NumChord3].fund = 2;
@@ -373,7 +373,7 @@ RecChord::IniciaChords()
             NumChord3++;
             break;
         case 4:
-            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
+            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = numno[2];
             Chord4[NumChord4].di2 = numno[3] - numno[2];
             Chord4[NumChord4].di3 = numno[4] - numno[3];
@@ -382,28 +382,28 @@ RecChord::IniciaChords()
             NumChord4++;
             if (ChN[i].num == 1)
                 break;
-            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
+            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = numno[3] - numno[2];
             Chord4[NumChord4].di2 = numno[4] - numno[3];
             Chord4[NumChord4].di3 = 12 - numno[4];
             Chord4[NumChord4].fund = 4;
             Chord4[NumChord4].tipo = i;
             NumChord4++;
-            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
+            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = numno[4] - numno[3];
             Chord4[NumChord4].di2 = 12 - numno[4];
             Chord4[NumChord4].di3 = numno[2];
             Chord4[NumChord4].fund = 3;
             Chord4[NumChord4].tipo = i;
             NumChord4++;
-            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
+            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = 12 - numno[4];
             Chord4[NumChord4].di2 = numno[2];
             Chord4[NumChord4].di3 = numno[3] - numno[2];
             Chord4[NumChord4].fund = 2;
             Chord4[NumChord4].tipo = i;
             NumChord4++;
-            strcpy(Chord4[NumChord4].Nom, ChN[i].Nom);
+            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = numno[2] + (12 - numno[4]);
             Chord4[NumChord4].di2 = numno[3] - numno[2];
             Chord4[NumChord4].di3 = 12 - numno[3];
@@ -413,7 +413,7 @@ RecChord::IniciaChords()
             break;
 
         case 5:
-            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
+            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[2];
             Chord5[NumChord5].di2 = numno[3] - numno[2];
             Chord5[NumChord5].di3 = numno[4] - numno[3];
@@ -423,7 +423,7 @@ RecChord::IniciaChords()
             NumChord5++;
             if (ChN[i].num == 1)
                 break;
-            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
+            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[3] - numno[2];
             Chord5[NumChord5].di2 = numno[4] - numno[3];
             Chord5[NumChord5].di3 = numno[5] - numno[4];
@@ -432,7 +432,7 @@ RecChord::IniciaChords()
             Chord5[NumChord5].fund = 5;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
+            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[4] - numno[3];
             Chord5[NumChord5].di2 = numno[5] - numno[4];
             Chord5[NumChord5].di3 = 12 - numno[5];
@@ -440,7 +440,7 @@ RecChord::IniciaChords()
             Chord5[NumChord5].fund = 4;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
+            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[5] - numno[4];
             Chord5[NumChord5].di2 = 12 - numno[5];
             Chord5[NumChord5].di3 = numno[2];
@@ -448,7 +448,7 @@ RecChord::IniciaChords()
             Chord5[NumChord5].fund = 3;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
+            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = 12 - numno[5];
             Chord5[NumChord5].di2 = numno[2];
             Chord5[NumChord5].di3 = numno[3] - numno[2];
@@ -456,7 +456,7 @@ RecChord::IniciaChords()
             Chord5[NumChord5].fund = 2;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strcpy(Chord5[NumChord5].Nom, ChN[i].Nom);
+            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[2] + (12 - numno[5]);
             Chord5[NumChord5].di2 = numno[3] - numno[2];
             Chord5[NumChord5].di3 = numno[4] - numno[3];
@@ -539,18 +539,18 @@ RecChord::MiraChord()
                     ctipo = Chord3[j].tipo;
                     int elke = anote[Chord3[j].fund - 1];
                     fundi = elke % 12;
-                    sprintf(AName, "%s%s", NC[fundi].Nom, Chord3[j].Nom);
+                    snprintf(AName, sizeof(AName), "%s%s", NC[fundi].Nom, Chord3[j].Nom);
 
                     if (bass != fundi)
                     {
                         memset(AName, 0, sizeof (AName));
-                        sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord3[j].Nom,
+                        snprintf(AName, sizeof(AName), "%s%s/%s", NC[fundi].Nom, Chord3[j].Nom,
                                 NCE[bass + plus(fundi)].Nom);
                     }
 
                     if (strcmp(AName, NombreAcorde) != 0)
                     {
-                        strcpy(NombreAcorde, AName);
+                        strlcpy(NombreAcorde, AName, sizeof(NombreAcorde));
                         cc = 1;
                     }
 
@@ -578,18 +578,18 @@ RecChord::MiraChord()
                     ctipo = Chord4[j].tipo;
                     int elke = anote[Chord4[j].fund - 1];
                     fundi = elke % 12;
-                    sprintf(AName, "%s%s", NC[fundi].Nom, Chord4[j].Nom);
+                    snprintf(AName, sizeof(AName), "%s%s", NC[fundi].Nom, Chord4[j].Nom);
 
                     if (bass != fundi)
                     {
                         memset(AName, 0, sizeof (AName));
-                        sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord4[j].Nom,
+                        snprintf(AName, sizeof(AName), "%s%s/%s", NC[fundi].Nom, Chord4[j].Nom,
                                 NCE[bass + plus(fundi)].Nom);
                     }
 
                     if (strcmp(AName, NombreAcorde) != 0)
                     {
-                        strcpy(NombreAcorde, AName);
+                        strlcpy(NombreAcorde, AName, sizeof(NombreAcorde));
                         cc = 1;
                     }
                     return;
@@ -618,18 +618,18 @@ RecChord::MiraChord()
                     ctipo = Chord5[j].tipo;
                     int elke = anote[Chord5[j].fund - 1];
                     fundi = elke % 12;
-                    sprintf(AName, "%s%s", NC[fundi].Nom, Chord5[j].Nom);
+                    snprintf(AName, sizeof(AName), "%s%s", NC[fundi].Nom, Chord5[j].Nom);
 
                     if (bass != fundi)
                     {
                         memset(AName, 0, sizeof (AName));
-                        sprintf(AName, "%s%s/%s", NC[fundi].Nom, Chord5[j].Nom,
+                        snprintf(AName, sizeof(AName), "%s%s/%s", NC[fundi].Nom, Chord5[j].Nom,
                                 NCE[bass + plus(fundi)].Nom);
                     }
 
                     if (strcmp(AName, NombreAcorde) != 0)
                     {
-                        strcpy(NombreAcorde, AName);
+                        strlcpy(NombreAcorde, AName, sizeof(NombreAcorde));
                         cc = 1;
                     }
                     return;
