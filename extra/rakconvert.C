@@ -76,11 +76,11 @@ int i;
 for(i=0; i<62; i++)
 {
   memset(NewBank[i].cInput_Gain, 0, sizeof(NewBank[i].cInput_Gain));
-  sprintf(NewBank[i].cInput_Gain, "%f", NewBank[i].Input_Gain);
+  snprintf(NewBank[i].cInput_Gain, sizeof(NewBank[i].cInput_Gain), "%f", NewBank[i].Input_Gain);
   memset(NewBank[i].cMaster_Volume, 0, sizeof(NewBank[i].cMaster_Volume));
-  sprintf(NewBank[i].cMaster_Volume, "%f", NewBank[i].Master_Volume);
+  snprintf(NewBank[i].cMaster_Volume, sizeof(NewBank[i].cMaster_Volume), "%f", NewBank[i].Master_Volume);
   memset(NewBank[i].cBalance, 0, sizeof(NewBank[i].cBalance));
-  sprintf(NewBank[i].cBalance, "%f", NewBank[i].Balance);
+  snprintf(NewBank[i].cBalance, sizeof(NewBank[i].cBalance), "%f", NewBank[i].Balance);
 }  
 }
 
@@ -329,7 +329,7 @@ loadbank (char *filename)
       if(BigEndian()) old_fix_endianess();
       convert_IO();
  
-    sprintf(nfilename, "%s.ml",filename);
+    snprintf(nfilename, sizeof(nfilename), "%s.ml",filename);
     if ((fn = fopen (nfilename, "r")) == NULL)
     return(1);
 
@@ -542,8 +542,8 @@ memset(NewFile2,0, sizeof(NewFile2));
 std::string file_name = OldBankFile;
 file_name = file_name.substr(0, file_name.size() - c_rkrb_ext_size); // remove file extension .rkrb
 
-sprintf(NewFile1, "%s01_050.rkrb",file_name.c_str());
-sprintf(NewFile2, "%s02_050.rkrb",file_name.c_str());
+snprintf(NewFile1, sizeof(NewFile1), "%s01_050.rkrb",file_name.c_str());
+snprintf(NewFile2, sizeof(NewFile2), "%s02_050.rkrb",file_name.c_str());
 
 printf("generating %s\n",NewFile1);
 
@@ -556,11 +556,11 @@ for (i=1; i<61; i++)
      NewBank[i].Balance = 1.0f;
      NewBank[i].Bypass = Bank[i].Bypass;
      
-     sprintf(NewBank[i].Preset_Name, "%s",Bank[i].Preset_Name);
-     sprintf(NewBank[i].Author, "%s",Bank[i].Author);
-     sprintf(NewBank[i].cInput_Gain, "%s",Bank[i].Reserva);
-     sprintf(NewBank[i].cMaster_Volume, "%s",Bank[i].Reserva1);
-     sprintf(NewBank[i].cBalance, "%s","1.000000");
+     snprintf(NewBank[i].Preset_Name, sizeof(NewBank[i].Preset_Name), "%s",Bank[i].Preset_Name);
+     snprintf(NewBank[i].Author, sizeof(NewBank[i].Author), "%s",Bank[i].Author);
+     snprintf(NewBank[i].cInput_Gain, sizeof(NewBank[i].cInput_Gain), "%s",Bank[i].Reserva);
+     snprintf(NewBank[i].cMaster_Volume, sizeof(NewBank[i].cMaster_Volume), "%s",Bank[i].Reserva1);
+     snprintf(NewBank[i].cBalance, sizeof(NewBank[i].cBalance), "%s","1.000000");
       
   for(j=0;j<20;j++)
      {
@@ -636,11 +636,11 @@ for (i=61; i<81; i++)
      NewBank[i-60].Balance = 1.0f;
      NewBank[i-60].Bypass = Bank[i].Bypass;
      
-     sprintf(NewBank[i-60].Preset_Name, "%s",Bank[i].Preset_Name);
-     sprintf(NewBank[i-60].Author, "%s",Bank[i].Author);
-     sprintf(NewBank[i-60].cInput_Gain, "%s",Bank[i].Reserva);
-     sprintf(NewBank[i-60].cMaster_Volume, "%s",Bank[i].Reserva1);
-     sprintf(NewBank[i-60].cBalance, "%s","1.000000");
+     snprintf(NewBank[i-60].Preset_Name, sizeof(NewBank[i-60].Preset_Name), "%s",Bank[i].Preset_Name);
+     snprintf(NewBank[i-60].Author, sizeof(NewBank[i-60].Author), "%s",Bank[i].Author);
+     snprintf(NewBank[i-60].cInput_Gain, sizeof(NewBank[i-60].cInput_Gain), "%s",Bank[i].Reserva);
+     snprintf(NewBank[i-60].cMaster_Volume, sizeof(NewBank[i-60].cMaster_Volume), "%s",Bank[i].Reserva1);
+     snprintf(NewBank[i-60].cBalance, sizeof(NewBank[i-60].cBalance), "%s","1.000000");
       
   for(j=0;j<20;j++)
      {
