@@ -367,13 +367,13 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     {
         global_gui_show = CONST_GUI_HIDE;
     }
-\#endif} open selected
+\#endif} selected
       xywh {140 478 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
       }
-      Fl_Menu_Bar MenuP {open
+      Fl_Menu_Bar MenuP {
         xywh {2 2 518 18} box NO_BOX color 178 selection_color 7 labelcolor 7 align 112 textcolor 7
         code0 {o->set_label_offset(4);}
         code1 {o->set_submenu_paths(main_submenu_paths);}
@@ -502,7 +502,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     // Set the file chooser to the previous hidden file
     char tempfile[256];
     memset(tempfile, 0, sizeof (tempfile));
-    sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
+    snprintf(tempfile, sizeof(tempfile), "%s%s", getenv("HOME"), "/.rkrintpreset");
   
     filename = fl_file_chooser("Import Inserted Presets:","(*)", tempfile,0);
 
@@ -1397,7 +1397,7 @@ m_process->M_Metronome->set_tempo(m_process->M_Metro_Tempo);}
           class RKR_Box
         }
       }
-      Fl_Group Presets {open
+      Fl_Group Presets {
         xywh {168 24 352 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Box PRESETS_LABEL {
@@ -1589,7 +1589,7 @@ BankWindow->hide();}
           class RKR_Button
         }
         Fl_Input WPreset_Name {
-          callback {strcpy(m_process->Active_Preset.Preset_Name,o->value());}
+          callback {strlcpy(m_process->Active_Preset.Preset_Name,o->value(), sizeof(m_process->Active_Preset.Preset_Name));}
           tooltip {Enter the preset name for this effect.} xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
           code0 {o->set_text_offset(14);}
           code1 {o->maximum_size(22);}
@@ -1986,7 +1986,7 @@ o->hide();} open
       class RandomEditGui size_range {240 320 960 1280}
     } {}
     code {char tmp[64];
-sprintf(tmp,"Version %s",VERSION);
+snprintf(tmp, sizeof(tmp), "Version %s",VERSION);
 AboutWin->About_Version->copy_label(tmp);} {}
   }
   Function {RKRGUI(int argc, char**argv,RKR *rkr_)} {

@@ -190,7 +190,7 @@ void RKRGUI::cb_ImportPresets_i(Fl_Menu_*, void*) {
     // Set the file chooser to the previous hidden file
     char tempfile[256];
     memset(tempfile, 0, sizeof (tempfile));
-    sprintf(tempfile, "%s%s", getenv("HOME"), "/.rkrintpreset");
+    snprintf(tempfile, sizeof(tempfile), "%s%s", getenv("HOME"), "/.rkrintpreset");
   
     filename = fl_file_chooser("Import Inserted Presets:","(*)", tempfile,0);
 
@@ -802,7 +802,7 @@ void RKRGUI::cb_B_preset(RKR_Button* o, void* v) {
 }
 
 void RKRGUI::cb_WPreset_Name_i(RKR_Input* o, void*) {
-  strcpy(m_process->Active_Preset.Preset_Name,o->value());
+  strlcpy(m_process->Active_Preset.Preset_Name,o->value(), sizeof(m_process->Active_Preset.Preset_Name));
 }
 void RKRGUI::cb_WPreset_Name(RKR_Input* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_WPreset_Name_i(o,v);
@@ -3059,6 +3059,6 @@ references.");
     RandomEdit->resizable(RandomEdit);
   } // RandomEditGui* RandomEdit
   char tmp[64];
-  sprintf(tmp,"Version %s",VERSION);
+  snprintf(tmp, sizeof(tmp), "Version %s",VERSION);
   AboutWin->About_Version->copy_label(tmp);
 }
