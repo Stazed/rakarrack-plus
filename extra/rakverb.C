@@ -85,7 +85,7 @@ main(int argc, char *argv[])
        	case 'i':
         if (optarguments != NULL)
 	    {
-	    strcpy(Inputfile,optarguments); 
+	    strlcpy(Inputfile,optarguments, sizeof(Inputfile)); 
             if(!(infile = sf_open(Inputfile, SFM_READ, &sfinfo))) return(0);
 
             }
@@ -94,7 +94,7 @@ main(int argc, char *argv[])
            if (optarguments != NULL)
 	    {
 	    have_output = 1;
-            strcpy(Outputfile,optarguments);
+            strlcpy(Outputfile,optarguments, sizeof(Outputfile));
             }
             break;
          }
@@ -124,14 +124,14 @@ if(!have_output)
     std::string file_name = Inputfile;
     file_name = file_name.substr(0, file_name.size() - c_wav_ext_size);    // remove the file extension .wav
 
-    sprintf(Outputfile, "%s.rvb",file_name.c_str());
+    snprintf(Outputfile, sizeof(Outputfile), "%s.rvb",file_name.c_str());
 }
 
 // open output and save headers
 
   if ((fn = fopen (Outputfile, "w")) == NULL)  return(0);
   memset(wbuf, 0, sizeof (wbuf));
-  sprintf(wbuf,"%s\n",Inputfile);    
+  snprintf(wbuf, sizeof(wbuf),"%s\n",Inputfile);    
   fputs (wbuf, fn);
 
 // read file
@@ -187,7 +187,7 @@ sf_close(infile);
 
 
 memset(wbuf,0, sizeof(wbuf));
-sprintf(wbuf,"%f,%f\n", compress, quality);
+snprintf(wbuf, sizeof(wbuf),"%f,%f\n", compress, quality);
 fputs(wbuf,fn);
 
 skip = 0.0f;
@@ -195,7 +195,7 @@ indexx = 1500;
 chunk = 11;
 
 memset(wbuf,0, sizeof(wbuf));
-sprintf(wbuf,"%d\n", indexx);
+snprintf(wbuf, sizeof(wbuf),"%d\n", indexx);
 fputs(wbuf,fn);
 
 skip = 0.0f;
@@ -214,7 +214,7 @@ for(i=0;i<x;i++)
     if(indexx<1500)
     {
   memset(wbuf,0, sizeof(wbuf));
-  sprintf(wbuf, "%f,%f\n",index[i+j],data[i+j]);
+  snprintf(wbuf, sizeof(wbuf), "%f,%f\n",index[i+j],data[i+j]);
   fputs(wbuf,fn);
   indexx++;
   
