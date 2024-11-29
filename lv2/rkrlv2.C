@@ -4238,7 +4238,7 @@ static LV2_Worker_Status revwork(LV2_Handle handle, LV2_Worker_Respond_Function 
         char* path = (char*)LV2_ATOM_BODY_CONST(file_path);
 
         plug->loading_file = 1;
-        strcpy(plug->revtron->Filename,path);
+        strlcpy(plug->revtron->Filename, path, sizeof(plug->revtron->Filename));
         plug->revtron->setfile(USERFILE);
 
         respond(rhandle,0,0);
@@ -4296,7 +4296,7 @@ static LV2_State_Status revrestore(LV2_Handle handle, LV2_State_Retrieve_Functio
     {
             char* path = (char*)value;
 
-            strcpy(plug->revtron->Filename,path);
+            strlcpy(plug->revtron->Filename, path, sizeof(plug->revtron->Filename));
             plug->revtron->setfile(USERFILE);
 
             plug->file_changed = 1;
@@ -4548,7 +4548,7 @@ static LV2_Worker_Status echowork(LV2_Handle handle, LV2_Worker_Respond_Function
         char* path = (char*)LV2_ATOM_BODY_CONST(file_path);
 
         plug->loading_file = 1;
-        strcpy(plug->echotron->Filename,path);
+        strlcpy(plug->echotron->Filename, path, sizeof(plug->echotron->Filename));
         plug->echotron->setfile(USERFILE);
 
         respond(rhandle,0,0);
@@ -4606,7 +4606,7 @@ static LV2_State_Status echorestore(LV2_Handle handle, LV2_State_Retrieve_Functi
     {
         char* path = (char*)value;
 
-        strcpy(plug->echotron->Filename,path);
+        strlcpy(plug->echotron->Filename, path, sizeof(plug->echotron->Filename));
         plug->echotron->setfile(USERFILE);
 
         plug->file_changed = 1;
@@ -5764,7 +5764,7 @@ static LV2_Worker_Status convwork(LV2_Handle handle, LV2_Worker_Respond_Function
         char* path = (char*)LV2_ATOM_BODY_CONST(file_path);
 
         plug->loading_file = 1;
-        strcpy(plug->convol->Filename,path);
+        strlcpy(plug->convol->Filename, path, sizeof(plug->convol->Filename));
         plug->convol->setfile(USERFILE);
         respond(rhandle,0,0);
     }//got file
@@ -5819,7 +5819,7 @@ static LV2_State_Status convrestore(LV2_Handle handle, LV2_State_Retrieve_Functi
     if (value)
     {
         char* path = (char*)value;
-        strcpy(plug->convol->Filename,path);
+        strlcpy(plug->convol->Filename, path, sizeof(plug->convol->Filename));
         plug->convol->setfile(USERFILE);
         plug->file_changed = 1;
     }
