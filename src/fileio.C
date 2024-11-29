@@ -80,7 +80,7 @@ void RKR::apply_effect_parameters(std::string s_buf, int fx_index, PresetBankStr
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
-                strcpy(preset_loaded.ConvoFiname, s_name.c_str());
+                strlcpy(preset_loaded.ConvoFiname, s_name.c_str(), sizeof(preset_loaded.ConvoFiname));
             }
             
             else if(fx_index == EFX_REVERBTRON)
@@ -89,7 +89,7 @@ void RKR::apply_effect_parameters(std::string s_buf, int fx_index, PresetBankStr
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
-                strcpy(preset_loaded.RevFiname, s_name.c_str());
+                strlcpy(preset_loaded.RevFiname, s_name.c_str(), sizeof(preset_loaded.RevFiname));
             }
 
             else if(fx_index == EFX_ECHOTRON)
@@ -98,7 +98,7 @@ void RKR::apply_effect_parameters(std::string s_buf, int fx_index, PresetBankStr
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
-                strcpy(preset_loaded.EchoFiname, s_name.c_str());
+                strlcpy(preset_loaded.EchoFiname, s_name.c_str(), sizeof(preset_loaded.EchoFiname));
             }
             
             return; // we found and processed what we were looking for
@@ -709,15 +709,15 @@ RKR::set_audio_paramters()
     // Copy the file names to the audio effects
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
     memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
-    strcpy(Efx_Convolotron->Filename, Active_Preset.ConvoFiname);
+    strlcpy(Efx_Convolotron->Filename, Active_Preset.ConvoFiname, sizeof(Efx_Convolotron->Filename));
 
     Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
     memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
-    strcpy(Efx_Reverbtron->Filename, Active_Preset.RevFiname);
+    strlcpy(Efx_Reverbtron->Filename, Active_Preset.RevFiname, sizeof(Efx_Reverbtron->Filename));
 
     Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
     memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
-    strcpy(Efx_Echotron->Filename, Active_Preset.EchoFiname);
+    strlcpy(Efx_Echotron->Filename, Active_Preset.EchoFiname, sizeof(Efx_Echotron->Filename));
     
     // The main window effect order
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
@@ -858,7 +858,8 @@ RKR::load_custom_MIDI_table_preset_names()
     {
         for (int j = 1; j <= 60; j++)
         {
-            strcpy(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name,  Bank_Vector[k].Bank[j].Preset_Name);
+            strlcpy(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name,
+                    Bank_Vector[k].Bank[j].Preset_Name, sizeof(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name));
         }
     }
 }
@@ -1543,15 +1544,15 @@ RKR::refresh_active_preset()
     // Update filenames for Convolotron, Echotron, Reverbtron to Active_Preset
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
     memset(Active_Preset.ConvoFiname, 0, sizeof (Active_Preset.ConvoFiname));
-    strcpy(Active_Preset.ConvoFiname, Efx_Convolotron->Filename);
+    strlcpy(Active_Preset.ConvoFiname, Efx_Convolotron->Filename, sizeof(Active_Preset.ConvoFiname));
     
     Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
     memset(Active_Preset.RevFiname, 0, sizeof (Active_Preset.RevFiname));
-    strcpy(Active_Preset.RevFiname, Efx_Reverbtron->Filename);
+    strlcpy(Active_Preset.RevFiname, Efx_Reverbtron->Filename, sizeof(Active_Preset.RevFiname));
 
     Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
     memset(Active_Preset.EchoFiname, 0, sizeof (Active_Preset.EchoFiname));
-    strcpy(Active_Preset.EchoFiname, Efx_Echotron->Filename);
+    strlcpy(Active_Preset.EchoFiname, Efx_Echotron->Filename, sizeof(Active_Preset.EchoFiname));
 }
 
 /**
@@ -1566,11 +1567,11 @@ RKR::copy_IO(struct PresetBankStruct _bank[])
     for (int i = 0; i < 62; i++)
     {
         memset(_bank[i].cInput_Gain, 0, sizeof (_bank[i].cInput_Gain));
-        sprintf(_bank[i].cInput_Gain, "%f", _bank[i].Input_Gain);
+        snprintf(_bank[i].cInput_Gain, sizeof(_bank[i].cInput_Gain), "%f", _bank[i].Input_Gain);
         memset(_bank[i].cMaster_Volume, 0, sizeof (_bank[i].cMaster_Volume));
-        sprintf(_bank[i].cMaster_Volume, "%f", _bank[i].Master_Volume);
+        snprintf(_bank[i].cMaster_Volume, sizeof(_bank[i].cMaster_Volume), "%f", _bank[i].Master_Volume);
         memset(_bank[i].cBalance, 0, sizeof (_bank[i].cBalance));
-        sprintf(_bank[i].cBalance, "%f", _bank[i].Fraction_Bypass);
+        snprintf(_bank[i].cBalance, sizeof(_bank[i].cBalance), "%f", _bank[i].Fraction_Bypass);
     }
 }
 
@@ -1649,24 +1650,24 @@ RKR::save_skin(const std::string &filename)
     }
 
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%d,%d\n", swidth, sheight);
+    snprintf(buf, sizeof(buf), "%d,%d\n", swidth, sheight);
     fputs(buf, fn);
 
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%d,%d,%d,%d\n", sback_color, sfore_color, slabel_color, sleds_color);
+    snprintf(buf, sizeof(buf), "%d,%d,%d,%d\n", sback_color, sfore_color, slabel_color, sleds_color);
     fputs(buf, fn);
 
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%s", Config.BackgroundImage);
+    snprintf(buf, sizeof(buf), "%s", Config.BackgroundImage);
     fputs(buf, fn);
     fputs("\n", fn);
 
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%d,%d\n", global_font_size, global_font_type);
+    snprintf(buf, sizeof(buf), "%d,%d\n", global_font_size, global_font_type);
     fputs(buf, fn);
 
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%d\n", sschema);
+    snprintf(buf, sizeof(buf), "%d\n", sschema);
     fputs(buf, fn);
 
     fclose(fn);
@@ -1789,7 +1790,7 @@ RKR::ConvertOldFile(const std::string &filename)
 {
     char buff[255];
     memset(buff, 0, sizeof (buff));
-    sprintf(buff, "rakconvert -c '%s'", filename.c_str());
+    snprintf(buff, sizeof(buff), "rakconvert -c '%s'", filename.c_str());
     
     if (system(buff) == -1)
     {
@@ -1802,7 +1803,7 @@ RKR::convert_reverb_file(const std::string &filename)
 {
     char buff[255];
     memset(buff, 0, sizeof (buff));
-    sprintf(buff, "rakverb -i '%s'", filename.c_str());
+    snprintf(buff, sizeof(buff), "rakverb -i '%s'", filename.c_str());
     printf("%s\n", buff);
     
     if (system(buff) == -1)
@@ -1884,11 +1885,11 @@ RKR::delete_insert_preset(int num, const std::string &name)
     memset(tempfile2, 0, sizeof (tempfile2));
     memset(orden, 0, sizeof (orden));
 
-    sprintf(tempfile, "%s", insert_preset_location.c_str());
+    snprintf(tempfile, sizeof(tempfile), "%s", insert_preset_location.c_str());
 
     if ((fs = fopen(tempfile, "r")) == NULL) return;
 
-    sprintf(tempfile2, "%s%s", getenv("HOME"), "/.rkrtemp");
+    snprintf(tempfile2, sizeof(tempfile2), "%s%s", getenv("HOME"), "/.rkrtemp");
 
     if ((fn = fopen(tempfile2, "w")) != NULL)
     {
@@ -1898,7 +1899,7 @@ RKR::delete_insert_preset(int num, const std::string &name)
             char rbuf[256];
             sbuf = buf;
             memset(rbuf, 0, sizeof (rbuf));
-            sprintf(rbuf, "%s", buf);
+            snprintf(rbuf, sizeof(rbuf), "%s", buf);
             sscanf(buf, "%d", &eff);
             char *rname = strsep(&sbuf, ","); // return not used, next delimiter
             rname = strsep(&sbuf, ",");
@@ -1915,7 +1916,7 @@ RKR::delete_insert_preset(int num, const std::string &name)
 
     fclose(fs);
 
-    sprintf(orden, "mv %s %s\n", tempfile2, tempfile);
+    snprintf(orden, sizeof(orden), "mv %s %s\n", tempfile2, tempfile);
 
     if (system(orden) == -1)
     {
@@ -1940,7 +1941,7 @@ RKR::save_MIDI_table(const std::string &filename)
     for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));
-        sprintf(buf, "%d,%d\n", MIDI_Table[i].bank, MIDI_Table[i].preset);
+        snprintf(buf, sizeof(buf), "%d,%d\n", MIDI_Table[i].bank, MIDI_Table[i].preset);
         fputs(buf, fn);
     }
 
