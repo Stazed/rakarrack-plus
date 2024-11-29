@@ -206,11 +206,11 @@ Config_fltk::PrefNom(const char *dato)
 
     if(nsm_preferences_file.empty())
     {
-        sprintf(tmpprefname, "%s %s", jackcliname, dato);
+        snprintf(tmpprefname, sizeof(tmpprefname), "%s %s", jackcliname, dato);
     }
     else    // NSM use - always use PACKAGE name since there is only one per preferences file
     {
-        sprintf(tmpprefname, "%s %s", PACKAGE, dato);
+        snprintf(tmpprefname, sizeof(tmpprefname), "%s %s", PACKAGE, dato);
     }
 
     return (tmpprefname);
@@ -243,7 +243,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     rakarrack.get(PrefNom("Enable Background Image"), EnableBackgroundImage, 0);
 
     char temp[256];
-    sprintf(temp, "%s/blackbg.png", DATADIR);
+    snprintf(temp, sizeof(temp), "%s/blackbg.png", DATADIR);
     rakarrack.get(PrefNom("Background Image"), BackgroundImage, temp, 256);
 
     // Check if valid file. Revert to default if error.
@@ -251,7 +251,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     if ((fn = fopen(BackgroundImage, "r")) == NULL)
     {
         memset(BackgroundImage, 0, sizeof (BackgroundImage));
-        strcpy(BackgroundImage, temp);
+        strlcpy(BackgroundImage, temp, sizeof (BackgroundImage));
         fprintf(stderr, "Invalid BackgroundImage file, reverting to default\n");
     }
     else
@@ -402,15 +402,15 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     for (int i = 0; i < cuan_jack; i++)
     {
         memset(temp, 0, sizeof (temp));
-        sprintf(temp, "Jack Port %d", i + 1);
+        snprintf(temp, sizeof(temp), "Jack Port %d", i + 1);
 
         if (i < 2)
         {
-            strcpy(j_names, jack_names[i]);
+            strlcpy(j_names, jack_names[i], sizeof(j_names));
         }
         else
         {
-            strcpy(j_names, "");
+            strlcpy(j_names, "", sizeof(j_names));
         }
 
         rakarrack.get(PrefNom(temp), jack_po[i].name, j_names, 128);
@@ -437,15 +437,15 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     for (int i = 0; i < cuan_ijack; i++)
     {
         memset(temp, 0, sizeof (temp));
-        sprintf(temp, "Jack Port In %d", i + 1);
+        snprintf(temp, sizeof(temp), "Jack Port In %d", i + 1);
 
         if (i < 1)
         {
-            strcpy(j_names, jack_inames[i]);
+            strlcpy(j_names, jack_inames[i], sizeof(j_names));
         }
         else
         {
-            strcpy(j_names, "");
+            strlcpy(j_names, "", sizeof(j_names));
         }
 
         rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);
@@ -462,12 +462,12 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     // ******************* Settings/User *******************
     // Get user default bank file from Settings/Bank/ --Bank Filename
     memset(temp, 0, sizeof (temp));
-    sprintf(temp, "%s/Default.rkrb", DATADIR);
+    snprintf(temp, sizeof(temp), "%s/Default.rkrb", DATADIR);
     rakarrack.get(PrefNom("Bank Filename"), BankFilename, temp, 127);
 
     // Get user bank directory
     memset(temp, 0, sizeof (temp));
-    sprintf(temp, "%s", UD_NOT_SET);
+    snprintf(temp, sizeof(temp), "%s", UD_NOT_SET);
     rakarrack.get(PrefNom("User Directory"), UDirFilename, temp, 127);
     global_user_directory = UDirFilename;
 
