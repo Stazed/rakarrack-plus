@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0308
+version 1.0309
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Light_Button.h"} {public global
@@ -262,7 +262,7 @@ m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_LPF,(int)o->value());
     {
         // Copy the file name to the EFX
         Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(m_process->Rack_Effects[EFX_REVERBTRON]);
-        strcpy(Efx_Reverbtron->Filename, file.c_str());
+        strlcpy(Efx_Reverbtron->Filename, file.c_str(), sizeof(Efx_Reverbtron->Filename));
         
         // Tell the EFX that this is a user supplied file
         m_process->Rack_Effects[EFX_REVERBTRON]->changepar(Revtron_User_File, 1);

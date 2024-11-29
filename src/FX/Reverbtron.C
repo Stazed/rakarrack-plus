@@ -587,7 +587,7 @@ Reverbtron::setfile(int value)
     {
         Filenum = value;
         memset(Filename, 0, sizeof (Filename));
-        sprintf(Filename, "%s/%d.rvb", DATADIR, Filenum + 1); // DATADIR comes from CMakeLists.txt
+        snprintf(Filename, sizeof(Filename), "%s/%d.rvb", DATADIR, Filenum + 1); // DATADIR comes from CMakeLists.txt
     }
 #ifndef LV2_SUPPORT // Rakarrack-plus only, user files must be in User Directory
     else    // User file
@@ -610,7 +610,7 @@ Reverbtron::setfile(int value)
                 // placed in the User Directory.
                 file_found = 1;
                 memset(Filename, 0, sizeof (Filename));
-                sprintf(Filename, "%s", RVB_Files[i].User_File_Name.c_str());
+                snprintf(Filename, sizeof(Filename), "%s", RVB_Files[i].User_File_Name.c_str());
                 break;
             }
         }
@@ -710,7 +710,7 @@ Reverbtron::loadfile(char* filename)
         return (f);
     }
     
-    strcpy(f.Filename, filename);
+    strlcpy(f.Filename, filename, sizeof(f.Filename));
     memset(f.tdata, 0, sizeof (float)*2000);
     memset(f.ftime, 0, sizeof (float)*2000);
 
@@ -800,7 +800,7 @@ Reverbtron::applyfile(const RvbFile &file)
 RvbFile Reverbtron::loaddefault()
 {
     RvbFile f;
-    strcpy(f.Filename, "default");
+    strlcpy(f.Filename, "default", sizeof(f.Filename));
     f.data_length = Llength = 2;
     f.ftime[0] = 1.0f;
     f.ftime[1] = 1.25f;

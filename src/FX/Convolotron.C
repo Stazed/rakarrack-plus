@@ -530,7 +530,7 @@ Convolotron::setfile(int value)
     {
         Filenum = value;
         memset(Filename, 0, sizeof (Filename));
-        sprintf(Filename, "%s/%d.wav", DATADIR, Filenum + 1);
+        snprintf(Filename, sizeof(Filename), "%s/%d.wav", DATADIR, Filenum + 1);
     }
 #ifndef LV2_SUPPORT // Rakarrack-plus only, user files must be in User Directory
     else    // User file
@@ -553,7 +553,7 @@ Convolotron::setfile(int value)
                 // placed in the User Directory.
                 file_found = 1;
                 memset(Filename, 0, sizeof (Filename));
-                sprintf(Filename, "%s", WAV_Files[i].User_File_Name.c_str());
+                snprintf(Filename, sizeof(Filename), "%s", WAV_Files[i].User_File_Name.c_str());
                 break;
             }
         }

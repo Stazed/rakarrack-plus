@@ -517,7 +517,7 @@ Echotron::setfile(int value)
     {
         Filenum = value;
         memset(Filename, 0, sizeof (Filename));
-        sprintf(Filename, "%s/%d.dly", DATADIR, Filenum + 1);
+        snprintf(Filename, sizeof(Filename), "%s/%d.dly", DATADIR, Filenum + 1);
     }
 #ifndef LV2_SUPPORT // Rakarrack-plus only, user files must be in User Directory
     else
@@ -540,7 +540,7 @@ Echotron::setfile(int value)
                 // placed in the User Directory.
                 file_found = 1;
                 memset(Filename, 0, sizeof (Filename));
-                sprintf(Filename, "%s", DLY_Files[i].User_File_Name.c_str());
+                snprintf(Filename, sizeof(Filename), "%s", DLY_Files[i].User_File_Name.c_str());
                 break;
             }
         }
@@ -684,7 +684,7 @@ Echotron::loadfile(char* Filename)
         return loaddefault();
     }
 
-    strcpy(f.Filename, Filename); // Must copy the file name here for lv2 save when if(plug->file_changed) in rkr.lv2.C
+    strlcpy(f.Filename, Filename, sizeof(f.Filename)); // Must copy the file name here for lv2 save when if(plug->file_changed) in rkr.lv2.C
 
     int first_line = 0;
     while (fgets(wbuf, sizeof wbuf, fs) != NULL)
@@ -788,7 +788,7 @@ Echotron::loaddefault()
 {
     Plength = 1;
     DlyFile f;
-    strcpy(f.Filename, "default");
+    strlcpy(f.Filename, "default", sizeof(f.Filename));
     f.fLength = 1;
     f.fPan[0] = 0.0f;
     f.fTime[0] = 1.0f; //default 1 measure delay
