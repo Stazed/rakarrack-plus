@@ -86,26 +86,26 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     memset(tmp, 0, sizeof (tmp));
     if (!m_process->File_To_Load.empty())
     {
-        sprintf(tmp, "Session: %s", m_process->File_To_Load.c_str ());
+        snprintf(tmp, sizeof(tmp), "Session: %s", m_process->File_To_Load.c_str ());
     }
     else
     {
-        sprintf(tmp, "%s   v%s", m_process->jackcliname, VERSION);
+        snprintf(tmp, sizeof(tmp), "%s   v%s", m_process->jackcliname, VERSION);
     }
 
     Principal->copy_label(tmp);
     BankWin_Label(m_process->Config.BankFilename);
     memset(tmp, 0, sizeof (tmp));
-    sprintf(tmp, "%s   v%s - Effects Order", m_process->jackcliname, VERSION);
+    snprintf(tmp, sizeof(tmp), "%s   v%s - Effects Order", m_process->jackcliname, VERSION);
     Order->copy_label(tmp);
     memset(tmp, 0, sizeof (tmp));
-    sprintf(tmp, "%s   v%s - Settings", m_process->jackcliname, VERSION);
+    snprintf(tmp, sizeof(tmp), "%s   v%s - Settings", m_process->jackcliname, VERSION);
     Settings->copy_label(tmp);
-    sprintf(tmp, "%s   v%s - MIDI Learn", m_process->jackcliname, VERSION);
+    snprintf(tmp, sizeof(tmp), "%s   v%s - MIDI Learn", m_process->jackcliname, VERSION);
     MIDILearn->copy_label(tmp);
-    sprintf(tmp, "%s   v%s - ACI", m_process->jackcliname, VERSION);
+    snprintf(tmp, sizeof(tmp), "%s   v%s - ACI", m_process->jackcliname, VERSION);
     Trigger->copy_label(tmp);
-    sprintf(tmp, "%s   v%s - Random", m_process->jackcliname, VERSION);
+    snprintf(tmp, sizeof(tmp), "%s   v%s - Random", m_process->jackcliname, VERSION);
     RandomEdit->copy_label(tmp);
     
     load_previous_state();
@@ -170,7 +170,7 @@ void RKRGUI::GuiTimeout(void)
         if (m_process->efx_Tuner->note_actual != m_process->note_old)
         {
             char notas[3];
-            sprintf(notas, "%-2s", m_process->efx_Tuner->notes[m_process->efx_Tuner->note_actual]);
+            snprintf(notas, sizeof(notas), "%-2s", m_process->efx_Tuner->notes[m_process->efx_Tuner->note_actual]);
             WNote->copy_label(notas);
             m_process->note_old = m_process->efx_Tuner->note_actual;
         }
@@ -178,7 +178,7 @@ void RKRGUI::GuiTimeout(void)
         if (m_process->efx_Tuner->nfreq != m_process->nfreq_old)
         {
             char refreq[60];
-            sprintf(refreq, "%8.3f", m_process->efx_Tuner->nfreq);
+            snprintf(refreq, sizeof(refreq), "%8.3f", m_process->efx_Tuner->nfreq);
             WRfreq->copy_label(refreq);
             m_process->nfreq_old = m_process->efx_Tuner->nfreq;
         }
@@ -187,7 +187,7 @@ void RKRGUI::GuiTimeout(void)
         if (fabsf(m_process->efx_Tuner->afreq - m_process->afreq_old) > .2f)
         {
             char nofreq[60];
-            sprintf(nofreq, "%8.3f", m_process->efx_Tuner->afreq);
+            snprintf(nofreq, sizeof(nofreq), "%8.3f", m_process->efx_Tuner->afreq);
             if (abs(m_process->efx_Tuner->cents) > 5)
                 WNfreq->labelcolor(FL_RED);
             else
@@ -199,7 +199,7 @@ void RKRGUI::GuiTimeout(void)
         if (m_process->efx_Tuner->afreq == 0.0f)
         {
             char notas[3];
-            sprintf(notas, "  ");
+            snprintf(notas, sizeof(notas), "  ");
             WNote->copy_label(notas);
         }
 
@@ -470,7 +470,7 @@ void RKRGUI::GuiTimeout(void)
                     m_process->looper_lqua = Efx_Looper->looper_qua;
                     char tmp[16];
                     memset(tmp, 0, sizeof (tmp));
-                    sprintf(tmp, "%d/%d", Efx_Looper->looper_bar, Efx_Looper->looper_qua);
+                    snprintf(tmp, sizeof(tmp), "%d/%d", Efx_Looper->looper_bar, Efx_Looper->looper_qua);
                     LOOPER->L_TimePos->copy_label(tmp);
                 }
             }
@@ -1222,7 +1222,7 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
             if (Settings->JackCo->selected(i))
             {
                 memset(temp1, 0, sizeof (temp1));
-                sprintf(temp1, "Jack Port %d", k);
+                snprintf(temp1, sizeof(temp1), "Jack Port %d", k);
                 rakarrack.set(m_process->Config.PrefNom(temp1), Settings->JackCo->text(i));
                 k++;
             }
@@ -1236,7 +1236,7 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
             if (Settings->JackIn->selected(i))
             {
                 memset(temp1, 0, sizeof (temp1));
-                sprintf(temp1, "Jack Port In %d", k);
+                snprintf(temp1, sizeof(temp1), "Jack Port In %d", k);
                 rakarrack.set(m_process->Config.PrefNom(temp1), Settings->JackIn->text(i));
                 k++;
             }
@@ -1609,7 +1609,7 @@ void RKRGUI::show_help()
 
 
     memset(temp, 0, sizeof (temp));
-    sprintf(temp, "%s/html/help.html", HELPDIR);
+    snprintf(temp, sizeof(temp), "%s/html/help.html", HELPDIR);
 
 
     if (FILE * file = fopen(temp, "r"))
@@ -1638,7 +1638,7 @@ void RKRGUI::show_lic()
     }
 
     memset(temp, 0, sizeof (temp));
-    sprintf(temp, "%s/html/license.html", HELPDIR);
+    snprintf(temp, sizeof(temp), "%s/html/license.html", HELPDIR);
     visor->load(temp);
 
     m_process->help_displayed = 1;
@@ -1665,7 +1665,7 @@ void RKRGUI::MiraClientes()
             {
                 char temp1[128];
                 char *masque;
-                strcpy(temp1, temp);
+                strlcpy(temp1, temp, sizeof(temp1));
                 strtok(temp1, "\"");
                 char *name = strtok(NULL, "\"");
                 masque = strtok(NULL, ")");
@@ -2101,7 +2101,7 @@ void RKRGUI::MiraConfig()
             name = buffer;
         }
 #else // this is neat, but really slow on some X servers:
-        sprintf(buffer, "@F%d@.%s", i, name);
+        snprintf(buffer, sizeof(buffer), "@F%d@.%s", i, name);
         name = buffer;
 #endif
         Settings->Font_Bro->add(name);
@@ -2115,7 +2115,7 @@ void RKRGUI::BankWin_Label(const std::string &filename)
     char tmp[256];
 
     memset(tmp, 0, sizeof (tmp));
-    sprintf(tmp, "%s   v%s - Bank Manager - %s", m_process->jackcliname, VERSION, fl_filename_name(filename.c_str()));
+    snprintf(tmp, sizeof(tmp), "%s   v%s - Bank Manager - %s", m_process->jackcliname, VERSION, fl_filename_name(filename.c_str()));
     BankWindow->copy_label(tmp);
 }
 
@@ -2217,7 +2217,8 @@ void RKRGUI::Chord(int eff)
 
     if (eff == 0)
     {
-        sprintf(m_process->RC_Harm->NombreAcorde, "%s%s", m_process->RC_Harm->NCE[undi].Nom, m_process->RC_Harm->ChN[tipo].Nom);
+        snprintf(m_process->RC_Harm->NombreAcorde, sizeof(m_process->RC_Harm->NombreAcorde),
+                 "%s%s", m_process->RC_Harm->NCE[undi].Nom, m_process->RC_Harm->ChN[tipo].Nom);
 
         m_process->RC_Harm->ctipo = tipo;
         m_process->RC_Harm->fundi = undi;
@@ -2225,7 +2226,8 @@ void RKRGUI::Chord(int eff)
     }
     else
     {
-        sprintf(m_process->RC_Stereo_Harm->NombreAcorde, "%s%s", m_process->RC_Stereo_Harm->NCE[undi].Nom, m_process->RC_Stereo_Harm->ChN[tipo].Nom);
+        snprintf(m_process->RC_Stereo_Harm->NombreAcorde, sizeof(m_process->RC_Stereo_Harm->NombreAcorde),
+                "%s%s", m_process->RC_Stereo_Harm->NCE[undi].Nom, m_process->RC_Stereo_Harm->ChN[tipo].Nom);
 
         m_process->RC_Stereo_Harm->ctipo = tipo;
         m_process->RC_Stereo_Harm->fundi = undi;
@@ -2629,7 +2631,7 @@ void RKRGUI::FillML(/*int type*/)
     memset(tmp, 0, sizeof (tmp));
 
 
-    sprintf(tmp, "%s   v%s - MIDI Learn - Preset : %s", m_process->jackcliname, VERSION, m_process->Bank[m_process->Selected_Preset].Preset_Name);
+    snprintf(tmp, sizeof(tmp), "%s   v%s - MIDI Learn - Preset : %s", m_process->jackcliname, VERSION, m_process->Bank[m_process->Selected_Preset].Preset_Name);
     MIDILearn->copy_label(tmp);
 
     memset(m_process->ML_clist, 0, sizeof (m_process->ML_clist));
@@ -2716,7 +2718,7 @@ void RKRGUI::DisAssigns()
             {
                 k++;
                 memset(tmp, 0, sizeof (tmp));
-                sprintf(tmp, "%d", i);
+                snprintf(tmp, sizeof(tmp), "%d", i);
 
                 switch (k)
                 {
