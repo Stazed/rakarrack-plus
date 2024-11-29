@@ -81,7 +81,7 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     fftInit(32); // == latency
 
     char portname[50]; // used by alsa - put here to avoid unused variable compiler warning on jname
-    sprintf(portname, "%s MC OUT", jname); // used by alsa - put here to avoid unused variable compiler warning on jname
+    snprintf(portname, sizeof(portname), "%s MC OUT", jname); // used by alsa - put here to avoid unused variable compiler warning on jname
 
 #ifdef LV2_SUPPORT
     update_freqs(440.0f);

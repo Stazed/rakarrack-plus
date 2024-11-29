@@ -304,7 +304,7 @@ int
 RKR::jack_open_client()
 {
     char temp[256];
-    sprintf(temp, "%s", jack_client_name);
+    snprintf(temp, sizeof(temp), "%s", jack_client_name);
 
     jackclient = jack_client_open(temp, options, &status, NULL);
 
@@ -315,8 +315,8 @@ RKR::jack_open_client()
         return 0;
     }
 
-    strcpy(jackcliname, jack_get_client_name(jackclient));
-    strcpy(Config.jackcliname, jack_get_client_name(jackclient));
+    strlcpy(jackcliname, jack_get_client_name(jackclient), sizeof(jackcliname));
+    strlcpy(Config.jackcliname, jack_get_client_name(jackclient), sizeof(Config.jackcliname));
 
     JACK_SAMPLE_RATE = jack_get_sample_rate(jackclient);
     JACK_PERIOD = jack_get_buffer_size(jackclient);
@@ -526,7 +526,7 @@ RKR::put_order_in_rack()
 
     for (int i = 0; i < EFX_NUMBER_EFFECTS * 3; i += 3)
     {
-        strcpy(efx_names[i / 3].Nom, los_names[i]);
+        strlcpy(efx_names[i / 3].Nom, los_names[i], sizeof(efx_names[i / 3].Nom));
         sscanf(los_names[i + 1], "%d", &efx_names[i / 3].Pos);
         sscanf(los_names[i + 2], "%d", &efx_names[i / 3].Type);
     }

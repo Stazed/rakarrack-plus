@@ -624,7 +624,7 @@ RKR::MIDI_control()
     // C_MC_PARAMETER_SIZE must be adjusted.
     for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
     {
-        strcpy(mc_efx_params[i].Description, los_params[i * 6]);
+        strlcpy(mc_efx_params[i].Description, los_params[i * 6], sizeof(mc_efx_params[i].Description));
         sscanf(los_params[i * 6 + 1], "%d", &mc_efx_params[i].MC_params_index);
         sscanf(los_params[i * 6 + 2], "%d", &mc_efx_params[i].Effect_index);
         sscanf(los_params[i * 6 + 3], "%d", &mc_efx_params[i].Efx_param_index);
@@ -657,7 +657,7 @@ RKR::InitMIDI()
     char portname[70];
 
     // Create Alsa Seq Client
-    sprintf(portname, "%s IN", jackcliname);
+    snprintf(portname, sizeof(portname), "%s IN", jackcliname);
     snd_seq_create_simple_port(midi_in, portname,
                                SND_SEQ_PORT_CAP_WRITE |
                                SND_SEQ_PORT_CAP_SUBS_WRITE,
@@ -1037,7 +1037,7 @@ RKR::Conecta()
         {
             if (strstr(temp, "Client") != NULL)
             {
-                strcpy(temp1, temp);
+                strlcpy(temp1, temp, sizeof(temp1));
                 strtok(temp1, " ");
                 nume = strtok(NULL, "\"");
                 sscanf(nume, "%d", &client);
@@ -1045,7 +1045,7 @@ RKR::Conecta()
 
             if (strstr(temp, "Port") != NULL)
             {
-                strcpy(temp2, temp);
+                strlcpy(temp2, temp, sizeof(temp2));
                 strtok(temp2, " ");
                 nume = strtok(NULL, "  ");
                 sscanf(nume, "%d", &puerto);
@@ -1080,7 +1080,7 @@ RKR::conectaaconnect()
     {
         char tempi[128];
         memset(tempi, 0, sizeof (tempi));
-        sprintf(tempi, "aconnect %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
+        snprintf(tempi, sizeof(tempi), "aconnect %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
         
         if (system(tempi) == -1)
         {
@@ -1098,7 +1098,7 @@ RKR::disconectaaconnect()
     {
         char tempi[128];
         memset(tempi, 0, sizeof (tempi));
-        sprintf(tempi, "aconnect -d %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
+        snprintf(tempi, sizeof(tempi), "aconnect -d %d:%d  %d:%d", Ccin, Pcin, Cyoin, Pyoin);
         if (system(tempi) == -1)
         {
             Handle_Message(29);
@@ -1513,7 +1513,7 @@ void RKR::sysex_save_preset()
     
     // Set the preset name for the active preset
     memset(Active_Preset.Preset_Name, 0, sizeof (char) * 64);
-    strcpy(Active_Preset.Preset_Name, m_preset_name.c_str());
+    strlcpy(Active_Preset.Preset_Name, m_preset_name.c_str(), sizeof(Active_Preset.Preset_Name));
     
     // Copy the active preset to the save bank
     Save_Bank[m_preset_number] = Active_Preset;
