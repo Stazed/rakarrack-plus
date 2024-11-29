@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0308
+version 1.0309
 header_name {.h}
 code_name {.cxx}
 decl {\#include <FL/Fl_File_Chooser.H>} {public global
@@ -119,7 +119,7 @@ widget_class DelayFileWindowGui {open selected
     /* Update the file name if we have one */
     if(strcmp(file.Filename, DEFAULT_DLY_FILE_NAME) != 0 )
     {
-        strcpy(Efx_Echotron->Filename, file.Filename);
+        strlcpy(Efx_Echotron->Filename, file.Filename, sizeof(Efx_Echotron->Filename));
     }
 
     /* Set efx gui max file length to the applied file size */
@@ -346,29 +346,29 @@ this->redraw();} {}
 
     // Description
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "\#%s\\n", dly_description->value());
+    snprintf(buf, sizeof(buf), "\#%s\\n", dly_description->value());
     fputs(buf, fn);
 
     //General
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "\#Filter  Delay  Mode\\n");   // titles
+    snprintf(buf, sizeof(buf), "\#Filter  Delay  Mode\\n");   // titles
     fputs(buf, fn);
 
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "%s\\t%s\\t%d\\n",dly_filter->value(), dly_delay->value(), delay_file.f_qmode);
+    snprintf(buf, sizeof(buf), "%s\\t%s\\t%d\\n",dly_filter->value(), dly_delay->value(), delay_file.f_qmode);
     fputs(buf, fn);
 
     memset(buf, 0, sizeof (buf));
-    sprintf(buf, "\#    Pan       Time            Level         LP          BP          HP     Frequency       Q    Stages\\n");   // titles
+    snprintf(buf, sizeof(buf), "\#    Pan       Time            Level         LP          BP          HP     Frequency       Q    Stages\\n");   // titles
     fputs(buf, fn);
     
     for(int i = 0; i < m_file_size; ++i)
     {
     
         memset(buf, 0, sizeof (buf));
-        sprintf
+        snprintf
         (
-        buf, "%9.3f\\t%9.10f\\t%9.4f\\t%9.4f\\t%9.4f\\t%9.4f\\t%9.5f\\t%9.6f\\t%d\\n",
+        buf, sizeof(buf), "%9.3f\\t%9.10f\\t%9.4f\\t%9.4f\\t%9.4f\\t%9.4f\\t%9.5f\\t%9.6f\\t%d\\n",
         delay_file.fPan[i],
         delay_file.fTime[i],
         delay_file.fLevel[i],
@@ -388,7 +388,7 @@ this->redraw();} {}
   } {
     code {DlyFile delay_file;
 
-  strcpy(delay_file.Filename, this->label());
+  strlcpy(delay_file.Filename, this->label(), sizeof(delay_file.Filename));
   delay_file.fLength = (float)m_file_size;
   
   delay_file.subdiv_fmod = (double) strtod(dly_filter->value(), NULL);
