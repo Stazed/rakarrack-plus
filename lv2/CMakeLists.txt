@@ -6,6 +6,7 @@ project (rakarrack-plus-lv2)
 
 add_library(rakarrack-plus-lv2 SHARED
   rkrlv2.C
+  ../src/strlcpy.C
   ../src/FX/Effect.C
   ../src/FX/EQ.C
   ../src/EFX_common/AnalogFilter.C
