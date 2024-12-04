@@ -27,6 +27,7 @@
 
 
 #include "global.h"
+#include "strlcpy.h"
 #include "Config_fltk.h"
 #include <FL/Fl.H>
 
@@ -251,7 +252,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     if ((fn = fopen(BackgroundImage, "r")) == NULL)
     {
         memset(BackgroundImage, 0, sizeof (BackgroundImage));
-        strlcpy(BackgroundImage, temp, sizeof (BackgroundImage));
+        RKRP::strlcpy(BackgroundImage, temp, sizeof (BackgroundImage));
         fprintf(stderr, "Invalid BackgroundImage file, reverting to default\n");
     }
     else
@@ -406,11 +407,11 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
 
         if (i < 2)
         {
-            strlcpy(j_names, jack_names[i], sizeof(j_names));
+            RKRP::strlcpy(j_names, jack_names[i], sizeof(j_names));
         }
         else
         {
-            strlcpy(j_names, "", sizeof(j_names));
+            RKRP::strlcpy(j_names, "", sizeof(j_names));
         }
 
         rakarrack.get(PrefNom(temp), jack_po[i].name, j_names, 128);
@@ -441,11 +442,11 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
 
         if (i < 1)
         {
-            strlcpy(j_names, jack_inames[i], sizeof(j_names));
+            RKRP::strlcpy(j_names, jack_inames[i], sizeof(j_names));
         }
         else
         {
-            strlcpy(j_names, "", sizeof(j_names));
+            RKRP::strlcpy(j_names, "", sizeof(j_names));
         }
 
         rakarrack.get(PrefNom(temp), jack_poi[i].name, j_names, 128);

@@ -17,6 +17,9 @@ decl {\#include "RKR_Choice.h"} {public global
 decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
+decl {\#include "../strlcpy.h"} {private global
+}
+
 widget_class {\#include "common_gui_menu.h"} EchotronGui {open selected
   xywh {1576 112 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
@@ -277,7 +280,7 @@ m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_Taps,(int)o->value());
     if(user_file_selected)
     {
         // Copy the file name to the EFX
-        strlcpy(Efx_Echotron->Filename, file.c_str(), sizeof(Efx_Echotron->Filename));
+        RKRP::strlcpy(Efx_Echotron->Filename, file.c_str(), sizeof(Efx_Echotron->Filename));
         
         // Tell the EFX that this is a user supplied file
         m_process->Rack_Effects[EFX_ECHOTRON]->changepar(Echotron_User_File, 1);

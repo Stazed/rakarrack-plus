@@ -24,6 +24,7 @@
 #include <algorithm>    // std::remove
 #include <fstream>
 #include "process.h"
+#include "strlcpy.h"
 #include <FL/fl_ask.H> // for error pop up
 
 /**
@@ -80,7 +81,7 @@ void RKR::apply_effect_parameters(std::string s_buf, int fx_index, PresetBankStr
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
-                strlcpy(preset_loaded.ConvoFiname, s_name.c_str(), sizeof(preset_loaded.ConvoFiname));
+                RKRP::strlcpy(preset_loaded.ConvoFiname, s_name.c_str(), sizeof(preset_loaded.ConvoFiname));
             }
             
             else if(fx_index == EFX_REVERBTRON)
@@ -89,7 +90,7 @@ void RKR::apply_effect_parameters(std::string s_buf, int fx_index, PresetBankStr
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
-                strlcpy(preset_loaded.RevFiname, s_name.c_str(), sizeof(preset_loaded.RevFiname));
+                RKRP::strlcpy(preset_loaded.RevFiname, s_name.c_str(), sizeof(preset_loaded.RevFiname));
             }
 
             else if(fx_index == EFX_ECHOTRON)
@@ -98,7 +99,7 @@ void RKR::apply_effect_parameters(std::string s_buf, int fx_index, PresetBankStr
 
                 // Gotta remove the '\n' from the file name or error.
                 s_name.erase(std::remove(s_name.begin(), s_name.end(), '\n'), s_name.end());
-                strlcpy(preset_loaded.EchoFiname, s_name.c_str(), sizeof(preset_loaded.EchoFiname));
+                RKRP::strlcpy(preset_loaded.EchoFiname, s_name.c_str(), sizeof(preset_loaded.EchoFiname));
             }
             
             return; // we found and processed what we were looking for
@@ -709,15 +710,15 @@ RKR::set_audio_paramters()
     // Copy the file names to the audio effects
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
     memset(Efx_Convolotron->Filename, 0, sizeof (Efx_Convolotron->Filename));
-    strlcpy(Efx_Convolotron->Filename, Active_Preset.ConvoFiname, sizeof(Efx_Convolotron->Filename));
+    RKRP::strlcpy(Efx_Convolotron->Filename, Active_Preset.ConvoFiname, sizeof(Efx_Convolotron->Filename));
 
     Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
     memset(Efx_Reverbtron->Filename, 0, sizeof (Efx_Reverbtron->Filename));
-    strlcpy(Efx_Reverbtron->Filename, Active_Preset.RevFiname, sizeof(Efx_Reverbtron->Filename));
+    RKRP::strlcpy(Efx_Reverbtron->Filename, Active_Preset.RevFiname, sizeof(Efx_Reverbtron->Filename));
 
     Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
     memset(Efx_Echotron->Filename, 0, sizeof (Efx_Echotron->Filename));
-    strlcpy(Efx_Echotron->Filename, Active_Preset.EchoFiname, sizeof(Efx_Echotron->Filename));
+    RKRP::strlcpy(Efx_Echotron->Filename, Active_Preset.EchoFiname, sizeof(Efx_Echotron->Filename));
     
     // The main window effect order
     for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
@@ -858,7 +859,7 @@ RKR::load_custom_MIDI_table_preset_names()
     {
         for (int j = 1; j <= 60; j++)
         {
-            strlcpy(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name,
+            RKRP::strlcpy(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name,
                     Bank_Vector[k].Bank[j].Preset_Name, sizeof(MIDI_Table_Bank_Preset_Names[k][j].Preset_Name));
         }
     }
@@ -1544,15 +1545,15 @@ RKR::refresh_active_preset()
     // Update filenames for Convolotron, Echotron, Reverbtron to Active_Preset
     Convolotron *Efx_Convolotron = static_cast<Convolotron*>(Rack_Effects[EFX_CONVOLOTRON]);
     memset(Active_Preset.ConvoFiname, 0, sizeof (Active_Preset.ConvoFiname));
-    strlcpy(Active_Preset.ConvoFiname, Efx_Convolotron->Filename, sizeof(Active_Preset.ConvoFiname));
+    RKRP::strlcpy(Active_Preset.ConvoFiname, Efx_Convolotron->Filename, sizeof(Active_Preset.ConvoFiname));
     
     Reverbtron *Efx_Reverbtron = static_cast<Reverbtron*>(Rack_Effects[EFX_REVERBTRON]);
     memset(Active_Preset.RevFiname, 0, sizeof (Active_Preset.RevFiname));
-    strlcpy(Active_Preset.RevFiname, Efx_Reverbtron->Filename, sizeof(Active_Preset.RevFiname));
+    RKRP::strlcpy(Active_Preset.RevFiname, Efx_Reverbtron->Filename, sizeof(Active_Preset.RevFiname));
 
     Echotron *Efx_Echotron = static_cast<Echotron*>(Rack_Effects[EFX_ECHOTRON]);
     memset(Active_Preset.EchoFiname, 0, sizeof (Active_Preset.EchoFiname));
-    strlcpy(Active_Preset.EchoFiname, Efx_Echotron->Filename, sizeof(Active_Preset.EchoFiname));
+    RKRP::strlcpy(Active_Preset.EchoFiname, Efx_Echotron->Filename, sizeof(Active_Preset.EchoFiname));
 }
 
 /**

@@ -71,6 +71,9 @@ decl {\#include <FL/Fl_Color_Chooser.H>} {public global
 decl {\#include <X11/xpm.h>} {public global
 }
 
+decl {\#include "../strlcpy.h"} {private global
+}
+
 decl {const std::vector<std::string> main_submenu_paths
 {
     "&File/Import Preset",
@@ -368,7 +371,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
         global_gui_show = CONST_GUI_HIDE;
     }
 \#endif} selected
-      xywh {140 478 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+      xywh {210 478 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -1589,7 +1592,7 @@ BankWindow->hide();}
           class RKR_Button
         }
         Fl_Input WPreset_Name {
-          callback {strlcpy(m_process->Active_Preset.Preset_Name,o->value(), sizeof(m_process->Active_Preset.Preset_Name));}
+          callback {RKRP::strlcpy(m_process->Active_Preset.Preset_Name,o->value(), sizeof(m_process->Active_Preset.Preset_Name));}
           tooltip {Enter the preset name for this effect.} xywh {174 72 338 30} color 62 labelcolor 7 align 20 textsize 24 textcolor 7
           code0 {o->set_text_offset(14);}
           code1 {o->maximum_size(22);}

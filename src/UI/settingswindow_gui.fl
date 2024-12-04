@@ -38,7 +38,10 @@ decl {\#include "RKR_Tabs.h"} {public global
 decl {\#include "RKR_Fl_Slider.h"} {public global
 }
 
-widget_class SettingsWindowGui {open selected
+decl {\#include "../strlcpy.h"} {selected private global
+}
+
+widget_class SettingsWindowGui {open
   xywh {708 107 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
@@ -171,7 +174,7 @@ m_parent->font_type_change(font_type);}
     char filename[256];
     snprintf(filename, sizeof(filename), "%s/blackbg.png", DATADIR);
     BackFiname->value(filename);
-    strlcpy(m_process->Config.BackgroundImage,filename, sizeof(m_process->Config.BackgroundImage));
+    RKRP::strlcpy(m_process->Config.BackgroundImage,filename, sizeof(m_process->Config.BackgroundImage));
     
     m_process->Config.EnableBackgroundImage = 0;
     m_parent->PutBackground();
@@ -275,7 +278,7 @@ filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
-strlcpy(m_process->Config.BackgroundImage,filename, sizeof(m_process->Config.BackgroundImage));
+RKRP::strlcpy(m_process->Config.BackgroundImage,filename, sizeof(m_process->Config.BackgroundImage));
 m_parent->PutBackground();}
         xywh {427 470 65 20}
         code0 {o->set_label_offset(4);}
@@ -1281,7 +1284,7 @@ else BMidiIn->deactivate();}
         callback {int valor;
 valor = (int) o->value();
 if(o->text(valor) != NULL)
-strlcpy(m_process->Config.MID,o->text(valor), sizeof(m_process->Config.MID));
+RKRP::strlcpy(m_process->Config.MID,o->text(valor), sizeof(m_process->Config.MID));
 else return;
 o->select(valor,1);
 m_process->Conecta();}
@@ -1523,7 +1526,7 @@ m_process->Config.NSM_single_state=(int) o->value();
         return;
 
     Udir->value(dir);
-    strlcpy(m_process->Config.UDirFilename, dir, sizeof(m_process->Config.UDirFilename));
+    RKRP::strlcpy(m_process->Config.UDirFilename, dir, sizeof(m_process->Config.UDirFilename));
 
     // Needed for FPreset
     global_user_directory = m_process->Config.UDirFilename;
@@ -1563,7 +1566,7 @@ See F1 help under General/Preferences for additional information.} xywh {415 65 
     filename = fl_filename_setext(filename, ".rkrb");
     
     BFiname->value(filename);
-    strlcpy(m_process->Config.BankFilename,filename, sizeof(m_process->Config.BankFilename));
+    RKRP::strlcpy(m_process->Config.BankFilename,filename, sizeof(m_process->Config.BankFilename));
 
     // If we do not find the Bank file, then the Default.rkrb file is loaded.
     int bank_found = -1;
@@ -1762,7 +1765,7 @@ Efx_Convolotron->reset_parameters(save_state);
 /* Check for user file and re-load if present */
 if(Efx_Convolotron->getpar(Convo_User_File))
 {
-    strlcpy(Efx_Convolotron->Filename,filename.c_str(), sizeof(Efx_Convolotron->Filename));
+    RKRP::strlcpy(Efx_Convolotron->Filename,filename.c_str(), sizeof(Efx_Convolotron->Filename));
     if(!Efx_Convolotron->setfile(USERFILE))
     {
         m_process->Handle_Message(14, filename);
@@ -1803,7 +1806,7 @@ Efx_Reverbtron->reset_parameters(save_state);
 /* Check for user file and re-load if present */
 if(Efx_Reverbtron->getpar(Revtron_User_File))
 {
-    strlcpy(Efx_Reverbtron->Filename,filename.c_str(), sizeof(Efx_Reverbtron->Filename));
+    RKRP::strlcpy(Efx_Reverbtron->Filename,filename.c_str(), sizeof(Efx_Reverbtron->Filename));
     if(!Efx_Reverbtron->setfile(USERFILE))
     {
         m_process->Handle_Message(14, filename);

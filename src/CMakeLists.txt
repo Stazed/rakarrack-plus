@@ -5,6 +5,7 @@ project (rakarrack-plus)
 set (ProgSources
     Config_fltk.C
     jack.C 
+    strlcpy.C
     UI/rakarrack.cxx
     UI/analyzer.cxx
     UI/scope.cxx

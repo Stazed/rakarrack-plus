@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Reverbtron.h"
+#include "../strlcpy.h"
 
 Reverbtron::Reverbtron(int DS, int uq, int dq,
                        double sample_rate, uint32_t intermediate_bufsize) :
@@ -710,7 +711,7 @@ Reverbtron::loadfile(char* filename)
         return (f);
     }
     
-    strlcpy(f.Filename, filename, sizeof(f.Filename));
+    RKRP::strlcpy(f.Filename, filename, sizeof(f.Filename));
     memset(f.tdata, 0, sizeof (float)*2000);
     memset(f.ftime, 0, sizeof (float)*2000);
 
@@ -800,7 +801,7 @@ Reverbtron::applyfile(const RvbFile &file)
 RvbFile Reverbtron::loaddefault()
 {
     RvbFile f;
-    strlcpy(f.Filename, "default", sizeof(f.Filename));
+    RKRP::strlcpy(f.Filename, "default", sizeof(f.Filename));
     f.data_length = Llength = 2;
     f.ftime[0] = 1.0f;
     f.ftime[1] = 1.25f;

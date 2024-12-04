@@ -14,8 +14,11 @@ decl {\#include "RKR_Choice.h"} {public global
 decl {\#include "RKR_GUI_Effect.h"} {public global
 }
 
+decl {\#include "../strlcpy.h"} {private global
+}
+
 widget_class ConvoGui {open selected
-  xywh {1550 59 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
+  xywh {1550 65 155 180} type Double box UP_BOX color 0 selection_color 0 align 112
   code0 {\#include "RKR_Slider.h"}
   code1 {\#include "../process.h"}
   code2 {\#include "rakarrack.h"}
@@ -183,7 +186,7 @@ m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_Length,(int)o->value()
     {
         // Copy the file name to the EFX
         Convolotron *Efx_Convolotron = static_cast<Convolotron*>(m_process->Rack_Effects[EFX_CONVOLOTRON]);
-        strlcpy(Efx_Convolotron->Filename, file.c_str(), sizeof(Efx_Convolotron->Filename));
+        RKRP::strlcpy(Efx_Convolotron->Filename, file.c_str(), sizeof(Efx_Convolotron->Filename));
         
         // Tell the EFX that this is a user supplied file
         m_process->Rack_Effects[EFX_CONVOLOTRON]->changepar(Convo_User_File, 1);

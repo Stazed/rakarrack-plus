@@ -27,6 +27,7 @@
  */
 
 #include "rakarrack.h"
+#include "../strlcpy.h"
 #include "../icono_rakarrack_128x128.xpm"
 #include <algorithm>    // std::sort
 static Fl_Widget *previous_widget = NULL;
@@ -1665,7 +1666,7 @@ void RKRGUI::MiraClientes()
             {
                 char temp1[128];
                 char *masque;
-                strlcpy(temp1, temp, sizeof(temp1));
+                RKRP::strlcpy(temp1, temp, sizeof(temp1));
                 strtok(temp1, "\"");
                 char *name = strtok(NULL, "\"");
                 masque = strtok(NULL, ")");

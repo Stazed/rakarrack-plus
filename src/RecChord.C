@@ -23,6 +23,7 @@
 
 
 #include "RecChord.h"
+#include "strlcpy.h"
 
 RecChord::RecChord() :
     cc(),
@@ -250,7 +251,7 @@ RecChord::RecChord() :
         
         for (int i = 0; i <= 33; i++)
         {
-            strlcpy(ChN[i].Nom, stnom[i], sizeof(ChN[i].Nom));
+            RKRP::strlcpy(ChN[i].Nom, stnom[i], sizeof(ChN[i].Nom));
             ChN[i].tipo = i;
         }
     }
@@ -268,12 +269,12 @@ RecChord::RecChord() :
 
         for (int i = 0; i <= 11; i++)
         {
-            strlcpy(NC[i].Nom, stnom[i], sizeof(NC[i].Nom));
+            RKRP::strlcpy(NC[i].Nom, stnom[i], sizeof(NC[i].Nom));
         }
         
         for (int i = 0; i <= 23; i++)
         {
-            strlcpy(NCE[i].Nom, stnom[i], sizeof(NCE[i].Nom));
+            RKRP::strlcpy(NCE[i].Nom, stnom[i], sizeof(NCE[i].Nom));
         }
     }
     
@@ -351,7 +352,7 @@ RecChord::IniciaChords()
         switch (notas)
         {
         case 3:
-            strlcpy(Chord3[NumChord3].Nom, ChN[i].Nom, sizeof(Chord3[NumChord3].Nom));
+            RKRP::strlcpy(Chord3[NumChord3].Nom, ChN[i].Nom, sizeof(Chord3[NumChord3].Nom));
             Chord3[NumChord3].di1 = numno[2];
             Chord3[NumChord3].di2 = numno[3] - numno[2];
             Chord3[NumChord3].fund = 1;
@@ -359,13 +360,13 @@ RecChord::IniciaChords()
             NumChord3++;
             if (ChN[i].num == 1)
                 break;
-            strlcpy(Chord3[NumChord3].Nom, ChN[i].Nom, sizeof(Chord3[NumChord3].Nom));
+            RKRP::strlcpy(Chord3[NumChord3].Nom, ChN[i].Nom, sizeof(Chord3[NumChord3].Nom));
             Chord3[NumChord3].di1 = numno[3] - numno[2];
             Chord3[NumChord3].di2 = 12 - numno[3];
             Chord3[NumChord3].fund = 3;
             Chord3[NumChord3].tipo = i;
             NumChord3++;
-            strlcpy(Chord3[NumChord3].Nom, ChN[i].Nom, sizeof(Chord3[NumChord3].Nom));
+            RKRP::strlcpy(Chord3[NumChord3].Nom, ChN[i].Nom, sizeof(Chord3[NumChord3].Nom));
             Chord3[NumChord3].di1 = 12 - numno[3];
             Chord3[NumChord3].di2 = numno[2];
             Chord3[NumChord3].fund = 2;
@@ -373,7 +374,7 @@ RecChord::IniciaChords()
             NumChord3++;
             break;
         case 4:
-            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
+            RKRP::strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = numno[2];
             Chord4[NumChord4].di2 = numno[3] - numno[2];
             Chord4[NumChord4].di3 = numno[4] - numno[3];
@@ -382,28 +383,28 @@ RecChord::IniciaChords()
             NumChord4++;
             if (ChN[i].num == 1)
                 break;
-            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
+            RKRP::strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = numno[3] - numno[2];
             Chord4[NumChord4].di2 = numno[4] - numno[3];
             Chord4[NumChord4].di3 = 12 - numno[4];
             Chord4[NumChord4].fund = 4;
             Chord4[NumChord4].tipo = i;
             NumChord4++;
-            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
+            RKRP::strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = numno[4] - numno[3];
             Chord4[NumChord4].di2 = 12 - numno[4];
             Chord4[NumChord4].di3 = numno[2];
             Chord4[NumChord4].fund = 3;
             Chord4[NumChord4].tipo = i;
             NumChord4++;
-            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
+            RKRP::strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = 12 - numno[4];
             Chord4[NumChord4].di2 = numno[2];
             Chord4[NumChord4].di3 = numno[3] - numno[2];
             Chord4[NumChord4].fund = 2;
             Chord4[NumChord4].tipo = i;
             NumChord4++;
-            strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
+            RKRP::strlcpy(Chord4[NumChord4].Nom, ChN[i].Nom, sizeof(Chord4[NumChord4].Nom));
             Chord4[NumChord4].di1 = numno[2] + (12 - numno[4]);
             Chord4[NumChord4].di2 = numno[3] - numno[2];
             Chord4[NumChord4].di3 = 12 - numno[3];
@@ -413,7 +414,7 @@ RecChord::IniciaChords()
             break;
 
         case 5:
-            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
+            RKRP::strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[2];
             Chord5[NumChord5].di2 = numno[3] - numno[2];
             Chord5[NumChord5].di3 = numno[4] - numno[3];
@@ -423,7 +424,7 @@ RecChord::IniciaChords()
             NumChord5++;
             if (ChN[i].num == 1)
                 break;
-            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
+            RKRP::strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[3] - numno[2];
             Chord5[NumChord5].di2 = numno[4] - numno[3];
             Chord5[NumChord5].di3 = numno[5] - numno[4];
@@ -432,7 +433,7 @@ RecChord::IniciaChords()
             Chord5[NumChord5].fund = 5;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
+            RKRP::strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[4] - numno[3];
             Chord5[NumChord5].di2 = numno[5] - numno[4];
             Chord5[NumChord5].di3 = 12 - numno[5];
@@ -440,7 +441,7 @@ RecChord::IniciaChords()
             Chord5[NumChord5].fund = 4;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
+            RKRP::strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[5] - numno[4];
             Chord5[NumChord5].di2 = 12 - numno[5];
             Chord5[NumChord5].di3 = numno[2];
@@ -448,7 +449,7 @@ RecChord::IniciaChords()
             Chord5[NumChord5].fund = 3;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
+            RKRP::strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = 12 - numno[5];
             Chord5[NumChord5].di2 = numno[2];
             Chord5[NumChord5].di3 = numno[3] - numno[2];
@@ -456,7 +457,7 @@ RecChord::IniciaChords()
             Chord5[NumChord5].fund = 2;
             Chord5[NumChord5].tipo = i;
             NumChord5++;
-            strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
+            RKRP::strlcpy(Chord5[NumChord5].Nom, ChN[i].Nom, sizeof(Chord5[NumChord5].Nom));
             Chord5[NumChord5].di1 = numno[2] + (12 - numno[5]);
             Chord5[NumChord5].di2 = numno[3] - numno[2];
             Chord5[NumChord5].di3 = numno[4] - numno[3];
@@ -550,7 +551,7 @@ RecChord::MiraChord()
 
                     if (strcmp(AName, NombreAcorde) != 0)
                     {
-                        strlcpy(NombreAcorde, AName, sizeof(NombreAcorde));
+                        RKRP::strlcpy(NombreAcorde, AName, sizeof(NombreAcorde));
                         cc = 1;
                     }
 
@@ -589,7 +590,7 @@ RecChord::MiraChord()
 
                     if (strcmp(AName, NombreAcorde) != 0)
                     {
-                        strlcpy(NombreAcorde, AName, sizeof(NombreAcorde));
+                        RKRP::strlcpy(NombreAcorde, AName, sizeof(NombreAcorde));
                         cc = 1;
                     }
                     return;
@@ -629,7 +630,7 @@ RecChord::MiraChord()
 
                     if (strcmp(AName, NombreAcorde) != 0)
                     {
-                        strlcpy(NombreAcorde, AName, sizeof(NombreAcorde));
+                        RKRP::strlcpy(NombreAcorde, AName, sizeof(NombreAcorde));
                         cc = 1;
                     }
                     return;

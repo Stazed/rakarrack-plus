@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "Echotron.h"
+#include "../strlcpy.h"
 
 Echotron::Echotron(double sample_rate, uint32_t intermediate_bufsize) :
     Effect(sample_rate, intermediate_bufsize),
@@ -684,7 +685,7 @@ Echotron::loadfile(char* Filename)
         return loaddefault();
     }
 
-    strlcpy(f.Filename, Filename, sizeof(f.Filename)); // Must copy the file name here for lv2 save when if(plug->file_changed) in rkr.lv2.C
+    RKRP::strlcpy(f.Filename, Filename, sizeof(f.Filename)); // Must copy the file name here for lv2 save when if(plug->file_changed) in rkr.lv2.C
 
     int first_line = 0;
     while (fgets(wbuf, sizeof wbuf, fs) != NULL)
@@ -788,7 +789,7 @@ Echotron::loaddefault()
 {
     Plength = 1;
     DlyFile f;
-    strlcpy(f.Filename, "default", sizeof(f.Filename));
+    RKRP::strlcpy(f.Filename, "default", sizeof(f.Filename));
     f.fLength = 1;
     f.fPan[0] = 0.0f;
     f.fTime[0] = 1.0f; //default 1 measure delay

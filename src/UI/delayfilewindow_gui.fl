@@ -29,6 +29,9 @@ decl {\#include "../FX/Echotron.h"} {public global
 decl {\#include "rakarrack.h"} {public global
 }
 
+decl {\#include "../strlcpy.h"} {private global
+}
+
 decl {\#define DEFAULT_DLY_FILE_NAME "Delay File - Untitled"} {public global
 }
 
@@ -119,7 +122,7 @@ widget_class DelayFileWindowGui {open selected
     /* Update the file name if we have one */
     if(strcmp(file.Filename, DEFAULT_DLY_FILE_NAME) != 0 )
     {
-        strlcpy(Efx_Echotron->Filename, file.Filename, sizeof(Efx_Echotron->Filename));
+        RKRP::strlcpy(Efx_Echotron->Filename, file.Filename, sizeof(Efx_Echotron->Filename));
     }
 
     /* Set efx gui max file length to the applied file size */
@@ -388,7 +391,7 @@ this->redraw();} {}
   } {
     code {DlyFile delay_file;
 
-  strlcpy(delay_file.Filename, this->label(), sizeof(delay_file.Filename));
+  RKRP::strlcpy(delay_file.Filename, this->label(), sizeof(delay_file.Filename));
   delay_file.fLength = (float)m_file_size;
   
   delay_file.subdiv_fmod = (double) strtod(dly_filter->value(), NULL);

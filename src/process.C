@@ -30,6 +30,7 @@
 #include <unistd.h>
 #include "global.h"
 #include "process.h"
+#include "strlcpy.h"
 
 int global_error_number = 0;
 char *jack_client_name = (char*) PACKAGE;
@@ -315,8 +316,8 @@ RKR::jack_open_client()
         return 0;
     }
 
-    strlcpy(jackcliname, jack_get_client_name(jackclient), sizeof(jackcliname));
-    strlcpy(Config.jackcliname, jack_get_client_name(jackclient), sizeof(Config.jackcliname));
+    RKRP::strlcpy(jackcliname, jack_get_client_name(jackclient), sizeof(jackcliname));
+    RKRP::strlcpy(Config.jackcliname, jack_get_client_name(jackclient), sizeof(Config.jackcliname));
 
     JACK_SAMPLE_RATE = jack_get_sample_rate(jackclient);
     JACK_PERIOD = jack_get_buffer_size(jackclient);
@@ -526,7 +527,7 @@ RKR::put_order_in_rack()
 
     for (int i = 0; i < EFX_NUMBER_EFFECTS * 3; i += 3)
     {
-        strlcpy(efx_names[i / 3].Nom, los_names[i], sizeof(efx_names[i / 3].Nom));
+        RKRP::strlcpy(efx_names[i / 3].Nom, los_names[i], sizeof(efx_names[i / 3].Nom));
         sscanf(los_names[i + 1], "%d", &efx_names[i / 3].Pos);
         sscanf(los_names[i + 2], "%d", &efx_names[i / 3].Type);
     }

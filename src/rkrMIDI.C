@@ -23,6 +23,7 @@
 
 
 #include "process.h"
+#include "strlcpy.h"
 #include <FL/fl_ask.H>  // for error pop up
 #include <FL/Fl_Preferences.H>
 
@@ -624,7 +625,7 @@ RKR::MIDI_control()
     // C_MC_PARAMETER_SIZE must be adjusted.
     for (int i = 0; i < C_MC_PARAMETER_SIZE; i++)
     {
-        strlcpy(mc_efx_params[i].Description, los_params[i * 6], sizeof(mc_efx_params[i].Description));
+        RKRP::strlcpy(mc_efx_params[i].Description, los_params[i * 6], sizeof(mc_efx_params[i].Description));
         sscanf(los_params[i * 6 + 1], "%d", &mc_efx_params[i].MC_params_index);
         sscanf(los_params[i * 6 + 2], "%d", &mc_efx_params[i].Effect_index);
         sscanf(los_params[i * 6 + 3], "%d", &mc_efx_params[i].Efx_param_index);
@@ -1037,7 +1038,7 @@ RKR::Conecta()
         {
             if (strstr(temp, "Client") != NULL)
             {
-                strlcpy(temp1, temp, sizeof(temp1));
+                RKRP::strlcpy(temp1, temp, sizeof(temp1));
                 strtok(temp1, " ");
                 nume = strtok(NULL, "\"");
                 sscanf(nume, "%d", &client);
@@ -1045,7 +1046,7 @@ RKR::Conecta()
 
             if (strstr(temp, "Port") != NULL)
             {
-                strlcpy(temp2, temp, sizeof(temp2));
+                RKRP::strlcpy(temp2, temp, sizeof(temp2));
                 strtok(temp2, " ");
                 nume = strtok(NULL, "  ");
                 sscanf(nume, "%d", &puerto);
@@ -1513,7 +1514,7 @@ void RKR::sysex_save_preset()
     
     // Set the preset name for the active preset
     memset(Active_Preset.Preset_Name, 0, sizeof (char) * 64);
-    strlcpy(Active_Preset.Preset_Name, m_preset_name.c_str(), sizeof(Active_Preset.Preset_Name));
+    RKRP::strlcpy(Active_Preset.Preset_Name, m_preset_name.c_str(), sizeof(Active_Preset.Preset_Name));
     
     // Copy the active preset to the save bank
     Save_Bank[m_preset_number] = Active_Preset;

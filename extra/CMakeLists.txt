@@ -1,7 +1,7 @@
 
 add_executable (rakconvert rakconvert.C)
-add_executable (rakverb rakverb.C)
-add_executable (rakverb2 rakverb2.C)
+add_executable (rakverb ../src/strlcpy.C rakverb.C )
+add_executable (rakverb2 ../src/strlcpy.C rakverb2.C )
 add_executable (rakgit2new rakgit2new.C)
 
 target_include_directories (rakverb PRIVATE  ${SNDFILE_INCLUDE_DIRS})

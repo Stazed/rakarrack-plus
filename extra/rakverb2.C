@@ -24,6 +24,7 @@
 #include <sndfile.h>
 #include <getopt.h>
 #include <string>
+#include "../src/strlcpy.h"
 
 #define PERIOD 128
 
@@ -111,7 +112,7 @@ main(int argc, char *argv[])
             case 'i':
                 if (optarguments != NULL)
                 {
-                    strlcpy(Inputfile, optarguments, sizeof(Inputfile));
+                    RKRP::strlcpy(Inputfile, optarguments, sizeof(Inputfile));
                     if(!(infile = sf_open(Inputfile, SFM_READ, &sfinfo))) return(0);
                     all_ok = 1;
                 }
@@ -120,7 +121,7 @@ main(int argc, char *argv[])
                 if (optarguments != NULL)
                 {
                     have_output = 1;
-                    strlcpy(Outputfile, optarguments, sizeof(Outputfile));
+                    RKRP::strlcpy(Outputfile, optarguments, sizeof(Outputfile));
                 }
                 break;
         }
