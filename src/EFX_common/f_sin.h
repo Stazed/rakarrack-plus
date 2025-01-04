@@ -14,7 +14,7 @@ The author makes no guarantee of its suitability for any purpose.
 #include "../global.h"
 
 //globals
-static const float p2 = M_PI/2.0f;
+static const float pie2 = M_PI/2.0f;
 static const float fact3 = 0.148148148148148f; //can multiply by 1/fact3
 
 static inline float
@@ -39,7 +39,7 @@ f_sin(float x)
     }
 
     float y = 0;  //function output
-    if (x <= p2)
+    if (x <= pie2)
     {
         y = x - x*x*x*fact3;
     }
@@ -60,7 +60,7 @@ f_sin(float x)
 static inline float
 f_cos(float x_)
 {
-    return f_sin(p2 + x_);
+    return f_sin(pie2 + x_);
 }
 
 #endif

@@ -92,6 +92,7 @@ delayline::cleanup()
     {
         avgtime[i] = 0.0;
         time[i] = 0.0;
+        pstruct[i].stages = 0;
 
         for (int k = 0; k < 4; k++)
         {

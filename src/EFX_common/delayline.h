@@ -80,12 +80,6 @@ private:
         float xn1[4];
         float gain[4];
         int stages;
-        
-        phasevars():
-            yn1(),
-            xn1(),
-            gain(),
-            stages() {}
     } *pstruct;
 
     float phaser(float fxn);
@@ -97,11 +91,6 @@ private:
         float lvars[4];
         float ivars[4];
         float fracts[4];
-        
-        tapvars():
-            lvars(),
-            ivars(),
-            fracts() {}
     } *tapstruct;
 
     float *ringbuffer;
