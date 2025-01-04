@@ -82,6 +82,13 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
         {
             char *cfilename;
             cfilename = (char *) malloc(sizeof (char) * 128);
+
+            if(cfilename == NULL)
+            {
+                fprintf(stderr, "Cannot allocate memory for cfilename\n");
+                return;
+            }
+
             memset(cfilename, 0, sizeof (char) * 128);
             while (fgets(buf, sizeof buf, fn) != NULL)
             {
@@ -114,6 +121,13 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
         {
             char *cfilename;
             cfilename = (char *) malloc(sizeof (char) * 128);
+
+            if(cfilename == NULL)
+            {
+                fprintf(stderr, "Cannot allocate memory for cfilename\n");
+                return;
+            }
+
             memset(cfilename, 0, sizeof (char) * 128);
             while (fgets(buf, sizeof buf, fn) != NULL)
             {
@@ -145,6 +159,13 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
         {
             char *cfilename;
             cfilename = (char *) malloc(sizeof (char) * 128);
+
+            if(cfilename == NULL)
+            {
+                fprintf(stderr, "Cannot allocate memory for cfilename\n");
+                return;
+            }
+
             memset(cfilename, 0, sizeof (char) * 128);
             while (fgets(buf, sizeof buf, fn) != NULL)
             {
