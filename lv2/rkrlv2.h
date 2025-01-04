@@ -224,22 +224,6 @@ typedef struct _RKRLV2
         LV2_URID    filetype_rvb;
         LV2_URID    filetype_dly;
         LV2_URID    filetype_snd;
-        
-        urids():
-            midi_MidiEvent(),
-            atom_Float(),
-            atom_Int(),
-            atom_Object(),
-            atom_Path(),
-            atom_URID(),
-            bufsz_max(),
-            patch_Set(),
-            patch_Get(),
-            patch_property(),
-            patch_value(),
-            filetype_rvb(),
-            filetype_dly(),
-            filetype_snd() {}
 
     } URIDs;
 

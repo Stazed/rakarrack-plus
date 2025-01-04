@@ -270,8 +270,20 @@ void getFeatures(RKRLV2* plug, const LV2_Feature * const* host_features)
     plug->file_changed = 0;
     plug->scheduler = 0;
     plug->urid_map = 0;
-    plug->URIDs.bufsz_max = 0;  // for valgrind
-    plug->URIDs.atom_Int = 0;   // for valgrind
+    plug->URIDs.midi_MidiEvent = 0;
+    plug->URIDs.atom_Float = 0;
+    plug->URIDs.atom_Int = 0;
+    plug->URIDs.atom_Object = 0;
+    plug->URIDs.atom_Path = 0;
+    plug->URIDs.atom_URID = 0;
+    plug->URIDs.bufsz_max = 0;
+    plug->URIDs.patch_Set = 0;
+    plug->URIDs.patch_Get = 0;
+    plug->URIDs.patch_property = 0;
+    plug->URIDs.patch_value = 0;
+    plug->URIDs.filetype_rvb = 0;
+    plug->URIDs.filetype_dly = 0;
+    plug->URIDs.filetype_snd = 0;
 
     for(i=0; host_features[i]; i++)
     {
@@ -4897,7 +4909,7 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
     //check and set changed parameters
     int val = 0;
 
-    for(int i; i < plug->nparams; i++)
+    for(int i = 0; i < plug->nparams; i++)
     {
         switch(i)
         {
