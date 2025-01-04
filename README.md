@@ -150,3 +150,7 @@ Additional Information
 *   You may find additional information on the official rakarrack site (http://rakarrack.sourceforge.net).
 *   This project was forked from (https://github.com/ssj71/rakarrack) >> (https://github.com/Stazed/rakarrack).
 *   Special thanks to Spencer Jackson (https://github.com/ssj71/rkrlv2).
+
+## SAST Tools
+
+[PVS-Studio](https://pvs-studio.com/en/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
