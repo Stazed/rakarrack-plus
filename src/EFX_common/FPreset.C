@@ -94,7 +94,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
                 {
                     strsep(&sbuf, ",");
                     strsep(&sbuf, ",");
-                    sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+                    sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%127s\n",
                            &pdata[0], &pdata[1], &pdata[2], &pdata[3], &pdata[4], &pdata[5],
                            &pdata[6], &pdata[7], &pdata[8], &pdata[9], &pdata[10], &pdata[11],
                            cfilename);
@@ -124,7 +124,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
                 {
                     strsep(&sbuf, ",");
                     strsep(&sbuf, ",");
-                    sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+                    sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%127s\n",
                            &pdata[0], &pdata[1], &pdata[2], &pdata[3], &pdata[4], &pdata[5],
                            &pdata[6], &pdata[7], &pdata[8], &pdata[9], &pdata[10], &pdata[11],
                            &pdata[12], &pdata[13], &pdata[14], &pdata[15], &pdata[16],
@@ -157,7 +157,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
                 {
                     strsep(&sbuf, ",");
                     strsep(&sbuf, ",");
-                    sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%s\n",
+                    sscanf(sbuf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%127s\n",
                            &pdata[0], &pdata[1], &pdata[2], &pdata[3], &pdata[4], &pdata[5],
                            &pdata[6], &pdata[7], &pdata[8], &pdata[9], &pdata[10], &pdata[11],
                            &pdata[12], &pdata[13], &pdata[14], &pdata[15], &pdata[16],
