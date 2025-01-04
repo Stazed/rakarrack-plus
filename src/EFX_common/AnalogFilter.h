@@ -81,7 +81,7 @@ private:
     int abovenq;			//this is 1 if the frequency is above the nyquist
     int oldabovenq;		//if the last time was above nyquist (used to see if it needs interpolation)
 
-    float freq;		//Frequency given in Hz
+    float m_freq;		//Frequency given in Hz
     float q;			//Q factor (resonance or Q factor)
     float gain;		//the gain of the filter (if are shelf/peak) filters
 

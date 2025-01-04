@@ -42,7 +42,7 @@ AnalogFilter::AnalogFilter(unsigned char Ftype, float Ffreq, float Fq,
     firsttime(),
     abovenq(),
     oldabovenq(),
-    freq(Ffreq),
+    m_freq(Ffreq),
     q(Fq),
     gain(1.0),
     c(),
@@ -57,7 +57,7 @@ AnalogFilter::AnalogFilter(unsigned char Ftype, float Ffreq, float Fq,
     firsttime = 0;
     abovenq = 0;
     oldabovenq = 0;
-    setfreq_and_q(Ffreq, Fq);
+    AnalogFilter::setfreq_and_q(Ffreq, Fq);
     firsttime = 1;
     d[0] = 0; //this is not used
     outgain = 1.0;                  // Base class Filter_.h
@@ -92,7 +92,7 @@ AnalogFilter::computefiltercoefs()
     float omega, sn, cs, alpha, beta;
 
     //do not allow frequencies bigger than samplerate/2
-    float freq = this->freq;
+    float freq = m_freq;
     
     if (freq > (iSAMPLE_RATE / 2 - 500.0))
     {
@@ -347,7 +347,7 @@ AnalogFilter::setfreq(float frequency)
     if (frequency < 0.1)
         frequency = 0.1f;
     
-    float rap = freq / frequency;
+    float rap = m_freq / frequency;
     
     if (rap < 1.0)
         rap = 1.0f / rap;
@@ -377,7 +377,7 @@ AnalogFilter::setfreq(float frequency)
             needsinterpolation = 1;
     }
     
-    freq = frequency;
+    m_freq = frequency;
     computefiltercoefs();
     firsttime = 0;
 }
