@@ -340,6 +340,9 @@ LV2_Handle init_eqlv2(const LV2_Descriptor* /* descriptor */,double sample_freq,
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_EQ_PARAMETERS;
     plug->effectindex = IEQ;
     plug->prev_bypass = 1;
@@ -447,6 +450,9 @@ LV2_Handle init_complv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_COMPRESS_PARAMETERS;
     plug->effectindex = ICOMP;
     plug->prev_bypass = 1;
@@ -525,6 +531,9 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_distlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = (C_DIST_PARAMETERS - 1); // -1 for skipped parameter 11
     plug->effectindex = IDIST;
@@ -656,6 +665,9 @@ LV2_Handle init_echolv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_ECHO_PARAMETERS;
     plug->effectindex = IECHO;
     plug->prev_bypass = 1;
@@ -763,6 +775,9 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_choruslv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = (C_CHORUS_PARAMETERS - 1);  // -1 skip Chorus_SKIP_Flange_10
     plug->effectindex = ICHORUS;
@@ -891,6 +906,9 @@ LV2_Handle init_aphaselv2(const LV2_Descriptor* /* descriptor */,double sample_f
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_APHASER_PARAMETERS;
     plug->effectindex = IAPHASE;
     plug->prev_bypass = 1;
@@ -1004,6 +1022,9 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_harmnomidlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = (C_HARM_PARAMETERS - 1); // -1 for Harm_MIDI - since this is no MIDI
     plug->effectindex = IHARM_NM;
@@ -1221,6 +1242,9 @@ LV2_Handle init_exciterlv2(const LV2_Descriptor* /* descriptor */,double sample_
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_EXCITER_PARAMETERS;
     plug->effectindex = IEXCITER;
     plug->prev_bypass = 1;
@@ -1304,6 +1328,9 @@ void run_exciterlv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_panlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_PAN_PARAMETERS;
     plug->effectindex = IPAN;
@@ -1413,6 +1440,9 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_alienlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_ALIENWAH_PARAMETERS;
     plug->effectindex = IAWAH;
@@ -1525,6 +1555,9 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_revelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = (C_REVERB_PARAMETERS - 2); // -2 skips 5 & 6 unused
     plug->effectindex = IREV;
@@ -1649,6 +1682,9 @@ LV2_Handle init_eqplv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_PARAMETRIC_EQ_PARAMETERS;
     plug->effectindex = IEQP;
     plug->prev_bypass = 1;
@@ -1754,6 +1790,9 @@ LV2_Handle init_cablv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_CABINET_PARAMETERS;  // This is not used
     plug->effectindex = ICAB;
     plug->prev_bypass = 1;
@@ -1823,6 +1862,9 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_mdellv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_MUSIC_PARAMETERS;
     plug->effectindex = IMDEL;
@@ -1937,6 +1979,9 @@ LV2_Handle init_wahlv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_WAHWAH_PARAMETERS;
     plug->effectindex = IWAH;
     plug->prev_bypass = 1;
@@ -2047,6 +2092,9 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_derelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_DERE_PARAMETERS;
     plug->effectindex = IDERE;
@@ -2159,6 +2207,9 @@ void run_derelv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_valvelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_VALVE_PARAMETERS;
     plug->effectindex = IVALVE;
@@ -2273,6 +2324,9 @@ LV2_Handle init_dflangelv2(const LV2_Descriptor* /* descriptor */,double sample_
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_DFLANGE_PARAMETERS;
     plug->effectindex = IDFLANGE;
     plug->prev_bypass = 1;
@@ -2368,6 +2422,9 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_ringlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_RING_PARAMETERS;
     plug->effectindex = IRING;
@@ -2506,6 +2563,9 @@ LV2_Handle init_distbandlv2(const LV2_Descriptor* /* descriptor */,double sample
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_DBAND_PARAMETERS;
     plug->effectindex = IDISTBAND;
     plug->prev_bypass = 1;
@@ -2621,6 +2681,9 @@ LV2_Handle init_arplv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_ARPIE_PARAMETERS;
     plug->effectindex = IARPIE;
     plug->prev_bypass = 1;
@@ -2732,6 +2795,9 @@ LV2_Handle init_expandlv2(const LV2_Descriptor* /* descriptor */,double sample_f
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_EXPANDER_PARAMETERS;
     plug->effectindex = IEXPAND;
     plug->prev_bypass = 1;
@@ -2809,6 +2875,9 @@ void run_expandlv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_shuflv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_SHUFFLE_PARAMETERS;
     plug->effectindex = ISHUFF;
@@ -2911,6 +2980,9 @@ void run_shuflv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_synthlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_SYNTHFILTER_PARAMETERS;
     plug->effectindex = ISYNTH;
@@ -3017,6 +3089,9 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_varybandlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     // +3 for the 4 LV2 parameters added - 1 for legacy pcombi
     plug->nparams = (C_VARYBAND_PARAMETERS + 3);
@@ -3137,6 +3212,9 @@ void run_varybandlv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_mutrolv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     // -1 for Mutro_Mode_Legacy, +2 for MuTro_AG_Mode, MuTro_Exp_Wah
     plug->nparams = (C_MUTRO_PARAMETERS + 1);
@@ -3272,6 +3350,9 @@ LV2_Handle init_echoverselv2(const LV2_Descriptor* /* descriptor */,double sampl
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_ECHOVERSE_PARAMETERS;
     plug->effectindex = IECHOVERSE;
     plug->prev_bypass = 1;
@@ -3382,6 +3463,9 @@ LV2_Handle init_coillv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = (C_COIL_PARAMETERS - 2);  // -2  Coil_Origin, Coil_Destiny skipped
     plug->effectindex = ICOIL;
     plug->prev_bypass = 1;
@@ -3477,6 +3561,9 @@ LV2_Handle init_shelflv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_SHELF_PARAMETERS;
     plug->effectindex = ISHELF;
     plug->prev_bypass = 1;
@@ -3552,6 +3639,9 @@ void run_shelflv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_voclv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_VOCODER_PARAMETERS;
     plug->effectindex = IVOC;
@@ -3666,6 +3756,9 @@ void run_voclv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_suslv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
     
     plug->nparams = C_SUSTAIN_PARAMETERS;
     plug->effectindex = ISUS;
@@ -3739,6 +3832,9 @@ void run_suslv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_seqlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_SEQUENCE_PARAMETERS;
     plug->effectindex = ISEQ;
@@ -3856,6 +3952,9 @@ LV2_Handle init_shiftlv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_SHIFTER_PARAMETERS;
     plug->effectindex = ISHIFT;
     plug->prev_bypass = 1;
@@ -3967,6 +4066,9 @@ LV2_Handle init_stomplv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_STOMP_PARAMETERS;
     plug->effectindex = ISTOMP;
     plug->prev_bypass = 1;
@@ -4043,6 +4145,9 @@ void run_stomplv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_revtronlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = (C_REVTRON_PARAMETERS - 2);  // -2 Revtron_User_File, Revtron_Set_File
     plug->effectindex = IREVTRON;
@@ -4337,6 +4442,9 @@ static const void* revtron_extension_data(const char* uri)
 LV2_Handle init_echotronlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = (C_ECHOTRON_PARAMETERS - 2); // -2 for skip user file and set file
     plug->effectindex = IECHOTRON;
@@ -4649,6 +4757,9 @@ LV2_Handle init_sharmnomidlv2(const LV2_Descriptor* /* descriptor */,double samp
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = (C_SHARM_PARAMETERS - 1);    // -1 for Sharm_MIDI
     plug->effectindex = ISHARM_NM;
     plug->prev_bypass = 1;
@@ -4866,6 +4977,9 @@ LV2_Handle init_mbcomplv2(const LV2_Descriptor* /* descriptor */,double sample_f
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_COMPBAND_PARAMETERS;
     plug->effectindex = IMBCOMP;
     plug->prev_bypass = 1;
@@ -4970,6 +5084,9 @@ LV2_Handle init_otremlv2(const LV2_Descriptor* /* descriptor */,double sample_fr
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_OPTICAL_PARAMETERS;
     plug->effectindex = IOPTTREM;
     plug->prev_bypass = 1;
@@ -5057,6 +5174,9 @@ void run_otremlv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_vibelv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_VIBE_PARAMETERS;
     plug->effectindex = IVIBE;
@@ -5169,6 +5289,9 @@ LV2_Handle init_inflv2(const LV2_Descriptor* /* descriptor */,double sample_freq
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_INFINITY_PARAMETERS;
     plug->effectindex = IINF;
     plug->prev_bypass = 1;
@@ -5277,6 +5400,9 @@ void run_inflv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_phaselv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_PHASER_PARAMETERS;
     plug->effectindex = IPHASE;
@@ -5397,6 +5523,9 @@ LV2_Handle init_gatelv2(const LV2_Descriptor* /* descriptor */,double sample_fre
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_GATE_PARAMETERS;
     plug->effectindex = IGATE;
     plug->prev_bypass = 1;
@@ -5475,6 +5604,9 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_midiclv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_MIDICONV_PARAMETERS;
     plug->effectindex = IMIDIC;
@@ -5574,6 +5706,9 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_convollv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     // -4 for: Convo_User_File, Convo_SKIP_5, Convo_Set_File, Convo_SKIP_9
     plug->nparams = (C_CONVO_PARAMETERS - 4);
@@ -5860,6 +5995,9 @@ LV2_Handle init_flangerlv2(const LV2_Descriptor* /* descriptor */,double sample_
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = (C_FLANGER_PARAMETERS - 1); // -1 skip Flanger_SKIP_Flange_10
     plug->effectindex = IFLANGE;
     plug->prev_bypass = 1;
@@ -5987,6 +6125,9 @@ LV2_Handle init_overdrivelv2(const LV2_Descriptor* /* descriptor */,double sampl
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = (C_OVERDRIVE_PARAMETERS - 2); // -2 for Skipped param 11 and Suboctave
     plug->effectindex = IOVERDRIVE;
     plug->prev_bypass = 1;
@@ -6099,6 +6240,9 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
 LV2_Handle init_harmonizerlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_HARM_PARAMETERS;
     plug->effectindex = IHARM;
@@ -6397,6 +6541,9 @@ see process.C ln 1507
 LV2_Handle init_stereoharmlv2(const LV2_Descriptor* /* descriptor */,double sample_freq, const char* /* bundle_path */,const LV2_Feature * const* host_features)
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
+
+    if(plug == NULL)
+        return NULL;
 
     plug->nparams = C_SHARM_PARAMETERS;
     plug->effectindex = ISTEREOHARM;
@@ -6697,6 +6844,9 @@ LV2_Handle init_ressollv2(const LV2_Descriptor* /* descriptor */,double sample_f
 {
     RKRLV2* plug = (RKRLV2*)malloc(sizeof(RKRLV2));
 
+    if(plug == NULL)
+        return NULL;
+
     plug->nparams = C_RESSOL_PARAMETERS - 2; // -2 for LFO_Random and LFO_Type
     plug->effectindex = IRESSOLUTION;
     plug->prev_bypass = 1;
@@ -6850,6 +7000,7 @@ void cleanup_rkrlv2(LV2_Handle handle)
     case IAPHASE:
         delete plug->aphase;
         break;
+    case IHARM:
     case IHARM_NM:
         delete plug->harm;
         delete plug->noteID;
@@ -6941,6 +7092,7 @@ void cleanup_rkrlv2(LV2_Handle handle)
     case IECHOTRON:
         delete plug->echotron;
         break;
+    case ISTEREOHARM:
     case ISHARM_NM:
     	delete plug->sharm;
         delete plug->noteID;
@@ -6978,18 +7130,6 @@ void cleanup_rkrlv2(LV2_Handle handle)
     case IOVERDRIVE:
         delete plug->overdrive;
         break;
-    case IHARM:
-        delete plug->harm;
-        delete plug->noteID;
-        delete plug->chordID;
-        delete plug->comp;
-        break;
-    case ISTEREOHARM:
-    	delete plug->sharm;
-        delete plug->noteID;
-        delete plug->chordID;
-        delete plug->comp;
-    	break;
     case IRESSOLUTION:
         delete plug->ressol;
         break;
