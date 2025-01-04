@@ -57,7 +57,7 @@ Expander::Expander(double sample_rate, uint32_t intermediate_bufsize) :
     hpfr(NULL)
 {
     initialize();
-    setpreset(0);
+    Expander::setpreset(0);
 }
 
 Expander::~Expander()

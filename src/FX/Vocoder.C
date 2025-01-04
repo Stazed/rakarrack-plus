@@ -102,7 +102,7 @@ Vocoder::Vocoder(float *auxresampled_, int bands, int DS, int uq, int dq,
 
     setbands(VOC_BANDS, 200.0f, 4000.0f);
     init_filters();
-    setpreset(Ppreset);
+    Vocoder::setpreset(Ppreset);
 }
 
 Vocoder::~Vocoder()

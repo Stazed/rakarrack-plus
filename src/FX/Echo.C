@@ -71,8 +71,8 @@ Echo::Echo(double sample_rate, uint32_t intermediate_bufsize) :
     ldelay = new delayline(2.0f, 1, sample_rate);
     rdelay = new delayline(2.0f, 1, sample_rate);
 
-    setpreset(Ppreset);
-    cleanup();
+    Echo::setpreset(Ppreset);
+    Echo::cleanup();
 }
 
 Echo::~Echo()

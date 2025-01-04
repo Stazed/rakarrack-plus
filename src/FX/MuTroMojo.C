@@ -81,9 +81,9 @@ MuTroMojo::MuTroMojo(double sample_rate, uint32_t intermediate_bufsize) :
     lfo = new EffectLFO(sample_rate);
 
     initialize();
-    setpreset(Ppreset);
+    MuTroMojo::setpreset(Ppreset);
 
-    cleanup();
+    MuTroMojo::cleanup();
 }
 
 MuTroMojo::~MuTroMojo()

@@ -52,8 +52,8 @@ Alienwah::Alienwah(double sample_rate, uint32_t intermediate_bufsize) :
 {
     lfo = new EffectLFO(sample_rate);
 
-    setpreset(Ppreset);
-    cleanup();
+    Alienwah::setpreset(Ppreset);
+    Alienwah::cleanup();
     
     oldclfol.a = fb;
     oldclfol.b = 0.0;

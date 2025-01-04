@@ -28,7 +28,7 @@
 Cabinet::Cabinet(double sample_frequency, uint32_t intermediate_bufsize) :
     EQ(sample_frequency, intermediate_bufsize)
 {
-    setpreset(Ppreset);
+    Cabinet::setpreset(Ppreset);
 }
 
 void

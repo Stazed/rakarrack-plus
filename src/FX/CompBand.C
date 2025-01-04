@@ -95,8 +95,8 @@ CompBand::CompBand(double sample_rate, uint32_t intermediate_bufsize) :
     CMH->setpreset(2);
     CH->setpreset(2);
 
-    setpreset(Ppreset);
-    cleanup();
+    CompBand::setpreset(Ppreset);
+    CompBand::cleanup();
 }
 
 CompBand::~CompBand()

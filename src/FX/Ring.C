@@ -69,8 +69,8 @@ Ring::Ring(double sample_rate, uint32_t intermediate_bufsize) :
 
     Create_Tables(sample_rate);
 
-    setpreset(Ppreset);
-    cleanup();
+    Ring::setpreset(Ppreset);
+    Ring::cleanup();
 }
 
 Ring::~Ring()

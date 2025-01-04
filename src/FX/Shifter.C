@@ -80,8 +80,8 @@ Shifter::Shifter(long int Quality, int DS, int uq, int dq,
     PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
 
-    setpreset(Ppreset);
-    cleanup();
+    Shifter::setpreset(Ppreset);
+    Shifter::cleanup();
 }
 
 Shifter::~Shifter()

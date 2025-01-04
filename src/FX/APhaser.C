@@ -109,8 +109,8 @@ Analog_Phaser::Analog_Phaser(double sample_rate, uint32_t intermediate_bufsize) 
 
     lfo = new EffectLFO(sample_rate);
 
-    setpreset(Ppreset); //this will get done before out is run
-    cleanup();
+    Analog_Phaser::setpreset(Ppreset); //this will get done before out is run
+    Analog_Phaser::cleanup();
 };
 
 Analog_Phaser::~Analog_Phaser()

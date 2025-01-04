@@ -36,8 +36,8 @@ Exciter::Exciter(double sample_rate, uint32_t intermediate_bufsize) :
 {
     harm = new HarmEnhancer(rm, 2500.0f, 8000.0, 1.0f, sample_rate, PERIOD);
 
-    cleanup();
-    setpreset(Ppreset);
+    Exciter::cleanup();
+    Exciter::setpreset(Ppreset);
 }
 
 Exciter::~Exciter()

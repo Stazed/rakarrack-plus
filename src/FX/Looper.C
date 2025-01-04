@@ -93,8 +93,8 @@ Looper::Looper(float size, double samplerate, uint32_t intermediate_bufsize) :
     t2ldelay = new float[maxx_delay];
     t2rdelay = new float[maxx_delay];
 
-    setpreset(Ppreset);
-    cleanup();
+    Looper::setpreset(Ppreset);
+    Looper::cleanup();
 }
 
 Looper::~Looper()

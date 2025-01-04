@@ -100,8 +100,8 @@ VaryBand::VaryBand(double sample_rate, uint32_t intermediate_bufsize) :
     lfo1 = new EffectLFO(fSAMPLE_RATE);
     lfo2 = new EffectLFO(fSAMPLE_RATE);
 
-    setpreset(Ppreset);
-    cleanup();
+    VaryBand::setpreset(Ppreset);
+    VaryBand::cleanup();
 }
 
 VaryBand::~VaryBand()

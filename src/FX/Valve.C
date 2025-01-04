@@ -79,8 +79,8 @@ Valve::Valve(double sample_rate, uint32_t intermediate_bufsize) :
     sethpf(1);
     init_coefs();
 
-    setpreset(Ppreset);
-    cleanup();
+    Valve::setpreset(Ppreset);
+    Valve::cleanup();
 }
 
 Valve::~Valve()

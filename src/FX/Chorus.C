@@ -79,8 +79,8 @@ Chorus::Chorus(double sample_rate, uint32_t intermediate_bufsize) :
     lfo->effectlfoout(&lfol, &lfor);
     dl2 = getdelay(lfol);
     dr2 = getdelay(lfor);
-    setpreset(Ppreset); // must be set after call to getdelay
-    cleanup();
+    Chorus::setpreset(Ppreset); // must be set after call to getdelay
+    Chorus::cleanup();
 }
 
 Chorus::~Chorus()

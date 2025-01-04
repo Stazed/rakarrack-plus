@@ -61,8 +61,8 @@ Shuffle::Shuffle(double sample_rate, uint32_t intermediate_bufsize) :
 {
     initialize();
 
-    setpreset(Ppreset);
-    cleanup();
+    Shuffle::setpreset(Ppreset);
+    Shuffle::cleanup();
 }
 
 Shuffle::~Shuffle()

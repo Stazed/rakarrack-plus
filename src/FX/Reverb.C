@@ -99,8 +99,8 @@ Reverb::Reverb(double samplerate, uint16_t intermediate_bufsize) :
     tmp = lrintf(2.5 * samplerate);
     idelay = new float[tmp]; //set to max length
 
-    setpreset(Ppreset);
-    cleanup(); //do not call this before the comb initialisation
+    Reverb::setpreset(Ppreset);
+    Reverb::cleanup(); //do not call this before the comb initialisation
 }
 
 Reverb::~Reverb()

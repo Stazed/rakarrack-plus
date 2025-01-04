@@ -76,8 +76,8 @@ Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq,
     PS = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PS->ratio = 1.0f;
 
-    setpreset(Ppreset);
-    cleanup();
+    Harmonizer::setpreset(Ppreset);
+    Harmonizer::cleanup();
 }
 
 Harmonizer::~Harmonizer()

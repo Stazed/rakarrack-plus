@@ -74,8 +74,8 @@ Echoverse::Echoverse(double sample_rate, uint32_t intermediate_bufsize) :
     ldelay = new delayline(2.0f, 3, sample_rate);
     rdelay = new delayline(2.0f, 3, sample_rate);
 
-    setpreset(Ppreset);
-    cleanup();
+    Echoverse::setpreset(Ppreset);
+    Echoverse::cleanup();
 }
 
 Echoverse::~Echoverse()

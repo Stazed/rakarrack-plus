@@ -118,8 +118,8 @@ Dflange::Dflange(double sample_rate, uint32_t intermediate_bufsize) :
     rdelayline1->set_mix(0.5f);
 
     lfo = new EffectLFO(sample_rate);
-    setpreset(Ppreset);
-    cleanup();
+    Dflange::setpreset(Ppreset);
+    Dflange::cleanup();
 }
 
 Dflange::~Dflange()

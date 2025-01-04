@@ -59,7 +59,7 @@ Gate::Gate(double sample_rate, uint32_t intermediate_bufsize) :
     hpfr(NULL)
 {
     initialize();
-    setpreset(0);
+    Gate::setpreset(0);
 }
 
 Gate::~Gate()

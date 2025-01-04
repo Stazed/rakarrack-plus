@@ -120,8 +120,8 @@ Reverbtron::Reverbtron(int DS, int uq, int dq,
     U_Resample = new Resample(uq);
     D_Resample = new Resample(dq);  //Downsample, uses sinc interpolation for bandlimiting to avoid aliasing
 
-    setpreset(Ppreset);
-    cleanup();
+    Reverbtron::setpreset(Ppreset);
+    Reverbtron::cleanup();
 }
 
 Reverbtron::~Reverbtron()

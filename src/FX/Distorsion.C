@@ -71,8 +71,8 @@ Distorsion::Distorsion(int wave_res, int wave_upq,
 {
     initialize();
 
-    setpreset(Ppreset);
-    cleanup();
+    Distorsion::setpreset(Ppreset);
+    Distorsion::cleanup();
 }
 
 Distorsion::~Distorsion()

@@ -83,9 +83,9 @@ Arpie::Arpie(double sample_rate, uint32_t intermediate_bufsize) :
     rdelay = new float[maxx_delay];
     pattern = new int[MAXHARMS];
 
-    setpreset(Ppreset);
+    Arpie::setpreset(Ppreset);
     setpattern(0);
-    cleanup();
+    Arpie::cleanup();
 }
 
 Arpie::~Arpie()

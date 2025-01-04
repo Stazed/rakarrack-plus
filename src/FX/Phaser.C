@@ -58,8 +58,8 @@ Phaser::Phaser(double sample_rate, uint32_t intermediate_bufsize) :
 
     lfo = new EffectLFO(sample_rate);
 
-    setpreset(Ppreset);
-    cleanup();
+    Phaser::setpreset(Ppreset);
+    Phaser::cleanup();
 }
 
 Phaser::~Phaser()

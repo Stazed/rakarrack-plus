@@ -45,11 +45,11 @@ Pan::Pan(double sample_rate, uint32_t intermediate_bufsize) :
     lfo(NULL)
 {
     lfo = new EffectLFO(sample_rate);
-    setpreset(Ppreset);
+    Pan::setpreset(Ppreset);
 
     lfo->effectlfoout(&lfol, &lfor);
 
-    cleanup();
+    Pan::cleanup();
 }
 
 Pan::~Pan()

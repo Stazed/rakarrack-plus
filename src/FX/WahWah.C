@@ -54,8 +54,8 @@ WahWah::WahWah(double sample_rate, uint32_t intermediate_bufsize) :
 {
     lfo = new EffectLFO(sample_rate);
     filterpars = new FilterParams(0, 64, 64, sample_rate, PERIOD);
-    setpreset(Ppreset);
-    cleanup();
+    WahWah::setpreset(Ppreset);
+    WahWah::cleanup();
 }
 
 WahWah::~WahWah()

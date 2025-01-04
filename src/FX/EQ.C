@@ -36,8 +36,8 @@ EQ::EQ(double sample_rate, uint32_t intermediate_bufsize) :
     filter()
 {
     outvolume = 0.7f;
-    initialize();
-    cleanup();
+    EQ::initialize();
+    EQ::cleanup();
 };
 
 EQ::~EQ()

@@ -83,8 +83,8 @@ Derelict::Derelict(int wave_res, int wave_upq, int wave_dnq,
 {
     initialize();
 
-    setpreset(Ppreset);
-    cleanup();
+    Derelict::setpreset(Ppreset);
+    Derelict::cleanup();
 }
 
 Derelict::~Derelict()

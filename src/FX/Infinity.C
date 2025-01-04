@@ -84,7 +84,7 @@ Infinity::Infinity(double sample_rate, uint32_t intermediate_bufsize) :
     alpha = dt / (0.5f + dt); //200ms time constant on parameter change -- quick but not jerky
     beta = 1.0f - alpha;
 
-    setpreset(Ppreset);
+    Infinity::setpreset(Ppreset);
     adjustfreqs();
     reinitfilter();
 }

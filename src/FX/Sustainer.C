@@ -56,9 +56,9 @@ Sustainer::Sustainer(double sample_rate, uint32_t intermediate_bufsize) :
     calpha = cSAMPLE_RATE / (cSAMPLE_RATE + tmp);
     cbeta = 1.0f - calpha;
 
-    setpreset(Ppreset);
+    Sustainer::setpreset(Ppreset);
 
-    cleanup();
+    Sustainer::cleanup();
 }
 
 Sustainer::~Sustainer()

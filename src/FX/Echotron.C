@@ -97,7 +97,7 @@ Echotron::Echotron(double sample_rate, uint32_t intermediate_bufsize) :
 
     initialize();
 
-    setpreset(Ppreset);
+    Echotron::setpreset(Ppreset);
     init_params();
 }
 

@@ -78,8 +78,8 @@ MusicDelay::MusicDelay(double sample_rate, uint32_t intermediate_bufsize) :
     ldelay2 = new float[maxx_delay];
     rdelay2 = new float[maxx_delay];
 
-    setpreset(Ppreset);
-    cleanup();
+    MusicDelay::setpreset(Ppreset);
+    MusicDelay::cleanup();
 }
 
 MusicDelay::~MusicDelay()

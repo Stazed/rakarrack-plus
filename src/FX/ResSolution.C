@@ -28,8 +28,8 @@
 ResSolution::ResSolution(double sample_rate, uint32_t intermediate_bufsize):
     Analog_Phaser(sample_rate, intermediate_bufsize)
 {
-    setpreset(0); //this will get done before out is run
-    cleanup();
+    ResSolution::setpreset(0); //this will get done before out is run
+    Analog_Phaser::cleanup();
 }
 
 void

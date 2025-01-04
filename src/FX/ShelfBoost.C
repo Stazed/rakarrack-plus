@@ -41,9 +41,9 @@ ShelfBoost::ShelfBoost(double sample_rate, uint32_t intermediate_bufsize) :
     interpbuf(NULL)
 {
     initialize();
-    cleanup();
+    ShelfBoost::cleanup();
 
-    setpreset(Ppreset);
+    ShelfBoost::setpreset(Ppreset);
 }
 
 ShelfBoost::~ShelfBoost()

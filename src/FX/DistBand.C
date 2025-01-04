@@ -91,8 +91,8 @@ DistBand::DistBand(int wave_res, int wave_upq, int wave_dnq,
 {
     initialize();
 
-    setpreset(Ppreset);
-    cleanup();
+    DistBand::setpreset(Ppreset);
+    DistBand::cleanup();
 }
 
 DistBand::~DistBand()

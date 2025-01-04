@@ -85,9 +85,9 @@ StereoHarm::StereoHarm(long int Quality, int DS, int uq, int dq,
     PSr = new PitchShifter(window, hq, nfSAMPLE_RATE);
     PSr->ratio = 1.0f;
 
-    setpreset(Ppreset);
+    StereoHarm::setpreset(Ppreset);
 
-    cleanup();
+    StereoHarm::cleanup();
 }
 
 StereoHarm::~StereoHarm()

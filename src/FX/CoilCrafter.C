@@ -94,9 +94,9 @@ CoilCrafter::CoilCrafter(double sample_rate, uint32_t intermediate_bufsize) :
     RB2l = new AnalogFilter(2, 2000.0f, 1.0f, 0, sample_rate, interpbuf);
     RB2r = new AnalogFilter(2, 2000.0f, 1.0f, 0, sample_rate, interpbuf);
 
-    cleanup();
+    CoilCrafter::cleanup();
 
-    setpreset(Ppreset);
+    CoilCrafter::setpreset(Ppreset);
 }
 
 CoilCrafter::~CoilCrafter()

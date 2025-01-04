@@ -90,7 +90,7 @@ Compressor::Compressor(double sample_rate, uint32_t intermediate_bufsize) :
     lpeak(),
     rpeak()
 {
-    setpreset(0);
+    Compressor::setpreset(0);
 }
 
 Compressor::~Compressor()
