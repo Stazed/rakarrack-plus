@@ -129,6 +129,12 @@ main(int argc, char *argv[])
     index = (float *) malloc (sizeof (float) * sfinfo.frames*sfinfo.channels); // put the max size
     data  = (float *) malloc (sizeof (float) * sfinfo.frames*sfinfo.channels); // put the max size
 
+    if ((buf == NULL) || (index == NULL) || (data == NULL))
+    {
+        fprintf(stderr, "ERRoR: Cannot allocate memory, buf, index, data\n");
+        return(0);
+    }
+
     if(!have_output)
     {
         std::string file_name = Inputfile;
@@ -145,7 +151,14 @@ main(int argc, char *argv[])
     fputs (wbuf, fn);
 
     // read file
-    readcount = sf_seek (infile, 0, SEEK_SET);
+    int ret = sf_seek (infile, 0, SEEK_SET);
+
+    if(ret < 0)
+    {
+        fprintf(stderr, "An error occurred reading the sound file %127s\n", Inputfile);
+        return(0);
+    }
+    
     readcount = 1;
     time = 0.0f;
     tmp = 0.0f;
@@ -199,9 +212,7 @@ main(int argc, char *argv[])
     snprintf(wbuf, sizeof(wbuf), "%f,%f\n", compress, quality);
     fputs(wbuf, fn);
 
-    skip = 0.0f;
     indexx = 1500;
-    chunk = 11;
 
     memset(wbuf, 0, sizeof(wbuf));
     snprintf(wbuf, sizeof(wbuf), "%d\n", indexx);
