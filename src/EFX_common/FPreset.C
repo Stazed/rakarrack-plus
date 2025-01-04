@@ -82,7 +82,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
         {
             char *cfilename;
             cfilename = (char *) malloc(sizeof (char) * 128);
-            memset(cfilename, 0, sizeof (*cfilename));
+            memset(cfilename, 0, sizeof (char) * 128);
             while (fgets(buf, sizeof buf, fn) != NULL)
             {
                 sbuf = buf;
@@ -114,7 +114,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
         {
             char *cfilename;
             cfilename = (char *) malloc(sizeof (char) * 128);
-            memset(cfilename, 0, sizeof (*cfilename));
+            memset(cfilename, 0, sizeof (char) * 128);
             while (fgets(buf, sizeof buf, fn) != NULL)
             {
                 sbuf = buf;
@@ -145,7 +145,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
         {
             char *cfilename;
             cfilename = (char *) malloc(sizeof (char) * 128);
-            memset(cfilename, 0, sizeof (*cfilename));
+            memset(cfilename, 0, sizeof (char) * 128);
             while (fgets(buf, sizeof buf, fn) != NULL)
             {
                 sbuf = buf;
