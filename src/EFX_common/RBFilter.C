@@ -62,7 +62,7 @@ RBFilter::RBFilter(int Ftype, float Ffreq, float Fq,
     }
     
     cleanup();
-    setfreq_and_q(Ffreq, Fq);
+    RBFilter::setfreq_and_q(Ffreq, Fq);
     float cSAMPLE_RATE = 1 / sample_rate;
     a_smooth_tc = cSAMPLE_RATE / (cSAMPLE_RATE + 0.01f); //10ms time constant for averaging coefficients
     b_smooth_tc = 1.0f - a_smooth_tc;

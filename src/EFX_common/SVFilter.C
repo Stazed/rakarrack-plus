@@ -51,7 +51,7 @@ SVFilter::SVFilter(unsigned char Ftype, float Ffreq, float Fq,
     }
     
     cleanup();
-    setfreq_and_q(Ffreq, Fq);
+    SVFilter::setfreq_and_q(Ffreq, Fq);
 }
 
 SVFilter::~SVFilter()
