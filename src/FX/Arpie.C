@@ -586,10 +586,6 @@ Arpie::changepar(int npar, int value)
         break;
     case Arpie_Harm:
         Pharms = value;
-        if ((Pharms < 2) && (Pharms >= MAXHARMS))
-        {
-            Pharms = 2;
-        }
         break;
     case Arpie_Pattern:
         setpattern(value);
