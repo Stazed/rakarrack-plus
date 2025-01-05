@@ -86,7 +86,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
             if(cfilename == NULL)
             {
                 fprintf(stderr, "Cannot allocate memory for cfilename\n");
-                return;
+                goto ERROR_QUIT;
             }
 
             memset(cfilename, 0, sizeof (char) * 128);
@@ -125,7 +125,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
             if(cfilename == NULL)
             {
                 fprintf(stderr, "Cannot allocate memory for cfilename\n");
-                return;
+                goto ERROR_QUIT;
             }
 
             memset(cfilename, 0, sizeof (char) * 128);
@@ -163,7 +163,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
             if(cfilename == NULL)
             {
                 fprintf(stderr, "Cannot allocate memory for cfilename\n");
-                return;
+                goto ERROR_QUIT;
             }
 
             memset(cfilename, 0, sizeof (char) * 128);
@@ -196,6 +196,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
             free(cfilename);
         }
 
+ERROR_QUIT:
         fclose(fn);
     }
 }
