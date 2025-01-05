@@ -136,7 +136,7 @@ MuTroMojo::out(float * efxoutl, float * efxoutr)
             
             if (variq)
             {
-                q = f_pow2((2.0f * (1.0f - rms) + 1.0f));
+                q = f_pow2(2.0f * (1.0f - rms) + 1.0f);
             }
             
             filterl->setq(q);
@@ -163,7 +163,7 @@ MuTroMojo::out(float * efxoutl, float * efxoutr)
 
         if (variq)
         {
-            q = f_pow2((2.0f * (1.0f - rms) + 1.0f));
+            q = f_pow2(2.0f * (1.0f - rms) + 1.0f);
         }
 
         float lmod = (lfol + rms);
