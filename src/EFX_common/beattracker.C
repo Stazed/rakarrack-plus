@@ -62,7 +62,6 @@ beattracker::cleanup()
     trigtime = fSAMPLE_RATE / 20; //time to take next peak
     onset = 0;
     trigthresh = 0.15f;
-    oldbpm = 0.0f;
     oldmost = 0.0f;
     tscntr = 0;
     tsidx = 0;
