@@ -496,6 +496,9 @@ void fft_filter::resample_impulse(int size, float* ir)
     while (fftLength < size) fftLength *= 2; //make sure it's a power of 2
 
     fftBuf = (float*) malloc(fftLength * sizeof (float));
+    if( fftBuf == NULL)
+        return;
+
     memset(fftBuf, 0.0f, fftLength * sizeof (float));
     memcpy(fftBuf, ir, size * sizeof (float));
 
