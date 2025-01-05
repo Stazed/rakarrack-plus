@@ -93,7 +93,7 @@ ResSolution::LV2_parameters(std::string &s_buf, int type)
                 {
                     s_buf += NTS( getpar( param_case_offset ));
 
-                    if ( i !=  Ressol_Hyper)   // last one no need for delimiter
+                    if ( param_case_offset !=  Ressol_Hyper)   // last one no need for delimiter
                         s_buf += ":";
                 }
             }
