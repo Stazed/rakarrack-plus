@@ -547,7 +547,6 @@ Looper::changepar(int npar, int value)
             Precord = 0;
             Pplay = rplaystate;
             if (Pautoplay) Pplay = 1;
-            Pstop = 0;
         }
         else
         {
