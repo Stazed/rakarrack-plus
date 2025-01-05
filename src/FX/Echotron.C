@@ -651,10 +651,10 @@ Echotron::check_delay_file_ranges(double value, int item)
 }
 
 DlyFile
-Echotron::loadfile(char* Filename)
+Echotron::loadfile(char* filename)
 {
 #ifdef LV2_SUPPORT
-    FILENAME = Filename; // For lv2 if need to re-initialize and reload file
+    FILENAME = filename; // For lv2 if need to re-initialize and reload file
 #endif // LV2
     
     double tPan = 0.0f;
@@ -674,18 +674,18 @@ Echotron::loadfile(char* Filename)
 
     error = 0;
 
-    if ((fs = fopen(Filename, "r")) == NULL)
+    if ((fs = fopen(filename, "r")) == NULL)
     {
         error = Dly_Open;
 #ifndef LV2_SUPPORT
         global_error_number = error;
 #else
-        fprintf(stderr, "Echotron file open error #%d - %s\n", error, Filename);
+        fprintf(stderr, "Echotron file open error #%d - %s\n", error, filename);
 #endif
         return loaddefault();
     }
 
-    RKRP::strlcpy(f.Filename, Filename, sizeof(f.Filename)); // Must copy the file name here for lv2 save when if(plug->file_changed) in rkr.lv2.C
+    RKRP::strlcpy(f.Filename, filename, sizeof(f.Filename)); // Must copy the file name here for lv2 save when if(plug->file_changed) in rkr.lv2.C
 
     int first_line = 0;
     while (fgets(wbuf, sizeof wbuf, fs) != NULL)
@@ -769,7 +769,7 @@ Echotron::loadfile(char* Filename)
     if(error)
     {
 #ifdef LV2_SUPPORT
-    fprintf(stderr, "Echotron file loading error #%d - %s\n", error, Filename);
+    fprintf(stderr, "Echotron file loading error #%d - %s\n", error, filename);
 #endif
         return loaddefault();
     }    
