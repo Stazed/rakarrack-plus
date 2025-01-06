@@ -21,9 +21,14 @@
 #include "scope.h"
 #include "rakarrack.h"
 
-Scope::Scope(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h, label)
+Scope::Scope(int x, int y, int w, int h, const char *label) :
+    Fl_Box(x, y, w, h, label),
+    m_parent(NULL),
+    spl(NULL),
+    spr(NULL),
+    ns(256),
+    Scope_ON(false)
 {
-    Scope_ON = false;
 }
 
 void Scope::init(float *smpsl, float *smpsr, int PERIOD, RKRGUI *_rgui)
