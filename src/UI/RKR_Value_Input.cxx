@@ -58,7 +58,7 @@ RKR_Value_Input::RKR_Value_Input(int X, int Y, int W, int H, const char* l) :
     color(input.color());
     selection_color(input.selection_color());
     align(FL_ALIGN_LEFT);
-    value_damage();
+    RKR_Value_Input::value_damage();
     set_flag(SHORTCUT_LABEL);
     
     this->user_data((void*)(UD_RKR_Highlight));
