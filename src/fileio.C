@@ -955,7 +955,7 @@ RKR::revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int siz
     }
     
     // Clear the bank array.
-    memset(lv_revert, 0, sizeof (size));
+    memset(lv_revert, 0, size);
     
     // Put the reverted temp array into the bank array.
     for(int i = 0; i < C_MAX_EFFECTS; i++)
@@ -1118,7 +1118,7 @@ RKR::convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int s
     }
     
     // Clear the bank array.
-    memset(lv_convert, 0, sizeof (size));
+    memset(lv_convert, 0, size);
     
     // Put the converted temp array into the bank array.
     for(int i = 0; i < C_MAX_EFFECTS; i++)
