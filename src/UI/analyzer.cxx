@@ -21,9 +21,15 @@
 #include "analyzer.h"
 #include "rakarrack.h"
 
-Analyzer::Analyzer(int x, int y, int w, int h, const char *label) : Fl_Box(x, y, w, h, label)
+Analyzer::Analyzer(int x, int y, int w, int h, const char *label) :
+    Fl_Box(x, y, w, h, label),
+    m_parent(NULL),
+    spl(NULL),
+    spr(NULL),
+    sr(44100), 
+    ns(256),
+    Analyzer_ON(false) 
 {
-    Analyzer_ON = false;
 }
 
 void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE, RKRGUI *_rgui)
