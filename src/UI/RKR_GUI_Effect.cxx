@@ -25,8 +25,12 @@
 
 #include "RKR_GUI_Effect.h"
 
-RKR_Gui_Effect::RKR_Gui_Effect(int X, int Y, int W, int H, const char *L)
-  : Fl_Group(X, Y, W, H, L)
+RKR_Gui_Effect::RKR_Gui_Effect(int X, int Y, int W, int H, const char *L) :
+    Fl_Group(X, Y, W, H, L),
+    m_process(NULL),
+    m_parent(NULL),
+    activate_effect(NULL),
+    preset_choice(NULL)
 {
     this->user_data((void*)(UD_Group_Efx));
 }
