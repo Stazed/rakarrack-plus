@@ -948,7 +948,7 @@ void RKRGUI::load_previous_state()
         long long ud = (long long) w->user_data();
         ud -= UD_random_edit;
 
-        if(ud >= 0 && ud <= EFX_NUMBER_EFFECTS)
+        if(ud >= 0 && ud < EFX_NUMBER_EFFECTS)
         {
             RKR_Check_Button *b = static_cast<RKR_Check_Button *>(w);
 
@@ -3433,8 +3433,7 @@ void RKRGUI::PrepareML()
         put_icon(MIDILearn);
         return;
     }
-
-    if (m_process->comemouse)
+    else
     {
         if (m_process->Config.autoassign == 0)
         {
