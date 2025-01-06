@@ -63,10 +63,12 @@ private:
     float *inputl;
     float *inputr;
     float vol;
+#ifdef UNUSED_STUFF
     float itm1l;
     float itm1r;
     float otm1l;
     float otm1r;
+#endif
 
     float p[HARMONICS];
 

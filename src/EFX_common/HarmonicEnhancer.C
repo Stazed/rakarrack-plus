@@ -39,10 +39,12 @@ HarmEnhancer::HarmEnhancer(float *Rmag, float hfreq, float lfreq, float gain,
     inputl(NULL),
     inputr(NULL),
     vol(),
+#ifdef UNUSED_STUFF
     itm1l(),
     itm1r(),
     otm1l(),
     otm1r(),
+#endif
     p(),
     hpfl(NULL),
     hpfr(NULL),
@@ -259,6 +261,8 @@ HarmEnhancer::harm_out(float *efxoutl, float *efxoutr)
         yl += p[0];
         yr += p[0];
 
+#ifdef UNUSED_STUFF
+        // this unused stuff is effectively the same as the used below
         otm1l = 0.999f * otm1l + yl - itm1l;
         itm1l = yl;
         otm1r = 0.999f * otm1r + yr - itm1r;
@@ -269,6 +273,10 @@ HarmEnhancer::harm_out(float *efxoutl, float *efxoutr)
 
         inputl[i] = otm1l;
         inputr[i] = otm1r;
+#else
+        inputl[i] = yl;
+        inputr[i] = yr;
+#endif
     }
 
     lpfl->filterout(inputl, PERIOD);
