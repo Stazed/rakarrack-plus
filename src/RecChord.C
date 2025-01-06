@@ -678,7 +678,7 @@ RecChord::plus(int nota)
 void
 RecChord::Vamos(int voz, int interval, int reconota)
 {
-    int ninterval = interval;
+    int ninterval = 0;
     int tengo = 0;
     int nota = reconota % 12;
 
@@ -733,11 +733,7 @@ RecChord::Vamos(int voz, int interval, int reconota)
     switch (typo)
     {
     case 0:
-        ninterval = interval;
-        break;
     case 1:
-        ninterval = interval;
-        break;
     case 2:
         ninterval = interval;
         break;
@@ -775,6 +771,10 @@ RecChord::Vamos(int voz, int interval, int reconota)
         {
             ninterval = interval - 1;
         }
+        break;
+
+        default:
+            ninterval = interval;
         break;
     }
 
