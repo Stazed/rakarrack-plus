@@ -436,7 +436,7 @@ Vocoder::out(float * efxoutl, float * efxoutr)
     { //apply compression to auxresampled
         float auxtemp = input * tmpaux[i];
 
-        if (fabs(auxtemp > compeak))
+        if (auxtemp > compeak)
         {
             compeak = fabs(auxtemp);                        //  First do peak detection on the signal
         }
@@ -570,7 +570,7 @@ Vocoder::setbands(int numbands, float startfreq, float endfreq)
         filterbank[k].r->setfreq_and_q(filterbank[k].sfreq, filterbank[k].sq);
         filterbank[k].aux->setfreq_and_q(filterbank[k].sfreq, filterbank[k].sq);
     }
-    cleanup();
+    Vocoder::cleanup();
 }
 
 /*

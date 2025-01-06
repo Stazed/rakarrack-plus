@@ -134,16 +134,6 @@ private:
     {
         float sfreq, sq,speak,gain,oldgain;
         AnalogFilter *l, *r, *aux;
-        
-        fbank():
-            sfreq(),
-            sq(),
-            speak(),
-            gain(),
-            oldgain(),
-            l(),
-            r(),
-            aux() {}
     } *filterbank;
 
     AnalogFilter *vhp, *vlp;
