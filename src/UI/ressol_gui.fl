@@ -180,8 +180,6 @@ m_process->Rack_Effects[EFX_RESSOLUTION]->changepar(Ressol_LFO_Stereo,(int)o->va
     xywh {90 160 53 15} down_box BORDER_BOX labelsize 10 labelcolor 7
     class RKR_Check_Button
   }
-  decl {CommonGuiMenu *m_lfo_menu;} {private local
-  }
   Function {parameter_refresh(int index)} {return_type void
   } {
     code {switch (index)

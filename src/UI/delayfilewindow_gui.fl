@@ -74,7 +74,7 @@ decl {class dlyFileGroup;  // forward declaration} {public global
 }
 
 widget_class DelayFileWindowGui {open selected
-  xywh {777 65 800 265} type Double color 4 selection_color 7 resizable
+  xywh {795 305 800 265} type Double color 4 selection_color 7 resizable
   code0 {this->m_process = NULL;}
   code1 {this->m_parent = NULL;}
   class Fl_Double_Window size_range {400 130 1600 530} visible
@@ -602,7 +602,8 @@ vector_delay_line = vector_temp;} {}
 
 widget_class dlyFileGroup {
   user_data UD_delay_group open
-  xywh {805 212 745 30} type Double
+  xywh {820 443 745 30} type Double
+  code0 {m_parent = NULL;}
   class RKR_Group visible position_relative
 } {
   decl {DelayFileWindowGui *m_parent;} {private local

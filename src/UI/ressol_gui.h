@@ -81,7 +81,6 @@ public:
 private:
   inline void cb_ressol_hyper_i(RKR_Check_Button*, void*);
   static void cb_ressol_hyper(RKR_Check_Button*, void*);
-  CommonGuiMenu *m_lfo_menu; 
 public:
   void parameter_refresh(int index);
 };
