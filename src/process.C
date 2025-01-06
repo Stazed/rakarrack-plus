@@ -103,7 +103,7 @@ RKR::RKR(int gui) :
     m_displayed(),
     Mvalue(),
     Mnumeff(),
-    OnOffC(),
+    OnOffC(0),
     JACK_SAMPLE_RATE(),
     JACK_PERIOD(),
     period_master(),
