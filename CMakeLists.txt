@@ -1,6 +1,6 @@
 #CMake file for Rakarrack-plus & LV2
 
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.5.1...3.31.1)
 project (rakarrack-plus)
 
 set (PACKAGE_VERSION "1.2.6")
