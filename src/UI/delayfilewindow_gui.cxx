@@ -1022,6 +1022,7 @@ this->when(FL_WHEN_RELEASE);
   dly_down->align(Fl_Align(FL_ALIGN_CENTER));
   dly_down->when(FL_WHEN_RELEASE);
 } // RKR_Button* dly_down
+m_parent = NULL;
 position(X, Y);
 end();
 }
