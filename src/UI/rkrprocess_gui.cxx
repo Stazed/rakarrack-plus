@@ -1672,8 +1672,8 @@ void RKRGUI::MiraClientes()
                 masque = strtok(NULL, ")");
                 
                 std::string s_name = m_process->jackcliname;
-                s_name + " MC OUT";
-
+                s_name += " MC OUT";
+                
                 if ((masque[2] == 'R') && (strstr(name, s_name.c_str()) == 0))
                 {
                     Settings->BMidiIn->add(name);

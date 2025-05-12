@@ -1052,7 +1052,7 @@ RKR::Conecta()
                 sscanf(nume, "%d", &puerto);
                 
                 std::string s_name = jackcliname;
-                s_name + " IN";
+                s_name += " IN";
                 
                 if (strstr(temp, s_name.c_str()) != 0)
                 {
