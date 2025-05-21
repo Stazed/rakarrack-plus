@@ -67,6 +67,7 @@ extern std::string nsm_preferences_file;
 
 // Used by FPreset
 extern std::string global_user_directory;
+const std::string C_INSERT_PRESET_FILE = "InsertPresets.rkis";
 
 const int C_DEFAULT_FONT_SIZE = 10;
 

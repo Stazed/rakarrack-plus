@@ -39,7 +39,10 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
     if( (strcmp(global_user_directory.c_str(), DATADIR) != 0) && (strcmp(global_user_directory.c_str(), UD_NOT_SET) != 0) )
     {
         insert_preset_location = global_user_directory;
-        insert_preset_location += "InsertPresets.rkis";
+        if(insert_preset_location[insert_preset_location.size() - 1] != '/')
+            insert_preset_location += "/";
+
+        insert_preset_location += C_INSERT_PRESET_FILE;
     }
     else
     {
@@ -52,7 +55,7 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
     char *sbuf;
     int reff = 0;
     memset(pdata, 0, sizeof (int)*MAX_PDATA_SIZE);
-    
+
     if ((fn = fopen(insert_preset_location.c_str(), "r")) != NULL)
     {
         int k = 0;
@@ -63,9 +66,9 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
             {
                 sbuf = buf;
                 sscanf(buf, "%d", &reff);
-                
+
                 if (reff == eff) k++;
-                
+
                 if (k == num)
                 {
                     strsep(&sbuf, ",");
@@ -198,6 +201,10 @@ FPreset::ReadPreset(int eff, int num, int pdata[], char *filename)
 
 ERROR_QUIT:
         fclose(fn);
+    }
+    else
+    {
+        fprintf(stderr,"Cannot load insert preset file: %s\n", insert_preset_location.c_str());
     }
 }
 

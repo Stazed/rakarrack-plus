@@ -1826,7 +1826,7 @@ RKR::save_insert_preset(int num, const std::string &name)
         if(insert_preset_location[insert_preset_location.size() - 1] != '/')
             insert_preset_location += "/";
         
-        insert_preset_location += "InsertPresets.rkis";
+        insert_preset_location += C_INSERT_PRESET_FILE;
     }
     else
     {
@@ -1863,7 +1863,10 @@ RKR::delete_insert_preset(int num, const std::string &name)
     if( (strcmp(global_user_directory.c_str(), DATADIR) != 0) && (strcmp(global_user_directory.c_str(), UD_NOT_SET) != 0) )
     {
         insert_preset_location = global_user_directory;
-        insert_preset_location += "InsertPresets.rkis";
+        if(insert_preset_location[insert_preset_location.size() - 1] != '/')
+            insert_preset_location += "/";
+
+        insert_preset_location += C_INSERT_PRESET_FILE;
     }
     else
     {
