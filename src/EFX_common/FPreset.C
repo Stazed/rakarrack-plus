@@ -21,6 +21,7 @@
 #include "FPreset.h"
 
 std::string global_user_directory = "";
+const std::string C_INSERT_PRESET_FILE = "InsertPresets.rkis";
 
 FPreset::FPreset()
 {
