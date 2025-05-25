@@ -11,6 +11,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+
+#ifndef nullptr
+// needed for c++98 with fltk > 1.3.9
+#define nullptr 0
+#endif
+
 #include "../global.h"
 
 #define M_PI 3.14159265358979323846

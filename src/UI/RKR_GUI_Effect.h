@@ -26,6 +26,7 @@
 #ifndef RKR_GUI_EFFECT_H
 #define RKR_GUI_EFFECT_H
 
+#include <FL/Fl_Group.H>
 #include "RKR_Light_Button.h"
 #include "RKR_Choice.h"
 

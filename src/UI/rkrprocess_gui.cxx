@@ -27,6 +27,7 @@
  */
 
 #include "rakarrack.h"
+#include <FL/Fl_Shared_Image.H>
 #include "../strlcpy.h"
 #include "../icono_rakarrack_128x128.xpm"
 #include <algorithm>    // std::sort
