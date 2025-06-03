@@ -1115,6 +1115,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
     int i;
     int type = midievent->buffer[0] >> 4;
 
+    // 0xf8 is MIDI message clock
     if ((Tap_Active) && (Tap_Selection == 3) && (midievent->buffer[0] == 0xf8))
     {
         mtc_counter++;
@@ -1126,6 +1127,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         }
     }
 
+    // Note ON and Note OFF
     if ((type == 8) || (type == 9))
     {
         int cmdnote = midievent->buffer[1];
@@ -1138,6 +1140,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         {
             for (i = 0; i < POLY; i++)
             {
+                // Note ON with > 0 velocity
                 if ((type == 9) && (cmdvelo != 0))
                 {
                     if (RC_Harm->note_active[i] == 0)
@@ -1150,6 +1153,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
                     }
                 }
 
+                // Note ON with zero velocity, treat as note OFF
                 if ((type == 9) && (cmdvelo == 0))
                 {
                     if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == cmdnote))
@@ -1160,6 +1164,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
                     }
                 }
 
+                // Note OFF
                 if (type == 8)
                 {
                     if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == cmdnote))
@@ -1176,6 +1181,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         {
             for (i = 0; i < POLY; i++)
             {
+                // Note ON with > 0 velocity
                 if ((type == 9) && (cmdvelo != 0))
                 {
                     if (RC_Stereo_Harm->note_active[i] == 0)
@@ -1188,6 +1194,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
                     }
                 }
 
+                // Note ON with zero velocity, treat as note OFF
                 if ((type == 9) && (cmdvelo == 0))
                 {
                     if ((RC_Stereo_Harm->note_active[i]) && (RC_Stereo_Harm->rnote[i] == cmdnote))
@@ -1198,6 +1205,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
                     }
                 }
 
+                // Note OFF
                 if (type == 8)
                 {
                     if ((RC_Stereo_Harm->note_active[i]) && (RC_Stereo_Harm->rnote[i] == cmdnote))
@@ -1211,6 +1219,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         }
     }
 
+    // Program Change
     if (type == 12)
     {
         int cmdvalue = midievent->buffer[1];
@@ -1237,6 +1246,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         }
     }
 
+    // Control Change
     if (type == 11)
     {
         int cmdcontrol = midievent->buffer[1];
