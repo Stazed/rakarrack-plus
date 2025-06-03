@@ -130,8 +130,9 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     
     HideUE->redraw();
 
-    Fl::add_timeout(.04, this->TimeoutStatic, this);
     Fl::add_handler(global_shortcuts);
+
+    Fl::add_timeout(.04, this->TimeoutStatic, this);
 }
 
 /**
