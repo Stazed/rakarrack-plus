@@ -35,7 +35,7 @@
 int global_error_number = 0;
 char *jack_client_name = (char*) PACKAGE;
 
-RKR::RKR(int gui) :
+RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     efx_Tuner(NULL),
     efx_MIDIConverter(NULL),
     M_Metronome(NULL),
@@ -53,8 +53,6 @@ RKR::RKR(int gui) :
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
     jackclient(NULL),
-    options(),
-    status(),
     jackcliname(),
     Jack_Shut_Down(0),
     db6booster(),
@@ -74,7 +72,6 @@ RKR::RKR(int gui) :
     Gui_Shown(gui),
     Gui_Refresh(0),
     Shut_Off_Below_Mouse(0),
-    No_Jack_Client(0),
     Bank_Load_Command_Line(0),
     saved_order(),
     efx_order(),
@@ -104,8 +101,8 @@ RKR::RKR(int gui) :
     Mvalue(),
     Mnumeff(),
     OnOffC(0),
-    JACK_SAMPLE_RATE(),
-    JACK_PERIOD(),
+    JACK_SAMPLE_RATE(_sample_rate),
+    JACK_PERIOD(_period),
     period_master(),
     fPeriod(),
     sample_rate(),
@@ -207,11 +204,11 @@ RKR::RKR(int gui) :
     m_preset_number(0)
 #endif
 {
-    if(!jack_open_client())
-    {
-        return; // If we don't have a jack client then quit with message
-    }
+}
 
+void
+RKR::initialize()
+{
     load_user_preferences();
 
     Get_Bogomips();
@@ -294,35 +291,13 @@ RKR::~RKR()
     }
 };
 
-/**
- *  Opens a jack client for this session.
- * 
- * @return 
- *      0 if client cannot be opened.
- *      1 if valid client is opened.
- */
-int
-RKR::jack_open_client()
+void
+RKR::set_jack_client(jack_client_t *_jackclient)
 {
-    char temp[256];
-    snprintf(temp, sizeof(temp), "%s", jack_client_name);
-
-    jackclient = jack_client_open(temp, options, &status, NULL);
-
-    if (jackclient == NULL)
-    {
-        fprintf(stderr, "Cannot make a jack client, is jackd running?\n");
-        No_Jack_Client = 1;
-        return 0;
-    }
+    jackclient = _jackclient;
 
     RKRP::strlcpy(jackcliname, jack_get_client_name(jackclient), sizeof(jackcliname));
     RKRP::strlcpy(Config.jackcliname, jack_get_client_name(jackclient), sizeof(Config.jackcliname));
-
-    JACK_SAMPLE_RATE = jack_get_sample_rate(jackclient);
-    JACK_PERIOD = jack_get_buffer_size(jackclient);
-    
-    return 1;
 }
 
 /**

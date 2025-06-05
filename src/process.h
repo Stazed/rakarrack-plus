@@ -672,11 +672,12 @@ class RKR
 
 public:
 
-    explicit RKR (int gui);
+    explicit RKR (uint32_t _sample_rate, uint32_t _period, int gui);
     ~RKR ();
 
     // process.C
-    int jack_open_client();
+    void initialize();
+    void set_jack_client(jack_client_t *_jackclient);
     void load_user_preferences();
     void instantiate_effects();
     void initialize_arrays();
@@ -805,8 +806,6 @@ public:
     class AnalogFilter *DC_Offsetr;
 
     jack_client_t *jackclient;
-    jack_options_t options;
-    jack_status_t status;
     char jackcliname[64];
     int Jack_Shut_Down;
 
@@ -883,11 +882,6 @@ public:
      which get caught by the below mouse function.
     */
     int Shut_Off_Below_Mouse;
-    
-    /**
-     * Flag to indicate that a Jack client cannot be created.
-     */
-    int No_Jack_Client;
 
     /**
      * Flag to indicate if a bank is set from the command line.

@@ -188,6 +188,27 @@ show_help()
     fprintf(stderr, "\n");
 }
 
+jack_client_t *jackclient;
+
+int
+jack_create_client(uint32_t &JACK_SAMPLE_RATE, uint32_t &JACK_PERIOD)
+{
+    char temp[256];
+    snprintf(temp, sizeof(temp), "%s", jack_client_name);
+
+    jackclient = jack_client_open(temp, (jack_options_t) 0, NULL);
+
+    if (jackclient == NULL)
+    {
+        fprintf(stderr, "Cannot make a jack client, is jackd running?\n");
+        return 0;
+    }
+
+    JACK_SAMPLE_RATE = jack_get_sample_rate(jackclient);
+    JACK_PERIOD = jack_get_buffer_size(jackclient);
+    
+    return 1;
+}
 
 int
 main(int argc, char *argv[])
@@ -334,16 +355,19 @@ main(int argc, char *argv[])
     int hold_preset = C_CHANGE_PRESET_OFF;
 #endif // NSM_SUPPORT
 
-
-    RKR process(gui);
-
-    if (process.No_Jack_Client)
+    uint32_t jack_sample_rate, jack_period;
+    if(!jack_create_client(jack_sample_rate, jack_period))
     {
         show_help();
-        
-        process.Handle_Message(34);
+        if(gui)
+            fl_message("Cannot make a Jack client. Is JACK running?");
+
         return (0);
     }
+
+    RKR process(jack_sample_rate, jack_period, gui);
+    process.set_jack_client(jackclient);
+    process.initialize();
 
     if (needtodump)
     {
