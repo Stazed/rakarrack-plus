@@ -1,0 +1,98 @@
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+# --------------------------------------------------------------------------
+#
+
+@prefix atom:  <http://lv2plug.in/ns/ext/atom#> .
+@prefix doap:  <http://usefulinc.com/ns/doap#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ll: <http://ll-plugins.nongnu.org/lv2/namespace#>.
+#@prefix units: <http://lv2plug.in/ns/extensions/units#> .
+#@prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
+#@prefix param: <http://lv2plug.in/ns/ext/parameters#> .
+#@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
+@prefix state: <http://lv2plug.in/ns/ext/state#> .
+@prefix lv2midi:  <http://lv2plug.in/ns/ext/midi#> .
+@prefix time: <http://lv2plug.in/ns/ext/time#> .
+
+@prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
+@prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
+
+<https://github.com/Stazed/rakarrack-plus#rkrplus_ui>
+        a <http://kxstudio.sf.net/ns/lv2ext/external-ui#Widget> ;
+ 	ui:binary <rkrplus.so> ;
+ 	lv2:extensionData ui:idleInterface ;
+ 	.
+
+<https://github.com/Stazed/rakarrack-plus#rkrplus>
+        a lv2:Plugin, lv2:CompressionPlugin ;
+		doap:name "Rakarrack-plus" ;
+        doap:description "Audio effects processor";
+        doap:license <http://opensource.org/licenses/gpl-2.0> ;
+		ll:pegName "p";
+        doap:maintainer [
+                foaf:name "Stazed" ;
+                foaf:homepage <https://github.com/Stazed/rakarrack-plus>;
+                foaf:mbox <mailto:stazed@web.com> ;
+        ] ;
+        lv2:minorVersion 0 ;
+        lv2:microVersion 0 ;
+        rdfs:comment "Guitar and audio effects." ;
+        lv2:optionalFeature lv2:hardRTCapable ;
+        ui:ui  <https://github.com/Stazed/rakarrack-plus#rkrplus_ui> ;
+
+        lv2:port [
+                a lv2:InputPort, lv2:AudioPort ;
+                lv2:index 0 ;
+                lv2:symbol "INPUT_L" ;
+                lv2:name "Audio In L" ;
+        ] ;
+        lv2:port [
+                a lv2:InputPort, lv2:AudioPort ;
+                lv2:index 1 ;
+                lv2:symbol "INPUT_R" ;
+                lv2:name "Audio In R" ;
+        ] ;
+        lv2:port [
+                a lv2:OutputPort, lv2:AudioPort ;
+                lv2:index 2 ;
+                lv2:symbol "OUTPUT_L" ;
+                lv2:name "Audio Out L" ;
+        ] ;
+        lv2:port [
+                a lv2:OutputPort, lv2:AudioPort ;
+                lv2:index 3 ;
+                lv2:symbol "OUTPUT_R" ;
+                lv2:name "Audio Out R" ;
+        ] ;         
+        lv2:port [
+                a lv2:InputPort , atom:AtomPort ;
+                atom:bufferType atom:Sequence ;
+                atom:supports lv2midi:MidiEvent, time:Position ;
+                lv2:index 4 ;
+                lv2:symbol "MIDI_IN" ;
+                lv2:name "MIDI In" ;
+                lv2:designation lv2:control ;
+        ] ; 
+        lv2:port [
+                a lv2:OutputPort, atom:AtomPort ;
+                lv2:index 5 ;
+                lv2:symbol "MIDI_OUT" ;
+                lv2:name "MIDI Out" ;
+                atom:bufferType atom:Sequence ;
+                atom:supports lv2midi:MidiEvent ;
+        ] .

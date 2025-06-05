@@ -1,0 +1,495 @@
+#include <lv2.h>
+#include <lv2/lv2plug.in/ns/ext/urid/urid.h>
+#include <lv2/lv2plug.in/ns/ext/midi/midi.h>
+#include <lv2/lv2plug.in/ns/ext/atom/util.h>
+#include <lv2/lv2plug.in/ns/ext/atom/forge.h>
+#include <lv2/lv2plug.in/ns/ext/time/time.h>
+#include <lv2/lv2plug.in/ns/ext/buf-size/buf-size.h>
+#include <lv2/lv2plug.in/ns/ext/options/options.h>
+#include <lv2/lv2plug.in/ns/ext/atom/atom.h>
+#include <lv2/lv2plug.in/ns/ext/patch/patch.h>
+#include <lv2/lv2plug.in/ns/ext/worker/worker.h>
+#include <lv2/lv2plug.in/ns/ext/state/state.h>
+#include <lv2/lv2plug.in/ns/ext/time/time.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <string>
+#include <unistd.h>
+#include "RakarrackPlusLV2.h"
+#include "RakarrackPlusLV2UI.h"
+
+#include "../process.h"
+
+// externs
+int global_gui_show = 0;
+std::string nsm_preferences_file = "";
+
+//this is the default hopefully hosts don't use periods of more than this, or they will communicate the max bufsize
+#define INTERMEDIATE_BUFSIZE 1024
+
+
+typedef struct _RKRPLUSLV2
+{
+    uint8_t nparams;
+    uint8_t effectindex;//index of effect
+    uint16_t period_max;
+    float	*tmp_l;//temporary buffers for wet/dry mixing for hosts with shared in/out buffers(Ardour)
+    float 	*tmp_r; // TODO check
+
+    //ports
+    float *input_l_p;
+    float *input_r_p;
+    float *output_l_p;
+    float *output_r_p;
+    const LV2_Atom_Sequence* atom_in_p;
+    LV2_Atom_Sequence* atom_out_p;
+    float *param_p[20];
+
+    //various "advanced" lv2 stuffs
+    LV2_Atom_Forge	forge;
+    LV2_Atom_Forge_Frame atom_frame;
+    LV2_URID_Map *urid_map;
+
+    struct urids
+    {
+        LV2_URID    midi_MidiEvent;
+        LV2_URID    atom_Float;
+        LV2_URID    atom_Int;
+        LV2_URID    atom_long;
+        LV2_URID    atom_string_id;
+        LV2_URID    atom_Object;
+        LV2_URID    atom_URID;
+        LV2_URID    bufsz_max;
+        LV2_URID    rkrplus_state_id;
+        LV2_URID    atom_blank;
+        LV2_URID    atom_position;
+        LV2_URID    atom_bpb;
+        LV2_URID    atom_bar;
+        LV2_URID    atom_bar_beat;
+        LV2_URID    atom_bpm;
+        LV2_URID    atom_beatUnit;
+        
+    } URIDs;
+
+    RKR* rkrplus;
+
+} RKRPLUSLV2;
+
+
+void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
+{
+    uint8_t i,j;
+    plug->period_max = INTERMEDIATE_BUFSIZE;
+    plug->urid_map = 0;
+    plug->URIDs.midi_MidiEvent = 0;
+    plug->URIDs.atom_Float = 0;
+    plug->URIDs.atom_Int = 0;
+    plug->URIDs.atom_long = 0;
+    plug->URIDs.atom_string_id = 0;
+    plug->URIDs.atom_Object = 0;
+    plug->URIDs.atom_URID = 0;
+    plug->URIDs.bufsz_max = 0;
+    plug->URIDs.rkrplus_state_id = 0;
+    plug->URIDs.atom_blank = 0;
+    plug->URIDs.atom_position = 0;
+    plug->URIDs.atom_bpb = 0;
+    plug->URIDs.atom_bar = 0;
+    plug->URIDs.atom_bar_beat = 0;
+    plug->URIDs.atom_bpm = 0;
+    plug->URIDs.atom_beatUnit = 0;
+
+    for(i=0; host_features[i]; i++)
+    {
+        if(!strcmp(host_features[i]->URI,LV2_OPTIONS__options))
+        {
+            LV2_Options_Option* option;
+            option = (LV2_Options_Option*)host_features[i]->data;
+            for(j=0; option[j].key; j++)
+            {
+                if(option[j].key == plug->URIDs.bufsz_max)
+                {
+                    if(option[j].type == plug->URIDs.atom_Int)
+                    {
+                        plug->period_max = *(const int*)option[j].value;
+                    }
+                    //other types?
+                }
+            }
+        }
+        else if(!strcmp(host_features[i]->URI,LV2_URID__map))
+        {
+            plug->urid_map = (LV2_URID_Map *) host_features[i]->data;
+            if(plug->urid_map)
+            {
+                plug->URIDs.midi_MidiEvent = plug->urid_map->map(plug->urid_map->handle,LV2_MIDI__MidiEvent);
+                plug->URIDs.atom_Float = plug->urid_map->map(plug->urid_map->handle,LV2_ATOM__Float);
+                plug->URIDs.atom_Int = plug->urid_map->map(plug->urid_map->handle,LV2_ATOM__Int);
+                plug->URIDs.atom_Object = plug->urid_map->map(plug->urid_map->handle,LV2_ATOM__Object);
+                plug->URIDs.atom_URID = plug->urid_map->map(plug->urid_map->handle,LV2_ATOM__URID);
+                plug->URIDs.bufsz_max = plug->urid_map->map(plug->urid_map->handle,LV2_BUF_SIZE__maxBlockLength);
+                plug->URIDs.rkrplus_state_id = plug->urid_map->map(plug->urid_map->handle,RAKARRACK_PLUS_STATE_URI);
+                plug->URIDs.atom_string_id = plug->urid_map->map(plug->urid_map->handle,LV2_ATOM__String);
+                plug->URIDs.atom_position = plug->urid_map->map(plug->urid_map->handle, LV2_TIME__Position);
+                plug->URIDs.atom_blank = plug->urid_map->map(plug->urid_map->handle, LV2_ATOM__Blank);
+                plug->URIDs.atom_bpb = plug->urid_map->map(plug->urid_map->handle, LV2_TIME__beatsPerBar);
+                plug->URIDs.atom_bar = plug->urid_map->map(plug->urid_map->handle, LV2_TIME__bar);
+                plug->URIDs.atom_bar_beat = plug->urid_map->map(plug->urid_map->handle, LV2_TIME__barBeat);
+                plug->URIDs.atom_bpm = plug->urid_map->map(plug->urid_map->handle, LV2_TIME__beatsPerMinute);
+                plug->URIDs.atom_long = plug->urid_map->map(plug->urid_map->handle, LV2_ATOM__Long);
+                plug->URIDs.atom_beatUnit = plug->urid_map->map(plug->urid_map->handle, LV2_TIME__beatUnit);
+            }
+        }
+    }
+}
+
+//checks if input and output buffers are shared and copies it in a temp buffer so wet/dry works
+static void
+check_shared_buf(RKRPLUSLV2* plug, uint32_t nframes)
+{
+    // This original from rkrlv2 works for all
+    if(nframes > plug->period_max)
+    {
+        if(plug->tmp_l)
+            free(plug->tmp_l);
+
+        if(plug->tmp_r)
+            free(plug->tmp_r);
+    
+        plug->tmp_l = (float*)malloc(sizeof(float)*nframes);
+        plug->tmp_r = (float*)malloc(sizeof(float)*nframes);
+    }
+
+    if(plug->input_l_p == plug->output_l_p )
+    {
+        memcpy(plug->tmp_l,plug->input_l_p,sizeof(float)*nframes);
+        plug->input_l_p = plug->tmp_l;
+    }
+    if(plug->input_r_p == plug->output_r_p)
+    {
+        memcpy(plug->tmp_r,plug->input_r_p,sizeof(float)*nframes);
+        plug->input_r_p = plug->tmp_r;
+    }
+}
+
+static void
+inline_check(RKRPLUSLV2* plug, uint32_t nframes)
+{
+    // copy only if needed. memcpy() src/dest memory areas must not overlap.
+    if (plug->output_l_p != plug->input_l_p) {
+        memcpy(plug->output_l_p,plug->input_l_p,sizeof(float)*nframes);
+    }
+    if (plug->output_r_p != plug->input_r_p) {
+        memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
+    }
+}
+
+///// Rakarrack-plus /////////
+LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
+    double sample_freq,
+    const char */*bundle_path*/,
+    const LV2_Feature * const* host_features)
+{
+    RKRPLUSLV2* plug = (RKRPLUSLV2*)malloc(sizeof(RKRPLUSLV2));
+    
+//    plug->nparams = 2;
+    plug->effectindex = IRKRPLUS;
+//    plug->prev_bypass = 1;
+
+    getFeatures(plug,host_features);
+
+    plug->rkrplus = g_rkrplus = new RKR(sample_freq, plug->period_max, true);
+//    plug->rkrplus->set_jack_client();
+    plug->rkrplus->initialize();
+
+    return plug;
+}
+
+void run_rkrplus(LV2_Handle handle, uint32_t nframes)
+{
+    if( nframes == 0)
+        return;
+
+    RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
+
+//    check_shared_buf(plug,nframes);   // TODO
+//    inline_check(plug, nframes);      // TODO
+
+    /* adjust for possible variable nframes */
+    if(plug->period_max != nframes)
+    {
+        plug->period_max = nframes;
+      //  plug->rkrplus->m_sus->lv2_update_params(nframes); // TODO
+    }
+
+    /* Process incoming MIDI messages */
+    LV2_ATOM_SEQUENCE_FOREACH(plug->atom_in_p , ev)
+    {
+        printf("GOT atoM %d: Blank = %d: Object = %d: MIDIEvent = %d: Position = %d\n",
+                ev->body.type, plug->URIDs.atom_blank,
+                plug->URIDs.atom_Object,
+                plug->URIDs.midi_MidiEvent,
+                plug->URIDs.atom_position);
+    
+        if (ev->body.type ==  plug->URIDs.midi_MidiEvent)
+        {
+            const uint8_t* const msg = (const uint8_t*)(ev + 1);
+     //       plug->rkrplus->lv2_process_midievents(msg); // TODO
+        }
+        else if (ev->body.type == plug->URIDs.atom_blank || ev->body.type == plug->URIDs.atom_Object)
+        {
+            LV2_Atom_Object *obj = (LV2_Atom_Object *)&ev->body;
+            if (obj->body.otype != plug->URIDs.atom_position)
+                continue;
+
+            LV2_Atom *bpb = NULL;
+            LV2_Atom *bar = NULL;
+            LV2_Atom *barBeat = NULL;
+            LV2_Atom *bpm = NULL;
+            LV2_Atom *beatUnit = NULL;
+            lv2_atom_object_get(obj,
+                                plug->URIDs.atom_bpb, &bpb,
+                                plug->URIDs.atom_bar, &bar,
+                                plug->URIDs.atom_bar_beat, &barBeat,
+                                plug->URIDs.atom_bpm, &bpm,
+                                plug->URIDs.atom_beatUnit, &beatUnit,
+                                NULL);
+
+            if (bpm && bpm->type == plug->URIDs.atom_Float)
+            {
+                float BPM = ((LV2_Atom_Float *)bpm)->body;
+ 
+                if (beatUnit && beatUnit->type == plug->URIDs.atom_Int)
+                {
+                    // In DAWs, Beats Per Minute really mean Quarter Beats Per
+                    // Minute. Therefore we need to divide by four first, to
+                    // get a whole beat, and then multiply that according to
+                    // the time signature denominator. See this link for some
+                    // background: https://music.stackexchange.com/a/109743
+                    BPM = BPM / 4 * ((LV2_Atom_Int *)beatUnit)->body;
+                }
+       //         plug->rkrplus->lv2_set_bpm(BPM);  // TODO
+            }
+        }
+    }
+    
+    // we are good to run now
+    //inline copy input to process output
+#if 0   // TODO
+    memcpy(plug->rkrplus->efxoutl, plug->input_l_p, sizeof(float)*nframes);
+    memcpy(plug->rkrplus->efxoutr, plug->input_r_p, sizeof(float)*nframes);
+
+    //now run
+    plug->rkrplus->process_effects(plug->input_l_p,plug->input_r_p, 0);
+
+    // copy processed output to LV2 output
+    memcpy(plug->output_l_p, plug->rkrplus->efxoutl, sizeof(float)*nframes);
+    memcpy(plug->output_r_p, plug->rkrplus->efxoutr, sizeof(float)*nframes);
+#endif
+    return;
+}
+
+void cleanup_rkrplus(LV2_Handle handle)
+{
+    RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
+    switch(plug->effectindex)
+    {
+    case IRKRPLUS:
+        delete plug->rkrplus;
+        break;
+
+    }
+    free(plug);
+}
+
+void connect_rkrplus_ports(LV2_Handle handle, uint32_t port, void *data)
+{
+    RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
+    switch(port)
+    {
+    case INL:
+        plug->input_l_p = (float*)data;
+        break;
+    case INR:
+        plug->input_r_p = (float*)data;
+        break;
+    case OUTL:
+        plug->output_l_p = (float*)data;
+        break;
+    case OUTR:
+        plug->output_r_p = (float*)data;
+        break;
+    case ATOM_IN:
+        plug->atom_in_p = (const LV2_Atom_Sequence*)data;
+        break;
+    case ATOM_OUT:
+        plug->atom_out_p = (LV2_Atom_Sequence*)data;
+        break;
+    case PARAM0:
+        plug->param_p[0] = (float*)data;
+        break;
+    case PARAM1:
+        plug->param_p[1] = (float*)data;
+        break;
+    case PARAM2:
+        plug->param_p[2] = (float*)data;
+        break;
+    case PARAM3:
+        plug->param_p[3] = (float*)data;
+        break;
+    case PARAM4:
+        plug->param_p[4] = (float*)data;
+        break;
+    case PARAM5:
+        plug->param_p[5] = (float*)data;
+        break;
+    case PARAM6:
+        plug->param_p[6] = (float*)data;
+        break;
+    case PARAM7:
+        plug->param_p[7] = (float*)data;
+        break;
+    case PARAM8:
+        plug->param_p[8] = (float*)data;
+        break;
+    case PARAM9:
+        plug->param_p[9] = (float*)data;
+        break;
+    case PARAM10:
+        plug->param_p[10] = (float*)data;
+        break;
+    case PARAM11:
+        plug->param_p[11] = (float*)data;
+        break;
+    case PARAM12:
+        plug->param_p[12] = (float*)data;
+        break;
+    case PARAM13:
+        plug->param_p[13] = (float*)data;
+        break;
+    case PARAM14:
+        plug->param_p[14] = (float*)data;
+        break;
+    case PARAM15:
+        plug->param_p[15] = (float*)data;
+        break;
+    case PARAM16:
+        plug->param_p[16] = (float*)data;
+        break;
+    case PARAM17:
+        plug->param_p[17] = (float*)data;
+        break;
+    case PARAM18:
+        plug->param_p[18] = (float*)data;
+        break;
+    case PARAM19:
+        plug->param_p[19] = (float*)data;
+        break;
+    default:
+        puts("UNKNOWN PORT YO!!");
+    }
+}
+
+
+LV2_State_Status stateSave(LV2_Handle h,
+        LV2_State_Store_Function store,
+        LV2_State_Handle handle,
+        uint32_t flags,
+        const LV2_Feature * const *features)
+{
+    RKRPLUSLV2* plug = (RKRPLUSLV2*)h;
+    uint32_t a = flags; flags = a;
+    const LV2_Feature * const *feat = features;
+    features = feat;
+    // suppress warnings - may use later
+
+//    printf("GOT STATE SAVE\n");
+
+    std::string str;
+#if 0   // TODO
+    int sz = plug->rkrplus->save_state_lv2(str);
+    char *data = new char[sz]; // Allocate memory
+    strcpy(data, str.c_str()); // Copy the string
+
+    store(handle, plug->URIDs.rkrplus_state_id, data, sz, plug->URIDs.atom_string_id, LV2_STATE_IS_POD | LV2_STATE_IS_PORTABLE);
+    delete[] data; // Deallocate the memory
+#endif
+    return LV2_STATE_SUCCESS;
+}
+
+
+LV2_State_Status stateRestore(LV2_Handle h,
+        LV2_State_Retrieve_Function retrieve,
+        LV2_State_Handle handle,
+        uint32_t flags,
+        const LV2_Feature * const *features)
+{
+    RKRPLUSLV2* plug = (RKRPLUSLV2*)h;
+    uint32_t a = flags; flags = a;
+    const LV2_Feature * const *feat = features;
+    features = feat;
+    // lines above suppress warnings - may use later
+
+//    printf("GOT STATE RESTORE\n");
+#if 0 // TODO
+    size_t sz = 0;
+    LV2_URID type = 0;
+    uint32_t new_flags;
+
+    const char *data = (const char *)retrieve(handle, plug->URIDs.rkrplus_state_id, &sz, &type, &new_flags);
+    
+    if(sz > 0)
+        plug->rkrplus->restore_state_lv2(data);
+#endif
+    return LV2_STATE_SUCCESS;
+}
+
+
+static LV2_State_Status callback_stateSave(LV2_Handle h, LV2_State_Store_Function store, LV2_State_Handle state, uint32_t flags, const LV2_Feature * const *features)
+{
+    return stateSave(h, store, state, flags, features);
+}
+
+
+static LV2_State_Status callback_stateRestore(LV2_Handle h, LV2_State_Retrieve_Function retrieve, LV2_State_Handle state, uint32_t flags, const LV2_Feature * const *features)
+{
+    return stateRestore(h, retrieve, state, flags, features);
+}
+
+static const void *extension_data(const char *uri)
+{
+    static const LV2_State_Interface state_iface = { callback_stateSave, callback_stateRestore };
+    if (!strcmp(uri, LV2_STATE__interface))
+    {
+        return static_cast<const void *>(&state_iface);
+
+    }
+
+    return NULL;
+}
+
+static const LV2_Descriptor rkrplus_descriptor=
+{
+    RAKARRACK_PLUS_LV2_URI,
+    init_rkrplus,
+    connect_rkrplus_ports,
+    0,//activate
+    run_rkrplus,
+    0,//deactivate
+    cleanup_rkrplus,
+    extension_data
+
+};
+
+LV2_SYMBOL_EXPORT
+const LV2_Descriptor* lv2_descriptor(uint32_t index)
+{
+    switch (index)
+    {
+    case IRKRPLUS:
+        return &rkrplus_descriptor ;
+    default:
+        return 0;
+    }
+}
+
