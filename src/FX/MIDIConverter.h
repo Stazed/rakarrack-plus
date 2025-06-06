@@ -129,7 +129,9 @@ private:
 public:
     jack_ringbuffer_t   *m_buffSize;
     jack_ringbuffer_t   *m_buffMessage;
+#ifndef RKR_PLUS_LV2
     snd_seq_t *port;
+#endif
 private:
 #endif
     //Parametrii

@@ -563,6 +563,7 @@ main(int argc, char *argv[])
             process.Handle_Message(33);
         }
 
+        // Alsa
         process.miramidi();
     
 #ifdef SYSEX_SUPPORT

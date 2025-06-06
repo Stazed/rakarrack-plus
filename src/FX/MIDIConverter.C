@@ -62,8 +62,10 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     /* Jack */
     m_buffSize(NULL),
     m_buffMessage(NULL),
+#ifndef RKR_PLUS_LV2
     /* Alsa */
     port(NULL),
+#endif
 #endif // LV2_SUPPORT
     Pmidi(),
     Poctave(),
@@ -92,6 +94,7 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
 #ifdef LV2_SUPPORT
     update_freqs(440.0f);
 #else
+#ifndef RKR_PLUS_LV2
     // Open Alsa Seq
     int err = snd_seq_open(&port, "default", SND_SEQ_OPEN_OUTPUT, 0);
 
@@ -107,6 +110,7 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
                                SND_SEQ_PORT_CAP_SUBS_READ,
                                SND_SEQ_PORT_TYPE_APPLICATION);
 
+#endif // ifndef RKR_PLUS_LV2
 #endif // LV2_SUPPORT
 }
 
@@ -115,10 +119,12 @@ MIDIConverter::~MIDIConverter()
     schmittFree();
     fftFree();
 #ifndef LV2_SUPPORT
+#ifndef RKR_PLUS_LV2
     if(port)
     {
         snd_seq_close(port);
     }
+#endif
 #endif // LV2_SUPPORT
 }
 
@@ -557,6 +563,7 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
     forge_midimessage(plug, 0, midi_Note_Message, 3);
 #else
 
+#ifndef RKR_PLUS_LV2
     // ALSA
     snd_seq_event_t ev;
     snd_seq_ev_clear(&ev);
@@ -569,7 +576,7 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
     snd_seq_ev_set_subs(&ev);
     snd_seq_ev_set_direct(&ev);
     snd_seq_event_output_direct(port, &ev);
-
+#endif
     // JACK
     size_t size = 3;
     int nBytes = static_cast<int> (size);

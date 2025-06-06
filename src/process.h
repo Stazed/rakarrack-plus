@@ -1237,9 +1237,10 @@ public:
     std::vector<User_Files> Echotron_DLY_Files;
     std::vector<User_Files> Reverbtron_RVB_Files;
 
-
+#ifndef RKR_PLUS_LV2
     // Alsa MIDI
     snd_seq_t *midi_in;
+#endif
     
 #ifdef SYSEX_SUPPORT
     // data for sysex

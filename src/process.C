@@ -195,8 +195,10 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     mc_efx_params(),
     Bank(),
     MIDI_Table(),
-    MIDI_Table_Bank_Preset_Names(),
-    midi_in(NULL)
+    MIDI_Table_Bank_Preset_Names()
+#ifndef RKR_PLUS_LV2
+    ,midi_in(NULL)
+#endif
 #ifdef SYSEX_SUPPORT
     ,m_have_sysex_message(0),
     m_preset_name(),
@@ -285,10 +287,12 @@ RKR::~RKR()
     free(interpbuf);
 
     // alsa
+#ifndef RKR_PLUS_LV2
     if(midi_in)
     {
         snd_seq_close(midi_in);
     }
+#endif
 };
 
 void
