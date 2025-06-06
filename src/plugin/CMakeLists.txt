@@ -219,13 +219,11 @@ target_sources(rkrplus PRIVATE
   ../FX/MIDIConverter.C
 )
 
-#target_compile_definitions(rkrplus PRIVATE LV2_UI_EXTERNAL=1)
+target_compile_definitions(rkrplus PRIVATE RKR_PLUS_LV2=1)
 set_target_properties(rkrplus PROPERTIES PREFIX "")
 set_target_properties(rkrplus PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE )
 
-#target_include_directories (rkrplus PRIVATE ${LV2_INCLUDE_DIRS} ${SAMPLERATE_INCLUDE_DIRS} ${FFTW3_INCLUDE_DIRS} ${SNDFILE_INCLUDE_DIRS} ../src)
-#target_link_libraries(rkrplus PRIVATE ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} ${FFTW3_LIBRARIES} ${SNDFILE_LIBRARIES} )
-
+# FIXME TMP_INSTALL
 set(LV2_TMP_INSTALL_DIR ~/.lv2/rkrplus.lv2 CACHE PATH
         "Specifies where the LV2 libraries should be installed")
 
