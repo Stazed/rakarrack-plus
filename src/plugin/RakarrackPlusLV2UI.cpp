@@ -16,7 +16,8 @@ RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_
     plugin_human_id{"Rakarrack-plus lv2 plugin"},
     notify_on_GUI_close{},
     r_gui(NULL),
-    is_shown(false)
+    is_shown(false),
+    callbackGuiClosed{}
 {
     // Configure callbacks for running the UI
     LV2_External_UI_Widget::run  = RakarrackPlusLV2UI::callback_Run;
@@ -54,14 +55,13 @@ bool RakarrackPlusLV2UI::init()
 
     if(!r_gui)
         return false;
-#if 0   // TODO
-    r_gui->installGuiClosedCallback([this]
-                                        {// invoked when FLTK GUI is closed explicitly...
-                                            RakarrackPlusLV2UI::nothing();    // could do something if we wanted...
-                                            if (notify_on_GUI_close)
-                                                notify_on_GUI_close();
-                                        }); 
-#endif
+
+    installGuiClosedCallback([this]
+                            {// invoked when FLTK GUI is closed explicitly...
+                                RakarrackPlusLV2UI::nothing();    // could do something if we wanted...
+                                if (notify_on_GUI_close)
+                                    notify_on_GUI_close();
+                            }); 
 
     return true;
 }
@@ -70,6 +70,14 @@ void RakarrackPlusLV2UI::run()
 {
     if (is_shown)
     {
+        if(g_rkrplus->Exit_Program)
+        {
+            if (callbackGuiClosed)
+                callbackGuiClosed(); // if defined, invoke it
+
+            return;
+        }
+            
        /* if(r_gui->m_process->m_sus->m_midi_control)
         {
             r_gui->get_parameters();
@@ -92,6 +100,7 @@ void RakarrackPlusLV2UI::show()
     {
         r_gui->Principal->show();
         is_shown = true;
+        g_rkrplus->Exit_Program = 0;    // false
 
         // TODO
         // Update paramters

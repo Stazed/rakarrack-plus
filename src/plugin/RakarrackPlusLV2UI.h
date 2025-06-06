@@ -51,7 +51,14 @@ public:
     static int callback_ShowInterface(LV2_Handle ui){ self(ui).show(); return 0; }
     static int callback_HideInterface(LV2_Handle ui){ self(ui).hide(); return 0; }
 
+public:
+    using CallbackGuiClosed = std::function<void()>;
+    void installGuiClosedCallback(CallbackGuiClosed callback)
+    {
+        callbackGuiClosed = std::move(callback);
+    }
 private:
+    CallbackGuiClosed callbackGuiClosed;
 
 };
 
