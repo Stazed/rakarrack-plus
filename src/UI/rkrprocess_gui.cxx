@@ -804,6 +804,10 @@ void RKRGUI::load_previous_state()
         Preset_Counter->value(m_process->Config.Preset_Number);
         Preset_Counter->do_callback();
     }
+#else   // For LV2 we set the GUI counter for display but don't call do_callback()
+        // since we don't want to load anything and overwrite state restore.
+        m_process->Selected_Preset = m_process->Config.Preset_Number;
+        Preset_Counter->value(m_process->Config.Preset_Number);
 #endif  // undef RKR_PLUS_LV2
 
     // MIDI Learn
@@ -1015,10 +1019,23 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Hide Effects"), (int) m_process->Config.deachide);
         rakarrack.set(m_process->Config.PrefNom("Scale Window"), (int) m_process->Config.scalable);
 
+#ifdef RKR_PLUS_LV2
+        m_process->Config.back_color = (int) global_back_color;
+        m_process->Config.fore_color = (int) global_fore_color;
+        m_process->Config.leds_color = (int) global_leds_color;
+        m_process->Config.label_color = (int) global_label_color;
+        m_process->Config.Schema = (int) Settings->scheme_ch->value();
+#endif
+
         rakarrack.set(m_process->Config.PrefNom("Bank Selected"), m_process->active_bank);
 
         if ((Preset_Counter->value() > 0) && (Preset_Counter->value() < 61))
+        {
             rakarrack.set(m_process->Config.PrefNom("Preset Num"), (int) Preset_Counter->value());
+#ifdef RKR_PLUS_LV2
+            m_process->Config.Preset_Number = (int) Preset_Counter->value();
+#endif
+        }
 
         if (m_process->help_displayed)
         {
@@ -1027,10 +1044,21 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
             rakarrack.set(m_process->Config.PrefNom("Help W"), visor->w());
             rakarrack.set(m_process->Config.PrefNom("Help H"), visor->h());
             rakarrack.set(m_process->Config.PrefNom("Help TextSize"), visor->textsize());
+#ifdef RKR_PLUS_LV2
+            m_process->Config.Help_X = visor->x();
+            m_process->Config.Help_Y = visor->y();
+            m_process->Config.Help_W = visor->w();
+            m_process->Config.Help_H = visor->h();
+            m_process->Config.Help_TextSize = visor->textsize();
+            m_process->help_displayed = 0;  // For LV2 the UI is deleted so reset as not displayed
+#endif
         }
 
         //Tuner
         rakarrack.set(m_process->Config.PrefNom("Tuner On/Off"), (int) m_process->Tuner_Active);
+#ifdef RKR_PLUS_LV2
+        m_process->Config.Tuner_On_Off = (int) m_process->Tuner_Active;
+#endif
 
         //MIDIConverter
         rakarrack.set(m_process->Config.PrefNom("MIDI Converter On/Off"), (int) m_process->MIDIConverter_Active);

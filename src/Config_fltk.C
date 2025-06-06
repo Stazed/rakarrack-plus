@@ -531,8 +531,11 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
 
     // Last bank and preset selected
     rakarrack.get(PrefNom("Bank Selected"), active_bank, 0);
+#ifndef RKR_PLUS_LV2
     rakarrack.get(PrefNom("Preset Num"), Preset_Number, 1);
-
+#else
+    Preset_Number = 1;  // For LV2 we don't load the preset
+#endif
     // MIDIConverter
     rakarrack.get(PrefNom("Midi Out Channel"), Midi_Out_Channel, 1);
     rakarrack.get(PrefNom("Trigger Adjust"), Trigger_Adjust, 4);
