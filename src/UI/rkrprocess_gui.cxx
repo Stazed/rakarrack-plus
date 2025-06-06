@@ -795,13 +795,16 @@ void RKRGUI::load_previous_state()
     {
         BankWin_Label(m_process->Command_Line_Bank);
     }
-
+    
+// Don't load the default preset if LV2
+#ifndef RKR_PLUS_LV2
     if (!m_process->Command_Line_File)
     {
         m_process->Selected_Preset = m_process->Config.Preset_Number;
         Preset_Counter->value(m_process->Config.Preset_Number);
         Preset_Counter->do_callback();
     }
+#endif  // undef RKR_PLUS_LV2
 
     // MIDI Learn
     if (!m_process->Config.MIDIway)
