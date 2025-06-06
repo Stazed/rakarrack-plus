@@ -15,7 +15,8 @@ RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_
         LV2UI_Widget* widget, LV2_Feature const *const * features) :
     plugin_human_id{"Rakarrack-plus lv2 plugin"},
     notify_on_GUI_close{},
-    r_gui(NULL)
+    r_gui(NULL),
+    is_shown(false)
 {
     // Configure callbacks for running the UI
     LV2_External_UI_Widget::run  = RakarrackPlusLV2UI::callback_Run;
@@ -67,8 +68,7 @@ bool RakarrackPlusLV2UI::init()
 
 void RakarrackPlusLV2UI::run()
 {
-#if 0
-    if (r_gui->is_shown)
+    if (is_shown)
     {
        /* if(r_gui->m_process->m_sus->m_midi_control)
         {
@@ -76,38 +76,39 @@ void RakarrackPlusLV2UI::run()
             r_gui->m_process->m_sus->m_midi_control = false;
         }
         */
+        r_gui->run();
         Fl::check();
         Fl::flush();
     }
     else if (notify_on_GUI_close)
         notify_on_GUI_close();
-#endif
 }
 
 void RakarrackPlusLV2UI::show()
 {
     printf("SHOW CALLED\n");
-#if 0   // TODO
-    if(!r_gui->is_shown)
+
+    if(!is_shown)
     {
-        Fl_Double_Window *gui = r_gui->make_window();
-        gui->show();
-        r_gui->is_shown = true;
-        
+        r_gui->Principal->show();
+        is_shown = true;
+
+        // TODO
         // Update paramters
-        r_gui->get_parameters();
+       // r_gui->get_parameters();
     }
-#endif
 }
 
 void RakarrackPlusLV2UI::hide()
 {
     printf("HIDING CALLED\n");
-#if 0   // TODO
-    r_gui->is_shown = false;
-    r_gui->ui->hide();
+
+    is_shown = false;
+//    r_gui->save_current_state(0);   // TODO
+//    r_gui->is_bank_modified();
+//    r_gui->is_PG_table_modified();  
+    r_gui->Principal->hide();
     Fl::flush();
-#endif
 }
 
 
@@ -142,6 +143,7 @@ void RakarrackPlusLV2UI::cleanup(LV2UI_Handle ui)
     printf("CLEANUP CALLED\n");
     RakarrackPlusLV2UI *self = (RakarrackPlusLV2UI*)ui;
 //    delete self->r_gui->ui;
+    delete self->r_gui->Principal;
     delete self->r_gui;
     delete self;
 }

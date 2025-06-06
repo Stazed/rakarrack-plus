@@ -370,8 +370,8 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     {
         global_gui_show = CONST_GUI_HIDE;
     }
-\#endif} selected
-      xywh {210 478 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+\#endif}
+      xywh {210 475 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -2003,6 +2003,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
     comment {Main FLTK gui timeout} open private C return_type {static void}
   } {}
   Function {GuiTimeout(void)} {open private C return_type void
+  } {}
+  Function {run()} {open selected
   } {}
   Function {load_default_bank(unsigned bank_index)} {open return_type void
   } {}

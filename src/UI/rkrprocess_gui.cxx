@@ -619,6 +619,11 @@ void RKRGUI::GuiTimeout(void)
 #endif
 }
 
+void RKRGUI::run()
+{
+    GuiTimeout();
+}
+
 void RKRGUI::load_default_bank(unsigned bank_index)
 {
     // Check if the bank was modified - request save
