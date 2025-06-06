@@ -80,7 +80,15 @@ typedef struct _RKRPLUSLV2
 void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
 {
     uint8_t i,j;
+    plug->nparams = 0;
+    plug->effectindex = 0;
     plug->period_max = INTERMEDIATE_BUFSIZE;
+    plug->tmp_l = 0;
+    plug->tmp_r = 0;
+    plug->input_l_p = 0;
+    plug->input_r_p = 0;
+    plug->output_l_p = 0;
+    plug->output_r_p = 0;
     plug->urid_map = 0;
     plug->URIDs.midi_MidiEvent = 0;
     plug->URIDs.atom_Float = 0;
@@ -147,7 +155,7 @@ void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
 static void
 check_shared_buf(RKRPLUSLV2* plug, uint32_t nframes)
 {
-    // This original from rkrlv2 works for all
+#if 0
     if(nframes > plug->period_max)
     {
         if(plug->tmp_l)
@@ -159,14 +167,24 @@ check_shared_buf(RKRPLUSLV2* plug, uint32_t nframes)
         plug->tmp_l = (float*)malloc(sizeof(float)*nframes);
         plug->tmp_r = (float*)malloc(sizeof(float)*nframes);
     }
-
+#endif
     if(plug->input_l_p == plug->output_l_p )
     {
+        if(plug->tmp_l)
+            free(plug->tmp_l);
+        
+        plug->tmp_l = (float*)malloc(sizeof(float)*nframes);
+
         memcpy(plug->tmp_l,plug->input_l_p,sizeof(float)*nframes);
         plug->input_l_p = plug->tmp_l;
     }
+
     if(plug->input_r_p == plug->output_r_p)
     {
+        if(plug->tmp_r)
+            free(plug->tmp_r);
+        plug->tmp_r = (float*)malloc(sizeof(float)*nframes);
+
         memcpy(plug->tmp_r,plug->input_r_p,sizeof(float)*nframes);
         plug->input_r_p = plug->tmp_r;
     }
@@ -199,7 +217,7 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
     getFeatures(plug,host_features);
 
     plug->rkrplus = g_rkrplus = new RKR(sample_freq, plug->period_max, true);
-//    plug->rkrplus->set_jack_client();
+    plug->rkrplus->set_client_name(PACKAGE);
     plug->rkrplus->initialize();
 
     return plug;
@@ -212,8 +230,8 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
 
     RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
 
-//    check_shared_buf(plug,nframes);   // TODO
-//    inline_check(plug, nframes);      // TODO
+    check_shared_buf(plug,nframes);
+    inline_check(plug, nframes);
 
     /* adjust for possible variable nframes */
     if(plug->period_max != nframes)
@@ -275,7 +293,6 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     
     // we are good to run now
     //inline copy input to process output
-#if 0   // TODO
     memcpy(plug->rkrplus->efxoutl, plug->input_l_p, sizeof(float)*nframes);
     memcpy(plug->rkrplus->efxoutr, plug->input_r_p, sizeof(float)*nframes);
 
@@ -285,7 +302,7 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     // copy processed output to LV2 output
     memcpy(plug->output_l_p, plug->rkrplus->efxoutl, sizeof(float)*nframes);
     memcpy(plug->output_r_p, plug->rkrplus->efxoutr, sizeof(float)*nframes);
-#endif
+
     return;
 }
 
