@@ -550,6 +550,9 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
     midi_Note_Message[1] = anota;
     midi_Note_Message[2] = velocity;
 
+#ifdef RKR_PLUS_LV2
+    // TODO
+#else
 #ifdef LV2_SUPPORT
     forge_midimessage(plug, 0, midi_Note_Message, 3);
 #else
@@ -576,7 +579,8 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
                           nBytes);
     jack_ringbuffer_write(m_buffSize, (char *) &nBytes, sizeof ( nBytes));
 
-#endif // LV2_SUPPORT    
+#endif // LV2_SUPPORT
+#endif // RKR_PLUS_LV2
 }
 
 #ifdef LV2_SUPPORT
