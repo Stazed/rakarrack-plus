@@ -189,6 +189,12 @@ set(ExternLibraries
 
 add_executable (rakarrack-plus ${ProgSources} main.C)
 
+if (EnableNSM)
+    if (LIBLO_FOUND)
+        target_compile_definitions(rakarrack-plus PRIVATE NSM_SUPPORT=1)
+    endif (LIBLO_FOUND)
+endif (EnableNSM)
+
 target_include_directories (
     rakarrack-plus PRIVATE
     ${FLTK_INCLUDE_DIR}
