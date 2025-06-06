@@ -21,7 +21,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#rkrplus>
         a lv2:Plugin ;
-        lv2:binary <rkrplus.so> ;
-        rdfs:seeAlso <rkrplus.ttl> .
+        lv2:binary <Rakarrack-Plus.so> ;
+        rdfs:seeAlso <Rakarrack-Plus.ttl> .
 
 

@@ -34,7 +34,7 @@
 
 <https://github.com/Stazed/rakarrack-plus#rkrplus_ui>
         a <http://kxstudio.sf.net/ns/lv2ext/external-ui#Widget> ;
- 	ui:binary <rkrplus.so> ;
+ 	ui:binary <Rakarrack-Plus.so> ;
  	lv2:extensionData ui:idleInterface ;
  	.
 

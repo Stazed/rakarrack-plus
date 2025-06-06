@@ -1,4 +1,4 @@
-project (rkrplus)
+project (Rakarrack-Plus)
 
 set (ProgSources
     RakarrackPlusLV2.cpp
@@ -187,12 +187,12 @@ set(ExternLibraries
 )
 
 
-add_library(rkrplus SHARED
+add_library(Rakarrack-Plus SHARED
     ${ProgSources}
 )
 
 target_include_directories (
-    rkrplus PRIVATE
+    Rakarrack-Plus PRIVATE
     ${FLTK_INCLUDE_DIR}
     ${ALSA_INCLUDE_DIRS}
     ${JACK_INCLUDE_DIRS}
@@ -211,27 +211,27 @@ target_include_directories (
     "${CMAKE_CURRENT_BINARY_DIR}../UI"
 )
 
-target_link_libraries (rkrplus PRIVATE ${ExternLibraries})
+target_link_libraries (Rakarrack-Plus PRIVATE ${ExternLibraries})
 
 set_source_files_properties(../FX/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
 
-target_sources(rkrplus PRIVATE
+target_sources(Rakarrack-Plus PRIVATE
   ../FX/MIDIConverter.C
 )
 
-target_compile_definitions(rkrplus PRIVATE RKR_PLUS_LV2=1)
-set_target_properties(rkrplus PROPERTIES PREFIX "")
-set_target_properties(rkrplus PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE )
+target_compile_definitions(Rakarrack-Plus PRIVATE RKR_PLUS_LV2=1)
+set_target_properties(Rakarrack-Plus PROPERTIES PREFIX "")
+set_target_properties(Rakarrack-Plus PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE )
 
-# FIXME TMP_INSTALL
-set(LV2_TMP_INSTALL_DIR ~/.lv2/rkrplus.lv2 CACHE PATH
+# FIXME LV2_TMP_INSTALL_DIR >> LV2_INSTALL_DIR
+set(LV2_TMP_INSTALL_DIR ~/.lv2/Rakarrack-Plus.lv2 CACHE PATH
         "Specifies where the LV2 libraries should be installed")
 
-install(TARGETS rkrplus
+install(TARGETS Rakarrack-Plus
   LIBRARY
   DESTINATION ${LV2_TMP_INSTALL_DIR} )
 
 if (BuildRakarrackPlusLV2)
-    install (FILES rkrplus.ttl manifest.ttl
+    install (FILES Rakarrack-Plus.ttl manifest.ttl
         DESTINATION ${LV2_TMP_INSTALL_DIR} )
 endif (BuildRakarrackPlusLV2)
