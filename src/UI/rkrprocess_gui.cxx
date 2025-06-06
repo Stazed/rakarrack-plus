@@ -131,8 +131,9 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     HideUE->redraw();
 
     Fl::add_handler(global_shortcuts);
-
+#ifndef RKR_PLUS_LV2
     Fl::add_timeout(.04, this->TimeoutStatic, this);
+#endif
 }
 
 /**
@@ -613,8 +614,9 @@ void RKRGUI::GuiTimeout(void)
             Principal->size_range(320, 240, 3200, 2400);
         }
     }
-
+#ifndef RKR_PLUS_LV2
     Fl::repeat_timeout(.04, this->TimeoutStatic, this);
+#endif
 }
 
 void RKRGUI::load_default_bank(unsigned bank_index)
