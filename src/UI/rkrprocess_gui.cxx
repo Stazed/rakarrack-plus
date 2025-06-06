@@ -1082,14 +1082,28 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Internal Metronome Tempo"), (int) Metro_Tempo->value());
         rakarrack.set(m_process->Config.PrefNom("Internal Metronome Show"), (int) m_process->Config.sw_stat);
         rakarrack.set(m_process->Config.PrefNom("Internal Metronome Sound"), (int) MetroSound->value());
-
+#ifdef RKR_PLUS_LV2
+        m_process->Config.Metronome_On_Off = (int) m_process->Metro_Active;
+        m_process->Config.Metronome_Time = (int) MetroBar->value();
+        m_process->Config.Metro_Vol = (int) Metro_Volume->value();
+        m_process->Config.Metronome_Tempo = (int) Metro_Tempo->value();
+        m_process->Config.Metronome_Sound = (int) MetroSound->value();
+#endif
         //Booster
         rakarrack.set(m_process->Config.PrefNom("Booster"), m_process->booster);
+#ifdef RKR_PLUS_LV2
+        m_process->Config.booster = m_process->booster;
+#endif
 
         //Tap Tempo
         rakarrack.set(m_process->Config.PrefNom("TapTempo On/Off"), (int) m_process->Tap_Active);
         rakarrack.set(m_process->Config.PrefNom("TapTempo Input"), (int) m_process->Tap_Selection);
         rakarrack.set(m_process->Config.PrefNom("TapTempo Set"), (int) m_process->Tap_SetValue);
+#ifdef RKR_PLUS_LV2
+        m_process->Config.TapTempo_On_Off = (int) m_process->Tap_Active;
+        m_process->Config.Tap_Selection = (int) m_process->Tap_Selection;
+        m_process->Config.Tap_SetValue = (int) m_process->Tap_SetValue;
+#endif
     }
 
     if (whati == 1)
@@ -1098,6 +1112,12 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("BankWindow Y"), BankWindow->y());
         rakarrack.set(m_process->Config.PrefNom("BankWindow W"), BankWindow->w());
         rakarrack.set(m_process->Config.PrefNom("BankWindow H"), BankWindow->h());
+#ifdef RKR_PLUS_LV2
+        m_process->Config.BankWindow_X = BankWindow->x();
+        m_process->Config.BankWindow_Y = BankWindow->y();
+        m_process->Config.BankWindow_W = BankWindow->w();
+        m_process->Config.BankWindow_H = BankWindow->h();
+#endif
     }
 
     if (whati == 2)
@@ -1106,6 +1126,12 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Order Y"), Order->y());
         rakarrack.set(m_process->Config.PrefNom("Order W"), Order->w());
         rakarrack.set(m_process->Config.PrefNom("Order H"), Order->h());
+#ifdef RKR_PLUS_LV2
+        m_process->Config.Order_X = Order->x();
+        m_process->Config.Order_Y = Order->y();
+        m_process->Config.Order_W = Order->w();
+        m_process->Config.Order_H = Order->h();
+#endif
     }
 
     if (whati == 3)
@@ -1114,6 +1140,12 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Settings Y"), Settings->y());
         rakarrack.set(m_process->Config.PrefNom("Settings W"), Settings->w());
         rakarrack.set(m_process->Config.PrefNom("Settings H"), Settings->h());
+#ifdef RKR_PLUS_LV2
+        m_process->Config.Settings_X = Settings->x();
+        m_process->Config.Settings_Y = Settings->y();
+        m_process->Config.Settings_W = Settings->w();
+        m_process->Config.Settings_H = Settings->h();
+#endif
     }
 
     if (whati == 4)
