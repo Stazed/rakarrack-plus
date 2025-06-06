@@ -863,6 +863,9 @@ void RKRGUI::load_previous_state()
     MIDI->midi_activar->value(m_process->Config.MIDI_Converter_On_Off);
     MIDI->midi_activar->do_callback();
 
+    MIDI->Use_FFT->value(m_process->Config.Use_FFT);
+    MIDI->Use_FFT->do_callback();
+
     //Metronome
     MetroBar->value(m_process->Config.Metronome_Time);
     MetroBar->do_callback();
@@ -972,6 +975,18 @@ void RKRGUI::load_previous_state()
     }
 }
 
+/**
+ * Save the user preferences to the ~/.fltk/github.com.Stazed.rakarrack.plus folder (or NSM config).
+ * For RKR_PLUS_LV2, when the UI is shown, it loads from the saved values in m_process. Since
+ * the UI does not get deleted on standalone until the program quits, it does not matter if
+ * the m_process values are updated. But for the LV2, the UI is deleted on hide and when re-shown,
+ * the UI state is loaded from existing m_process values. So, the #ifdef RKR_PLUS_LV2 items are to
+ * update the m_process values on hide/show.
+ * @param rakarrack
+ *      The Fl_Preferences - the location of the preferences file.
+ * @param whati
+ *      The specific items to save. (See save_current_state() function comments for whati types).
+ */
 void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
 {
     char temp1[128];
@@ -984,7 +999,14 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Principal H"), Principal->h());
         rakarrack.set(m_process->Config.PrefNom("FontSize"), global_font_size);
         rakarrack.set(m_process->Config.PrefNom("Font"), global_font_type);
-
+#ifdef RKR_PLUS_LV2
+        m_process->Config.Principal_X = Principal->x();
+        m_process->Config.Principal_Y = Principal->y();
+        m_process->Config.Principal_W = Principal->w();
+        m_process->Config.Principal_H = Principal->h();
+        m_process->Config.font_size = global_font_size;
+        m_process->Config.font_type = global_font_type;
+#endif
         rakarrack.set(m_process->Config.PrefNom("Background Color"), (int) global_back_color);
         rakarrack.set(m_process->Config.PrefNom("Foreground Color"), (int) global_fore_color);
         rakarrack.set(m_process->Config.PrefNom("Leds Color"), (int) global_leds_color);
@@ -1016,7 +1038,15 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Trigger Adjust"), (int) MIDI->Trig_Adj->value());
         rakarrack.set(m_process->Config.PrefNom("Velocity Adjust"), (int) MIDI->Vel_Adj->value());
         rakarrack.set(m_process->Config.PrefNom("Converter Octave"), (int) MIDI->MIDIOctave->value());
-
+        rakarrack.set(m_process->Config.PrefNom("Use FFT"), (int) MIDI->Use_FFT->value());
+#ifdef RKR_PLUS_LV2
+        m_process->Config.Midi_Out_Channel = (int) MIDI->Midi_out_Counter->value();
+        m_process->Config.Trigger_Adjust = (int) MIDI->Trig_Adj->value();
+        m_process->Config.Velocity_Adjust = (int) MIDI->Vel_Adj->value();
+        m_process->Config.Converter_Octave = (int) MIDI->MIDIOctave->value();
+        m_process->Config.MIDI_Converter_On_Off = (int) m_process->MIDIConverter_Active;
+        m_process->Config.Use_FFT = (int) MIDI->Use_FFT->value();
+#endif
         //Metronome
         rakarrack.set(m_process->Config.PrefNom("Internal Metronome On/Off"), (int) m_process->Metro_Active);
         rakarrack.set(m_process->Config.PrefNom("Internal Metronome Time"), (int) MetroBar->value());

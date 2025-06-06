@@ -166,6 +166,7 @@ Config_fltk::Config_fltk() :
     Velocity_Adjust(50),
     Converter_Octave(2),
     MIDI_Converter_On_Off(0),
+    Use_FFT(0),
     Metronome_Time(2),
     Metronome_Sound(0),
     Metronome_Volume(50),
@@ -538,6 +539,7 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     rakarrack.get(PrefNom("Velocity Adjust"), Velocity_Adjust, 50);
     rakarrack.get(PrefNom("Converter Octave"), Converter_Octave, 2);
     rakarrack.get(PrefNom("MIDI Converter On/Off"), MIDI_Converter_On_Off, 0);
+    rakarrack.get(PrefNom("Use FFT"), Use_FFT, 0);
 
     // Metronome
     rakarrack.get(PrefNom("Internal Metronome Time"), Metronome_Time, 2);

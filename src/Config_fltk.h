@@ -258,6 +258,7 @@ public:
     int Velocity_Adjust;
     int Converter_Octave;
     int MIDI_Converter_On_Off;
+    int Use_FFT;
 
     // Metronome
     int Metronome_Time;
