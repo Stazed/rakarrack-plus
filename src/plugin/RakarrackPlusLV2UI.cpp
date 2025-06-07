@@ -1,8 +1,26 @@
+/*
+  rakarrack-plus - a guitar effects software
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of version 2 of the GNU General Public License
+ as published by the Free Software Foundation.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License (version 2) for more details.
+
+ You should have received a copy of the GNU General Public License
+ (version2)  along with this program; if not, write to the Free Software
+ Foundation,
+ Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+
+ */
+
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>
 #include <FL/x.H>
 
-//#include "sustain_ui.h"
 #include "../UI/rakarrack.h"
 #include "RakarrackPlusLV2.h"
 #include "RakarrackPlusLV2UI.h"
@@ -149,6 +167,27 @@ void RakarrackPlusLV2UI::cleanup(LV2UI_Handle ui)
     delete self;
 }
 
+LV2UI_Show_Interface rakarrack_plus_show_interface_desc =
+{
+    RakarrackPlusLV2UI::callback_ShowInterface,
+    RakarrackPlusLV2UI::callback_HideInterface,
+};
+
+LV2UI_Idle_Interface rakarrack_plus_idle_interface_desc =
+{
+    RakarrackPlusLV2UI::callback_IdleInterface,
+};
+
+const void *RakarrackPlusLV2UI::extension_data(const char *uri)
+{
+    if (strcmp(uri, LV2_UI__showInterface) == 0) {
+        return &rakarrack_plus_show_interface_desc;
+    } else if (strcmp(uri, LV2_UI__idleInterface) == 0) {
+        return &rakarrack_plus_idle_interface_desc;
+    }
+    return nullptr;
+}
+
 void RakarrackPlusLV2UI::port_event(LV2UI_Handle ui,
     uint32_t port_index,
     uint32_t /*buffer_size*/,
@@ -158,30 +197,6 @@ void RakarrackPlusLV2UI::port_event(LV2UI_Handle ui,
    // printf("GOT PORT EVENT\n");
 }
 
-#ifdef LV2_X11_EMBEDED
-int RakarrackPlusLV2UI::idle(LV2UI_Handle handle)
-{
-    SustainUI* self = (SustainUI*)handle;
-    self->idle();
-
-    return 0;
-}
-#endif
-
-const void* RakarrackPlusLV2UI::extension_data(const char* uri)
-{
-#ifdef LV2_X11_EMBEDED
-    if (!strcmp(uri, LV2_UI__idleInterface))
-    {
-        return &idle_iface;
-    }
-    if (!strcmp(uri, LV2_UI__resize))
-    {
-        return &resize_ui;
-    }
-#endif
-    return NULL;
-}
 
 static const LV2UI_Descriptor rakarrack_plus_descriptor = {
     RAKARRACK_PLUS_LV2_UI_URI,
