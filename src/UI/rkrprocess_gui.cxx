@@ -1159,12 +1159,28 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Rand Active"), efx_always_active);
         rakarrack.set(m_process->Config.PrefNom("Rand Current"), use_current_active_efx);
         rakarrack.set(m_process->Config.PrefNom("Rand Max"), max_random_active);
+#ifdef RKR_PLUS_LV2
+        m_process->Config.Random_X = RandomEdit->x();
+        m_process->Config.Random_Y = RandomEdit->y();
+        m_process->Config.Random_W = RandomEdit->w();
+        m_process->Config.Random_H = RandomEdit->h();
 
+        m_process->Config.Rand_Parameters = random_parameters;
+        m_process->Config.Rand_Active = efx_always_active;
+        m_process->Config.Rand_Current = use_current_active_efx;
+        m_process->Config.Rand_Max = max_random_active;
+#endif
         // convert the asci char to string for the set 
         std::string s;
         for(int i = 0; i < EFX_NUMBER_EFFECTS; ++i)
         {
             s +=  NTS((int) FX_Excluded[i]);
+#ifdef RKR_PLUS_LV2
+            if(FX_Excluded[i] == (char) 1)
+                m_process->Config.Rand_Exclude[i] = ASCII_One;
+            else
+                m_process->Config.Rand_Exclude[i] = ASCII_Space;
+#endif
         }
 
         rakarrack.set(m_process->Config.PrefNom("Rand Exclude"), s.c_str());
@@ -1176,6 +1192,12 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("MIDI Learn Y"), MIDILearn->y());
         rakarrack.set(m_process->Config.PrefNom("MIDI Learn W"), MIDILearn->w());
         rakarrack.set(m_process->Config.PrefNom("MIDI Learn H"), MIDILearn->h());
+#ifdef RKR_PLUS_LV2
+        m_process->Config.MIDI_Learn_X = MIDILearn->x();
+        m_process->Config.MIDI_Learn_Y = MIDILearn->y();
+        m_process->Config.MIDI_Learn_W = MIDILearn->w();
+        m_process->Config.MIDI_Learn_H = MIDILearn->h();
+#endif
     }
 
     if (whati == 6)
@@ -1184,7 +1206,19 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Trigger Y"), Trigger->y());
         rakarrack.set(m_process->Config.PrefNom("Trigger W"), Trigger->w());
         rakarrack.set(m_process->Config.PrefNom("Trigger H"), Trigger->h());
+#ifdef RKR_PLUS_LV2
+        m_process->Config.Trigger_X = Trigger->x();
+        m_process->Config.Trigger_Y = Trigger->y();
+        m_process->Config.Trigger_W = Trigger->w();
+        m_process->Config.Trigger_H = Trigger->h();
 
+        m_process->Config.Aux_Source = m_process->Aux_Source;
+        m_process->Config.Aux_Gain = m_process->Aux_Gain;
+        m_process->Config.Aux_Threshold = m_process->Aux_Threshold;
+        m_process->Config.Aux_MIDI = m_process->Aux_MIDI;
+        m_process->Config.Aux_Minimum = m_process->Aux_Minimum;
+        m_process->Config.Aux_Maximum = m_process->Aux_Maximum;
+#endif
         rakarrack.set(m_process->Config.PrefNom("Aux Source"), m_process->Aux_Source);
         rakarrack.set(m_process->Config.PrefNom("Aux Gain"), m_process->Aux_Gain);
         rakarrack.set(m_process->Config.PrefNom("Aux Threshold"), m_process->Aux_Threshold);
@@ -1199,6 +1233,12 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         rakarrack.set(m_process->Config.PrefNom("Delay Y"), DelayFile->y());
         rakarrack.set(m_process->Config.PrefNom("Delay W"), DelayFile->w());
         rakarrack.set(m_process->Config.PrefNom("Delay H"), DelayFile->h());
+#ifdef RKR_PLUS_LV2
+        m_process->Config.Delay_X = DelayFile->x();
+        m_process->Config.Delay_Y = DelayFile->y();
+        m_process->Config.Delay_W = DelayFile->w();
+        m_process->Config.Delay_H = DelayFile->h();
+#endif
     }
 
     if ((whati == 3) || (whati == 0))
