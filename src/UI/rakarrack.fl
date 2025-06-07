@@ -358,20 +358,24 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
   Function {make_window()} {open return_type void
   } {
     Fl_Window Principal {
-      callback {if(nsm_preferences_file.empty())
+      callback {\#ifdef RKR_PLUS_LV2
+    LV2_gui_hide();
+\#else
+    if(nsm_preferences_file.empty())
     {
         is_bank_modified();
         is_PG_table_modified();
         save_current_state(0);
         m_process->Exit_Program=1;
     }
+\#endif
 \#ifdef NSM_SUPPORT
     else
     {
         global_gui_show = CONST_GUI_HIDE;
     }
-\#endif}
-      xywh {210 475 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
+\#endif} open selected
+      xywh {513 290 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
         xywh {1 1 800 600} align 112
@@ -2004,7 +2008,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {GuiTimeout(void)} {open private C return_type void
   } {}
-  Function {run()} {open selected
+  Function {run()} {open
   } {}
   Function {load_default_bank(unsigned bank_index)} {open return_type void
   } {}
@@ -2153,5 +2157,7 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {NSM_gui_show(int hold_preset)} {open return_type int
   } {}
   Function {NSM_gui_hide()} {open return_type void
+  } {}
+  Function {LV2_gui_hide()} {open return_type void
   } {}
 }

@@ -4381,3 +4381,26 @@ void RKRGUI::NSM_gui_hide()
     global_gui_show = CONST_GUI_OFF;
 #endif
 }
+
+void
+RKRGUI::LV2_gui_hide()
+{
+#ifdef RKR_PLUS_LV2
+    is_bank_modified();
+    is_PG_table_modified();
+
+    BankWindow->hide();
+    Order->hide();
+    Settings->hide();
+    AboutWin->hide();
+    MIDILearn->hide();
+    Trigger->hide();
+    Principal->hide();
+    DelayFile->hide();
+    RandomEdit->hide();
+    for(unsigned i = 0; i < 8; ++i)
+        save_current_state(i);
+
+    m_process->Exit_Program=1;
+#endif
+}

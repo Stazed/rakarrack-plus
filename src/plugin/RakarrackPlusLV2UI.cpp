@@ -94,28 +94,22 @@ void RakarrackPlusLV2UI::run()
 
 void RakarrackPlusLV2UI::show()
 {
-    printf("SHOW CALLED\n");
+//    printf("SHOW CALLED\n");
 
     if(!is_shown)
     {
         r_gui->Principal->show();
         is_shown = true;
         g_rkrplus->Exit_Program = 0;    // false
-
-        // TODO
-        // Update paramters
-       // r_gui->get_parameters();
     }
 }
 
 void RakarrackPlusLV2UI::hide()
 {
-    printf("HIDING CALLED\n");
+//    printf("HIDING CALLED\n");
 
     is_shown = false;
-//    r_gui->save_current_state(0);   // TODO
-//    r_gui->is_bank_modified();
-//    r_gui->is_PG_table_modified();  
+    r_gui->LV2_gui_hide();
     r_gui->Principal->hide();
     Fl::flush();
 }
@@ -148,10 +142,8 @@ LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*d
 
 void RakarrackPlusLV2UI::cleanup(LV2UI_Handle ui)
 {
-    // TODO
-    printf("CLEANUP CALLED\n");
+//    printf("CLEANUP CALLED\n");
     RakarrackPlusLV2UI *self = (RakarrackPlusLV2UI*)ui;
-//    delete self->r_gui->ui;
     delete self->r_gui->Principal;
     delete self->r_gui;
     delete self;
