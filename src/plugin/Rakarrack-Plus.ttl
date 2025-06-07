@@ -35,17 +35,18 @@
 <https://github.com/Stazed/rakarrack-plus#rkrplus_ui>
         a <http://kxstudio.sf.net/ns/lv2ext/external-ui#Widget> ;
  	ui:binary <Rakarrack-Plus.so> ;
- 	lv2:extensionData ui:idleInterface ;
+ 	lv2:extensionData ui:idleInterface, ui:showInterface ;
+        lv2:optionalFeature ui:idleInterface, ui:showInterface ;
  	.
 
 <https://github.com/Stazed/rakarrack-plus#rkrplus>
-        a lv2:Plugin, lv2:CompressionPlugin ;
+        a lv2:Plugin, lv2:UtilityPlugin ;
 		doap:name "Rakarrack-plus" ;
         doap:description "Audio effects processor";
         doap:license <http://opensource.org/licenses/gpl-2.0> ;
 		ll:pegName "p";
         doap:maintainer [
-                foaf:name "Stazed" ;
+                foaf:name "Rakarrack-plus Team" ;
                 foaf:homepage <https://github.com/Stazed/rakarrack-plus>;
                 foaf:mbox <mailto:stazed@web.com> ;
         ] ;
