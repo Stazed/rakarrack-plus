@@ -49,6 +49,9 @@
                 foaf:homepage <https://github.com/Stazed/rakarrack-plus>;
                 foaf:mbox <mailto:stazed@web.com> ;
         ] ;
+
+        lv2:extensionData state:interface ;
+        lv2:requiredFeature <http://lv2plug.in/ns/ext/urid#map> ;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Guitar and audio effects." ;
