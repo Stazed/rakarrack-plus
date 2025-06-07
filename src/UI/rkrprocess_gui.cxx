@@ -1793,6 +1793,7 @@ void RKRGUI::show_lic()
 void RKRGUI::MiraClientes()
 {
     // Find Audio and midi ports
+#ifndef RKR_PLUS_LV2
     FILE *fp;
 
     Settings->BMidiIn->clear();
@@ -1879,11 +1880,13 @@ void RKRGUI::MiraClientes()
     }
 
     free(iports);
+#endif  // #ifndef RKR_PLUS_LV2
 }
 
 void RKRGUI::MiraConfig()
 {
     // Loads the settings into the settings class
+#ifndef RKR_PLUS_LV2
     {
         int i = 1;
         while (Settings->BMidiIn->text(i) != NULL)
@@ -1927,6 +1930,11 @@ void RKRGUI::MiraConfig()
             i++;
         }
     }
+#else
+    Settings->BMidiIn->deactivate();
+    Settings->JackCo->deactivate();
+    Settings->JackIn->deactivate();
+#endif  // #ifndef RKR_PLUS_LV2
 
     if (m_process->Config.MIDIway)
     {
@@ -2039,9 +2047,15 @@ void RKRGUI::MiraConfig()
 #endif
     Settings->Upr_Amo->value(m_process->Config.UpAmo);
     Settings->L_SIZE->value(m_process->Config.looper_size);
+#ifdef RKR_PLUS_LV2
+    Settings->D_A_Connect->deactivate();
+    Settings->D_J_Connect->deactivate();
+    Settings->D_IJ_Connect->deactivate();
+#else
     Settings->D_A_Connect->value(m_process->Config.aconnect_MI);
     Settings->D_J_Connect->value(m_process->Config.aconnect_JA);
     Settings->D_IJ_Connect->value(m_process->Config.aconnect_JIA);
+#endif
     
     // For NSM the default setting is Off for auto connect audio and we do not let the user change it.
     // All jack connections should be handled by NSM.
@@ -2135,7 +2149,7 @@ void RKRGUI::MiraConfig()
             break;
     }
 
-
+#ifndef RKR_PLUS_LV2
     if (m_process->Config.aconnect_MI)
     {
         Settings->BMidiIn->activate();
@@ -2162,6 +2176,7 @@ void RKRGUI::MiraConfig()
     {
         Settings->JackIn->deactivate();
     }
+#endif  // #ifdef RKR_PLUS_LV2
 
     Fl_Menu_Item *item;
     Fl_Menu_Item *Har = Settings->get_menu_Har_Downsample();
