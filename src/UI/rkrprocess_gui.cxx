@@ -1238,6 +1238,7 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         m_process->Config.Delay_Y = DelayFile->y();
         m_process->Config.Delay_W = DelayFile->w();
         m_process->Config.Delay_H = DelayFile->h();
+        // TODO need to save the delay gui table for gui hide and return.
 #endif
     }
 

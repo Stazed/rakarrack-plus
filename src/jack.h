@@ -23,6 +23,8 @@
 #ifndef JACK_OUTPUT_H
 #define JACK_OUTPUT_H
 
+#ifndef RKR_PLUS_LV2
+
 #include "global.h"
 #include "process.h"
 
@@ -34,4 +36,5 @@ void jackshutdown (void *arg);
 int timebase(jack_transport_state_t state, jack_position_t *pos, void *arg);
 void actualiza_tap(double val, RKR * JackOUT);
 
+#endif  // #ifndef RKR_PLUS_LV2
 #endif

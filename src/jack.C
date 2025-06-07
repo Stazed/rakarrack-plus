@@ -20,6 +20,7 @@
   Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 
  */
+#ifndef RKR_PLUS_LV2
 
 #include <jack/jack.h>
 #include <jack/midiport.h>
@@ -322,4 +323,4 @@ actualiza_tap(double val, RKR * JackOUT)
     JackOUT->Update_tempo();
     JackOUT->Tap_Display = 1;
 }
-
+#endif  // #ifndef RKR_PLUS_LV2

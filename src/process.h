@@ -677,9 +677,10 @@ public:
 
     // process.C
     void initialize();
-    void set_jack_client(jack_client_t *_jackclient);
 #ifdef RKR_PLUS_LV2
     void set_client_name(std::string s_name);
+#else
+    void set_jack_client(jack_client_t *_jackclient);
 #endif
     void load_user_preferences();
     void instantiate_effects();

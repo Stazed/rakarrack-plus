@@ -295,6 +295,14 @@ RKR::~RKR()
 #endif
 };
 
+#ifdef RKR_PLUS_LV2
+void
+RKR::set_client_name(std::string s_name)
+{
+    RKRP::strlcpy(jackcliname, s_name.c_str(), sizeof(jackcliname));
+    RKRP::strlcpy(Config.jackcliname, s_name.c_str(), sizeof(Config.jackcliname));
+}
+#else
 void
 RKR::set_jack_client(jack_client_t *_jackclient)
 {
@@ -302,14 +310,6 @@ RKR::set_jack_client(jack_client_t *_jackclient)
 
     RKRP::strlcpy(jackcliname, jack_get_client_name(jackclient), sizeof(jackcliname));
     RKRP::strlcpy(Config.jackcliname, jack_get_client_name(jackclient), sizeof(Config.jackcliname));
-}
-
-#ifdef RKR_PLUS_LV2
-void
-RKR::set_client_name(std::string s_name)
-{
-    RKRP::strlcpy(jackcliname, s_name.c_str(), sizeof(jackcliname));
-    RKRP::strlcpy(Config.jackcliname, s_name.c_str(), sizeof(Config.jackcliname));
 }
 #endif
 
