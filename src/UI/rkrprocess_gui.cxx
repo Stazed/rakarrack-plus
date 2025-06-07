@@ -904,6 +904,7 @@ void RKRGUI::load_previous_state()
     // Tap Tempo
     m_process->Tap_Selection = m_process->Config.Tap_Selection;
     T_SEL->value(m_process->Tap_Selection);
+    T_DIS->value((double) m_process->Tap_TempoSet);
 
     m_process->t_timeout = m_process->Config.t_timeout;
     Settings->T_TIMEOUT->value(m_process->t_timeout);
@@ -1103,6 +1104,7 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         m_process->Config.TapTempo_On_Off = (int) m_process->Tap_Active;
         m_process->Config.Tap_Selection = (int) m_process->Tap_Selection;
         m_process->Config.Tap_SetValue = (int) m_process->Tap_SetValue;
+        m_process->Tap_TempoSet = (int) T_DIS->value();
 #endif
     }
 
