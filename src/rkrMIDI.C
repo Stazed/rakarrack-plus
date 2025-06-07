@@ -1424,21 +1424,65 @@ RKR::lv2_process_midievents(const uint8_t* const msg)
             }
             break;
         }
-        case LV2_MIDI_MSG_CONTROLLER:
-        {
-            printf("Got CC %hhu: Control Change %hhu: Value %hhu\n", msg[0], msg[1], msg[2]);
-
-            /* CC 1 = Volume */
-            if(msg[1] == 1)
-            {
-               // m_sus->changepar(0, msg[2]);
-               // m_sus->m_midi_control = true;
-            }
-            break;
-        }
         case LV2_MIDI_MSG_PGM_CHANGE:
         {
-            printf("Program change %hhu\n", msg[1]);
+//            printf("Program change %hhu\n", msg[1]);
+            int cmdvalue = msg[1];
+
+            if (channel == Config.MIDI_In_Channel)
+            {
+                if (!Config.custom_midi_table)
+                {
+                    if ((cmdvalue > 0)
+                        && (cmdvalue < 61))
+                        Change_Preset = cmdvalue;
+
+                    if (cmdvalue == 81) if (Selected_Preset > 1) Change_Preset = Selected_Preset - 1;
+
+                    if (cmdvalue == 82) if (Selected_Preset < 60) Change_Preset = Selected_Preset + 1;
+                }
+                else
+                {
+                    int bank = MIDI_Table[cmdvalue].bank;
+                    int preset = MIDI_Table[cmdvalue].preset + 1;
+                    process_midi_controller_events(0, bank, preset);    // 0 is CC 0 Bank Select
+                }
+            }
+
+            break;
+        }
+        case LV2_MIDI_MSG_CONTROLLER:
+        {
+ //           printf("Got CC %hhu: Control Change %hhu: Value %hhu\n", msg[0], msg[1], msg[2]);
+
+            int cmdcontrol = msg[1];
+            int cmdvalue = msg[2];
+
+            if (channel == Config.MIDI_In_Channel)
+            {
+                if (RControl)
+                {
+                    ControlGet = cmdcontrol;
+                    return;
+                }
+
+                // Bank_Select = CC 0
+                if(cmdcontrol == 0)
+                {
+                    process_midi_controller_events(cmdcontrol, cmdvalue);
+                }
+                else if (Config.MIDIway)
+                {
+                    for (i = 0; i < 20; i++)
+                    {
+                        if (Active_Preset.XUserMIDI[cmdcontrol][i])
+                            process_midi_controller_events(Active_Preset.XUserMIDI[cmdcontrol][i], cmdvalue);
+                        else break;
+                    }
+                }
+                else
+                    process_midi_controller_events(cmdcontrol, cmdvalue);
+            }
             break;
         }
 
