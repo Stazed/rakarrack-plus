@@ -1121,6 +1121,7 @@ RKR::disconectaaconnect()
 void
 RKR::jack_process_midievents(jack_midi_event_t *midievent)
 {
+#ifndef RKR_PLUS_LV2
     int i;
     int type = midievent->buffer[0] >> 4;
 
@@ -1296,6 +1297,7 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         parse_sysex();
     }
 #endif
+#endif  // #ifndef RKR_PLUS_LV2
 }
 
 void
@@ -1314,16 +1316,114 @@ RKR::lv2_process_midievents(const uint8_t* const msg)
         }
     }
 
+    int i;
     uint8_t statusByte = msg[0];
     int channel = 0;
     if ((statusByte & 0xF0) >= 0x80 && (statusByte & 0xF0) <= 0xEF)
     {
         channel = statusByte & 0x0F; // Extract channel from the status byte
-        printf("Channel = %d\n", channel);
+       // printf("Channel = %d\n", channel);
     }
 
     switch (lv2_midi_message_type(msg))
     {
+        case LV2_MIDI_MSG_NOTE_ON:
+        {
+            //printf("NOTE ON - msg[0] %hhu: NOTE-msg[1] %hhu: VELOCITY-msg[2] %hhu\n", msg[0], msg[1], msg[2]);
+            // Set tap tempo based on any note on
+            if ((Tap_Active) && (Tap_Selection == 1) &&  (msg[2] != 0))
+                Tap_TempoSet = TapTempo();
+
+            if (channel == Config.Harmonizer_MIDI_Channel)
+            {
+                for (i = 0; i < POLY; i++)
+                {
+                    // Note ON with > 0 velocity
+                    if (msg[2] != 0)
+                    {
+                        if (RC_Harm->note_active[i] == 0)
+                        {
+                            RC_Harm->note_active[i] = 1;
+                            RC_Harm->rnote[i] = msg[1];
+                            RC_Harm->gate[i] = 1;
+                            RC_Harm->MiraChord();
+                            break;
+                        }
+                    }
+
+                    // Note ON with zero velocity, treat as note OFF
+                    if (msg[2] == 0)
+                    {
+                        if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == msg[1]))
+                        {
+                            RC_Harm->note_active[i] = 0;
+                            RC_Harm->gate[i] = 0;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (channel == Config.StereoHarm_MIDI_Channel)
+            {
+                for (i = 0; i < POLY; i++)
+                {
+                    // Note ON with > 0 velocity
+                    if (msg[2] != 0)
+                    {
+                        if (RC_Stereo_Harm->note_active[i] == 0)
+                        {
+                            RC_Stereo_Harm->note_active[i] = 1;
+                            RC_Stereo_Harm->rnote[i] = msg[1];
+                            RC_Stereo_Harm->gate[i] = 1;
+                            RC_Stereo_Harm->MiraChord();
+                            break;
+                        }
+                    }
+
+                    // Note ON with zero velocity, treat as note OFF
+                    if (msg[2] == 0)
+                    {
+                        if ((RC_Stereo_Harm->note_active[i]) && (RC_Stereo_Harm->rnote[i] == msg[1]))
+                        {
+                            RC_Stereo_Harm->note_active[i] = 0;
+                            RC_Stereo_Harm->gate[i] = 0;
+                            break;
+                        }
+                    }
+                }
+            }
+            break;
+        }
+        case LV2_MIDI_MSG_NOTE_OFF:
+        {
+           // printf("NOTE OFF - msg[0] %hhu: msg[1] %hhu: msg[2] %hhu\n", msg[0], msg[1], msg[2]);
+            if (channel == Config.Harmonizer_MIDI_Channel)
+            {
+                for (i = 0; i < POLY; i++)
+                {
+                    if ((RC_Harm->note_active[i]) && (RC_Harm->rnote[i] == msg[1]))
+                    {
+                        RC_Harm->note_active[i] = 0;
+                        RC_Harm->gate[i] = 0;
+                        break;
+                    }
+                }
+            }
+            if (channel == Config.StereoHarm_MIDI_Channel)
+            {
+                for (i = 0; i < POLY; i++)
+                {
+                    if ((RC_Stereo_Harm->note_active[i]) && (RC_Stereo_Harm->rnote[i] == msg[1]))
+                    {
+                        RC_Stereo_Harm->note_active[i] = 0;
+                        RC_Stereo_Harm->gate[i] = 0;
+                        break;
+                    }
+                }
+            }
+            break;
+        }
         case LV2_MIDI_MSG_CONTROLLER:
         {
             printf("Got CC %hhu: Control Change %hhu: Value %hhu\n", msg[0], msg[1], msg[2]);
@@ -1341,16 +1441,7 @@ RKR::lv2_process_midievents(const uint8_t* const msg)
             printf("Program change %hhu\n", msg[1]);
             break;
         }
-        case LV2_MIDI_MSG_NOTE_ON:
-        {
-            printf("NOTE ON - msg[0] %hhu: msg[1] %hhu: msg[2] %hhu\n", msg[0], msg[1], msg[2]);
-            break;
-        }
-        case LV2_MIDI_MSG_NOTE_OFF:
-        {
-            printf("NOTE OFF - msg[0] %hhu: msg[1] %hhu: msg[2] %hhu\n", msg[0], msg[1], msg[2]);
-            break;
-        }
+
         default: break;
     }
 
