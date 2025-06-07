@@ -27,6 +27,10 @@
 #include <FL/fl_ask.H>  // for error pop up
 #include <FL/Fl_Preferences.H>
 
+#ifdef RKR_PLUS_LV2
+#include<lv2/lv2plug.in/ns/ext/midi/midi.h>
+#endif
+
 /* MIDI control defines (Max - Min) / 127 - parameter ranges  */
 
 const float C_MC_LFO_RNGE       =  float(LFO_NUM_TYPES - 1) / 127.0;
@@ -1291,6 +1295,73 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         append_sysex(midievent->buffer, midievent->size);
         parse_sysex();
     }
+#endif
+}
+
+void
+RKR::lv2_process_midievents(const uint8_t* const msg)
+{
+#ifdef RKR_PLUS_LV2
+
+    if ((Tap_Active) && (Tap_Selection == 3) && (msg[0] == LV2_MIDI_MSG_CLOCK))
+    {
+        mtc_counter++;
+
+        if (mtc_counter >= 24)
+        {
+            Tap_TempoSet = TapTempo();
+            mtc_counter = 0;
+        }
+    }
+
+    uint8_t statusByte = msg[0];
+    int channel = 0;
+    if ((statusByte & 0xF0) >= 0x80 && (statusByte & 0xF0) <= 0xEF)
+    {
+        channel = statusByte & 0x0F; // Extract channel from the status byte
+        printf("Channel = %d\n", channel);
+    }
+
+    switch (lv2_midi_message_type(msg))
+    {
+        case LV2_MIDI_MSG_CONTROLLER:
+        {
+            printf("Got CC %hhu: Control Change %hhu: Value %hhu\n", msg[0], msg[1], msg[2]);
+
+            /* CC 1 = Volume */
+            if(msg[1] == 1)
+            {
+               // m_sus->changepar(0, msg[2]);
+               // m_sus->m_midi_control = true;
+            }
+            break;
+        }
+        case LV2_MIDI_MSG_PGM_CHANGE:
+        {
+            printf("Program change %hhu\n", msg[1]);
+            break;
+        }
+        case LV2_MIDI_MSG_NOTE_ON:
+        {
+            printf("NOTE ON - msg[0] %hhu: msg[1] %hhu: msg[2] %hhu\n", msg[0], msg[1], msg[2]);
+            break;
+        }
+        case LV2_MIDI_MSG_NOTE_OFF:
+        {
+            printf("NOTE OFF - msg[0] %hhu: msg[1] %hhu: msg[2] %hhu\n", msg[0], msg[1], msg[2]);
+            break;
+        }
+        default: break;
+    }
+
+#endif  // #ifdef RKR_PLUS_LV2
+}
+
+void
+RKR::lv2_set_bpm(float a_bpm)
+{
+#ifdef RKR_PLUS_LV2
+    printf("BPM = %f\n", a_bpm);    // TODO
 #endif
 }
 

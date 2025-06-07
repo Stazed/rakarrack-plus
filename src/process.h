@@ -709,6 +709,8 @@ public:
     void conectaaconnect ();
     void disconectaaconnect ();
     void jack_process_midievents (jack_midi_event_t *midievent);
+    void lv2_process_midievents(const uint8_t* const msg);
+    void lv2_set_bpm(float a_bpm);
     void process_midi_controller_events(int parameter, int value, int preset = C_CHANGE_PRESET_OFF);
     void start_sysex(void);
     bool append_sysex( unsigned char *a_data, long a_size );

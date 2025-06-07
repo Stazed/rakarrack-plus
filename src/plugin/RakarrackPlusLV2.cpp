@@ -262,16 +262,16 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     /* Process incoming MIDI messages */
     LV2_ATOM_SEQUENCE_FOREACH(plug->atom_in_p , ev)
     {
-        printf("GOT atoM %d: Blank = %d: Object = %d: MIDIEvent = %d: Position = %d\n",
+    /*    printf("GOT atoM %d: Blank = %d: Object = %d: MIDIEvent = %d: Position = %d\n",
                 ev->body.type, plug->URIDs.atom_blank,
                 plug->URIDs.atom_Object,
                 plug->URIDs.midi_MidiEvent,
                 plug->URIDs.atom_position);
-    
+    */
         if (ev->body.type ==  plug->URIDs.midi_MidiEvent)
         {
             const uint8_t* const msg = (const uint8_t*)(ev + 1);
-     //       plug->rkrplus->lv2_process_midievents(msg); // TODO
+            plug->rkrplus->lv2_process_midievents(msg);
         }
         else if (ev->body.type == plug->URIDs.atom_blank || ev->body.type == plug->URIDs.atom_Object)
         {
@@ -305,7 +305,7 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
                     // background: https://music.stackexchange.com/a/109743
                     BPM = BPM / 4 * ((LV2_Atom_Int *)beatUnit)->body;
                 }
-       //         plug->rkrplus->lv2_set_bpm(BPM);  // TODO
+                plug->rkrplus->lv2_set_bpm(BPM);
             }
         }
     }
