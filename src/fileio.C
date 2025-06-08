@@ -696,6 +696,67 @@ RKR::load_preset(const std::string &filename)
     set_audio_paramters();
 }
 
+int
+RKR::lv2_save_state(std::string &s_buf)
+{
+    // TODO
+    // Update active preset for any user changes
+    refresh_active_preset();
+    
+    // Copy active preset for file operations
+    PresetBankStruct Save_Preset = Active_Preset;
+    
+    // Program release version
+//    s_buf = VERSION;
+//    s_buf += ",";
+    s_buf = NTS(C_LV2_STATE_VERSION);
+    s_buf += "\n";
+    s_buf += NTS(Save_Preset.Input_Gain);
+    s_buf += ",";
+    s_buf += NTS(Save_Preset.Master_Volume);
+    s_buf += ",";
+    s_buf += NTS(Save_Preset.Fraction_Bypass);
+    s_buf += ",";
+    s_buf += NTS(Save_Preset.FX_Master_Active);
+    s_buf += "\n";
+
+    return s_buf.length() + 1;
+}
+
+void
+RKR::lv2_restore_state(const char *buf)
+{
+    // TODO
+    PresetBankStruct preset_loaded;
+
+    int lv2_state_version = 0;
+    float in_vol, out_vol; in_vol = out_vol = 0.0;
+    float balance = 1.0f;
+
+    sscanf(buf, "%d\n%f,%f,%f,%d\n", &lv2_state_version, &in_vol, &out_vol, &balance, &FX_Master_Active_Reset);
+
+    printf("LV2 state version %d\n", lv2_state_version);
+    printf("Balance = %f: In Vol = %f: Out Vol = %f: Active = %d\n", balance, in_vol, out_vol, FX_Master_Active_Reset);
+
+    if (!Config.preserve_master)
+    {
+        preset_loaded.Fraction_Bypass = balance;
+        preset_loaded.Input_Gain = in_vol;
+        preset_loaded.Master_Volume = out_vol;
+    }
+    else    // Use current Master
+    {
+        preset_loaded.Fraction_Bypass = Active_Preset.Fraction_Bypass;
+        preset_loaded.Input_Gain = Active_Preset.Input_Gain;
+        preset_loaded.Master_Volume = Active_Preset.Master_Volume;
+    }
+
+    // Copy the loaded preset to Main window
+    Active_Preset = preset_loaded;
+
+    set_audio_paramters();
+}
+
 /**
  * Sets the individual effect parameters for each effect.
  * Sets the main rack effect order.

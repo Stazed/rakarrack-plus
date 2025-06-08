@@ -667,6 +667,11 @@ const unsigned char  EVENT_SYSEX            = 0xF0;
 const unsigned char  EVENT_SYSEX_END        = 0xF7;
 #endif
 
+/* To be incremented if anything changes */
+#ifdef RKR_PLUS_LV2
+const int C_LV2_STATE_VERSION = 1;
+#endif
+
 class RKR
 {
 
@@ -679,6 +684,8 @@ public:
     void initialize();
 #ifdef RKR_PLUS_LV2
     void set_client_name(std::string s_name);
+    int lv2_save_state(std::string &s_buf);
+    void lv2_restore_state(const char *buf);
 #else
     void set_jack_client(jack_client_t *_jackclient);
 #endif

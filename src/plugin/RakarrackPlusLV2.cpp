@@ -439,17 +439,15 @@ LV2_State_Status stateSave(LV2_Handle h,
     features = feat;
     // suppress warnings - may use later
 
-//    printf("GOT STATE SAVE\n");
-
     std::string str;
-#if 0   // TODO
-    int sz = plug->rkrplus->save_state_lv2(str);
+
+    int sz = plug->rkrplus->lv2_save_state(str);
     char *data = new char[sz]; // Allocate memory
     strcpy(data, str.c_str()); // Copy the string
 
     store(handle, plug->URIDs.rkrplus_state_id, data, sz, plug->URIDs.atom_string_id, LV2_STATE_IS_POD | LV2_STATE_IS_PORTABLE);
     delete[] data; // Deallocate the memory
-#endif
+
     return LV2_STATE_SUCCESS;
 }
 
@@ -466,8 +464,6 @@ LV2_State_Status stateRestore(LV2_Handle h,
     features = feat;
     // lines above suppress warnings - may use later
 
-//    printf("GOT STATE RESTORE\n");
-#if 0 // TODO
     size_t sz = 0;
     LV2_URID type = 0;
     uint32_t new_flags;
@@ -475,8 +471,8 @@ LV2_State_Status stateRestore(LV2_Handle h,
     const char *data = (const char *)retrieve(handle, plug->URIDs.rkrplus_state_id, &sz, &type, &new_flags);
     
     if(sz > 0)
-        plug->rkrplus->restore_state_lv2(data);
-#endif
+        plug->rkrplus->lv2_restore_state(data);
+
     return LV2_STATE_SUCCESS;
 }
 
