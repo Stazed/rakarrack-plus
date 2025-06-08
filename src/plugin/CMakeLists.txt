@@ -167,8 +167,6 @@ set (ProgSources
 
 set(ExternLibraries
     ${FLTK_LIBRARIES}
-    ${ALSA_LIBRARIES}
-    ${JACK_LINK_LIBRARIES}
     ${FONTCONFIG_LIBRARIES}
     ${FFTW3_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
@@ -180,7 +178,6 @@ set(ExternLibraries
     ${XPM_LIBRARIES}
     ${FREETYPE_LIBRARIES}
     ${ZLIB_LIBRARIES}
-    ${LIBLO_LIBRARIES}
     dl
     rt
     m
@@ -194,8 +191,6 @@ add_library(Rakarrack-Plus SHARED
 target_include_directories (
     Rakarrack-Plus PRIVATE
     ${FLTK_INCLUDE_DIR}
-    ${ALSA_INCLUDE_DIRS}
-    ${JACK_INCLUDE_DIRS}
     ${FONTCONFIG_INCLUDE_DIRS}
     ${FFTW3_INCLUDE_DIRS}
     ${SNDFILE_INCLUDE_DIRS}
@@ -206,7 +201,6 @@ target_include_directories (
     ${XPM_INCLUDE_DIRS}
     ${FREETYPE_INCLUDE_DIRS}
     ${ZLIB_INCLUDE_DIRS}
-    ${LIBLO_INCLUDE_DIRS}
     "${CMAKE_CURRENT_SOURCE_DIR}../UI"
     "${CMAKE_CURRENT_BINARY_DIR}../UI"
 )
