@@ -324,6 +324,7 @@ void RKRGUI::GuiTimeout(void)
     if (m_process->ACI_Active)
         ActACI();
 
+#ifndef RKR_PLUS_LV2
     m_process->cpufp++;
     if (m_process->cpufp == 40)
     {
@@ -333,7 +334,6 @@ void RKRGUI::GuiTimeout(void)
         CPULOAD->copy_label(tmp);
         m_process->cpufp = 0;
     }
-
 
     // Jack Port connections
     if (m_process->Jack_Port_Connnection_Changed)
@@ -360,7 +360,7 @@ void RKRGUI::GuiTimeout(void)
             PORT_MIDI_OUT_STATE->hide();
         m_process->Jack_Port_Connnection_Changed = 0;
     }
-
+#endif
     if (global_error_number > 0)
         m_process->Handle_Message(global_error_number);
 
@@ -434,7 +434,7 @@ void RKRGUI::GuiTimeout(void)
         m_process->efx_FLimiter->clipping = 0;
         m_process->efx_FLimiter->limit = 0;
 
-
+#ifndef RKR_PLUS_LV2
         if (m_process->checkforaux())
         {
             Vocoder *Efx_Vocoder = static_cast <Vocoder*>(m_process->Rack_Effects[EFX_VOCODER]);
@@ -444,7 +444,7 @@ void RKRGUI::GuiTimeout(void)
                 VOCODER->vu_vu->value(Efx_Vocoder->vulevel);
             }
         }
-
+#endif
         if (Sco->get_scope_ON())
         {
             Sco->redraw();
@@ -3186,9 +3186,15 @@ void RKRGUI::ActACI()
     switch (m_process->Aux_Source)
     {
         case 0:
+        {
+#ifdef RKR_PLUS_LV2
+            tmp = 0.0;  // LV2 does not have aux input
+#else
             gain = dB2rap(75.0f * (float) m_process->Aux_Gain / 127.0f);
             tmp = m_process->val_a_sum * gain;
+#endif
             break;
+        }
         case 1:
             gain = (float) m_process->Aux_Gain / 127.0f;
             tmp = dB2rap(m_process->val_il_sum) * 12.0f * gain;
