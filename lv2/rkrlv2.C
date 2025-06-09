@@ -25,6 +25,178 @@
 #define INTERMEDIATE_BUFSIZE 1024
 #define MAX_INPLACE 8192
 
+#include<lv2.h>
+#include<lv2/lv2plug.in/ns/ext/urid/urid.h>
+#include<lv2/lv2plug.in/ns/ext/midi/midi.h>
+#include<lv2/lv2plug.in/ns/ext/atom/util.h>
+#include<lv2/lv2plug.in/ns/ext/atom/forge.h>
+#include<lv2/lv2plug.in/ns/ext/time/time.h>
+#include<lv2/lv2plug.in/ns/ext/buf-size/buf-size.h>
+#include<lv2/lv2plug.in/ns/ext/options/options.h>
+#include<lv2/lv2plug.in/ns/ext/atom/atom.h>
+#include<lv2/lv2plug.in/ns/ext/patch/patch.h>
+#include<lv2/lv2plug.in/ns/ext/worker/worker.h>
+#include<lv2/lv2plug.in/ns/ext/state/state.h>
+
+#include"FX/Effect.h"
+#include"FX/EQ.h"
+#include"FX/Compressor.h"
+#include"Limiter.h"
+#include"strlcpy.h"
+#include"FX/Distorsion.h"
+#include"FX/Overdrive.h"
+#include"FX/Echo.h"
+#include"FX/Chorus.h"
+#include"FX/Flanger.h"
+#include"FX/APhaser.h"
+#include"FX/Harmonizer.h"
+#include"RecChord.h"
+#include"RecognizeNote.h"
+#include"FX/Exciter.h"
+#include"FX/Pan.h"
+#include"FX/Alienwah.h"
+#include"FX/Reverb.h"
+#include"FX/Cabinet.h"
+#include"FX/MusicDelay.h"
+#include"FX/WahWah.h"
+#include"FX/Derelict.h"
+#include"FX/Valve.h"
+#include"FX/Dual_Flange.h"
+#include"FX/Ring.h"
+#include"FX/DistBand.h"
+#include"FX/Arpie.h"
+#include"FX/Expander.h"
+#include"FX/Shuffle.h"
+#include"FX/Synthfilter.h"
+#include"FX/VaryBand.h"
+#include"FX/MuTroMojo.h"
+#include"FX/Echoverse.h"
+#include"FX/CoilCrafter.h"
+#include"FX/ShelfBoost.h"
+#include"FX/Vocoder.h"
+#include"FX/Sequence.h"
+#include"FX/Shifter.h"
+#include"FX/StompBox.h"
+#include"FX/Reverbtron.h"
+#include"FX/Echotron.h"
+#include"FX/StereoHarm.h"
+#include"FX/CompBand.h"
+#include"FX/Opticaltrem.h"
+#include"FX/Vibe.h"
+#include"FX/Infinity.h"
+#include"FX/Phaser.h"
+#include"FX/Gate.h"
+#include"FX/MIDIConverter.h"
+#include"FX/Convolotron.h"
+#include"FX/ParametricEQ.h"
+#include"FX/ResSolution.h"
+
+#define RVBFILE_URI "https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile"
+#define DLYFILE_URI "https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile"
+#define SNDFILE_URI "https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile"
+
+
+typedef struct _RKRLV2
+{
+    uint8_t nparams;
+    uint8_t effectindex;//index of effect
+    uint32_t period_max;
+    uint8_t loading_file;//flag to indicate that file load work is underway
+    uint8_t file_changed;
+    uint8_t prev_bypass;
+    float	*tmp_l;//temporary buffers for wet/dry mixing for hosts with shared in/out buffers(Ardour)
+    float 	*tmp_r;
+
+    //ports
+    float *input_l_p;
+    float *input_r_p;
+    float *output_l_p;
+    float *output_r_p;
+    float *bypass_p;
+    const LV2_Atom_Sequence* atom_in_p;
+    LV2_Atom_Sequence* atom_out_p;
+    float *param_p[20];
+    float *dbg_p;
+
+    //various "advanced" lv2 stuffs
+    LV2_Worker_Schedule* scheduler;
+    LV2_Atom_Forge	forge;
+    LV2_Atom_Forge_Frame atom_frame;
+    LV2_URID_Map *urid_map;
+
+    struct urids
+    {
+        LV2_URID    midi_MidiEvent;
+        LV2_URID    atom_Float;
+        LV2_URID    atom_Int;
+        LV2_URID    atom_Object;
+        LV2_URID    atom_Path;
+        LV2_URID    atom_URID;
+        LV2_URID    bufsz_max;
+        LV2_URID    patch_Set;
+        LV2_URID    patch_Get;
+        LV2_URID    patch_property;
+        LV2_URID    patch_value;
+        LV2_URID    filetype_rvb;
+        LV2_URID    filetype_dly;
+        LV2_URID    filetype_snd;
+
+    } URIDs;
+
+    //effect modules
+    EQ* eq;             //0
+    Compressor* comp;   //1
+    Distorsion* dist;   //2
+    Echo* echo;         //3
+    Chorus* chorus;     //4
+    Analog_Phaser* aphase;//5
+    Harmonizer* harm;	//6
+    RecChord* chordID;
+    Recognize* noteID;
+    Exciter* exciter;	//7
+    Pan* pan;			//8
+    Alienwah* alien;    //9
+    Reverb* reve;       //10
+    ParametricEQ* peq;  //11
+    Cabinet* cab;       //12
+    MusicDelay* mdel; 	//13
+    WahWah* wah; //14
+    Derelict* dere; 		//15
+    Valve* valve;		//16
+    Dflange* dflange;   //17
+    Ring* ring;			//18
+    DistBand* distband;		//19
+    Arpie* arp;			//20
+    Expander* expand;	//21
+    Shuffle* shuf;		//22
+    Synthfilter* synth; //23
+    VaryBand* varyband;		//24
+    MuTroMojo* mutro; 	//25
+    Echoverse* echoverse;	//26
+    CoilCrafter* coil;	//27
+    ShelfBoost* shelf;	//28
+    Vocoder* voc;		//29
+    Sustainer* sus;		//30
+    Sequence* seq;		//31
+    Shifter* shift;		//32
+    StompBox* stomp;	//33,34
+    Reverbtron* revtron;//35
+    Echotron* echotron; //36
+    StereoHarm* sharm;  //37
+    CompBand* mbcomp; 	//38
+    Opticaltrem* otrem; //39
+    Vibe* vibe;			//40
+    Infinity* inf;		//41
+    Phaser* phase;      //42
+    Gate* gate;         //43
+    MIDIConverter* midic; //44
+    Convolotron* convol;  //45
+    Flanger* flanger;     //46
+    Overdrive* overdrive;   //47
+    ResSolution* ressol; // 48
+
+} RKRLV2;
+
 enum other_ports
 {
     //be sure to account for index of array vs lv2 port index

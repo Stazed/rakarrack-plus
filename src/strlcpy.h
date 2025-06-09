@@ -25,6 +25,8 @@
 #ifndef STRLCPY_H
 #define STRLCPY_H
 
+#include <cstddef>  // size_t
+
 namespace RKRP
 {
 size_t
