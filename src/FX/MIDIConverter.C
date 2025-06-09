@@ -59,10 +59,10 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     val_ir_sum(-50.0f),
     Pgain(64),
 #else
+#ifndef RKR_PLUS_LV2
     /* Jack */
     m_buffSize(NULL),
     m_buffMessage(NULL),
-#ifndef RKR_PLUS_LV2
     /* Alsa */
     port(NULL),
 #endif
@@ -556,14 +556,9 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
     midi_Note_Message[1] = anota;
     midi_Note_Message[2] = velocity;
 
-#ifdef RKR_PLUS_LV2
-    // TODO
-#else
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
     forge_midimessage(plug, 0, midi_Note_Message, 3);
 #else
-
-#ifndef RKR_PLUS_LV2
     // ALSA
     snd_seq_event_t ev;
     snd_seq_ev_clear(&ev);
@@ -576,7 +571,7 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
     snd_seq_ev_set_subs(&ev);
     snd_seq_ev_set_direct(&ev);
     snd_seq_event_output_direct(port, &ev);
-#endif
+
     // JACK
     size_t size = 3;
     int nBytes = static_cast<int> (size);
@@ -586,8 +581,7 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
                           nBytes);
     jack_ringbuffer_write(m_buffSize, (char *) &nBytes, sizeof ( nBytes));
 
-#endif // LV2_SUPPORT
-#endif // RKR_PLUS_LV2
+#endif // LV2_SUPPORT || RKR_PLUS_LV2
 }
 
 #ifdef LV2_SUPPORT

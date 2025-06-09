@@ -1118,10 +1118,10 @@ RKR::disconectaaconnect()
     }
 }
 
+#ifndef RKR_PLUS_LV2
 void
 RKR::jack_process_midievents(jack_midi_event_t *midievent)
 {
-#ifndef RKR_PLUS_LV2
     int i;
     int type = midievent->buffer[0] >> 4;
 
@@ -1297,8 +1297,8 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
         parse_sysex();
     }
 #endif
-#endif  // #ifndef RKR_PLUS_LV2
 }
+#endif  // #ifndef RKR_PLUS_LV2
 
 void
 RKR::lv2_process_midievents(const uint8_t* const msg)

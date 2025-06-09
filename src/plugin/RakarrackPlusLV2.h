@@ -62,5 +62,13 @@ enum RKRLV2_effects_
     IRKRPLUS = 0
 };
 
+struct _RKRPLUSLV2;
+
+void
+forge_midimessage(_RKRPLUSLV2* plug,
+		uint32_t tme,
+		const uint8_t* const buffer,
+		uint32_t size);
+
 
 #endif

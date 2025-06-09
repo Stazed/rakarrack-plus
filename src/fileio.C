@@ -696,6 +696,7 @@ RKR::load_preset(const std::string &filename)
     set_audio_paramters();
 }
 
+#ifdef RKR_PLUS_LV2
 int
 RKR::lv2_save_state(std::string &s_buf)
 {
@@ -756,6 +757,7 @@ RKR::lv2_restore_state(const char *buf)
 
     set_audio_paramters();
 }
+#endif
 
 /**
  * Sets the individual effect parameters for each effect.

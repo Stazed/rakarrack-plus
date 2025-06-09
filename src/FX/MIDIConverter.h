@@ -24,19 +24,21 @@ const unsigned char  EVENT_NOTE_OFF         = 0x80;
 const unsigned char  EVENT_NOTE_ON          = 0x90;
 const unsigned char  NOTE_OFF_VELOCITY      = 64;
 
-#ifdef LV2_SUPPORT
-
-#include "lv2/lv2plug.in/ns/ext/midi/midi.h"
-#include"../lv2/rkrlv2.h"
-
-struct _RKRLV2;     // Forward declaration
-
+#ifdef RKR_PLUS_LV2
+    #include "lv2/lv2plug.in/ns/ext/midi/midi.h"
+    #include "../plugin/RakarrackPlusLV2.h"
+    struct _RKRPLUSLV2; // Forward declaration
 #else
-#include <jack/midiport.h>
-#include <jack/ringbuffer.h>
-#include <alsa/asoundlib.h>
-
-#endif // LV2_SUPPORT
+#ifdef LV2_SUPPORT
+    #include "lv2/lv2plug.in/ns/ext/midi/midi.h"
+    #include"../lv2/rkrlv2.h"
+    struct _RKRLV2;     // Forward declaration
+#else
+    #include <jack/midiport.h>
+    #include <jack/ringbuffer.h>
+    #include <alsa/asoundlib.h>
+#endif  // LV2_SUPPORT
+#endif  // RKR_PLUS_LV2
 
 const int C_MIDICONV_PARAMETERS = 7;
 
@@ -127,9 +129,11 @@ private:
     int Pgain;
 #else // LV2_SUPPORT
 public:
+#ifdef RKR_PLUS_LV2
+    _RKRPLUSLV2* plug; // for access to forge_midimessage()
+#else 
     jack_ringbuffer_t   *m_buffSize;
     jack_ringbuffer_t   *m_buffMessage;
-#ifndef RKR_PLUS_LV2
     snd_seq_t *port;
 #endif
 private:

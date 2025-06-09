@@ -221,6 +221,26 @@ inline_check(RKRPLUSLV2* plug, uint32_t nframes)
     }
 }
 
+/**
+ * add a midi message to the output port
+ * This is used by MIDIConverter
+ */
+void
+forge_midimessage(RKRPLUSLV2* plug,
+		uint32_t tme,
+		const uint8_t* const buffer,
+		uint32_t size)
+{
+	LV2_Atom midiatom;
+	midiatom.type = plug->URIDs.midi_MidiEvent;
+	midiatom.size = size;
+
+	if (0 == lv2_atom_forge_frame_time(&plug->forge, tme)) return;
+	if (0 == lv2_atom_forge_raw(&plug->forge, &midiatom, sizeof(LV2_Atom))) return;
+	if (0 == lv2_atom_forge_raw(&plug->forge, buffer, size)) return;
+	lv2_atom_forge_pad(&plug->forge, sizeof(LV2_Atom) + size);
+}
+
 ///// Rakarrack-plus /////////
 LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
     double sample_freq,
@@ -235,6 +255,15 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
 
     getFeatures(plug,host_features);
 
+    if(!plug->urid_map)
+    {
+    //a required feature was not supported by host
+    	free(plug);
+    	return 0;
+    }
+
+    lv2_atom_forge_init(&plug->forge, plug->urid_map);
+
     plug->rkrplus = g_rkrplus = new RKR(sample_freq, plug->period_max, true);
     plug->rkrplus->set_client_name(PACKAGE);
     plug->rkrplus->initialize();
@@ -248,6 +277,8 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
+
+    plug->rkrplus->efx_MIDIConverter->plug = plug;       // for MIDIConverter direct access to lv2 
 
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
@@ -309,6 +340,11 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
             }
         }
     }
+
+    const uint32_t out_capacity = plug->atom_out_p->atom.size;
+
+    lv2_atom_forge_set_buffer(&plug->forge, (uint8_t*)plug->atom_out_p, out_capacity);
+    lv2_atom_forge_sequence_head(&plug->forge, &plug->atom_frame, 0);
     
     // we are good to run now
     //inline copy input to process output
