@@ -30,6 +30,7 @@
 #include <string>
 #include <cassert>
 #include <functional>
+#include <memory>
 
 #include "external-ui.h"
 #include "../UI/rakarrack.h"
@@ -40,7 +41,7 @@ class RakarrackPlusLV2UI : public LV2_External_UI_Widget
 {
     std::string plugin_human_id;
     std::function<void()> notify_on_GUI_close;
-    RKRGUI * r_gui;
+    std::unique_ptr<RKRGUI> r_gui;
     bool is_shown;
 
     static RakarrackPlusLV2UI& self(void* handle) { assert(handle); return * static_cast<RakarrackPlusLV2UI *>(handle); }
@@ -53,7 +54,7 @@ public:
 
     RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller, LV2UI_Widget*, LV2_Feature const *const *);
     ~RakarrackPlusLV2UI();
-    void nothing(){return;}     // dummy
+    void shutDownGUI();
     bool init();
     void run();
     void show();

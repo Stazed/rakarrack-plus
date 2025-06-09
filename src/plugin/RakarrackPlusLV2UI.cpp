@@ -33,7 +33,6 @@ RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_
         LV2UI_Widget* widget, LV2_Feature const *const * features) :
     plugin_human_id{"Rakarrack-plus lv2 plugin"},
     notify_on_GUI_close{},
-    r_gui(NULL),
     is_shown(false),
     callbackGuiClosed{}
 {
@@ -67,7 +66,7 @@ RakarrackPlusLV2UI::~RakarrackPlusLV2UI()
 bool RakarrackPlusLV2UI::init()
 {
     if(g_rkrplus)
-        r_gui = new RKRGUI(0, NULL, g_rkrplus);
+        r_gui.reset(new RKRGUI(0, NULL, g_rkrplus));
     else
         return false;
 
@@ -76,7 +75,7 @@ bool RakarrackPlusLV2UI::init()
 
     installGuiClosedCallback([this]
                             {// invoked when FLTK GUI is closed explicitly...
-                                RakarrackPlusLV2UI::nothing();    // could do something if we wanted...
+                                RakarrackPlusLV2UI::shutDownGUI();
                                 if (notify_on_GUI_close)
                                     notify_on_GUI_close();
                             }); 
@@ -93,15 +92,12 @@ void RakarrackPlusLV2UI::run()
             if (callbackGuiClosed)
                 callbackGuiClosed(); // if defined, invoke it
 
+            Fl::check();
+            Fl::flush();
+
             return;
         }
-            
-       /* if(r_gui->m_process->m_sus->m_midi_control)
-        {
-            r_gui->get_parameters();
-            r_gui->m_process->m_sus->m_midi_control = false;
-        }
-        */
+
         r_gui->run();
         Fl::check();
         Fl::flush();
@@ -113,7 +109,6 @@ void RakarrackPlusLV2UI::run()
 void RakarrackPlusLV2UI::show()
 {
 //    printf("SHOW CALLED\n");
-
     if(!is_shown)
     {
         r_gui->Principal->show();
@@ -125,13 +120,20 @@ void RakarrackPlusLV2UI::show()
 void RakarrackPlusLV2UI::hide()
 {
 //    printf("HIDING CALLED\n");
+    if(is_shown)
+        shutDownGUI();
 
-    is_shown = false;
-    r_gui->LV2_gui_hide();
-    r_gui->Principal->hide();
+    Fl::check();
     Fl::flush();
 }
 
+void RakarrackPlusLV2UI::shutDownGUI()
+{
+//    printf("SHUTDOWN CALLED\n");
+    is_shown = false;
+    r_gui->LV2_gui_hide();  // will set Exit_Program to true
+    r_gui.reset();
+}
 
 LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*descriptor*/,
 		const char * plugin_uri,
@@ -161,9 +163,7 @@ LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*d
 void RakarrackPlusLV2UI::cleanup(LV2UI_Handle ui)
 {
 //    printf("CLEANUP CALLED\n");
-    RakarrackPlusLV2UI *self = (RakarrackPlusLV2UI*)ui;
-    delete self->r_gui->Principal;
-    delete self->r_gui;
+    RakarrackPlusLV2UI *self = static_cast<RakarrackPlusLV2UI *>(ui);
     delete self;
 }
 

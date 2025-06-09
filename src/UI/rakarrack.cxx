@@ -38,7 +38,8 @@ int global_look_changed = 0;
 
 void RKRGUI::cb_Principal_i(Fl_Double_Window*, void*) {
   #ifdef RKR_PLUS_LV2
-    LV2_gui_hide();
+    // triggers hide from RakarrackPlusLV2UI::run()
+    m_process->Exit_Program = 1;
 #else
     if(nsm_preferences_file.empty())
     {
