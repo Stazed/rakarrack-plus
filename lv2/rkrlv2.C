@@ -413,11 +413,11 @@ up_to_stereo(uint32_t nframes, float *input_mono, float* efxoutl, float* efxoutr
 
 
 /**
- * add a midi message to the output port
+ * Add a midi message to the output port.
  * This is used by MIDIConverter
  */
 void
-forge_midimessage(RKRLV2* plug,
+forge_midimessage(_RKRLV2* plug,
 		uint32_t tme,
 		const uint8_t* const buffer,
 		uint32_t size)

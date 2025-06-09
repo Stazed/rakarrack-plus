@@ -222,11 +222,11 @@ inline_check(RKRPLUSLV2* plug, uint32_t nframes)
 }
 
 /**
- * add a midi message to the output port
+ * Add a midi message to the output port.
  * This is used by MIDIConverter
  */
 void
-forge_midimessage(RKRPLUSLV2* plug,
+forge_midimessage(_RKRPLUSLV2* plug,
 		uint32_t tme,
 		const uint8_t* const buffer,
 		uint32_t size)
