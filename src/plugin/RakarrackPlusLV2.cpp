@@ -38,14 +38,15 @@
 #include "RakarrackPlusLV2.h"
 #include "RakarrackPlusLV2UI.h"
 
-#include "../process.h"
 
 // externs
+RKR * g_rkrplus = NULL;    // external
 int global_gui_show = 0;
 std::string nsm_preferences_file = "";
 
 //this is the default hopefully hosts don't use periods of more than this, or they will communicate the max bufsize
 #define INTERMEDIATE_BUFSIZE 1024
+#define RAKARRACK_PLUS_STATE_URI "https://github.com/Stazed/rakarrack-plus#state"
 
 
 typedef struct _RKRPLUSLV2

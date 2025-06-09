@@ -969,7 +969,7 @@ RKR::process_effects(float *origl, float *origr, void *)
             // Don't process inactive effects
             if(!EFX_Active[efx_order[i]])
                 continue;
-            
+
             // The effect out()
             Rack_Effects[efx_order[i]]->out(efxoutl, efxoutr);
 

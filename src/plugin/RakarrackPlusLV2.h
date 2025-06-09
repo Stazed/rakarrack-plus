@@ -20,10 +20,12 @@
 #ifndef RAKARRACKPLUSLV2_H
 #define RAKARRACKPLUSLV2_H
 
+#include "../process.h"
+
+extern RKR *g_rkrplus;
 
 #define RAKARRACK_PLUS_LV2_URI "https://github.com/Stazed/rakarrack-plus#rkrplus"
 #define RAKARRACK_PLUS_LV2_UI_URI "https://github.com/Stazed/rakarrack-plus#rkrplus_ui"
-#define RAKARRACK_PLUS_STATE_URI "https://github.com/Stazed/rakarrack-plus#state"
 
 
 enum RKRLV2_ports_

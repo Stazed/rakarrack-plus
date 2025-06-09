@@ -26,9 +26,6 @@
 #include "RakarrackPlusLV2UI.h"
 
 
-RKR * g_rkrplus;    // external
-
-
 RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller controller,
         LV2UI_Widget* widget, LV2_Feature const *const * features) :
     plugin_human_id{"Rakarrack-plus lv2 plugin"},
@@ -68,10 +65,16 @@ bool RakarrackPlusLV2UI::init()
     if(g_rkrplus)
         r_gui.reset(new RKRGUI(0, NULL, g_rkrplus));
     else
+    {
+        printf("Global g_rkrplus pointer is NULL %p\n", g_rkrplus);
         return false;
+    }
 
     if(!r_gui)
+    {
+        printf("R_GUI is NULL\n");
         return false;
+    }
 
     installGuiClosedCallback([this]
                             {// invoked when FLTK GUI is closed explicitly...
