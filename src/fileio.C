@@ -612,9 +612,18 @@ RKR::load_preset(const std::string &filename)
 
     sscanf(buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &FX_Master_Active_Reset);
 
-    preset_loaded.Fraction_Bypass = balance;
-    preset_loaded.Input_Gain = in_vol;
-    preset_loaded.Master_Volume = out_vol;
+    if (!Config.preserve_master)
+    {
+        preset_loaded.Fraction_Bypass = balance;
+        preset_loaded.Input_Gain = in_vol;
+        preset_loaded.Master_Volume = out_vol;
+    }
+    else    // Use current Master
+    {
+        preset_loaded.Fraction_Bypass = Active_Preset.Fraction_Bypass;
+        preset_loaded.Input_Gain = Active_Preset.Input_Gain;
+        preset_loaded.Master_Volume = Active_Preset.Master_Volume;
+    }
 
     // Effect parameters
     for (int i = 0; i < 10; i++)
