@@ -917,7 +917,11 @@ RKR::lv2_restore_state(const char *data)
     // These need to be set as if the GUI is not loaded.
     calculavol(1);
     calculavol(2);
-    booster = 1.0f;
+
+    if(Config.booster == 1.0)
+        booster = 1.0f;
+    else
+        booster = dB2rap(10);
 }
 #endif
 
@@ -1650,7 +1654,14 @@ RKR::new_preset()
     strncpy(Active_Preset.Author, Config.UserRealName, sizeof(Active_Preset.Author) - 1);
 
     // Set the Master to OFF
+#ifdef RKR_PLUS_LV2
+    if(Config.init_state)
+        FX_Master_Active_Reset = 1;
+    else
+        FX_Master_Active_Reset = 0;
+#else
     FX_Master_Active_Reset = 0;
+#endif
 
     // Apply all the above settings to each effect, etc.
     set_audio_paramters();

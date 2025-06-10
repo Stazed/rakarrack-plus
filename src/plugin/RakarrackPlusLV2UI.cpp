@@ -57,7 +57,7 @@ RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_
 
 RakarrackPlusLV2UI::~RakarrackPlusLV2UI()
 {
-    // nothing - cleanup does it
+    r_gui.reset();
 }
 
 bool RakarrackPlusLV2UI::init()

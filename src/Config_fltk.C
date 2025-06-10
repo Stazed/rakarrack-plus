@@ -268,7 +268,11 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     // ************ Settings/Audio *******************
     if(nsm_preferences_file.empty())    // Not NSM - master Off by default = 0
     {
+#ifdef RKR_PLUS_LV2
+        rakarrack.get(PrefNom("FX_init_state"), init_state, 1); // On by default
+#else
         rakarrack.get(PrefNom("FX_init_state"), init_state, 0);
+#endif
     }
     else    // NSM - master On by default = 1
     {

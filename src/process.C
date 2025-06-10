@@ -330,6 +330,17 @@ void
 RKR::load_user_preferences()
 {
     Config.load_previous_state();
+
+#ifdef RKR_PLUS_LV2
+    if(Config.booster == 1.0)
+        booster = 1.0f;
+    else
+        booster = dB2rap(10);
+    
+    if(Config.init_state)
+        FX_Master_Active_Reset = 1;
+#endif
+
     upsample = Config.upsample;
     Adjust_Upsample();
 }

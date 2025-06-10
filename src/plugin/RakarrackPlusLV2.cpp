@@ -268,6 +268,8 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
     plug->rkrplus = g_rkrplus = new RKR(sample_freq, plug->period_max, true);
     plug->rkrplus->set_client_name(PACKAGE);
     plug->rkrplus->initialize();
+    plug->rkrplus->calculavol(1);
+    plug->rkrplus->calculavol(2);
 
     return plug;
 }
