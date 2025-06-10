@@ -948,7 +948,7 @@ void RKRGUI::cb_T_SEL(RKR_Choice* o, void* v) {
 Fl_Menu_Item RKRGUI::menu_T_SEL[] = {
  {"GUI", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"MIDI Note On", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
- {"Jack Transport", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
+ {"Jack Transport (LV2)", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"MTC", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {"Beat Tracker", 0,  0, 0, 0, (uchar)FL_NORMAL_LABEL, 0, 9, 0},
  {0,0,0,0,0,0,0,0,0}

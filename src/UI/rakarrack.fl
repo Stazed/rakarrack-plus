@@ -355,7 +355,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
   }
   decl {Fl_Help_Dialog *visor;} {private local
   }
-  Function {make_window()} {open selected return_type void
+  Function {make_window()} {open return_type void
   } {
     Fl_Window Principal {
       callback {\#ifdef RKR_PLUS_LV2
@@ -375,7 +375,7 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     {
         global_gui_show = CONST_GUI_HIDE;
     }
-\#endif} open
+\#endif} open selected
       xywh {977 236 800 600} type Double box DOWN_BOX color 0 resizable size_range {320 240 3200 2400} visible
     } {
       Fl_Box fondo {
@@ -1757,7 +1757,7 @@ TAP_LABEL->redraw_label();}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {
-            label {Jack Transport}
+            label {Jack Transport (LV2)}
             xywh {0 0 36 21} labelsize 9
           }
           MenuItem {} {

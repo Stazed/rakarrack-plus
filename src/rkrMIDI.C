@@ -1496,7 +1496,16 @@ void
 RKR::lv2_set_bpm(float a_bpm)
 {
 #ifdef RKR_PLUS_LV2
-    printf("BPM = %f\n", a_bpm);    // TODO
+    if ((Tap_Active) && (Tap_Selection == 2))
+    {
+
+        if ((a_bpm > 19) && (a_bpm < 360) && (a_bpm != Tap_TempoSet))
+        {
+            Tap_TempoSet = a_bpm;
+            Update_tempo();
+            Tap_Display = 1;
+        }
+    }
 #endif
 }
 
