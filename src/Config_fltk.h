@@ -291,6 +291,10 @@ public:
     int Rand_Max;
     char Rand_Exclude[EFX_NUMBER_EFFECTS + 1];
 
+    // Analyzer and Scope
+    bool Analyzer_On_Off;
+    bool Scope_On_Off;
+
     // NSM
 #ifdef NSM_SUPPORT
     int NSM_single_state;

@@ -188,6 +188,8 @@ Config_fltk::Config_fltk() :
     Rand_Current(),
     Rand_Max(6),
     Rand_Exclude(),
+    Analyzer_On_Off(false),
+    Scope_On_Off(false),
 #ifdef NSM_SUPPORT
     NSM_single_state(),
     NSM_gui_status(),

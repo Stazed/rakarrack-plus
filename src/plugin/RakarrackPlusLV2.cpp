@@ -55,7 +55,7 @@ typedef struct _RKRPLUSLV2
     uint8_t effectindex;//index of effect
     uint16_t period_max;
     float	*tmp_l;//temporary buffers for wet/dry mixing for hosts with shared in/out buffers(Ardour)
-    float 	*tmp_r; // TODO check
+    float 	*tmp_r;
 
     //ports
     float *input_l_p;

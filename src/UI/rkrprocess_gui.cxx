@@ -78,13 +78,22 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     Trigger->icon((char *) p);
     DelayFile->icon((char *) p);
 
-    char tmp[256];
-    Analy->set_analyzer_ON(false);
-    Sco->set_scope_ON(false);
+    Analy->set_analyzer_ON(m_process->Config.Analyzer_On_Off);
+    Sco->set_scope_ON(m_process->Config.Scope_On_Off);
 
     Sco->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, this);
     Analy->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, m_process->sample_rate, this);
 
+    if(Analy->get_analyzer_ON())
+    {
+        Etit->do_callback();
+    }
+    if(Sco->get_scope_ON())
+    {
+        TITTLE_L->do_callback();
+    }
+
+    char tmp[256];
     memset(tmp, 0, sizeof (tmp));
     if (!m_process->File_To_Load.empty())
     {
@@ -1105,6 +1114,10 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
         m_process->Config.Tap_Selection = (int) m_process->Tap_Selection;
         m_process->Config.Tap_SetValue = (int) m_process->Tap_SetValue;
         m_process->Tap_TempoSet = (int) T_DIS->value();
+
+        // We don't save this to preferences, this is just for LV2 hide/show gui consistency
+        m_process->Config.Analyzer_On_Off = Analy->get_analyzer_ON();
+        m_process->Config.Scope_On_Off = Sco->get_scope_ON();
 #endif
     }
 
