@@ -114,6 +114,13 @@ static void
 check_shared_buf(RKRPLUSLV2* plug, uint32_t nframes)
 {
 #if 0
+    // This crashes non-mixer sometimes
+    if(nframes > MAX_INPLACE)
+    {
+        return;
+    }
+#else
+    // This original from rkrlv2 works for all
     if(nframes > plug->period_max)
     {
         if(plug->tmp_l)
@@ -128,21 +135,11 @@ check_shared_buf(RKRPLUSLV2* plug, uint32_t nframes)
 #endif
     if(plug->input_l_p == plug->output_l_p )
     {
-        if(plug->tmp_l)
-            free(plug->tmp_l);
-        
-        plug->tmp_l = (float*)malloc(sizeof(float)*nframes);
-
         memcpy(plug->tmp_l,plug->input_l_p,sizeof(float)*nframes);
         plug->input_l_p = plug->tmp_l;
     }
-
     if(plug->input_r_p == plug->output_r_p)
     {
-        if(plug->tmp_r)
-            free(plug->tmp_r);
-        plug->tmp_r = (float*)malloc(sizeof(float)*nframes);
-
         memcpy(plug->tmp_r,plug->input_r_p,sizeof(float)*nframes);
         plug->input_r_p = plug->tmp_r;
     }
@@ -209,6 +206,10 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
     plug->rkrplus->calculavol(1);
     plug->rkrplus->calculavol(2);
 
+    // initialize for shared in/out buffer
+    plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
+    plug->tmp_r = (float*)malloc(sizeof(float)*plug->period_max);
+
     return plug;
 }
 
@@ -245,49 +246,53 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
             const uint8_t* const msg = (const uint8_t*)(ev + 1);
             plug->rkrplus->lv2_process_midievents(msg);
         }
-        else if (ev->body.type == plug->URIDs.atom_blank || ev->body.type == plug->URIDs.atom_Object)
+        else if ((plug->rkrplus->Tap_Active) && (plug->rkrplus->Tap_Selection == 2))
         {
-            LV2_Atom_Object *obj = (LV2_Atom_Object *)&ev->body;
-            if (obj->body.otype != plug->URIDs.atom_position)
-                continue;
-
-            LV2_Atom *bpb = NULL;
-            LV2_Atom *bar = NULL;
-            LV2_Atom *barBeat = NULL;
-            LV2_Atom *bpm = NULL;
-            LV2_Atom *beatUnit = NULL;
-            lv2_atom_object_get(obj,
-                                plug->URIDs.atom_bpb, &bpb,
-                                plug->URIDs.atom_bar, &bar,
-                                plug->URIDs.atom_bar_beat, &barBeat,
-                                plug->URIDs.atom_bpm, &bpm,
-                                plug->URIDs.atom_beatUnit, &beatUnit,
-                                NULL);
-
-            if (bpm && bpm->type == plug->URIDs.atom_Float)
+            if (ev->body.type == plug->URIDs.atom_blank || ev->body.type == plug->URIDs.atom_Object)
             {
-                float BPM = ((LV2_Atom_Float *)bpm)->body;
- 
-                if (beatUnit && beatUnit->type == plug->URIDs.atom_Int)
+                LV2_Atom_Object *obj = (LV2_Atom_Object *)&ev->body;
+                if (obj->body.otype != plug->URIDs.atom_position)
+                    continue;
+
+                LV2_Atom *bpb = NULL;
+                LV2_Atom *bar = NULL;
+                LV2_Atom *barBeat = NULL;
+                LV2_Atom *bpm = NULL;
+                LV2_Atom *beatUnit = NULL;
+                lv2_atom_object_get(obj,
+                                    plug->URIDs.atom_bpb, &bpb,
+                                    plug->URIDs.atom_bar, &bar,
+                                    plug->URIDs.atom_bar_beat, &barBeat,
+                                    plug->URIDs.atom_bpm, &bpm,
+                                    plug->URIDs.atom_beatUnit, &beatUnit,
+                                    NULL);
+
+                if (bpm && bpm->type == plug->URIDs.atom_Float)
                 {
-                    // In DAWs, Beats Per Minute really mean Quarter Beats Per
-                    // Minute. Therefore we need to divide by four first, to
-                    // get a whole beat, and then multiply that according to
-                    // the time signature denominator. See this link for some
-                    // background: https://music.stackexchange.com/a/109743
-                    BPM = BPM / 4 * ((LV2_Atom_Int *)beatUnit)->body;
+                    float BPM = ((LV2_Atom_Float *)bpm)->body;
+
+                    if (beatUnit && beatUnit->type == plug->URIDs.atom_Int)
+                    {
+                        // In DAWs, Beats Per Minute really mean Quarter Beats Per
+                        // Minute. Therefore we need to divide by four first, to
+                        // get a whole beat, and then multiply that according to
+                        // the time signature denominator. See this link for some
+                        // background: https://music.stackexchange.com/a/109743
+                        BPM = BPM / 4 * ((LV2_Atom_Int *)beatUnit)->body;
+                    }
+                    plug->rkrplus->lv2_set_bpm(BPM);
                 }
-                plug->rkrplus->lv2_set_bpm(BPM);
             }
         }
     }
 
+    // Process MIDI out - MIDIConverter
     const uint32_t out_capacity = plug->atom_out_p->atom.size;
 
     lv2_atom_forge_set_buffer(&plug->forge, (uint8_t*)plug->atom_out_p, out_capacity);
     lv2_atom_forge_sequence_head(&plug->forge, &plug->atom_frame, 0);
     
-    // we are good to run now
+    // Audio - we are good to run now
     //inline copy input to process output
     memcpy(plug->rkrplus->efxoutl, plug->input_l_p, sizeof(float)*nframes);
     memcpy(plug->rkrplus->efxoutr, plug->input_r_p, sizeof(float)*nframes);
