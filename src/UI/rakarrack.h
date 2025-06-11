@@ -657,7 +657,6 @@ private:
   static void TimeoutStatic(void* ptr);
   void GuiTimeout(void);
 public:
-  void run();
   void load_default_bank(unsigned bank_index);
   void back_color_change(Fl_Color back_color);
   void label_color_change(Fl_Color label_color);

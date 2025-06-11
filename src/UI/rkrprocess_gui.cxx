@@ -626,11 +626,6 @@ void RKRGUI::GuiTimeout(void)
     Fl::repeat_timeout(.04, this->TimeoutStatic, this);
 }
 
-void RKRGUI::run()
-{
-    GuiTimeout();   // TODO remove this function
-}
-
 void RKRGUI::load_default_bank(unsigned bank_index)
 {
     // Check if the bank was modified - request save
