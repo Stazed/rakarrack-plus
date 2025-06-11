@@ -201,7 +201,13 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
     lv2_atom_forge_init(&plug->forge, plug->urid_map);
 
     plug->rkrplus = new RKR(sample_freq, plug->period_max, true);
-    plug->rkrplus->set_client_name(PACKAGE);
+
+    // This pref-name is used by the FLTK preferences for configure lookup
+    // specifically for LV2, so we don't clobber the standalone configure.
+    std::string pref_name(PACKAGE);
+    pref_name += "-LV2";
+    plug->rkrplus->set_client_name(pref_name);
+
     plug->rkrplus->initialize();
     plug->rkrplus->calculavol(1);
     plug->rkrplus->calculavol(2);
