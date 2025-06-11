@@ -20,12 +20,73 @@
 #ifndef RAKARRACKPLUSLV2_H
 #define RAKARRACKPLUSLV2_H
 
+#include <lv2.h>
+#include <lv2/lv2plug.in/ns/ext/urid/urid.h>
+#include <lv2/lv2plug.in/ns/ext/midi/midi.h>
+#include <lv2/lv2plug.in/ns/ext/atom/util.h>
+#include <lv2/lv2plug.in/ns/ext/time/time.h>
+#include <lv2/lv2plug.in/ns/ext/buf-size/buf-size.h>
+#include <lv2/lv2plug.in/ns/ext/options/options.h>
+#include <lv2/lv2plug.in/ns/ext/patch/patch.h>
+#include <lv2/lv2plug.in/ns/ext/worker/worker.h>
+#include <lv2/lv2plug.in/ns/ext/state/state.h>
+#include <lv2/lv2plug.in/ns/ext/time/time.h>
+// We are including our own atom-forge.h, etc because of a name clash with Bool and one
+// of the FLTK included shared libraries definition by the same name.
+#include "atom-forge.h"
+
 #include "../process.h"
 
 
 #define RAKARRACK_PLUS_LV2_URI "https://github.com/Stazed/rakarrack-plus#rkrplus"
 #define RAKARRACK_PLUS_LV2_UI_URI "https://github.com/Stazed/rakarrack-plus#rkrplus_ui"
 
+typedef struct _RKRPLUSLV2
+{
+    uint8_t nparams;
+    uint8_t effectindex;//index of effect
+    uint16_t period_max;
+    float	*tmp_l;//temporary buffers for wet/dry mixing for hosts with shared in/out buffers(Ardour)
+    float 	*tmp_r;
+
+    //ports
+    float *input_l_p;
+    float *input_r_p;
+    float *output_l_p;
+    float *output_r_p;
+    const LV2_Atom_Sequence* atom_in_p;
+    LV2_Atom_Sequence* atom_out_p;
+    float *param_p[20];
+
+    //various "advanced" lv2 stuffs
+    LV2_Atom_Forge	forge;
+    LV2_Atom_Forge_Frame atom_frame;
+    LV2_URID_Map *urid_map;
+
+    struct urids
+    {
+        LV2_URID    midi_MidiEvent;
+        LV2_URID    atom_Float;
+        LV2_URID    atom_Int;
+        LV2_URID    atom_long;
+        LV2_URID    atom_string_id;
+        LV2_URID    atom_Object;
+        LV2_URID    atom_URID;
+        LV2_URID    bufsz_max;
+        LV2_URID    rkrplus_state_id;
+        LV2_URID    atom_blank;
+        LV2_URID    atom_position;
+        LV2_URID    atom_bpb;
+        LV2_URID    atom_bar;
+        LV2_URID    atom_bar_beat;
+        LV2_URID    atom_bpm;
+        LV2_URID    atom_beatUnit;
+        
+    } URIDs;
+
+    RKR* rkrplus;
+
+} RKRPLUSLV2;
 
 enum RKRLV2_ports_
 {
