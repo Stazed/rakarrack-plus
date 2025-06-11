@@ -22,7 +22,6 @@
 
 #include "../process.h"
 
-extern RKR *g_rkrplus;
 
 #define RAKARRACK_PLUS_LV2_URI "https://github.com/Stazed/rakarrack-plus#rkrplus"
 #define RAKARRACK_PLUS_LV2_UI_URI "https://github.com/Stazed/rakarrack-plus#rkrplus_ui"

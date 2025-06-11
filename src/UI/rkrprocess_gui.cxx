@@ -140,9 +140,8 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     HideUE->redraw();
 
     Fl::add_handler(global_shortcuts);
-#ifndef RKR_PLUS_LV2
+
     Fl::add_timeout(.04, this->TimeoutStatic, this);
-#endif
 }
 
 /**
@@ -623,14 +622,13 @@ void RKRGUI::GuiTimeout(void)
             Principal->size_range(320, 240, 3200, 2400);
         }
     }
-#ifndef RKR_PLUS_LV2
+
     Fl::repeat_timeout(.04, this->TimeoutStatic, this);
-#endif
 }
 
 void RKRGUI::run()
 {
-    GuiTimeout();
+    GuiTimeout();   // TODO remove this function
 }
 
 void RKRGUI::load_default_bank(unsigned bank_index)
@@ -4438,6 +4436,7 @@ RKRGUI::LV2_gui_hide()
     for(unsigned i = 0; i < 8; ++i)
         save_current_state(i);
 
+    Fl::remove_timeout(this->TimeoutStatic, this);
     m_process->Exit_Program=1;
 #endif
 }

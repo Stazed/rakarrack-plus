@@ -20,16 +20,18 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Double_Window.H>
 #include <FL/x.H>
-
+#include <lv2/lv2plug.in/ns/ext/instance-access/instance-access.h>
 #include "../UI/rakarrack.h"
 #include "RakarrackPlusLV2.h"
 #include "RakarrackPlusLV2UI.h"
+
 
 
 RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller controller,
         LV2UI_Widget* widget, LV2_Feature const *const * features) :
     plugin_human_id{"Rakarrack-plus lv2 plugin"},
     notify_on_GUI_close{},
+    m_RKR(0),
     is_shown(false),
     callbackGuiClosed{}
 {
@@ -41,6 +43,13 @@ RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_
     while (*features)
     {
         LV2_Feature const* f = *features;
+        if (strcmp(f->URI, LV2_INSTANCE_ACCESS_URI) == 0)
+        {
+            _RKRPLUSLV2 * plug = (static_cast<_RKRPLUSLV2 *>(f->data));
+            m_RKR = plug->rkrplus;
+           // printf("GOT M_RKR = %p\n", m_RKR);
+        }
+        else
         if (strcmp(f->URI, LV2_EXTERNAL_UI__Host) == 0)
         {
             LV2_External_UI_Host& hostSpec = * static_cast<LV2_External_UI_Host *>(f->data);
@@ -62,11 +71,11 @@ RakarrackPlusLV2UI::~RakarrackPlusLV2UI()
 
 bool RakarrackPlusLV2UI::init()
 {
-    if(g_rkrplus)
-        r_gui.reset(new RKRGUI(0, NULL, g_rkrplus));
+    if(m_RKR)
+        r_gui.reset(new RKRGUI(0, NULL, m_RKR));
     else
     {
-        printf("Global g_rkrplus pointer is NULL %p\n", g_rkrplus);
+       // printf("Global g_rkrplus pointer is NULL %p\n", m_RKR);
         return false;
     }
 
@@ -90,7 +99,7 @@ void RakarrackPlusLV2UI::run()
 {
     if (is_shown)
     {
-        if(g_rkrplus->Exit_Program)
+        if(m_RKR->Exit_Program)
         {
             if (callbackGuiClosed)
                 callbackGuiClosed(); // if defined, invoke it
@@ -101,9 +110,7 @@ void RakarrackPlusLV2UI::run()
             return;
         }
 
-        r_gui->run();
         Fl::check();
-        Fl::flush();
     }
     else if (notify_on_GUI_close)
         notify_on_GUI_close();
@@ -114,9 +121,9 @@ void RakarrackPlusLV2UI::show()
 //    printf("SHOW CALLED\n");
     if(!is_shown)
     {
-        r_gui->Principal->show();
+        init_fltk_lock();
         is_shown = true;
-        g_rkrplus->Exit_Program = 0;    // false
+        m_RKR->Exit_Program = 0;    // false
     }
 }
 
@@ -224,3 +231,13 @@ const LV2UI_Descriptor* lv2ui_descriptor(uint32_t index)
     }
 }
 
+void
+RakarrackPlusLV2UI::init_fltk_lock()
+{
+    static bool firstTime{true};
+    if (firstTime)
+    {
+        Fl::lock();
+        firstTime = false;
+    }
+}

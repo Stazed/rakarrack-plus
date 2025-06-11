@@ -34,14 +34,14 @@
 
 #include "external-ui.h"
 #include "../UI/rakarrack.h"
-
-extern RKR *g_rkrplus;
+#include "../process.h"
 
 class RakarrackPlusLV2UI : public LV2_External_UI_Widget
 {
     std::string plugin_human_id;
     std::function<void()> notify_on_GUI_close;
     std::unique_ptr<RKRGUI> r_gui;
+    RKR * m_RKR;
     bool is_shown;
 
     static RakarrackPlusLV2UI& self(void* handle) { assert(handle); return * static_cast<RakarrackPlusLV2UI *>(handle); }
@@ -74,7 +74,7 @@ public:
     }
 private:
     CallbackGuiClosed callbackGuiClosed;
-
+    void init_fltk_lock();
 };
 
 

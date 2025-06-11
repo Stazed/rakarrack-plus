@@ -40,7 +40,6 @@
 
 
 // externs
-RKR * g_rkrplus = NULL;    // external
 int global_gui_show = 0;
 std::string nsm_preferences_file = "";
 
@@ -265,7 +264,7 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
 
     lv2_atom_forge_init(&plug->forge, plug->urid_map);
 
-    plug->rkrplus = g_rkrplus = new RKR(sample_freq, plug->period_max, true);
+    plug->rkrplus = new RKR(sample_freq, plug->period_max, true);
     plug->rkrplus->set_client_name(PACKAGE);
     plug->rkrplus->initialize();
     plug->rkrplus->calculavol(1);
