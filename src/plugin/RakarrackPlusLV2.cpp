@@ -222,7 +222,7 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
 void activate_rkrplus(LV2_Handle handle)
 {
     RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
-    printf("Activate Called\n");
+ //   printf("Activate Called\n");
 
     plug->rkrplus->FX_Master_Active_Reset = 1;
     plug->rkrplus->Mvalue = 1;
@@ -236,7 +236,7 @@ void activate_rkrplus(LV2_Handle handle)
 void deactivate_rkrplus(LV2_Handle handle)
 {
     RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
-    printf("DE-Activate Called\n");
+//    printf("DE-Activate Called\n");
 
     plug->rkrplus->FX_Master_Active_Reset = 0;
 
@@ -457,7 +457,7 @@ LV2_State_Status stateSave(LV2_Handle h,
 
     std::string str;
 
-    int sz = plug->rkrplus->lv2_save_state(str);
+    int sz = plug->rkrplus->rkr_save_state(str);
     char *data = new char[sz]; // Allocate memory
     strcpy(data, str.c_str()); // Copy the string
 
@@ -487,7 +487,19 @@ LV2_State_Status stateRestore(LV2_Handle h,
     const char *data = (const char *)retrieve(handle, plug->URIDs.rkrplus_state_id, &sz, &type, &new_flags);
     
     if(sz > 0)
-        plug->rkrplus->lv2_restore_state(data);
+    {
+        std::string s_buf(data);
+        plug->rkrplus->rkr_restore_state(s_buf);
+        
+        // These need to be set as if the GUI is not loaded.
+        plug->rkrplus->calculavol(1);
+        plug->rkrplus->calculavol(2);
+
+        if(plug->rkrplus->Config.booster == 1.0)
+            plug->rkrplus->booster = 1.0f;
+        else
+            plug->rkrplus->booster = dB2rap(10);
+    }
 
     return LV2_STATE_SUCCESS;
 }

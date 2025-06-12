@@ -184,116 +184,21 @@ void RKR::get_effect_parameters(std::string &s_buf, int fx_index)
 void
 RKR::save_preset(const std::string &filename)
 {
-    FILE *fn;
-
-    std::string s_buf;
-
-    fn = fopen(filename.c_str(), "w");
-
-    if (errno == EACCES)
+    std::ofstream outputFile(filename);
+    if (!outputFile.is_open())
     {
         Handle_Message(3);
-        fclose(fn);
         return;
     }
-    
-    // Update active preset for any user changes
-    refresh_active_preset();
-    
-    // Copy active preset for file operations
-    PresetBankStruct Save_Preset = Active_Preset;
-    
-    // Program release version
-    s_buf = VERSION;
-    s_buf += "\n";
-    fputs(s_buf.c_str(), fn);
 
-    // Author
-    s_buf.clear();
-    if (strlen(Save_Preset.Author) != 0)
-    {
-        s_buf = Save_Preset.Author;
-        s_buf += "\n";
-    }
-    else
-    {
-        if (strlen(Config.UserRealName) != 0)
-        {
-            s_buf = Config.UserRealName;
-            s_buf += "\n";
-        }
-        else
-        {
-            s_buf = getenv("USER");
-            s_buf += "\n";
-        }
-    }
+    // Get the current state
+    std::string s_buf;
+    rkr_save_state(s_buf);
 
-    fputs(s_buf.c_str(), fn);
+    // Write it to file
+    outputFile << s_buf;
 
-    // Preset Name
-    fputs(Save_Preset.Preset_Name, fn);
-    fputs("\n", fn);
-
-    // Master control
-    s_buf.clear();
-    
-    s_buf += NTS(Save_Preset.Input_Gain);
-    s_buf += ",";
-    s_buf += NTS(Save_Preset.Master_Volume);
-    s_buf += ",";
-    s_buf += NTS(Save_Preset.Fraction_Bypass);
-    s_buf += ",";
-    s_buf += NTS(Save_Preset.FX_Master_Active);
-    s_buf += "\n";
-
-    fputs(s_buf.c_str(), fn);
-
-    // Effect parameters
-    for (int order = 0; order < C_NUMBER_ORDERED_EFFECTS; order++)
-    {
-        int effect = Save_Preset.Effect_Params[EFX_ORDER][order];
-        s_buf.clear();
-
-        get_effect_parameters(s_buf, effect);
-        fputs(s_buf.c_str(), fn);
-    }
-
-    // Effect Order
-    s_buf.clear();
-    for(int i = 0; i < 10; i++)
-    {
-        s_buf += NTS(Save_Preset.Effect_Params[EFX_ORDER][i]);
-        if(i < 9)
-        {
-            s_buf += ",";
-        }
-    }
-    s_buf += "\n";
-    
-    fputs(s_buf.c_str(), fn);
-
-    // MIDI learn table
-    for (int i = 0; i < 128; i++)
-    {
-        s_buf.clear();
-        
-        for(int j = 0; j < 20; j++)
-        {
-            s_buf += NTS(Save_Preset.XUserMIDI[i][j]);
-            
-            if(j < 19)
-            {
-                s_buf += ",";
-            }
-        }
-        
-        s_buf += "\n";
-
-        fputs(s_buf.c_str(), fn);
-    }
-
-    fclose(fn);
+    outputFile.close();
 }
 
 void
@@ -491,230 +396,34 @@ RKR::export_to_carla(const std::string &filename)
  */
 void
 RKR::load_preset(const std::string &filename)
-{
-    FILE *fn;
-    char buf[256];
-
-    PresetBankStruct preset_loaded;
-    
-    if ((fn = fopen(filename.c_str(), "r")) == NULL)
+{ 
+    std::ifstream file(filename);
+    if (!file.is_open())
     {
-        File_To_Load.clear();
         Handle_Message(14, filename);
         return;
     }
 
-    // This cycles through the first 14 lines which should always exist.
-    // Will set fgets to the next item which is order for loading.
-    for (int i = 0; i < 14; i++)
-    {
-        memset(buf, 0, sizeof (buf));
-        
-        if (fgets(buf, sizeof buf, fn) == NULL)
-        {
-            File_To_Load.clear();
-            Handle_Message(14, filename);
-            fclose(fn);
-            return;
-        }
-    }
+    std::stringstream buffer;
+    buffer << file.rdbuf();
 
-    // Order
-    memset(buf, 0, sizeof (buf));
-
-    if (fgets(buf, sizeof buf, fn) == NULL)
-    {
-        File_To_Load.clear();
-        Handle_Message(15, filename);
-        fclose(fn);
-        return;
-    }
-
-    // Parse the effect order into the order array
-    int order[10];
-    sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-           &order[0], &order[1], &order[2], &order[3], &order[4],
-           &order[5], &order[6], &order[7], &order[8], &order[9]);
-
-    // Close the file to start at the top again...
-    // This is done since the effect order comes after the individual
-    // effect parameters in the file. We do not know which effects
-    // the parameters apply until we get the order first, uuuuuggghhlllyyy!!!!
-    fclose(fn);
-
-    if ((fn = fopen(filename.c_str(), "r")) == NULL)
-    {
-        return;
-    }
-
-    // Program version
-    memset(buf, 0, sizeof (buf));
-
-    if (fgets(buf, sizeof buf, fn) == NULL)
-    {
-        File_To_Load.clear();
-        Handle_Message(16, filename);
-        fclose(fn);
-        return;
-    }
-
-    // Author
-    memset(buf, 0, sizeof (buf));
-
-    if (fgets(buf, sizeof buf, fn) == NULL)
-    {
-        File_To_Load.clear();
-        Handle_Message(17, filename);
-        fclose(fn);
-        return;
-    }
-
-    for (int i = 0; i < 64; i++)
-    {
-        if (buf[i] > 20)        // remove LF '\n'
-        {
-            preset_loaded.Author[i] = buf[i];
-        }
-    }
-
-    // Preset Name
-    memset(buf, 0, sizeof (buf));
-
-    if (fgets(buf, sizeof buf, fn) == NULL)
-    {
-        File_To_Load.clear();
-        Handle_Message(18, filename);
-        fclose(fn);
-        return;
-    }
-
-    for (int i = 0; i < 64; i++)
-    {
-        if (buf[i] > 20)        // remove LF '\n'
-        {
-            preset_loaded.Preset_Name[i] = buf[i];
-        }
-    }
-
-    // Master control
-    memset(buf, 0, sizeof (buf));
-
-    if (fgets(buf, sizeof buf, fn) == NULL)
-    {
-        File_To_Load.clear();
-        Handle_Message(19, filename);
-        fclose(fn);
-        return;
-    }
-
-    float in_vol, out_vol; in_vol = out_vol = 0.0;
-    float balance = 1.0f;
-
-    sscanf(buf, "%f,%f,%f,%d\n", &in_vol, &out_vol, &balance, &FX_Master_Active_Reset);
-
-    if (!Config.preserve_master)
-    {
-        preset_loaded.Fraction_Bypass = balance;
-        preset_loaded.Input_Gain = in_vol;
-        preset_loaded.Master_Volume = out_vol;
-    }
-    else    // Use current Master
-    {
-        preset_loaded.Fraction_Bypass = Active_Preset.Fraction_Bypass;
-        preset_loaded.Input_Gain = Active_Preset.Input_Gain;
-        preset_loaded.Master_Volume = Active_Preset.Master_Volume;
-    }
-
-    // Effect parameters
-    for (int i = 0; i < 10; i++)
-    {
-        int effect = order[i];  // This is why we had to load the order first!!!
-
-        memset(buf, 0, sizeof (buf));
-
-        if (fgets(buf, sizeof buf, fn) == NULL)
-        {
-            File_To_Load.clear();
-            Handle_Message(19, filename);
-            fclose(fn);
-            return;
-        }
-
-        apply_effect_parameters(buf, effect, preset_loaded);
-    }
-
-    // Effect order... again!!
-    memset(buf, 0, sizeof (buf));
-
-    if (fgets(buf, sizeof buf, fn) == NULL)
-    {
-        File_To_Load.clear();
-        Handle_Message(15, filename);
-        fclose(fn);
-        return;
-    }
-
-    // Apply the order
-    sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-           &preset_loaded.Effect_Params[EFX_ORDER][0], &preset_loaded.Effect_Params[EFX_ORDER][1],
-           &preset_loaded.Effect_Params[EFX_ORDER][2], &preset_loaded.Effect_Params[EFX_ORDER][3],
-           &preset_loaded.Effect_Params[EFX_ORDER][4], &preset_loaded.Effect_Params[EFX_ORDER][5],
-           &preset_loaded.Effect_Params[EFX_ORDER][6], &preset_loaded.Effect_Params[EFX_ORDER][7],
-           &preset_loaded.Effect_Params[EFX_ORDER][8], &preset_loaded.Effect_Params[EFX_ORDER][9]);
-
-    // MIDI learn table
-    for (int i = 0; i < 128; i++)
-    {
-        memset(buf, 0, sizeof (buf));
-
-        if (fgets(buf, sizeof buf, fn) == NULL)
-        {
-            File_To_Load.clear();
-            Handle_Message(20, filename);
-            fclose(fn);
-            return;
-        }
-
-        sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-               &preset_loaded.XUserMIDI[i][0], &preset_loaded.XUserMIDI[i][1],
-               &preset_loaded.XUserMIDI[i][2], &preset_loaded.XUserMIDI[i][3],
-               &preset_loaded.XUserMIDI[i][4], &preset_loaded.XUserMIDI[i][5],
-               &preset_loaded.XUserMIDI[i][6], &preset_loaded.XUserMIDI[i][7],
-               &preset_loaded.XUserMIDI[i][8], &preset_loaded.XUserMIDI[i][9],
-               &preset_loaded.XUserMIDI[i][10], &preset_loaded.XUserMIDI[i][10],
-               &preset_loaded.XUserMIDI[i][12], &preset_loaded.XUserMIDI[i][13],
-               &preset_loaded.XUserMIDI[i][14], &preset_loaded.XUserMIDI[i][15],
-               &preset_loaded.XUserMIDI[i][16], &preset_loaded.XUserMIDI[i][17],
-               &preset_loaded.XUserMIDI[i][18], &preset_loaded.XUserMIDI[i][19]);
-    }
-
-    fclose(fn);
-
-    // Copy the loaded preset to Main window
-    Active_Preset = preset_loaded;
-
-    set_audio_paramters();
+    rkr_restore_state(buffer.str());
 }
 
-#ifdef RKR_PLUS_LV2
 int
-RKR::lv2_save_state(std::string &s_buf)
+RKR::rkr_save_state(std::string &s_buf)
 {
     // Update active preset for any user changes
     refresh_active_preset();
 
     // Copy active preset for file operations
     PresetBankStruct Save_Preset = Active_Preset;
- 
-    // LV2 state version
-    s_buf = NTS(C_LV2_STATE_VERSION);
-    s_buf += "\n";
 
-    // Program release version
+    // Program release version = 0
     s_buf += VERSION;
     s_buf += "\n";
 
-    // Author
+    // Author = 1
     if (strlen(Save_Preset.Author) != 0)
     {
         s_buf += Save_Preset.Author;
@@ -734,11 +443,11 @@ RKR::lv2_save_state(std::string &s_buf)
         }
     }
 
-    // Preset Name
+    // Preset Name = 2
     s_buf += Save_Preset.Preset_Name;
     s_buf += "\n";
 
-    // Master control
+    // Master control = 3
     s_buf += NTS(Save_Preset.Input_Gain);
     s_buf += ",";
     s_buf += NTS(Save_Preset.Master_Volume);
@@ -748,18 +457,7 @@ RKR::lv2_save_state(std::string &s_buf)
     s_buf += NTS(Save_Preset.FX_Master_Active);
     s_buf += "\n";
 
-    // Effect Order
-    for(int i = 0; i < 10; i++)
-    {
-        s_buf += NTS(Save_Preset.Effect_Params[EFX_ORDER][i]);
-        if(i < 9)
-        {
-            s_buf += ",";
-        }
-    }
-    s_buf += "\n";
-
-    // Effect parameters
+    // Effect parameters = 4
     std::string s_temp;
     for (int order = 0; order < C_NUMBER_ORDERED_EFFECTS; order++)
     {
@@ -770,7 +468,18 @@ RKR::lv2_save_state(std::string &s_buf)
         s_buf += s_temp;
     }
 
-    // MIDI learn table
+    // Effect Order = 4 + 10 = 14
+    for(int i = 0; i < 10; i++)
+    {
+        s_buf += NTS(Save_Preset.Effect_Params[EFX_ORDER][i]);
+        if(i < 9)
+        {
+            s_buf += ",";
+        }
+    }
+    s_buf += "\n";
+
+    // MIDI learn table = 15
     for (int i = 0; i < 128; i++)
     {
         s_temp.clear();
@@ -790,13 +499,18 @@ RKR::lv2_save_state(std::string &s_buf)
         s_buf += s_temp;
     }
 
+#if 0
+    // LV2 state version
+    s_buf = NTS(C_LV2_STATE_VERSION);
+    s_buf += "\n";
+#endif
+
     return s_buf.length() + 1;
 }
 
 void
-RKR::lv2_restore_state(const char *data)
+RKR::rkr_restore_state(const std::string &s_buf)
 {
-    std::string s_buf(data);
     char buf[256];
     PresetBankStruct preset_loaded;
 
@@ -809,26 +523,12 @@ RKR::lv2_restore_state(const char *data)
         segments.push_back(segment);
     }
 
-#if 0
-    for(const auto& s : segments)
-    {
-        printf("Vector %s\n", s.c_str());
-        //std::cout << s << std::endl;
-    }
-#endif
+    // Program release version = 0
+    printf("Program release version = %s\n", segments[0].c_str());
 
-    // LV2 state version
-    if( std::stoi(segments[0]) != C_LV2_STATE_VERSION)
-    {
-        printf("Invalid State Version %s\n", segments[0].c_str());
-    }
-
-    // Program release version
-    printf("Program release version = %s\n", segments[1].c_str());
-
-    // Author
+    // Author = 1
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[2].c_str(), segments[2].size());
+    memcpy(buf, segments[1].c_str(), segments[1].size());
     for (int i = 0; i < 64; i++)
     {
         if (buf[i] > 20)        // remove LF '\n'
@@ -837,9 +537,9 @@ RKR::lv2_restore_state(const char *data)
         }
     }
 
-    // Preset Name
+    // Preset Name = 2
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[3].c_str(), segments[3].size());
+    memcpy(buf, segments[2].c_str(), segments[2].size());
     for (int i = 0; i < 64; i++)
     {
         if (buf[i] > 20)        // remove LF '\n'
@@ -848,9 +548,9 @@ RKR::lv2_restore_state(const char *data)
         }
     }
 
-    // Master control
+    // Master control = 3
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[4].c_str(), segments[4].size());
+    memcpy(buf, segments[3].c_str(), segments[3].size());
     float in_vol, out_vol; in_vol = out_vol = 0.0;
     float balance = 1.0f;
 
@@ -860,29 +560,29 @@ RKR::lv2_restore_state(const char *data)
     preset_loaded.Input_Gain = in_vol;
     preset_loaded.Master_Volume = out_vol;
  
-    // Effect Order
+    // Effect Order = 14
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[5].c_str(), segments[5].size());
+    memcpy(buf, segments[14].c_str(), segments[14].size());
 
     int order[10];
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
            &order[0], &order[1], &order[2], &order[3], &order[4],
            &order[5], &order[6], &order[7], &order[8], &order[9]);
  
-    // Effect parameters
+    // Effect parameters = 4
     for (int i = 0; i < 10; i++)
     {
         int effect = order[i];  // This is why we had to load the order first!!!
 
         memset(buf, 0, sizeof (buf));
-        memcpy(buf, segments[6 + i].c_str(), segments[6 + i].size());
+        memcpy(buf, segments[4 + i].c_str(), segments[4 + i].size());
 
         apply_effect_parameters(buf, effect, preset_loaded);
     }
 
     /* Get the order again to apply it */
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[5].c_str(), segments[5].size());
+    memcpy(buf, segments[14].c_str(), segments[14].size());
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
            &preset_loaded.Effect_Params[EFX_ORDER][0], &preset_loaded.Effect_Params[EFX_ORDER][1],
            &preset_loaded.Effect_Params[EFX_ORDER][2], &preset_loaded.Effect_Params[EFX_ORDER][3],
@@ -890,11 +590,11 @@ RKR::lv2_restore_state(const char *data)
            &preset_loaded.Effect_Params[EFX_ORDER][6], &preset_loaded.Effect_Params[EFX_ORDER][7],
            &preset_loaded.Effect_Params[EFX_ORDER][8], &preset_loaded.Effect_Params[EFX_ORDER][9]);
 
-    // MIDI learn table
+    // MIDI learn table = 15
     for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));
-        memcpy(buf, segments[16 + i].c_str(), segments[16 + i].size());
+        memcpy(buf, segments[15 + i].c_str(), segments[15 + i].size());
 
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &preset_loaded.XUserMIDI[i][0], &preset_loaded.XUserMIDI[i][1],
@@ -909,21 +609,19 @@ RKR::lv2_restore_state(const char *data)
                &preset_loaded.XUserMIDI[i][18], &preset_loaded.XUserMIDI[i][19]);
     }
 
+#if 0
+    // LV2 state version
+    if( std::stoi(segments[0]) != C_LV2_STATE_VERSION)
+    {
+        printf("Invalid State Version %s\n", segments[0].c_str());
+    }
+#endif
+
     // Copy the loaded preset to Main window
     Active_Preset = preset_loaded;
 
     set_audio_paramters();
-
-    // These need to be set as if the GUI is not loaded.
-    calculavol(1);
-    calculavol(2);
-
-    if(Config.booster == 1.0)
-        booster = 1.0f;
-    else
-        booster = dB2rap(10);
 }
-#endif
 
 /**
  * Sets the individual effect parameters for each effect.
