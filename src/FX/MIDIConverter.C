@@ -65,6 +65,8 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     m_buffMessage(NULL),
     /* Alsa */
     port(NULL),
+#else
+    plug(NULL),
 #endif
 #endif // LV2_SUPPORT
     Pmidi(),
@@ -557,7 +559,8 @@ MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
     midi_Note_Message[2] = velocity;
 
 #if defined LV2_SUPPORT || defined RKR_PLUS_LV2
-    forge_midimessage(plug, 0, midi_Note_Message, 3);
+    if(plug)
+        forge_midimessage(plug, 0, midi_Note_Message, 3);
 #else
     // ALSA
     snd_seq_event_t ev;
