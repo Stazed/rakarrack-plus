@@ -219,6 +219,34 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
     return plug;
 }
 
+void activate_rkrplus(LV2_Handle handle)
+{
+    RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
+    printf("Activate Called\n");
+
+    plug->rkrplus->FX_Master_Active_Reset = 1;
+    plug->rkrplus->Mvalue = 1;
+
+    // Uses MIDI control to set/unset master on/off
+    plug->rkrplus->Mcontrol[MC_Multi_On_Off] = 1;
+    plug->rkrplus->OnOffC = 0;
+    plug->rkrplus->ActiveUn(EFX_MASTER_ON_OFF);
+}
+
+void deactivate_rkrplus(LV2_Handle handle)
+{
+    RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
+    printf("DE-Activate Called\n");
+
+    plug->rkrplus->FX_Master_Active_Reset = 0;
+
+    // Uses MIDI control to set/unset master on/off
+    plug->rkrplus->Mvalue = 1;
+    plug->rkrplus->Mcontrol[MC_Multi_On_Off] = 1;
+    plug->rkrplus->OnOffC = 0;
+    plug->rkrplus->ActiveUn(EFX_MASTER_ON_OFF);
+}
+
 void run_rkrplus(LV2_Handle handle, uint32_t nframes)
 {
     if( nframes == 0)
@@ -493,9 +521,9 @@ static const LV2_Descriptor rkrplus_descriptor=
     RAKARRACK_PLUS_LV2_URI,
     init_rkrplus,
     connect_rkrplus_ports,
-    0,//activate
+    activate_rkrplus,
     run_rkrplus,
-    0,//deactivate
+    deactivate_rkrplus,
     cleanup_rkrplus,
     extension_data
 

@@ -838,9 +838,18 @@ void RKRGUI::load_previous_state()
 
     if (m_process->Config.init_state)
     {
+#ifdef RKR_PLUS_LV2
+        m_process->Active_Preset.FX_Master_Active = m_process->FX_Master_Active_Reset;
+        if(m_process->FX_Master_Active_Reset)
+        {
+            m_process->calculavol(1);
+            m_process->calculavol(2);
+        }
+#else
         m_process->Active_Preset.FX_Master_Active = 1;
         m_process->calculavol(1);
         m_process->calculavol(2);
+#endif
     }
 
     Settings->RC_Harm_Opti->value(m_process->Config.RCOpti_Harm);
