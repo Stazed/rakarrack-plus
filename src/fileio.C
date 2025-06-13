@@ -623,6 +623,540 @@ RKR::rkr_restore_state(const std::string &s_buf)
     set_audio_paramters();
 }
 
+int
+RKR::LV2_save_preferences(std::string &s_buf)
+{
+//    char temp1[128];
+
+
+    Config.Principal_X;
+    Config.Principal_Y;
+    Config.Principal_W;
+    Config.Principal_H;
+    Config.font_size = global_font_size;
+    Config.font_type = global_font_type;
+
+    Config.back_color = (int) global_back_color;
+    Config.fore_color = (int) global_fore_color;
+    Config.leds_color = (int) global_leds_color;
+    Config.label_color = (int) global_label_color;
+    Config.Schema;
+    Config.deachide;
+    Config.scalable;
+
+    active_bank;
+
+ //       if ((Preset_Counter->value() > 0) && (Preset_Counter->value() < 61))
+ //       {
+
+        //    Config.Preset_Number = (int) Preset_Counter->value();
+    Config.Preset_Number;
+ //       }
+
+    if (help_displayed)
+    {
+        Config.Help_X;
+        Config.Help_Y;
+        Config.Help_W;
+        Config.Help_H;
+        Config.Help_TextSize;
+        help_displayed = 0;  // For LV2 the UI is deleted so reset as not displayed
+    }
+
+    //Tuner
+    Config.Tuner_On_Off = (int) Tuner_Active;
+
+    //MIDIConverter
+    Config.Midi_Out_Channel;
+    Config.Trigger_Adjust;
+    Config.Velocity_Adjust;
+    Config.Converter_Octave;
+    Config.MIDI_Converter_On_Off = (int) MIDIConverter_Active;
+    Config.Use_FFT;
+
+    //Metronome
+    Config.Metronome_On_Off = (int) Metro_Active;
+    Config.Metronome_Time;
+    Config.Metro_Vol;
+    Config.Metronome_Tempo;
+    Config.Metronome_Sound;
+
+    //Booster
+    Config.booster = booster;
+
+    //Tap Tempo
+    Config.TapTempo_On_Off = (int) Tap_Active;
+    Config.Tap_Selection = (int) Tap_Selection;
+    Config.Tap_SetValue = (int) Tap_SetValue;
+    Tap_TempoSet;
+
+    // We don't save this to preferences, this is just for LV2 hide/show gui consistency
+    Config.Analyzer_On_Off;
+    Config.Scope_On_Off;
+
+    Config.BankWindow_X;
+    Config.BankWindow_Y;
+    Config.BankWindow_W;
+    Config.BankWindow_H;
+
+    Config.Order_X;
+    Config.Order_Y;
+    Config.Order_W;
+    Config.Order_H;
+
+    Config.Settings_X;
+    Config.Settings_Y;
+    Config.Settings_W;
+    Config.Settings_H;
+
+    Config.Random_X;
+    Config.Random_Y;
+    Config.Random_W;
+    Config.Random_H;
+
+    Config.Rand_Parameters;
+    Config.Rand_Active;
+    Config.Rand_Current;
+    Config.Rand_Max;
+
+    Config.Rand_Exclude;  //  Special case
+
+        // convert the asci char to string for the set 
+/*        std::string s;
+        for(int i = 0; i < EFX_NUMBER_EFFECTS; ++i)
+        {
+            if(FX_Excluded[i] == (char) 1)
+                Config.Rand_Exclude[i] = ASCII_One;
+            else
+                Config.Rand_Exclude[i] = ASCII_Space;
+        }
+*/
+    Config.MIDI_Learn_X;
+    Config.MIDI_Learn_Y;
+    Config.MIDI_Learn_W;
+    Config.MIDI_Learn_H;
+
+    Config.Trigger_X;
+    Config.Trigger_Y;
+    Config.Trigger_W;
+    Config.Trigger_H;
+
+    Config.Aux_Source = Aux_Source;
+    Config.Aux_Gain = Aux_Gain;
+    Config.Aux_Threshold = Aux_Threshold;
+    Config.Aux_MIDI = Aux_MIDI;
+    Config.Aux_Minimum = Aux_Minimum;
+    Config.Aux_Maximum = Aux_Maximum;
+
+
+    Config.Delay_X;
+    Config.Delay_Y;
+    Config.Delay_W;
+    Config.Delay_H;
+        // TODO need to save the delay gui table for gui hide and return.
+
+
+    Config.UserRealName;
+    Config.preserve_master;
+    Config.Metro_Vol;
+
+    Config.DC_Offset;
+
+    Config.Tap_Updated;
+    flpos;
+    db6booster;
+
+    Config.RCOpti_Harm;
+    Config.RCOpti_Stereo;
+    Config.RCOpti_Ring;
+
+    // Quality reset
+    Config.HarQual;
+    Config.Har_Down;
+    Config.Har_U_Q;
+    Config.Har_D_Q;
+
+    Config.Rev_Down;
+    Config.Rev_U_Q;
+    Config.Rev_D_Q;
+
+    Config.Con_Down;
+    Config.Con_U_Q;
+    Config.Con_D_Q;
+
+    Config.SeqQual;
+    Config.Seq_Down;
+    Config.Seq_U_Q;
+    Config.Seq_D_Q;
+
+    Config.ShiQual;
+    Config.Shi_Down;
+    Config.Shi_U_Q;
+    Config.Shi_D_Q;
+
+    Config.VocBands;
+    Config.Voc_Down;
+    Config.Voc_U_Q;
+    Config.Voc_D_Q;
+
+    Config.SteQual;
+    Config.Ste_Down;
+    Config.Ste_U_Q;
+    Config.Ste_D_Q;
+
+    Config.Dist_res_amount;
+    Config.Dist_up_q;
+    Config.Dist_down_q;
+
+    Config.Ovrd_res_amount;
+    Config.Ovrd_up_q;
+    Config.Ovrd_down_q;
+
+    Config.Dere_res_amount;
+    Config.Dere_up_q;
+    Config.Dere_down_q;
+
+    Config.DBand_res_amount;
+    Config.DBand_up_q;
+    Config.DBand_down_q;
+
+    Config.Stomp_res_amount;
+    Config.Stomp_up_q;
+    Config.Stomp_down_q;
+    // End reset
+
+    Config.aFreq;
+    Config.rtrig;
+
+        // Need reset
+ //       rakarrack.set(m_process->Config.PrefNom("Vocoder Bands"), m_process->Config.VocBands);
+        // End reset
+
+    Config.init_state;
+    Config.autoassign;
+
+    // Need reset
+    Config.upsample;
+    Config.UpQual;
+    Config.DownQual;
+
+    Config.UpAmo;
+    Config.looper_size;
+    // End reset
+
+    Config.BankFilename;
+    Config.UDirFilename;
+
+    Config.EnableBackgroundImage;
+    Config.BackgroundImage;
+//        rakarrack.set(m_process->Config.PrefNom("Auto Connect MIDI IN"), m_process->Config.aconnect_MI);
+//        rakarrack.set(m_process->Config.PrefNom("Auto Connect Jack"), m_process->Config.aconnect_JA);
+//        rakarrack.set(m_process->Config.PrefNom("Auto Connect Jack In"), m_process->Config.aconnect_JIA);
+
+    Config.MIDIway;
+    Config.custom_midi_table;
+
+
+    Config.MIDI_In_Channel + 1; // check this + 1
+    Config.Harmonizer_MIDI_Channel + 1;
+    Config.StereoHarm_MIDI_Channel + 1;
+
+        // Need reset
+    //    rakarrack.set(m_process->Config.PrefNom("Harmonizer Quality"), m_process->Config.HarQual);
+    //    rakarrack.set(m_process->Config.PrefNom("StereoHarm Quality"), m_process->Config.SteQual);
+    //    rakarrack.set(m_process->Config.PrefNom("Sequence Quality"), m_process->Config.SeqQual);
+    //    rakarrack.set(m_process->Config.PrefNom("Shifter Quality"), m_process->Config.ShiQual);
+        // End reset
+
+    t_timeout;
+    Config.Disable_Warnings;
+    Config.ena_tool;
+    Config.Focus_Delay;
+    Config.custom_midi_table_file;
+
+    return s_buf.length() + 1;
+}
+
+void
+RKR::LV2_restore_preferences(const std::string &s_buf)
+{
+           // ************* Settings/Look ******************
+    Config.Schema;
+
+    Config.font_type;
+    // Sanity check. Can happen when NSM session copied to another computer
+    // that has fewer fonts loaded than source. Also if some fonts are removed.
+    // Segfault if font type is out of range.
+//    if(Config.font_type >= Fl::set_fonts(0)) // set_fonts returns number of fonts available
+//    {
+//        fprintf(stderr, "Invalid font type, reverting to default\n");
+//        Config.font_type = 0;   // reset to default
+//    }
+
+    Config.font_size;
+    Config.fore_color;
+    Config.label_color;
+    Config.leds_color;
+    Config.back_color;
+
+    Config.EnableBackgroundImage;
+
+    char temp[256];
+    snprintf(temp, sizeof(temp), "%s/blackbg.png", DATADIR);
+    Config.BackgroundImage;
+
+    // Check if valid file. Revert to default if error.
+    FILE *fn;
+    if ((fn = fopen(Config.BackgroundImage, "r")) == NULL)
+    {
+        memset(Config.BackgroundImage, 0, sizeof (Config.BackgroundImage));
+        RKRP::strlcpy(Config.BackgroundImage, temp, sizeof (Config.BackgroundImage));
+        fprintf(stderr, "Invalid BackgroundImage file, reverting to default\n");
+    }
+    else
+    {
+        fclose(fn);
+    }
+
+    Config.deachide;
+    Config.scalable;
+    // End Settings/Look
+
+    // ************ Settings/Audio *******************
+
+    Config.init_state; // On by default
+
+
+    Config.DC_Offset;
+    Config.preserve_master;
+    Config.Tap_Updated;
+    Config.flpos;
+    Config.db6booster;
+
+    Config.upsample;
+    Config.UpAmo;
+    Config.UpQual;
+    Config.DownQual;
+
+    Config.looper_size;
+    Config.Metro_Vol;  // Looper
+
+    Config.aFreq;
+    Config.rtrig;
+
+    Config.RCOpti_Harm;
+    Config.RCOpti_Stereo;
+    Config.RCOpti_Ring;
+    // End Settings/Audio
+
+    // ************ Settings/Quality ******************
+    Config.HarQual;
+    Config.SteQual;
+
+    Config.SeqQual;
+    Config.ShiQual;
+
+    Config.VocBands;
+
+    Config.Har_Down;
+    Config.Har_U_Q;
+    Config.Har_D_Q;
+
+    Config.Rev_Down;
+    Config.Rev_U_Q;
+    Config.Rev_D_Q;
+
+    Config.Con_Down;
+    Config.Con_U_Q;
+    Config.Con_D_Q;
+
+    Config.Seq_Down;
+    Config.Seq_U_Q;
+    Config.Seq_D_Q;
+
+    Config.Shi_Down;
+    Config.Shi_U_Q;
+    Config.Shi_D_Q;
+
+    Config.Voc_Down;
+    Config.Voc_U_Q;
+    Config.Voc_D_Q;
+
+    Config.Ste_Down;
+    Config.Ste_U_Q;
+    Config.Ste_D_Q;
+
+    Config.Dist_res_amount;
+    Config.Dist_up_q;
+    Config.Dist_down_q;
+
+    Config.Ovrd_res_amount;
+    Config.Ovrd_up_q;
+    Config.Ovrd_down_q;
+
+    Config.Dere_res_amount;
+    Config.Dere_up_q;
+    Config.Dere_down_q;
+
+    Config.DBand_res_amount;
+    Config.DBand_up_q;
+    Config.DBand_down_q;
+
+    Config.Stomp_res_amount;
+    Config.Stomp_up_q;
+    Config.Stomp_down_q;
+    // End Settings/Quality
+
+    // ************ Settings/MIDI *****************
+    // Alsa MIDI
+//    rakarrack.get(PrefNom("Auto Connect MIDI IN"), aconnect_MI, 0);
+//    rakarrack.get(PrefNom("MIDI IN Device"), MID, "", 40);
+
+    Config.MIDI_In_Channel;
+    Config.MIDI_In_Channel--;
+
+    Config.Harmonizer_MIDI_Channel;
+    Config.Harmonizer_MIDI_Channel--;
+
+    Config.StereoHarm_MIDI_Channel;
+    Config.StereoHarm_MIDI_Channel--;
+
+    // MIDI Learn used On/Off
+    Config.MIDIway;
+    Config.autoassign;
+
+    // Custom MIDI Table used On/OFF
+    Config.custom_midi_table;
+
+    // Custom MIDI Table last used file
+    Config.custom_midi_table_file;
+    // End Settings/MIDI
+
+    // *********** Settings/Jack *****************
+    // Jack Out
+    // End Settings/Jack
+
+    // *************** Settings/Misc **********************
+    Config.Disable_Warnings;
+    Config.t_timeout;
+    Config.ena_tool;
+    Config.Focus_Delay;
+    // End Settings/Misc
+
+    // ******************* Settings/User *******************
+    // Get user default bank file from Settings/Bank/ --Bank Filename
+    memset(temp, 0, sizeof (temp));
+    snprintf(temp, sizeof(temp), "%s/Default.rkrb", DATADIR);
+    Config.BankFilename;
+
+    // Get user bank directory
+    memset(temp, 0, sizeof (temp));
+    snprintf(temp, sizeof(temp), "%s", UD_NOT_SET);
+    Config.UDirFilename;
+    global_user_directory = Config.UDirFilename;
+
+    memset(temp, 0, sizeof (temp));
+    Config.UserRealName;
+    // End Settings/User
+
+    // ************** Window Sizes *****************
+    Config.Principal_X;
+    Config.Principal_Y;
+    Config.Principal_W;
+    Config.Principal_H;
+
+    Config.BankWindow_X;
+    Config.BankWindow_Y;
+    Config.BankWindow_W;
+    Config.BankWindow_H;
+
+    Config.Order_X;
+    Config.Order_Y;
+    Config.Order_W;
+    Config.Order_H;
+
+    Config.MIDI_Learn_X;
+    Config.MIDI_Learn_Y;
+    Config.MIDI_Learn_W;
+    Config.MIDI_Learn_H;
+
+    Config.Trigger_X;
+    Config.Trigger_Y;
+    Config.Trigger_W;
+    Config.Trigger_H;
+
+    Config.Settings_X;
+    Config.Settings_Y;
+    Config.Settings_W;
+    Config.Settings_H;
+
+    Config.Help_X;
+    Config.Help_Y;
+    Config.Help_W;
+    Config.Help_H;
+    Config.Help_TextSize;
+
+    Config.Random_X;
+    Config.Random_Y;
+    Config.Random_W;
+    Config.Random_H;
+
+    Config.Delay_X;
+    Config.Delay_Y;
+    Config.Delay_W;
+    Config.Delay_H;
+    
+    // End Window Sizes
+
+    // Main window booster button
+    Config.booster;   // On/Off
+
+    // Last bank and preset selected
+    Config.active_bank;
+    Config.Preset_Number = 1;  // For LV2 we don't load the preset
+
+    // MIDIConverter
+    Config.Midi_Out_Channel;
+    Config.Trigger_Adjust;
+    Config.Velocity_Adjust;
+    Config.Converter_Octave;
+    Config.MIDI_Converter_On_Off;
+    Config.Use_FFT;
+
+    // Metronome
+    Config.Metronome_Time;
+    Config.Metronome_Sound;
+    Config.Metronome_Volume;
+    Config.Metronome_Tempo;
+    Config.sw_stat;
+    Config.Metronome_On_Off;
+
+    // Tuner
+    Config.Tuner_On_Off;
+
+    // Tap Tempo
+    Config.Tap_Selection;
+    Config.Tap_SetValue;
+    Config.TapTempo_On_Off;
+
+    // Trigger
+    Config.Aux_Source;
+    Config.Aux_Gain;
+    Config.Aux_Threshold;
+    Config.Aux_MIDI;
+    Config.Aux_Minimum;
+    Config. Aux_Maximum;
+
+    // Random
+    Config.Rand_Parameters;
+    Config.Rand_Active;
+    Config.Rand_Current;
+    Config.Rand_Max;
+
+    memset(temp, 0, sizeof (temp));
+ //   Config.Rand_Exclude, temp, EFX_NUMBER_EFFECTS + 1);
+}
+
 /**
  * Sets the individual effect parameters for each effect.
  * Sets the main rack effect order.
