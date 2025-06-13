@@ -681,7 +681,9 @@ public:
     ~RKR ();
 
     // process.C
-    void initialize();
+    void initialize(bool re_initialize = false);
+    void delete_everything();
+    void reset_all_effects(bool is_LV2 = false);
 #ifdef RKR_PLUS_LV2
     void set_client_name(std::string s_name);
 #else

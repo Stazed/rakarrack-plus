@@ -207,11 +207,34 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
 #endif
 {
 }
-
+/**
+ * Instantiate all effects, buffers, arrays, etc.
+ * 
+ * @param re_initialize
+ *      For some changes in user preferences such as master up-sampling we
+ *      need to re-initialize everything or quit and restart which was the 
+ *      legacy method. With re_initialize, the initialize function was previously
+ *      run, and now to avoid restarting, we delete all the necessary objects, etc
+ *      the re-run initialize with re-initialize = true. Currently only used by LV2
+ *      on state restore to allow for each instance to have independent preferences.
+ */
 void
-RKR::initialize()
+RKR::initialize(bool re_initialize)
 {
-    load_user_preferences();
+    if(!re_initialize)
+        load_user_preferences();
+    
+#ifdef RKR_PLUS_LV2
+    if(Config.booster == 1.0)
+        booster = 1.0f;
+    else
+        booster = dB2rap(10);
+    
+    if(Config.init_state)
+        FX_Master_Active_Reset = 1;
+#endif
+    upsample = Config.upsample;
+    Adjust_Upsample();
 
     Get_Bogomips();
 
@@ -219,38 +242,40 @@ RKR::initialize()
 
     instantiate_effects();
 
-    put_order_in_rack();
+    if(!re_initialize)
+    {
+        put_order_in_rack();
+
+        MIDI_control();
     
-    MIDI_control();
+        // Initialize Preset
+        new_preset();
+
+        // Initialize Bank
+        new_bank(Bank);
     
-    // Initialize Preset
-    new_preset();
+        // Loads all Banks, default and any in Settings/Preferences/Bank - User Directory
+        load_bank_vector();
 
-    // Initialize Bank
-    new_bank(Bank);
-    
-    // Loads all Banks, default and any in Settings/Preferences/Bank - User Directory
-    load_bank_vector();
+        // Custom MIDI table file loading
+        load_MIDI_table_vector();
 
-    // Custom MIDI table file loading
-    load_MIDI_table_vector();
+        // Either default or last used table
+        load_default_midi_table();
 
-    // Either default or last used table
-    load_default_midi_table();
+        // The Preset scroll items in Settings/Preferences/Midi - MIDI Program Change Table
+        load_custom_MIDI_table_preset_names();
 
-    // The Preset scroll items in Settings/Preferences/Midi - MIDI Program Change Table
-    load_custom_MIDI_table_preset_names();
-
-    // Related user files in User Directory
-    load_convolotron_vector();
-    load_echotron_vector();
-    load_reverbtron_vector();
+        // Related user files in User Directory
+        load_convolotron_vector();
+        load_echotron_vector();
+        load_reverbtron_vector();
+    }
 }
 
-RKR::~RKR()
+void
+RKR::delete_everything()
 {
-    /* To clean up valgrind log */
-
     delete DC_Offsetl;
     delete DC_Offsetr;
     delete M_Metronome;
@@ -276,16 +301,56 @@ RKR::~RKR()
     delete RC_Stereo_Harm;
 
     free(efxoutl);
+    efxoutl = NULL;
     free(efxoutr);
+    efxoutr = NULL;
     free(auxdata);
+    auxdata = NULL;
     free(auxresampled);
+    auxresampled = NULL;
     free(anall);
+    anall = NULL;
     free(analr);
+    analr = NULL;
     free(smpl);
+    smpl = NULL;
     free(smpr);
+    smpr = NULL;
     free(m_ticks);
+    m_ticks = NULL;
     free(interpbuf);
+    interpbuf = NULL;
+}
 
+void 
+RKR::reset_all_effects(bool is_LV2)
+{
+    std::string s_buf;
+    if(!is_LV2)
+        rkr_save_state(s_buf);
+
+    quality_update = true;
+    usleep(C_MILLISECONDS_25);
+
+    delete_everything();
+
+    /* Wait a bit */
+    usleep(C_MILLISECONDS_300);
+
+    initialize(true);   // true is re-initialize
+
+    /* Wait for things to complete */
+    usleep(C_MILLISECONDS_300);
+
+    if(!is_LV2)
+        rkr_restore_state(s_buf);
+
+    quality_update = false;
+}
+
+RKR::~RKR()
+{
+    delete_everything();
     // alsa
 #ifndef RKR_PLUS_LV2
     if(midi_in)
@@ -330,19 +395,6 @@ void
 RKR::load_user_preferences()
 {
     Config.load_previous_state();
-
-#ifdef RKR_PLUS_LV2
-    if(Config.booster == 1.0)
-        booster = 1.0f;
-    else
-        booster = dB2rap(10);
-    
-    if(Config.init_state)
-        FX_Master_Active_Reset = 1;
-#endif
-
-    upsample = Config.upsample;
-    Adjust_Upsample();
 }
 
 void
@@ -462,7 +514,6 @@ RKR::initialize_arrays()
 
     memset(m_ticks, 0, sizeof (float)*period_master);
     memset(interpbuf, 0, sizeof (float)*period_master);
-
 }
 
 /**

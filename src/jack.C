@@ -115,7 +115,7 @@ int
 jackprocess(jack_nframes_t nframes, void *arg)
 {
     RKR *JackOUT = static_cast<RKR *>(arg);
-    
+
     jack_midi_event_t midievent;
     jack_position_t pos;
     jack_transport_state_t astate;
@@ -130,6 +130,18 @@ jackprocess(jack_nframes_t nframes, void *arg)
             jack_port_get_buffer(inputport_left, nframes);
     jack_default_audio_sample_t *inr = (jack_default_audio_sample_t *)
             jack_port_get_buffer(inputport_right, nframes);
+
+    if(JackOUT->quality_update)
+    {
+        if(nframes)
+        {
+            memcpy(outl, inl,
+                   sizeof (jack_default_audio_sample_t) * nframes);
+            memcpy(outr, inr,
+                   sizeof (jack_default_audio_sample_t) * nframes);
+        }
+        return 0;
+    }
 
     jack_default_audio_sample_t *aux = (jack_default_audio_sample_t *)
             jack_port_get_buffer(inputport_aux, nframes);

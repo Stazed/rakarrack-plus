@@ -93,6 +93,11 @@ extern char *jack_client_name;
    is not real time safe. */
 const unsigned C_MILLISECONDS_25 = 250000;   // 1/4 second
 const unsigned C_MILLISECONDS_50 = 500000;   // 1/2 second
+
+/* For up-sampling changes, all effects, arrays etc must be
+   deleted and then re-initialized. Based on my computer, the
+   three seconds is necessary to prevent crashes... */
+const unsigned C_MILLISECONDS_300 = 3000000; // 3 seconds
 #endif // ndef LV2_SUPPORT
 
 inline int Dry_Wet (int x) {return 127 - x;}
