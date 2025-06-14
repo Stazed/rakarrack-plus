@@ -27,6 +27,52 @@
 #include "strlcpy.h"
 #include <FL/fl_ask.H> // for error pop up
 
+enum
+{
+    RKR_VERSION = 0,
+    RKR_AUTHOR,
+    RKR_PRESET_NAME,
+    RKR_MASTER_CTRL,
+    RKR_EFX_PARAMS,     // 4
+    RKR_EFX_ORDER = 14,      // 4 + 10
+    RKR_MIDI_LEARN,     // 15
+    PREFS_LOOK = 143,   // 15 + 128
+    PREFS_BG_FILE_PATH,
+    PREFS_AUDIO,
+    PREFS_MASTER,
+    PREFS_HARM,
+    PREFS_REVTRON,
+    PREFS_CONVO,
+    PREFS_SEQUENCE,
+    PREFS_SHIFTER,
+    PREFS_VOCODER,
+    PREFS_STEREO_HARM,  // 10
+    PREFS_DIST,
+    PREFS_OVRD,
+    PREFS_DERELICT,
+    PREFS_DBAND,
+    PREFS_STOMP,
+    PREFS_MIDI_TAB,
+    PREFS_MISC_TAB,
+    PREFS_BANK_FILE_NAME,
+    PREFS_USER_DIRECTORY,
+    PREFS_USER_NAME,    // 20
+    PREFS_MAIN,
+    PREFS_MIDI_CONVERT,
+    PREFS_METRONOME,
+    PREFS_TAP_TEMPO,
+    PREFS_PRINCIPAL,
+    PREFS_BANK,
+    PREFS_ORDER,
+    PREFS_SETTINGS,
+    PREFS_HELP,
+    PREFS_RANDOM,       // 30
+    PREFS_RAND_EXCLUDE,
+    PREFS_MIDI_LEARN,
+    PREFS_TRIGGER,
+    PREFS_DELAY
+};
+
 /**
  *  Individual preset file loading. Main menu File/Load Preset.
  *  Apply buffer holding effect parameters to the lv[][] array, bypass, filename.
@@ -524,11 +570,11 @@ RKR::rkr_restore_state(const std::string &s_buf)
     }
 
     // Program release version = 0
-    printf("Program release version = %s\n", segments[0].c_str());
+    printf("Program release version = %s\n", segments[RKR_VERSION].c_str());
 
     // Author = 1
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[1].c_str(), segments[1].size());
+    memcpy(buf, segments[RKR_AUTHOR].c_str(), segments[RKR_AUTHOR].size());
     for (int i = 0; i < 64; i++)
     {
         if (buf[i] > 20)        // remove LF '\n'
@@ -539,7 +585,7 @@ RKR::rkr_restore_state(const std::string &s_buf)
 
     // Preset Name = 2
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[2].c_str(), segments[2].size());
+    memcpy(buf, segments[RKR_PRESET_NAME].c_str(), segments[RKR_PRESET_NAME].size());
     for (int i = 0; i < 64; i++)
     {
         if (buf[i] > 20)        // remove LF '\n'
@@ -550,7 +596,7 @@ RKR::rkr_restore_state(const std::string &s_buf)
 
     // Master control = 3
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[3].c_str(), segments[3].size());
+    memcpy(buf, segments[RKR_MASTER_CTRL].c_str(), segments[RKR_MASTER_CTRL].size());
     float in_vol, out_vol; in_vol = out_vol = 0.0;
     float balance = 1.0f;
 
@@ -562,7 +608,7 @@ RKR::rkr_restore_state(const std::string &s_buf)
  
     // Effect Order = 14
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[14].c_str(), segments[14].size());
+    memcpy(buf, segments[RKR_EFX_ORDER].c_str(), segments[RKR_EFX_ORDER].size());
 
     int order[10];
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
@@ -575,14 +621,14 @@ RKR::rkr_restore_state(const std::string &s_buf)
         int effect = order[i];  // This is why we had to load the order first!!!
 
         memset(buf, 0, sizeof (buf));
-        memcpy(buf, segments[4 + i].c_str(), segments[4 + i].size());
+        memcpy(buf, segments[RKR_EFX_PARAMS + i].c_str(), segments[RKR_EFX_PARAMS + i].size());
 
         apply_effect_parameters(buf, effect, preset_loaded);
     }
 
     /* Get the order again to apply it */
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[14].c_str(), segments[14].size());
+    memcpy(buf, segments[RKR_EFX_ORDER].c_str(), segments[RKR_EFX_ORDER].size());
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
            &preset_loaded.Effect_Params[EFX_ORDER][0], &preset_loaded.Effect_Params[EFX_ORDER][1],
            &preset_loaded.Effect_Params[EFX_ORDER][2], &preset_loaded.Effect_Params[EFX_ORDER][3],
@@ -594,7 +640,7 @@ RKR::rkr_restore_state(const std::string &s_buf)
     for (int i = 0; i < 128; i++)
     {
         memset(buf, 0, sizeof (buf));
-        memcpy(buf, segments[15 + i].c_str(), segments[15 + i].size());
+        memcpy(buf, segments[RKR_MIDI_LEARN + i].c_str(), segments[RKR_MIDI_LEARN + i].size());
 
         sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
                &preset_loaded.XUserMIDI[i][0], &preset_loaded.XUserMIDI[i][1],
@@ -1020,7 +1066,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 
     // ************* Settings/Look ******************
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[0].c_str(), segments[0].size());
+    memcpy(buf, segments[PREFS_LOOK].c_str(), segments[PREFS_LOOK].size());
     
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
             &Config.Schema, &Config.font_type, &Config.font_size, &Config.fore_color,
@@ -1038,7 +1084,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 //    }
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[1].c_str(), segments[1].size());
+    memcpy(buf, segments[PREFS_BG_FILE_PATH].c_str(), segments[PREFS_BG_FILE_PATH].size());
     for (int i = 0; i < 256; i++)
     {
         if (buf[i] > 20)        // remove LF '\n'
@@ -1064,7 +1110,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 
     // ************ Settings/Audio *******************
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[2].c_str(), segments[2].size());
+    memcpy(buf, segments[PREFS_AUDIO].c_str(), segments[PREFS_AUDIO].size());
     
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%f,%f,%d,%d,%d\n",
             &Config.init_state, &Config.DC_Offset, &Config.preserve_master,
@@ -1074,76 +1120,76 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 
     // Master need reset - 3
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[3].c_str(), segments[3].size());
+    memcpy(buf, segments[PREFS_MASTER].c_str(), segments[PREFS_MASTER].size());
     sscanf(buf, "%d,%d,%d,%d,%f\n", &Config.UpAmo, &Config.upsample,
             &Config.UpQual, &Config.DownQual, &Config.looper_size);
     // End Settings/Audio
 
     // ************ Settings/Quality ******************
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[4].c_str(), segments[4].size());
+    memcpy(buf, segments[PREFS_HARM].c_str(), segments[PREFS_HARM].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.HarQual, &Config.Har_Down,
             &Config.Har_U_Q, &Config.Har_D_Q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[5].c_str(), segments[5].size());
+    memcpy(buf, segments[PREFS_REVTRON].c_str(), segments[PREFS_REVTRON].size());
     sscanf(buf, "%d,%d,%d\n", &Config.Rev_Down, &Config.Rev_U_Q,
             &Config.Rev_D_Q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[6].c_str(), segments[6].size());
+    memcpy(buf, segments[PREFS_CONVO].c_str(), segments[PREFS_CONVO].size());
     sscanf(buf, "%d,%d,%d\n", &Config.Con_Down, &Config.Con_U_Q,
             &Config.Con_D_Q);
     
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[7].c_str(), segments[7].size());
+    memcpy(buf, segments[PREFS_SEQUENCE].c_str(), segments[PREFS_SEQUENCE].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.SeqQual, &Config.Seq_Down,
             &Config.Seq_U_Q, &Config.Seq_D_Q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[8].c_str(), segments[8].size());
+    memcpy(buf, segments[PREFS_SHIFTER].c_str(), segments[PREFS_SHIFTER].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.ShiQual, &Config.Shi_Down,
             &Config.Shi_U_Q, &Config.Shi_D_Q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[9].c_str(), segments[9].size());
+    memcpy(buf, segments[PREFS_VOCODER].c_str(), segments[PREFS_VOCODER].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.VocBands, &Config.Voc_Down,
             &Config.Voc_U_Q, &Config.Voc_D_Q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[10].c_str(), segments[10].size());
+    memcpy(buf, segments[PREFS_STEREO_HARM].c_str(), segments[PREFS_STEREO_HARM].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.SteQual, &Config.Ste_Down,
             &Config.Ste_U_Q, &Config.Ste_D_Q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[11].c_str(), segments[11].size());
+    memcpy(buf, segments[PREFS_DIST].c_str(), segments[PREFS_DIST].size());
     sscanf(buf, "%d,%d,%d\n", &Config.Dist_res_amount, &Config.Dist_up_q,
             &Config.Dist_down_q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[12].c_str(), segments[12].size());
+    memcpy(buf, segments[PREFS_OVRD].c_str(), segments[PREFS_OVRD].size());
     sscanf(buf, "%d,%d,%d\n", &Config.Ovrd_res_amount, &Config.Ovrd_up_q,
             &Config.Ovrd_down_q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[13].c_str(), segments[13].size());
+    memcpy(buf, segments[PREFS_DERELICT].c_str(), segments[PREFS_DERELICT].size());
     sscanf(buf, "%d,%d,%d\n", &Config.Dere_res_amount, &Config.Dere_up_q,
             &Config.Dere_down_q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[14].c_str(), segments[14].size());
+    memcpy(buf, segments[PREFS_DBAND].c_str(), segments[PREFS_DBAND].size());
     sscanf(buf, "%d,%d,%d\n", &Config.DBand_res_amount, &Config.DBand_up_q,
             &Config.DBand_down_q);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[15].c_str(), segments[15].size());
+    memcpy(buf, segments[PREFS_STOMP].c_str(), segments[PREFS_STOMP].size());
     sscanf(buf, "%d,%d,%d\n", &Config.Stomp_res_amount, &Config.Stomp_up_q,
             &Config.Stomp_down_q);
     // End Settings/Quality
 
     // ************ Settings/MIDI *****************
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[16].c_str(), segments[16].size());
+    memcpy(buf, segments[PREFS_MIDI_TAB].c_str(), segments[PREFS_MIDI_TAB].size());
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d\n", &Config.MIDI_In_Channel, &Config.Harmonizer_MIDI_Channel,
             &Config.StereoHarm_MIDI_Channel, &Config.MIDIway, &Config.autoassign,
             &Config.custom_midi_table, &Config.custom_midi_table_file);
@@ -1151,7 +1197,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 
     // *************** Settings/Misc **********************
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[17].c_str(), segments[17].size());
+    memcpy(buf, segments[PREFS_MISC_TAB].c_str(), segments[PREFS_MISC_TAB].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.Disable_Warnings, &Config.t_timeout,
             &Config.ena_tool, &Config.Focus_Delay);
     // End Settings/Misc
@@ -1160,7 +1206,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     // Get user default bank file from Settings/Bank/ --Bank Filename
     char temp[128];
     memset(temp, 0, sizeof (temp));
-    memcpy(temp, segments[18].c_str(), segments[18].size());
+    memcpy(temp, segments[PREFS_BANK_FILE_NAME].c_str(), segments[PREFS_BANK_FILE_NAME].size());
     for (int i = 0; i < 128; i++)
     {
         if (temp[i] > 20)        // remove LF '\n'
@@ -1170,7 +1216,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     }
 
     memset(temp, 0, sizeof (temp));
-    memcpy(temp, segments[19].c_str(), segments[19].size());
+    memcpy(temp, segments[PREFS_USER_DIRECTORY].c_str(), segments[PREFS_USER_DIRECTORY].size());
     for (int i = 0; i < 128; i++)
     {
         if (temp[i] > 20)        // remove LF '\n'
@@ -1181,7 +1227,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     global_user_directory = Config.UDirFilename;
 
     memset(temp, 0, sizeof (temp));
-    memcpy(temp, segments[20].c_str(), segments[20].size());
+    memcpy(temp, segments[PREFS_USER_NAME].c_str(), segments[PREFS_USER_NAME].size());
     for (int i = 0; i < 128; i++)
     {
         if (temp[i] > 20)        // remove LF '\n'
@@ -1194,7 +1240,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     // Main window
     int Analyzer, Scope;
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[21].c_str(), segments[21].size());
+    memcpy(buf, segments[PREFS_MAIN].c_str(), segments[PREFS_MAIN].size());
     sscanf(buf, "%d,%f,%d,%d,%d,%d\n", &Config.active_bank, &Config.booster,
             &Analyzer, &Scope, &Config.Preset_Number, &Config.Tuner_On_Off);
 
@@ -1204,21 +1250,21 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 
     // MIDIConverter
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[22].c_str(), segments[22].size());
+    memcpy(buf, segments[PREFS_MIDI_CONVERT].c_str(), segments[PREFS_MIDI_CONVERT].size());
     sscanf(buf, "%d,%d,%d,%d,%d,%d\n", &Config.Midi_Out_Channel, &Config.Trigger_Adjust,
             &Config.Velocity_Adjust, &Config.Converter_Octave, &Config.MIDI_Converter_On_Off,
             &Config.Use_FFT);
 
     // Metronome
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[23].c_str(), segments[23].size());
+    memcpy(buf, segments[PREFS_METRONOME].c_str(), segments[PREFS_METRONOME].size());
     sscanf(buf, "%d,%d,%d,%d,%d,%d\n", &Config.Metronome_On_Off, &Config.Metronome_Time,
             &Config.Metronome_Volume, &Config.Metronome_Tempo, &Config.Metronome_Sound, 
             &Config.sw_stat);
 
     // Tap Tempo
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[24].c_str(), segments[24].size());
+    memcpy(buf, segments[PREFS_TAP_TEMPO].c_str(), segments[PREFS_TAP_TEMPO].size());
     sscanf(buf, "%d,%d,%d\n", &Config.TapTempo_On_Off, &Config.Tap_Selection, &Config.Tap_SetValue);
 
     //s_buf += std::to_string(Tap_TempoSet);    // FIXME check
@@ -1226,38 +1272,38 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 
     // ************** Window Sizes *****************
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[25].c_str(), segments[25].size());
+    memcpy(buf, segments[PREFS_PRINCIPAL].c_str(), segments[PREFS_PRINCIPAL].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.Principal_X, &Config.Principal_Y,
             &Config.Principal_W, &Config.Principal_H);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[26].c_str(), segments[26].size());
+    memcpy(buf, segments[PREFS_BANK].c_str(), segments[PREFS_BANK].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.BankWindow_X, &Config.BankWindow_Y,
             &Config.BankWindow_W, &Config.BankWindow_H);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[27].c_str(), segments[27].size());
+    memcpy(buf, segments[PREFS_ORDER].c_str(), segments[PREFS_ORDER].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.Order_X, &Config.Order_Y,
             &Config.Order_W, &Config.Order_H);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[28].c_str(), segments[28].size());
+    memcpy(buf, segments[PREFS_SETTINGS].c_str(), segments[PREFS_SETTINGS].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.Settings_X, &Config.Settings_Y,
             &Config.Settings_W, &Config.Settings_H);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[29].c_str(), segments[29].size());
+    memcpy(buf, segments[PREFS_HELP].c_str(), segments[PREFS_HELP].size());
     sscanf(buf, "%d,%d,%d,%d,%d\n", &Config.Help_X, &Config.Help_Y, &Config.Help_W,
             &Config.Help_H, &Config.Help_TextSize);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[30].c_str(), segments[30].size());
+    memcpy(buf, segments[PREFS_RANDOM].c_str(), segments[PREFS_RANDOM].size());
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n", &Config.Random_X, &Config.Random_Y,
             &Config.Random_W, &Config.Random_H, &Config.Rand_Parameters,
             &Config.Rand_Active, &Config.Rand_Current, &Config.Rand_Max);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[31].c_str(), segments[31].size());
+    memcpy(buf, segments[PREFS_RAND_EXCLUDE].c_str(), segments[PREFS_RAND_EXCLUDE].size());
     for (int i = 0; i < (EFX_NUMBER_EFFECTS + 1); i++)
     {
         if (buf[i] > 20)        // remove LF '\n'
@@ -1269,19 +1315,19 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
  //   Config.Rand_Exclude, temp, EFX_NUMBER_EFFECTS + 1);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[32].c_str(), segments[32].size());
+    memcpy(buf, segments[PREFS_MIDI_LEARN].c_str(), segments[PREFS_MIDI_LEARN].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.MIDI_Learn_X, &Config.MIDI_Learn_Y,
             &Config.MIDI_Learn_W, &Config.MIDI_Learn_H);
 
     // Trigger
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[33].c_str(), segments[33].size());
+    memcpy(buf, segments[PREFS_TRIGGER].c_str(), segments[PREFS_TRIGGER].size());
     sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n", &Config.Trigger_X, &Config.Trigger_Y,
             &Config.Trigger_W, &Config.Trigger_H, &Config.Aux_Source, &Config.Aux_Gain,
             &Config.Aux_Threshold, &Config.Aux_MIDI, &Config.Aux_Minimum, &Config. Aux_Maximum);
 
     memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[34].c_str(), segments[34].size());
+    memcpy(buf, segments[PREFS_DELAY].c_str(), segments[PREFS_DELAY].size());
     sscanf(buf, "%d,%d,%d,%d\n", &Config.Delay_X, &Config.Delay_Y, &Config.Delay_W,
             &Config.Delay_H);
 }
