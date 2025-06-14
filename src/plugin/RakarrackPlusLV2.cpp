@@ -489,7 +489,21 @@ LV2_State_Status stateRestore(LV2_Handle h,
     
     if(sz > 0)
     {
+        std::vector<int>v_default;
+        std::vector<int>v_restore;
+        plug->rkrplus->check_preferences_changed(v_default);
+        
         std::string s_buf(data);
+        plug->rkrplus->LV2_restore_preferences(s_buf);
+
+        plug->rkrplus->check_preferences_changed(v_restore);
+        
+        if (v_default != v_restore)
+        {
+            plug->rkrplus->reset_all_effects(true);
+            plug->rkrplus->initialize(true);
+        }
+
         plug->rkrplus->rkr_restore_state(s_buf);
         
         // These need to be set as if the GUI is not loaded.

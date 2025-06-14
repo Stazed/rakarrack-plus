@@ -867,6 +867,8 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Metronome_Tempo);
     s_buf += ",";
     s_buf += std::to_string(Config.Metronome_Sound);
+    s_buf += ",";
+    s_buf += std::to_string(Config.sw_stat);
     s_buf += "\n";
 
     //Tap Tempo - 24
@@ -876,8 +878,8 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += ",";
     s_buf += std::to_string(Tap_SetValue);
     s_buf += ",";
-    s_buf += std::to_string(Tap_TempoSet);
-    s_buf += "\n";
+//    s_buf += std::to_string(Tap_TempoSet);
+//    s_buf += "\n";
     // End Main Window items
 
     // Window sizes - 25
@@ -1006,10 +1008,26 @@ RKR::LV2_save_preferences(std::string &s_buf)
 void
 RKR::LV2_restore_preferences(const std::string &s_buf)
 {
-           // ************* Settings/Look ******************
-    Config.Schema;
+    char buf[256];
+    std::stringstream ss(s_buf);
+    std::string segment;
+    std::vector<std::string> segments;
 
-    Config.font_type;
+    while(std::getline(ss, segment))    // Use getline reads to \n
+    {
+        segments.push_back(segment);
+    }
+
+    // ************* Settings/Look ******************
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[0].c_str(), segments[0].size());
+    
+    sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
+            &Config.Schema, &Config.font_type, &Config.font_size, &Config.fore_color,
+            &Config.label_color, &Config.leds_color, &Config.back_color,
+            &Config.EnableBackgroundImage, &Config.deachide, &Config.scalable);
+
+    // FIXME TODO
     // Sanity check. Can happen when NSM session copied to another computer
     // that has fewer fonts loaded than source. Also if some fonts are removed.
     // Segfault if font type is out of range.
@@ -1019,71 +1037,269 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 //        Config.font_type = 0;   // reset to default
 //    }
 
-    Config.font_size;
-    Config.fore_color;
-    Config.label_color;
-    Config.leds_color;
-    Config.back_color;
-
-    Config.EnableBackgroundImage;
-
-    char temp[256];
-    snprintf(temp, sizeof(temp), "%s/blackbg.png", DATADIR);
-    Config.BackgroundImage;
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[1].c_str(), segments[1].size());
+    for (int i = 0; i < 256; i++)
+    {
+        if (buf[i] > 20)        // remove LF '\n'
+        {
+            Config.BackgroundImage[i] = buf[i];
+        }
+    }
 
     // Check if valid file. Revert to default if error.
     FILE *fn;
+    memset(buf, 0, sizeof (buf));
     if ((fn = fopen(Config.BackgroundImage, "r")) == NULL)
     {
         memset(Config.BackgroundImage, 0, sizeof (Config.BackgroundImage));
-        RKRP::strlcpy(Config.BackgroundImage, temp, sizeof (Config.BackgroundImage));
+        RKRP::strlcpy(Config.BackgroundImage, buf, sizeof (Config.BackgroundImage));
         fprintf(stderr, "Invalid BackgroundImage file, reverting to default\n");
     }
     else
     {
         fclose(fn);
     }
-
-    Config.deachide;
-    Config.scalable;
     // End Settings/Look
 
     // ************ Settings/Audio *******************
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[2].c_str(), segments[2].size());
+    
+    sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%f,%f,%d,%d,%d\n",
+            &Config.init_state, &Config.DC_Offset, &Config.preserve_master,
+            &Config.Tap_Updated, &Config.flpos, &Config.db6booster, 
+            &Config.Metro_Vol, &Config.aFreq, &Config.rtrig, 
+            &Config.RCOpti_Harm, &Config.RCOpti_Stereo, &Config.RCOpti_Ring);
 
-    Config.init_state; // On by default
-
-
-    Config.DC_Offset;
-    Config.preserve_master;
-    Config.Tap_Updated;
-    Config.flpos;
-    Config.db6booster;
-
-    Config.upsample;
-    Config.UpAmo;
-    Config.UpQual;
-    Config.DownQual;
-
-    Config.looper_size;
-    Config.Metro_Vol;  // Looper
-
-    Config.aFreq;
-    Config.rtrig;
-
-    Config.RCOpti_Harm;
-    Config.RCOpti_Stereo;
-    Config.RCOpti_Ring;
+    // Master need reset - 3
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[3].c_str(), segments[3].size());
+    sscanf(buf, "%d,%d,%d,%d,%f\n", &Config.UpAmo, &Config.upsample,
+            &Config.UpQual, &Config.DownQual, &Config.looper_size);
     // End Settings/Audio
 
     // ************ Settings/Quality ******************
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[4].c_str(), segments[4].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.HarQual, &Config.Har_Down,
+            &Config.Har_U_Q, &Config.Har_D_Q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[5].c_str(), segments[5].size());
+    sscanf(buf, "%d,%d,%d\n", &Config.Rev_Down, &Config.Rev_U_Q,
+            &Config.Rev_D_Q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[6].c_str(), segments[6].size());
+    sscanf(buf, "%d,%d,%d\n", &Config.Con_Down, &Config.Con_U_Q,
+            &Config.Con_D_Q);
+    
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[7].c_str(), segments[7].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.SeqQual, &Config.Seq_Down,
+            &Config.Seq_U_Q, &Config.Seq_D_Q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[8].c_str(), segments[8].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.ShiQual, &Config.Shi_Down,
+            &Config.Shi_U_Q, &Config.Shi_D_Q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[9].c_str(), segments[9].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.VocBands, &Config.Voc_Down,
+            &Config.Voc_U_Q, &Config.Voc_D_Q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[10].c_str(), segments[10].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.SteQual, &Config.Ste_Down,
+            &Config.Ste_U_Q, &Config.Ste_D_Q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[11].c_str(), segments[11].size());
+    sscanf(buf, "%d,%d,%d\n", &Config.Dist_res_amount, &Config.Dist_up_q,
+            &Config.Dist_down_q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[12].c_str(), segments[12].size());
+    sscanf(buf, "%d,%d,%d\n", &Config.Ovrd_res_amount, &Config.Ovrd_up_q,
+            &Config.Ovrd_down_q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[13].c_str(), segments[13].size());
+    sscanf(buf, "%d,%d,%d\n", &Config.Dere_res_amount, &Config.Dere_up_q,
+            &Config.Dere_down_q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[14].c_str(), segments[14].size());
+    sscanf(buf, "%d,%d,%d\n", &Config.DBand_res_amount, &Config.DBand_up_q,
+            &Config.DBand_down_q);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[15].c_str(), segments[15].size());
+    sscanf(buf, "%d,%d,%d\n", &Config.Stomp_res_amount, &Config.Stomp_up_q,
+            &Config.Stomp_down_q);
+    // End Settings/Quality
+
+    // ************ Settings/MIDI *****************
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[16].c_str(), segments[16].size());
+    sscanf(buf, "%d,%d,%d,%d,%d,%d,%d\n", &Config.MIDI_In_Channel, &Config.Harmonizer_MIDI_Channel,
+            &Config.StereoHarm_MIDI_Channel, &Config.MIDIway, &Config.autoassign,
+            &Config.custom_midi_table, &Config.custom_midi_table_file);
+    // End Settings/MIDI
+
+    // *************** Settings/Misc **********************
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[17].c_str(), segments[17].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.Disable_Warnings, &Config.t_timeout,
+            &Config.ena_tool, &Config.Focus_Delay);
+    // End Settings/Misc
+
+    // ******************* Settings/User *******************
+    // Get user default bank file from Settings/Bank/ --Bank Filename
+    char temp[128];
+    memset(temp, 0, sizeof (temp));
+    memcpy(temp, segments[18].c_str(), segments[18].size());
+    for (int i = 0; i < 128; i++)
+    {
+        if (temp[i] > 20)        // remove LF '\n'
+        {
+            Config.BankFilename[i] = buf[i];
+        }
+    }
+
+    memset(temp, 0, sizeof (temp));
+    memcpy(temp, segments[19].c_str(), segments[19].size());
+    for (int i = 0; i < 128; i++)
+    {
+        if (temp[i] > 20)        // remove LF '\n'
+        {
+            Config.UDirFilename[i] = buf[i];
+        }
+    }
+    global_user_directory = Config.UDirFilename;
+
+    memset(temp, 0, sizeof (temp));
+    memcpy(temp, segments[20].c_str(), segments[20].size());
+    for (int i = 0; i < 128; i++)
+    {
+        if (temp[i] > 20)        // remove LF '\n'
+        {
+            Config.UserRealName[i] = buf[i];
+        }
+    }
+    // End Settings/User
+
+    // Main window
+    int Analyzer, Scope;
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[21].c_str(), segments[21].size());
+    sscanf(buf, "%d,%f,%d,%d,%d,%d\n", &Config.active_bank, &Config.booster,
+            &Analyzer, &Scope, &Config.Preset_Number, &Config.Tuner_On_Off);
+
+    Config.Analyzer_On_Off = (bool) Analyzer;
+    Config.Scope_On_Off = (bool) Scope;
+    Config.Preset_Number = 1;  // For LV2 we don't load the preset
+
+    // MIDIConverter
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[22].c_str(), segments[22].size());
+    sscanf(buf, "%d,%d,%d,%d,%d,%d\n", &Config.Midi_Out_Channel, &Config.Trigger_Adjust,
+            &Config.Velocity_Adjust, &Config.Converter_Octave, &Config.MIDI_Converter_On_Off,
+            &Config.Use_FFT);
+
+    // Metronome
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[23].c_str(), segments[23].size());
+    sscanf(buf, "%d,%d,%d,%d,%d,%d\n", &Config.Metronome_On_Off, &Config.Metronome_Time,
+            &Config.Metronome_Volume, &Config.Metronome_Tempo, &Config.Metronome_Sound, 
+            &Config.sw_stat);
+
+    // Tap Tempo
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[24].c_str(), segments[24].size());
+    sscanf(buf, "%d,%d,%d\n", &Config.TapTempo_On_Off, &Config.Tap_Selection, &Config.Tap_SetValue);
+
+    //s_buf += std::to_string(Tap_TempoSet);    // FIXME check
+    // End Main window
+
+    // ************** Window Sizes *****************
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[25].c_str(), segments[25].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.Principal_X, &Config.Principal_Y,
+            &Config.Principal_W, &Config.Principal_H);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[26].c_str(), segments[26].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.BankWindow_X, &Config.BankWindow_Y,
+            &Config.BankWindow_W, &Config.BankWindow_H);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[27].c_str(), segments[27].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.Order_X, &Config.Order_Y,
+            &Config.Order_W, &Config.Order_H);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[28].c_str(), segments[28].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.Settings_X, &Config.Settings_Y,
+            &Config.Settings_W, &Config.Settings_H);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[29].c_str(), segments[29].size());
+    sscanf(buf, "%d,%d,%d,%d,%d\n", &Config.Help_X, &Config.Help_Y, &Config.Help_W,
+            &Config.Help_H, &Config.Help_TextSize);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[30].c_str(), segments[30].size());
+    sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d\n", &Config.Random_X, &Config.Random_Y,
+            &Config.Random_W, &Config.Random_H, &Config.Rand_Parameters,
+            &Config.Rand_Active, &Config.Rand_Current, &Config.Rand_Max);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[31].c_str(), segments[31].size());
+    for (int i = 0; i < (EFX_NUMBER_EFFECTS + 1); i++)
+    {
+        if (buf[i] > 20)        // remove LF '\n'
+        {
+            Config.Rand_Exclude[i] = buf[i];
+        }
+    }
+//    memset(temp, 0, sizeof (temp));
+ //   Config.Rand_Exclude, temp, EFX_NUMBER_EFFECTS + 1);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[32].c_str(), segments[32].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.MIDI_Learn_X, &Config.MIDI_Learn_Y,
+            &Config.MIDI_Learn_W, &Config.MIDI_Learn_H);
+
+    // Trigger
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[33].c_str(), segments[33].size());
+    sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n", &Config.Trigger_X, &Config.Trigger_Y,
+            &Config.Trigger_W, &Config.Trigger_H, &Config.Aux_Source, &Config.Aux_Gain,
+            &Config.Aux_Threshold, &Config.Aux_MIDI, &Config.Aux_Minimum, &Config. Aux_Maximum);
+
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[34].c_str(), segments[34].size());
+    sscanf(buf, "%d,%d,%d,%d\n", &Config.Delay_X, &Config.Delay_Y, &Config.Delay_W,
+            &Config.Delay_H);
+}
+
+void
+RKR::check_preferences_changed(std::vector<int> s_vect)
+{
+#if 0   // TODO
+    Config.UpAmo;
+    Config.upsample;
+    Config.UpQual;
+    Config.DownQual;
+    Config.looper_size;
+    // End Settings/Audio
+
+    // ************ Settings/Quality ******************
+
     Config.HarQual;
-    Config.SteQual;
-
-    Config.SeqQual;
-    Config.ShiQual;
-
-    Config.VocBands;
-
     Config.Har_Down;
     Config.Har_U_Q;
     Config.Har_D_Q;
@@ -1096,18 +1312,22 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     Config.Con_U_Q;
     Config.Con_D_Q;
 
+    Config.SeqQual;
     Config.Seq_Down;
     Config.Seq_U_Q;
     Config.Seq_D_Q;
 
+    Config.ShiQual;
     Config.Shi_Down;
     Config.Shi_U_Q;
     Config.Shi_D_Q;
 
+    Config.VocBands;
     Config.Voc_Down;
     Config.Voc_U_Q;
     Config.Voc_D_Q;
 
+    Config.SteQual;
     Config.Ste_Down;
     Config.Ste_U_Q;
     Config.Ste_D_Q;
@@ -1131,156 +1351,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     Config.Stomp_res_amount;
     Config.Stomp_up_q;
     Config.Stomp_down_q;
-    // End Settings/Quality
-
-    // ************ Settings/MIDI *****************
-    // Alsa MIDI
-//    rakarrack.get(PrefNom("Auto Connect MIDI IN"), aconnect_MI, 0);
-//    rakarrack.get(PrefNom("MIDI IN Device"), MID, "", 40);
-
-    Config.MIDI_In_Channel;
-//    Config.MIDI_In_Channel--;
-
-    Config.Harmonizer_MIDI_Channel;
-//    Config.Harmonizer_MIDI_Channel--;
-
-    Config.StereoHarm_MIDI_Channel;
-//    Config.StereoHarm_MIDI_Channel--;
-
-    // MIDI Learn used On/Off
-    Config.MIDIway;
-    Config.autoassign;
-
-    // Custom MIDI Table used On/OFF
-    Config.custom_midi_table;
-
-    // Custom MIDI Table last used file
-    Config.custom_midi_table_file;
-    // End Settings/MIDI
-
-    // *********** Settings/Jack *****************
-    // Jack Out
-    // End Settings/Jack
-
-    // *************** Settings/Misc **********************
-    Config.Disable_Warnings;
-    Config.t_timeout;
-    Config.ena_tool;
-    Config.Focus_Delay;
-    // End Settings/Misc
-
-    // ******************* Settings/User *******************
-    // Get user default bank file from Settings/Bank/ --Bank Filename
-    memset(temp, 0, sizeof (temp));
-    snprintf(temp, sizeof(temp), "%s/Default.rkrb", DATADIR);
-    Config.BankFilename;
-
-    // Get user bank directory
-    memset(temp, 0, sizeof (temp));
-    snprintf(temp, sizeof(temp), "%s", UD_NOT_SET);
-    Config.UDirFilename;
-    global_user_directory = Config.UDirFilename;
-
-    memset(temp, 0, sizeof (temp));
-    Config.UserRealName;
-    // End Settings/User
-
-    // ************** Window Sizes *****************
-    Config.Principal_X;
-    Config.Principal_Y;
-    Config.Principal_W;
-    Config.Principal_H;
-
-    Config.BankWindow_X;
-    Config.BankWindow_Y;
-    Config.BankWindow_W;
-    Config.BankWindow_H;
-
-    Config.Order_X;
-    Config.Order_Y;
-    Config.Order_W;
-    Config.Order_H;
-
-    Config.MIDI_Learn_X;
-    Config.MIDI_Learn_Y;
-    Config.MIDI_Learn_W;
-    Config.MIDI_Learn_H;
-
-    Config.Trigger_X;
-    Config.Trigger_Y;
-    Config.Trigger_W;
-    Config.Trigger_H;
-
-    Config.Settings_X;
-    Config.Settings_Y;
-    Config.Settings_W;
-    Config.Settings_H;
-
-    Config.Help_X;
-    Config.Help_Y;
-    Config.Help_W;
-    Config.Help_H;
-    Config.Help_TextSize;
-
-    Config.Random_X;
-    Config.Random_Y;
-    Config.Random_W;
-    Config.Random_H;
-
-    Config.Delay_X;
-    Config.Delay_Y;
-    Config.Delay_W;
-    Config.Delay_H;
-    
-    // End Window Sizes
-
-    // Main window booster button
-    Config.booster;   // On/Off
-
-    // Last bank and preset selected
-    Config.active_bank;
-    Config.Preset_Number = 1;  // For LV2 we don't load the preset
-
-    // MIDIConverter
-    Config.Midi_Out_Channel;
-    Config.Trigger_Adjust;
-    Config.Velocity_Adjust;
-    Config.Converter_Octave;
-    Config.MIDI_Converter_On_Off;
-    Config.Use_FFT;
-
-    // Metronome
-    Config.Metronome_Time;
-    Config.Metronome_Sound;
-    Config.Metronome_Volume;
-    Config.Metronome_Tempo;
-    Config.sw_stat;
-    Config.Metronome_On_Off;
-
-    // Tuner
-    Config.Tuner_On_Off;
-
-    // Tap Tempo
-    Config.Tap_Selection;
-    Config.Tap_SetValue;
-    Config.TapTempo_On_Off;
-
-    // Trigger
-    Config.Aux_Source;
-    Config.Aux_Gain;
-    Config.Aux_Threshold;
-    Config.Aux_MIDI;
-    Config.Aux_Minimum;
-    Config. Aux_Maximum;
-
-    // Random
-    Config.Rand_Parameters;
-    Config.Rand_Active;
-    Config.Rand_Current;
-    Config.Rand_Max;
-
-    memset(temp, 0, sizeof (temp));
- //   Config.Rand_Exclude, temp, EFX_NUMBER_EFFECTS + 1);
+#endif
 }
 
 /**
