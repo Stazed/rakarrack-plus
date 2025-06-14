@@ -457,7 +457,8 @@ LV2_State_Status stateSave(LV2_Handle h,
 
     std::string str;
 
-    int sz = plug->rkrplus->rkr_save_state(str);
+    plug->rkrplus->rkr_save_state(str);
+    int sz = plug->rkrplus->LV2_save_preferences(str);
     char *data = new char[sz]; // Allocate memory
     strcpy(data, str.c_str()); // Copy the string
 

@@ -626,100 +626,329 @@ RKR::rkr_restore_state(const std::string &s_buf)
 int
 RKR::LV2_save_preferences(std::string &s_buf)
 {
-//    char temp1[128];
+    // Look Tab - 0
+    s_buf += std::to_string(Config.Schema);
+    s_buf += ",";
+    s_buf += std::to_string(global_font_type);
+    s_buf += ",";
+    s_buf += std::to_string(global_font_size);
+    s_buf += ",";
+    s_buf += std::to_string((int) global_fore_color);
+    s_buf += ",";
+    s_buf += std::to_string((int) global_label_color);
+    s_buf += ",";
+    s_buf += std::to_string((int) global_leds_color);
+    s_buf += ",";
+    s_buf += std::to_string((int) global_back_color);
+    s_buf += ",";
+    s_buf += std::to_string(Config.EnableBackgroundImage);
+    s_buf += ",";
+    s_buf += std::to_string(Config.deachide);
+    s_buf += ",";
+    s_buf += std::to_string(Config.scalable);
+    s_buf += "\n";
 
+    // 1
+    s_buf += Config.BackgroundImage;     // File path char[256]
+    s_buf += "\n";
+    // End Look
 
-    Config.Principal_X;
-    Config.Principal_Y;
-    Config.Principal_W;
-    Config.Principal_H;
-    Config.font_size = global_font_size;
-    Config.font_type = global_font_type;
+    // Audio Tab - 2
+    s_buf += std::to_string(Config.init_state);      // FX ON at start
+    s_buf += ",";
+    s_buf += std::to_string(Config.DC_Offset);
+    s_buf += ",";
+    s_buf += std::to_string(Config.preserve_master);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Tap_Updated);
+    s_buf += ",";
+    s_buf += std::to_string(flpos);          // Limiter before output volume
+    s_buf += ",";
+    s_buf += std::to_string(db6booster);
+    s_buf += ",";
+    // Master Up-sampling are below as they need reset
+    // Looper size also needs reset below
+    s_buf += std::to_string(Config.Metro_Vol);
+    s_buf += ",";
+    s_buf += std::to_string(Config.aFreq);   // Tuner Calibration - float
+    s_buf += ",";
+    s_buf += std::to_string(Config.rtrig);   // Tuner Note Trigger -float
+    s_buf += ",";
+    s_buf += std::to_string(Config.RCOpti_Harm);
+    s_buf += ",";
+    s_buf += std::to_string(Config.RCOpti_Stereo);
+    s_buf += ",";
+    s_buf += std::to_string(Config.RCOpti_Ring);
+    s_buf += "\n";
 
-    Config.back_color = (int) global_back_color;
-    Config.fore_color = (int) global_fore_color;
-    Config.leds_color = (int) global_leds_color;
-    Config.label_color = (int) global_label_color;
-    Config.Schema;
-    Config.deachide;
-    Config.scalable;
+    // Master need reset - 3
+    s_buf += std::to_string(Config.UpAmo);
+    s_buf += ",";
+    s_buf += std::to_string(Config.upsample);
+    s_buf += ",";
+    s_buf += std::to_string(Config.UpQual);
+    s_buf += ",";
+    s_buf += std::to_string(Config.DownQual);
+    s_buf += ",";
+    s_buf += std::to_string(Config.looper_size);     // float
+    s_buf += "\n";
+    // Master end reset
+    // End Audio tab
 
-    active_bank;
+    // Quality Tab - Need Reset - 4
+    s_buf += std::to_string(Config.HarQual);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Har_Down);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Har_U_Q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Har_D_Q);
+    s_buf += "\n";
 
- //       if ((Preset_Counter->value() > 0) && (Preset_Counter->value() < 61))
- //       {
+    s_buf += std::to_string(Config.Rev_Down);    // - 5
+    s_buf += ",";
+    s_buf += std::to_string(Config.Rev_U_Q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Rev_D_Q);
+    s_buf += "\n";
 
-        //    Config.Preset_Number = (int) Preset_Counter->value();
-    Config.Preset_Number;
- //       }
+    s_buf += std::to_string(Config.Con_Down);    // - 6
+    s_buf += ",";
+    s_buf += std::to_string(Config.Con_U_Q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Con_D_Q);
+    s_buf += "\n";
 
-    if (help_displayed)
-    {
-        Config.Help_X;
-        Config.Help_Y;
-        Config.Help_W;
-        Config.Help_H;
-        Config.Help_TextSize;
-        help_displayed = 0;  // For LV2 the UI is deleted so reset as not displayed
-    }
+    s_buf += std::to_string(Config.SeqQual);     // - 7
+    s_buf += ",";
+    s_buf += std::to_string(Config.Seq_Down);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Seq_U_Q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Seq_D_Q);
+    s_buf += "\n";
 
-    //Tuner
-    Config.Tuner_On_Off = (int) Tuner_Active;
+    s_buf += std::to_string(Config.ShiQual);     // - 8
+    s_buf += ",";
+    s_buf += std::to_string(Config.Shi_Down);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Shi_U_Q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Shi_D_Q);
+    s_buf += "\n";
 
-    //MIDIConverter
-    Config.Midi_Out_Channel;
-    Config.Trigger_Adjust;
-    Config.Velocity_Adjust;
-    Config.Converter_Octave;
-    Config.MIDI_Converter_On_Off = (int) MIDIConverter_Active;
-    Config.Use_FFT;
+    s_buf += std::to_string(Config.VocBands);    // - 9
+    s_buf += ",";
+    s_buf += std::to_string(Config.Voc_Down);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Voc_U_Q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Voc_D_Q);
+    s_buf += "\n";
 
-    //Metronome
-    Config.Metronome_On_Off = (int) Metro_Active;
-    Config.Metronome_Time;
-    Config.Metro_Vol;
-    Config.Metronome_Tempo;
-    Config.Metronome_Sound;
+    s_buf += std::to_string(Config.SteQual);     // - 10
+    s_buf += ",";
+    s_buf += std::to_string(Config.Ste_Down);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Ste_U_Q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Ste_D_Q);
+    s_buf += "\n";
 
-    //Booster
-    Config.booster = booster;
+    // Waveshape Resampling
+    s_buf += std::to_string(Config.Dist_res_amount); // - 11
+    s_buf += ",";
+    s_buf += std::to_string(Config.Dist_up_q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Dist_down_q);
+    s_buf += "\n";
 
-    //Tap Tempo
-    Config.TapTempo_On_Off = (int) Tap_Active;
-    Config.Tap_Selection = (int) Tap_Selection;
-    Config.Tap_SetValue = (int) Tap_SetValue;
-    Tap_TempoSet;
+    s_buf += std::to_string(Config.Ovrd_res_amount); // - 12
+    s_buf += ",";
+    s_buf += std::to_string(Config.Ovrd_up_q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Ovrd_down_q);
+    s_buf += "\n";
 
-    // We don't save this to preferences, this is just for LV2 hide/show gui consistency
-    Config.Analyzer_On_Off;
-    Config.Scope_On_Off;
+    s_buf += std::to_string(Config.Dere_res_amount); // - 13
+    s_buf += ",";
+    s_buf += std::to_string(Config.Dere_up_q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Dere_down_q);
+    s_buf += "\n";
 
-    Config.BankWindow_X;
-    Config.BankWindow_Y;
-    Config.BankWindow_W;
-    Config.BankWindow_H;
+    s_buf += std::to_string(Config.DBand_res_amount);// - 14
+    s_buf += ",";
+    s_buf += std::to_string(Config.DBand_up_q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.DBand_down_q);
+    s_buf += "\n";
 
-    Config.Order_X;
-    Config.Order_Y;
-    Config.Order_W;
-    Config.Order_H;
+    s_buf += std::to_string(Config.Stomp_res_amount);// - 15
+    s_buf += ",";
+    s_buf += std::to_string(Config.Stomp_up_q);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Stomp_down_q);
+    s_buf += "\n";
+    // End Quality Tab
 
-    Config.Settings_X;
-    Config.Settings_Y;
-    Config.Settings_W;
-    Config.Settings_H;
+    // MIDI Tab - 16
+    s_buf += std::to_string(Config.MIDI_In_Channel);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Harmonizer_MIDI_Channel);
+    s_buf += ",";
+    s_buf += std::to_string(Config.StereoHarm_MIDI_Channel);
+    s_buf += ",";
+    s_buf += std::to_string(Config.MIDIway);     // MIDI Implementation
+    s_buf += ",";
+    s_buf += std::to_string(Config.autoassign);
+    s_buf += ",";
+    s_buf += std::to_string(Config.custom_midi_table);   // Use custom midi table flag
+    s_buf += ",";
+    s_buf += std::to_string(Config.custom_midi_table_file);  // - Index
+    s_buf += "\n";
+    // End MIDI Tab
 
-    Config.Random_X;
-    Config.Random_Y;
-    Config.Random_W;
-    Config.Random_H;
+    // MISC Tab - 17
+    s_buf += std::to_string(Config.Disable_Warnings);
+    s_buf += ",";
+    s_buf += std::to_string(t_timeout);
+    s_buf += ",";
+    s_buf += std::to_string(Config.ena_tool);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Focus_Delay);
+    s_buf += "\n";
+    // End MISC Tab
 
-    Config.Rand_Parameters;
-    Config.Rand_Active;
-    Config.Rand_Current;
-    Config.Rand_Max;
+    // User Tab
+    s_buf += Config.BankFilename;    // - 18 char[128]
+    s_buf += "\n";
+    s_buf += Config.UDirFilename;    // - 19 char[128]
+    s_buf += "\n";
+    s_buf += Config.UserRealName;    // - 20 char[128]
+    s_buf += "\n";
+    // End User Tab
 
-    Config.Rand_Exclude;  //  Special case
+    // Main Window items    // - 21
+    s_buf += std::to_string(active_bank);
+    s_buf += ",";
+    s_buf += std::to_string(booster);   // Not included in state save.-- float
+    s_buf += ",";
+    s_buf += std::to_string((int) Config.Analyzer_On_Off);  // bool
+    s_buf += ",";
+    s_buf += std::to_string( (int) Config.Scope_On_Off);    // bool
+    s_buf += ",";
+    s_buf += std::to_string(Config.Preset_Number); 
+    s_buf += ",";
+    s_buf += std::to_string(Tuner_Active);
+    s_buf += "\n";
+
+    //MIDIConverter - 22
+    s_buf += std::to_string(Config.Midi_Out_Channel);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Trigger_Adjust);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Velocity_Adjust);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Converter_Octave);
+    s_buf += ",";
+    s_buf += std::to_string(MIDIConverter_Active);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Use_FFT);
+    s_buf += "\n";
+
+    //Metronome - 23
+    s_buf += std::to_string(Metro_Active);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Metronome_Time);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Metro_Vol);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Metronome_Tempo);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Metronome_Sound);
+    s_buf += "\n";
+
+    //Tap Tempo - 24
+    s_buf += std::to_string(Tap_Active);
+    s_buf += ",";
+    s_buf += std::to_string(Tap_Selection);
+    s_buf += ",";
+    s_buf += std::to_string(Tap_SetValue);
+    s_buf += ",";
+    s_buf += std::to_string(Tap_TempoSet);
+    s_buf += "\n";
+    // End Main Window items
+
+    // Window sizes - 25
+    s_buf += std::to_string(Config.Principal_X);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Principal_Y);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Principal_W);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Principal_H);
+    s_buf += "\n";
+
+    s_buf += std::to_string(Config.BankWindow_X);    // - 26
+    s_buf += ",";
+    s_buf += std::to_string(Config.BankWindow_Y);
+    s_buf += ",";
+    s_buf += std::to_string(Config.BankWindow_W);
+    s_buf += ",";
+    s_buf += std::to_string(Config.BankWindow_H);
+    s_buf += "\n";
+
+    s_buf += std::to_string(Config.Order_X); // - 27
+    s_buf += ",";
+    s_buf += std::to_string(Config.Order_Y);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Order_W);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Order_H);
+    s_buf += "\n";
+
+    s_buf += std::to_string(Config.Settings_X);  // - 28
+    s_buf += ",";
+    s_buf += std::to_string(Config.Settings_Y);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Settings_W);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Settings_H);
+    s_buf += "\n";
+
+    s_buf += std::to_string(Config.Help_X);      // - 29
+    s_buf += ",";
+    s_buf += std::to_string(Config.Help_Y);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Help_W);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Help_H);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Help_TextSize);
+    s_buf += "\n";
+    
+ //   help_displayed = 0;  // For LV2 the UI is deleted so reset as not displayed
+
+    s_buf += std::to_string(Config.Random_X);    // - 30
+    s_buf += ",";
+    s_buf += std::to_string(Config.Random_Y);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Random_W);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Random_H);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Rand_Parameters);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Rand_Active);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Rand_Current);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Rand_Max);
+    s_buf += "\n";
+
+    s_buf += Config.Rand_Exclude;  //  Special case  - 31 - char [EFX_NUMBER_EFFECTS + 1]
+    s_buf += "\n";
 
         // convert the asci char to string for the set 
 /*        std::string s;
@@ -731,148 +960,45 @@ RKR::LV2_save_preferences(std::string &s_buf)
                 Config.Rand_Exclude[i] = ASCII_Space;
         }
 */
-    Config.MIDI_Learn_X;
-    Config.MIDI_Learn_Y;
-    Config.MIDI_Learn_W;
-    Config.MIDI_Learn_H;
+    s_buf += std::to_string(Config.MIDI_Learn_X);    // - 32
+    s_buf += ",";
+    s_buf += std::to_string(Config.MIDI_Learn_Y);
+    s_buf += ",";
+    s_buf += std::to_string(Config.MIDI_Learn_W);
+    s_buf += ",";
+    s_buf += std::to_string(Config.MIDI_Learn_H);
+    s_buf += "\n";
 
-    Config.Trigger_X;
-    Config.Trigger_Y;
-    Config.Trigger_W;
-    Config.Trigger_H;
+    s_buf += std::to_string(Config.Trigger_X);       // - 33
+    s_buf += ",";
+    s_buf += std::to_string(Config.Trigger_Y);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Trigger_W);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Trigger_H);
+    s_buf += ",";
+    s_buf += std::to_string(Aux_Source);
+    s_buf += ",";
+    s_buf += std::to_string(Aux_Gain);
+    s_buf += ",";
+    s_buf += std::to_string(Aux_Threshold);
+    s_buf += ",";
+    s_buf += std::to_string(Aux_MIDI);
+    s_buf += ",";
+    s_buf += std::to_string(Aux_Minimum);
+    s_buf += ",";
+    s_buf += std::to_string(Aux_Maximum);
+    s_buf += "\n";
 
-    Config.Aux_Source = Aux_Source;
-    Config.Aux_Gain = Aux_Gain;
-    Config.Aux_Threshold = Aux_Threshold;
-    Config.Aux_MIDI = Aux_MIDI;
-    Config.Aux_Minimum = Aux_Minimum;
-    Config.Aux_Maximum = Aux_Maximum;
-
-
-    Config.Delay_X;
-    Config.Delay_Y;
-    Config.Delay_W;
-    Config.Delay_H;
-        // TODO need to save the delay gui table for gui hide and return.
-
-
-    Config.UserRealName;
-    Config.preserve_master;
-    Config.Metro_Vol;
-
-    Config.DC_Offset;
-
-    Config.Tap_Updated;
-    flpos;
-    db6booster;
-
-    Config.RCOpti_Harm;
-    Config.RCOpti_Stereo;
-    Config.RCOpti_Ring;
-
-    // Quality reset
-    Config.HarQual;
-    Config.Har_Down;
-    Config.Har_U_Q;
-    Config.Har_D_Q;
-
-    Config.Rev_Down;
-    Config.Rev_U_Q;
-    Config.Rev_D_Q;
-
-    Config.Con_Down;
-    Config.Con_U_Q;
-    Config.Con_D_Q;
-
-    Config.SeqQual;
-    Config.Seq_Down;
-    Config.Seq_U_Q;
-    Config.Seq_D_Q;
-
-    Config.ShiQual;
-    Config.Shi_Down;
-    Config.Shi_U_Q;
-    Config.Shi_D_Q;
-
-    Config.VocBands;
-    Config.Voc_Down;
-    Config.Voc_U_Q;
-    Config.Voc_D_Q;
-
-    Config.SteQual;
-    Config.Ste_Down;
-    Config.Ste_U_Q;
-    Config.Ste_D_Q;
-
-    Config.Dist_res_amount;
-    Config.Dist_up_q;
-    Config.Dist_down_q;
-
-    Config.Ovrd_res_amount;
-    Config.Ovrd_up_q;
-    Config.Ovrd_down_q;
-
-    Config.Dere_res_amount;
-    Config.Dere_up_q;
-    Config.Dere_down_q;
-
-    Config.DBand_res_amount;
-    Config.DBand_up_q;
-    Config.DBand_down_q;
-
-    Config.Stomp_res_amount;
-    Config.Stomp_up_q;
-    Config.Stomp_down_q;
-    // End reset
-
-    Config.aFreq;
-    Config.rtrig;
-
-        // Need reset
- //       rakarrack.set(m_process->Config.PrefNom("Vocoder Bands"), m_process->Config.VocBands);
-        // End reset
-
-    Config.init_state;
-    Config.autoassign;
-
-    // Need reset
-    Config.upsample;
-    Config.UpQual;
-    Config.DownQual;
-
-    Config.UpAmo;
-    Config.looper_size;
-    // End reset
-
-    Config.BankFilename;
-    Config.UDirFilename;
-
-    Config.EnableBackgroundImage;
-    Config.BackgroundImage;
-//        rakarrack.set(m_process->Config.PrefNom("Auto Connect MIDI IN"), m_process->Config.aconnect_MI);
-//        rakarrack.set(m_process->Config.PrefNom("Auto Connect Jack"), m_process->Config.aconnect_JA);
-//        rakarrack.set(m_process->Config.PrefNom("Auto Connect Jack In"), m_process->Config.aconnect_JIA);
-
-    Config.MIDIway;
-    Config.custom_midi_table;
-
-
-    Config.MIDI_In_Channel + 1; // check this + 1
-    Config.Harmonizer_MIDI_Channel + 1;
-    Config.StereoHarm_MIDI_Channel + 1;
-
-        // Need reset
-    //    rakarrack.set(m_process->Config.PrefNom("Harmonizer Quality"), m_process->Config.HarQual);
-    //    rakarrack.set(m_process->Config.PrefNom("StereoHarm Quality"), m_process->Config.SteQual);
-    //    rakarrack.set(m_process->Config.PrefNom("Sequence Quality"), m_process->Config.SeqQual);
-    //    rakarrack.set(m_process->Config.PrefNom("Shifter Quality"), m_process->Config.ShiQual);
-        // End reset
-
-    t_timeout;
-    Config.Disable_Warnings;
-    Config.ena_tool;
-    Config.Focus_Delay;
-    Config.custom_midi_table_file;
+    s_buf += std::to_string(Config.Delay_X);     // - 34
+    s_buf += ",";
+    s_buf += std::to_string(Config.Delay_Y);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Delay_W);
+    s_buf += ",";
+    s_buf += std::to_string(Config.Delay_H);
+    s_buf += "\n";
+    // TODO need to save the delay gui table for gui hide and return.
 
     return s_buf.length() + 1;
 }
@@ -1013,13 +1139,13 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 //    rakarrack.get(PrefNom("MIDI IN Device"), MID, "", 40);
 
     Config.MIDI_In_Channel;
-    Config.MIDI_In_Channel--;
+//    Config.MIDI_In_Channel--;
 
     Config.Harmonizer_MIDI_Channel;
-    Config.Harmonizer_MIDI_Channel--;
+//    Config.Harmonizer_MIDI_Channel--;
 
     Config.StereoHarm_MIDI_Channel;
-    Config.StereoHarm_MIDI_Channel--;
+//    Config.StereoHarm_MIDI_Channel--;
 
     // MIDI Learn used On/Off
     Config.MIDIway;
