@@ -923,7 +923,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Tap_Selection);
     s_buf += ",";
     s_buf += std::to_string(Tap_SetValue);
-    s_buf += ",";
+    s_buf += "\n";
 //    s_buf += std::to_string(Tap_TempoSet);
 //    s_buf += "\n";
     // End Main Window items
@@ -1335,69 +1335,66 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 void
 RKR::check_preferences_changed(std::vector<int> s_vect)
 {
-#if 0   // TODO
-    Config.UpAmo;
-    Config.upsample;
-    Config.UpQual;
-    Config.DownQual;
-    Config.looper_size;
-    // End Settings/Audio
+    // Audio Tab
+    s_vect.push_back(Config.UpAmo);
+    s_vect.push_back(Config.upsample);
+    s_vect.push_back(Config.UpQual);
+    s_vect.push_back(Config.DownQual);
+    s_vect.push_back(Config.looper_size);
 
-    // ************ Settings/Quality ******************
+    // Quality Tab
+    s_vect.push_back(Config.HarQual);
+    s_vect.push_back(Config.Har_Down);
+    s_vect.push_back(Config.Har_U_Q);
+    s_vect.push_back(Config.Har_D_Q);
 
-    Config.HarQual;
-    Config.Har_Down;
-    Config.Har_U_Q;
-    Config.Har_D_Q;
+    s_vect.push_back(Config.Rev_Down);
+    s_vect.push_back(Config.Rev_U_Q);
+    s_vect.push_back(Config.Rev_D_Q);
 
-    Config.Rev_Down;
-    Config.Rev_U_Q;
-    Config.Rev_D_Q;
+    s_vect.push_back(Config.Con_Down);
+    s_vect.push_back(Config.Con_U_Q);
+    s_vect.push_back(Config.Con_D_Q);
 
-    Config.Con_Down;
-    Config.Con_U_Q;
-    Config.Con_D_Q;
+    s_vect.push_back(Config.SeqQual);
+    s_vect.push_back(Config.Seq_Down);
+    s_vect.push_back(Config.Seq_U_Q);
+    s_vect.push_back(Config.Seq_D_Q);
 
-    Config.SeqQual;
-    Config.Seq_Down;
-    Config.Seq_U_Q;
-    Config.Seq_D_Q;
+    s_vect.push_back(Config.ShiQual);
+    s_vect.push_back(Config.Shi_Down);
+    s_vect.push_back(Config.Shi_U_Q);
+    s_vect.push_back(Config.Shi_D_Q);
 
-    Config.ShiQual;
-    Config.Shi_Down;
-    Config.Shi_U_Q;
-    Config.Shi_D_Q;
+    s_vect.push_back(Config.VocBands);
+    s_vect.push_back(Config.Voc_Down);
+    s_vect.push_back(Config.Voc_U_Q);
+    s_vect.push_back(Config.Voc_D_Q);
 
-    Config.VocBands;
-    Config.Voc_Down;
-    Config.Voc_U_Q;
-    Config.Voc_D_Q;
+    s_vect.push_back(Config.SteQual);
+    s_vect.push_back(Config.Ste_Down);
+    s_vect.push_back(Config.Ste_U_Q);
+    s_vect.push_back(Config.Ste_D_Q);
 
-    Config.SteQual;
-    Config.Ste_Down;
-    Config.Ste_U_Q;
-    Config.Ste_D_Q;
+    s_vect.push_back(Config.Dist_res_amount);
+    s_vect.push_back(Config.Dist_up_q);
+    s_vect.push_back(Config.Dist_down_q);
 
-    Config.Dist_res_amount;
-    Config.Dist_up_q;
-    Config.Dist_down_q;
+    s_vect.push_back(Config.Ovrd_res_amount);
+    s_vect.push_back(Config.Ovrd_up_q);
+    s_vect.push_back(Config.Ovrd_down_q);
 
-    Config.Ovrd_res_amount;
-    Config.Ovrd_up_q;
-    Config.Ovrd_down_q;
+    s_vect.push_back(Config.Dere_res_amount);
+    s_vect.push_back(Config.Dere_up_q);
+    s_vect.push_back(Config.Dere_down_q);
 
-    Config.Dere_res_amount;
-    Config.Dere_up_q;
-    Config.Dere_down_q;
+    s_vect.push_back(Config.DBand_res_amount);
+    s_vect.push_back(Config.DBand_up_q);
+    s_vect.push_back(Config.DBand_down_q);
 
-    Config.DBand_res_amount;
-    Config.DBand_up_q;
-    Config.DBand_down_q;
-
-    Config.Stomp_res_amount;
-    Config.Stomp_up_q;
-    Config.Stomp_down_q;
-#endif
+    s_vect.push_back(Config.Stomp_res_amount);
+    s_vect.push_back(Config.Stomp_up_q);
+    s_vect.push_back(Config.Stomp_down_q);
 }
 
 /**

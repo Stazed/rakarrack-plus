@@ -254,6 +254,9 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
 
     RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
 
+    if(plug->rkrplus->quality_update)
+        return;
+
     plug->rkrplus->efx_MIDIConverter->plug = plug;       // for MIDIConverter direct access to lv2 
 
     check_shared_buf(plug,nframes);
@@ -500,8 +503,12 @@ LV2_State_Status stateRestore(LV2_Handle h,
         
         if (v_default != v_restore)
         {
+            printf("WE Are Re-initializing\n");
+
+            plug->rkrplus->quality_update = true;
             plug->rkrplus->reset_all_effects(true);
             plug->rkrplus->initialize(true);
+            plug->rkrplus->quality_update = false;
         }
 
         plug->rkrplus->rkr_restore_state(s_buf);
