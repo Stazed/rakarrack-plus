@@ -1322,7 +1322,13 @@ void RKRGUI::save_preferences (Fl_Preferences &rakarrack, int whati)
 
         rakarrack.set(m_process->Config.PrefNom("Vocoder Bands"), m_process->Config.VocBands);
 
+#ifdef RKR_PLUS_LV2
         rakarrack.set(m_process->Config.PrefNom("FX_init_state"), m_process->Config.init_state);
+        // If the user changed the Active button, then we need to reset it on gui show
+        m_process->FX_Master_Active_Reset = m_process->Active_Preset.FX_Master_Active;
+#else
+        rakarrack.set(m_process->Config.PrefNom("FX_init_state"), m_process->Config.init_state);
+#endif
         rakarrack.set(m_process->Config.PrefNom("Auto Assign"), m_process->Config.autoassign);
 
         rakarrack.set(m_process->Config.PrefNom("UpSampling"), m_process->Config.upsample);
@@ -1903,7 +1909,11 @@ void RKRGUI::MiraClientes()
 void RKRGUI::MiraConfig()
 {
     // Loads the settings into the settings class
-#ifndef RKR_PLUS_LV2
+#ifdef RKR_PLUS_LV2
+    Settings->BMidiIn->deactivate();
+    Settings->JackCo->deactivate();
+    Settings->JackIn->deactivate();
+#else
     {
         int i = 1;
         while (Settings->BMidiIn->text(i) != NULL)
@@ -1947,11 +1957,7 @@ void RKRGUI::MiraConfig()
             i++;
         }
     }
-#else
-    Settings->BMidiIn->deactivate();
-    Settings->JackCo->deactivate();
-    Settings->JackIn->deactivate();
-#endif  // #ifndef RKR_PLUS_LV2
+#endif  // #ifdef RKR_PLUS_LV2
 
     if (m_process->Config.MIDIway)
     {
@@ -2068,6 +2074,7 @@ void RKRGUI::MiraConfig()
     Settings->D_A_Connect->deactivate();
     Settings->D_J_Connect->deactivate();
     Settings->D_IJ_Connect->deactivate();
+    Settings->INSTATE->deactivate();    // Always ON for LV2
 #else
     Settings->D_A_Connect->value(m_process->Config.aconnect_MI);
     Settings->D_J_Connect->value(m_process->Config.aconnect_JA);

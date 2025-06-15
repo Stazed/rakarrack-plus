@@ -230,8 +230,7 @@ RKR::initialize(bool re_initialize)
     else
         booster = dB2rap(10);
     
-    if(Config.init_state)
-        FX_Master_Active_Reset = 1;
+    FX_Master_Active_Reset = Config.init_state; // Always ON for LV2
 #endif
     upsample = Config.upsample;
     Adjust_Upsample();
