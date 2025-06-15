@@ -675,17 +675,17 @@ RKR::LV2_save_preferences(std::string &s_buf)
     // Look Tab - 0
     s_buf += std::to_string(Config.Schema);
     s_buf += ",";
-    s_buf += std::to_string(global_font_type);
+    s_buf += std::to_string(Config.font_type);
     s_buf += ",";
-    s_buf += std::to_string(global_font_size);
+    s_buf += std::to_string(Config.font_size);
     s_buf += ",";
-    s_buf += std::to_string((int) global_fore_color);
+    s_buf += std::to_string(Config.fore_color);
     s_buf += ",";
-    s_buf += std::to_string((int) global_label_color);
+    s_buf += std::to_string(Config.label_color);
     s_buf += ",";
-    s_buf += std::to_string((int) global_leds_color);
+    s_buf += std::to_string(Config.leds_color);
     s_buf += ",";
-    s_buf += std::to_string((int) global_back_color);
+    s_buf += std::to_string(Config.back_color);
     s_buf += ",";
     s_buf += std::to_string(Config.EnableBackgroundImage);
     s_buf += ",";
@@ -708,9 +708,9 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += ",";
     s_buf += std::to_string(Config.Tap_Updated);
     s_buf += ",";
-    s_buf += std::to_string(flpos);          // Limiter before output volume
+    s_buf += std::to_string(Config.flpos);          // Limiter before output volume
     s_buf += ",";
-    s_buf += std::to_string(db6booster);
+    s_buf += std::to_string(Config.db6booster);
     s_buf += ",";
     // Master Up-sampling are below as they need reset
     // Looper size also needs reset below
@@ -858,7 +858,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     // MISC Tab - 17
     s_buf += std::to_string(Config.Disable_Warnings);
     s_buf += ",";
-    s_buf += std::to_string(t_timeout);
+    s_buf += std::to_string(Config.t_timeout);
     s_buf += ",";
     s_buf += std::to_string(Config.ena_tool);
     s_buf += ",";
@@ -1204,33 +1204,32 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 
     // ******************* Settings/User *******************
     // Get user default bank file from Settings/Bank/ --Bank Filename
-    char temp[128];
-    memset(temp, 0, sizeof (temp));
-    memcpy(temp, segments[PREFS_BANK_FILE_NAME].c_str(), segments[PREFS_BANK_FILE_NAME].size());
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[PREFS_BANK_FILE_NAME].c_str(), segments[PREFS_BANK_FILE_NAME].size());
     for (int i = 0; i < 128; i++)
     {
-        if (temp[i] > 20)        // remove LF '\n'
+        if (buf[i] > 20)        // remove LF '\n'
         {
             Config.BankFilename[i] = buf[i];
         }
     }
 
-    memset(temp, 0, sizeof (temp));
-    memcpy(temp, segments[PREFS_USER_DIRECTORY].c_str(), segments[PREFS_USER_DIRECTORY].size());
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[PREFS_USER_DIRECTORY].c_str(), segments[PREFS_USER_DIRECTORY].size());
     for (int i = 0; i < 128; i++)
     {
-        if (temp[i] > 20)        // remove LF '\n'
+        if (buf[i] > 20)        // remove LF '\n'
         {
             Config.UDirFilename[i] = buf[i];
         }
     }
     global_user_directory = Config.UDirFilename;
 
-    memset(temp, 0, sizeof (temp));
-    memcpy(temp, segments[PREFS_USER_NAME].c_str(), segments[PREFS_USER_NAME].size());
+    memset(buf, 0, sizeof (buf));
+    memcpy(buf, segments[PREFS_USER_NAME].c_str(), segments[PREFS_USER_NAME].size());
     for (int i = 0; i < 128; i++)
     {
-        if (temp[i] > 20)        // remove LF '\n'
+        if (buf[i] > 20)        // remove LF '\n'
         {
             Config.UserRealName[i] = buf[i];
         }
@@ -1333,7 +1332,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
 }
 
 void
-RKR::check_preferences_changed(std::vector<int> s_vect)
+RKR::check_preferences_changed(std::vector<int> &s_vect)
 {
     // Audio Tab
     s_vect.push_back(Config.UpAmo);
