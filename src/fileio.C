@@ -678,8 +678,6 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += "\n";
 
     // Audio Tab
-    s_buf += std::to_string(Config.init_state);      // FX ON at start
-    s_buf += ",";
     s_buf += std::to_string(Config.DC_Offset);
     s_buf += ",";
     s_buf += std::to_string(Config.preserve_master);
@@ -1053,8 +1051,8 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     memset(buf, 0, sizeof (buf));
     memcpy(buf, segments[PREFS_AUDIO].c_str(), segments[PREFS_AUDIO].size());
     
-    sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%f,%f,%d,%d,%d\n",
-            &Config.init_state, &Config.DC_Offset, &Config.preserve_master,
+    sscanf(buf, "%d,%d,%d,%d,%d,%d,%f,%f,%d,%d,%d\n",
+            &Config.DC_Offset, &Config.preserve_master,
             &Config.Tap_Updated, &Config.flpos, &Config.db6booster, 
             &Config.Metro_Vol, &Config.aFreq, &Config.rtrig, 
             &Config.RCOpti_Harm, &Config.RCOpti_Stereo, &Config.RCOpti_Ring);
@@ -1146,6 +1144,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     // ******************* Settings/User *******************
     // Get user default bank file from Settings/Bank/ --Bank Filename
     memset(buf, 0, sizeof (buf));
+    memset(Config.BankFilename, 0, sizeof(Config.BankFilename));
     memcpy(buf, segments[PREFS_BANK_FILE_NAME].c_str(), segments[PREFS_BANK_FILE_NAME].size());
     for (int i = 0; i < 128; i++)
     {
@@ -1156,6 +1155,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     }
 
     memset(buf, 0, sizeof (buf));
+    memset(Config.UDirFilename, 0, sizeof(Config.UDirFilename));
     memcpy(buf, segments[PREFS_USER_DIRECTORY].c_str(), segments[PREFS_USER_DIRECTORY].size());
     for (int i = 0; i < 128; i++)
     {
@@ -1167,6 +1167,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     global_user_directory = Config.UDirFilename;
 
     memset(buf, 0, sizeof (buf));
+    memset(Config.UserRealName, 0, sizeof(Config.UserRealName));
     memcpy(buf, segments[PREFS_USER_NAME].c_str(), segments[PREFS_USER_NAME].size());
     for (int i = 0; i < 128; i++)
     {
@@ -2065,12 +2066,9 @@ RKR::new_preset()
     // Copy the user name from settings
     strncpy(Active_Preset.Author, Config.UserRealName, sizeof(Active_Preset.Author) - 1);
 
-    // Set the Master to OFF
+    // Set the Master to OFF for standalone and ON for LV2
 #ifdef RKR_PLUS_LV2
-    if(Config.init_state)
-        FX_Master_Active_Reset = 1;
-    else
-        FX_Master_Active_Reset = 0;
+    FX_Master_Active_Reset = 1;
 #else
     FX_Master_Active_Reset = 0;
 #endif
