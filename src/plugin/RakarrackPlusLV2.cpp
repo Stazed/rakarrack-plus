@@ -231,6 +231,7 @@ void activate_rkrplus(LV2_Handle handle)
     plug->rkrplus->Mcontrol[MC_Multi_On_Off] = 1;
     plug->rkrplus->OnOffC = 0;
     plug->rkrplus->ActiveUn(EFX_MASTER_ON_OFF);
+    plug->rkrplus->Active_Preset.FX_Master_Active = 1;
 }
 
 void deactivate_rkrplus(LV2_Handle handle)
@@ -245,6 +246,7 @@ void deactivate_rkrplus(LV2_Handle handle)
     plug->rkrplus->Mcontrol[MC_Multi_On_Off] = 1;
     plug->rkrplus->OnOffC = 0;
     plug->rkrplus->ActiveUn(EFX_MASTER_ON_OFF);
+    plug->rkrplus->Active_Preset.FX_Master_Active = 0;
 }
 
 void run_rkrplus(LV2_Handle handle, uint32_t nframes)
