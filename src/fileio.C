@@ -37,7 +37,6 @@ enum
     RKR_EFX_ORDER = 14,      // 4 + 10
     RKR_MIDI_LEARN,     // 15
     PREFS_LOOK = 143,   // 15 + 128
-    PREFS_BG_FILE_PATH,
     PREFS_AUDIO,
     PREFS_MASTER,
     PREFS_HARM,
@@ -46,7 +45,7 @@ enum
     PREFS_SEQUENCE,
     PREFS_SHIFTER,
     PREFS_VOCODER,
-    PREFS_STEREO_HARM,  // 10
+    PREFS_STEREO_HARM,
     PREFS_DIST,
     PREFS_OVRD,
     PREFS_DERELICT,
@@ -56,7 +55,7 @@ enum
     PREFS_MISC_TAB,
     PREFS_BANK_FILE_NAME,
     PREFS_USER_DIRECTORY,
-    PREFS_USER_NAME,    // 20
+    PREFS_USER_NAME,
     PREFS_MAIN,
     PREFS_MIDI_CONVERT,
     PREFS_METRONOME,
@@ -66,7 +65,7 @@ enum
     PREFS_ORDER,
     PREFS_SETTINGS,
     PREFS_HELP,
-    PREFS_RANDOM,       // 30
+    PREFS_RANDOM,
     PREFS_RAND_EXCLUDE,
     PREFS_MIDI_LEARN,
     PREFS_TRIGGER,
@@ -672,34 +671,13 @@ RKR::rkr_restore_state(const std::string &s_buf)
 int
 RKR::LV2_save_preferences(std::string &s_buf)
 {
-    // Look Tab - 0
-    s_buf += std::to_string(Config.Schema);
-    s_buf += ",";
-    s_buf += std::to_string(Config.font_type);
-    s_buf += ",";
-    s_buf += std::to_string(Config.font_size);
-    s_buf += ",";
-    s_buf += std::to_string(Config.fore_color);
-    s_buf += ",";
-    s_buf += std::to_string(Config.label_color);
-    s_buf += ",";
-    s_buf += std::to_string(Config.leds_color);
-    s_buf += ",";
-    s_buf += std::to_string(Config.back_color);
-    s_buf += ",";
-    s_buf += std::to_string(Config.EnableBackgroundImage);
-    s_buf += ",";
+    // Look Tab
     s_buf += std::to_string(Config.deachide);
     s_buf += ",";
     s_buf += std::to_string(Config.scalable);
     s_buf += "\n";
 
-    // 1
-    s_buf += Config.BackgroundImage;     // File path char[256]
-    s_buf += "\n";
-    // End Look
-
-    // Audio Tab - 2
+    // Audio Tab
     s_buf += std::to_string(Config.init_state);      // FX ON at start
     s_buf += ",";
     s_buf += std::to_string(Config.DC_Offset);
@@ -727,7 +705,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.RCOpti_Ring);
     s_buf += "\n";
 
-    // Master need reset - 3
+    // Master need reset
     s_buf += std::to_string(Config.UpAmo);
     s_buf += ",";
     s_buf += std::to_string(Config.upsample);
@@ -741,7 +719,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     // Master end reset
     // End Audio tab
 
-    // Quality Tab - Need Reset - 4
+    // Quality Tab - Need Reset
     s_buf += std::to_string(Config.HarQual);
     s_buf += ",";
     s_buf += std::to_string(Config.Har_Down);
@@ -751,21 +729,21 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Har_D_Q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Rev_Down);    // - 5
+    s_buf += std::to_string(Config.Rev_Down);
     s_buf += ",";
     s_buf += std::to_string(Config.Rev_U_Q);
     s_buf += ",";
     s_buf += std::to_string(Config.Rev_D_Q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Con_Down);    // - 6
+    s_buf += std::to_string(Config.Con_Down);
     s_buf += ",";
     s_buf += std::to_string(Config.Con_U_Q);
     s_buf += ",";
     s_buf += std::to_string(Config.Con_D_Q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.SeqQual);     // - 7
+    s_buf += std::to_string(Config.SeqQual);
     s_buf += ",";
     s_buf += std::to_string(Config.Seq_Down);
     s_buf += ",";
@@ -774,7 +752,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Seq_D_Q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.ShiQual);     // - 8
+    s_buf += std::to_string(Config.ShiQual);
     s_buf += ",";
     s_buf += std::to_string(Config.Shi_Down);
     s_buf += ",";
@@ -783,7 +761,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Shi_D_Q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.VocBands);    // - 9
+    s_buf += std::to_string(Config.VocBands);
     s_buf += ",";
     s_buf += std::to_string(Config.Voc_Down);
     s_buf += ",";
@@ -792,7 +770,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Voc_D_Q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.SteQual);     // - 10
+    s_buf += std::to_string(Config.SteQual);
     s_buf += ",";
     s_buf += std::to_string(Config.Ste_Down);
     s_buf += ",";
@@ -802,35 +780,35 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += "\n";
 
     // Waveshape Resampling
-    s_buf += std::to_string(Config.Dist_res_amount); // - 11
+    s_buf += std::to_string(Config.Dist_res_amount);
     s_buf += ",";
     s_buf += std::to_string(Config.Dist_up_q);
     s_buf += ",";
     s_buf += std::to_string(Config.Dist_down_q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Ovrd_res_amount); // - 12
+    s_buf += std::to_string(Config.Ovrd_res_amount);
     s_buf += ",";
     s_buf += std::to_string(Config.Ovrd_up_q);
     s_buf += ",";
     s_buf += std::to_string(Config.Ovrd_down_q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Dere_res_amount); // - 13
+    s_buf += std::to_string(Config.Dere_res_amount);
     s_buf += ",";
     s_buf += std::to_string(Config.Dere_up_q);
     s_buf += ",";
     s_buf += std::to_string(Config.Dere_down_q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.DBand_res_amount);// - 14
+    s_buf += std::to_string(Config.DBand_res_amount);
     s_buf += ",";
     s_buf += std::to_string(Config.DBand_up_q);
     s_buf += ",";
     s_buf += std::to_string(Config.DBand_down_q);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Stomp_res_amount);// - 15
+    s_buf += std::to_string(Config.Stomp_res_amount);
     s_buf += ",";
     s_buf += std::to_string(Config.Stomp_up_q);
     s_buf += ",";
@@ -838,7 +816,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += "\n";
     // End Quality Tab
 
-    // MIDI Tab - 16
+    // MIDI Tab
     s_buf += std::to_string(Config.MIDI_In_Channel);
     s_buf += ",";
     s_buf += std::to_string(Config.Harmonizer_MIDI_Channel);
@@ -855,7 +833,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += "\n";
     // End MIDI Tab
 
-    // MISC Tab - 17
+    // MISC Tab
     s_buf += std::to_string(Config.Disable_Warnings);
     s_buf += ",";
     s_buf += std::to_string(Config.t_timeout);
@@ -867,15 +845,15 @@ RKR::LV2_save_preferences(std::string &s_buf)
     // End MISC Tab
 
     // User Tab
-    s_buf += Config.BankFilename;    // - 18 char[128]
+    s_buf += Config.BankFilename;
     s_buf += "\n";
-    s_buf += Config.UDirFilename;    // - 19 char[128]
+    s_buf += Config.UDirFilename;
     s_buf += "\n";
-    s_buf += Config.UserRealName;    // - 20 char[128]
+    s_buf += Config.UserRealName;
     s_buf += "\n";
     // End User Tab
 
-    // Main Window items    // - 21
+    // Main Window items
     s_buf += std::to_string(active_bank);
     s_buf += ",";
     s_buf += std::to_string(booster);   // Not included in state save.-- float
@@ -889,7 +867,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Tuner_Active);
     s_buf += "\n";
 
-    //MIDIConverter - 22
+    //MIDIConverter
     s_buf += std::to_string(Config.Midi_Out_Channel);
     s_buf += ",";
     s_buf += std::to_string(Config.Trigger_Adjust);
@@ -903,7 +881,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Use_FFT);
     s_buf += "\n";
 
-    //Metronome - 23
+    //Metronome
     s_buf += std::to_string(Metro_Active);
     s_buf += ",";
     s_buf += std::to_string(Config.Metronome_Time);
@@ -917,7 +895,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.sw_stat);
     s_buf += "\n";
 
-    //Tap Tempo - 24
+    //Tap Tempo
     s_buf += std::to_string(Tap_Active);
     s_buf += ",";
     s_buf += std::to_string(Tap_Selection);
@@ -928,7 +906,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
 //    s_buf += "\n";
     // End Main Window items
 
-    // Window sizes - 25
+    // Window sizes
     s_buf += std::to_string(Config.Principal_X);
     s_buf += ",";
     s_buf += std::to_string(Config.Principal_Y);
@@ -938,7 +916,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Principal_H);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.BankWindow_X);    // - 26
+    s_buf += std::to_string(Config.BankWindow_X);
     s_buf += ",";
     s_buf += std::to_string(Config.BankWindow_Y);
     s_buf += ",";
@@ -947,7 +925,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.BankWindow_H);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Order_X); // - 27
+    s_buf += std::to_string(Config.Order_X);
     s_buf += ",";
     s_buf += std::to_string(Config.Order_Y);
     s_buf += ",";
@@ -956,7 +934,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Order_H);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Settings_X);  // - 28
+    s_buf += std::to_string(Config.Settings_X);
     s_buf += ",";
     s_buf += std::to_string(Config.Settings_Y);
     s_buf += ",";
@@ -965,7 +943,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Settings_H);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Help_X);      // - 29
+    s_buf += std::to_string(Config.Help_X);
     s_buf += ",";
     s_buf += std::to_string(Config.Help_Y);
     s_buf += ",";
@@ -978,7 +956,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     
  //   help_displayed = 0;  // For LV2 the UI is deleted so reset as not displayed
 
-    s_buf += std::to_string(Config.Random_X);    // - 30
+    s_buf += std::to_string(Config.Random_X);
     s_buf += ",";
     s_buf += std::to_string(Config.Random_Y);
     s_buf += ",";
@@ -995,7 +973,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.Rand_Max);
     s_buf += "\n";
 
-    s_buf += Config.Rand_Exclude;  //  Special case  - 31 - char [EFX_NUMBER_EFFECTS + 1]
+    s_buf += Config.Rand_Exclude;  //  Special case  - char [EFX_NUMBER_EFFECTS + 1]
     s_buf += "\n";
 
         // convert the asci char to string for the set 
@@ -1008,7 +986,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
                 Config.Rand_Exclude[i] = ASCII_Space;
         }
 */
-    s_buf += std::to_string(Config.MIDI_Learn_X);    // - 32
+    s_buf += std::to_string(Config.MIDI_Learn_X);
     s_buf += ",";
     s_buf += std::to_string(Config.MIDI_Learn_Y);
     s_buf += ",";
@@ -1017,7 +995,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Config.MIDI_Learn_H);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Trigger_X);       // - 33
+    s_buf += std::to_string(Config.Trigger_X);
     s_buf += ",";
     s_buf += std::to_string(Config.Trigger_Y);
     s_buf += ",";
@@ -1038,7 +1016,7 @@ RKR::LV2_save_preferences(std::string &s_buf)
     s_buf += std::to_string(Aux_Maximum);
     s_buf += "\n";
 
-    s_buf += std::to_string(Config.Delay_X);     // - 34
+    s_buf += std::to_string(Config.Delay_X);
     s_buf += ",";
     s_buf += std::to_string(Config.Delay_Y);
     s_buf += ",";
@@ -1068,44 +1046,7 @@ RKR::LV2_restore_preferences(const std::string &s_buf)
     memset(buf, 0, sizeof (buf));
     memcpy(buf, segments[PREFS_LOOK].c_str(), segments[PREFS_LOOK].size());
     
-    sscanf(buf, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n",
-            &Config.Schema, &Config.font_type, &Config.font_size, &Config.fore_color,
-            &Config.label_color, &Config.leds_color, &Config.back_color,
-            &Config.EnableBackgroundImage, &Config.deachide, &Config.scalable);
-
-    // FIXME TODO
-    // Sanity check. Can happen when NSM session copied to another computer
-    // that has fewer fonts loaded than source. Also if some fonts are removed.
-    // Segfault if font type is out of range.
-//    if(Config.font_type >= Fl::set_fonts(0)) // set_fonts returns number of fonts available
-//    {
-//        fprintf(stderr, "Invalid font type, reverting to default\n");
-//        Config.font_type = 0;   // reset to default
-//    }
-
-    memset(buf, 0, sizeof (buf));
-    memcpy(buf, segments[PREFS_BG_FILE_PATH].c_str(), segments[PREFS_BG_FILE_PATH].size());
-    for (int i = 0; i < 256; i++)
-    {
-        if (buf[i] > 20)        // remove LF '\n'
-        {
-            Config.BackgroundImage[i] = buf[i];
-        }
-    }
-
-    // Check if valid file. Revert to default if error.
-    FILE *fn;
-    memset(buf, 0, sizeof (buf));
-    if ((fn = fopen(Config.BackgroundImage, "r")) == NULL)
-    {
-        memset(Config.BackgroundImage, 0, sizeof (Config.BackgroundImage));
-        RKRP::strlcpy(Config.BackgroundImage, buf, sizeof (Config.BackgroundImage));
-        fprintf(stderr, "Invalid BackgroundImage file, reverting to default\n");
-    }
-    else
-    {
-        fclose(fn);
-    }
+    sscanf(buf, "%d,%d\n", &Config.deachide, &Config.scalable);
     // End Settings/Look
 
     // ************ Settings/Audio *******************
