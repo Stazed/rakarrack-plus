@@ -1300,6 +1300,61 @@ RKR::jack_process_midievents(jack_midi_event_t *midievent)
 }
 #endif  // #ifndef RKR_PLUS_LV2
 
+#ifdef RKR_PLUS_LV2
+static void* check_program_change(void * _RKR)
+{
+    RKR * rkr = (RKR *) _RKR;
+
+    while (rkr->Exit_Program)
+    {
+        if (rkr->Change_Preset != C_CHANGE_PRESET_OFF)
+        {
+            if ((rkr->Change_Preset > 0) && (rkr->Change_Preset < 61))
+            {
+                rkr->active_bank_preset_to_main_window(rkr->Change_Preset);
+
+                // reset these if volume changed from preset
+                rkr->calculavol(1);
+                rkr->calculavol(2);
+                rkr->booster = 1.0f;
+            }
+
+            // hold the preset number so we can update the bank window highlight TODO
+   //         hold_preset = process.Change_Preset;
+            rkr->Change_Preset = C_CHANGE_PRESET_OFF;
+        }
+        usleep(1500);
+    }
+
+    return 0;
+}
+
+void
+RKR::lv2_process_midi_program_changes()
+{
+    Exit_Program = 1;
+    int result = pthread_create(&t_pgm, nullptr, check_program_change, this);
+    if(result != 0)
+    {
+        printf("Error creating thread.\n");
+    }
+}
+
+void
+RKR::lv2_join_thread()
+{
+    Exit_Program = 0;
+    if(t_pgm)
+    {
+        int result = pthread_join(t_pgm, nullptr);
+        if(result != 0)
+        {
+            printf("Error joining thread.\n");
+        }
+    }
+}
+#endif
+
 void
 RKR::lv2_process_midievents(const uint8_t* const msg)
 {

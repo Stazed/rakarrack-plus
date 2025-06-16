@@ -4448,6 +4448,6 @@ RKRGUI::LV2_gui_hide()
         save_current_state(i);
 
     Fl::remove_timeout(this->TimeoutStatic, this);
-    m_process->Exit_Program=1;
+    m_process->lv2_process_midi_program_changes();  // this sets m_process->Exit_Program = 1;
 #endif
 }

@@ -88,6 +88,9 @@
 #include <jack/jack.h>
 #include <sstream>
 
+#ifdef RKR_PLUS_LV2
+#include <pthread.h>
+#endif
 
 /**
  * This is the "MIDI Implementation Chart" listed in Rakarrack-plus help.
@@ -715,7 +718,11 @@ public:
     void Conecta ();
     void conectaaconnect ();
     void disconectaaconnect ();
-#ifndef RKR_PLUS_LV2
+#ifdef RKR_PLUS_LV2
+    pthread_t t_pgm;
+    void lv2_process_midi_program_changes();
+    void lv2_join_thread();
+#else
     void jack_process_midievents (jack_midi_event_t *midievent);
 #endif
     void lv2_process_midievents(const uint8_t* const msg);

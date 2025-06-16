@@ -123,7 +123,7 @@ void RakarrackPlusLV2UI::show()
     {
         init_fltk_lock();
         is_shown = true;
-        m_RKR->Exit_Program = 0;    // false
+        m_RKR->lv2_join_thread();   // This sets Exit_Program = 0;
     }
 }
 
@@ -141,7 +141,7 @@ void RakarrackPlusLV2UI::shutDownGUI()
 {
 //    printf("SHUTDOWN CALLED\n");
     is_shown = false;
-    r_gui->LV2_gui_hide();  // will set Exit_Program to true
+    r_gui->LV2_gui_hide();  // will set Exit_Program = 1
     r_gui.reset();
 }
 

@@ -270,6 +270,18 @@ RKR::initialize(bool re_initialize)
         load_echotron_vector();
         load_reverbtron_vector();
     }
+
+#ifdef RKR_PLUS_LV2
+    active_bank = Config.active_bank;
+    copy_bank(Bank, Bank_Vector[active_bank].Bank);
+    lv2_process_midi_program_changes();
+#else
+    if (!Bank_Load_Command_Line && !Gui_Shown)
+    {
+        active_bank = Config.active_bank;
+        copy_bank(Bank, Bank_Vector[active_bank].Bank);
+    }
+#endif
 }
 
 void
@@ -350,9 +362,11 @@ RKR::reset_all_effects(bool is_LV2)
 RKR::~RKR()
 {
     delete_everything();
-    // alsa
-#ifndef RKR_PLUS_LV2
-    if(midi_in)
+
+#ifdef RKR_PLUS_LV2
+    lv2_join_thread();
+#else
+    if(midi_in)     // alsa
     {
         snd_seq_close(midi_in);
     }
