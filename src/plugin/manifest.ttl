@@ -17,11 +17,20 @@
 
 @prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
 
 <https://github.com/Stazed/rakarrack-plus#rkrplus>
-        a lv2:Plugin ;
+        a lv2:Plugin, lv2:UtilityPlugin ;
         lv2:binary <Rakarrack-Plus.so> ;
         rdfs:seeAlso <Rakarrack-Plus.ttl> .
 
+<https://github.com/Stazed/rakarrack-plus#rkrplus_ui>
+    a <http://kxstudio.sf.net/ns/lv2ext/external-ui#Widget> ;
+ 	ui:binary <Rakarrack-Plus.so> ;
+    lv2:extensionData <http://lv2plug.in/ns/extensions/ui#idleInterface> ,
+                      <http://lv2plug.in/ns/extensions/ui#showInterface> ;
+    lv2:optionalFeature <http://lv2plug.in/ns/extensions/ui#idleInterface> ;
+    lv2:optionalFeature <http://lv2plug.in/ns/extensions/ui#showInterface> ;
+    lv2:requiredFeature <http://lv2plug.in/ns/ext/instance-access> .
 

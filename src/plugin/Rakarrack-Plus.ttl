@@ -21,10 +21,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ll: <http://ll-plugins.nongnu.org/lv2/namespace#>.
-#@prefix units: <http://lv2plug.in/ns/extensions/units#> .
-#@prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
-#@prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-#@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix lv2midi:  <http://lv2plug.in/ns/ext/midi#> .
 @prefix time: <http://lv2plug.in/ns/ext/time#> .
@@ -32,12 +28,6 @@
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-<https://github.com/Stazed/rakarrack-plus#rkrplus_ui>
-        a <http://kxstudio.sf.net/ns/lv2ext/external-ui#Widget> ;
- 	ui:binary <Rakarrack-Plus.so> ;
- 	lv2:extensionData ui:idleInterface, ui:showInterface ;
-        lv2:optionalFeature ui:idleInterface, ui:showInterface ;
- 	.
 
 <https://github.com/Stazed/rakarrack-plus#rkrplus>
         a lv2:Plugin, lv2:UtilityPlugin ;
