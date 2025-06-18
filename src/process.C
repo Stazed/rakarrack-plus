@@ -274,7 +274,8 @@ RKR::initialize(bool re_initialize)
 #ifdef RKR_PLUS_LV2
     active_bank = Config.active_bank;
     copy_bank(Bank, Bank_Vector[active_bank].Bank);
-    lv2_process_midi_program_changes(); // this closes the GUI for LV2
+    if(!re_initialize)
+        lv2_process_midi_program_changes(); // this closes the GUI for LV2
 #else
     if (!Bank_Load_Command_Line && !Gui_Shown)
     {
@@ -334,10 +335,10 @@ RKR::delete_everything()
 }
 
 void 
-RKR::reset_all_effects(bool is_LV2)
+RKR::reset_all_effects(bool need_state_restore)
 {
     std::string s_buf;
-    if(!is_LV2)
+    if(need_state_restore)
         rkr_save_state(s_buf);
 
     quality_update = true;
@@ -353,7 +354,7 @@ RKR::reset_all_effects(bool is_LV2)
     /* Wait for things to complete */
     usleep(C_MILLISECONDS_300);
 
-    if(!is_LV2)
+    if(need_state_restore)
         rkr_restore_state(s_buf);
 
     quality_update = false;

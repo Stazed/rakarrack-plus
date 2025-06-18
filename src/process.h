@@ -686,7 +686,7 @@ public:
     // process.C
     void initialize(bool re_initialize = false);
     void delete_everything();
-    void reset_all_effects(bool is_LV2 = false);
+    void reset_all_effects(bool need_state_restore = true);
 #ifdef RKR_PLUS_LV2
     void set_client_name(std::string s_name);
 #else

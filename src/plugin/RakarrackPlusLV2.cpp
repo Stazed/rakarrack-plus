@@ -508,7 +508,7 @@ LV2_State_Status stateRestore(LV2_Handle h,
             printf("WE Are Re-initializing\n");
 
             plug->rkrplus->quality_update = true;
-            plug->rkrplus->reset_all_effects(true);
+            plug->rkrplus->reset_all_effects(false);    // false - don't need state restore since we do it next
             plug->rkrplus->initialize(true);
             plug->rkrplus->quality_update = false;
         }
