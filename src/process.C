@@ -361,11 +361,15 @@ RKR::reset_all_effects(bool is_LV2)
 
 RKR::~RKR()
 {
-    delete_everything();
-
+// The thread needs to be joined before deleting or it may invoke processing on
+// a deleted item.
 #ifdef RKR_PLUS_LV2
     lv2_join_thread();
-#else
+#endif
+
+    delete_everything();
+
+#ifndef RKR_PLUS_LV2
     if(midi_in)     // alsa
     {
         snd_seq_close(midi_in);
