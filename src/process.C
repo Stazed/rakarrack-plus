@@ -274,7 +274,7 @@ RKR::initialize(bool re_initialize)
 #ifdef RKR_PLUS_LV2
     active_bank = Config.active_bank;
     copy_bank(Bank, Bank_Vector[active_bank].Bank);
-    lv2_process_midi_program_changes();
+    lv2_process_midi_program_changes(); // this closes the GUI for LV2
 #else
     if (!Bank_Load_Command_Line && !Gui_Shown)
     {
@@ -365,6 +365,7 @@ RKR::~RKR()
 // a deleted item.
 #ifdef RKR_PLUS_LV2
     lv2_join_thread();
+    usleep(2000);   // We seem to need to wait a bit for the thread to finish...
 #endif
 
     delete_everything();
