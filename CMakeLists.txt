@@ -21,7 +21,7 @@ check_cxx_compiler_flag("-ftree-vectorize" SUPPORT_VECTOR)
 check_cxx_compiler_flag("-maltivec" SUPPORT_ALTIVEC)
 
 option (BuildRakarrackPlus "Build rakarrack-plus" ON)
-option (BuildRakarrackPlusLV2 "Build rakarrack-plus LV2 (Rakarrack-Plus.lv2)" ON)
+option (BuildRakarrackPlusLV2 "Build rakarrack-plus LV2 (Rakarrack-Plus.lv2) Experimental!!!" OFF)
 option (BuildLV2Plugins "Build rakarack-plus lv2 plugin effects (RakarrackPlus.lv2)" ON)
 option (BuildCarlaPresets "Build Carla presets for lv2 from default banks" OFF)
 option (EnableNSM "Enable NSM session support" ON)
@@ -214,10 +214,10 @@ if (BuildRakarrackPlusLV2)
     pkg_check_modules(LV2 REQUIRED lv2>=1.0.0)
     if (LV2_FOUND)
         if (DEFINED LV2_PATH)
-            set(LV2_INSTALL_DIR "${LV2_PATH}/rkrplus.lv2" CACHE PATH
+            set(LV2_INSTALL_DIR_RKRP "${LV2_PATH}/Rakarrack-Plus.lv2" CACHE PATH
             "Specifies where the LV2 libraries should be installed")
         else()
-            set(LV2_INSTALL_DIR lib/lv2/rkrplus.lv2 CACHE PATH
+            set(LV2_INSTALL_DIR_RKRP lib/lv2/Rakarrack-Plus.lv2 CACHE PATH
             "Specifies where the LV2 libraries should be installed")
         endif()
         add_subdirectory(src/plugin)

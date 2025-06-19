@@ -218,15 +218,11 @@ target_compile_definitions(Rakarrack-Plus PRIVATE RKR_PLUS_LV2=1)
 set_target_properties(Rakarrack-Plus PROPERTIES PREFIX "")
 set_target_properties(Rakarrack-Plus PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE )
 
-# FIXME LV2_TMP_INSTALL_DIR >> LV2_INSTALL_DIR
-set(LV2_TMP_INSTALL_DIR ~/.lv2/Rakarrack-Plus.lv2 CACHE PATH
-        "Specifies where the LV2 libraries should be installed")
-
-install(TARGETS Rakarrack-Plus
-  LIBRARY
-  DESTINATION ${LV2_TMP_INSTALL_DIR} )
-
 if (BuildRakarrackPlusLV2)
+    install(TARGETS Rakarrack-Plus
+      LIBRARY
+      DESTINATION ${LV2_INSTALL_DIR_RKRP} )
+
     install (FILES Rakarrack-Plus.ttl manifest.ttl
-        DESTINATION ${LV2_TMP_INSTALL_DIR} )
+        DESTINATION ${LV2_INSTALL_DIR_RKRP} )
 endif (BuildRakarrackPlusLV2)
