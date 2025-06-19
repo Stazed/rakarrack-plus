@@ -1336,7 +1336,7 @@ RKR::lv2_process_midi_program_changes()
     int result = pthread_create(&t_pgm, nullptr, check_program_change, this);
     if(result != 0)
     {
-        printf("Error creating thread.\n");
+        Handle_Message (52, "pthread_create - at lv2_process_midi_program_changes().");
     }
 }
 
@@ -1349,7 +1349,7 @@ RKR::lv2_join_thread()
         int result = pthread_join(t_pgm, nullptr);
         if(result != 0)
         {
-            printf("Error joining thread.\n");
+            Handle_Message (52, "pthread_join - at lv2_join_thread().");
         }
     }
 }

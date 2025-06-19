@@ -1084,7 +1084,7 @@ RKR::reset_everything()
     int result = pthread_create(&t_init, nullptr, re_initialize_everything, this);
     if(result != 0)
     {
-        printf("Error creating thread.\n"); // FIXME
+        Handle_Message (52, "pthread_create - at reset_everything().");
     }
 }
 
@@ -1096,7 +1096,7 @@ RKR::reset_join_thread()
         int result = pthread_join(t_init, nullptr);
         if(result != 0)
         {
-            printf("Error joining thread.\n");  // FIXME
+            Handle_Message (52, "pthread_join - at reset_join_thread().");
         }
     }
 }
