@@ -27,22 +27,24 @@
 #ifndef RESET_WINDOW_H
 #define RESET_WINDOW_H
 
+#include <X11/X.h>
+
 #include "../process.h"
 
 class Reset_Window {
 public:
-    Reset_Window();
+    Reset_Window(RKR * _rkr, Pixmap pixmap);
     Reset_Window(const Reset_Window&) = delete;
     Reset_Window & operator=(const Reset_Window&) = delete;
     virtual ~Reset_Window();
 
-    void initialize(RKR * _rkr);
     bool show_reset_window ();
     void close_reset_window( );
 private:
 
     RKR* m_process; 
-    Fl_Box *_box;
+    Fl_Box* m_box;
+    Pixmap m_pixmap;
     bool run_reset();
 };
 

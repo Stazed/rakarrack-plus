@@ -3140,8 +3140,7 @@ void RKRGUI::Prepare_Order()
 
 void RKRGUI::Show_Reset_Window()
 {
-    Reset_Window w_reset;
-    w_reset.initialize(m_process);
+    Reset_Window w_reset( m_process, p);
     w_reset.show_reset_window();
 }
 

@@ -24,8 +24,8 @@
  * Created on June 18, 2025, 6:46 PM
  */
 
-#include <thread>
-#include <unistd.h>
+#include <unistd.h> // usleep()
+#include <FL/Fl_Pixmap.H>
 #include <FL/Fl.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Window.H>
@@ -52,23 +52,22 @@ reset_timeout( void* )
     Fl::repeat_timeout ( 0.03f, &reset_timeout );
 }
 
-Reset_Window::Reset_Window():
-    _box( nullptr )
+Reset_Window::Reset_Window(RKR * _rkr, Pixmap pixmap):
+    m_process( _rkr ),
+    m_box( nullptr ),
+    m_pixmap( pixmap )
 {
-    g_reset_window = new Fl_Window ( 720, 60, "Resetting" );
-    _box = new Fl_Box ( 20, 10, 560, 40, "Re-initializing effects please wait..." );
-    _box->box ( FL_UP_BOX );
-    _box->labelsize ( 12 );
-    _box->labelfont ( FL_BOLD );
-    _box->show ( );
+    g_reset_window = new Fl_Window ( 600, 60, "Resetting" );
+    g_reset_window->icon((char *) m_pixmap);
+    m_box = new Fl_Box ( 20, 10, 560, 40, "Re-initializing effects please wait..." );
+    m_box->box ( FL_UP_BOX );
+    m_box->labelsize ( 12 );
+    m_box->labelfont ( FL_BOLD );
+    m_box->show ( );
 
     g_reset_window->callback ( (Fl_Callback*) window_cb );
     g_reset_window->end ( );
     g_reset_window->set_modal ( );
-}
-
-void Reset_Window::initialize(RKR * _rkr) {
-  m_process = _rkr;
 }
 
 Reset_Window::~Reset_Window()

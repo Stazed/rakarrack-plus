@@ -87,10 +87,8 @@
 #include "EFX_common/beattracker.h"
 #include <jack/jack.h>
 #include <sstream>
-
-#ifdef RKR_PLUS_LV2
 #include <pthread.h>
-#endif
+
 
 /**
  * This is the "MIDI Implementation Chart" listed in Rakarrack-plus help.
