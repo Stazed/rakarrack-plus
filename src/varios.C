@@ -296,7 +296,7 @@ RKR::Handle_Message(int num, std::string strMessage)
             break;
         case 52:
         {
-            snprintf(error_msg, sizeof(error_msg), "An error occured in thread: %s\n", strMessage.c_str());
+            snprintf(error_msg, sizeof(error_msg), "An error occurred in thread: %s\n", strMessage.c_str());
         }
             break;
     }
