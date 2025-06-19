@@ -89,6 +89,7 @@ set (ProgSources
     UI/delayfilewindow_gui.cxx
     UI/randomedit_gui.cxx
     UI/rkrprocess_gui.cxx
+    UI/Reset_Window.cpp
     PresetBankStruct.C
     process.C
     fileio.C

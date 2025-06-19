@@ -63,6 +63,7 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     Tap_Active(0),
     ACI_Active(0),
     Exit_Program(0),
+    Re_init_in_progress(0),
     Selected_Preset(1),
     Change_Preset(C_CHANGE_PRESET_OFF),
     Change_Bank(C_BANK_CHANGE_OFF),
@@ -1065,5 +1066,37 @@ RKR::process_effects(float *origl, float *origr, void *)
         }
 
         Control_Volume(origl, origr);
+    }
+}
+
+static void* re_initialize_everything(void * _RKR)
+{
+    RKR * rkr = (RKR *) _RKR;
+    rkr->reset_all_effects();
+    rkr->Re_init_in_progress = 0;
+
+    return 0;
+}
+
+void
+RKR::reset_everything()
+{
+    int result = pthread_create(&t_init, nullptr, re_initialize_everything, this);
+    if(result != 0)
+    {
+        printf("Error creating thread.\n"); // FIXME
+    }
+}
+
+void 
+RKR::reset_join_thread()
+{
+    if(t_init)
+    {
+        int result = pthread_join(t_init, nullptr);
+        if(result != 0)
+        {
+            printf("Error joining thread.\n");  // FIXME
+        }
     }
 }

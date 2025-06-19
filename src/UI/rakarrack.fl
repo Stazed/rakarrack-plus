@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0309
+version 1.0311
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -283,6 +283,9 @@ decl {class DelayFileWindowGui; // forward declaration} {public global
 }
 
 decl {class RandomEditGui; // forward declaration} {public global
+}
+
+decl {\#include "Reset_Window.h"} {public global
 }
 
 decl {Fl_Tiled_Image *back = NULL;} {private global
@@ -2074,6 +2077,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {DisAssigns()} {open
   } {}
   Function {Prepare_Order()} {open
+  } {}
+  Function {Show_Reset_Window()} {open return_type void
   } {}
   Function {Show_Next_Time()} {open
   } {}

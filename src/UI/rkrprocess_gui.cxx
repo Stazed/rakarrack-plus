@@ -3138,6 +3138,13 @@ void RKRGUI::Prepare_Order()
     Order->Order_Bro->select(1);
 }
 
+void RKRGUI::Show_Reset_Window()
+{
+    Reset_Window w_reset;
+    w_reset.initialize(m_process);
+    w_reset.show_reset_window();
+}
+
 void RKRGUI::Show_Next_Time()
 {
     // popup for settings changes that will not take effect until restart

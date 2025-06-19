@@ -687,6 +687,8 @@ public:
     void initialize(bool re_initialize = false);
     void delete_everything();
     void reset_all_effects(bool need_state_restore = true);
+    void reset_everything();
+    void reset_join_thread();
 #ifdef RKR_PLUS_LV2
     void set_client_name(std::string s_name);
 #else
@@ -719,7 +721,6 @@ public:
     void conectaaconnect ();
     void disconectaaconnect ();
 #ifdef RKR_PLUS_LV2
-    pthread_t t_pgm;
     void lv2_process_midi_program_changes();
     void lv2_join_thread();
 #else
@@ -832,6 +833,11 @@ public:
     class AnalogFilter *DC_Offsetl;
     class AnalogFilter *DC_Offsetr;
 
+#ifdef RKR_PLUS_LV2
+    pthread_t t_pgm;
+#endif
+    pthread_t t_init;
+
     jack_client_t *jackclient;
     char jackcliname[64];
     int Jack_Shut_Down;
@@ -853,10 +859,16 @@ public:
     int ACI_Active;     // Analog control (trigger window)
 
     /**
-     * Flag to indicate the program should terminate (user request).
+     * Flag to indicate the program should terminate (user request). Or,
+     * for LV2, the custom GUI is to be hidden, either by host or user.
      * 1 to quit, 0 to continue. Used in Main() processing loop.
      */
     int Exit_Program;
+
+    /**
+     * Flag for indicating the re-initialization is in progress.
+     */
+    int Re_init_in_progress;
 
     /**
      * The current user selected bank preset index from button press in Bank window or
