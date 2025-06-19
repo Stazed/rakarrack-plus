@@ -198,6 +198,7 @@ const void *RakarrackPlusLV2UI::extension_data(const char *uri)
     return nullptr;
 }
 
+#if 0
 void RakarrackPlusLV2UI::port_event(LV2UI_Handle ui,
     uint32_t port_index,
     uint32_t /*buffer_size*/,
@@ -206,13 +207,13 @@ void RakarrackPlusLV2UI::port_event(LV2UI_Handle ui,
 {
    // printf("GOT PORT EVENT\n");
 }
-
+#endif
 
 static const LV2UI_Descriptor rakarrack_plus_descriptor = {
     RAKARRACK_PLUS_LV2_UI_URI,
     RakarrackPlusLV2UI::instantiate,
     RakarrackPlusLV2UI::cleanup,
-    RakarrackPlusLV2UI::port_event,
+    NULL,
     RakarrackPlusLV2UI::extension_data
 };
 
