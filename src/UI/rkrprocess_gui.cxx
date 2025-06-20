@@ -3142,6 +3142,10 @@ void RKRGUI::Show_Reset_Window()
 {
     Reset_Window w_reset( m_process, p);
     w_reset.show_reset_window();
+
+    // Update these as well
+    Sco->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, this);
+    Analy->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, m_process->sample_rate, this);
 }
 
 void RKRGUI::Show_Next_Time()
