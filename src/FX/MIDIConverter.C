@@ -23,6 +23,8 @@
 #define MAX_FFT_LENGTH 48000
 #define MAX_PEAKS 8
 
+static pthread_mutex_t fftw_planner_lock = PTHREAD_MUTEX_INITIALIZER;
+
 MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermediate_bufsize):
     schmittBuffer(NULL),
     schmittPointer(NULL),
@@ -88,7 +90,9 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     notes = englishNotes;
 
     schmittInit(32); // 32 == latency (tuneit default = 10)
+#ifndef RKR_PLUS_LV2
     fftInit(32); // == latency
+#endif
 
     char portname[50]; // used by alsa - put here to avoid unused variable compiler warning on jname
     snprintf(portname, sizeof(portname), "%s MC OUT", jname); // used by alsa - put here to avoid unused variable compiler warning on jname
@@ -119,7 +123,9 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
 MIDIConverter::~MIDIConverter()
 {
     schmittFree();
+#ifndef RKR_PLUS_LV2
     fftFree();
+#endif
 #ifndef LV2_SUPPORT
 #ifndef RKR_PLUS_LV2
     if(port)
@@ -379,7 +385,9 @@ MIDIConverter::fftInit(int size)
     fftSize = 2 + (SAMPLE_RATE / size);
     fftIn = (float*) fftwf_malloc(sizeof (float) * 2 * (fftSize / 2 + 1));
     fftOut = (fftwf_complex *) fftIn;
+    pthread_mutex_lock (&fftw_planner_lock);
     fftPlan = fftwf_plan_dft_r2c_1d(fftSize, fftIn, fftOut, FFTW_MEASURE);
+    pthread_mutex_unlock (&fftw_planner_lock);
 
     fftSampleBuffer = (float *) malloc(fftSize * sizeof (float));
     fftSample = NULL;
@@ -520,7 +528,9 @@ MIDIConverter::fftS16LE(signed short int *indata, float val_sum, float *freqs, f
 void
 MIDIConverter::fftFree()
 {
+    pthread_mutex_lock (&fftw_planner_lock);
     fftwf_destroy_plan(fftPlan);
+    pthread_mutex_unlock (&fftw_planner_lock);
     fftwf_free(fftIn);
     free(fftSampleBuffer);
     free(fftLastPhase);
