@@ -27,19 +27,17 @@
 #ifndef RAKARRACKPLUSLV2_UI_H
 #define RAKARRACKPLUSLV2_UI_H
 
-#include <string>
-#include <cassert>
-#include <functional>
-#include <memory>
 
-#include "external-ui.h"
+#include <cassert>  // assert
+#include <memory>   // std::unique_ptr
+
+#include <lv2/lv2plug.in/ns/extensions/ui/ui.h>
 #include "../UI/rakarrack.h"
 #include "../process.h"
 
-class RakarrackPlusLV2UI : public LV2_External_UI_Widget
+
+class RakarrackPlusLV2UI
 {
-    std::string plugin_human_id;
-    std::function<void()> notify_on_GUI_close;
     std::unique_ptr<RKRGUI> r_gui;
     RKR * m_RKR;
     bool is_shown;
@@ -53,27 +51,15 @@ public:
     static void cleanup(LV2UI_Handle ui);
 //    static void port_event(LV2UI_Handle ui, uint32_t port_index, uint32_t /*buffer_size*/, uint32_t format, const void * buffer);
     static const void *extension_data(const char *uri);
-    void shutDownGUI();
     bool init();
     void run();
-    void show();
-    void hide();
-    static void callback_Run (LV2_External_UI_Widget* ui){ self(ui).run();  }
-    static void callback_Show(LV2_External_UI_Widget* ui){ self(ui).show(); }
-    static void callback_Hide(LV2_External_UI_Widget* ui){ self(ui).hide(); }
+    static int idle(LV2UI_Handle handle);
+    static int resize_func(LV2UI_Feature_Handle handle, int w, int h);
+    static constexpr LV2UI_Idle_Interface idle_iface = { RakarrackPlusLV2UI::idle };
+    static constexpr LV2UI_Resize resize_ui = { 0, RakarrackPlusLV2UI::resize_func };
     static int callback_IdleInterface(LV2_Handle ui){ self(ui).run(); return 0; }
-    static int callback_ShowInterface(LV2_Handle ui){ self(ui).show(); return 0; }
-    static int callback_HideInterface(LV2_Handle ui){ self(ui).hide(); return 0; }
-
-public:
-    using CallbackGuiClosed = std::function<void()>;
-    void installGuiClosedCallback(CallbackGuiClosed callback)
-    {
-        callbackGuiClosed = std::move(callback);
-    }
 private:
-    CallbackGuiClosed callbackGuiClosed;
-    void init_fltk_lock();
+
 };
 
 
