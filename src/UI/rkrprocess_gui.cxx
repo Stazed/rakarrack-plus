@@ -740,9 +740,12 @@ void RKRGUI::put_icon(Fl_Window* window)
  */
 void RKRGUI::load_previous_state()
 {
+#ifdef RKR_PLUS_LV2
+    Principal->resize(0, 0, m_process->Config.Principal_W, m_process->Config.Principal_H);
+#else
     Principal->resize(m_process->Config.Principal_X, m_process->Config.Principal_Y,
                       m_process->Config.Principal_W, m_process->Config.Principal_H);
-
+#endif
     BankWindow->resize(m_process->Config.BankWindow_X, m_process->Config.BankWindow_Y,
                        m_process->Config.BankWindow_W, m_process->Config.BankWindow_H);
 
