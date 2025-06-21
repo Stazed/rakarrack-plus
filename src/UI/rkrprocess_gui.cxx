@@ -59,7 +59,9 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
 
     Fl::visual(FL_DOUBLE | FL_RGB);
     fl_register_images();
+#ifndef NTK_SUPPORT
     Fl::set_fonts(0);
+#endif
 
     m_process = process_rkr = rkr_;
 
@@ -2261,7 +2263,7 @@ void RKRGUI::MiraConfig()
 
     Settings->Font_Bro->clear();
     Settings->Font_Bro->textcolor(global_label_color);
-
+#ifndef NTK_SUPPORT
     int k = Fl::set_fonts(0);
     for (int i = 0; i < k; i++)
     {
@@ -2293,7 +2295,7 @@ void RKRGUI::MiraConfig()
 #endif
         Settings->Font_Bro->add(name);
     }
-
+#endif
     Settings->Font_Bro->value(global_font_type + 1);
 }
 
