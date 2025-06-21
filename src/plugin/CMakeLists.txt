@@ -167,7 +167,8 @@ set (ProgSources
 )
 
 set(ExternLibraries
-    ${FLTK_LIBRARIES}
+    ${NTK_IMAGES_LIBRARIES}
+    ${NTK_LIBRARIES}
     ${FONTCONFIG_LIBRARIES}
     ${FFTW3_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
@@ -191,7 +192,7 @@ add_library(Rakarrack-Plus SHARED
 
 target_include_directories (
     Rakarrack-Plus PRIVATE
-    ${FLTK_INCLUDE_DIR}
+    ${NTK_INCLUDE_DIRS}
     ${FONTCONFIG_INCLUDE_DIRS}
     ${FFTW3_INCLUDE_DIRS}
     ${SNDFILE_INCLUDE_DIRS}
@@ -215,6 +216,7 @@ target_sources(Rakarrack-Plus PRIVATE
 )
 
 target_compile_definitions(Rakarrack-Plus PRIVATE RKR_PLUS_LV2=1)
+target_compile_definitions(Rakarrack-Plus PRIVATE NTK_SUPPORT=1)
 set_target_properties(Rakarrack-Plus PROPERTIES PREFIX "")
 set_target_properties(Rakarrack-Plus PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE )
 
