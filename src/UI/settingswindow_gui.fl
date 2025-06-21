@@ -69,7 +69,8 @@ m_parent= _rgui;} {}
       }
       Fl_Choice scheme_ch {
         label Schema
-        callback {switch ((int)o->value())
+        callback {\#ifndef NTK_SUPPORT
+switch ((int)o->value())
 
 {
 
@@ -104,7 +105,8 @@ Fl::redraw();
 break;
 
 
-}}
+}
+\#endif}
         xywh {30 59 88 20} down_box BORDER_BOX labelsize 13 labelcolor 7 align 5 textsize 12 textcolor 7
         code0 {o->set_label_offset(3);}
         code1 {o->set_text_offset(2);}

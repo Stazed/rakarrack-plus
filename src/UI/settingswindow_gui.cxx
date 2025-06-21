@@ -4,7 +4,8 @@
 #include "../strlcpy.h"
 
 void SettingsWindowGui::cb_scheme_ch_i(RKR_Choice* o, void*) {
-  switch ((int)o->value())
+  #ifndef NTK_SUPPORT
+switch ((int)o->value())
 
 {
 
@@ -39,7 +40,8 @@ Fl::redraw();
 break;
 
 
-};
+}
+#endif
 }
 void SettingsWindowGui::cb_scheme_ch(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_scheme_ch_i(o,v);
