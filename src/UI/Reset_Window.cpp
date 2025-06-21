@@ -33,7 +33,6 @@
 #include "Reset_Window.h"
 
 static Fl_Window * g_reset_window = 0;
-static bool _reset_complete = false;
 
 static void
 window_cb( Fl_Widget *, void * )
