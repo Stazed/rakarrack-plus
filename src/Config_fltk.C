@@ -232,11 +232,13 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     // Sanity check. Can happen when NSM session copied to another computer
     // that has fewer fonts loaded than source. Also if some fonts are removed.
     // Segfault if font type is out of range.
+#ifndef NTK_SUPPORT
     if(font_type >= Fl::set_fonts(0)) // set_fonts returns number of fonts available
     {
         fprintf(stderr, "Invalid font type, reverting to default\n");
         font_type = 0;   // reset to default
     }
+#endif
 
     rakarrack.get(PrefNom("FontSize"), font_size, C_DEFAULT_FONT_SIZE);
     rakarrack.get(PrefNom("Foreground Color"), fore_color, RKR_buttons_color);
