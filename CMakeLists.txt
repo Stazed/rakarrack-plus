@@ -24,7 +24,7 @@ option (BuildRakarrackPlus "Build rakarrack-plus" ON)
 option (BuildRakarrackPlusLV2 "Build rakarrack-plus LV2 (Rakarrack-Plus.lv2) Experimental!!!" OFF)
 option (BuildLV2Plugins "Build rakarack-plus lv2 plugin effects (RakarrackPlus.lv2)" ON)
 option (BuildCarlaPresets "Build Carla presets for lv2 from default banks" OFF)
-option (EnableNTK "Use NTK toolkit for build" OFF)
+#option (EnableNTK "Use NTK toolkit for build" OFF)
 option (EnableNSM "Enable NSM session support" ON)
 option (EnableSysex "Enable Sysex preset save support" ON)
 option (BuildForDebug "Include gdb debugging support" OFF)
@@ -72,21 +72,22 @@ set (BuildOptionsBasic
 )
 
 set (BuildOptionsDebug
-    "-std=c++11 -O0 -g3 -ggdb -Wall -Wextra -Wpointer-arith"
+    "-std=c++11 -Wno-cast-function-type -O0 -g3 -ggdb -Wall -Wextra -Wpointer-arith"
     CACHE STRING "Debug build flags"
 )
 
 find_package (PkgConfig REQUIRED)
 
 #dependencies
-if(EnableNTK)
+if(BuildRakarrackPlusLV2)
     pkg_check_modules(NTK ntk REQUIRED)
     pkg_check_modules(NTK_IMAGES ntk_images REQUIRED)
-    add_definitions(-D'BUILD_TYPE="Built with NTK Library"')
-else(EnableNTK)
+endif(BuildRakarrackPlusLV2)
+
+if(BuildRakarrackPlus)
     SET(FLTK_SKIP_OPENGL TRUE) 
     find_package(FLTK REQUIRED)
-endif(EnableNTK)
+endif(BuildRakarrackPlus)
 
 find_package(ALSA REQUIRED alsa>=1.0.17)
 find_package(X11 REQUIRED)
@@ -349,7 +350,7 @@ package_status(EnableVectorization "Vectorization. . . . . . . . . . . . . . . .
 package_status(EnableAltivec       "Use altiveck . . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableSSE           "Use sse. . . . . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableSSE2          "Use sse2 . . . . . . . . . . . . . . . . . . . . . . . .:"  )
-package_status(EnableNTK           "Enable NTK build . . . . . . . . . . . . . . . . . . . .:"  )
+#package_status(EnableNTK           "Enable NTK build . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(BuildRakarrackPlus  "Build Rakarrack-plus . . . . . . . . . . . . . . . . . .:"  )
 package_status(BuildRakarrackPlusLV2  "Build Rakarrack-Plus-LV2 (Rakarrack-Plus.lv2). . . . . .:"  )
 package_status(BuildLV2Plugins     "Build LV2s (RakarrackPlus.lv2) . . . . . . . . . . . . .:"  )
