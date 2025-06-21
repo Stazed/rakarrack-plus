@@ -26,11 +26,9 @@
         rdfs:seeAlso <Rakarrack-Plus.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#rkrplus_ui>
-    a <http://kxstudio.sf.net/ns/lv2ext/external-ui#Widget> ;
+    a ui:X11UI ;
  	ui:binary <Rakarrack-Plus.so> ;
-    lv2:extensionData <http://lv2plug.in/ns/extensions/ui#idleInterface> ,
-                      <http://lv2plug.in/ns/extensions/ui#showInterface> ;
+    lv2:extensionData <http://lv2plug.in/ns/extensions/ui#idleInterface> ;
     lv2:optionalFeature <http://lv2plug.in/ns/extensions/ui#idleInterface> ;
-    lv2:optionalFeature <http://lv2plug.in/ns/extensions/ui#showInterface> ;
     lv2:requiredFeature <http://lv2plug.in/ns/ext/instance-access> .
 
