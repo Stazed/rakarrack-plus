@@ -86,6 +86,7 @@ void RKR_Choice::draw()
 
         // Draw arrow area
         fl_color(active_r() ? labelcolor() : fl_inactive(labelcolor()));
+#ifndef NTK_SUPPORT
         if (Fl::is_scheme("plastic"))
         {
             // Show larger up/down arrows...
@@ -93,6 +94,7 @@ void RKR_Choice::draw()
             fl_polygon(x1, y1 + 1, x1 + w1, y1 - w1 + 1, x1 + 2 * w1, y1 + 1); // Down arrow
         }
         else    // Gtk and Gleam 
+#endif
         {
 #if 1
             /* Draw Box and single down arrow, looks better to me */
