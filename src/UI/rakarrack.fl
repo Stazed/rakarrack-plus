@@ -580,10 +580,12 @@ m_process->ACI_Active = 0;
           }
           MenuItem FullScreen_Menu {
             label {Toggle Fullscreen}
-            callback {if(Principal->fullscreen_active())
+            callback {\#ifndef NTK_SUPPORT
+if(Principal->fullscreen_active())
     Principal->fullscreen_off();
   else
-    Principal->fullscreen();}
+    Principal->fullscreen();
+\#endif}
             xywh {0 0 36 21} shortcut 0xffc9
           }
         }

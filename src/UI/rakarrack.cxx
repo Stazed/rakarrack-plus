@@ -270,10 +270,12 @@ void RKRGUI::cb_ACI_Menu(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_FullScreen_Menu_i(Fl_Menu_*, void*) {
-  if(Principal->fullscreen_active())
+  #ifndef NTK_SUPPORT
+if(Principal->fullscreen_active())
     Principal->fullscreen_off();
   else
     Principal->fullscreen();
+#endif
 }
 void RKRGUI::cb_FullScreen_Menu(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_FullScreen_Menu_i(o,v);
