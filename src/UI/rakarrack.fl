@@ -2166,4 +2166,6 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {LV2_gui_hide()} {open return_type void
   } {}
+  Function {LV2_gui_show()} {open return_type void
+  } {}
 }

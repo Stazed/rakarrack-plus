@@ -66,6 +66,7 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     Re_init_in_progress(0),
     Selected_Preset(1),
     Change_Preset(C_CHANGE_PRESET_OFF),
+    hold_preset(C_CHANGE_PRESET_OFF),
     Change_Bank(C_BANK_CHANGE_OFF),
     Change_MIDI_Table(C_BANK_CHANGE_OFF),
     Command_Line_File(0),

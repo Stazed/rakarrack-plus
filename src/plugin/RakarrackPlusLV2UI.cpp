@@ -133,6 +133,7 @@ LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*d
         fl_embed( uiinst->r_gui->Principal ,(Window)uiinst->parentXWindow);
         *widget = (LV2UI_Widget)fl_xid_(uiinst->r_gui->Principal);
 
+        uiinst->m_RKR->Gui_Shown = 1;
         uiinst->thread_check_xwindow();
 
         return static_cast<LV2UI_Handle>(uiinst);
@@ -233,8 +234,9 @@ static void* check_xwindow_status(void * _RGUI)
             // Note: IsViewable means it's mapped and all its ancestors are mapped.
             if(!self->is_shown)
             {
+                printf("Showing GUI\n");
                 self->is_shown = true;
-                self->r_gui->LV2_gui_show(1);   // FIXME
+                self->r_gui->LV2_gui_show();
             }
         } else if (attrs.map_state == IsUnmapped)
         {
@@ -242,7 +244,7 @@ static void* check_xwindow_status(void * _RGUI)
             // Is triggered by user closing with the X box or host
             if(self->is_shown)
             {
-//                printf("Window is hidden\n");
+                printf("GUI is hidden\n");
                 self->is_shown = false;
                 self->r_gui->LV2_gui_hide();
                 Fl::check();

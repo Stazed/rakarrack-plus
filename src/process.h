@@ -880,6 +880,8 @@ public:
      * This is processed in GuiTimeout.
      */
     int Change_Preset;
+
+    int hold_preset;
     
     /**
      * Flag to indicate that a MIDI CC bank change has occurred. For GUI update.

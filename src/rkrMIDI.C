@@ -1320,7 +1320,7 @@ static void* check_program_change(void * _RKR)
             }
 
             // hold the preset number so we can update the bank window highlight TODO
-   //         hold_preset = process.Change_Preset;
+            rkr->hold_preset = rkr->Change_Preset;
             rkr->Change_Preset = C_CHANGE_PRESET_OFF;
         }
         usleep(1500);

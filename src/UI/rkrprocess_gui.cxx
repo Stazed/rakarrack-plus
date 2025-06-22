@@ -4460,13 +4460,48 @@ RKRGUI::LV2_gui_hide()
     AboutWin->hide();
     MIDILearn->hide();
     Trigger->hide();
-    Principal->hide();
+//    Principal->hide();    // don't need this because the parent xwindow close is what triggered this
     DelayFile->hide();
     RandomEdit->hide();
+
     for(unsigned i = 0; i < 8; ++i)
         save_current_state(i);
 
+    m_process->Gui_Shown = 0;
     Fl::remove_timeout(this->TimeoutStatic, this);
     m_process->lv2_process_midi_program_changes();  // this sets m_process->Exit_Program = 1;
 #endif
+}
+
+void RKRGUI::LV2_gui_show()
+{
+    // To update the Gui for any MIDI changes
+
+    /* For cabinet we need to update active preset on return from hide to refresh the gui */
+    m_process->Active_Preset.Effect_Params[EFX_CABINET][0] = m_process->Rack_Effects[EFX_CABINET]->getpar(0);
+    m_process->Active_Preset.Effect_Params[EFX_CABINET][1] = m_process->Rack_Effects[EFX_CABINET]->getpar(1);
+
+    Put_Loaded();
+    Put_Loaded_Bank();
+
+    if(m_process->hold_preset != C_CHANGE_PRESET_OFF)
+    {
+        BankWindow->unlight_preset(m_process->Selected_Preset);
+        BankWindow->light_preset(m_process->hold_preset);
+        Preset_Counter->value(m_process->hold_preset);
+        m_process->Selected_Preset = m_process->hold_preset;
+        m_process->hold_preset = C_CHANGE_PRESET_OFF;
+    }
+
+    // Need to reset OnOffC because the value is not adjusted or
+    // reset when the gui is hidden. If not reset, then it can
+    // result in an out of range.. segfault. Since this is used
+    // for efx_order[] array location.
+    m_process->OnOffC = 0;
+
+    m_process->lv2_join_thread();
+
+    m_process->Gui_Shown = 1;
+
+    Fl::add_timeout(.04, this->TimeoutStatic, this);
 }

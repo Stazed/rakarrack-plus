@@ -734,5 +734,6 @@ public:
   int NSM_gui_show(int hold_preset);
   void NSM_gui_hide();
   void LV2_gui_hide();
+  void LV2_gui_show();
 };
 #endif
