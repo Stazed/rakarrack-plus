@@ -29,7 +29,9 @@
 
 RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller controller,
         LV2UI_Widget* widget, LV2_Feature const *const * features) :
-    m_RKR(0),
+    r_gui(NULL),
+    m_RKR(NULL),
+    parentXWindow(NULL),
     is_shown(false)
 {
     while (*features)
@@ -51,13 +53,13 @@ RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_
 
 RakarrackPlusLV2UI::~RakarrackPlusLV2UI()
 {
-    r_gui.reset();
+    // cleanup does it
 }
 
 bool RakarrackPlusLV2UI::init()
 {
     if(m_RKR)
-        r_gui.reset(new RKRGUI(0, NULL, m_RKR));
+        r_gui = new RKRGUI(0, NULL, m_RKR);
     else
     {
        // printf("Global g_rkrplus pointer is NULL %p\n", m_RKR);
@@ -73,10 +75,77 @@ bool RakarrackPlusLV2UI::init()
     return true;
 }
 
-void RakarrackPlusLV2UI::run()
+int RakarrackPlusLV2UI::idle(LV2UI_Handle handle)
 {
+    RakarrackPlusLV2UI *self = static_cast<RakarrackPlusLV2UI *>(handle);
+
+ 
+    Display* display = XOpenDisplay(nullptr);
+    
+    if (!display)
+    {
+        // Handle error: could not open display
+        return 1;
+    }
+    
+    Window xid = (Window) self->parentXWindow;
+    
+    XWindowAttributes attrs;
+    if (XGetWindowAttributes(display, xid, &attrs) == 0) {
+        // Handle error: could not get window attributes (e.g., invalid XID)
+        XCloseDisplay(display);
+        return 1;
+    }
+
+    bool is_hidden = false;
+    
+    if (attrs.map_state == IsViewable)
+    {
+        // The window is mapped (shown)
+        // Note: IsViewable means it's mapped and all its ancestors are mapped.
+//        printf("Window is viewable\n");
+        if(!self->is_shown)
+        {
+            self->is_shown = true;
+            self->r_gui->LV2_gui_show(1);   // FIXME
+            //  self->r_gui->update_gui_from_LV2_hide();
+        }
+
+    } else if (attrs.map_state == IsUnmapped)
+    {
+        // The window is unmapped (hidden)
+        // Is triggered by user closing with the X box on the window
+        printf("Window is hidden\n");
+        bool is_hidden = true;
+        self->is_shown = false;
+        self->r_gui->LV2_gui_hide();
+        
+    } else if (attrs.map_state == IsUnviewable)
+    {
+        // The window is mapped but an ancestor is unmapped, so it's not viewable.
+        printf("Window is UN-viewable\n");
+    }
+    
+    XCloseDisplay(display);
+
+    if(is_hidden)
+        return 1;
+
     Fl::check();
     Fl::flush();
+    return 0;
+}
+
+int RakarrackPlusLV2UI::resize_func(LV2UI_Feature_Handle handle, int w, int h)
+{
+    RakarrackPlusLV2UI *self = static_cast<RakarrackPlusLV2UI *>(handle);
+    if(self && w>0 && h>0)
+    {
+        self->r_gui->Principal->size(w,h);
+    }
+
+    printf("RESIZE\n");
+    return 0;
 }
 
 LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*descriptor*/,
@@ -97,12 +166,11 @@ LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*d
     if (uiinst->init())
     {
         LV2UI_Resize* resize = NULL;
-        void* parentXwindow = 0;
         for (int i = 0; features[i]; ++i)
         {
             if (!strcmp(features[i]->URI, LV2_UI__parent)) 
             {
-               parentXwindow = features[i]->data;
+               uiinst->parentXWindow = features[i]->data;
             }
             else if (!strcmp(features[i]->URI, LV2_UI__resize)) 
             {
@@ -115,7 +183,7 @@ LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*d
         {
             resize->ui_resize(resize->handle, uiinst->r_gui->Principal->w(), uiinst->r_gui->Principal->h());
         }
-        fl_embed( uiinst->r_gui->Principal ,(Window)parentXwindow);
+        fl_embed( uiinst->r_gui->Principal ,(Window)uiinst->parentXWindow);
         *widget = (LV2UI_Widget)fl_xid_(uiinst->r_gui->Principal);
 
         return static_cast<LV2UI_Handle>(uiinst);
@@ -126,39 +194,40 @@ LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*d
     return NULL;
 }
 
-void RakarrackPlusLV2UI::cleanup(LV2UI_Handle ui)
+void RakarrackPlusLV2UI::cleanup(LV2UI_Handle handle)
 {
     printf("CLEANUP CALLED\n");
-    RakarrackPlusLV2UI *self = static_cast<RakarrackPlusLV2UI *>(ui);
+    RakarrackPlusLV2UI *self = static_cast<RakarrackPlusLV2UI *>(handle);
     self->r_gui->LV2_gui_hide();
     delete self->r_gui->Principal;
-    self->r_gui.reset();
+    delete self->r_gui;
     delete self;
 }
 
 LV2UI_Idle_Interface rakarrack_plus_idle_interface_desc =
 {
-    RakarrackPlusLV2UI::callback_IdleInterface,
+    RakarrackPlusLV2UI::idle_iface,
+};
+
+LV2UI_Resize rakarrack_plus_resize_ui_desc =
+{
+    RakarrackPlusLV2UI::resize_ui,
 };
 
 const void *RakarrackPlusLV2UI::extension_data(const char *uri)
 {
-    if (strcmp(uri, LV2_UI__idleInterface) == 0) {
+    if (strcmp(uri, LV2_UI__idleInterface) == 0)
+    {
         return &rakarrack_plus_idle_interface_desc;
     }
-    return nullptr;
-}
 
-#if 0
-void RakarrackPlusLV2UI::port_event(LV2UI_Handle ui,
-    uint32_t port_index,
-    uint32_t /*buffer_size*/,
-    uint32_t format,
-    const void * buffer)
-{
-   // printf("GOT PORT EVENT\n");
+    if (strcmp(uri, LV2_UI__resize) == 0)
+    {
+        return &rakarrack_plus_resize_ui_desc;
+    }
+
+    return NULL;
 }
-#endif
 
 static const LV2UI_Descriptor rakarrack_plus_descriptor = {
     RAKARRACK_PLUS_LV2_UI_URI,
