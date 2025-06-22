@@ -29,8 +29,8 @@
 
 RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller controller,
         LV2UI_Widget* widget, LV2_Feature const *const * features) :
-    r_gui(NULL),
     m_RKR(NULL),
+    r_gui(NULL),
     parentXWindow(NULL),
     is_shown(false),
     is_active(false)
