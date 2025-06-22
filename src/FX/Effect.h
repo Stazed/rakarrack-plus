@@ -75,7 +75,7 @@ public:
     
     void Vol3_Efx(float *efxoutl, float *efxoutr, float *smpl, float *smpr);
 
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
     virtual void lv2_update_params(uint32_t)  = 0;
 #endif // LV2
     virtual void LV2_parameters(std::string &, int) {};

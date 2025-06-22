@@ -78,7 +78,7 @@ HarmEnhancer::cleanup()
     limiter->cleanup();
 }
 
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
 void
 HarmEnhancer::lv2_update_params(uint32_t period)
 {

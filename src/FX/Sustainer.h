@@ -51,7 +51,7 @@ public:
     int get_number_efx_parameters () {return C_SUSTAIN_PARAMETERS;};
     void set_random_parameters();
 
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
     void lv2_update_params(uint32_t period);
 #endif // LV2
     virtual void LV2_parameters(std::string &s_buf, int type);

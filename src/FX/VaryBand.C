@@ -131,7 +131,7 @@ VaryBand::cleanup()
     hpf3r->cleanup();
 }
 
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
 void
 VaryBand::lv2_update_params(uint32_t period)
 {

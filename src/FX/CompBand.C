@@ -133,7 +133,7 @@ CompBand::cleanup()
     CH->cleanup();
 }
 
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
 void
 CompBand::lv2_update_params(uint32_t period)
 {

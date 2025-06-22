@@ -110,11 +110,14 @@ private:
 
     unsigned int SAMPLE_RATE;
     float fSAMPLE_RATE;
+
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
+public:
+    void lv2_update_params(uint32_t period);
+#endif
     
 #ifdef LV2_SUPPORT
-public:
     void setGain(int val);
-    void lv2_update_params(uint32_t period);
     void update_freqs(float val);
     _RKRLV2* plug; // for access to forge_midimessage()
 private:

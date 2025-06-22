@@ -257,7 +257,7 @@ Chorus::cleanup()
     }
 }
 
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
 void
 Chorus::lv2_update_params(uint32_t period)
 {

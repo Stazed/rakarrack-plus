@@ -156,7 +156,7 @@ Alienwah::cleanup()
     oldk = 0;
 }
 
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
 void
 Alienwah::lv2_update_params(uint32_t period)
 {

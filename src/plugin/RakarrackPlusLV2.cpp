@@ -268,7 +268,7 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
-      //  plug->rkrplus->m_sus->lv2_update_params(nframes); // TODO
+        plug->rkrplus->lv2_update_params(nframes);
     }
 
     /* Process incoming MIDI messages */

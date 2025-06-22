@@ -1103,3 +1103,13 @@ RKR::reset_join_thread()
         }
     }
 }
+
+void
+RKR::lv2_update_params(uint32_t period)
+{
+    for (int i = 0; i < C_NUMBER_ORDERED_EFFECTS; i++)
+    {
+        // process all effects since they can change 
+        Rack_Effects[efx_order[i]]->lv2_update_params(period);
+    }
+}

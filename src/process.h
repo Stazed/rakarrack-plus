@@ -745,6 +745,7 @@ public:
     int LV2_save_preferences(std::string &s_buf);
     void LV2_restore_preferences(const std::string &s_buf);
     void check_preferences_changed(std::vector<int> &s_vect);
+    void lv2_update_params(uint32_t period);
     void load_custom_MIDI_table_preset_names();
     void revert_file_to_bank(int lv_revert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
     void convert_bank_to_file(int lv_convert[C_MAX_EFFECTS][C_MAX_PARAMETERS], int size);
