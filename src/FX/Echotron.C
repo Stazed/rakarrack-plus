@@ -80,7 +80,7 @@ Echotron::Echotron(double sample_rate, uint32_t intermediate_bufsize) :
     lpfr(NULL),
     interpbuf(NULL),
     filterbank()
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
     ,FILENAME(NULL)
 #endif // LV2
 {
@@ -653,7 +653,7 @@ Echotron::check_delay_file_ranges(double value, int item)
 DlyFile
 Echotron::loadfile(char* filename)
 {
-#ifdef LV2_SUPPORT
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
     FILENAME = filename; // For lv2 if need to re-initialize and reload file
 #endif // LV2
     

@@ -279,7 +279,7 @@ private:
     } filterbank[ECHOTRON_MAXFILTERS];
 
 
-#if defined LV2_SUPPORT || defined RKR_PLUS_LV2 // FIXME CHECK FOR RPLUS LV2 TODO
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
     char* FILENAME;     // for lv2 if need to re-initialize and reset .dly file
 #endif // LV2
 };
