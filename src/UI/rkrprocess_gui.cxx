@@ -4475,6 +4475,7 @@ RKRGUI::LV2_gui_hide()
 
 void RKRGUI::LV2_gui_show()
 {
+#ifdef RKR_PLUS_LV2
     // To update the Gui for any MIDI changes
 
     /* For cabinet we need to update active preset on return from hide to refresh the gui */
@@ -4504,4 +4505,5 @@ void RKRGUI::LV2_gui_show()
     m_process->Gui_Shown = 1;
 
     Fl::add_timeout(.04, this->TimeoutStatic, this);
+#endif
 }
