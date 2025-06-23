@@ -106,7 +106,6 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     JACK_SAMPLE_RATE(_sample_rate),
     JACK_PERIOD(_period),
     period_master(),
-    fPeriod(),
     sample_rate(),
     fSample_rate(),
     cSample_rate(),
@@ -652,7 +651,6 @@ RKR::Adjust_Upsample()
 
     fSample_rate = (float) sample_rate;
     cSample_rate = 1.0f / (float) sample_rate;
-    fPeriod = float(period_master);
     t_periods = JACK_SAMPLE_RATE / 12 / JACK_PERIOD;
 
 }
@@ -1104,6 +1102,7 @@ RKR::reset_join_thread()
     }
 }
 
+#ifdef RKR_PLUS_LV2
 void
 RKR::lv2_update_params(uint32_t period)
 {
@@ -1113,3 +1112,4 @@ RKR::lv2_update_params(uint32_t period)
         Rack_Effects[efx_order[i]]->lv2_update_params(period);
     }
 }
+#endif
