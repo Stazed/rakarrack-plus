@@ -33,6 +33,8 @@ metronome::metronome(double samplerate, uint32_t intermediate_bufsize) :
     interpbuf(NULL),
     fSAMPLE_RATE(float(samplerate)),
     SAMPLE_RATE(samplerate),
+    dSAMPLERATE(samplerate),
+    PERIOD(intermediate_bufsize),
     tick_interval(SAMPLE_RATE),
     tickctr(),
     meter(3),
@@ -42,14 +44,26 @@ metronome::metronome(double samplerate, uint32_t intermediate_bufsize) :
     sharptick(NULL),
     hpf(NULL)
 {
-    interpbuf = new float[intermediate_bufsize];
-
-    dulltick = new AnalogFilter(4, 1600.0f, 80.0f, 1, samplerate, interpbuf); //BPF
-    sharptick = new AnalogFilter(4, 2800.0f, 80.0f, 1, samplerate, interpbuf); //BPF
-    hpf = new AnalogFilter(3, 850.0f, 60.0f, 1, samplerate, interpbuf); //HPF
+    initialize();
 }
 
 metronome::~metronome()
+{
+    clear_initialize();
+}
+
+void
+metronome::initialize()
+{
+    interpbuf = new float[PERIOD];
+
+    dulltick = new AnalogFilter(4, 1600.0f, 80.0f, 1, dSAMPLERATE, interpbuf); //BPF
+    sharptick = new AnalogFilter(4, 2800.0f, 80.0f, 1, dSAMPLERATE, interpbuf); //BPF
+    hpf = new AnalogFilter(3, 850.0f, 60.0f, 1, dSAMPLERATE, interpbuf); //HPF
+}
+
+void
+metronome::clear_initialize()
 {
     delete[] interpbuf;
     delete dulltick;
@@ -66,6 +80,16 @@ metronome::cleanup()
     sharptick->cleanup();
     hpf->cleanup();
 }
+
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
+void
+metronome::lv2_update_params(uint32_t period)
+{
+    PERIOD = period;
+    clear_initialize();
+    initialize();
+}
+#endif
 
 /*
  * Update the changed parameters

@@ -69,7 +69,7 @@ public:
     int getpar (int npar);
     int get_number_efx_parameters () {return C_LOOPER_PARAMETERS;};
 #if defined LV2_SUPPORT || defined RKR_PLUS_LV2
-    void lv2_update_params(uint32_t /*period*/){return;};   // FIXME TODO
+    void lv2_update_params(uint32_t period);
 #endif // LV2
     
     void cleanuppt1 ();

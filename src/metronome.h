@@ -34,15 +34,23 @@ public:
     metronome (double samplerate, uint32_t intermediate_bufsize);
     ~metronome ();
     void cleanup();
+    void initialize();
+    void clear_initialize();
     void metronomeout (float * tickout, int period);
     void set_tempo (int bpm);
     void set_meter (int counts);
     int markctr;
     float * interpbuf;//buffer for filter
 
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
+    void lv2_update_params(uint32_t period);
+#endif // LV2
+
 private:
     float fSAMPLE_RATE;
     unsigned int SAMPLE_RATE;
+    double dSAMPLERATE;
+    uint32_t PERIOD;
     int tick_interval;
     int tickctr;
     int meter;

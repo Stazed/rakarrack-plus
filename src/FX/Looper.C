@@ -161,6 +161,17 @@ Looper::initdelays()
     Srate_Attack_Coeff = 90.0f / (dl + dl2); // Set swell time
 }
 
+#if defined LV2_SUPPORT || defined RKR_PLUS_LV2
+void
+Looper::lv2_update_params(uint32_t period)
+{
+    PERIOD = period_master = period;
+    ticker.lv2_update_params(period);
+    ticker.cleanup();
+    cleanup();
+}
+#endif
+
 /*
  * Effect output
  */
