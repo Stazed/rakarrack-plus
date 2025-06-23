@@ -810,8 +810,11 @@ void RKRGUI::load_previous_state()
     // since we don't want to load anything and overwrite state restore.
     m_process->Selected_Preset = m_process->Config.Preset_Number;
     Preset_Counter->value(m_process->Config.Preset_Number);
-    // For LV2 the FFT multiple occurrances bug will crash things,,,
+    // For LV2 the FFT multiple occurrences bug will crash things,,,
     MIDI->Use_FFT->deactivate();
+    Settings->Font_Bro->deactivate();   // NTK does not support ATM
+    Settings->scheme_ch->deactivate();  // NTK does not support ATM
+    FullScreen_Menu->deactivate();      // NTK does not support ATM
 #else
     if (!m_process->Command_Line_File)
     {

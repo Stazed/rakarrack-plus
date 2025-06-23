@@ -226,13 +226,16 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     // ************* Settings/Look ******************
     rakarrack.get(PrefNom("Schema"), Schema, 2);
 
+#ifdef NTK_SUPPORT
+    font_type = 0;  // NTK does not support this ATM
+#else
     // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed
     // Free Helvetian, FreeSans, Garuda, Ubuntu, Verana Sans
     rakarrack.get(PrefNom("Font"), font_type, 0);
     // Sanity check. Can happen when NSM session copied to another computer
     // that has fewer fonts loaded than source. Also if some fonts are removed.
     // Segfault if font type is out of range.
-#ifndef NTK_SUPPORT
+
     if(font_type >= Fl::set_fonts(0)) // set_fonts returns number of fonts available
     {
         fprintf(stderr, "Invalid font type, reverting to default\n");
