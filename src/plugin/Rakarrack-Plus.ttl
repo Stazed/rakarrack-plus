@@ -24,6 +24,7 @@
 @prefix state: <http://lv2plug.in/ns/ext/state#> .
 @prefix lv2midi:  <http://lv2plug.in/ns/ext/midi#> .
 @prefix time: <http://lv2plug.in/ns/ext/time#> .
+@prefix opts: <http://lv2plug.in/ns/ext/options#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -42,10 +43,17 @@
         ] ;
 
         lv2:extensionData state:interface ;
-        lv2:requiredFeature <http://lv2plug.in/ns/ext/urid#map> ;
+        lv2:requiredFeature <http://lv2plug.in/ns/ext/urid#map>,
+             <http://lv2plug.in/ns/ext/buf-size#boundedBlockLength>,
+             opts:options;
         lv2:minorVersion 0 ;
         lv2:microVersion 0 ;
         rdfs:comment "Guitar and audio effects." ;
+
+        opts:requiredOption <http://lv2plug.in/ns/ext/buf-size#maxBlockLength> ;
+        opts:supportedOptions <http://lv2plug.in/ns/ext/buf-size#minBlockLength>,
+            <http://lv2plug.in/ns/ext/buf-size#nominalBlockLength> ;
+
         lv2:optionalFeature lv2:hardRTCapable ;
         ui:ui  <https://github.com/Stazed/rakarrack-plus#rkrplus_ui> ;
 

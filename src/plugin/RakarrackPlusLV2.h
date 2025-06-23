@@ -73,6 +73,8 @@ typedef struct _RKRPLUSLV2
         LV2_URID    atom_Object;
         LV2_URID    atom_URID;
         LV2_URID    bufsz_max;
+        LV2_URID    bufsz_min;
+        LV2_URID    bufsz_nom;
         LV2_URID    rkrplus_state_id;
         LV2_URID    atom_blank;
         LV2_URID    atom_position;

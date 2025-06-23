@@ -38,6 +38,7 @@ std::string nsm_preferences_file = "";
 void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
 {
     uint8_t i,j;
+    uint32_t nomBufSize = 0;
     plug->nparams = 0;
     plug->effectindex = 0;
     plug->period_max = INTERMEDIATE_BUFSIZE;
@@ -56,6 +57,8 @@ void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
     plug->URIDs.atom_Object = 0;
     plug->URIDs.atom_URID = 0;
     plug->URIDs.bufsz_max = 0;
+    plug->URIDs.bufsz_min = 0;
+    plug->URIDs.bufsz_nom = 0;
     plug->URIDs.rkrplus_state_id = 0;
     plug->URIDs.atom_blank = 0;
     plug->URIDs.atom_position = 0;
@@ -73,13 +76,20 @@ void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
             option = (LV2_Options_Option*)host_features[i]->data;
             for(j=0; option[j].key; j++)
             {
-                if(option[j].key == plug->URIDs.bufsz_max)
+                if(option[j].key == plug->URIDs.bufsz_max || option[j].key == plug->URIDs.bufsz_min)
                 {
                     if(option[j].type == plug->URIDs.atom_Int)
                     {
-                        plug->period_max = *(const int*)option[j].value;
+                        uint32_t bufSz = *(const int*)option[j].value;
+                        if(plug->period_max < bufSz)
+                            plug->period_max = bufSz;
+                        
                     }
                     //other types?
+                }
+                if(option[j].key == plug->URIDs.bufsz_nom && option[j].type == plug->URIDs.atom_Int)
+                {
+                    nomBufSize =  *(const uint32_t*)option[j].value;
                 }
             }
         }
@@ -94,6 +104,8 @@ void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
                 plug->URIDs.atom_Object = plug->urid_map->map(plug->urid_map->handle,LV2_ATOM__Object);
                 plug->URIDs.atom_URID = plug->urid_map->map(plug->urid_map->handle,LV2_ATOM__URID);
                 plug->URIDs.bufsz_max = plug->urid_map->map(plug->urid_map->handle,LV2_BUF_SIZE__maxBlockLength);
+                plug->URIDs.bufsz_min = plug->urid_map->map(plug->urid_map->handle,LV2_BUF_SIZE__minBlockLength);
+                plug->URIDs.bufsz_nom = plug->urid_map->map(plug->urid_map->handle,LV2_BUF_SIZE__nominalBlockLength);
                 plug->URIDs.rkrplus_state_id = plug->urid_map->map(plug->urid_map->handle,RAKARRACK_PLUS_STATE_URI);
                 plug->URIDs.atom_string_id = plug->urid_map->map(plug->urid_map->handle,LV2_ATOM__String);
                 plug->URIDs.atom_position = plug->urid_map->map(plug->urid_map->handle, LV2_TIME__Position);
@@ -107,6 +119,12 @@ void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
             }
         }
     }
+
+    if (nomBufSize > 0)
+        plug->period_max = nomBufSize;
+    else if (plug->period_max == 0)
+        plug->period_max = INTERMEDIATE_BUFSIZE;
+    
 }
 
 //checks if input and output buffers are shared and copies it in a temp buffer so wet/dry works
@@ -265,7 +283,7 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     inline_check(plug, nframes);
 
     /* adjust for possible variable nframes */
-    if(plug->period_max != nframes)
+    if(plug->period_max < nframes)
     {
         plug->period_max = nframes;
         plug->rkrplus->lv2_update_params(nframes);
