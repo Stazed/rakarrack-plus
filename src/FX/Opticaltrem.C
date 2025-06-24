@@ -85,7 +85,7 @@ Opticaltrem::cleanup()
 void
 Opticaltrem::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
+    PERIOD = period_master = period;
     lfo->updateparams(period);
 }
 #endif // LV2

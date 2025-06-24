@@ -137,9 +137,9 @@ CompBand::cleanup()
 void
 CompBand::lv2_update_params(uint32_t period)
 {
-    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period != PERIOD)
     {
-        PERIOD = period;
+        PERIOD = period_master = period;
         clear_initialize();
         initialize();
         setCross1(Cross1);
@@ -148,7 +148,7 @@ CompBand::lv2_update_params(uint32_t period)
     }
     else
     {
-        PERIOD = period;
+        PERIOD = period_master = period;
     }
 
     CL->lv2_update_params(period);

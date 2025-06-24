@@ -74,8 +74,8 @@ WahWah::out(float * efxoutl, float * efxoutr)
 {
     if (filterpars->changed)
     {
-        filterpars->changed = false;
-        cleanup();
+//        filterpars->changed = false;
+//        cleanup();
         return;
     }
 
@@ -146,16 +146,18 @@ WahWah::cleanup()
 void
 WahWah::lv2_update_params(uint32_t period)
 {
-    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period != PERIOD)
     {
-        PERIOD = period;
+        PERIOD = period_master = period;
+        filterpars->changed = true;
         delete filterpars;
         filterpars = new FilterParams(0, 64, 64, fSAMPLE_RATE, PERIOD);
         reinitfilter();
+        filterpars->changed = false;
     }
     else
     {
-        PERIOD = period;
+        PERIOD = period_master = period;
     }
     
     lfo->updateparams(period);

@@ -102,7 +102,7 @@ Echoverse::cleanup()
 void
 Echoverse::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
+    PERIOD = period_master = period;
 }
 #endif // LV2
 

@@ -65,9 +65,9 @@ ShelfBoost::cleanup()
 void
 ShelfBoost::lv2_update_params(uint32_t period)
 {
-    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period != PERIOD)
     {
-        PERIOD = period;
+        PERIOD = period_master = period;
         clear_initialize();
         initialize();
         set_q(Pq1);
@@ -76,7 +76,7 @@ ShelfBoost::lv2_update_params(uint32_t period)
     }
     else
     {
-        PERIOD = period;
+        PERIOD = period_master = period;
     }
 }
 #endif // LV2

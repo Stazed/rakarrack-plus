@@ -261,7 +261,7 @@ Chorus::cleanup()
 void
 Chorus::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
+    PERIOD = period_master = period;
     fPERIOD = period;
     lfo->updateparams(period);
 }

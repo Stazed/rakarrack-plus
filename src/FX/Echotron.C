@@ -130,9 +130,9 @@ Echotron::cleanup()
 void
 Echotron::lv2_update_params(uint32_t period)
 {
-    if (period > PERIOD) // only re-initialize if period > intermediate_bufsize of declaration
+    if (period != PERIOD)
     {
-        PERIOD = period;
+        PERIOD = period_master = period;
         fPERIOD = period;
         clear_initialize();
         initialize();
@@ -145,7 +145,7 @@ Echotron::lv2_update_params(uint32_t period)
     }
     else
     {
-        PERIOD = period;
+        PERIOD = period_master = period;
         fPERIOD = period;
     }
 

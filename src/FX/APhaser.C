@@ -344,7 +344,7 @@ Analog_Phaser::set_random_parameters()
 void
 Analog_Phaser::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
+    PERIOD = period_master = period;
     fPERIOD = period;
     lfo->updateparams(period);
     invperiod = 1.0f / fPERIOD;

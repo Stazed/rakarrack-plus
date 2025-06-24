@@ -288,7 +288,7 @@ Synthfilter::cleanup()
 void
 Synthfilter::lv2_update_params(uint32_t period)
 {
-    PERIOD = period;
+    PERIOD = period_master = period;
     lfo->updateparams(period);
     inv_period = 1.f / (float) period;
 }
