@@ -88,6 +88,7 @@ Gate::lv2_update_params(uint32_t period)
         initialize();
         setlpf(Plpf);
         sethpf(Phpf);
+        cleanup();
     }
     else
     {
