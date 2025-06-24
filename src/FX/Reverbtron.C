@@ -194,6 +194,9 @@ Reverbtron::lv2_update_params(uint32_t period)
         adjust(DS_state, fSAMPLE_RATE);
         clear_initialize();
         initialize();
+#ifdef RKR_PLUS_LV2
+        setfile(Filenum);
+#endif
         setlpf(Plpf);
         sethidamp(Phidamp);
     }
