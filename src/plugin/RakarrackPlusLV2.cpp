@@ -163,6 +163,7 @@ check_shared_buf(RKRPLUSLV2* plug, uint32_t nframes)
     }
 }
 
+#if 0   // Not used
 static void
 inline_check(RKRPLUSLV2* plug, uint32_t nframes)
 {
@@ -174,6 +175,7 @@ inline_check(RKRPLUSLV2* plug, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
     }
 }
+#endif
 
 /**
  * Add a midi message to the output port.
@@ -280,7 +282,6 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     plug->rkrplus->efx_MIDIConverter->plug = plug;       // for MIDIConverter direct access to lv2 
 
     check_shared_buf(plug,nframes);
-    inline_check(plug, nframes);
 
     /* adjust for possible variable nframes */
     if(plug->period_max < nframes)
@@ -354,7 +355,7 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     memcpy(plug->rkrplus->efxoutl, plug->input_l_p, sizeof(float)*nframes);
     memcpy(plug->rkrplus->efxoutr, plug->input_r_p, sizeof(float)*nframes);
 
-    //now run
+    //now run, the input here is used for wet/dry
     plug->rkrplus->process_effects(plug->input_l_p,plug->input_r_p, 0);
 
     // copy processed output to LV2 output
