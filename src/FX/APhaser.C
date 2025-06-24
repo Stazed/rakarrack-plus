@@ -348,6 +348,7 @@ Analog_Phaser::lv2_update_params(uint32_t period)
     fPERIOD = period;
     lfo->updateparams(period);
     invperiod = 1.0f / fPERIOD;
+    cleanup();
 }
 #endif // LV2
 
