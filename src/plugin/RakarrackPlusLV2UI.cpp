@@ -27,8 +27,8 @@
 
 
 
-RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller controller,
-        LV2UI_Widget* widget, LV2_Feature const *const * features) :
+RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller /*controller */,
+        LV2UI_Widget* /*widget*/, LV2_Feature const *const * features) :
     m_RKR(NULL),
     r_gui(NULL),
     parentXWindow(NULL),
@@ -91,7 +91,6 @@ int RakarrackPlusLV2UI::resize_func(LV2UI_Feature_Handle handle, int w, int h)
         self->r_gui->Principal->size(w,h);
     }
 
-    printf("RESIZE\n");
     return 0;
 }
 
@@ -197,8 +196,6 @@ const LV2UI_Descriptor* lv2ui_descriptor(uint32_t index)
     {
         case 0:
             return &rakarrack_plus_descriptor;
-    //    case 1:
-    //        return &stuckstackerUI_descriptor;
         default:
             return NULL;
     }
@@ -234,7 +231,7 @@ static void* check_xwindow_status(void * _RGUI)
             // Note: IsViewable means it's mapped and all its ancestors are mapped.
             if(!self->is_shown)
             {
-                printf("Showing GUI\n");
+//                printf("Showing GUI\n");
                 self->is_shown = true;
                 self->r_gui->LV2_gui_show();
             }
@@ -244,7 +241,7 @@ static void* check_xwindow_status(void * _RGUI)
             // Is triggered by user closing with the X box or host
             if(self->is_shown)
             {
-                printf("GUI is hidden\n");
+//                printf("GUI is hidden\n");
                 self->is_shown = false;
                 self->r_gui->LV2_gui_hide();
                 Fl::check();
