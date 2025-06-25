@@ -163,7 +163,6 @@ check_shared_buf(RKRPLUSLV2* plug, uint32_t nframes)
     }
 }
 
-#if 0   // Not used
 static void
 inline_check(RKRPLUSLV2* plug, uint32_t nframes)
 {
@@ -175,7 +174,6 @@ inline_check(RKRPLUSLV2* plug, uint32_t nframes)
         memcpy(plug->output_r_p,plug->input_r_p,sizeof(float)*nframes);
     }
 }
-#endif
 
 /**
  * Add a midi message to the output port.
@@ -277,7 +275,10 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
 
     if(plug->rkrplus->quality_update)
+    {
+        inline_check(plug, nframes);    // pass input to output if needed
         return;
+    }
 
     plug->rkrplus->efx_MIDIConverter->plug = plug;       // for MIDIConverter direct access to lv2 
 
