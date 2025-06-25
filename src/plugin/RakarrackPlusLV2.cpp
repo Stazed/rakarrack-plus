@@ -83,7 +83,7 @@ void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
                         uint32_t bufSz = *(const int*)option[j].value;
                         if(plug->period_max < bufSz)
                             plug->period_max = bufSz;
-                        
+
                     }
                     //other types?
                 }
@@ -124,7 +124,7 @@ void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
         plug->period_max = nomBufSize;
     else if (plug->period_max == 0)
         plug->period_max = INTERMEDIATE_BUFSIZE;
-    
+
 }
 
 //checks if input and output buffers are shared and copies it in a temp buffer so wet/dry works
@@ -284,7 +284,7 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     check_shared_buf(plug,nframes);
 
     /* adjust for possible variable nframes */
-    if(plug->period_max < nframes)
+    if(plug->period_max != nframes)
     {
         plug->period_max = nframes;
         plug->rkrplus->lv2_update_params(nframes);
