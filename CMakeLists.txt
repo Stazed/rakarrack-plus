@@ -21,7 +21,7 @@ check_cxx_compiler_flag("-ftree-vectorize" SUPPORT_VECTOR)
 check_cxx_compiler_flag("-maltivec" SUPPORT_ALTIVEC)
 
 option (BuildRakarrackPlus "Build rakarrack-plus" ON)
-option (BuildRakarrackPlusLV2 "Build rakarrack-plus LV2 (Rakarrack-Plus.lv2) Experimental!!!" OFF)
+option (BuildRakarrackPlusLV2 "Build rakarrack-plus LV2 (Rakarrack-Plus.lv2)" ON)
 option (BuildLV2Plugins "Build rakarack-plus lv2 plugin effects (RakarrackPlus.lv2)" ON)
 option (BuildCarlaPresets "Build Carla presets for lv2 from default banks" OFF)
 #option (EnableNTK "Use NTK toolkit for build" OFF)
