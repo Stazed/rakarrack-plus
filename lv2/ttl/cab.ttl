@@ -19,7 +19,7 @@
         doap:name "RKRP Cabinet" ;
         doap:description "Guitar Cabinet Emulation";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "Equalizer with preset curves to match the effect of various guitar cabinets." ;
         lv2:optionalFeature lv2:hardRTCapable;

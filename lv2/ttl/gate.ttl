@@ -19,7 +19,7 @@
         doap:name "RKRP NoiseGate" ;
         doap:description "Dynamic gate";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "Based on Gate, Steve Harris LADSPA plugin." ;
         lv2:optionalFeature lv2:hardRTCapable ;

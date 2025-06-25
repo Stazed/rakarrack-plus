@@ -21,7 +21,7 @@
         doap:name "RKRP Shelf Boost" ;
         doap:description "Tone Booster";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "Low-shelf filter for simple control of your tone." ;
         lv2:optionalFeature lv2:hardRTCapable ;

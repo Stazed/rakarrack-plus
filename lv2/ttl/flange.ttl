@@ -22,7 +22,7 @@
         mod:label "Flanger";
         doap:description "Flanger";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "A flanger effect. Allows for fractional delays for a more intense effect." ;
         lv2:optionalFeature lv2:hardRTCapable ;

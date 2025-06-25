@@ -36,7 +36,7 @@
     doap:name "RKRP Reverbtron" ;
     doap:description "Convolution-Based Reverb" ;
     lv2:project <https://github.com/Stazed/rakarrack-plus>;
-    lv2:minorVersion 0 ;
+    lv2:minorVersion 3 ;
     lv2:microVersion 0 ;
     rdfs:comment "Convolution-based reverb effect. IR samples can be converted to .rvb format and loaded into this effect for a less cpu-intensive convolution. Several files included." ;
     lv2:requiredFeature urid:map, worker:schedule ;

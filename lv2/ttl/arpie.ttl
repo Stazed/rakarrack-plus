@@ -19,7 +19,7 @@
         doap:name "RKRP Arpie" ;
         doap:description "Arpeggiated Pitch Shifter";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "A pitch shifter that changes the shifting amount in a rhythmic pattern. Adds pulse and brightness to your sound." ;
         lv2:optionalFeature lv2:hardRTCapable ;

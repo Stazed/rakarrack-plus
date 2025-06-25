@@ -20,7 +20,7 @@
         doap:name "RKRP Shifter" ;
         doap:description "whammy effect with envelope triggering";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "Pitch shifter with easy controls for expression pedal controled whammy effects. Also has a mode for envelope based control." ;
         lv2:optionalFeature lv2:hardRTCapable ;

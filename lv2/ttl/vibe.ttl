@@ -19,7 +19,7 @@
         doap:name "RKRP Vibe" ;
         doap:description "UniVibe Emulation";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "The UniVibe was intended as a rotating speaker emulation. It does a poor job of that, but in its own right became a popular phase-shifter effect. This version has optional feedback to achieve some additional tones." ;
         lv2:optionalFeature lv2:hardRTCapable ;

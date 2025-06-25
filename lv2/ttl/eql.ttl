@@ -20,7 +20,7 @@
         doap:description "10 Band Graphical Eq";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:optionalFeature lv2:hardRTCapable ;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "10 band graphical equalizer with resonance control." ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#eql_ui> ;

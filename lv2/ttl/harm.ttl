@@ -21,7 +21,7 @@
         doap:name "RKRP Harmonizer" ;
         doap:description "Harmonizing Pitch Shifter";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "Pitch shifter that harmonizes with your dry signal. This works best for monophonic sounds (a single note at a time). Also allows selection of root and chord for intelligent harmonies. Midi input can be used to select the harmoization notes." ;
         lv2:optionalFeature lv2:hardRTCapable,

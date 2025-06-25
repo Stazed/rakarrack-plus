@@ -20,7 +20,7 @@
         doap:name "RKRP Sequence" ;
         doap:description "Arpeggiated Volume/Filter/Pitch";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "8-step modulation sequencer. Each step is user-adjustable. Signal amplitude, filter cutoff frequency, or pitch shifting modulations available." ;
         lv2:optionalFeature lv2:hardRTCapable ;

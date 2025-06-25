@@ -19,7 +19,7 @@
         doap:name "RKRP Ring" ;
         doap:description "Ring Modulator";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 0 ;
+        lv2:minorVersion 3 ;
         lv2:microVersion 0 ;
         rdfs:comment "A ring modulator with monophonic frequency recognition for synthesis." ;
         lv2:optionalFeature lv2:hardRTCapable ;

@@ -36,7 +36,7 @@
     doap:name "RKRP Convolotron" ;
     doap:description "Convolution-Based Reverb" ;
     lv2:project <https://github.com/Stazed/rakarrack-plus>;
-    lv2:minorVersion 0 ;
+    lv2:minorVersion 3 ;
     lv2:microVersion 0 ;
     rdfs:comment "Convolution-based reverb effect." ;
     lv2:requiredFeature urid:map, worker:schedule ;
