@@ -74,8 +74,6 @@ WahWah::out(float * efxoutl, float * efxoutr)
 {
     if (filterpars->changed)
     {
-//        filterpars->changed = false;
-//        cleanup();
         return;
     }
 
@@ -148,6 +146,8 @@ WahWah::lv2_update_params(uint32_t period)
 {
     if (period != PERIOD)
     {
+        filterpars->changed = true;
+        usleep(500);    // to allow time for out() to complete since reinitfilter() deletes the filter
         PERIOD = period_master = period;
         filterpars->changed = true;
         delete filterpars;
@@ -497,11 +497,11 @@ WahWah::changepar(int npar, int value)
             filterpars->Pvowels[1].formants[1].q = 64;
             break;
         }   // switch (Pmode)
-        /* We do not want to re-initialize the filter here because it deletes the filter. 
-         * If it hits just at the wrong moment, then out() will try to use the just deleted filter
-         * and crash. So we set changed and check and delete in out() at - if (filterpars->changed).
-         */
+
         filterpars->changed = true;
+        usleep(500);    // to allow time for out() to complete since cleanup() deletes the filter
+        cleanup();
+        filterpars->changed = false;
         break;
     }   // case 10:
 
