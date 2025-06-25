@@ -235,7 +235,7 @@ if (BuildRakarrackPlusLV2)
             set(LV2_INSTALL_DIR_RKRP lib/lv2/Rakarrack-Plus.lv2 CACHE PATH
             "Specifies where the LV2 libraries should be installed")
         endif()
-        add_subdirectory(src/plugin)
+        add_subdirectory(src/LV2_Plugin)
     endif (LV2_FOUND)
 endif (BuildRakarrackPlusLV2)
 
@@ -278,7 +278,7 @@ if (BuildLV2Plugins)
         list(GET RVB 10 NEWNAME)
         configure_file(data/10.rvb lv2data/${NEWNAME}.rvb COPYONLY)
 
-        add_subdirectory(lv2)
+        add_subdirectory(LV2_Effects)
     endif (LV2_FOUND)
 else (BuildLV2Plugins)
     set (BuildCarlaPresets OFF)

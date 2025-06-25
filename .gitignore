@@ -1,3 +1,5 @@
 /build/
 /lv2/presets/
 lv2/__pycache__/
+/LV2_Effects/presets/
+LV2_Effects/__pycache__/

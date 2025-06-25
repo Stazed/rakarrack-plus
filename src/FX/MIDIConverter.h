@@ -26,12 +26,12 @@ const unsigned char  NOTE_OFF_VELOCITY      = 64;
 
 #ifdef RKR_PLUS_LV2
     #include "lv2/lv2plug.in/ns/ext/midi/midi.h"
-    #include "../plugin/RakarrackPlusLV2.h"
+    #include "../LV2_Plugin/RakarrackPlusLV2.h"
     struct _RKRPLUSLV2; // Forward declaration
 #else
 #ifdef LV2_SUPPORT
     #include "lv2/lv2plug.in/ns/ext/midi/midi.h"
-    #include"../lv2/rkrlv2.h"
+    #include"../LV2_Effects/rkrlv2.h"
     struct _RKRLV2;     // Forward declaration
 #else
     #include <jack/midiport.h>
