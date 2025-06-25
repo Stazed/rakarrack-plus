@@ -42,6 +42,7 @@ void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
     plug->nparams = 0;
     plug->effectindex = 0;
     plug->period_max = INTERMEDIATE_BUFSIZE;
+    plug->period_default = INTERMEDIATE_BUFSIZE;
     plug->tmp_l = 0;
     plug->tmp_r = 0;
     plug->input_l_p = 0;
@@ -124,6 +125,8 @@ void getFeatures(RKRPLUSLV2* plug, const LV2_Feature * const* host_features)
         plug->period_max = nomBufSize;
     else if (plug->period_max == 0)
         plug->period_max = INTERMEDIATE_BUFSIZE;
+
+    plug->period_default = plug->period_max;
 
 }
 
@@ -274,6 +277,14 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
 
     RKRPLUSLV2* plug = (RKRPLUSLV2*)handle;
 
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     if(plug->rkrplus->quality_update)
     {
         inline_check(plug, nframes);    // pass input to output if needed
@@ -284,8 +295,10 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
 
     check_shared_buf(plug,nframes);
 
-    /* adjust for possible variable nframes */
-    if(plug->period_max != nframes)
+    /* Adjust for possible change in nframes from period_max on init.
+     * We cannot adjust upwardly unless it is <= period_default.
+     * Thus the reason for the sanity check above. */
+    if( plug->period_max != nframes ) 
     {
         plug->period_max = nframes;
         plug->rkrplus->lv2_update_params(nframes);
