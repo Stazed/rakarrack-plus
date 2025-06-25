@@ -52,6 +52,9 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     A_Resample(NULL),
     DC_Offsetl(NULL),
     DC_Offsetr(NULL),
+#ifdef RKR_PLUS_LV2
+    sco_anal_need_init(false),
+#endif
     jackclient(NULL),
     jackcliname(),
     Jack_Shut_Down(0),
@@ -1106,14 +1109,17 @@ RKR::reset_join_thread()
 void
 RKR::lv2_update_params(uint32_t period)
 {
+    quality_update = true;
+
     JACK_PERIOD = period;
     Adjust_Upsample();
+    sco_anal_need_init = true;
     
-    M_Metronome->lv2_update_params(period);
-    efx_FLimiter->lv2_update_params(period);
-    HarmRecNote->lv2_update_params(period);
-    StHarmRecNote->lv2_update_params(period);
-    RingRecNote->lv2_update_params(period);
+    M_Metronome->lv2_update_params(period_master);
+    efx_FLimiter->lv2_update_params(period_master);
+    HarmRecNote->lv2_update_params(period_master);
+    StHarmRecNote->lv2_update_params(period_master);
+    RingRecNote->lv2_update_params(period_master);
     HarmRecNote->reconota = -1;
     StHarmRecNote->reconota = -1;
     RingRecNote->reconota = -1;
@@ -1121,40 +1127,9 @@ RKR::lv2_update_params(uint32_t period)
     // process all effects since they can change 
     for (int i = 0; i < EFX_NUMBER_EFFECTS; i++)
     {
-        Rack_Effects[i]->lv2_update_params(period);
+        Rack_Effects[i]->lv2_update_params(period_master);
     }
-    
-//    DC_Offsetl = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf); // FIXME LV2
-//    DC_Offsetr = new AnalogFilter(1, 20, 1, 0, sample_rate, interpbuf); // FIXME LV2
-//    beat = new beattracker(fSample_rate, period_master);    // FIXME LV2
-    
-    // Fix these as well
-//    Sco->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, this);
-//    Analy->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, m_process->sample_rate, this);
 
-//    cleanup_efx();
-
-#if 0
-    if(Config.booster == 1.0)
-        booster = 1.0f;
-    else
-        booster = dB2rap(10);
-    
-    val_il_sum = -0.0f;
-    old_il_sum  = -0.0f;
-    val_ir_sum = -0.0f;
-    old_ir_sum = -0.0f;
-    val_sum    = 0.0f;
-    val_a_sum = -0.0f;
-    old_a_sum = -0.0f;
-    OnCounter = 0;
-    t_periods = 0;
-    have_signal = 0;
-    val_vl_sum = -0.0f;
-    old_vl_sum = -0.0f;
-    val_vr_sum = -0.0f;
-    old_vr_sum = -0.0f;
-
-#endif
+    quality_update = false;
 }
 #endif

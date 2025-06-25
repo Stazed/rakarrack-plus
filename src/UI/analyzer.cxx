@@ -21,6 +21,9 @@
 #include "analyzer.h"
 #include "rakarrack.h"
 
+const int C_DEFAULT_SAMPLES = 1024;
+const double C_DEFAULT_ADJUST = 0.125;
+
 Analyzer::Analyzer(int x, int y, int w, int h, const char *label) :
     Fl_Box(x, y, w, h, label),
     m_parent(NULL),
@@ -28,7 +31,8 @@ Analyzer::Analyzer(int x, int y, int w, int h, const char *label) :
     spr(NULL),
     sr(44100), 
     ns(256),
-    Analyzer_ON(false) 
+    Analyzer_ON(false),
+    sample_adjustment(C_DEFAULT_ADJUST)
 {
 }
 
@@ -39,6 +43,10 @@ void Analyzer::init(float *smpsl, float *smpsr, int PERIOD, int SAMPLERATE, RKRG
     ns = PERIOD;
     sr = SAMPLERATE;
     m_parent = _rgui;
+
+    /* This adjusts the drawing based on period size. Otherwise the smaller period, lower height, etc...*/
+    if(ns)
+        sample_adjustment = C_DEFAULT_ADJUST * (double(C_DEFAULT_SAMPLES) / double(ns));
 }
 
 void Analyzer::draw()
@@ -76,7 +84,7 @@ void Analyzer::draw()
             for (int j = 0; j < ns; j++)
             {
                 double t = cos(D_PI * (double) j * coeff);
-                double image = t * ((spl[j] + spr[j]) * 0.125) ;
+                double image = t * ((spl[j] + spr[j]) * sample_adjustment) ;
                 oldimage = acoeff * image + (1.0 - acoeff) * oldimage;
 
                 y += fabs(oldimage);

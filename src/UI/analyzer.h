@@ -41,5 +41,6 @@ private:
     int sr; 
     int ns; 
     bool Analyzer_ON; 
+    double sample_adjustment;
 };
 #endif

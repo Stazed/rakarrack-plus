@@ -836,6 +836,7 @@ public:
 
 #ifdef RKR_PLUS_LV2
     pthread_t t_pgm;
+    bool sco_anal_need_init;
 #endif
     pthread_t t_init;
 

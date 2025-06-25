@@ -454,6 +454,13 @@ void RKRGUI::GuiTimeout(void)
                 VOCODER->vu_vu->value(Efx_Vocoder->vulevel);
             }
         }
+#else
+        if(m_process->sco_anal_need_init)
+        {
+            m_process->sco_anal_need_init = false;
+            Sco->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, this);
+            Analy->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, m_process->sample_rate, this);
+        }
 #endif
         if (Sco->get_scope_ON())
         {
