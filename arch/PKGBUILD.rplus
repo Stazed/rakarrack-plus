@@ -26,6 +26,7 @@ build(){
   cmake "$srcdir/${pkgname}" \
         -DCMAKE_BUILD_TYPE=Release \
         -DBuildLV2Plugins=OFF \
+        -DBuildRakarrackPlusLV2=OFF \
         -DCMAKE_INSTALL_PREFIX="/usr"
   make
 }
