@@ -133,11 +133,14 @@ WahWah::out(float * efxoutl, float * efxoutr)
 void
 WahWah::cleanup()
 {
+    filterpars->changed = true;
+    usleep(500);    // to allow time for out() to complete since reinitfilter() deletes the filter
     reinitfilter();
     ms1 = 0.0;
     ms2 = 0.0;
     ms3 = 0.0;
     ms4 = 0.0;
+    filterpars->changed = false;
 }
 
 #if defined LV2_SUPPORT || defined RKR_PLUS_LV2
@@ -149,7 +152,6 @@ WahWah::lv2_update_params(uint32_t period)
         filterpars->changed = true;
         usleep(500);    // to allow time for out() to complete since reinitfilter() deletes the filter
         PERIOD = period_master = period;
-        filterpars->changed = true;
         delete filterpars;
         filterpars = new FilterParams(0, 64, 64, fSAMPLE_RATE, PERIOD);
         reinitfilter();
@@ -498,10 +500,7 @@ WahWah::changepar(int npar, int value)
             break;
         }   // switch (Pmode)
 
-        filterpars->changed = true;
-        usleep(500);    // to allow time for out() to complete since cleanup() deletes the filter
         cleanup();
-        filterpars->changed = false;
         break;
     }   // case 10:
 
