@@ -101,6 +101,7 @@ typedef struct _RKRLV2
     uint8_t nparams;
     uint8_t effectindex;//index of effect
     uint32_t period_max;
+    uint16_t period_default;
     uint8_t loading_file;//flag to indicate that file load work is underway
     uint8_t file_changed;
     uint8_t prev_bypass;
@@ -438,6 +439,7 @@ void getFeatures(RKRLV2* plug, const LV2_Feature * const* host_features)
 {
     uint8_t i,j;
     plug->period_max = INTERMEDIATE_BUFSIZE;
+    plug->period_default = INTERMEDIATE_BUFSIZE;
     plug->loading_file = 0;
     plug->file_changed = 0;
     plug->scheduler = 0;
@@ -469,7 +471,7 @@ void getFeatures(RKRLV2* plug, const LV2_Feature * const* host_features)
                 {
                     if(option[j].type == plug->URIDs.atom_Int)
                     {
-                        plug->period_max = *(const int*)option[j].value;
+                        plug->period_max = plug->period_default = *(const int*)option[j].value;
                     }
                     //other types?
                 }
@@ -532,7 +534,15 @@ void run_eqlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -641,7 +651,15 @@ void run_complv2(LV2_Handle handle, uint32_t nframes)
         return;
     
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
     
     // are we bypassing
@@ -728,7 +746,15 @@ void run_distlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -861,7 +887,15 @@ void run_echolv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
     
@@ -972,7 +1006,15 @@ void run_choruslv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
     
@@ -1102,7 +1144,15 @@ void run_aphaselv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
     
@@ -1239,7 +1289,15 @@ void run_harmnomidlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -1434,7 +1492,15 @@ void run_exciterlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -1525,7 +1591,15 @@ void run_panlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -1637,7 +1711,15 @@ void run_alienlv2(LV2_Handle handle, uint32_t nframes)
         return;
     
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -1752,7 +1834,15 @@ void run_revelv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -1874,7 +1964,15 @@ void run_eqplv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -1982,7 +2080,15 @@ void run_cablv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -2059,7 +2165,15 @@ void run_mdellv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -2175,7 +2289,15 @@ void run_wahlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -2289,7 +2411,15 @@ void run_derelv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -2404,7 +2534,15 @@ void run_valvelv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -2515,7 +2653,15 @@ void run_dflangelv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -2628,7 +2774,15 @@ void run_ringlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -2759,7 +2913,15 @@ void run_distbandlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -2877,7 +3039,15 @@ void run_arplv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -2987,7 +3157,15 @@ void run_expandlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -3072,7 +3250,15 @@ void run_shuflv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -3177,7 +3363,15 @@ void run_synthlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -3288,7 +3482,15 @@ void run_varybandlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -3410,7 +3612,15 @@ void run_mutrolv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -3546,7 +3756,15 @@ void run_echoverselv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -3655,7 +3873,15 @@ void run_coillv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -3753,7 +3979,15 @@ void run_shelflv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -3837,7 +4071,15 @@ void run_voclv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -3949,7 +4191,15 @@ void run_suslv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -4030,7 +4280,15 @@ void run_seqlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -4149,7 +4407,15 @@ void run_shiftlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -4258,7 +4524,15 @@ void run_stomplv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -4350,6 +4624,14 @@ void run_revtronlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
 
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
@@ -4647,6 +4929,14 @@ void run_echotronlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
 
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
@@ -4971,7 +5261,15 @@ void run_sharmnomidlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -5173,7 +5471,15 @@ void run_mbcomplv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -5276,7 +5582,15 @@ void run_otremlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -5371,7 +5685,15 @@ void run_vibelv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -5485,7 +5807,15 @@ void run_inflv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -5604,7 +5934,15 @@ void run_phaselv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -5715,7 +6053,15 @@ void run_gatelv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     inline_check(plug, nframes);
 
     // are we bypassing
@@ -5806,6 +6152,14 @@ void run_midiclv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
 
     plug->midic->plug = plug;       // for MIDIConverter direct access to lv2 
 
@@ -5913,6 +6267,14 @@ void run_convollv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
 
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
@@ -6191,7 +6553,15 @@ void run_flangerlv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -6321,7 +6691,15 @@ void run_overdrivelv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -6459,7 +6837,15 @@ void run_harmonizerlv2(LV2_Handle handle, uint32_t nframes)
     int bypass = 0;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -6758,7 +7144,15 @@ void run_stereoharmlv2(LV2_Handle handle, uint32_t nframes)
     int bypass = 0;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
 
@@ -7040,7 +7434,15 @@ void run_ressollv2(LV2_Handle handle, uint32_t nframes)
         return;
 
     RKRLV2* plug = (RKRLV2*)handle;
-    
+
+    /* Sanity check */
+    if( nframes > plug->period_default )
+    {
+        fprintf(stderr, "The Host sent NFRAFES > MAX of %d, so we is bailing out...!!!\n", nframes);
+        inline_check(plug, nframes);    // pass input to output if needed
+        return;
+    }
+
     check_shared_buf(plug,nframes);
     inline_check(plug, nframes);
     
