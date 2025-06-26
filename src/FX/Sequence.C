@@ -178,21 +178,13 @@ Sequence::reset_parameters(std::vector<int> parameters)
 void
 Sequence::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, fSAMPLE_RATE);
-        clear_initialize();
-        initialize();
-        filterl->setmix(1, 0.33f, -1.0f, 0.25f);
-        filterr->setmix(1, 0.33f, -1.0f, 0.25f);
-        cleanup();
-    }
-    else
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, fSAMPLE_RATE);
-    }
+    PERIOD = period_master = period;
+    adjust(DS_state, fSAMPLE_RATE);
+    clear_initialize();
+    initialize();
+    filterl->setmix(1, 0.33f, -1.0f, 0.25f);
+    filterr->setmix(1, 0.33f, -1.0f, 0.25f);
+    cleanup();
 }
 #endif // LV2
 

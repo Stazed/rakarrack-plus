@@ -109,20 +109,13 @@ Valve::cleanup()
 void
 Valve::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        clear_initialize();
-        initialize();
-        cleanup();
-        setlpf(Plpf);
-        sethpf(Phpf);
-        //cleanup();
-    }
-    else
-    {
-        PERIOD = period_master = period;
-    }
+    PERIOD = period_master = period;
+    clear_initialize();
+    initialize();
+    cleanup();
+    setlpf(Plpf);
+    sethpf(Phpf);
+    //cleanup();
 
     harm->lv2_update_params(period);
 }

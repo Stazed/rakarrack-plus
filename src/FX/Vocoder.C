@@ -163,21 +163,13 @@ Vocoder::reset_parameters(std::vector<int> parameters)
 void
 Vocoder::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, fSAMPLE_RATE);
-        clear_initialize();
-        initialize();
-        setbands(VOC_BANDS, 200.0f, 4000.0f);
-        init_filters();
-        adjustq(Pqq);
-    }
-    else
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, fSAMPLE_RATE);
-    }
+    PERIOD = period_master = period;
+    adjust(DS_state, fSAMPLE_RATE);
+    clear_initialize();
+    initialize();
+    setbands(VOC_BANDS, 200.0f, 4000.0f);
+    init_filters();
+    adjustq(Pqq);
 }
 #endif // LV2
 

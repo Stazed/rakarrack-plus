@@ -205,21 +205,14 @@ MuTroMojo::cleanup()
 void
 MuTroMojo::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        clear_initialize();
-        initialize();
-        reinitfilter();
-        filterl->setstages(Pstages);
-        filterr->setstages(Pstages);
-        filterl->setmode(Pqm);
-        filterr->setmode(Pqm);
-    }
-    else
-    {
-        PERIOD = period_master = period;
-    }
+    PERIOD = period_master = period;
+    clear_initialize();
+    initialize();
+    reinitfilter();
+    filterl->setstages(Pstages);
+    filterr->setstages(Pstages);
+    filterl->setmode(Pqm);
+    filterr->setmode(Pqm);
 
     lfo->updateparams(period);
 }

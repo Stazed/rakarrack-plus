@@ -147,21 +147,14 @@ WahWah::cleanup()
 void
 WahWah::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        filterpars->changed = true;
-        usleep(500);    // to allow time for out() to complete since reinitfilter() deletes the filter
-        PERIOD = period_master = period;
-        delete filterpars;
-        filterpars = new FilterParams(0, 64, 64, fSAMPLE_RATE, PERIOD);
-        reinitfilter();
-        filterpars->changed = false;
-    }
-    else
-    {
-        PERIOD = period_master = period;
-    }
-    
+    filterpars->changed = true;
+    usleep(500);    // to allow time for out() to complete since reinitfilter() deletes the filter
+    PERIOD = period_master = period;
+    delete filterpars;
+    filterpars = new FilterParams(0, 64, 64, fSAMPLE_RATE, PERIOD);
+    reinitfilter();
+    filterpars->changed = false;
+
     lfo->updateparams(period);
 }
 #endif // LV2

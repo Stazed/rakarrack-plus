@@ -65,19 +65,12 @@ ShelfBoost::cleanup()
 void
 ShelfBoost::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        clear_initialize();
-        initialize();
-        set_q(Pq1);
-        set_freq(Pfreq1);
-        set_level(Plevel);
-    }
-    else
-    {
-        PERIOD = period_master = period;
-    }
+    PERIOD = period_master = period;
+    clear_initialize();
+    initialize();
+    set_q(Pq1);
+    set_freq(Pfreq1);
+    set_level(Plevel);
 }
 #endif // LV2
 

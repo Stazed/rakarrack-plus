@@ -79,18 +79,11 @@ Expander::cleanup()
 void
 Expander::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        clear_initialize();
-        initialize();
-        setlpf(Plpf);
-        sethpf(Phpf);
-    }
-    else
-    {
-        PERIOD = period_master = period;
-    }
+    PERIOD = period_master = period;
+    clear_initialize();
+    initialize();
+    setlpf(Plpf);
+    sethpf(Phpf);
 }
 #endif // LV2
 

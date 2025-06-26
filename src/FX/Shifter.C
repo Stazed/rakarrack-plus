@@ -130,19 +130,11 @@ Shifter::reset_parameters(std::vector<int> parameters)
 void
 Shifter::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, fSAMPLE_RATE);
-        clear_initialize();
-        initialize();
-        cleanup();
-    }
-    else
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, fSAMPLE_RATE);
-    }
+    PERIOD = period_master = period;
+    adjust(DS_state, fSAMPLE_RATE);
+    clear_initialize();
+    initialize();
+    cleanup();
 }
 #endif // LV2
 

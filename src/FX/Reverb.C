@@ -160,18 +160,11 @@ Reverb::cleanup()
 void
 Reverb::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        clear_initialize();
-        initialize();
-        sethpf(Phpf);
-        setlpf(Plpf);
-    }
-    else
-    {
-        PERIOD = period_master = period;
-    }
+    PERIOD = period_master = period;
+    clear_initialize();
+    initialize();
+    sethpf(Phpf);
+    setlpf(Plpf);
 }
 #endif // LV2
 

@@ -141,19 +141,12 @@ StompBox::reset_parameters(std::vector<int> parameters)
 void
 StompBox::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        clear_initialize();
-        initialize();
-        init_mode(Pmode);
-        init_tone();
-        cleanup();
-    }
-    else
-    {
-        PERIOD = period_master = period;
-    }
+    PERIOD = period_master = period;
+    clear_initialize();
+    initialize();
+    init_mode(Pmode);
+    init_tone();
+    cleanup();
 }
 #endif // LV2
 

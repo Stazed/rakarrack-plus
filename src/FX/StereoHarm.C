@@ -139,18 +139,10 @@ StereoHarm::reset_parameters(std::vector<int> parameters)
 void
 StereoHarm::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        adjust(STE_DOWN, PERIOD);
-        clear_initialize();
-        initialize();
-    }
-    else
-    {
-        PERIOD = period_master = period;
-        adjust(STE_DOWN, PERIOD);
-    }
+    PERIOD = period_master = period;
+    adjust(STE_DOWN, PERIOD);
+    clear_initialize();
+    initialize();
 }
 #endif // LV2
 

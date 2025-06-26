@@ -145,18 +145,11 @@ DistBand::reset_parameters(std::vector<int> parameters)
 void
 DistBand::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        clear_initialize();
-        initialize();
-        setCross1(Cross1);
-        setCross2(Cross2);
-    }
-    else
-    {
-        PERIOD = period_master = period;
-    }
+    PERIOD = period_master = period;
+    clear_initialize();
+    initialize();
+    setCross1(Cross1);
+    setCross2(Cross2);
 }
 #endif // LV2
 

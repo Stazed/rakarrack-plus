@@ -130,24 +130,16 @@ Echotron::cleanup()
 void
 Echotron::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        fPERIOD = period;
-        clear_initialize();
-        initialize();
+    PERIOD = period_master = period;
+    fPERIOD = period;
+    clear_initialize();
+    initialize();
 
-        DlyFile filedata; // need to reload the file to reset the parameters
-        filedata = loadfile(FILENAME);
+    DlyFile filedata; // need to reload the file to reset the parameters
+    filedata = loadfile(FILENAME);
 
-        applyfile(filedata);
-        sethidamp(Phidamp); // set for the analog filter
-    }
-    else
-    {
-        PERIOD = period_master = period;
-        fPERIOD = period;
-    }
+    applyfile(filedata);
+    sethidamp(Phidamp); // set for the analog filter
 
     lfo->updateparams(fPERIOD);
     dlfo->updateparams(fPERIOD);

@@ -135,19 +135,12 @@ VaryBand::cleanup()
 void
 VaryBand::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        clear_initialize();
-        initialize();
-        setCross1(Cross1);
-        setCross2(Cross2);
-        setCross3(Cross3);
-    }
-    else
-    {
-        PERIOD = period_master = period;
-    }
+    PERIOD = period_master = period;
+    clear_initialize();
+    initialize();
+    setCross1(Cross1);
+    setCross2(Cross2);
+    setCross3(Cross3);
 
     lfo1->updateparams(PERIOD);
     lfo2->updateparams(PERIOD);

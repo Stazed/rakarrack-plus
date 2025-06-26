@@ -188,23 +188,15 @@ Reverbtron::reset_parameters(std::vector<int> parameters)
 void
 Reverbtron::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, fSAMPLE_RATE);
-        clear_initialize();
-        initialize();
+    PERIOD = period_master = period;
+    adjust(DS_state, fSAMPLE_RATE);
+    clear_initialize();
+    initialize();
 #ifdef RKR_PLUS_LV2
-        setfile(Filenum);
+    setfile(Filenum);
 #endif
-        setlpf(Plpf);
-        sethidamp(Phidamp);
-    }
-    else
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, fSAMPLE_RATE);
-    }
+    setlpf(Plpf);
+    sethidamp(Phidamp);
 }
 #endif // LV2
 

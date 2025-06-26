@@ -123,21 +123,13 @@ Harmonizer::reset_parameters(std::vector<int> parameters)
 void
 Harmonizer::lv2_update_params(uint32_t period)
 {
-    if (period != PERIOD)
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, PERIOD); //readjust now that we know period size
-        clear_initialize();
-        initialize();
-        fsetfreq(fPfreq);
-        fsetgain(fPgain);
-        fsetq(fPq);
-    }
-    else
-    {
-        PERIOD = period_master = period;
-        adjust(DS_state, PERIOD); //readjust now that we know period size
-    }
+    PERIOD = period_master = period;
+    adjust(DS_state, PERIOD); //readjust now that we know period size
+    clear_initialize();
+    initialize();
+    fsetfreq(fPfreq);
+    fsetgain(fPgain);
+    fsetq(fPq);
 }
 #endif // LV2
 
