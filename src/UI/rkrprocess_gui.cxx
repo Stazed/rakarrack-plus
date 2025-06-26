@@ -748,7 +748,7 @@ void RKRGUI::put_icon(Fl_Window* window)
 void RKRGUI::load_previous_state()
 {
 #ifdef RKR_PLUS_LV2
-    Principal->resize(0, 0, m_process->Config.Principal_W, m_process->Config.Principal_H);
+    Principal->size(m_process->Config.Principal_W, m_process->Config.Principal_H);
 #else
     Principal->resize(m_process->Config.Principal_X, m_process->Config.Principal_Y,
                       m_process->Config.Principal_W, m_process->Config.Principal_H);
@@ -819,9 +819,6 @@ void RKRGUI::load_previous_state()
     Preset_Counter->value(m_process->Config.Preset_Number);
     // For LV2 the FFT multiple occurrences bug will crash things,,,
     MIDI->Use_FFT->deactivate();
-    Settings->Font_Bro->deactivate();   // NTK does not support ATM
-    Settings->scheme_ch->deactivate();  // NTK does not support ATM
-    FullScreen_Menu->deactivate();      // NTK does not support ATM
 #else
     if (!m_process->Command_Line_File)
     {
@@ -830,6 +827,12 @@ void RKRGUI::load_previous_state()
         Preset_Counter->do_callback();
     }
 #endif  //  RKR_PLUS_LV2
+
+#ifdef NTK_SUPPORT
+    Settings->Font_Bro->deactivate();   // NTK does not support ATM
+    Settings->scheme_ch->deactivate();  // NTK does not support ATM
+    FullScreen_Menu->deactivate();      // NTK does not support ATM
+#endif
 
     // MIDI Learn
     if (!m_process->Config.MIDIway)

@@ -168,7 +168,6 @@ set (ProgSources
 
 
 set(ExternLibraries
-    ${FLTK_LIBRARIES}
     ${ALSA_LIBRARIES}
     ${JACK_LINK_LIBRARIES}
     ${FONTCONFIG_LIBRARIES}
@@ -196,27 +195,56 @@ if (EnableNSM)
     endif (LIBLO_FOUND)
 endif (EnableNSM)
 
-target_include_directories (
-    rakarrack-plus PRIVATE
-    ${FLTK_INCLUDE_DIR}
-    ${ALSA_INCLUDE_DIRS}
-    ${JACK_INCLUDE_DIRS}
-    ${FONTCONFIG_INCLUDE_DIRS}
-    ${FFTW3_INCLUDE_DIRS}
-    ${SNDFILE_INCLUDE_DIRS}
-    ${SAMPLERATE_INCLUDE_DIRS}
-    ${X11_INCLUDE_DIRS}
-    ${XFT_INCLUDE_DIRS}
-    ${XRENDER_INCLUDE_DIRS}
-    ${XPM_INCLUDE_DIRS}
-    ${FREETYPE_INCLUDE_DIRS}
-    ${ZLIB_INCLUDE_DIRS}
-    ${LIBLO_INCLUDE_DIRS}
-    "${CMAKE_CURRENT_SOURCE_DIR}/UI"
-    "${CMAKE_CURRENT_BINARY_DIR}/UI"
-)
+if(EnableNTK)
+    target_include_directories (
+        rakarrack-plus PRIVATE
+        ${NTK_INCLUDE_DIRS}
+        ${ALSA_INCLUDE_DIRS}
+        ${JACK_INCLUDE_DIRS}
+        ${FONTCONFIG_INCLUDE_DIRS}
+        ${FFTW3_INCLUDE_DIRS}
+        ${SNDFILE_INCLUDE_DIRS}
+        ${SAMPLERATE_INCLUDE_DIRS}
+        ${X11_INCLUDE_DIRS}
+        ${XFT_INCLUDE_DIRS}
+        ${XRENDER_INCLUDE_DIRS}
+        ${XPM_INCLUDE_DIRS}
+        ${FREETYPE_INCLUDE_DIRS}
+        ${ZLIB_INCLUDE_DIRS}
+        ${LIBLO_INCLUDE_DIRS}
+        "${CMAKE_CURRENT_SOURCE_DIR}/UI"
+        "${CMAKE_CURRENT_BINARY_DIR}/UI"
+    )
 
-target_link_libraries (rakarrack-plus ${ExternLibraries})
+else(EnableNTK)
+    target_include_directories (
+        rakarrack-plus PRIVATE
+        ${FLTK_INCLUDE_DIR}
+        ${ALSA_INCLUDE_DIRS}
+        ${JACK_INCLUDE_DIRS}
+        ${FONTCONFIG_INCLUDE_DIRS}
+        ${FFTW3_INCLUDE_DIRS}
+        ${SNDFILE_INCLUDE_DIRS}
+        ${SAMPLERATE_INCLUDE_DIRS}
+        ${X11_INCLUDE_DIRS}
+        ${XFT_INCLUDE_DIRS}
+        ${XRENDER_INCLUDE_DIRS}
+        ${XPM_INCLUDE_DIRS}
+        ${FREETYPE_INCLUDE_DIRS}
+        ${ZLIB_INCLUDE_DIRS}
+        ${LIBLO_INCLUDE_DIRS}
+        "${CMAKE_CURRENT_SOURCE_DIR}/UI"
+        "${CMAKE_CURRENT_BINARY_DIR}/UI"
+    )
+endif(EnableNTK)
+
+if(EnableNTK)
+    target_link_libraries (rakarrack-plus ${NTK_IMAGES_LIBRARIES} ${NTK_LIBRARIES} ${ExternLibraries})
+else(EnableNTK)
+    target_link_libraries (rakarrack-plus ${FLTK_LIBRARIES} ${ExternLibraries})
+endif(EnableNTK)
+
+target_compile_definitions(rakarrack-plus PRIVATE NTK_SUPPORT=1)
 
 set_source_files_properties(FX/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
 target_sources(rakarrack-plus PRIVATE
