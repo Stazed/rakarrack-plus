@@ -143,6 +143,20 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     
     HideUE->redraw();
 
+// NTK does not show well with FL_BACKGROUND2_COLOR of FLTK default
+#ifdef NTK_SUPPORT
+    AboutWin->AB_Title->labelcolor(FL_WHITE);
+    AboutWin->AB_SubTitle->labelcolor(FL_WHITE);
+    AboutWin->About_Version->labelcolor(FL_WHITE);
+    AboutWin->AB_Authors->labelcolor(FL_WHITE);
+    AboutWin->AB_A1->labelcolor(FL_WHITE);
+    AboutWin->AB_A2->labelcolor(FL_WHITE);
+    AboutWin->AB_A3->labelcolor(FL_WHITE);
+    AboutWin->AB_A4->labelcolor(FL_WHITE);
+    AboutWin->AB_A5->labelcolor(FL_WHITE);
+    AboutWin->AB_A6->labelcolor(FL_WHITE);
+#endif
+
     Fl::add_handler(global_shortcuts);
 
     Fl::add_timeout(.04, this->TimeoutStatic, this);
