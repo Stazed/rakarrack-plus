@@ -226,7 +226,8 @@ Config_fltk::load_preferences(Fl_Preferences &rakarrack)
     // ************* Settings/Look ******************
     rakarrack.get(PrefNom("Schema"), Schema, 2);
 
-#ifdef NTK_SUPPORT
+// NTK_EXTENDED is ntk-unofficial which supports this
+#if !defined NTK_EXTENDED && defined NTK_SUPPORT
     font_type = 0;  // NTK does not support this ATM
 #else
     // Fonts that look good - Cantarell Bold, Computer Modern Bright Bold, DejaVu Sans Condensed

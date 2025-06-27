@@ -59,7 +59,9 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
 
     Fl::visual(FL_DOUBLE | FL_RGB);
     fl_register_images();
-#ifndef NTK_SUPPORT
+
+// NTK_EXTENDED is ntk-unofficial which supports this
+#if defined NTK_EXTENDED || !defined NTK_SUPPORT
     Fl::set_fonts(0);
 #endif
 
@@ -829,7 +831,9 @@ void RKRGUI::load_previous_state()
 #endif  //  RKR_PLUS_LV2
 
 #ifdef NTK_SUPPORT
+#ifndef NTK_EXTENDED    // ntk-unofficial which supports this
     Settings->Font_Bro->deactivate();   // NTK does not support ATM
+#endif
     Settings->scheme_ch->deactivate();  // NTK does not support ATM
     FullScreen_Menu->deactivate();      // NTK does not support ATM
 #endif
@@ -2279,7 +2283,9 @@ void RKRGUI::MiraConfig()
 
     Settings->Font_Bro->clear();
     Settings->Font_Bro->textcolor(global_label_color);
-#ifndef NTK_SUPPORT
+
+// NTK_EXTENDED is ntk-unofficial which supports this
+#if defined NTK_EXTENDED || !defined NTK_SUPPORT
     int k = Fl::set_fonts(0);
     for (int i = 0; i < k; i++)
     {
@@ -2311,7 +2317,7 @@ void RKRGUI::MiraConfig()
 #endif
         Settings->Font_Bro->add(name);
     }
-#endif
+#endif  // defined NTK_EXTENDED || !defined NTK_SUPPORT
     Settings->Font_Bro->value(global_font_type + 1);
 }
 

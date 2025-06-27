@@ -244,7 +244,9 @@ else(EnableNTK)
     target_link_libraries (rakarrack-plus ${FLTK_LIBRARIES} ${ExternLibraries})
 endif(EnableNTK)
 
-target_compile_definitions(rakarrack-plus PRIVATE NTK_SUPPORT=1)
+if(EnableNTK)
+    target_compile_definitions(rakarrack-plus PRIVATE NTK_SUPPORT=1)
+endif(EnableNTK)
 
 set_source_files_properties(FX/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
 target_sources(rakarrack-plus PRIVATE
