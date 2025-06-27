@@ -206,7 +206,7 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
 {
     RKRPLUSLV2* plug = (RKRPLUSLV2*)malloc(sizeof(RKRPLUSLV2));
     
-//    plug->nparams = 2;
+    plug->nparams = 7;
     plug->effectindex = IRKRPLUS;
 //    plug->prev_bypass = 1;
 
@@ -363,7 +363,34 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
 
     lv2_atom_forge_set_buffer(&plug->forge, (uint8_t*)plug->atom_out_p, out_capacity);
     lv2_atom_forge_sequence_head(&plug->forge, &plug->atom_frame, 0);
-    
+
+#if 0
+    //check and set changed parameters
+    int val = 0;
+
+    for(int i = 0; i < plug->nparams; i++)
+    {
+        switch(i)
+        {
+            case RKRP_Bypass:
+            case RKRP_DryWet:
+            case RKRP_Input:
+            case RKRP_Output:
+            case RKRP_Boost:
+            case RKRP_Preset:
+            case RKRP_Bank:
+            {
+                val = (int)*plug->param_p[i];
+                if(plug->rkrplus->getpar(i) != val)
+                {
+                    plug->rkrplus->changepar(i, val);
+                }
+            }
+            break;
+        }
+    }
+#endif
+
     // Audio - we are good to run now
     //inline copy input to process output
     memcpy(plug->rkrplus->efxoutl, plug->input_l_p, sizeof(float)*nframes);

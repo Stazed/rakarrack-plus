@@ -99,13 +99,13 @@ enum RKRLV2_ports_
     OUTR,
     ATOM_IN,    // MIDI IN
     ATOM_OUT,   // MIDI OUT
-    PARAM0,
-    PARAM1,
-    PARAM2,
-    PARAM3,
-    PARAM4,
-    PARAM5,
-    PARAM6,
+    PARAM0,     // Bypass
+    PARAM1,     // FX% (Wet/Dry)
+    PARAM2,     // Input (gain)
+    PARAM3,     // Output (gain)
+    PARAM4,     // +10db (Boost)
+    PARAM5,     // Preset (Program Change)
+    PARAM6,     // Bank select
     PARAM7,
     PARAM8,
     PARAM9,
