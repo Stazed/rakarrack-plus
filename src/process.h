@@ -89,7 +89,18 @@
 #include <sstream>
 #include <pthread.h>
 
-
+#ifdef RKR_PLUS_LV2
+enum RKRP_Index
+{
+    RKRP_Bypass = 0,
+    RKRP_DryWet,
+    RKRP_Input,
+    RKRP_Output,
+    RKRP_Boost,
+    RKRP_Preset,
+    RKRP_Bank
+};
+#endif
 /**
  * This is the "MIDI Implementation Chart" listed in Rakarrack-plus help.
  * For default MIDI processing (Not MIDI learn) this index directly corresponds
@@ -689,6 +700,8 @@ public:
     void reset_join_thread();
 #ifdef RKR_PLUS_LV2
     void set_client_name(std::string s_name);
+    void changepar (int npar, int value);
+    int getpar (int npar);
 #else
     void set_jack_client(jack_client_t *_jackclient);
 #endif

@@ -205,12 +205,13 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
     const LV2_Feature * const* host_features)
 {
     RKRPLUSLV2* plug = (RKRPLUSLV2*)malloc(sizeof(RKRPLUSLV2));
-    
-    plug->nparams = 7;
-    plug->effectindex = IRKRPLUS;
+
 //    plug->prev_bypass = 1;
 
     getFeatures(plug,host_features);
+
+    plug->nparams = 7;
+    plug->effectindex = IRKRPLUS;
 
     if(!plug->urid_map)
     {
@@ -364,7 +365,6 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
     lv2_atom_forge_set_buffer(&plug->forge, (uint8_t*)plug->atom_out_p, out_capacity);
     lv2_atom_forge_sequence_head(&plug->forge, &plug->atom_frame, 0);
 
-#if 0
     //check and set changed parameters
     int val = 0;
 
@@ -389,7 +389,6 @@ void run_rkrplus(LV2_Handle handle, uint32_t nframes)
             break;
         }
     }
-#endif
 
     // Audio - we are good to run now
     //inline copy input to process output
