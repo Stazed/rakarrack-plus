@@ -155,62 +155,6 @@ void RakarrackPlusLV2UI::cleanup(LV2UI_Handle handle)
     delete self;
 }
 
-void RakarrackPlusLV2UI::port_event(LV2UI_Handle handle,
-    uint32_t port_index,
-    uint32_t /*buffer_size*/,
-    uint32_t format,
-    const void * buffer)
-{
-    RakarrackPlusLV2UI *self = static_cast<RakarrackPlusLV2UI *>(handle);
-
-    if(!format)
-    {
-        float value =  *(float *)buffer;
- //       fprintf(stderr, "port_index %d: val %f\n", port_index, value);
-        switch(port_index)
-        {
-            case PARAM0:
-            {
-                // the value is opposite
-                int val = (int) value;
-                if(val == 1)
-                {
-                    val = 0;
-                   // self->sus_activar->label("Off");
-                }
-                else
-                {
-                    val = 1;
-                  //  self->sus_activar->label("On");
-                }
-               // self->sus_activar->value((int)val);
-            }
-            break;
-            case PARAM1:
-             // self->sus_gain->value((int)value);
-            break;
-            case PARAM2:
-             // self->sus_sus->value((int)value);
-            break;
-            case PARAM3:
-             // self->sus_gain->value((int)value);
-            break;
-            case PARAM4:
-             // self->sus_sus->value((int)value);
-            break;
-            case PARAM5:
-             // self->sus_sus->value((int)value);
-            break;
-            case PARAM6:
-             // self->sus_gain->value((int)value);
-            break;
-            case PARAM7:
-             // self->sus_sus->value((int)value);
-            break;
-        }
-    }
-}
-
 LV2UI_Idle_Interface rakarrack_plus_idle_interface_desc =
 {
     RakarrackPlusLV2UI::idle_iface,
@@ -240,7 +184,7 @@ static const LV2UI_Descriptor rakarrack_plus_descriptor = {
     RAKARRACK_PLUS_LV2_UI_URI,
     RakarrackPlusLV2UI::instantiate,
     RakarrackPlusLV2UI::cleanup,
-    RakarrackPlusLV2UI::port_event,
+    NULL,
     RakarrackPlusLV2UI::extension_data
 };
 
