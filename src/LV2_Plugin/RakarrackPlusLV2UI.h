@@ -46,7 +46,7 @@ public:
     void *parentXWindow;
     bool is_shown;
     bool is_active;
-    RakarrackPlusLV2UI(const char*, LV2UI_Widget*, LV2_Feature const *const *);
+    RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller, LV2UI_Widget*, LV2_Feature const *const *);
     ~RakarrackPlusLV2UI();
     static LV2UI_Handle	instantiate(const LV2UI_Descriptor *descriptor, const char *plugin_uri, const char *bundle_path, LV2UI_Write_Function write_function, LV2UI_Controller controller, LV2UI_Widget *widget, const LV2_Feature *const *features);
     static void cleanup(LV2UI_Handle handle);

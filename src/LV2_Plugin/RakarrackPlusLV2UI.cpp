@@ -27,7 +27,8 @@
 
 
 
-RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Widget* /*widget*/, LV2_Feature const *const * features) :
+RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller /*controller */,
+        LV2UI_Widget* /*widget*/, LV2_Feature const *const * features) :
     m_RKR(NULL),
     r_gui(NULL),
     parentXWindow(NULL),
@@ -96,8 +97,8 @@ int RakarrackPlusLV2UI::resize_func(LV2UI_Feature_Handle handle, int w, int h)
 LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*descriptor*/,
 		const char * plugin_uri,
 		const char * bundle_path,
-		LV2UI_Write_Function _write_function,
-		LV2UI_Controller _controller,
+		LV2UI_Write_Function write_function,
+		LV2UI_Controller controller,
 		LV2UI_Widget * widget,
 		const LV2_Feature * const * features) 
 {
@@ -107,12 +108,9 @@ LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*d
         return NULL;
     }
 
-    RakarrackPlusLV2UI* uiinst = new RakarrackPlusLV2UI(bundle_path, widget, features);
+    RakarrackPlusLV2UI* uiinst = new RakarrackPlusLV2UI(bundle_path, write_function, controller, widget, features);
     if (uiinst->init())
     {
-        uiinst->r_gui->write_function = _write_function;
-        uiinst->r_gui->controller = _controller;
-
         LV2UI_Resize* resize = NULL;
         for (int i = 0; features[i]; ++i)
         {

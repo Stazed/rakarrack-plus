@@ -394,7 +394,7 @@ RKR::set_client_name(std::string s_name)
 void
 RKR::changepar(int npar, int value)
 {
-   // printf("NPAR %d: Value = %d\n", npar, value);
+    //printf("NPAR %d: Value = %d\n", npar, value);
     switch (npar)
     {
         case RKRP_Bypass:
@@ -409,16 +409,12 @@ RKR::changepar(int npar, int value)
         case RKRP_Output:
             process_midi_controller_events(MC_Output_Volume,  value);
             break;
-        case RKRP_Boost:    // FIXME Update gui
+        case RKRP_Boost:
         {
             if(value)
-            {
                 booster = dB2rap(10);
-            }
             else
-            {
                 booster = 1.0f;
-            }
         }
             break;
         case RKRP_Preset:   // FIXME this may change DryWet, Input, Output so we need to inform the host...
@@ -455,13 +451,13 @@ RKR::getpar(int npar)
             return Active_Preset.FX_Master_Active;
 
         case RKRP_DryWet:
-            return (int) (Active_Preset.Fraction_Bypass * 127);
+            return (int) Active_Preset.Fraction_Bypass * 127;
 
         case RKRP_Input:
-            return (int) (Active_Preset.Input_Gain * 127);
+            return (int) Active_Preset.Input_Gain * 127;
 
         case RKRP_Output:
-            return (int) (Active_Preset.Master_Volume * 127);
+            return (int) Active_Preset.Master_Volume * 127;
 
         case RKRP_Boost:
             if(booster == 1.0f)
