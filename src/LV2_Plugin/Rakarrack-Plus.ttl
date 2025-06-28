@@ -101,8 +101,8 @@
         lv2:port [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 6 ;
-                lv2:symbol "BYPASS" ;
-                lv2:name "Bypass" ;
+                lv2:symbol "FXONOFF" ;
+                lv2:name "FX On/Off" ;
                 lv2:default 1 ;
                 lv2:minimum 0 ;
                 lv2:maximum 1 ;
