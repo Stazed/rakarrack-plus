@@ -26,6 +26,9 @@
 #include <FL/Fl_File_Chooser.H>
 #include <FL/Fl_Color_Chooser.H>
 #include <X11/xpm.h>
+#ifdef RKR_PLUS_LV2
+#include <lv2/lv2plug.in/ns/extensions/ui/ui.h>
+#endif
 class RKR;  // forward declaration
 class Scope;  // forward declaration
 class NewVum;  // forward declaration
@@ -735,5 +738,9 @@ public:
   void NSM_gui_hide();
   void LV2_gui_hide();
   void LV2_gui_show();
+#ifdef RKR_PLUS_LV2
+  LV2UI_Write_Function write_function; 
+  LV2UI_Controller controller; 
+#endif
 };
 #endif

@@ -442,7 +442,11 @@ void RKRGUI::cb_tuner_activar(RKR_Light_Button* o, void* v) {
 }
 
 void RKRGUI::cb_ActivarGeneral_i(RKR_Light_Button* o, void*) {
-  m_process->Active_Preset.FX_Master_Active = o->value();
+  #ifdef RKR_PLUS_LV2
+    float tmp = o->value();
+    write_function(controller,RKRP_Bypass + 6,sizeof(float),0,&tmp);
+#else
+m_process->Active_Preset.FX_Master_Active = o->value();
 m_process->val_il_sum=-50.0;
 m_process->val_ir_sum=-50.0;
 
@@ -481,15 +485,21 @@ if (!o->value())
              
 m_process->cleanup_efx();
 
-};
+}
+#endif
 }
 void RKRGUI::cb_ActivarGeneral(RKR_Light_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_ActivarGeneral_i(o,v);
 }
 
 void RKRGUI::cb_BostBut_i(RKR_Button* o, void*) {
-  if(o->value()) m_process->booster = dB2rap(10);
+  #ifdef RKR_PLUS_LV2
+    float tmp = o->value();
+    write_function(controller,RKRP_Boost + 6,sizeof(float),0,&tmp);
+#else
+if(o->value()) m_process->booster = dB2rap(10);
 else m_process->booster=1.0f;
+#endif
 }
 void RKRGUI::cb_BostBut(RKR_Button* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_BostBut_i(o,v);
@@ -501,7 +511,12 @@ void RKRGUI::cb_Balance_i(RKR_Slider* o, void*) {
  getMIDIControl(MC_Balance_FX);
  return;
 } 
+#ifdef RKR_PLUS_LV2
+    float tmp =(float)(o->value()/100.0f) * 127.0f;
+    write_function(controller,RKRP_DryWet + 6,sizeof(float),0,&tmp);
+#else
 m_process->Active_Preset.Fraction_Bypass=(float)(o->value()/100.0f);
+#endif
 }
 void RKRGUI::cb_Balance(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Balance_i(o,v);
@@ -513,8 +528,14 @@ void RKRGUI::cb_Nivel_Entrada_i(RKR_Slider* o, void*) {
  getMIDIControl(MC_Input_Volume);
  return;
 } 
+
+#ifdef RKR_PLUS_LV2
+    float tmp = (float)((o->value()+50)/100.0) * 127.0f;
+    write_function(controller,RKRP_Input + 6,sizeof(float),0,&tmp);
+#else
 m_process->Active_Preset.Input_Gain=(float)((o->value()+50)/100.0);
 m_process->calculavol(1);
+#endif
 }
 void RKRGUI::cb_Nivel_Entrada(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Nivel_Entrada_i(o,v);
@@ -526,9 +547,13 @@ void RKRGUI::cb_Nivel_Salida_i(RKR_Slider* o, void*) {
  getMIDIControl(MC_Output_Volume);
  return;
 } 
-
+#ifdef RKR_PLUS_LV2
+    float tmp =(float)((o->value()+50)/100.0) * 127.0f;
+    write_function(controller,RKRP_Output + 6,sizeof(float),0,&tmp);
+#else
 m_process->Active_Preset.Master_Volume=(float)((o->value()+50)/100.0);
 m_process->calculavol(2);
+#endif
 }
 void RKRGUI::cb_Nivel_Salida(RKR_Slider* o, void* v) {
   ((RKRGUI*)(o->parent()->parent()->user_data()))->cb_Nivel_Salida_i(o,v);
@@ -3070,3 +3095,5 @@ references.");
   snprintf(tmp, sizeof(tmp), "Version %s",VERSION);
   AboutWin->About_Version->copy_label(tmp);
 }
+#ifdef RKR_PLUS_LV2
+#endif

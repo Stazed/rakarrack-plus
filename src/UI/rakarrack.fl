@@ -74,6 +74,11 @@ decl {\#include <X11/xpm.h>} {public global
 decl {\#include "../strlcpy.h"} {private global
 }
 
+decl {\#ifdef RKR_PLUS_LV2
+\#include <lv2/lv2plug.in/ns/extensions/ui/ui.h>
+\#endif} {public global
+}
+
 decl {const std::vector<std::string> main_submenu_paths
 {
     "&File/Import Preset",
@@ -1180,12 +1185,16 @@ TUNER_LABEL->redraw_label();}
           class RKR_Box
         }
       }
-      Fl_Group InOut {
+      Fl_Group InOut {open
         xywh {2 24 164 170} box UP_BOX color 0 selection_color 0 align 112
       } {
         Fl_Light_Button ActivarGeneral {
           label {FX On}
-          callback {m_process->Active_Preset.FX_Master_Active = o->value();
+          callback {\#ifdef RKR_PLUS_LV2
+    float tmp = o->value();
+    write_function(controller,RKRP_Bypass + 6,sizeof(float),0,&tmp);
+\#else
+m_process->Active_Preset.FX_Master_Active = o->value();
 m_process->val_il_sum=-50.0;
 m_process->val_ir_sum=-50.0;
 
@@ -1224,14 +1233,20 @@ if (!o->value())
              
 m_process->cleanup_efx();
 
-}}
+}
+\#endif}
           tooltip {Enable rakarrack - Shortcut 'R'} xywh {6 30 52 18} down_box BORDER_BOX shortcut 0x72 color 62 selection_color 1 labelsize 10 align 84 when 1
           class RKR_Light_Button
         }
         Fl_Button BostBut {
           label {+10dB}
-          callback {if(o->value()) m_process->booster = dB2rap(10);
-else m_process->booster=1.0f;}
+          callback {\#ifdef RKR_PLUS_LV2
+    float tmp = o->value();
+    write_function(controller,RKRP_Boost + 6,sizeof(float),0,&tmp);
+\#else
+if(o->value()) m_process->booster = dB2rap(10);
+else m_process->booster=1.0f;
+\#endif}
           tooltip {+10 dB Booster - Shortcut 'F10'} xywh {132 30 30 14} type Toggle shortcut 0xffc7 color 62 labelsize 6
           code0 {o->set_label_offset(-4);}
           class RKR_Button
@@ -1243,7 +1258,12 @@ else m_process->booster=1.0f;}
  getMIDIControl(MC_Balance_FX);
  return;
 } 
-m_process->Active_Preset.Fraction_Bypass=(float)(o->value()/100.0f);}
+\#ifdef RKR_PLUS_LV2
+    float tmp =(float)(o->value()/100.0f) * 127.0f;
+    write_function(controller,RKRP_DryWet + 6,sizeof(float),0,&tmp);
+\#else
+m_process->Active_Preset.Fraction_Bypass=(float)(o->value()/100.0f);
+\#endif}
           xywh {15 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 100 maximum 0 step 1 value 100 textcolor 7
           class RKR_Slider
         }
@@ -1254,8 +1274,14 @@ m_process->Active_Preset.Fraction_Bypass=(float)(o->value()/100.0f);}
  getMIDIControl(MC_Input_Volume);
  return;
 } 
+
+\#ifdef RKR_PLUS_LV2
+    float tmp = (float)((o->value()+50)/100.0) * 127.0f;
+    write_function(controller,RKRP_Input + 6,sizeof(float),0,&tmp);
+\#else
 m_process->Active_Preset.Input_Gain=(float)((o->value()+50)/100.0);
-m_process->calculavol(1);}
+m_process->calculavol(1);
+\#endif}
           xywh {57 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class RKR_Slider
         }
@@ -1266,9 +1292,13 @@ m_process->calculavol(1);}
  getMIDIControl(MC_Output_Volume);
  return;
 } 
-
+\#ifdef RKR_PLUS_LV2
+    float tmp =(float)((o->value()+50)/100.0) * 127.0f;
+    write_function(controller,RKRP_Output + 6,sizeof(float),0,&tmp);
+\#else
 m_process->Active_Preset.Master_Volume=(float)((o->value()+50)/100.0);
-m_process->calculavol(2);}
+m_process->calculavol(2);
+\#endif}
           tooltip {Shortcut 'F2' decrease volume, 'F3' Increase volume} xywh {115 48 19 126} type {Vert Knob} box FLAT_BOX color 0 selection_color 0 labelsize 10 labelcolor 31 minimum 50 maximum -50 step 1 textcolor 7
           class RKR_Slider
         }
@@ -2168,4 +2198,10 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   } {}
   Function {LV2_gui_show()} {open return_type void
   } {}
+  declblock {\#ifdef RKR_PLUS_LV2} {open public after {\#endif}
+  } {
+    decl {LV2UI_Write_Function write_function; 
+  LV2UI_Controller controller;} {public local
+    }
+  }
 }
