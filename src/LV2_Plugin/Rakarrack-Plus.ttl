@@ -103,7 +103,7 @@
                 lv2:index 6 ;
                 lv2:symbol "BYPASS" ;
                 lv2:name "Bypass" ;
-                lv2:default 1 ;
+                lv2:default 0 ;
                 lv2:minimum 0 ;
                 lv2:maximum 1 ;
                 lv2:portProperty lv2:integer ;
@@ -113,27 +113,27 @@
                 lv2:index 7 ;
                 lv2:symbol "DRYWET" ;
                 lv2:name "Dry/Wet" ;
-                lv2:default 127 ;
+                lv2:default 100 ;
                 lv2:minimum 0 ;
-                lv2:maximum 127 ;
+                lv2:maximum 100 ;
                 lv2:portProperty lv2:integer ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 8 ;
                 lv2:symbol "INPUT" ;
                 lv2:name "Input Gain" ;
-                lv2:default 64 ;
-                lv2:minimum 0 ;
-                lv2:maximum 127 ;
+                lv2:default 0 ;
+                lv2:minimum -50 ;
+                lv2:maximum 50 ;
                 lv2:portProperty lv2:integer ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
                 lv2:index 9 ;
                 lv2:symbol "OUTPUT" ;
                 lv2:name "Output Gain" ;
-                lv2:default 64 ;
-                lv2:minimum 0 ;
-                lv2:maximum 127 ;
+                lv2:default 0 ;
+                lv2:minimum -50 ;
+                lv2:maximum 50 ;
                 lv2:portProperty lv2:integer ;
         ], [
                 a lv2:InputPort, lv2:ControlPort ;
