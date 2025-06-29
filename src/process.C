@@ -834,14 +834,14 @@ RKR::Control_Volume(const float *origl, const float *origr)
         }
 
         tmp = fabsf(efxoutl[i]);
-        
+
         if (tmp > il_sum)
         {
             il_sum = tmp;
         }
-        
+
         tmp = fabsf(efxoutr[i]);
-        
+
         if (tmp > ir_sum)
         {
             ir_sum = tmp;

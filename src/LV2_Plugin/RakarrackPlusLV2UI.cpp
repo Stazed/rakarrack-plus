@@ -27,8 +27,7 @@
 
 
 
-RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_Controller /*controller */,
-        LV2UI_Widget* /*widget*/, LV2_Feature const *const * features) :
+RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2_Feature const *const * features) :
     m_RKR(NULL),
     r_gui(NULL),
     parentXWindow(NULL),
@@ -46,10 +45,6 @@ RakarrackPlusLV2UI::RakarrackPlusLV2UI(const char*, LV2UI_Write_Function, LV2UI_
         }
         ++features;
     }
-#if 0
-    // this object also serves as »widget« for the event callbacks
-    *widget = static_cast<LV2UI_Widget>(this);
-#endif
 }
 
 RakarrackPlusLV2UI::~RakarrackPlusLV2UI()
@@ -108,7 +103,7 @@ LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*d
         return NULL;
     }
 
-    RakarrackPlusLV2UI* uiinst = new RakarrackPlusLV2UI(bundle_path, write_function, controller, widget, features);
+    RakarrackPlusLV2UI* uiinst = new RakarrackPlusLV2UI(bundle_path, features);
     if (uiinst->init())
     {
         LV2UI_Resize* resize = NULL;
