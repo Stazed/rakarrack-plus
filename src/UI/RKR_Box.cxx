@@ -34,7 +34,8 @@ RKR_Box::RKR_Box(int X, int Y, int W, int H, const char *label) :
     m_start_width(W),
     m_start_height(H),
     m_box_type(BOX_DEFAULT),
-    m_look_changed(0)
+    m_look_changed(0),
+    m_start_drag(false)
 {
 }
 
@@ -61,6 +62,7 @@ void RKR_Box::draw()
             }
 
             case BOX_LIGHT:
+            case BOX_DRAG_EFFECT:
             {
                 break;
             }
@@ -102,6 +104,30 @@ int RKR_Box::handle(int event)
         {
             do_callback();
         }
+        else if(Fl::event_button() == 1)
+        {
+            // Drag effect
+            if(m_box_type == BOX_DRAG_EFFECT)
+            {
+                m_start_drag = true;
+                return 1;
+            }
+        }
     }
+
+    // Drag effect
+    if(m_box_type == BOX_DRAG_EFFECT)
+    {
+        if(event == FL_DRAG)
+        {
+            if ( (Fl::event_button() == 1) && m_start_drag)
+            {
+                m_start_drag = false;
+                do_callback();
+                return 1;
+            }
+        }
+    }
+
     return Fl_Box::handle(event);
 }

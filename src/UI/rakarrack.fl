@@ -720,81 +720,151 @@ Fl::focus(Open_Order);}
       Fl_Box L1 {
         label label
         user_data UD_Label_1
-        callback {set_random_parameters(0);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_1);
+    }
+    else
+    {
+        set_random_parameters(0);
+    }}
         xywh {2 195 158 17} labelfont 1 labelcolor 7 align 64
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Box L2 {
         label label
         user_data UD_Label_2
-        callback {set_random_parameters(1);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_2);
+    }
+    else
+    {
+        set_random_parameters(1);
+    }}
         xywh {162 195 158 17} labelfont 1 labelcolor 7 align 64
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Box L3 {
         label label
         user_data UD_Label_3
-        callback {set_random_parameters(2);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_3);
+    }
+    else
+    {
+        set_random_parameters(2);
+    }}
         xywh {322 195 158 17} labelfont 1 labelcolor 7
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Box L4 {
         label label
         user_data UD_Label_4
-        callback {set_random_parameters(3);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_4);
+    }
+    else
+    {
+        set_random_parameters(3);
+    }}
         xywh {482 195 158 17} labelfont 1 labelcolor 7
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Box L5 {
         label label
         user_data UD_Label_5
-        callback {set_random_parameters(4);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_5);
+    }
+    else
+    {
+        set_random_parameters(4);
+    }}
         xywh {642 195 157 17} labelfont 1 labelcolor 7
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Box L6 {
         label label
         user_data UD_Label_6
-        callback {set_random_parameters(5);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_6);
+    }
+    else
+    {
+        set_random_parameters(5);
+    }}
         xywh {1 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Box L7 {
         label label
         user_data UD_Label_7
-        callback {set_random_parameters(6);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_7);
+    }
+    else
+    {
+        set_random_parameters(6);
+    }}
         xywh {162 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Box L8 {
         label label
         user_data UD_Label_8
-        callback {set_random_parameters(7);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_8);
+    }
+    else
+    {
+        set_random_parameters(7);
+    }}
         xywh {322 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Box L9 {
         label label
         user_data UD_Label_9
-        callback {set_random_parameters(8);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_9);
+    }
+    else
+    {
+        set_random_parameters(8);
+    }}
         xywh {482 396 158 17} labelfont 1 labelcolor 7
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Box L10 {
         label label
         user_data UD_Label_10
-        callback {set_random_parameters(9);}
+        callback {if(Fl::event_button()==FL_LEFT_MOUSE)
+    {
+         set_drag(UD_Label_10);
+    }
+    else
+    {
+        set_random_parameters(9);
+    }}
         xywh {642 396 154 17} labelfont 1 labelcolor 7
-        code0 {o->set_box_type(BOX_LIGHT);}
+        code0 {o->set_box_type(BOX_DRAG_EFFECT);}
         class RKR_Box
       }
       Fl_Group EQ {
@@ -2131,6 +2201,8 @@ in the header file. Changes to the defines can be made directly in the .cxx file
   Function {Set_effect(RKR_Check_Button *o, void* v)} {open return_type {static void}
   } {}
   Function {cb_Set_effect_i(RKR_Check_Button*, void*)} {open C return_type {inline void}
+  } {}
+  Function {set_drag(int rack_position)} {open return_type void
   } {}
   Function {RandomPreset()} {open
   } {}

@@ -717,6 +717,7 @@ public:
   inline void p_click_i(Fl_Choice* o, void*);
   static void Set_effect(RKR_Check_Button *o, void* v);
   inline void cb_Set_effect_i(RKR_Check_Button*, void*);
+  void set_drag(int rack_position);
   void RandomPreset();
   void set_random_parameters(int effect);
   void set_parameters_random(int value);

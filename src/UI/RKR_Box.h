@@ -33,6 +33,7 @@
 #define BOX_DEFAULT     0
 #define BOX_LEDS        1
 #define BOX_LIGHT       2
+#define BOX_DRAG_EFFECT 3
 
 class RKR_Box : public Fl_Box
 {
@@ -57,6 +58,7 @@ private:
     int m_start_height;
     int m_box_type;
     int m_look_changed;
+    bool m_start_drag;
     void font_resize(int,int);
 
 };

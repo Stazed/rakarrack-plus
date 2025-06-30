@@ -3535,6 +3535,11 @@ void RKRGUI::Scan_Bank_Dir(int reload)
  */
 int RKRGUI::global_shortcuts(int event)
 {
+#if 0
+    /* This is the original method for main window dragging start which uses the event handler.
+       This would not work for embedded NTK window since the event handler seems to not update
+       the below mouse coordinates when the window is moved. So this is replaced by a direct
+       callback from the effect label box instead.*/
     if (event == FL_DRAG)
     {
         Fl_Widget *widget_belowmouse = Fl::belowmouse();
@@ -3544,7 +3549,7 @@ int RKRGUI::global_shortcuts(int event)
         drag = widget_user_data - UD_Label_1;
         return 1;
     }
-
+#endif
     if (event != FL_SHORTCUT)
     {
         return 0;
@@ -4004,6 +4009,16 @@ inline void RKRGUI::cb_Set_effect_i(RKR_Check_Button* o, void* v)
     ud -= UD_random_edit;
 
     FX_Excluded[ud] = (char) o->value();
+}
+
+/**
+ * For consistency with the landing position we use the UD lablel from the user data for the
+ * rack_position starting point. Subtract UD_Label_1 to get the actual drag value (0 to 9).
+ * @param rack_position
+ */
+void RKRGUI::set_drag(int rack_position)
+{
+    drag = rack_position - UD_Label_1;
 }
 
 void RKRGUI::RandomPreset()
