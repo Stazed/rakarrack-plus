@@ -142,7 +142,8 @@ void RakarrackPlusLV2UI::cleanup(LV2UI_Handle handle)
 {
     RakarrackPlusLV2UI *self = static_cast<RakarrackPlusLV2UI *>(handle);
     self->join_thread_xwindow();
-    self->r_gui->LV2_gui_hide();
+    self->r_gui->LV2_gui_hide();    // This does not hide the Principal (embedded) window.
+    self->r_gui->Principal->hide(); // Muse seems to need this...
     Fl::check();
     Fl::flush();
     delete self->r_gui->Principal;

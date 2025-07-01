@@ -4508,9 +4508,17 @@ RKRGUI::LV2_gui_hide()
     AboutWin->hide();
     MIDILearn->hide();
     Trigger->hide();
-//    Principal->hide();    // don't need this because the parent xwindow close is what triggered this
     DelayFile->hide();
     RandomEdit->hide();
+
+    /**
+     * Principal->hide();   (embedded)
+     * We don't hide the Principal window here because not all hosts delete the GUI on close.
+     * If not deleted the hide() will detach the Principal from the embedding host X11 parent
+     * window and the subsequent show() will be a detached Principal with a separate host X11 frame.
+     * When the host deletes the GUI on close, cleanup() is called and we hide() the Principal there
+     * before deleting it.
+     */
 
     for(unsigned i = 0; i < 8; ++i)
         save_current_state(i);
