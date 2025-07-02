@@ -1117,6 +1117,10 @@ public:
     float booster;
     float cpuload;
 
+#ifdef RKR_PLUS_LV2
+    float *input_l;
+    float *input_r;
+#endif
     float *efxoutl;
     float *efxoutr;
     float *auxdata;

@@ -165,6 +165,10 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     timeA(),
     booster(),
     cpuload(),
+#ifdef RKR_PLUS_LV2
+    input_l(NULL),
+    input_r(NULL),
+#endif
     efxoutl(NULL),
     efxoutr(NULL),
     auxdata(NULL),
@@ -315,7 +319,12 @@ RKR::delete_everything()
     delete RingRecNote;
     delete RC_Harm;
     delete RC_Stereo_Harm;
-
+#ifdef RKR_PLUS_LV2
+    free(input_l);
+    input_l = NULL;
+    free(input_r);
+    input_r = NULL;
+#endif
     free(efxoutl);
     efxoutl = NULL;
     free(efxoutr);
@@ -507,6 +516,10 @@ RKR::instantiate_effects()
 void
 RKR::initialize_arrays()
 {
+#ifdef RKR_PLUS_LV2
+    input_l = (float *) malloc(sizeof (float) * period_master);
+    input_r = (float *) malloc(sizeof (float) * period_master);
+#endif
     efxoutl = (float *) malloc(sizeof (float) * period_master);
     efxoutr = (float *) malloc(sizeof (float) * period_master);
 
@@ -522,7 +535,10 @@ RKR::initialize_arrays()
     m_ticks = (float *) malloc(sizeof (float) * period_master);
 
     interpbuf = (float*) malloc(sizeof (float)* period_master);
-
+#ifdef RKR_PLUS_LV2
+    memset(input_l, 0, sizeof (float)*period_master);
+    memset(input_r, 0, sizeof (float)*period_master);
+#endif
     memset(efxoutl, 0, sizeof (float)*period_master);
     memset(efxoutr, 0, sizeof (float)*period_master);
 
@@ -705,7 +721,11 @@ RKR::Control_Gain(float *origl, float *origr)
 
     if (upsample)
     {
+#ifdef RKR_PLUS_LV2
+        U_Resample->out(input_l, input_r, efxoutl, efxoutr, JACK_PERIOD, u_up);
+#else
         U_Resample->out(origl, origr, efxoutl, efxoutr, JACK_PERIOD, u_up);
+#endif
         if ((checkforaux()) || (ACI_Active))
         {
             A_Resample->mono_out(auxdata, auxresampled, JACK_PERIOD, u_up, period_master);
@@ -829,8 +849,13 @@ RKR::Control_Volume(const float *origl, const float *origr)
 
         if (Active_Preset.Fraction_Bypass < 1.0f)
         { // FX% main window
+#ifdef RKR_PLUS_LV2
+            efxoutl[i] = (input_l[i] * (1.0f - Active_Preset.Fraction_Bypass) + efxoutl[i] * Active_Preset.Fraction_Bypass);
+            efxoutr[i] = (input_r[i] * (1.0f - Active_Preset.Fraction_Bypass) + efxoutr[i] * Active_Preset.Fraction_Bypass);
+#else
             efxoutl[i] = (origl[i] * (1.0f - Active_Preset.Fraction_Bypass) + efxoutl[i] * Active_Preset.Fraction_Bypass);
             efxoutr[i] = (origr[i] * (1.0f - Active_Preset.Fraction_Bypass) + efxoutr[i] * Active_Preset.Fraction_Bypass);
+#endif
         }
 
         tmp = fabsf(efxoutl[i]);
@@ -947,6 +972,22 @@ RKR::process_effects(float *origl, float *origr, void *)
 
     if (Active_Preset.FX_Master_Active)
     {
+#ifdef RKR_PLUS_LV2
+        memcpy(input_l, origl, sizeof(float)*JACK_PERIOD);
+        memcpy(input_r, origr, sizeof(float)*JACK_PERIOD);
+
+        if (upsample)
+        {
+            // Sanity check - seems to be necessary for LV2 with up sampling...???
+            for(unsigned i = 0; i < JACK_PERIOD; ++i)
+            {
+                if(fabsf(input_l[i]) > 1.0f)
+                    input_l[i] = 0.0f;
+                if(fabsf(input_r[i]) > 1.0f)
+                    input_r[i] = 0.0f;
+            }
+        }
+#endif
         Control_Gain(origl, origr);
 
         if (Metro_Active)
