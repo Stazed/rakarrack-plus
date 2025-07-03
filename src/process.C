@@ -55,6 +55,7 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     sco_anal_need_init(false),
     need_bogomips_message(false),
     handle_bogomips_message(false),
+    lv2_is_active(false),
     jackclient(NULL),
     jackcliname(),
     Jack_Shut_Down(0),

@@ -470,6 +470,7 @@ void RKRGUI::GuiTimeout(void)
         if(m_process->handle_bogomips_message)
         {
             m_process->handle_bogomips_message = false;
+            m_process->need_bogomips_message = false;   // from lv2 init possibly
             m_process->Handle_Message(32);
         }
 

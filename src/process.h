@@ -874,6 +874,7 @@ public:
     bool sco_anal_need_init;
     bool need_bogomips_message;
     bool handle_bogomips_message;
+    bool lv2_is_active;
 
     /**
      * The current user selected bank preset index from button press in Bank window or

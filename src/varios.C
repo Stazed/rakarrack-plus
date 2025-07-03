@@ -351,7 +351,7 @@ RKR::Get_Bogomips()
         {
             // if (maxx_len < 2) maxx_len = 2;
 
-            if(Re_init_in_progress)
+            if(Re_init_in_progress || lv2_is_active)
                 need_bogomips_message = true;
             else
                 Handle_Message(32);

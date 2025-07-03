@@ -228,10 +228,14 @@ LV2_Handle init_rkrplus(const LV2_Descriptor */*descriptor*/,
     std::string pref_name(PACKAGE);
     pref_name += "-LV2";
     plug->rkrplus->set_client_name(pref_name);
+    plug->rkrplus->lv2_is_active = true;
 
     plug->rkrplus->initialize();
     plug->rkrplus->calculavol(1);
     plug->rkrplus->calculavol(2);
+
+    if(plug->rkrplus->need_bogomips_message)
+        plug->rkrplus->handle_bogomips_message = true;
 
     // initialize for shared in/out buffer
     plug->tmp_l = (float*)malloc(sizeof(float)*plug->period_max);
@@ -557,6 +561,9 @@ LV2_State_Status stateRestore(LV2_Handle h,
         else
             plug->rkrplus->booster = dB2rap(10);
     }
+
+    if(plug->rkrplus->need_bogomips_message)
+        plug->rkrplus->handle_bogomips_message = true;
 
     return LV2_STATE_SUCCESS;
 }
