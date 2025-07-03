@@ -837,6 +837,8 @@ public:
 #ifdef RKR_PLUS_LV2
     pthread_t t_pgm;
     bool sco_anal_need_init;
+    bool need_bogomips_message;
+    bool handle_bogomips_message;
 #endif
     pthread_t t_init;
 

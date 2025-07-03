@@ -350,8 +350,11 @@ RKR::Get_Bogomips()
         if (maxx_len < 5)
         {
             // if (maxx_len < 2) maxx_len = 2;
-            
-            Handle_Message(32);            
+#ifdef RKR_PLUS_LV2
+            need_bogomips_message = true;
+#else
+            Handle_Message(32);
+#endif
         }
 
         fclose(fp);

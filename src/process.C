@@ -54,6 +54,8 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     DC_Offsetr(NULL),
 #ifdef RKR_PLUS_LV2
     sco_anal_need_init(false),
+    need_bogomips_message(false),
+    handle_bogomips_message(false),
 #endif
     jackclient(NULL),
     jackcliname(),
@@ -1143,6 +1145,13 @@ RKR::reset_join_thread()
         {
             Handle_Message (52, "pthread_join - at reset_join_thread().");
         }
+#ifdef RKR_PLUS_LV2
+        if(need_bogomips_message)
+        {
+            need_bogomips_message = false;
+            handle_bogomips_message = true;
+        }
+#endif
     }
 }
 

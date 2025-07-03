@@ -477,6 +477,12 @@ void RKRGUI::GuiTimeout(void)
             Sco->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, this);
             Analy->init(m_process->efxoutl, m_process->efxoutr, m_process->period_master, m_process->sample_rate, this);
         }
+
+        if(m_process->handle_bogomips_message)
+        {
+            m_process->handle_bogomips_message = false;
+            m_process->Handle_Message(32);
+        }
 #endif
         if (Sco->get_scope_ON())
         {
