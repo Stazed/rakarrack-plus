@@ -460,17 +460,6 @@ void RKRGUI::GuiTimeout(void)
         m_process->efx_FLimiter->clipping = 0;
         m_process->efx_FLimiter->limit = 0;
 
-#ifndef RKR_PLUS_LV2
-        if (m_process->checkforaux())
-        {
-            Vocoder *Efx_Vocoder = static_cast <Vocoder*>(m_process->Rack_Effects[EFX_VOCODER]);
-            
-            if (VOCODER->vu_vu->value() != Efx_Vocoder->vulevel)
-            {
-                VOCODER->vu_vu->value(Efx_Vocoder->vulevel);
-            }
-        }
-#else
         if(m_process->sco_anal_need_init)
         {
             m_process->sco_anal_need_init = false;
@@ -482,6 +471,17 @@ void RKRGUI::GuiTimeout(void)
         {
             m_process->handle_bogomips_message = false;
             m_process->Handle_Message(32);
+        }
+
+#ifndef RKR_PLUS_LV2
+        if (m_process->checkforaux())
+        {
+            Vocoder *Efx_Vocoder = static_cast <Vocoder*>(m_process->Rack_Effects[EFX_VOCODER]);
+            
+            if (VOCODER->vu_vu->value() != Efx_Vocoder->vulevel)
+            {
+                VOCODER->vu_vu->value(Efx_Vocoder->vulevel);
+            }
         }
 #endif
         if (Sco->get_scope_ON())
