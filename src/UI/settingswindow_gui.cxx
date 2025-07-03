@@ -300,7 +300,10 @@ void SettingsWindowGui::cb_UPSAMPLE_C(RKR_Check_Button* o, void* v) {
 void SettingsWindowGui::cb_Upr_Amo_i(RKR_Choice* o, void*) {
   m_process->Config.UpAmo =(int) o->value();
 
-m_parent->Show_Reset_Window();
+if(m_process->Config.upsample)
+{
+  m_parent->Show_Reset_Window();
+};
 }
 void SettingsWindowGui::cb_Upr_Amo(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Upr_Amo_i(o,v);
@@ -324,7 +327,10 @@ Fl_Menu_Item SettingsWindowGui::menu_Upr_Amo[] = {
 void SettingsWindowGui::cb_Upr_Qual_i(RKR_Choice* o, void*) {
   m_process->Config.UpQual =(int) o->value();
 
-m_parent->Show_Reset_Window();
+if(m_process->Config.upsample)
+{
+  m_parent->Show_Reset_Window();
+};
 }
 void SettingsWindowGui::cb_Upr_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Upr_Qual_i(o,v);
@@ -342,7 +348,10 @@ Fl_Menu_Item SettingsWindowGui::menu_Upr_Qual[] = {
 void SettingsWindowGui::cb_Downr_Qual_i(RKR_Choice* o, void*) {
   m_process->Config.DownQual =(int) o->value();
 
-m_parent->Show_Reset_Window();
+if(m_process->Config.upsample)
+{
+  m_parent->Show_Reset_Window();
+};
 }
 void SettingsWindowGui::cb_Downr_Qual(RKR_Choice* o, void* v) {
   ((SettingsWindowGui*)(o->parent()->parent()->parent()))->cb_Downr_Qual_i(o,v);

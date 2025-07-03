@@ -42,7 +42,7 @@ decl {\#include "../strlcpy.h"} {private global
 }
 
 widget_class SettingsWindowGui {open selected
-  xywh {708 107 530 580} type Double
+  xywh {482 234 530 580} type Double
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -418,7 +418,10 @@ m_parent->Show_Reset_Window();}
         label Amount
         callback {m_process->Config.UpAmo =(int) o->value();
 
-m_parent->Show_Reset_Window();}
+if(m_process->Config.upsample)
+{
+  m_parent->Show_Reset_Window();
+}}
         xywh {241 175 47 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->set_label_offset(1);}
         class RKR_Choice
@@ -472,7 +475,10 @@ m_parent->Show_Reset_Window();}
         label Up
         callback {m_process->Config.UpQual =(int) o->value();
 
-m_parent->Show_Reset_Window();}
+if(m_process->Config.upsample)
+{
+  m_parent->Show_Reset_Window();
+}}
         xywh {313 175 72 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->set_label_offset(1);}
         class RKR_Choice
@@ -502,7 +508,10 @@ m_parent->Show_Reset_Window();}
         label Down
         callback {m_process->Config.DownQual =(int) o->value();
 
-m_parent->Show_Reset_Window();}
+if(m_process->Config.upsample)
+{
+  m_parent->Show_Reset_Window();
+}}
         xywh {425 175 73 18} down_box BORDER_BOX labelsize 11 labelcolor 7 textsize 10 textcolor 7
         code0 {o->menu(menu_Upr_Qual);}
         code1 {o->set_label_offset(1);}
