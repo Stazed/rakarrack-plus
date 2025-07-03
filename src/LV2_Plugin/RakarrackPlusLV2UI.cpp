@@ -71,7 +71,7 @@ bool RakarrackPlusLV2UI::init()
     return true;
 }
 
-int RakarrackPlusLV2UI::idle(LV2UI_Handle handle)
+int RakarrackPlusLV2UI::idle(LV2UI_Handle /*handle*/)
 {
     Fl::check();
     Fl::flush();
@@ -92,8 +92,8 @@ int RakarrackPlusLV2UI::resize_func(LV2UI_Feature_Handle handle, int w, int h)
 LV2UI_Handle RakarrackPlusLV2UI::instantiate(const struct LV2UI_Descriptor * /*descriptor*/,
 		const char * plugin_uri,
 		const char * bundle_path,
-		LV2UI_Write_Function write_function,
-		LV2UI_Controller controller,
+		LV2UI_Write_Function /*write_function*/,
+		LV2UI_Controller /*controller*/,
 		LV2UI_Widget * widget,
 		const LV2_Feature * const * features) 
 {
