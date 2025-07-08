@@ -853,10 +853,10 @@ void RKRGUI::load_previous_state()
 
 #ifdef NTK_SUPPORT
 #ifndef NTK_EXTENDED    // ntk-unofficial which supports this
-    Settings->Font_Bro->deactivate();   // NTK does not support ATM
+    Settings->Font_Bro->deactivate();   // NTK original does not support
 #endif
-    Settings->scheme_ch->deactivate();  // NTK does not support ATM
-    FullScreen_Menu->deactivate();      // NTK does not support ATM
+    Settings->scheme_ch->deactivate();  // NTK does not support
+    FullScreen_Menu->deactivate();      // NTK does not work correctly
 #endif
 
     // MIDI Learn

@@ -100,7 +100,7 @@ Additional features, enhancements:
   the changes.
     - If you use the original NTK library, the font selector is de-activated.
     - If you use ntk-unofficial (git clone https://github.com/Stazed/ntk-unofficial.git), then the font selector is active.
-    - F12 fullscreen does not work with NTK and is de-activated.
+    - F12 fullscreen does not work correctly with NTK and is de-activated.
     - For LV2, the Settings/Preferences/Audio 'FX On at start' button is de-activated and is always active.
     - The LV2 uses a separate configure file than the standalone and each instance can have different settings.
     - The LV2 Settings/Preferences/Look items are global for all instances. Other tab items can be different.
