@@ -282,14 +282,17 @@ RKR::initialize(bool re_initialize)
 
 #ifdef RKR_PLUS_LV2
     active_bank = Config.active_bank;
-    copy_bank(Bank, Bank_Vector[active_bank].Bank);
+    if(active_bank < (int) Bank_Vector.size())
+        copy_bank(Bank, Bank_Vector[active_bank].Bank);
+
     if(!re_initialize)
         lv2_process_midi_program_changes(); // this closes the GUI for LV2
 #else
     if (!Bank_Load_Command_Line && !Gui_Shown)
     {
         active_bank = Config.active_bank;
-        copy_bank(Bank, Bank_Vector[active_bank].Bank);
+        if(active_bank < (int) Bank_Vector.size())
+            copy_bank(Bank, Bank_Vector[active_bank].Bank);
     }
 #endif
 }
