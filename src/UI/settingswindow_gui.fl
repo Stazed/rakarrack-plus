@@ -276,7 +276,7 @@ m_parent->PutBackground();}
       Fl_Button BI_Browser {
         label Browse
         callback {char *filename;
-filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
+filename=fl_file_chooser("Browse:","(*.png)",DATADIR,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);

@@ -179,7 +179,7 @@ void SettingsWindowGui::cb_Enable_Back(RKR_Check_Button* o, void* v) {
 
 void SettingsWindowGui::cb_BI_Browser_i(RKR_Button*, void*) {
   char *filename;
-filename=fl_file_chooser("Browse:","(*.png)",NULL,0);
+filename=fl_file_chooser("Browse:","(*.png)",DATADIR,0);
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
