@@ -180,10 +180,10 @@ if(EnableSysex)
     add_definitions(-D'SYSEX_SUPPORT=1')
 endif (EnableSysex)
 
-if(BuildRakarrackPlus)
+if(BuildRakarrackPlus OR BuildRakarrackPlusLV2)
     install(FILES COPYING AUTHORS README README.md
         DESTINATION share/doc/rakarrack-plus)
-endif(BuildRakarrackPlus)
+endif(BuildRakarrackPlus OR BuildRakarrackPlusLV2)
 #TODO move from /data to main
 #install(FILES rakarrack-plus-plus.desktop
 #    DESTINATION share/applications)
@@ -292,12 +292,15 @@ endif (BuildLV2Plugins)
 
 if(BuildRakarrackPlus)
     add_subdirectory(src)
+endif (BuildRakarrackPlus)
+
+if(BuildRakarrackPlus OR BuildRakarrackPlusLV2)
     add_subdirectory(man)
     add_subdirectory(data)
     add_subdirectory(icons)
     add_subdirectory(doc)
     add_subdirectory(extra)
-endif (BuildRakarrackPlus)
+endif (BuildRakarrackPlus OR BuildRakarrackPlusLV2)
 
 
 ##Summarize The Full Configuration
