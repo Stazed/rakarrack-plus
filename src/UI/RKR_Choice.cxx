@@ -160,7 +160,7 @@ void RKR_Choice::draw()
             l.font = m.labelsize_ || m.labelfont_ ? m.labelfont_ : textfont();
             l.size = m.labelsize_ ? m.labelsize_ : textsize();
             l.color = m.labelcolor_ ? m.labelcolor_ : textcolor();
-#ifdef FLTK_VERSION_1_4
+#if defined FLTK_VERSION_1_4 && !defined NTK_SUPPORT
             l.h_margin_ = l.v_margin_ = l.spacing = 0;
 #endif
             if (!m.active()) l.color = fl_inactive((Fl_Color) l.color);
