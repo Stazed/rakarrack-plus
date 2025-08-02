@@ -1484,7 +1484,11 @@ void RKRGUI::save_current_state(int whati)
     }
     else    // Using NSM
     {
+#if defined FLTK_VERSION_1_4 && !defined NTK_SUPPORT
+        Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL, Fl_Preferences::USER_L);
+#else
         Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL);
+#endif
         save_preferences(rakarrack, whati);
     }
 }
@@ -2623,7 +2627,6 @@ void RKRGUI::PutBackground()
     MIDI->image(InOut->image());
     Metro->image(InOut->image());
     fondo->image(InOut->image());
-    TITTLE_L->image(InOut->image());
     Order->Fondo1->image(InOut->image());
     Settings->Fondo2->image(InOut->image());
     BankWindow->Fondo3->image(InOut->image());
@@ -2637,12 +2640,17 @@ void RKRGUI::PutBackground()
     Settings->Fondo11->image(InOut->image());
     Settings->Fondo12->image(InOut->image());
 
-    Etit->image(InOut->image());
+    // Don't know why setting the image for these causes the labels of the 
+    // MenuP (TITTLE_L) and the Etit (Rakarrack +) to be hidden for FLTK 1.4.
+    // But they don't seem necessary for NTK or earlier versions of FLTK.
+//    TITTLE_L->image(InOut->image());
+//    Etit->image(InOut->image());
+
     MIDILearn->Ares->image(InOut->image());
 
     MenuP->image(InOut->image());
     BankWindow->MenuB->image(InOut->image());
-    
+
     DelayFile->Fondo13->image(InOut->image());
     RandomEdit->Fondo14->image(InOut->image());
 
