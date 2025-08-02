@@ -96,6 +96,8 @@ if(BuildRakarrackPlus)
             message(STATUS "FLTK version is 1.4.0 or newer.")
             add_definitions(-D'FLTK_VERSION_1_4=1')
         else()
+            # If FLTK version is < 1.4 the CONFIG option does not link, so re-run find_package without it.
+            find_package(FLTK REQUIRED)
             message(STATUS "FLTK version is older than 1.4.0.")
         endif()
     endif(EnableNTK)
