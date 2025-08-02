@@ -21,7 +21,7 @@
         doap:description "Arpeggiated Volume/Filter/Pitch";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 3 ;
-        lv2:microVersion 0 ;
+        lv2:microVersion 1 ;
         rdfs:comment "8-step modulation sequencer. Each step is user-adjustable. Signal amplitude, filter cutoff frequency, or pitch shifting modulations available." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#Sequence_ui> ;

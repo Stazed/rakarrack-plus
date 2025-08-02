@@ -37,7 +37,7 @@
     doap:description "Extremely Configurable Delay" ;
     lv2:project <https://github.com/Stazed/rakarrack-plus>;
     lv2:minorVersion 3 ;
-    lv2:microVersion 0 ;
+    lv2:microVersion 1 ;
     rdfs:comment "An extremely-configurable delay that allows up to 127 taps. Individual tap timing can be customized and loaded through text files. You can also have a custom filter on each tap. Several example files included." ;
     lv2:requiredFeature urid:map, worker:schedule ;
     lv2:optionalFeature lv2:hardRTCapable, state:loadDefaultState ;

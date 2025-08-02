@@ -20,7 +20,7 @@
         doap:description "compressor";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 3 ;
-        lv2:microVersion 0 ;
+        lv2:microVersion 1 ;
         rdfs:comment "A flexible compressor with optional soft knee and makeup gain." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#comp_ui> ;

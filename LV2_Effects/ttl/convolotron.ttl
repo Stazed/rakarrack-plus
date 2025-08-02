@@ -37,7 +37,7 @@
     doap:description "Convolution-Based Reverb" ;
     lv2:project <https://github.com/Stazed/rakarrack-plus>;
     lv2:minorVersion 3 ;
-    lv2:microVersion 0 ;
+    lv2:microVersion 1 ;
     rdfs:comment "Convolution-based reverb effect." ;
     lv2:requiredFeature urid:map, worker:schedule ;
     lv2:optionalFeature lv2:hardRTCapable, state:loadDefaultState ;

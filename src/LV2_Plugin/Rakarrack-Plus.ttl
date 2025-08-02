@@ -47,7 +47,7 @@
              <http://lv2plug.in/ns/ext/buf-size#boundedBlockLength>,
              opts:options;
         lv2:minorVersion 3 ;
-        lv2:microVersion 0 ;
+        lv2:microVersion 1 ;
         rdfs:comment "Guitar and audio effects." ;
 
         opts:requiredOption <http://lv2plug.in/ns/ext/buf-size#maxBlockLength> ;

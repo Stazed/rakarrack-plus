@@ -20,7 +20,7 @@
         doap:description "Distortion with Extra Color";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 3 ;
-        lv2:microVersion 0 ;
+        lv2:microVersion 1 ;
         rdfs:comment "A very configurable waveshaping distortion module with resonance control of the filters for extra color." ;
         lv2:optionalFeature lv2:hardRTCapable,
             <http://lv2plug.in/ns/ext/urid#map>,

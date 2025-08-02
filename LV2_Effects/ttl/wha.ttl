@@ -23,7 +23,7 @@
         doap:description "Envelope/LFO Controlled Wah";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 3 ;
-        lv2:microVersion 0 ;
+        lv2:microVersion 1 ;
         rdfs:comment "Wah effect controllable by the input volume envelope or by LFO." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#wha_ui> ;

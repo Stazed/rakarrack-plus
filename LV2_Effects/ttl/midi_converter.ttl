@@ -22,7 +22,7 @@
         doap:description "Audio to Midi conversion";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 3 ;
-        lv2:microVersion 0 ;
+        lv2:microVersion 1 ;
         rdfs:comment "An experimental monophonic midi converter." ;
         lv2:optionalFeature lv2:hardRTCapable ;
         lv2:requiredFeature urid:map ;

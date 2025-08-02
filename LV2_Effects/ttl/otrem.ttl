@@ -22,7 +22,7 @@
         doap:description "Optical Tremolo Emulation";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
         lv2:minorVersion 3 ;
-        lv2:microVersion 0 ;
+        lv2:microVersion 1 ;
         rdfs:comment "An optical tremolo effect emulation such as often built into a guitar amplifier. This varies the signal volume through an LFO." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#Otrem_ui> ;
