@@ -623,7 +623,11 @@ void Config_fltk::load_previous_state()
     }
     else    // Using NSM
     {
+#if defined FLTK_VERSION_1_4 && !defined NTK_SUPPORT
+        Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL, Fl_Preferences::USER_L);
+#else
         Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL);
+#endif
         load_preferences(rakarrack);
     }
 }
