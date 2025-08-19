@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0311
+version 1.0404
 header_name {.h}
 code_name {.cxx}
 decl {\#include "RKR_Box.h"} {public global
@@ -41,8 +41,8 @@ decl {\#include "RKR_Fl_Slider.h"} {public global
 decl {\#include "../strlcpy.h"} {private global
 }
 
-widget_class SettingsWindowGui {open selected
-  xywh {482 234 530 580} type Double
+widget_class {this->m_parent = NULL;} SettingsWindowGui {open selected
+  xywh {482 234 530 580}
   code0 {\#include "rakarrack.h"}
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
@@ -61,7 +61,7 @@ m_parent= _rgui;} {}
     class RKR_Tabs
   } {
     Fl_Group Look {
-      label Look open
+      label Look
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4
     } {
       Fl_Box Fondo6 {
@@ -275,8 +275,10 @@ m_parent->PutBackground();}
       }
       Fl_Button BI_Browser {
         label Browse
-        callback {char *filename;
-filename=fl_file_chooser("Browse:","(*.png)",DATADIR,0);
+        callback {m_process->Shut_Off_Below_Mouse = 1;
+char *filename=fl_file_chooser("Browse:","(*.png)",DATADIR,0);
+m_process->Shut_Off_Below_Mouse = 0;
+
 if (filename==NULL) return;
 filename=fl_filename_setext(filename,".png");
 BackFiname->value(filename);
@@ -304,7 +306,7 @@ m_process->change_scale = 1; // true}
       }
     }
     Fl_Group AUDIO_SET {
-      label Audio open
+      label Audio
       xywh {5 26 518 554} box DOWN_FRAME labelfont 1 labelcolor 7 align 4 hide
     } {
       Fl_Box Fondo7 {
@@ -1530,8 +1532,9 @@ m_process->Config.NSM_single_state=(int) o->value();
       }
       Fl_Button UD_Browser {
         label Browse
-        callback {char *dir;
-    dir = fl_dir_chooser("Browse:", NULL, 0);
+        callback {m_process->Shut_Off_Below_Mouse = 1;
+    char *dir = fl_dir_chooser("Browse:", NULL, 0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (dir == NULL)
         return;
@@ -1568,9 +1571,10 @@ See F1 help under General/Preferences for additional information.} xywh {415 65 
         chooser_start_location = m_process->Config.UDirFilename;
     }
 
-    char *filename;
-    filename = fl_file_chooser("Browse:", "(*.rkrb)", chooser_start_location.c_str (), 0);
-    
+    m_process->Shut_Off_Below_Mouse = 1;
+    char *filename = fl_file_chooser("Browse:", "(*.rkrb)", chooser_start_location.c_str (), 0);
+    m_process->Shut_Off_Below_Mouse = 0;
+
     if (filename == NULL)
         return;
     

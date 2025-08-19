@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0311
+version 1.0404
 header_name {.h}
 code_name {.cxx}
 decl {\#include "../process.h"} {public local
@@ -423,9 +423,9 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }
-
-    char *filename;
-    filename = fl_file_chooser("Load Skin:", "(*.rkrs)", chooser_start_location.c_str(), 0);
+    m_process->Shut_Off_Below_Mouse = 1;
+    char *filename = fl_file_chooser("Load Skin:", "(*.rkrs)", chooser_start_location.c_str(), 0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (filename == NULL)
         return;
@@ -451,7 +451,9 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
 
     char *filename;
 \#define EXT ".rkrs"
+    m_process->Shut_Off_Below_Mouse = 1;
     filename = fl_file_chooser("Save Skin:", "(*" EXT")", chooser_start_location.c_str(), 0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (filename == NULL)
         return;
@@ -491,10 +493,10 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
     {
         chooser_start_location = m_process->Config.UDirFilename;
     }
-    
-    char *filename;
 
-    filename = fl_file_chooser("Convert Reverb IR File:", "(*.wav)", chooser_start_location.c_str(), 0);
+    m_process->Shut_Off_Below_Mouse = 1;
+    char *filename = fl_file_chooser("Convert Reverb IR File:", "(*.wav)", chooser_start_location.c_str(), 0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (filename == NULL)
         return;
@@ -508,14 +510,14 @@ If efx_always_active is not checked, then the actual is randomly generated.} pri
           }
           MenuItem ImportPresets {
             label {Import Inserted Presets}
-            callback {char *filename;
-
-    // Set the file chooser to the previous hidden file
+            callback {// Set the file chooser to the previous hidden file
     char tempfile[256];
     memset(tempfile, 0, sizeof (tempfile));
     snprintf(tempfile, sizeof(tempfile), "%s%s", getenv("HOME"), "/.rkrintpreset");
-  
-    filename = fl_file_chooser("Import Inserted Presets:","(*)", tempfile,0);
+
+    m_process->Shut_Off_Below_Mouse = 1;
+    char *filename = fl_file_chooser("Import Inserted Presets:","(*)", tempfile,0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (filename == NULL) return;
 
@@ -1543,9 +1545,10 @@ Put_Loaded();}
         chooser_start_location = m_process->Config.UDirFilename;
     }
 
-    char *filename;
-    filename = fl_file_chooser("Import Preset:", "(*.rkr)", chooser_start_location.c_str(), 0);
-    
+    m_process->Shut_Off_Below_Mouse = 1;
+    char *filename = fl_file_chooser("Import Preset:", "(*.rkr)", chooser_start_location.c_str(), 0);
+    m_process->Shut_Off_Below_Mouse = 0;
+
     if (filename == NULL)
         return;
 
@@ -1578,7 +1581,10 @@ Put_Loaded();}
             char *filename;
 
 \#define EXT ".rkr"
+            m_process->Shut_Off_Below_Mouse = 1;
             filename = fl_file_chooser("Export Preset:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            m_process->Shut_Off_Below_Mouse = 0;
+
             if (filename == NULL)
                 return;
 
@@ -1593,7 +1599,10 @@ Put_Loaded();}
             char *filename;
 
 \#define EXT ".strip"
+            m_process->Shut_Off_Below_Mouse = 1;
             filename = fl_file_chooser("Export Non-Mixer-XT:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            m_process->Shut_Off_Below_Mouse = 0;
+
             if (filename == NULL)
                 return;
 
@@ -1609,7 +1618,10 @@ Put_Loaded();}
             char *filename;
 
 \#define EXT ".carxp"
+            m_process->Shut_Off_Below_Mouse = 1;
             filename = fl_file_chooser("Export Carla:", "(*" EXT")", chooser_start_location.c_str (), 0);
+            m_process->Shut_Off_Below_Mouse = 0;
+
             if (filename == NULL)
                 return;
 
@@ -1621,7 +1633,7 @@ Put_Loaded();}
         break;
     }
 
-    m_process->Shut_Off_Below_Mouse = 0;}
+    m_process->Shut_Off_Below_Mouse = 0;} open
           tooltip {Export preset to file - Shortcut 'E'} xywh {306 50 64 18} down_box BORDER_BOX color 2 selection_color 0 align 1 when 6
           class RKR_Choice
         } {

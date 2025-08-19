@@ -1,5 +1,5 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0308
+version 1.0404
 header_name {.h}
 code_name {.cxx}
 decl {\#include <vector>} {public global
@@ -31,8 +31,8 @@ All the sub menu paths for resizing.
 These need to be adjusted if the file menu is changed.} private global
 }
 
-widget_class BankWindowGui {open selected
-  xywh {867 238 800 600} type Double color 4 selection_color 7 resizable
+widget_class {this->m_parent = NULL;} BankWindowGui {open selected
+  xywh {738 200 800 600} color 4 selection_color 7 resizable
   code1 {this->m_process = NULL;}
   code2 {this->m_parent = NULL;}
   class Fl_Double_Window size_range {320 240 3200 2400} visible
@@ -67,9 +67,9 @@ m_parent= _rgui;} {}
       }
       MenuItem Convert_Old_Bank {
         label {Convert &Old Bank}
-        callback {char *filename;
-
-    filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
+        callback {m_process->Shut_Off_Below_Mouse = 1;
+    char *filename=fl_file_chooser("Convert Old Bank File:","(*.rkrb)",NULL,0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (filename==NULL)
         return;

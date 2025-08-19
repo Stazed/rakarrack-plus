@@ -4282,7 +4282,9 @@ void RKRGUI::set_bank_file()
         chooser_start_location = m_process->Config.UDirFilename;
     }
 
+    m_process->Shut_Off_Below_Mouse = 1;
     filename = fl_file_chooser("Load Bank File:", "(*.rkrb)", chooser_start_location.c_str (), 0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (filename == NULL)
         return;
@@ -4315,7 +4317,9 @@ void RKRGUI::set_save_file()
     char *filename;
 
 #define EXT ".rkrb"
+    m_process->Shut_Off_Below_Mouse = 1;
     filename = fl_file_chooser("Save Bank File:", "(*" EXT")", chooser_start_location.c_str (), 0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (filename == NULL)
         return;
@@ -4385,7 +4389,9 @@ void RKRGUI::Load_Midi_Program_Change_Table()
     }
     
     char *filename;
+    m_process->Shut_Off_Below_Mouse = 1;
     filename = fl_file_chooser("Load MIDI Table:", "(*.rmt)", chooser_start_location.c_str (), 0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (filename == NULL)
         return;
@@ -4431,7 +4437,9 @@ void RKRGUI::Save_Midi_Program_Change_Table()
 
     char *filename;
 #define EXT ".rmt"
+    m_process->Shut_Off_Below_Mouse = 1;
     filename = fl_file_chooser("Save MIDI Table:", "(*" EXT")", chooser_start_location.c_str (), 0);
+    m_process->Shut_Off_Below_Mouse = 0;
 
     if (filename == NULL)
         return;
