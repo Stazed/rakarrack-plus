@@ -216,32 +216,51 @@ if(EnableNTK)
         "${CMAKE_CURRENT_BINARY_DIR}/UI"
     )
 
-else(EnableNTK)
-    target_include_directories (
-        rakarrack-plus PRIVATE
-        ${FLTK_INCLUDE_DIR}
-        ${ALSA_INCLUDE_DIRS}
-        ${JACK_INCLUDE_DIRS}
-        ${FONTCONFIG_INCLUDE_DIRS}
-        ${FFTW3_INCLUDE_DIRS}
-        ${SNDFILE_INCLUDE_DIRS}
-        ${SAMPLERATE_INCLUDE_DIRS}
-        ${X11_INCLUDE_DIRS}
-        ${XFT_INCLUDE_DIRS}
-        ${XRENDER_INCLUDE_DIRS}
-        ${XPM_INCLUDE_DIRS}
-        ${FREETYPE_INCLUDE_DIRS}
-        ${ZLIB_INCLUDE_DIRS}
-        ${LIBLO_INCLUDE_DIRS}
-        "${CMAKE_CURRENT_SOURCE_DIR}/UI"
-        "${CMAKE_CURRENT_BINARY_DIR}/UI"
+else(EnableNTK) # Modern cmake
+    if(TARGET fltk::fltk-shared)
+        target_include_directories (
+            rakarrack-plus PRIVATE
+            ${ALSA_INCLUDE_DIRS}
+            ${JACK_INCLUDE_DIRS}
+            ${FFTW3_INCLUDE_DIRS}
+            ${SNDFILE_INCLUDE_DIRS}
+            ${SAMPLERATE_INCLUDE_DIRS}
+            ${ZLIB_INCLUDE_DIRS}
+            ${LIBLO_INCLUDE_DIRS}
+            "${CMAKE_CURRENT_SOURCE_DIR}/UI"
+            "${CMAKE_CURRENT_BINARY_DIR}/UI"
+        )
+    else()  # Old cmake
+        target_include_directories (
+            rakarrack-plus PRIVATE
+            ${FLTK_INCLUDE_DIR}
+            ${ALSA_INCLUDE_DIRS}
+            ${JACK_INCLUDE_DIRS}
+            ${FONTCONFIG_INCLUDE_DIRS}
+            ${FFTW3_INCLUDE_DIRS}
+            ${SNDFILE_INCLUDE_DIRS}
+            ${SAMPLERATE_INCLUDE_DIRS}
+            ${X11_INCLUDE_DIRS}
+            ${XFT_INCLUDE_DIRS}
+            ${XRENDER_INCLUDE_DIRS}
+            ${XPM_INCLUDE_DIRS}
+            ${FREETYPE_INCLUDE_DIRS}
+            ${ZLIB_INCLUDE_DIRS}
+            ${LIBLO_INCLUDE_DIRS}
+            "${CMAKE_CURRENT_SOURCE_DIR}/UI"
+            "${CMAKE_CURRENT_BINARY_DIR}/UI"
     )
+    endif()
 endif(EnableNTK)
 
 if(EnableNTK)
-    target_link_libraries (rakarrack-plus ${NTK_IMAGES_LIBRARIES} ${NTK_LIBRARIES} ${ExternLibraries})
+    target_link_libraries (rakarrack-plus PRIVATE ${NTK_IMAGES_LIBRARIES} ${NTK_LIBRARIES} ${ExternLibraries})
 else(EnableNTK)
-    target_link_libraries (rakarrack-plus ${FLTK_LIBRARIES} ${ExternLibraries})
+    if(TARGET fltk::fltk-shared)    # Modern cmake
+        target_link_libraries (rakarrack-plus PRIVATE fltk::fltk-shared fltk::images ${ExternLibraries})
+    else()                          # Old cmake
+        target_link_libraries (rakarrack-plus PRIVATE ${FLTK_LIBRARIES} ${ExternLibraries})
+    endif()
 endif(EnableNTK)
 
 if(EnableNTK)
