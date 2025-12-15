@@ -1602,7 +1602,8 @@ inline void RKRGUI::preset_click_i(Fl_Button* o, void*)
 
         // Check if user really wants to set the preset to the bank
         Fl_Widget *m = fl_message_icon();
-        m->parent()->copy_label(m_process->jackcliname);
+        if(m->parent())
+            m->parent()->copy_label(m_process->jackcliname);
         
         // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
         m_process->Shut_Off_Below_Mouse = 1;
@@ -2362,7 +2363,8 @@ void RKRGUI::is_bank_modified()
     if (m_process->bank_modified)
     {
         Fl_Widget *w = fl_message_icon();
-        w->parent()->copy_label(m_process->jackcliname);
+        if(w->parent())
+            w->parent()->copy_label(m_process->jackcliname);
 
         // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
         m_process->Shut_Off_Below_Mouse = 1;
@@ -2388,7 +2390,8 @@ RKRGUI::is_PG_table_modified()
     if (m_process->PG_table_modified)
     {
         Fl_Widget *w = fl_message_icon();
-        w->parent()->copy_label(m_process->jackcliname);
+        if(w->parent())
+            w->parent()->copy_label(m_process->jackcliname);
 
         // Need to shut off below mouse or it tries to modify the fl_choice widget and crash.
         m_process->Shut_Off_Below_Mouse = 1;
@@ -3212,7 +3215,8 @@ void RKRGUI::Show_Next_Time()
         return;
 
     Fl_Widget *w = fl_message_icon();
-    w->parent()->copy_label(m_process->jackcliname);
+    if(w->parent())
+        w->parent()->copy_label(m_process->jackcliname);
     
     m_process->Handle_Message (38);
 }

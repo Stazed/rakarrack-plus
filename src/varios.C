@@ -43,7 +43,8 @@ RKR::Message(int prio, const std::string &labelwin, const std::string &message_t
         w->label("");
         w->image(img);
         w->align(FL_ALIGN_TOP | FL_ALIGN_INSIDE);
-        w->parent()->copy_label(labelwin.c_str());
+        if(w->parent())
+            w->parent()->copy_label(labelwin.c_str());
 
         // Need to shut off below mouse or it tries to modify the fl_message widget and crash.
         Shut_Off_Below_Mouse = 1;
