@@ -856,7 +856,9 @@ void RKRGUI::load_previous_state()
     Settings->Font_Bro->deactivate();   // NTK original does not support
 #endif
     Settings->scheme_ch->deactivate();  // NTK does not support
-    FullScreen_Menu->deactivate();      // NTK does not work correctly
+#endif
+#if defined RKR_PLUS_LV2 || ( defined NTK_SUPPORT && !defined NTK_EXTENDED )
+    FullScreen_Menu->deactivate();      // NTK original does not work correctly & does not work with x_embed for LV2
 #endif
 
     // MIDI Learn

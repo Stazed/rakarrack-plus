@@ -272,12 +272,19 @@ void RKRGUI::cb_ACI_Menu(Fl_Menu_* o, void* v) {
 }
 
 void RKRGUI::cb_FullScreen_Menu_i(Fl_Menu_*, void*) {
-#ifndef NTK_SUPPORT
-  if(Principal->fullscreen_active())
-      Principal->fullscreen_off();
-    else
-      Principal->fullscreen();
+#ifdef RKR_PLUS_LV2
+      // Not supported for LV2
+      return;
 #endif
+#if !defined NTK_EXTENDED && defined NTK_SUPPORT
+      // Only supported by NTK_EXTENDED
+      return;
+#endif
+
+    if(Principal->fullscreen_active())
+        Principal->fullscreen_off();
+    else
+        Principal->fullscreen();
 }
 void RKRGUI::cb_FullScreen_Menu(Fl_Menu_* o, void* v) {
   ((RKRGUI*)(o->parent()->user_data()))->cb_FullScreen_Menu_i(o,v);
