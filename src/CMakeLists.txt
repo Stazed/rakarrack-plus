@@ -164,6 +164,7 @@ set (ProgSources
     FX/Infinity.C
     FX/Cabinet.C
     FX/ParametricEQ.C
+    FX/MIDIConverter.C
 )
 
 
@@ -266,10 +267,5 @@ endif(EnableNTK)
 if(EnableNTK)
     target_compile_definitions(rakarrack-plus PRIVATE NTK_SUPPORT=1)
 endif(EnableNTK)
-
-set_source_files_properties(FX/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
-target_sources(rakarrack-plus PRIVATE
-  FX/MIDIConverter.C
-)
 
 install (TARGETS rakarrack-plus RUNTIME DESTINATION bin)

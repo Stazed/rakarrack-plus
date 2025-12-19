@@ -11,12 +11,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
-#ifndef nullptr
-// needed for c++98 with fltk > 1.3.9
-#define nullptr 0
-#endif
-
 #include "../global.h"
 
 #define M_PI 3.14159265358979323846
@@ -430,40 +424,46 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
 
             fftwf_execute(fftPlan);
 
-            for (k = 0; k <= fftSize / 2; k++)
+            for (int k = 0; k <= fftSize / 2; ++k)
             {
-                float real = creal(fftOut[k]), // This requires -std=gnu++98 
-                        imag = cimag(fftOut[k]), // This requires -std=gnu++98 
-                        magnitude = 20. * log10(2. * sqrt(real * real + imag * imag) / fftSize),
-                        phase = atan2(imag, real),
-                        tmp, freq;
+                float real = fftOut[k][0];
+                float imag = fftOut[k][1];
+
+                float magnitude = 20.0f * std::log10(
+                    2.0f * std::sqrt(real * real + imag * imag) / fftSize
+                );
+
+                float phase = std::atan2(imag, real);
+                float tmp, freq;
 
                 /* compute phase difference */
                 tmp = phase - fftLastPhase[k];
                 fftLastPhase[k] = phase;
 
                 /* subtract expected phase difference */
-                tmp -= (double) k*phaseDifference;
+                tmp -= static_cast<float>(k) * phaseDifference;
 
                 /* map delta phase into +/- Pi interval */
-                long qpd = tmp / M_PI;
+                long qpd = static_cast<long>(tmp / M_PI);
 
-                if (qpd >= 0) qpd += qpd & 1;
-                else qpd -= qpd & 1;
+                if (qpd >= 0)
+                    qpd += qpd & 1;
+                else
+                    qpd -= qpd & 1;
 
-                tmp -= M_PI * (double) qpd;
+                tmp -= static_cast<float>(M_PI * qpd);
 
                 /* get deviation from bin frequency from the +/- Pi interval */
-                tmp = overlap * tmp / (2. * M_PI);
+                tmp = overlap * tmp / (2.0f * static_cast<float>(M_PI));
 
-                /* compute the k-th partials' true frequency */
-                freq = (double) k * freqPerBin + tmp*freqPerBin;
+                /* compute the k-th partial's true frequency */
+                freq = static_cast<float>(k) * freqPerBin + tmp * freqPerBin;
 
-                if (freq > 0.0 && magnitude > peaks[0].db)
+                if (freq > 0.0f && magnitude > peaks[0].db)
                 {
-                    memmove(peaks + 1, peaks, sizeof (Peak)*(MAX_PEAKS - 1));
+                    memmove(peaks + 1, peaks, sizeof(Peak) * (MAX_PEAKS - 1));
                     peaks[0].freq = freq;
-                    peaks[0].db = magnitude;
+                    peaks[0].db   = magnitude;
                 }
             }
 

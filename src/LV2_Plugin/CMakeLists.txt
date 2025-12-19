@@ -164,6 +164,7 @@ set (ProgSources
     ../FX/Infinity.C
     ../FX/Cabinet.C
     ../FX/ParametricEQ.C
+    ../FX/MIDIConverter.C
 )
 
 set(ExternLibraries
@@ -208,12 +209,6 @@ target_include_directories (
 )
 
 target_link_libraries (Rakarrack-Plus PRIVATE ${ExternLibraries})
-
-set_source_files_properties(../FX/MIDIConverter.C PROPERTIES COMPILE_FLAGS -std=c++98)
-
-target_sources(Rakarrack-Plus PRIVATE
-  ../FX/MIDIConverter.C
-)
 
 target_compile_definitions(Rakarrack-Plus PRIVATE RKR_PLUS_LV2=1)
 target_compile_definitions(Rakarrack-Plus PRIVATE NTK_SUPPORT=1)
