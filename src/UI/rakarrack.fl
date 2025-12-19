@@ -582,19 +582,21 @@ m_process->ACI_Active = 0;
           }
           MenuItem FullScreen_Menu {
             label {Toggle Fullscreen}
-            callback {\#ifdef RKR_PLUS_LV2
-    // Not supported for LV2
-    return;
-\#endif
-\#if !defined NTK_EXTENDED && defined NTK_SUPPORT
-    // Only supported by NTK_EXTENDED
-    return;
-\#endif
-
-  if(Principal->fullscreen_active())
-      Principal->fullscreen_off();
-  else
-      Principal->fullscreen();}
+            callback {\#ifndef RKR_PLUS_LV2
+\#ifdef NTK_SUPPORT
+\#ifdef NTK_EXTENDED
+    if(Principal->fullscreen_active())
+        Principal->fullscreen_off();
+    else
+        Principal->fullscreen();
+\#endif	// !RKR_PLUS_LV2
+\#else   // FLTK
+    if(Principal->fullscreen_active())
+        Principal->fullscreen_off();
+    else
+        Principal->fullscreen();
+\#endif	// NTK_SUPPORT
+\#endif	// NTK_EXTENDED}
             xywh {0 0 36 21} shortcut 0xffc9
           }
         }
