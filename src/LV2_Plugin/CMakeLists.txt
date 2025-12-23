@@ -186,6 +186,9 @@ set(ExternLibraries
     m
 )
 
+if (EnableKISSfft)
+    set(ExternLibraries "${ExternLibraries} libkissfft-float.a")
+endif (EnableKISSfft)
 
 add_library(Rakarrack-Plus SHARED
     ${ProgSources}

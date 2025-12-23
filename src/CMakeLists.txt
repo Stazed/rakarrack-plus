@@ -188,6 +188,10 @@ set(ExternLibraries
     m
 )
 
+if (EnableKISSfft)
+    set(ExternLibraries "${ExternLibraries} libkissfft-float.a")
+endif (EnableKISSfft)
+
 add_executable (rakarrack-plus ${ProgSources} main.C)
 
 if (EnableNSM)
