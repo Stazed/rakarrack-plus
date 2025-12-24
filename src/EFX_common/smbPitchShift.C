@@ -96,6 +96,12 @@ PitchShifter::PitchShifter(long fftFrameSize, long osamp, float sampleRate)
     memset(gAnaMagn,       0, MAX_FRAME_LENGTH * sizeof(float));
     memset(window,         0, MAX_FRAME_LENGTH * sizeof(double));
 
+    makeWindow(fftFrameSize);
+
+#ifdef KISSFFT_SUPPORT
+    kiss_cfg_fwd = kiss_fft_alloc(fftFrameSize, 0, nullptr, nullptr);
+    kiss_cfg_inv = kiss_fft_alloc(fftFrameSize, 1, nullptr, nullptr);
+#else
     int nfftFrameSize = (int)fftFrameSize;
 
     pthread_mutex_lock(&fftw_planner_lock);
@@ -104,17 +110,22 @@ PitchShifter::PitchShifter(long fftFrameSize, long osamp, float sampleRate)
     ftPlanInverse = fftw_plan_dft_1d(
         nfftFrameSize, fftw_in, fftw_out, FFTW_BACKWARD, FFTW_MEASURE);
     pthread_mutex_unlock(&fftw_planner_lock);
-
-    makeWindow(fftFrameSize);
+#endif
 }
 
 PitchShifter::~PitchShifter()
 {
+#ifdef KISSFFT_SUPPORT
+    free(kiss_cfg_fwd);
+    free(kiss_cfg_inv);
+#else
     pthread_mutex_lock(&fftw_planner_lock);
     fftw_destroy_plan(ftPlanForward);
     fftw_destroy_plan(ftPlanInverse);
     pthread_mutex_unlock(&fftw_planner_lock);
+#endif
 }
+
 
 // ============================================================================
 // Window
@@ -157,20 +168,34 @@ void PitchShifter::smbPitchShift(float pitchShift,
             // Windowing
             for (k = 0; k < fftFrameSize; ++k)
             {
+#ifdef KISSFFT_SUPPORT
+                kiss_in[k].r = gInFIFO[k] * window[k];
+                kiss_in[k].i = 0.0f;
+#else
                 fftw_in[k][0] = gInFIFO[k] * window[k];
                 fftw_in[k][1] = 0.0;
+#endif
             }
 
             // FFT
+#ifdef KISSFFT_SUPPORT
+            kiss_fft(kiss_cfg_fwd, kiss_in, kiss_out);
+#else
             fftw_execute(ftPlanForward);
+#endif
 
             // Analysis
             for (k = 0; k <= fftFrameSize2; ++k)
             {
                 double dk = (double)k;
 
-                real  = fftw_out[k][0];
-                imag  = fftw_out[k][1];
+#ifdef KISSFFT_SUPPORT
+                real = kiss_out[k].r;
+                imag = kiss_out[k].i;
+#else
+                real = fftw_out[k][0];
+                imag = fftw_out[k][1];
+#endif
                 magn  = 2.0 * sqrt(real * real + imag * imag);
                 phase = atan2(imag, real);
 
@@ -223,22 +248,41 @@ void PitchShifter::smbPitchShift(float pitchShift,
                 gSumPhase[k] += tmp;
                 phase         = gSumPhase[k];
 
+#ifdef KISSFFT_SUPPORT
+                kiss_in[k].r = magn * cos(phase);
+                kiss_in[k].i = magn * sin(phase);
+#else
                 fftw_in[k][0] = magn * cos(phase);
                 fftw_in[k][1] = magn * sin(phase);
+#endif
             }
 
             for (k = 2 + fftFrameSize2; k < fftFrameSize; ++k)
             {
+#ifdef KISSFFT_SUPPORT
+                kiss_in[k].r     = 0.0f;
+                kiss_in[k - 1].i = 0.0f;
+#else
                 fftw_in[k][0]     = 0.0;
                 fftw_in[k - 1][1] = 0.0;
+#endif
             }
 
+#ifdef KISSFFT_SUPPORT
+            kiss_fft(kiss_cfg_inv, kiss_in, kiss_out);
+#else
             fftw_execute(ftPlanInverse);
+#endif
 
             for (k = 0; k < fftFrameSize; ++k)
             {
+#ifdef KISSFFT_SUPPORT
+                gOutputAccum[k] +=
+                    2.0 * window[k] * kiss_out[k].r / FS_osamp;
+#else
                 gOutputAccum[k] +=
                     2.0 * window[k] * fftw_out[k][0] / FS_osamp;
+#endif
             }
 
             for (k = 0; k < stepSize; ++k)

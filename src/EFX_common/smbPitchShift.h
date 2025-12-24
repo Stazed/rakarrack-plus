@@ -43,7 +43,12 @@
 #include <string.h>
 #include <math.h>
 #include <stdio.h>
-#include <fftw3.h>
+
+#ifdef KISSFFT_SUPPORT
+    #include <kissfft/kiss_fft.h>
+#else
+    #include <fftw3.h>
+#endif
 
 #define MAX_FRAME_LENGTH 2048
 
@@ -107,11 +112,16 @@ private:
     long gRover;
     long FS_osamp;
 
-    // FFTW
+#ifdef KISSFFT_SUPPORT
+    kiss_fft_cfg  kiss_cfg_fwd;
+    kiss_fft_cfg  kiss_cfg_inv;
+    kiss_fft_cpx  kiss_in[MAX_FRAME_LENGTH];
+    kiss_fft_cpx  kiss_out[MAX_FRAME_LENGTH];
+#else
     fftw_complex fftw_in[MAX_FRAME_LENGTH];
     fftw_complex fftw_out[MAX_FRAME_LENGTH];
     fftw_plan    ftPlanForward;
     fftw_plan    ftPlanInverse;
+#endif
 };
-
-#endif /* PITCH_H */
+#endif
