@@ -46,40 +46,72 @@
 #include <fftw3.h>
 
 #define MAX_FRAME_LENGTH 2048
+
 class PitchShifter
 {
 public:
-    PitchShifter (long fftFrameSize, long osamp, float sampleRate);
-    ~PitchShifter ();
-    void smbPitchShift (float pitchShift, long numSampsToProcess,
-                        long fftFrameSize, long osamp, float sampleRate,
-                        const float *indata, float *outdata);
-    void smbFft (float *fftBuffer, long fftFrameSize, long sign);
-    double smbAtan2 (double x, double y);
+    PitchShifter(long fftFrameSize, long osamp, float sampleRate);
+    ~PitchShifter();
+
+    void smbPitchShift(float pitchShift,
+                       long numSampsToProcess,
+                       long fftFrameSize,
+                       long osamp,
+                       float sampleRate,
+                       const float* indata,
+                       float* outdata);
+
+    void smbFft(float* fftBuffer, long fftFrameSize, long sign);
+    double smbAtan2(double x, double y);
+
     float ratio;
+
 private:
     void makeWindow(long fftFrameSize);
-    float gInFIFO[MAX_FRAME_LENGTH];
-    float gOutFIFO[MAX_FRAME_LENGTH];
-    float gFFTworksp[2 * MAX_FRAME_LENGTH];
-    float gLastPhase[MAX_FRAME_LENGTH / 2 + 1];
-    float gSumPhase[MAX_FRAME_LENGTH / 2 + 1];
-    float gOutputAccum[2 * MAX_FRAME_LENGTH];
-    float gAnaFreq[MAX_FRAME_LENGTH];
-    float gAnaMagn[MAX_FRAME_LENGTH];
-    float gSynFreq[MAX_FRAME_LENGTH];
-    float gSynMagn[MAX_FRAME_LENGTH];
-    double window[MAX_FRAME_LENGTH];
-    double dfftFrameSize, coef_dfftFrameSize, dpi_coef;
-    double magn, phase, tmp, real, imag;
-    double freqPerBin, expct, coefPB, coef_dpi, coef_mpi;
-    long k, qpd, index, inFifoLatency, stepSize, fftFrameSize2, gRover, FS_osamp;
 
-    //FFTW variables
-    fftw_complex fftw_in[MAX_FRAME_LENGTH], fftw_out[MAX_FRAME_LENGTH];
-    fftw_plan ftPlanForward, ftPlanInverse;
+    float  gInFIFO[MAX_FRAME_LENGTH];
+    float  gOutFIFO[MAX_FRAME_LENGTH];
+    float  gFFTworksp[2 * MAX_FRAME_LENGTH];
+    float  gLastPhase[MAX_FRAME_LENGTH / 2 + 1];
+    float  gSumPhase[MAX_FRAME_LENGTH / 2 + 1];
+    float  gOutputAccum[2 * MAX_FRAME_LENGTH];
+    float  gAnaFreq[MAX_FRAME_LENGTH];
+    float  gAnaMagn[MAX_FRAME_LENGTH];
+    float  gSynFreq[MAX_FRAME_LENGTH];
+    float  gSynMagn[MAX_FRAME_LENGTH];
+
+    double window[MAX_FRAME_LENGTH];
+
+    double dfftFrameSize;
+    double coef_dfftFrameSize;
+    double dpi_coef;
+
+    double magn;
+    double phase;
+    double tmp;
+    double real;
+    double imag;
+
+    double freqPerBin;
+    double expct;
+    double coefPB;
+    double coef_dpi;
+    double coef_mpi;
+
+    long k;
+    long qpd;
+    long index;
+    long inFifoLatency;
+    long stepSize;
+    long fftFrameSize2;
+    long gRover;
+    long FS_osamp;
+
+    // FFTW
+    fftw_complex fftw_in[MAX_FRAME_LENGTH];
+    fftw_complex fftw_out[MAX_FRAME_LENGTH];
+    fftw_plan    ftPlanForward;
+    fftw_plan    ftPlanInverse;
 };
 
-
-#endif /*  */
-
+#endif /* PITCH_H */
