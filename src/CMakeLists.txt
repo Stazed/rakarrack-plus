@@ -189,7 +189,7 @@ set(ExternLibraries
 )
 
 if (EnableKISSfft)
-    set(ExternLibraries "${ExternLibraries} libkissfft-float.a")
+    list(APPEND ExternLibraries libkissfft-float.a)
 endif (EnableKISSfft)
 
 add_executable (rakarrack-plus ${ProgSources} main.C)
