@@ -76,16 +76,20 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     fftLastPhase(NULL),
     fftSize(),
     fftFrameCount(),
-    fftIn(NULL),
-    fftOut(NULL),
+    fftIn(NULL)
+#ifndef KISSFFT_SUPPORT
+    ,fftOut(NULL),
     fftPlan()
+#endif
 {
     static const char *englishNotes[12] = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
     notes = englishNotes;
 
     schmittInit(32); // 32 == latency (tuneit default = 10)
 #ifndef RKR_PLUS_LV2
+#ifndef KISSFFT_SUPPORT
     fftInit(32); // == latency
+#endif
 #endif
 
     char portname[50]; // used by alsa - put here to avoid unused variable compiler warning on jname
@@ -118,7 +122,9 @@ MIDIConverter::~MIDIConverter()
 {
     schmittFree();
 #ifndef RKR_PLUS_LV2
+#ifndef KISSFFT_SUPPORT
     fftFree();
+#endif
 #endif
 #ifndef LV2_SUPPORT
 #ifndef RKR_PLUS_LV2
@@ -170,7 +176,13 @@ MIDIConverter::out(float * efxoutl, float * efxoutr)
     VAL_SUM = val_il_sum + val_ir_sum;
 
     if (Pfft)
+    {
+#ifdef KISSFFT_SUPPORT  // KissFFT caused excessive CPU usage so disabled when KissFFT is supported, only use schmittFloat
+        schmittFloat(efxoutl, efxoutr, VAL_SUM, FREQS, LFREQS);
+#else
         fftFloat(efxoutl, efxoutr, VAL_SUM, FREQS, LFREQS);
+#endif
+    }
     else
         schmittFloat(efxoutl, efxoutr, VAL_SUM, FREQS, LFREQS);
 }
@@ -372,7 +384,7 @@ MIDIConverter::schmittFloat(float * efxoutl, float * efxoutr, float val_sum, flo
     }
     schmittS16LE(buf, val_sum, freqs, lfreqs);
 }
-
+#ifndef KISSFFT_SUPPORT
 void
 MIDIConverter::fftInit(int size)
 {
@@ -535,7 +547,7 @@ MIDIConverter::fftFree()
     free(fftSampleBuffer);
     free(fftLastPhase);
 }
-
+#endif
 void
 MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)
 {

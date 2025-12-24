@@ -16,7 +16,10 @@
 #include <math.h>
 #include <stdlib.h>
 #include <complex.h>
-#include <fftw3.h>
+
+#ifndef KISSFFT_SUPPORT
+    #include <fftw3.h>
+#endif
 
 #define MIDICLV2_URI "https://github.com/Stazed/rakarrack-plus#midi_converter"
 
@@ -69,7 +72,9 @@ public:
     float TrigVal;
     int cents;
     void schmittFloat (float * efxoutl, float * efxoutr, float val_sum, float *freqs, float *lfreqs);
+#ifndef KISSFFT_SUPPORT
     void fftFloat (float * efxoutl, float * efxoutr, float val_sum, float *freqs, float *lfreqs);
+#endif
     void setmidichannel (int channel);
     void panic ();
     void setTriggerAdjust (int val);
@@ -100,10 +105,12 @@ private:
     void schmittFree ();
 
     //FFT
+#ifndef KISSFFT_SUPPORT
     void fftInit (int size);
     void fftMeasure (int overlap, float *indata, float val_sum, float *freqs, float *lfreqs);
     void fftS16LE (signed short int *indata, float val_sum, float *freqs, float *lfreqs);
     void fftFree ();
+#endif
     void send_Midi_Note (uint nota, float val_sum, bool is_On);
 
     unsigned int blockSize;
@@ -155,9 +162,10 @@ private:
     int fftSize;
     int fftFrameCount;
     float *fftIn;
+#ifndef KISSFFT_SUPPORT
     fftwf_complex *fftOut;
     fftwf_plan fftPlan;
-
+#endif
     typedef struct Peak {
         double freq;
         double db;
