@@ -2,10 +2,7 @@
 
 project (rakarrack-plus)
 
-set (ProgSources
-    Config_fltk.C
-    jack.C 
-    strlcpy.C
+set(UI_SOURCES
     UI/rakarrack.cxx
     UI/analyzer.cxx
     UI/scope.cxx
@@ -90,43 +87,25 @@ set (ProgSources
     UI/randomedit_gui.cxx
     UI/rkrprocess_gui.cxx
     UI/Reset_Window.cpp
-    PresetBankStruct.C
-    process.C
-    fileio.C
-    varios.C
-    EFX_common/FPreset.C
+)
+
+set(FX_SOURCES
     FX/Reverb.C
     FX/Chorus.C
     FX/Flanger.C
     FX/Effect.C
-    EFX_common/EffectLFO.C
     FX/Echo.C
     FX/Phaser.C
     FX/Distorsion.C
     FX/Overdrive.C
     FX/EQ.C
     FX/Compressor.C
-    Limiter.C
-    EFX_common/AnalogFilter.C
     FX/Alienwah.C
-    EFX_common/beattracker.C
-    EFX_common/delayline.C
-    EFX_common/Filter.C
-    EFX_common/HarmonicEnhancer.C
     FX/WahWah.C
-    EFX_common/SVFilter.C
-    EFX_common/RBFilter.C
-    EFX_common/FormantFilter.C
-    EFX_common/FilterParams.C
     FX/Pan.C
     FX/Harmonizer.C
-    EFX_common/smbPitchShift.C
-    Tuner.C
     FX/MusicDelay.C
     FX/Gate.C
-    RecognizeNote.C
-    RecChord.C
-    rkrMIDI.C
     FX/Derelict.C
     FX/APhaser.C
     FX/Dual_Flange.C
@@ -137,19 +116,15 @@ set (ProgSources
     FX/Expander.C
     FX/Ring.C
     FX/Shuffle.C
-    EFX_common/mayer_fft.C
     FX/VaryBand.C
-    metronome.C
     FX/Convolotron.C
     FX/Synthfilter.C
-    EFX_common/Resample.C
     FX/Looper.C
     FX/MuTroMojo.C
     FX/Echoverse.C
     FX/CoilCrafter.C
     FX/ShelfBoost.C
     FX/Vocoder.C
-    EFX_common/Waveshaper.C
     FX/Sustainer.C
     FX/Sequence.C
     FX/Shifter.C
@@ -167,6 +142,46 @@ set (ProgSources
     FX/MIDIConverter.C
 )
 
+set(EFX_COMMON_SOURCES
+    EFX_common/FPreset.C
+    EFX_common/EffectLFO.C
+    EFX_common/AnalogFilter.C
+    EFX_common/beattracker.C
+    EFX_common/delayline.C
+    EFX_common/Filter.C
+    EFX_common/HarmonicEnhancer.C
+    EFX_common/SVFilter.C
+    EFX_common/RBFilter.C
+    EFX_common/FormantFilter.C
+    EFX_common/FilterParams.C
+    EFX_common/smbPitchShift.C
+    EFX_common/mayer_fft.C
+    EFX_common/Resample.C
+    EFX_common/Waveshaper.C
+)
+
+set(CORE_SOURCES
+    Config_fltk.C
+    jack.C 
+    strlcpy.C
+    PresetBankStruct.C
+    process.C
+    fileio.C
+    varios.C
+    Limiter.C
+    Tuner.C
+    RecognizeNote.C
+    RecChord.C
+    rkrMIDI.C
+    metronome.C
+)
+
+set(ProgSources
+    ${CORE_SOURCES}
+    ${UI_SOURCES}
+    ${FX_SOURCES}
+    ${EFX_COMMON_SOURCES}
+)
 
 set(ExternLibraries
     ${ALSA_LIBRARIES}
