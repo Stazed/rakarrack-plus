@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -226,44 +225,3 @@
                 lv2:portProperty lv2:integer ;
         ] ;
 	.
-
-
-<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lowpass>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:highpass>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:bandpass>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lead_synth>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:water>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
-        
-<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:pan_filter>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:multi>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lazy_wahble>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .

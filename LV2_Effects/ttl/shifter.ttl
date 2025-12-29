@@ -4,7 +4,6 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pprops: <http://lv2plug.in/ns/ext/port-props#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -162,33 +161,3 @@
                 lv2:portProperty lv2:integer ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#Shifter:preset:fast>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Shifter:preset:slow_up>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Shifter:preset:slow_down>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Shifter:preset:chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Shifter:preset:trig_chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Shifter:preset:shifter_6>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .

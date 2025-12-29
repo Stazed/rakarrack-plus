@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix patch: <http://lv2plug.in/ns/ext/patch#> .
 @prefix pprops: <http://lv2plug.in/ns/ext/port-props#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix atom:  <http://lv2plug.in/ns/ext/atom#> .  
 @prefix urid:  <http://lv2plug.in/ns/ext/urid#> .
 @prefix worker:  <http://lv2plug.in/ns/ext/worker#> .
@@ -234,48 +233,3 @@
 		<https://github.com/Stazed/rakarrack-plus#Reverbtron:rvbfile> <Chamber.rvb>
 	] 
 	.
-
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:chamber>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:concrete_stairwell>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:hall>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:med_hall>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:Room>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:large_hall>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:guitar>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:studio>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:chathedral>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .

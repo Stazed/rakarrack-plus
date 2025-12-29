@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -187,19 +186,3 @@
                 lv2:portProperty lv2:integer ;
         ] ;
 	.
-
-
-<https://github.com/Stazed/rakarrack-plus#CompBand:preset:good_start>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
-        rdfs:seeAlso <compband_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#CompBand:preset:loudness>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
-        rdfs:seeAlso <compband_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#CompBand:preset:loudness2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
-        rdfs:seeAlso <compband_presets.ttl> .

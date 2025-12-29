@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix patch: <http://lv2plug.in/ns/ext/patch#> .
 @prefix pprops: <http://lv2plug.in/ns/ext/port-props#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix atom:  <http://lv2plug.in/ns/ext/atom#> .  
 @prefix urid:  <http://lv2plug.in/ns/ext/urid#> .
 @prefix worker:  <http://lv2plug.in/ns/ext/worker#> .
@@ -167,25 +166,4 @@
 		<https://github.com/Stazed/rakarrack-plus#Convolotron:sndfile> <Marshall_JCM200.wav>
 	] 
 	.
-
-<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Marshall_JCM200>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
-        rdfs:seeAlso <convolotron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Fender_Superchamp>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
-        rdfs:seeAlso <convolotron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Mesa_Boogie>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
-        rdfs:seeAlso <convolotron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Mesa_Boogie_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
-        rdfs:seeAlso <convolotron_presets.ttl> .
-
 

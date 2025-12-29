@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -175,54 +174,3 @@
                 lv2:scalePoint [ rdfs:label "1/6"; rdf:value 5 ] ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:tremolo>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .
-
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:arpie_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:simple_arpie>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:canyon>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:panning_arpie_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:panning_arpie_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:panning_arpie_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Arpie:preset:feedback_arpie>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Arpie> ;
-        rdfs:seeAlso <arpie_presets.ttl> .

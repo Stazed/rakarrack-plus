@@ -4,7 +4,6 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pprops: <http://lv2plug.in/ns/ext/port-props#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix mod:   <http://moddevices.com/ns/mod#>.
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -186,28 +185,3 @@
                 lv2:scalePoint [ rdfs:label "Formant 2"; rdf:value 4 ] ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#wha:preset:wahwah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#wha:preset:autowah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#wha:preset:sweep>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#wha:preset:vocalmorph1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#wha:preset:vocalmorph2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .

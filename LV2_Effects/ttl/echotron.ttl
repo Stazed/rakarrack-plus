@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix patch: <http://lv2plug.in/ns/ext/patch#> .
 @prefix pprops: <http://lv2plug.in/ns/ext/port-props#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix atom:  <http://lv2plug.in/ns/ext/atom#> .  
 @prefix urid:  <http://lv2plug.in/ns/ext/urid#> .
 @prefix worker:  <http://lv2plug.in/ns/ext/worker#> .
@@ -246,33 +245,3 @@
 		<https://github.com/Stazed/rakarrack-plus#Echotron:dlyfile> <SwingPong.dly>
 	] 
 	.
-
-<https://github.com/Stazed/rakarrack-plus#Echotron:preset:summer>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Echotron:preset:ambience>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Echotron:preset:arranjer>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Echotron:preset:suction>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Echotron:preset:suctionflange>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Echotron:preset:soft>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .

@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix mod:   <http://moddevices.com/ns/mod#>.
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -132,82 +131,3 @@
                 lv2:portProperty lv2:toggled ;
         ] ;
 	.
-
-
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:htos>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:stoh>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-
-# presets for individual coils (origins)
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofso>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofsn>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:oss>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofh>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogp90>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogs>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogm>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogsl6s>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-
-# presets for individual coils (destinations)
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfso>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfsn>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dss>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfh>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgp90>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgs>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgm>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
-<https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgsl6s>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .

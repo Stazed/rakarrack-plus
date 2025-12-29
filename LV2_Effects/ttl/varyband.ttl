@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix mod:   <http://moddevices.com/ns/mod#>.
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -261,24 +260,3 @@
                 lv2:scalePoint [ rdfs:label "Muted"; rdf:value 3 ] ;
         ] ;
 	.
-
-
-<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
-        rdfs:seeAlso <varyband_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
-        rdfs:seeAlso <varyband_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
-        rdfs:seeAlso <varyband_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
-        rdfs:seeAlso <varyband_presets.ttl> .

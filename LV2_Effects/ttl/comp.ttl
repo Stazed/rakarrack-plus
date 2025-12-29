@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -150,28 +149,3 @@
                 lv2:portProperty lv2:toggled ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#comp:preset:2_1>
-	a pset:Preset ;
-    rdfs:label "2:1" ;
-	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
-
-<https://github.com/Stazed/rakarrack-plus#comp:preset:4_1>
-	a pset:Preset ;
-    rdfs:label "4:1" ;
-	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
-
-<https://github.com/Stazed/rakarrack-plus#comp:preset:8_1>
-	a pset:Preset ;
-    rdfs:label "8:1" ;
-	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
-
-<https://github.com/Stazed/rakarrack-plus#comp:preset:limiter>
-	a pset:Preset ;
-    rdfs:label "Limiter" ;
-	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
-

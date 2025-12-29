@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -110,25 +109,3 @@
                 lv2:portProperty lv2:integer ;
         ] ;
 	.
-
-
-<https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:trebble>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-        rdfs:seeAlso <shelfboost_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:mid>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-        rdfs:seeAlso <shelfboost_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:bass>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-        rdfs:seeAlso <shelfboost_presets.ttl> .
-
-
-<https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:distortion_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-        rdfs:seeAlso <shelfboost_presets.ttl> .

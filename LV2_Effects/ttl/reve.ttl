@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix mod:   <http://moddevices.com/ns/mod#>.
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -160,69 +159,3 @@
                 lv2:portProperty lv2:integer ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:cathedral_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:cathedral_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:cathedral_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:hall_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:hall_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:room_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:room_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:basement>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:tunnel>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:echoed_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:echoed_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:verylong_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#reve:preset:verylong_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
-

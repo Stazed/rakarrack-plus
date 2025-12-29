@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-@prefix pset:  <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -181,21 +180,3 @@
                 pg:group <https://github.com/Stazed/rakarrack-plus#eqp:group:c_high> ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#eqp:preset:plain>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
-        rdfs:label "Plain" ;
-        rdfs:seeAlso <eqp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#eqp:preset:pop>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
-        rdfs:label "Pop" ;
-        rdfs:seeAlso <eqp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#eqp:preset:jazz>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
-        rdfs:label "Jazz" ;
-        rdfs:seeAlso <eqp_presets.ttl> .

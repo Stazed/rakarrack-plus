@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -182,29 +181,3 @@
                 units:unit units:hz;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#Exciter:preset:plain>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
-
-<https://github.com/Stazed/rakarrack-plus#Exciter:preset:loudness>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
-
-<https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_1>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
-
-<https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_2>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
-
-<https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_3>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
-

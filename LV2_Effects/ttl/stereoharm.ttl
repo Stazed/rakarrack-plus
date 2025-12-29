@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix atom:  <http://lv2plug.in/ns/ext/atom#> .
 @prefix lv2midi: <http://lv2plug.in/ns/ext/midi#> .
 
@@ -259,24 +258,3 @@
                 lv2:portProperty lv2:integer ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:plain>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:octavator>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:hard_chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
-

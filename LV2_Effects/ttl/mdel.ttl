@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
 @prefix mod:   <http://moddevices.com/ns/mod#>.
@@ -229,13 +228,3 @@
                 pg:group <https://github.com/Stazed/rakarrack-plus#delm:group:del2> ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#delm:preset:echo_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
-        rdfs:seeAlso <mdel_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#delm:preset:echo_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
-        rdfs:seeAlso <mdel_presets.ttl> .

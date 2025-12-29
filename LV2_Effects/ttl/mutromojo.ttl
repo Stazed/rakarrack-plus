@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix mod:   <http://moddevices.com/ns/mod#>.
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -257,39 +256,3 @@
                 lv2:portProperty lv2:toggled ;
         ] ;
 	.
-
-
-<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:wahwah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:mutron>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:phase_wah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:phaser>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:quack_quack>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:smoothtron>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:wah_fever>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .

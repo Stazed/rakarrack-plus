@@ -4,7 +4,6 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pprops: <http://lv2plug.in/ns/ext/port-props#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix mod:   <http://moddevices.com/ns/mod#>.
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -127,58 +126,3 @@
                 lv2:scalePoint [ rdfs:label "Fuzz"; rdf:value 7 ] ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:amp_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:odie>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:grunger>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:hard_dist>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:ratula>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:classic_dist>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:mobid_impalement>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:sharp_metal>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:classic_fuzz>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:gnasty>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#StompBox:preset:amp_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .

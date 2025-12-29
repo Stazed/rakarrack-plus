@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -206,21 +205,3 @@
                 lv2:portProperty lv2:integer ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#dere:preset:dist1>
-        a pset:Preset ;
-        rdfs:label "Distortion 1" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
-        rdfs:seeAlso <dere_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#dere:preset:dist2>
-        a pset:Preset ;
-        rdfs:label "Distortion 2" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
-        rdfs:seeAlso <dere_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#dere:preset:dist3>
-        a pset:Preset ;
-        rdfs:label "Distortion 3" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
-        rdfs:seeAlso <dere_presets.ttl> .

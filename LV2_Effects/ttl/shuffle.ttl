@@ -5,7 +5,6 @@
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix param: <http://lv2plug.in/ns/ext/parameters#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -198,29 +197,3 @@
                 lv2:scalePoint [ rdfs:label "Side"; rdf:value 1 ] ;
         ] ;
 	.
-
-
-<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Shuffle:preset:remover>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .

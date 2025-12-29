@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix mod:   <http://moddevices.com/ns/mod#>.
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -178,23 +177,3 @@
                 lv2:portProperty lv2:integer ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#awha:preset:alienwah_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#awha> ;
-        rdfs:seeAlso <alienwah_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#awha:preset:alienwah_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#awha> ;
-        rdfs:seeAlso <alienwah_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#awha:preset:alienwah_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#awha> ;
-        rdfs:seeAlso <alienwah_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#awha:preset:alienwah_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#awha> ;
-        rdfs:seeAlso <alienwah_presets.ttl> .

@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -159,27 +158,3 @@
                 lv2:portProperty lv2:integer ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
-        rdfs:label "Echo 1" ;
-        rdfs:seeAlso <echoverse_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
-        rdfs:label "Echo 2" ;
-        rdfs:seeAlso <echoverse_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
-        rdfs:label "Echo 3" ;
-        rdfs:seeAlso <echoverse_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
-        rdfs:label "Echo 4" ;
-        rdfs:seeAlso <echoverse_presets.ttl> .

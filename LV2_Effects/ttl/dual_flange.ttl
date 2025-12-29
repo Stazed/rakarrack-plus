@@ -3,7 +3,6 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 @prefix mod:   <http://moddevices.com/ns/mod#>.
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
@@ -221,43 +220,3 @@
                 lv2:portProperty lv2:toggled ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:preset1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:flangewah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:fbflange>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:softflange>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:flanger>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:preset2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .

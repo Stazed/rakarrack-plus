@@ -4,7 +4,6 @@
 @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 @prefix pprops: <http://lv2plug.in/ns/ext/port-props#> .
-@prefix pset: <http://lv2plug.in/ns/ext/presets#> .
 
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
@@ -219,64 +218,3 @@
                 units:unit units:hz ;
         ] ;
 	.
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:jumpy>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:stair_step>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:mild>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:wahwah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:filter_pan>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:stepper>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:shifter>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:tremor>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:boogie>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:random_mode>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
-
-<https://github.com/Stazed/rakarrack-plus#Sequence:preset:sequence_11>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
