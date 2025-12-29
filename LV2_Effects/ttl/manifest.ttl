@@ -401,1493 +401,1493 @@
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
+    rdfs:seeAlso <chorus_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
+    rdfs:seeAlso <chorus_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#chor:preset:chorus_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
+    rdfs:seeAlso <chorus_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#chor:preset:celeste_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
+    rdfs:seeAlso <chorus_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#chor:preset:celeste_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
-        rdfs:seeAlso <chorus_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#chor> ;
+    rdfs:seeAlso <chorus_presets.ttl> .
 
 ################################################################################
 # CoilCrafter Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:htos>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:stoh>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 
 # presets for individual coils (origins)
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofso>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofsn>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:oss>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ofh>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogp90>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogs>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogm>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:ogsl6s>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 
 # presets for individual coils (destinations)
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfso>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfsn>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dss>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dfh>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgp90>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgs>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgm>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 <https://github.com/Stazed/rakarrack-plus#CoilCrafter:preset:dgsl6s>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
-        rdfs:seeAlso <coilcrafter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CoilCrafter> ;
+    rdfs:seeAlso <coilcrafter_presets.ttl> .
 
 ################################################################################
 # Compressor Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#comp:preset:2_1>
-	a pset:Preset ;
+    a pset:Preset ;
     rdfs:label "2:1" ;
-	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
+    rdfs:seeAlso <comp_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
 
 <https://github.com/Stazed/rakarrack-plus#comp:preset:4_1>
-	a pset:Preset ;
+    a pset:Preset ;
     rdfs:label "4:1" ;
-	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
+    rdfs:seeAlso <comp_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
 
 <https://github.com/Stazed/rakarrack-plus#comp:preset:8_1>
-	a pset:Preset ;
+    a pset:Preset ;
     rdfs:label "8:1" ;
-	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
+    rdfs:seeAlso <comp_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
 
 <https://github.com/Stazed/rakarrack-plus#comp:preset:limiter>
-	a pset:Preset ;
+    a pset:Preset ;
     rdfs:label "Limiter" ;
-	rdfs:seeAlso <comp_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
+    rdfs:seeAlso <comp_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#comp> .
 
 ################################################################################
 # CompBand Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#CompBand:preset:good_start>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
-        rdfs:seeAlso <compband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
+    rdfs:seeAlso <compband_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#CompBand:preset:loudness>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
-        rdfs:seeAlso <compband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
+    rdfs:seeAlso <compband_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#CompBand:preset:loudness2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
-        rdfs:seeAlso <compband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#CompBand> ;
+    rdfs:seeAlso <compband_presets.ttl> .
 
 ################################################################################
 # Covolotron Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Marshall_JCM200>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
-        rdfs:seeAlso <convolotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
+    rdfs:seeAlso <convolotron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Fender_Superchamp>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
-        rdfs:seeAlso <convolotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
+    rdfs:seeAlso <convolotron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Mesa_Boogie>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
-        rdfs:seeAlso <convolotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
+    rdfs:seeAlso <convolotron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Convolotron:preset:Mesa_Boogie_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
-        rdfs:seeAlso <convolotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Convolotron> ;
+    rdfs:seeAlso <convolotron_presets.ttl> .
 
 ################################################################################
 # Derelict Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#dere:preset:dist1>
-        a pset:Preset ;
-        rdfs:label "Distortion 1" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
-        rdfs:seeAlso <dere_presets.ttl> .
+    a pset:Preset ;
+    rdfs:label "Distortion 1" ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
+    rdfs:seeAlso <dere_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#dere:preset:dist2>
-        a pset:Preset ;
-        rdfs:label "Distortion 2" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
-        rdfs:seeAlso <dere_presets.ttl> .
+    a pset:Preset ;
+    rdfs:label "Distortion 2" ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
+    rdfs:seeAlso <dere_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#dere:preset:dist3>
-        a pset:Preset ;
-        rdfs:label "Distortion 3" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
-        rdfs:seeAlso <dere_presets.ttl> .
+    a pset:Preset ;
+    rdfs:label "Distortion 3" ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dere> ;
+    rdfs:seeAlso <dere_presets.ttl> .
 
 ################################################################################
 # Distortion Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#dist:preset:distortion_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dist> ;
-        rdfs:label "Distorsion 1" ;
-        rdfs:seeAlso <dist_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dist> ;
+    rdfs:label "Distorsion 1" ;
+    rdfs:seeAlso <dist_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#dist:preset:distortion_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dist> ;
-        rdfs:label "Distorsion 2" ;
-        rdfs:seeAlso <dist_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dist> ;
+    rdfs:label "Distorsion 2" ;
+    rdfs:seeAlso <dist_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#dist:preset:distortion_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dist> ;
-        rdfs:label "Distorsion 3" ;
-        rdfs:seeAlso <dist_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dist> ;
+    rdfs:label "Distorsion 3" ;
+    rdfs:seeAlso <dist_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#dist:preset:guitar_amp>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dist> ;
-        rdfs:label "Guitar Amp" ;
-        rdfs:seeAlso <dist_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#dist> ;
+    rdfs:label "Guitar Amp" ;
+    rdfs:seeAlso <dist_presets.ttl> .
 
 ################################################################################
 # DistBand Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#DistBand:preset:saturation>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
-        rdfs:seeAlso <distband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
+    rdfs:seeAlso <distband_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#DistBand:preset:distorsion_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
-        rdfs:seeAlso <distband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
+    rdfs:seeAlso <distband_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#DistBand:preset:soft>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
-        rdfs:seeAlso <distband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
+    rdfs:seeAlso <distband_presets.ttl> .
       
 <https://github.com/Stazed/rakarrack-plus#DistBand:preset:modulated>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
-        rdfs:seeAlso <distband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
+    rdfs:seeAlso <distband_presets.ttl> .
       
 <https://github.com/Stazed/rakarrack-plus#DistBand:preset:crunch>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
-        rdfs:seeAlso <distband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
+    rdfs:seeAlso <distband_presets.ttl> .
       
 <https://github.com/Stazed/rakarrack-plus#DistBand:preset:distortion_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
-        rdfs:seeAlso <distband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
+    rdfs:seeAlso <distband_presets.ttl> .
       
 <https://github.com/Stazed/rakarrack-plus#DistBand:preset:distortion_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
-        rdfs:seeAlso <distband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
+    rdfs:seeAlso <distband_presets.ttl> .
       
 <https://github.com/Stazed/rakarrack-plus#DistBand:preset:distortion_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
-        rdfs:seeAlso <distband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#DistBand> ;
+    rdfs:seeAlso <distband_presets.ttl> .
 
 ################################################################################
 # Dual Flange Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:preset1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
+    rdfs:seeAlso <dual_flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:flangewah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
+    rdfs:seeAlso <dual_flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:fbflange>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
+    rdfs:seeAlso <dual_flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:softflange>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
+    rdfs:seeAlso <dual_flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:flanger>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
+    rdfs:seeAlso <dual_flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
+    rdfs:seeAlso <dual_flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:chorus2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
+    rdfs:seeAlso <dual_flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Dual_Flange:preset:preset2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
-        rdfs:seeAlso <dual_flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Dual_Flange> ;
+    rdfs:seeAlso <dual_flange_presets.ttl> .
 
 ################################################################################
 # Echo Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#eco:preset:echo_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
-        rdfs:label "Echo 1" ;
-        rdfs:seeAlso <echo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
+    rdfs:label "Echo 1" ;
+    rdfs:seeAlso <echo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eco:preset:echo_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
-        rdfs:label "Echo 2" ;
-        rdfs:seeAlso <echo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
+    rdfs:label "Echo 2" ;
+    rdfs:seeAlso <echo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eco:preset:echo_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
-        rdfs:label "Echo 3" ;
-        rdfs:seeAlso <echo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
+    rdfs:label "Echo 3" ;
+    rdfs:seeAlso <echo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eco:preset:simple_echo>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
-        rdfs:label "Simple Echo" ;
-        rdfs:seeAlso <echo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
+    rdfs:label "Simple Echo" ;
+    rdfs:seeAlso <echo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eco:preset:canyon>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
-        rdfs:label "Canyon" ;
-        rdfs:seeAlso <echo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
+    rdfs:label "Canyon" ;
+    rdfs:seeAlso <echo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eco:preset:panning_echo_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
-        rdfs:label "Panning Echo 1" ;
-        rdfs:seeAlso <echo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
+    rdfs:label "Panning Echo 1" ;
+    rdfs:seeAlso <echo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eco:preset:panning_echo_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
-        rdfs:label "Panning Echo 2" ;
-        rdfs:seeAlso <echo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
+    rdfs:label "Panning Echo 2" ;
+    rdfs:seeAlso <echo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eco:preset:panning_echo_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
-        rdfs:label "Panning Echo 3" ;
-        rdfs:seeAlso <echo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
+    rdfs:label "Panning Echo 3" ;
+    rdfs:seeAlso <echo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eco:preset:feedback_echo>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
-        rdfs:label "Feedback Echo" ;
-        rdfs:seeAlso <echo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eco> ;
+    rdfs:label "Feedback Echo" ;
+    rdfs:seeAlso <echo_presets.ttl> .
 
 ################################################################################
 # Echotron Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Echotron:preset:summer>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
+    rdfs:seeAlso <echotron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Echotron:preset:ambience>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
+    rdfs:seeAlso <echotron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Echotron:preset:arranjer>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
+    rdfs:seeAlso <echotron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Echotron:preset:suction>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
+    rdfs:seeAlso <echotron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Echotron:preset:suctionflange>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
+    rdfs:seeAlso <echotron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Echotron:preset:soft>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
-        rdfs:seeAlso <echotron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echotron> ;
+    rdfs:seeAlso <echotron_presets.ttl> .
 
 ################################################################################
 # Echoverse Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
-        rdfs:label "Echo 1" ;
-        rdfs:seeAlso <echoverse_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
+    rdfs:label "Echo 1" ;
+    rdfs:seeAlso <echoverse_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
-        rdfs:label "Echo 2" ;
-        rdfs:seeAlso <echoverse_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
+    rdfs:label "Echo 2" ;
+    rdfs:seeAlso <echoverse_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
-        rdfs:label "Echo 3" ;
-        rdfs:seeAlso <echoverse_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
+    rdfs:label "Echo 3" ;
+    rdfs:seeAlso <echoverse_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Echoverse:preset:echo_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
-        rdfs:label "Echo 4" ;
-        rdfs:seeAlso <echoverse_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Echoverse> ;
+    rdfs:label "Echo 4" ;
+    rdfs:seeAlso <echoverse_presets.ttl> .
 
 ################################################################################
 # Eql Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#eql:preset:plain>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eql> ;
-        rdfs:label "Plain" ;
-        rdfs:seeAlso <eql_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eql> ;
+    rdfs:label "Plain" ;
+    rdfs:seeAlso <eql_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eql:preset:pop>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eql> ;
-        rdfs:label "Pop" ;
-        rdfs:seeAlso <eql_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eql> ;
+    rdfs:label "Pop" ;
+    rdfs:seeAlso <eql_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eql:preset:jazz>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eql> ;
-        rdfs:label "Jazz" ;
-        rdfs:seeAlso <eql_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eql> ;
+    rdfs:label "Jazz" ;
+    rdfs:seeAlso <eql_presets.ttl> .
 
 ################################################################################
 # Eqp Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#eqp:preset:plain>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
-        rdfs:label "Plain" ;
-        rdfs:seeAlso <eqp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
+    rdfs:label "Plain" ;
+    rdfs:seeAlso <eqp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eqp:preset:pop>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
-        rdfs:label "Pop" ;
-        rdfs:seeAlso <eqp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
+    rdfs:label "Pop" ;
+    rdfs:seeAlso <eqp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#eqp:preset:jazz>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
-        rdfs:label "Jazz" ;
-        rdfs:seeAlso <eqp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#eqp> ;
+    rdfs:label "Jazz" ;
+    rdfs:seeAlso <eqp_presets.ttl> .
 
 ################################################################################
 # Exciter Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Exciter:preset:plain>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
+    a pset:Preset ;
+    rdfs:seeAlso <exciter_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 
 <https://github.com/Stazed/rakarrack-plus#Exciter:preset:loudness>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
+    a pset:Preset ;
+    rdfs:seeAlso <exciter_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 
 <https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_1>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
+    a pset:Preset ;
+    rdfs:seeAlso <exciter_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 
 <https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_2>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
+    a pset:Preset ;
+    rdfs:seeAlso <exciter_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 
 <https://github.com/Stazed/rakarrack-plus#Exciter:preset:exciter_3>
-	a pset:Preset ;
-	rdfs:seeAlso <exciter_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
+    a pset:Preset ;
+    rdfs:seeAlso <exciter_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Exciter> .
 
 ################################################################################
 # Expander Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Expander:preset:noise_gate>
-	a pset:Preset ;
-	rdfs:seeAlso <expander_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> .
+    a pset:Preset ;
+    rdfs:seeAlso <expander_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> .
 
 <https://github.com/Stazed/rakarrack-plus#Expander:preset:boost_gate>
-	a pset:Preset ;
-	rdfs:seeAlso <expander_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> .
+    a pset:Preset ;
+    rdfs:seeAlso <expander_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> .
 
 <https://github.com/Stazed/rakarrack-plus#Expander:preset:treble_swell>
-	a pset:Preset ;
-	rdfs:seeAlso <expander_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> .
+    a pset:Preset ;
+    rdfs:seeAlso <expander_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> .
 
 <https://github.com/Stazed/rakarrack-plus#Expander:preset:another>
-	a pset:Preset ;
-	rdfs:seeAlso <expander_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> .
+    a pset:Preset ;
+    rdfs:seeAlso <expander_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Expander> .
 
 ################################################################################
 # Flange Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
-        rdfs:seeAlso <flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+    rdfs:seeAlso <flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
-        rdfs:seeAlso <flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+    rdfs:seeAlso <flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
-        rdfs:seeAlso <flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+    rdfs:seeAlso <flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
-        rdfs:seeAlso <flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+    rdfs:seeAlso <flange_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Flange:preset:flange_5>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
-        rdfs:seeAlso <flange_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Flange> ;
+    rdfs:seeAlso <flange_presets.ttl> .
 
 ################################################################################
 # Gate Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#gate:preset:0dB>
-	a pset:Preset ;
-	rdfs:seeAlso <gate_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> .
+    a pset:Preset ;
+    rdfs:seeAlso <gate_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> .
 
 <https://github.com/Stazed/rakarrack-plus#gate:preset:-10dB>
-	a pset:Preset ;
-	rdfs:seeAlso <gate_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> .
+    a pset:Preset ;
+    rdfs:seeAlso <gate_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> .
 
 <https://github.com/Stazed/rakarrack-plus#gate:preset:-20dB>
-	a pset:Preset ;
-	rdfs:seeAlso <gate_presets.ttl> ;
-	lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> .
+    a pset:Preset ;
+    rdfs:seeAlso <gate_presets.ttl> ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#gate> .
 
 ################################################################################
 # Harmonizer Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:plain>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har> ;
-        rdfs:seeAlso <harm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har> ;
+    rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:octavador>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har> ;
-        rdfs:seeAlso <harm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har> ;
+    rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:3mdown>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har> ;
-        rdfs:seeAlso <harm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har> ;
+    rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
 ################################################################################
 # Harmonizer No MIDI Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:plain>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
-        rdfs:seeAlso <harm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
+    rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:octavador>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
-        rdfs:seeAlso <harm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
+    rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#har_no_mid:preset:3mdown>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
-        rdfs:seeAlso <harm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#har_no_mid> ;
+    rdfs:seeAlso <harm_no_midi_presets.ttl> .
 
 ################################################################################
 # Infinity Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:plain>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:basic>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:rising_comb>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:falling_comb>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:laser>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:doppler>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:detune>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:dizzy_sailor>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:stereo_phaser>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:corkscrew>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Infinity:preset:freeqeevox>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
-        rdfs:seeAlso <inf_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Infinity> ;
+    rdfs:seeAlso <inf_presets.ttl> .
 
 ################################################################################
 # Musical Delay Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#delm:preset:echo_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
-        rdfs:seeAlso <mdel_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
+    rdfs:seeAlso <mdel_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#delm:preset:echo_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
-        rdfs:seeAlso <mdel_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#delm> ;
+    rdfs:seeAlso <mdel_presets.ttl> .
 
 ################################################################################
 # MuTroMojo Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:wahwah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
+    rdfs:seeAlso <mutromojo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:mutron>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
+    rdfs:seeAlso <mutromojo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:phase_wah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
+    rdfs:seeAlso <mutromojo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:phaser>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
+    rdfs:seeAlso <mutromojo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:quack_quack>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
+    rdfs:seeAlso <mutromojo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:smoothtron>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
+    rdfs:seeAlso <mutromojo_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#MuTroMojo:preset:wah_fever>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
-        rdfs:seeAlso <mutromojo_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#MuTroMojo> ;
+    rdfs:seeAlso <mutromojo_presets.ttl> .
 
 ################################################################################
 # Optical Tremolo Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Otrem:preset:fast>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
-        rdfs:seeAlso <otrem_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
+    rdfs:seeAlso <otrem_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Otrem:preset:trem_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
-        rdfs:seeAlso <otrem_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
+    rdfs:seeAlso <otrem_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Otrem:preset:hard_pan>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
-        rdfs:seeAlso <otrem_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
+    rdfs:seeAlso <otrem_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Otrem:preset:soft_pan>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
-        rdfs:seeAlso <otrem_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
+    rdfs:seeAlso <otrem_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Otrem:preset:ramp_down>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
-        rdfs:seeAlso <otrem_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
+    rdfs:seeAlso <otrem_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Otrem:preset:hard_ramp>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
-        rdfs:seeAlso <otrem_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
+    rdfs:seeAlso <otrem_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Otrem:preset:slow>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
-        rdfs:seeAlso <otrem_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Otrem> ;
+    rdfs:seeAlso <otrem_presets.ttl> .
 
 ################################################################################
 # Overdrive Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Overdrive:preset:overdrive_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Overdrive> ;
-        rdfs:label "Overdrive 1" ;
-        rdfs:seeAlso <overdrive_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Overdrive> ;
+    rdfs:label "Overdrive 1" ;
+    rdfs:seeAlso <overdrive_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Overdrive:preset:overdrive_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Overdrive> ;
-        rdfs:label "Overdrive 2" ;
-        rdfs:seeAlso <overdrive_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Overdrive> ;
+    rdfs:label "Overdrive 2" ;
+    rdfs:seeAlso <overdrive_presets.ttl> .
 
 ################################################################################
 # Pan Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#pan:preset:autopan>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#pan> ;
-        rdfs:seeAlso <pan_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#pan> ;
+    rdfs:seeAlso <pan_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#pan:preset:extra_stereo>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#pan> ;
-        rdfs:seeAlso <pan_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#pan> ;
+    rdfs:seeAlso <pan_presets.ttl> .
 
 ################################################################################
 # Phaser Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
-        rdfs:seeAlso <phas_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
+    rdfs:seeAlso <phas_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
-        rdfs:seeAlso <phas_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
+    rdfs:seeAlso <phas_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
-        rdfs:seeAlso <phas_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
+    rdfs:seeAlso <phas_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
-        rdfs:seeAlso <phas_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
+    rdfs:seeAlso <phas_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_5>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
-        rdfs:seeAlso <phas_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
+    rdfs:seeAlso <phas_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#phas:preset:phaser_6>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
-        rdfs:seeAlso <phas_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#phas> ;
+    rdfs:seeAlso <phas_presets.ttl> .
 
 ################################################################################
 # ResSolution Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#ressol:preset:static_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ressol> ;
-        rdfs:seeAlso <ressol_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ressol> ;
+    rdfs:seeAlso <ressol_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#ressol:preset:static_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ressol> ;
-        rdfs:seeAlso <ressol_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ressol> ;
+    rdfs:seeAlso <ressol_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#ressol:preset:static_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ressol> ;
-        rdfs:seeAlso <ressol_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ressol> ;
+    rdfs:seeAlso <ressol_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#ressol:preset:static_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ressol> ;
-        rdfs:seeAlso <ressol_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ressol> ;
+    rdfs:seeAlso <ressol_presets.ttl> .
 
 ################################################################################
 # Reverb Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:cathedral_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:cathedral_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:cathedral_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:hall_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:hall_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:room_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:room_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:basement>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:tunnel>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:echoed_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:echoed_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:verylong_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#reve:preset:verylong_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
-        rdfs:seeAlso <reve_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#reve> ;
+    rdfs:seeAlso <reve_presets.ttl> .
 
 ################################################################################
 # Reverbtron Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:chamber>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
+    rdfs:seeAlso <reverbtron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:concrete_stairwell>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
+    rdfs:seeAlso <reverbtron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:hall>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
+    rdfs:seeAlso <reverbtron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:med_hall>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
+    rdfs:seeAlso <reverbtron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:Room>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
+    rdfs:seeAlso <reverbtron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:large_hall>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
+    rdfs:seeAlso <reverbtron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:guitar>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
+    rdfs:seeAlso <reverbtron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:studio>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
+    rdfs:seeAlso <reverbtron_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Reverbtron:preset:chathedral>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
-        rdfs:seeAlso <reverbtron_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Reverbtron> ;
+    rdfs:seeAlso <reverbtron_presets.ttl> .
 
 ################################################################################
 # Ring Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Ring:preset:sawsin>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
-        rdfs:seeAlso <ring_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
+    rdfs:seeAlso <ring_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Ring:preset:e_string>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
-        rdfs:seeAlso <ring_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
+    rdfs:seeAlso <ring_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Ring:preset:a_string>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
-        rdfs:seeAlso <ring_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
+    rdfs:seeAlso <ring_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Ring:preset:dissonance>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
-        rdfs:seeAlso <ring_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
+    rdfs:seeAlso <ring_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Ring:preset:fast_beat>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
-        rdfs:seeAlso <ring_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
+    rdfs:seeAlso <ring_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Ring:preset:ring_amp>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
-        rdfs:seeAlso <ring_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Ring> ;
+    rdfs:seeAlso <ring_presets.ttl> .
 
 ################################################################################
 # Sequence Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:jumpy>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:stair_step>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:mild>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:wahwah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:filter_pan>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:stepper>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:shifter>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:tremor>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:boogie>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:random_mode>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sequence:preset:sequence_11>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
-        rdfs:seeAlso <sequence_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sequence> ;
+    rdfs:seeAlso <sequence_presets.ttl> .
 
 ################################################################################
 # Shelfboost Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:trebble>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-        rdfs:seeAlso <shelfboost_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
+    rdfs:seeAlso <shelfboost_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:mid>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-        rdfs:seeAlso <shelfboost_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
+    rdfs:seeAlso <shelfboost_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:bass>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-        rdfs:seeAlso <shelfboost_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
+    rdfs:seeAlso <shelfboost_presets.ttl> .
 
 
 <https://github.com/Stazed/rakarrack-plus#ShelfBoost:preset:distortion_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
-        rdfs:seeAlso <shelfboost_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#ShelfBoost> ;
+    rdfs:seeAlso <shelfboost_presets.ttl> .
 
 ################################################################################
 # Shifter Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Shifter:preset:fast>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
+    rdfs:seeAlso <shifter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Shifter:preset:slow_up>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
+    rdfs:seeAlso <shifter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Shifter:preset:slow_down>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
+    rdfs:seeAlso <shifter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Shifter:preset:chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
+    rdfs:seeAlso <shifter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Shifter:preset:trig_chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
+    rdfs:seeAlso <shifter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Shifter:preset:shifter_6>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
-        rdfs:seeAlso <shifter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shifter> ;
+    rdfs:seeAlso <shifter_presets.ttl> .
 
 ################################################################################
 # Shuffle Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
+    rdfs:seeAlso <shuffle_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
+    rdfs:seeAlso <shuffle_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
+    rdfs:seeAlso <shuffle_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Shuffle:preset:shuffle_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
+    rdfs:seeAlso <shuffle_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Shuffle:preset:remover>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
-        rdfs:seeAlso <shuffle_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Shuffle> ;
+    rdfs:seeAlso <shuffle_presets.ttl> .
 
 ################################################################################
 # Stereo Harmonizer Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:plain>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
+    rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:octavator>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
+    rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
+    rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:hard_chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm> ;
+    rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
 ################################################################################
 # Stereo Harmonizer No MIDI Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:plain>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
+    rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:octavator>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
+    rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
+    rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid:preset:hard_chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
-        rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StereoHarm_no_mid> ;
+    rdfs:seeAlso <stereoharm_no_midi_presets.ttl> .
 
 ################################################################################
 # StompBox Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:amp_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:odie>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:grunger>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:hard_dist>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:ratula>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:classic_dist>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:mobid_impalement>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:sharp_metal>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:classic_fuzz>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:gnasty>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#StompBox:preset:amp_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
-        rdfs:seeAlso <stomp_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#StompBox> ;
+    rdfs:seeAlso <stomp_presets.ttl> .
 
 ################################################################################
 # Sustainer Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Sustainer:preset:sustain_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
-        rdfs:seeAlso <sustain_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
+    rdfs:seeAlso <sustain_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sustainer:preset:sustain_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
-        rdfs:seeAlso <sustain_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
+    rdfs:seeAlso <sustain_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Sustainer:preset:sustain_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
-        rdfs:seeAlso <sustain_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Sustainer> ;
+    rdfs:seeAlso <sustain_presets.ttl> .
 
 ################################################################################
 # Synthfilter Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lowpass>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
+    rdfs:seeAlso <synthfilter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:highpass>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
+    rdfs:seeAlso <synthfilter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:bandpass>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
+    rdfs:seeAlso <synthfilter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lead_synth>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
+    rdfs:seeAlso <synthfilter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:water>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
-        
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
+    rdfs:seeAlso <synthfilter_presets.ttl> .
+    
 <https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:pan_filter>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
+    rdfs:seeAlso <synthfilter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:multi>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
+    rdfs:seeAlso <synthfilter_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Synthfilter:preset:lazy_wahble>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
-        rdfs:seeAlso <synthfilter_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Synthfilter> ;
+    rdfs:seeAlso <synthfilter_presets.ttl> .
 
 ################################################################################
 # Valve Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Valve:preset:valve1>
-        a pset:Preset ;
-        rdfs:label "Valve 1" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
-        rdfs:seeAlso <valve_presets.ttl> .
+    a pset:Preset ;
+    rdfs:label "Valve 1" ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
+    rdfs:seeAlso <valve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Valve:preset:valve2>
-        a pset:Preset ;
-        rdfs:label "Valve 2" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
-        rdfs:seeAlso <valve_presets.ttl> .
+    a pset:Preset ;
+    rdfs:label "Valve 2" ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
+    rdfs:seeAlso <valve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Valve:preset:valve3>
-        a pset:Preset ;
-        rdfs:label "Valve 3" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
-        rdfs:seeAlso <valve_presets.ttl> .
+    a pset:Preset ;
+    rdfs:label "Valve 3" ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
+    rdfs:seeAlso <valve_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Valve:preset:valve4>
-        a pset:Preset ;
-        rdfs:label "Valve 4" ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
-        rdfs:seeAlso <valve_presets.ttl> .
+    a pset:Preset ;
+    rdfs:label "Valve 4" ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Valve> ;
+    rdfs:seeAlso <valve_presets.ttl> .
 
 ################################################################################
 # VaryBand Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
-        rdfs:seeAlso <varyband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
+    rdfs:seeAlso <varyband_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
-        rdfs:seeAlso <varyband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
+    rdfs:seeAlso <varyband_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
-        rdfs:seeAlso <varyband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
+    rdfs:seeAlso <varyband_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#VaryBand:preset:vary4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
-        rdfs:seeAlso <varyband_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#VaryBand> ;
+    rdfs:seeAlso <varyband_presets.ttl> .
 
 ################################################################################
 # Vibe Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Vibe:preset:classic>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
-        rdfs:seeAlso <vibe_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+    rdfs:seeAlso <vibe_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vibe:preset:stereo_classic>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
-        rdfs:seeAlso <vibe_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+    rdfs:seeAlso <vibe_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vibe:preset:wide_vibe>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
-        rdfs:seeAlso <vibe_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+    rdfs:seeAlso <vibe_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vibe:preset:classic_chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
-        rdfs:seeAlso <vibe_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+    rdfs:seeAlso <vibe_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vibe:preset:vibe_chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
-        rdfs:seeAlso <vibe_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+    rdfs:seeAlso <vibe_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vibe:preset:lush_chorus>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
-        rdfs:seeAlso <vibe_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+    rdfs:seeAlso <vibe_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vibe:preset:sick_phaser>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
-        rdfs:seeAlso <vibe_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+    rdfs:seeAlso <vibe_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vibe:preset:warble>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
-        rdfs:seeAlso <vibe_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+    rdfs:seeAlso <vibe_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vibe:preset:vibe9>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
-        rdfs:seeAlso <vibe_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vibe> ;
+    rdfs:seeAlso <vibe_presets.ttl> .
 
 ################################################################################
 # Vocoder Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
-        rdfs:seeAlso <vocoder_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
+    rdfs:seeAlso <vocoder_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
-        rdfs:seeAlso <vocoder_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
+    rdfs:seeAlso <vocoder_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_3>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
-        rdfs:seeAlso <vocoder_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
+    rdfs:seeAlso <vocoder_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_4>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
-        rdfs:seeAlso <vocoder_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
+    rdfs:seeAlso <vocoder_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#Vocoder:preset:vocoder_5>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
-        rdfs:seeAlso <vocoder_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#Vocoder> ;
+    rdfs:seeAlso <vocoder_presets.ttl> .
 
 ################################################################################
 # Whawha Presets
 ################################################################################
 
 <https://github.com/Stazed/rakarrack-plus#wha:preset:wahwah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
+    rdfs:seeAlso <wha_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#wha:preset:autowah>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
+    rdfs:seeAlso <wha_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#wha:preset:sweep>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
+    rdfs:seeAlso <wha_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#wha:preset:vocalmorph1>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
+    rdfs:seeAlso <wha_presets.ttl> .
 
 <https://github.com/Stazed/rakarrack-plus#wha:preset:vocalmorph2>
-        a pset:Preset ;
-        lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
-        rdfs:seeAlso <wha_presets.ttl> .
+    a pset:Preset ;
+    lv2:appliesTo <https://github.com/Stazed/rakarrack-plus#wha> ;
+    rdfs:seeAlso <wha_presets.ttl> .
