@@ -155,6 +155,7 @@ set(EFX_COMMON_SOURCES
     EFX_common/FormantFilter.C
     EFX_common/FilterParams.C
     EFX_common/smbPitchShift.C
+    EFX_common/pffft.C
     EFX_common/mayer_fft.C
     EFX_common/Resample.C
     EFX_common/Waveshaper.C

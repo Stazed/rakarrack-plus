@@ -33,6 +33,7 @@ option (EnableSSE "Enable SSE (default=automatic check)" ON)
 option (EnableSSE2 "Enable SSE2 (default=automatic check)" ON)
 option (EnableVectorization "Enable vectorize" ON)
 option (EnableAltivec "Enable altivec (default=automatic check)" ON)
+option (EnablePFFFT "Use the PFFFT library instead of fftw or KISSfft" ON)
 option (EnableKISSfft "Use the KISSfft library instead of fftw" OFF)
 
 
@@ -114,6 +115,10 @@ if(THREADS_HAVE_PTHREAD_ARG)
   set_property(TARGET rakarrack-plus PROPERTY INTERFACE_COMPILE_OPTIONS "-pthread")
 endif()
 
+if (EnablePFFFT)
+    message(STATUS "Using PFFFT library")
+    add_definitions(-D'PFFFT_SUPPORT=1')
+else()
 if (EnableKISSfft)
     find_package(kissfft CONFIG REQUIRED COMPONENTS STATIC)
     if(TARGET kissfft::kissfft)   # Modern cmake
@@ -124,6 +129,7 @@ if (EnableKISSfft)
 else (EnableKISSfft)
     pkg_check_modules(FFTW3 REQUIRED fftw3>=0.22 fftw3f>=0.22)
 endif (EnableKISSfft)
+endif()
 
 pkg_check_modules(JACK REQUIRED jack>=0.115.6)
 pkg_check_modules(FONTCONFIG REQUIRED fontconfig>=0.22)
@@ -387,6 +393,7 @@ package_status(BuildCarlaPresets   "Build Carla lv2 presets. . . . . . . . . . .
 package_status(BuildForDebug       "Build for debug. . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableNSM           "NSM session support. . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableSysex         "Sysex preset save support. . . . . . . . . . . . . . . .:"  )
+package_status(EnablePFFFT         "PFFFT support. . . . . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableKISSfft       "KissFft support. . . . . . . . . . . . . . . . . . . . .:"  )
 
 message (STATUS)

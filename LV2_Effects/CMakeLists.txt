@@ -72,6 +72,7 @@ set(EFX_COMMON_SOURCES
     ../src/EFX_common/delayline.C
     ../src/EFX_common/EffectLFO.C
     ../src/EFX_common/smbPitchShift.C
+    ../src/EFX_common/pffft.C
     ../src/EFX_common/HarmonicEnhancer.C
     ../src/EFX_common/Filter.C
     ../src/EFX_common/FilterParams.C
