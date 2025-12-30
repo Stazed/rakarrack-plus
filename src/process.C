@@ -1022,11 +1022,7 @@ RKR::process_effects(float *origl, float *origr, void *)
             if (efx_MIDIConverter->getpar(MIDIConv_FFT))
             {
 #ifndef RKR_PLUS_LV2
-#ifdef KISSFFT_SUPPORT  // KissFFT caused excessive CPU usage so disabled when KissFFT is supported, only use schmittFloat
-                efx_MIDIConverter->schmittFloat(efxoutl, efxoutr, val_sum, HarmRecNote->freqs, HarmRecNote->lfreqs);
-#else
                 efx_MIDIConverter->fftFloat(efxoutl, efxoutr, val_sum, HarmRecNote->freqs, HarmRecNote->lfreqs);
-#endif
 #endif
             }
             else

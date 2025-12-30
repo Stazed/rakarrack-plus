@@ -46,8 +46,6 @@
 
 #ifdef PFFFT_SUPPORT
     #include "pffft.h"
-#elif defined(KISSFFT_SUPPORT)
-    #include <kissfft/kiss_fft.h>
 #else
     #include <fftw3.h>
 #endif
@@ -119,11 +117,6 @@ private:
     float         pffft_in[2 * MAX_FRAME_LENGTH];
     float         pffft_out[2 * MAX_FRAME_LENGTH];
     float         pffft_work[2 * MAX_FRAME_LENGTH];
-#elif defined(KISSFFT_SUPPORT)
-    kiss_fft_cfg  kiss_cfg_fwd;
-    kiss_fft_cfg  kiss_cfg_inv;
-    kiss_fft_cpx  kiss_in[MAX_FRAME_LENGTH];
-    kiss_fft_cpx  kiss_out[MAX_FRAME_LENGTH];
 #else
     fftw_complex fftw_in[MAX_FRAME_LENGTH];
     fftw_complex fftw_out[MAX_FRAME_LENGTH];
