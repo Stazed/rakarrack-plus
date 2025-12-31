@@ -17,7 +17,9 @@
 #define MAX_FFT_LENGTH 48000
 #define MAX_PEAKS 8
 
+#ifndef PFFFT_SUPPORT
 static pthread_mutex_t fftw_planner_lock = PTHREAD_MUTEX_INITIALIZER;
+#endif
 
 MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermediate_bufsize):
     schmittBuffer(NULL),
@@ -77,10 +79,14 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     fftSize(),
     fftFrameCount(),
     fftIn(NULL),
-    fftOut(NULL),
-    fftPlan()
+    fftOut(NULL)
+#ifndef PFFFT_SUPPORT
+    , fftPlan()
+#else
+    , fftSetup(NULL)
+#endif
 {
-    static const char *englishNotes[12] = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"};
+    static const char *englishNotes[12] = {"A","A#","B","C","C#","D","D#","E","F","F#","G","G#"};
     notes = englishNotes;
 
     schmittInit(32); // 32 == latency (tuneit default = 10)
@@ -215,7 +221,7 @@ MIDIConverter::displayFrequency(float ffreq, float val_sum, float *freqs, float 
 
     float mldf = LOG_D_NOTE;
     float ldf = 0.0;
-    
+
     for (int i = 0; i < 12; i++)
     {
         ldf = fabsf(lfreq - lfreqs[i]);
@@ -306,7 +312,7 @@ MIDIConverter::schmittS16LE(signed short int *indata, float val_sum, float *freq
         if (schmittPointer - schmittBuffer >= blockSize)
         {
             schmittPointer = schmittBuffer;
-            
+
             int  A1, A2; A1 = A2 = 0;            
             for (j = 0, A1 = 0, A2 = 0; j < blockSize; j++)
             {
@@ -374,6 +380,161 @@ MIDIConverter::schmittFloat(float * efxoutl, float * efxoutr, float val_sum, flo
     }
     schmittS16LE(buf, val_sum, freqs, lfreqs);
 }
+
+#ifdef PFFFT_SUPPORT
+void
+MIDIConverter::fftInit(int size)
+{
+    fftSize = 2 + (SAMPLE_RATE / size);
+
+    // PFFFT requires power-of-two size
+    pffftSize = 1;
+    while (pffftSize < fftSize) pffftSize <<= 1;
+
+    fftSetup = pffft_new_setup(pffftSize, PFFFT_COMPLEX);
+    if (!fftSetup) {
+        fprintf(stderr, "PFFFT setup failed\n");
+        abort();
+    }
+
+    // Complex input/output: interleaved [real, imag]
+    fftIn      = (float*) pffft_aligned_malloc(sizeof(float) * 2 * pffftSize);
+    fftOut     = (float*) pffft_aligned_malloc(sizeof(float) * 2 * pffftSize);
+    fftScratch = (float*) pffft_aligned_malloc(sizeof(float) * 2 * pffftSize);
+
+    memset(fftIn,  0, sizeof(float) * 2 * pffftSize);
+    memset(fftOut, 0, sizeof(float) * 2 * pffftSize);
+
+    fftSampleBuffer = (float*) malloc(sizeof(float) * fftSize);
+    fftLastPhase    = (float*) malloc(sizeof(float) * (fftSize / 2 + 1));
+
+    memset(fftSampleBuffer, 0, sizeof(float) * fftSize);
+    memset(fftLastPhase,    0, sizeof(float) * (fftSize / 2 + 1));
+
+    fftSample = fftSampleBuffer + (fftSize - 1);
+    fftFrameCount = 0;
+}
+
+void
+MIDIConverter::fftMeasure(
+    int overlap,
+    float *indata,
+    float val_sum,
+    float *freqs,
+    float *lfreqs)
+{
+    int stepSize = fftSize / overlap;
+    double freqPerBin = SAMPLE_RATE / (double)pffftSize;
+    double phaseDifference = 2.0 * M_PI * stepSize / (double)pffftSize;
+
+    if (!fftSample)
+        fftSample = fftSampleBuffer + (fftSize - stepSize);
+
+    for (unsigned int i = 0; i < PERIOD; i++)
+    {
+        *fftSample++ = indata[i];
+
+        if (fftSample - fftSampleBuffer >= fftSize)
+        {
+            Peak peaks[MAX_PEAKS];
+            for (int k = 0; k < MAX_PEAKS; k++) {
+                peaks[k].db = -200.0;
+                peaks[k].freq = 0.0;
+            }
+
+            /* Window + build complex input */
+            for (int k = 0; k < fftSize; k++)
+            {
+                double window = 0.5 - 0.5 * cos(2.0 * M_PI * k / fftSize);
+                fftIn[2*k]     = fftSampleBuffer[k] * window;
+                fftIn[2*k + 1] = 0.0f;
+            }
+
+            /* Zero pad */
+            for (int k = fftSize; k < pffftSize; k++) {
+                fftIn[2*k]     = 0.0f;
+                fftIn[2*k + 1] = 0.0f;
+            }
+
+            /* Execute FFT */
+            pffft_transform_ordered(
+                fftSetup,
+                fftIn,
+                fftOut,
+                fftScratch,
+                PFFFT_FORWARD
+            );
+
+            int maxBin = fftSize / 2;
+            for (int k = 1; k <= maxBin; ++k)
+            {
+                float real = fftOut[2*k];
+                float imag = fftOut[2*k + 1];
+
+                float magnitude = 20.0f * log10f(
+                    2.0f * sqrtf(real*real + imag*imag) / fftSize
+                );
+
+                float phase = atan2f(imag, real);
+                float tmp = phase - fftLastPhase[k];
+                fftLastPhase[k] = phase;
+
+                tmp -= (float)k * phaseDifference;
+
+                long qpd = (long)(tmp / M_PI);
+                if (qpd >= 0) qpd += qpd & 1;
+                else          qpd -= qpd & 1;
+
+                tmp -= (float)(M_PI * qpd);
+                tmp = overlap * tmp / (2.0f * M_PI);
+
+                float freq = (float)k * freqPerBin + tmp * freqPerBin;
+
+                if (freq > 0.0f && magnitude > peaks[0].db)
+                {
+                    memmove(peaks + 1, peaks, sizeof(Peak) * (MAX_PEAKS - 1));
+                    peaks[0].freq = freq;
+                    peaks[0].db   = magnitude;
+                }
+            }
+
+            fftFrameCount++;
+            if (fftFrameCount % overlap == 0)
+            {
+                int k = 0, maxharm = 0;
+
+                for (int l = 1; l < MAX_PEAKS && peaks[l].freq > 0.0; l++)
+                {
+                    for (int harmonic = 5; harmonic > 1; harmonic--)
+                    {
+                        if (peaks[0].freq / peaks[l].freq < harmonic + 0.02 &&
+                            peaks[0].freq / peaks[l].freq > harmonic - 0.02)
+                        {
+                            if (harmonic > maxharm &&
+                                peaks[0].db < peaks[l].db / 2)
+                            {
+                                maxharm = harmonic;
+                                k = l;
+                            }
+                        }
+                    }
+                }
+
+                displayFrequency(peaks[k].freq, val_sum, freqs, lfreqs);
+            }
+
+            memmove(
+                fftSampleBuffer,
+                fftSampleBuffer + stepSize,
+                (fftSize - stepSize) * sizeof(float)
+            );
+
+            fftSample = fftSampleBuffer + (fftSize - stepSize);
+        }
+    }
+}
+
+#else   // FFTW
 
 void
 MIDIConverter::fftInit(int size)
@@ -500,6 +661,7 @@ MIDIConverter::fftMeasure(int overlap, float *indata, float val_sum, float *freq
         }
     }
 }
+#endif  // FFTW
 
 void
 MIDIConverter::fftFloat(float *efxoutl, float *efxoutr, float val_sum, float *freqs, float *lfreqs)
@@ -530,13 +692,58 @@ MIDIConverter::fftS16LE(signed short int *indata, float val_sum, float *freqs, f
 void
 MIDIConverter::fftFree()
 {
-    pthread_mutex_lock (&fftw_planner_lock);
-    fftwf_destroy_plan(fftPlan);
-    pthread_mutex_unlock (&fftw_planner_lock);
-    fftwf_free(fftIn);
-    free(fftSampleBuffer);
-    free(fftLastPhase);
+#ifdef PFFFT_SUPPORT
+    if (fftSetup) {
+        pffft_destroy_setup(fftSetup);
+        fftSetup = nullptr;
+    }
+
+    if (fftIn) {
+        pffft_aligned_free(fftIn);
+        fftIn = nullptr;
+    }
+
+    if (fftOut) {
+        pffft_aligned_free(fftOut);
+        fftOut = nullptr;
+    }
+
+    if (fftScratch) {
+        pffft_aligned_free(fftScratch);
+        fftScratch = nullptr;
+    }
+#else
+    pthread_mutex_lock(&fftw_planner_lock);
+    if (fftPlan) {
+        fftwf_destroy_plan(fftPlan);
+        fftPlan = nullptr;
+    }
+    pthread_mutex_unlock(&fftw_planner_lock);
+
+    if (fftIn) {
+        fftwf_free(fftIn);
+        fftIn = nullptr;
+    }
+
+    if (fftOut) {
+        fftwf_free(fftOut);
+        fftOut = nullptr;
+    }
+#endif
+
+    if (fftSampleBuffer) {
+        free(fftSampleBuffer);
+        fftSampleBuffer = nullptr;
+    }
+
+    if (fftLastPhase) {
+        free(fftLastPhase);
+        fftLastPhase = nullptr;
+    }
+
+    fftSample = nullptr;
 }
+
 
 void
 MIDIConverter::send_Midi_Note(uint nota, float val_sum, bool is_On)

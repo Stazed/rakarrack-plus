@@ -17,7 +17,11 @@
 #include <stdlib.h>
 #include <complex.h>
 
-#include <fftw3.h>
+#ifndef PFFFT_SUPPORT
+    #include <fftw3.h>
+#else
+    #include "../EFX_common/pffft.h"
+#endif
 
 #define MIDICLV2_URI "https://github.com/Stazed/rakarrack-plus#midi_converter"
 
@@ -116,7 +120,7 @@ private:
 public:
     void lv2_update_params(uint32_t period);
 #endif
-    
+
 #ifdef LV2_SUPPORT
     void setGain(int val);
     void update_freqs(float val);
@@ -135,7 +139,7 @@ private:
 public:
 #ifdef RKR_PLUS_LV2
     _RKRPLUSLV2* plug; // for access to forge_midimessage()
-#else 
+#else
     jack_ringbuffer_t   *m_buffSize;
     jack_ringbuffer_t   *m_buffMessage;
     snd_seq_t *port;
@@ -156,8 +160,16 @@ private:
     int fftSize;
     int fftFrameCount;
     float *fftIn;
+#ifndef PFFFT_SUPPORT
     fftwf_complex *fftOut;
     fftwf_plan fftPlan;
+#else
+    PFFFT_Setup *fftSetup;
+    float *fftOut;
+    float *fftScratch;
+    int pffftSize;
+#endif
+
     typedef struct Peak {
         double freq;
         double db;
