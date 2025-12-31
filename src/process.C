@@ -1021,7 +1021,7 @@ RKR::process_effects(float *origl, float *origr, void *)
         {
             if (efx_MIDIConverter->getpar(MIDIConv_FFT))
             {
-#ifndef RKR_PLUS_LV2
+#if !defined(RKR_PLUS_LV2) || defined(PFFFT_SUPPORT)
                 efx_MIDIConverter->fftFloat(efxoutl, efxoutr, val_sum, HarmRecNote->freqs, HarmRecNote->lfreqs);
 #endif
             }

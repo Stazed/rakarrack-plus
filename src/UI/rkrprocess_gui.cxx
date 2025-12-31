@@ -840,8 +840,10 @@ void RKRGUI::load_previous_state()
     // since we don't want to load anything and overwrite state restore.
     m_process->Selected_Preset = m_process->Config.Preset_Number;
     Preset_Counter->value(m_process->Config.Preset_Number);
-    // For LV2 the FFT multiple occurrences bug will crash things,,,
+#ifndef PFFFT_SUPPORT
+    // For LV2 the FFTW multiple occurrences bug will crash things,,,
     MIDI->Use_FFT->deactivate();
+#endif
 #else
     if (!m_process->Command_Line_File)
     {

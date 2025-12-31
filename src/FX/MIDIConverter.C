@@ -94,7 +94,7 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
     notes = englishNotes;
 
     schmittInit(32); // 32 == latency (tuneit default = 10)
-#ifndef RKR_PLUS_LV2
+#if !defined(RKR_PLUS_LV2) || defined(PFFFT_SUPPORT)
     fftInit(32); // == latency
 #endif
 
@@ -127,7 +127,7 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
 MIDIConverter::~MIDIConverter()
 {
     schmittFree();
-#ifndef RKR_PLUS_LV2
+#if !defined(RKR_PLUS_LV2) || defined(PFFFT_SUPPORT)
     fftFree();
 #endif
 #ifndef LV2_SUPPORT
