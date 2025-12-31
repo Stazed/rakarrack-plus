@@ -83,7 +83,9 @@ MIDIConverter::MIDIConverter(char *jname, double sample_rate, uint32_t intermedi
 #ifndef PFFFT_SUPPORT
     , fftPlan()
 #else
-    , fftSetup(NULL)
+    , fftSetup(NULL),
+    fftScratch(NULL),
+    pffftSize(1)
 #endif
 {
     static const char *englishNotes[12] = {"A","A#","B","C","C#","D","D#","E","F","F#","G","G#"};

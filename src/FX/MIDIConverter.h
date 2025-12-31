@@ -164,8 +164,8 @@ private:
     fftwf_complex *fftOut;
     fftwf_plan fftPlan;
 #else
-    PFFFT_Setup *fftSetup;
     float *fftOut;
+    PFFFT_Setup *fftSetup;
     float *fftScratch;
     int pffftSize;
 #endif
