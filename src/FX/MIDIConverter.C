@@ -16,6 +16,8 @@
 #define M_PI 3.14159265358979323846
 #define MAX_FFT_LENGTH 48000
 #define MAX_PEAKS 8
+// Below this bin, phase vocoder becomes unstable for low notes
+#define LOW_BIN_LIMIT 12
 
 #ifndef PFFFT_SUPPORT
 static pthread_mutex_t fftw_planner_lock = PTHREAD_MUTEX_INITIALIZER;
@@ -470,6 +472,7 @@ MIDIConverter::fftMeasure(
             int maxBin = fftSize / 2;
             for (int k = 1; k <= maxBin; ++k)
             {
+                float freq;
                 float real = fftOut[2*k];
                 float imag = fftOut[2*k + 1];
 
@@ -490,7 +493,32 @@ MIDIConverter::fftMeasure(
                 tmp -= (float)(M_PI * qpd);
                 tmp = overlap * tmp / (2.0f * M_PI);
 
-                float freq = (float)k * freqPerBin + tmp * freqPerBin;
+                /* Low-frequency bins: use magnitude interpolation instead of phase */
+                if (k < LOW_BIN_LIMIT && k > 1)
+                {
+                    float rl = fftOut[2*(k-1)];
+                    float il = fftOut[2*(k-1)+1];
+                    float rc = real;
+                    float ic = imag;
+                    float rr = fftOut[2*(k+1)];
+                    float ir = fftOut[2*(k+1)+1];
+
+                    float magL = sqrtf(rl*rl + il*il);
+                    float magC = sqrtf(rc*rc + ic*ic);
+                    float magR = sqrtf(rr*rr + ir*ir);
+
+                    float denom = (magL - 2.0f * magC + magR);
+                    float delta = 0.0f;
+
+                    if (fabsf(denom) > 1e-6f)
+                        delta = 0.5f * (magL - magR) / denom;
+
+                    freq = ((float)k + delta) * freqPerBin;
+                }
+                else
+                {
+                    freq = (float)k * freqPerBin + tmp * freqPerBin;
+                }
 
                 if (freq > 0.0f && magnitude > peaks[0].db)
                 {
@@ -725,10 +753,6 @@ MIDIConverter::fftFree()
     if (fftIn) {
         fftwf_free(fftIn);
         fftIn = nullptr;
-    }
-
-    if (fftOut) {
-        fftwf_free(fftOut);
         fftOut = nullptr;
     }
 #endif
