@@ -33,7 +33,7 @@ option (EnableSSE "Enable SSE (default=automatic check)" ON)
 option (EnableSSE2 "Enable SSE2 (default=automatic check)" ON)
 option (EnableVectorization "Enable vectorize" ON)
 option (EnableAltivec "Enable altivec (default=automatic check)" ON)
-option (EnablePFFFT "Use the PFFFT library instead of fftw or KISSfft" ON)
+option (EnablePFFFT "Use the PFFFT library instead of FFTW" ON)
 
 
 set(CMAKE_BUILD_TYPE "Release")
