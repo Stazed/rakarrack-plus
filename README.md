@@ -28,7 +28,7 @@ The dependencies are:
 *   aconnect  (part of Debian Package alsa-utils, name may vary on other distributions)
 *   jack (One of the following jack1, jack2, pipewire-jack, name may vary with different distributions)
 *   libxft2
-*   libfftw3
+*   libfftw3    (Optional FFTW support)
 *   lv2     (LV2 support)
 *   liblo   (NSM support)
 *   ntk     (X11 embedded GUI support or optional NTK standalone)
@@ -42,7 +42,7 @@ If you want to compile you will also need the development packages:
 *   libsamplerate0-dev
 *   libasound2-dev
 *   libxft-dev
-*   libfftw3-dev
+*   libfftw3-dev    (Optional FFTW support)
 *   lv2-dev  (LV2 support)
 *   liblo-dev   (NSM support)
 

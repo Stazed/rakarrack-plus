@@ -95,13 +95,13 @@ set_target_properties(rakarrack-plus-lv2 PROPERTIES PREFIX "")
 
 set_target_properties(rakarrack-plus-lv2 PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE)
 
-if (EnableKISSfft)
+if (EnablePFFFT)
     target_include_directories (rakarrack-plus-lv2 PRIVATE ${LV2_INCLUDE_DIRS} ${SAMPLERATE_INCLUDE_DIRS} ${SNDFILE_INCLUDE_DIRS} ../src)
-    target_link_libraries(rakarrack-plus-lv2 PRIVATE ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} libkissfft-float.a ${SNDFILE_LIBRARIES} )
-else (EnableKISSfft)
+    target_link_libraries(rakarrack-plus-lv2 PRIVATE ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} ${SNDFILE_LIBRARIES} )
+else (EnablePFFFT)
     target_include_directories (rakarrack-plus-lv2 PRIVATE ${LV2_INCLUDE_DIRS} ${SAMPLERATE_INCLUDE_DIRS} ${FFTW3_INCLUDE_DIRS} ${SNDFILE_INCLUDE_DIRS} ../src)
     target_link_libraries(rakarrack-plus-lv2 PRIVATE ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} ${FFTW3_LIBRARIES} ${SNDFILE_LIBRARIES} )
-endif (EnableKISSfft)
+endif (EnablePFFFT)
 
 # config install
 install(TARGETS rakarrack-plus-lv2

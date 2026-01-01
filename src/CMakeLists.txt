@@ -204,10 +204,6 @@ set(ExternLibraries
     m
 )
 
-if (EnableKISSfft)
-    list(APPEND ExternLibraries libkissfft-float.a)
-endif (EnableKISSfft)
-
 add_executable (rakarrack-plus ${ProgSources} main.C)
 
 if (EnableNSM)

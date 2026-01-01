@@ -203,10 +203,6 @@ set(ExternLibraries
     m
 )
 
-if (EnableKISSfft)
-    list(APPEND ExternLibraries libkissfft-float.a)
-endif (EnableKISSfft)
-
 add_library(Rakarrack-Plus SHARED
     ${ProgSources}
 )
