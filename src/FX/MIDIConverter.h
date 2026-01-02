@@ -17,10 +17,10 @@
 #include <stdlib.h>
 #include <complex.h>
 
-#ifndef PFFFT_SUPPORT
-    #include <fftw3.h>
-#else
+#ifdef PFFFT_SUPPORT
     #include "../EFX_common/pffft.h"
+#else
+    #include <fftw3.h>
 #endif
 
 #define MIDICLV2_URI "https://github.com/Stazed/rakarrack-plus#midi_converter"
@@ -160,14 +160,14 @@ private:
     int fftSize;
     int fftFrameCount;
     float *fftIn;
-#ifndef PFFFT_SUPPORT
-    fftwf_complex *fftOut;
-    fftwf_plan fftPlan;
-#else
+#ifdef PFFFT_SUPPORT
     float *fftOut;
     PFFFT_Setup *fftSetup;
     float *fftScratch;
     int pffftSize;
+#else
+    fftwf_complex *fftOut;
+    fftwf_plan fftPlan;
 #endif
 
     typedef struct Peak {
