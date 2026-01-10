@@ -23,7 +23,8 @@ The dependencies are:
 *   libfltk1.3
 *   libxpm
 *   libasound2
-*   libsamplerate0
+*   libsamplerate0 (optional)
+*   libzita-resampler1 (Debian/Ubuntu - other distributions may use a different name)
 *   libsndfile1
 *   aconnect  (part of Debian Package alsa-utils, name may vary on other distributions)
 *   jack (One of the following jack1, jack2, pipewire-jack, name may vary with different distributions)
@@ -39,7 +40,8 @@ If you want to compile you will also need the development packages:
 *   libfltk1.3-dev
 *   jack (The development package for jack1, jack2 or pipewire-jack, name may vary with different distributions)
 *   libsndfile1-dev
-*   libsamplerate0-dev
+*   libsamplerate0-dev (optional)
+*   libzita-resampler-dev (Debian/Ubuntu - other distributions may use a different name)
 *   libasound2-dev
 *   libxft-dev
 *   libfftw3-dev    (Optional FFTW support)
@@ -87,6 +89,14 @@ To disable NTK embedded LV2 build set "BuildRakarrackPlusLV2" to OFF:
 To enable NTK standalone build set "EnableNTK" to ON:
 
     cmake -DEnableNTK=ON ..
+
+Rakarrack-plus-1.4.0
+--------------------
+Additional features, enhancements:
+*  With version 1.4.0 the zita-resampler library has been added to replace libsamplerate.
+   Zita-resampler has shown to give significant improvement in CPU usage and it readily
+   available in most distribution repositories.
+   You can optionally use libsamplerate by setting the cmake command : cmake -DEnableZITA=OFF ..
 
 Rakarrack-plus-1.3.0
 --------------------
