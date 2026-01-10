@@ -94,8 +94,8 @@ Rakarrack-plus-1.4.0
 --------------------
 Additional features, enhancements:
 *  With version 1.4.0 the zita-resampler library has been added to replace libsamplerate.
-   Zita-resampler has shown to give significant improvement in CPU usage and it readily
-   available in most distribution repositories.
+   Zita-resampler has shown to give significant improvement in CPU usage and it is available
+   in most distribution repositories.
    You can optionally use libsamplerate by setting the cmake command : cmake -DEnableZITA=OFF ..
 
 Rakarrack-plus-1.3.0
