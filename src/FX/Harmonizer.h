@@ -157,7 +157,6 @@ private:
     unsigned int SAMPLE_RATE;
     double fSAMPLE_RATE;
     uint32_t PERIOD;
-    bool DS_init;
 };
 
 #endif

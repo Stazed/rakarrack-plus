@@ -64,8 +64,7 @@ Harmonizer::Harmonizer(long int Quality, int DS, int uq, int dq,
     PS(NULL),
     SAMPLE_RATE((unsigned int) sample_rate),
     fSAMPLE_RATE(sample_rate),
-    PERIOD(intermediate_bufsize),
-    DS_init()
+    PERIOD(intermediate_bufsize)
 {
     adjust(DS, PERIOD);
     initialize();
@@ -467,7 +466,6 @@ void
 Harmonizer::adjust(int DS, uint32_t period)
 {
     DS_state = DS;
-    DS_init = 1;
     float fSAMPLE_RATE = SAMPLE_RATE;
     float fPERIOD = period;
 
