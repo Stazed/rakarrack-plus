@@ -118,28 +118,6 @@ Resample::_ratio_tol_from_frames(int frames)
     return std::max(tol, kHardEps);
 }
 
-double
-Resample::_snap_to_std_ratio(double ratio, int frames) const
-{
-    // Find closest “standard SR ratio” within an adaptive tolerance.
-    const double tol = _ratio_tol_from_frames(frames);
-    double best = ratio;
-    double best_err = 1e100;
-    for (size_t i = 0; i < _std_ratios.size(); ++i)
-    {
-        const double r = _std_ratios[i];
-        const double err = dabs(r - ratio);
-        if (err < best_err)
-        {
-            best_err = err;
-            best = r;
-        }
-    }
-    if (best_err <= tol)
-        return best;
-    return ratio; // do not snap
-}
-
 Resample::ZitaPair*
 Resample::_find_existing(double ratio, double tol) const
 {
@@ -166,7 +144,6 @@ Resample::_get_or_create(double ratio)
 {
     // We only create pairs before RT starts.
     // After _rt_started is true, we will only return an existing pair.
-    const double tol = _ratio_tol_from_frames(256); // creation matching doesn't need per-call frames
 
     std::lock_guard<std::mutex> g(_pool_mtx);
 
@@ -294,19 +271,11 @@ Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, doub
     srcinfor.input_frames_used = 0;
     srcinfor.output_frames_gen = 0;
 
-    // Many callers pass ratios quantized via nPERIOD/period.
-    // Prefer snapping to an intended “standard SR ratio” using a frames-based tolerance.
-    const double snapped = _snap_to_std_ratio(ratio, frames);
-
-    // If the caller’s ratio is period-quantized, we can also stabilize to the exact
-    // ratio implied by integer output frames (prevents tiny drift across buffers).
-    const double quant = (double)o_frames / (double)frames;
-
-    // Selection order:
-    // 1) If ratio is close to a standard SR ratio, use the snapped SR ratio.
-    // 2) Else use the quantized ratio (matches caller’s exact buffer sizing).
-    // This avoids surprises like 0.3330078125 failing to match 1/3.
-    double use_ratio = (snapped != ratio) ? snapped : quant;
+    // IMPORTANT:
+    // Your callers often size output buffers from integer periods:
+    //   o_frames = lrint(frames * ratio) and then pass ratio ~ o_frames/frames.
+    // To avoid discontinuities, always use the exact buffer-consistent ratio:
+    const double use_ratio = (double)o_frames / (double)frames;
 
     // First, try to use an existing pair (no setup).
     const double tol = _ratio_tol_from_frames(frames);
@@ -323,9 +292,9 @@ Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, doub
 
 #if RESAMPLE_ZITA_DEBUG
         fprintf(stderr,
-                "Resample(ZITA): ratio unavailable: in_ratio=%.15g snapped=%.15g quant=%.15g use=%.15g "
+                "Resample(ZITA): ratio unavailable: in_ratio=%.15g quant=%.15g use=%.15g "
                 "(frames=%d o_frames=%ld rt_started=%d)\n",
-                ratio, snapped, quant, use_ratio, frames, (long)o_frames, _rt_started ? 1 : 0);
+                ratio, (double)o_frames/(double)frames, use_ratio, frames, (long)o_frames, _rt_started ? 1 : 0);
         assert(!"Resample(ZITA): ratio not available (needs prewarm before RT started)");
 #endif
         return;
@@ -346,6 +315,7 @@ Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, doub
     _cur->l.out_data  = outl;
     _cur->l.out_count = (unsigned int)o_frames;
     errorl = _cur->l.process();
+    const long l_gen = o_frames - (long)_cur->l.out_count;
 
     // Right
     _cur->r.inp_data  = inr;
@@ -353,12 +323,19 @@ Resample::out(float *inl, float *inr, float *outl, float *outr, int frames, doub
     _cur->r.out_data  = outr;
     _cur->r.out_count = (unsigned int)o_frames;
     errorr = _cur->r.process();
+    const long r_gen = o_frames - (long)_cur->r.out_count;
 
     srcinfol.input_frames_used  = frames - (long)_cur->l.inp_count;
-    srcinfol.output_frames_gen  = o_frames - (long)_cur->l.out_count;
+    srcinfol.output_frames_gen  = l_gen;
     srcinfor.input_frames_used  = frames - (long)_cur->r.inp_count;
-    srcinfor.output_frames_gen  = o_frames - (long)_cur->r.out_count;
+    srcinfor.output_frames_gen  = r_gen;
 
+    // zita can legitimately generate fewer than requested frames at startup.
+    // Your callers usually assume the full buffer is valid; zero-fill remainder to avoid garbage/static.
+    if (l_gen < o_frames && l_gen >= 0)
+        memset(outl + l_gen, 0, (size_t)(o_frames - l_gen) * sizeof(float));
+    if (r_gen < o_frames && r_gen >= 0)
+        memset(outr + r_gen, 0, (size_t)(o_frames - r_gen) * sizeof(float));
 #else
     if(!statel)
         return;
@@ -401,11 +378,8 @@ Resample::mono_out(float *inl, float *outl, int frames, double ratio, int o_fram
     srcinfol.input_frames_used = 0;
     srcinfol.output_frames_gen = 0;
 
-    // For mono_out, you already pass o_frames explicitly.
-    // Prefer the exact quantized ratio implied by (o_frames/frames).
-    const double quant = (double)o_frames / (double)frames;
-    const double snapped = _snap_to_std_ratio(ratio, frames);
-    double use_ratio = (snapped != ratio) ? snapped : quant;
+    // For mono_out, o_frames is explicit; use the exact buffer-consistent ratio.
+    const double use_ratio = (double)o_frames / (double)frames;
 
     const double tol = _ratio_tol_from_frames(frames);
     ZitaPair* p = _find_existing(use_ratio, tol);
@@ -418,9 +392,9 @@ Resample::mono_out(float *inl, float *outl, int frames, double ratio, int o_fram
 
 #if RESAMPLE_ZITA_DEBUG
         fprintf(stderr,
-                "Resample(ZITA): mono ratio unavailable: in_ratio=%.15g snapped=%.15g quant=%.15g use=%.15g "
+                "Resample(ZITA): mono ratio unavailable: in_ratio=%.15g quant=%.15g use=%.15g "
                 "(frames=%d o_frames=%d rt_started=%d)\n",
-                ratio, snapped, quant, use_ratio, frames, o_frames, _rt_started ? 1 : 0);
+                ratio, (double)o_frames/(double)frames, use_ratio, frames, o_frames, _rt_started ? 1 : 0);
         assert(!"Resample(ZITA): mono ratio not available (needs prewarm before RT started)");
 #endif
         return;
@@ -439,9 +413,14 @@ Resample::mono_out(float *inl, float *outl, int frames, double ratio, int o_fram
     _cur->l.out_data  = outl;
     _cur->l.out_count = (unsigned int)o_frames;
     errorl = _cur->l.process();
+    const long gen = o_frames - (long)_cur->l.out_count;
 
     srcinfol.input_frames_used = frames - (long)_cur->l.inp_count;
-    srcinfol.output_frames_gen = o_frames - (long)_cur->l.out_count;
+    srcinfol.output_frames_gen = gen;
+
+    // Zero-fill remainder to avoid garbage/static if fewer frames were generated.
+    if (gen < o_frames && gen >= 0)
+        memset(outl + gen, 0, (size_t)(o_frames - gen) * sizeof(float));
 
 #else
     if(!statel)
