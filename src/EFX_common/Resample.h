@@ -25,9 +25,42 @@
 #ifndef RESAMPLE_H
 #define RESAMPLE_H
 
-#include <samplerate.h>
 #include "../global.h"
 
+#ifdef ZITA_SUPPORT
+  // zita-resampler (e.g. v1.11.2)
+  // Common Linux include path:
+  //   /usr/include/zita-resampler/vresampler.h
+  #include <zita-resampler/vresampler.h>
+  #include <vector>
+  #include <mutex>
+
+  // Keep the public API intact: the class exposes SRC_DATA publicly.
+  // Provide a compatible SRC_DATA when building without libsamplerate.
+  typedef struct
+  {
+      float *data_in;
+      float *data_out;
+      long  input_frames;
+      long  output_frames;
+      long  input_frames_used;
+      long  output_frames_gen;
+      int   end_of_input;
+      double src_ratio;
+  } SRC_DATA;
+
+  // Keep the documented "type" values usable by callers (same numeric values).
+  enum
+  {
+      SRC_SINC_BEST_QUALITY   = 0,
+      SRC_SINC_MEDIUM_QUALITY = 1,
+      SRC_SINC_FASTEST        = 2,
+      SRC_ZERO_ORDER_HOLD     = 3,
+      SRC_LINEAR              = 4
+  };
+#else
+  #include <samplerate.h>
+#endif
 
 
 
@@ -60,11 +93,43 @@ private:
 
     int errorl,errorr;
 
+#ifdef ZITA_SUPPORT
+    struct ZitaPair
+    {
+        double ratio;
+        VResampler l;
+        VResampler r;
+        bool ok;
+        ZitaPair(double ra) : ratio(ra), l(), r(), ok(false) {}
+    };
 
-    SRC_STATE *statel;
-    SRC_STATE *stater;
+    // quality mapping
+    unsigned int _z_hlen;
 
+    // “standard SR” ratios to snap to (derived from supported rates list)
+    std::vector<double> _std_ratios;
 
+    // lazily created resamplers (created only before RT starts)
+    std::vector<ZitaPair*> _pairs;
+    ZitaPair* _cur;
+
+    // once true, we will never call setup() again (prevents setup on audio thread)
+    bool _rt_started;
+
+    // protects pool creation (intended for non-RT only)
+    mutable std::mutex _pool_mtx;
+
+    static std::vector<double> _build_std_ratios();
+    static double _ratio_tol_from_frames(int frames);
+    double _snap_to_std_ratio(double ratio, int frames) const;
+
+    ZitaPair* _find_existing(double ratio, double tol) const;
+    ZitaPair* _get_or_create(double ratio);
+    void _reset_pair(ZitaPair* p);
+#else
+     SRC_STATE *statel;
+     SRC_STATE *stater;
+#endif
 };
 
 #endif
