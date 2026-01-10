@@ -34,6 +34,7 @@ option (EnableSSE2 "Enable SSE2 (default=automatic check)" ON)
 option (EnableVectorization "Enable vectorize" ON)
 option (EnableAltivec "Enable altivec (default=automatic check)" ON)
 option (EnablePFFFT "Use the PFFFT library instead of FFTW" ON)
+option (EnableZITA "Use Zita Resampler instead of libsamplerate" ON)
 
 
 set(CMAKE_BUILD_TYPE "Release")
@@ -121,10 +122,28 @@ else()
     pkg_check_modules(FFTW3 REQUIRED fftw3>=0.22 fftw3f>=0.22)
 endif()
 
+if (EnableZITA)
+    find_path(ZITA_RESAMPLER_INCLUDE_DIR
+    NAMES resampler.h
+    PATH_SUFFIXES zita-resampler
+    )
+
+    find_library(ZITA_RESAMPLER_LIBRARY
+        NAMES zita-resampler
+    )
+
+    if (NOT ZITA_RESAMPLER_INCLUDE_DIR OR NOT ZITA_RESAMPLER_LIBRARY)
+        message(FATAL_ERROR "zita-resampler not found")
+    else()
+        add_definitions(-D'ZITA_SUPPORT=1')
+    endif()
+else (EnableZITA)
+    pkg_check_modules(SAMPLERATE REQUIRED samplerate>=0.1.5)
+endif (EnableZITA)
+
 pkg_check_modules(JACK REQUIRED jack>=0.115.6)
 pkg_check_modules(FONTCONFIG REQUIRED fontconfig>=0.22)
 pkg_check_modules(SNDFILE REQUIRED sndfile)
-pkg_check_modules(SAMPLERATE REQUIRED samplerate>=0.1.5)
 pkg_check_modules(XFT REQUIRED xft)
 pkg_check_modules(XRENDER REQUIRED xrender)
 pkg_check_modules(XPM REQUIRED xpm)
@@ -383,6 +402,7 @@ package_status(BuildForDebug       "Build for debug. . . . . . . . . . . . . . .
 package_status(EnableNSM           "NSM session support. . . . . . . . . . . . . . . . . . .:"  )
 package_status(EnableSysex         "Sysex preset save support. . . . . . . . . . . . . . . .:"  )
 package_status(EnablePFFFT         "PFFFT support. . . . . . . . . . . . . . . . . . . . . .:"  )
+package_status(EnableZITA          "ZITA resampler support . . . . . . . . . . . . . . . . .:"  )
 
 message (STATUS)
 message (STATUS)

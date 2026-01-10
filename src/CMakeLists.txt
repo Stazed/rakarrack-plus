@@ -192,6 +192,7 @@ set(ExternLibraries
     ${CMAKE_THREAD_LIBS_INIT}
     ${SNDFILE_LIBRARIES}
     ${SAMPLERATE_LIBRARIES}
+    ${ZITA_RESAMPLER_LIBRARY}
     ${X11_LIBRARIES}
     ${XFT_LIBRARIES}
     ${XRENDER_LIBRARIES}
@@ -222,6 +223,7 @@ if(EnableNTK)
         ${FFTW3_INCLUDE_DIRS}
         ${SNDFILE_INCLUDE_DIRS}
         ${SAMPLERATE_INCLUDE_DIRS}
+        ${ZITA_RESAMPLER_INCLUDE_DIR}
         ${X11_INCLUDE_DIRS}
         ${XFT_INCLUDE_DIRS}
         ${XRENDER_INCLUDE_DIRS}
@@ -242,6 +244,7 @@ else(EnableNTK) # Modern cmake
             ${FFTW3_INCLUDE_DIRS}
             ${SNDFILE_INCLUDE_DIRS}
             ${SAMPLERATE_INCLUDE_DIRS}
+            ${ZITA_RESAMPLER_INCLUDE_DIR}
             ${ZLIB_INCLUDE_DIRS}
             ${LIBLO_INCLUDE_DIRS}
             "${CMAKE_CURRENT_SOURCE_DIR}/UI"
@@ -257,6 +260,7 @@ else(EnableNTK) # Modern cmake
             ${FFTW3_INCLUDE_DIRS}
             ${SNDFILE_INCLUDE_DIRS}
             ${SAMPLERATE_INCLUDE_DIRS}
+            ${ZITA_RESAMPLER_INCLUDE_DIR}
             ${X11_INCLUDE_DIRS}
             ${XFT_INCLUDE_DIRS}
             ${XRENDER_INCLUDE_DIRS}
