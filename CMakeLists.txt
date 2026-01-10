@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.5.1...3.31.1)
 project (rakarrack-plus)
 
-set (PACKAGE_VERSION "1.3.2")
+set (PACKAGE_VERSION "1.4.0")
 
 set (CMAKE_SKIP_RULE_DEPENDENCY OFF)
 
@@ -227,6 +227,7 @@ if (BuildForDebug)
     set (CMAKE_CXX_FLAGS_DEBUG ${BuildOptionsDebug})
 else (BuildForDebug)
     set (CMAKE_BUILD_TYPE "Release")
+#    add_definitions(-D'NDEBUG=1')
 
     set (CMAKE_CXX_FLAGS_RELEASE ${BuildOptionsBasic})
 

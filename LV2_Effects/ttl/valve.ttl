@@ -20,8 +20,8 @@
         mod:brand "RKRP";
         doap:description "Tube Distortion Emulator";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 3 ;
-        lv2:microVersion 2 ;
+        lv2:minorVersion 4;
+        lv2:microVersion 0;
         rdfs:comment "Tube distortion emulation with extra distortion available." ;
         lv2:optionalFeature lv2:hardRTCapable,
             <http://lv2plug.in/ns/ext/urid#map>,

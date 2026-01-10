@@ -18,8 +18,8 @@
         doap:name "RKRP Infinity" ;
         doap:description "Infinite Ascending/Descending Phaser";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 3 ;
-        lv2:microVersion 2 ;
+        lv2:minorVersion 4;
+        lv2:microVersion 0;
         rdfs:comment "This is the audio equivalent of a barber pole effect, with 8 filter bands continuously sweeping up or down. This has enough flexibility to create effects anywhere from subtle to insane." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#Infinity_ui> ;

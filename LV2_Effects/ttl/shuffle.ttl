@@ -41,8 +41,8 @@
         doap:name "RKRP Shuffle" ;
         doap:description "Stereo Shuffler (Mid/Side EQ)";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 3 ;
-        lv2:microVersion 2 ;
+        lv2:minorVersion 4;
+        lv2:microVersion 0;
         rdfs:comment "Creates interesting spatial effects. Converts stereo signal to Mid/Side and applys a parametric four band EQ to M or S channel. Effect based on Stereo Shuffling paper by Michael Gerzon." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#Shuffle_ui> ;

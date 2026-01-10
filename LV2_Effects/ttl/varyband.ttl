@@ -33,8 +33,8 @@
         mod:brand "Rakarrack" ;
         doap:description "Multi-Band Volume Modulator";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 3 ;
-        lv2:microVersion 2 ;
+        lv2:minorVersion 4;
+        lv2:microVersion 0;
         rdfs:comment "Multi-band tremolo effect allowing 2 LFOs to modulate volume of any combination of 4 frequency bands." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#VaryBand_ui> ;

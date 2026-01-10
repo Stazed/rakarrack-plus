@@ -36,8 +36,8 @@
         doap:name "RKRP Parametric EQ" ;
         doap:description "3 Band Parametric Eq";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 3 ;
-        lv2:microVersion 2 ;
+        lv2:minorVersion 4;
+        lv2:microVersion 0;
         rdfs:comment "3 band parametric peak-filter equalizer." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#eqp_ui> ;

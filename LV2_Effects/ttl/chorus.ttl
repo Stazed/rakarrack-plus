@@ -21,8 +21,8 @@
         mod:label "Chorus";
         doap:description "Chorus";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 3 ;
-        lv2:microVersion 2 ;
+        lv2:minorVersion 4;
+        lv2:microVersion 0;
         rdfs:comment "A chorus effect. Allows for fractional delays for a more intense effect." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#chor_ui> ;

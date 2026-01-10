@@ -18,8 +18,8 @@
         doap:name "RKRP Echoverse" ;
         doap:description "Thick Echo";
         lv2:project <https://github.com/Stazed/rakarrack-plus>;
-        lv2:minorVersion 3 ;
-        lv2:microVersion 2 ;
+        lv2:minorVersion 4;
+        lv2:microVersion 0;
         rdfs:comment "Configurable echo designed to be stable for thick, in-your-face walls of sound." ;
         lv2:optionalFeature lv2:hardRTCapable ;
 #        ui:ui  <https://github.com/Stazed/rakarrack-plus#Echoverse_ui> ;
