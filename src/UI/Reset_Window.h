@@ -33,7 +33,7 @@
 
 class Reset_Window {
 public:
-    Reset_Window(RKR * _rkr, Pixmap pixmap);
+    Reset_Window(RKR * _rkr);
     Reset_Window(const Reset_Window&) = delete;
     Reset_Window & operator=(const Reset_Window&) = delete;
     virtual ~Reset_Window();
@@ -44,7 +44,6 @@ private:
 
     RKR* m_process; 
     Fl_Box* m_box;
-    Pixmap m_pixmap;
     bool run_reset();
 };
 

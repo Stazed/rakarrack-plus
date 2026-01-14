@@ -29,14 +29,22 @@
 #include "rakarrack.h"
 #include <FL/Fl_Shared_Image.H>
 #include "../strlcpy.h"
-#include "../icono_rakarrack_128x128.xpm"
 #include <algorithm>    // std::sort
 static Fl_Widget *previous_widget = NULL;
 static int drag = C_NO_DRAG;
 static int analyzer_redraw = 0;
 static int grab_focus = 0;
+
+#ifdef NTK_SUPPORT
+#include "../icono_rakarrack_128x128.xpm"
 static Pixmap p, mask;
 static XWMHints *hints = NULL;
+#else
+static Fl_PNG_Image i16(ICONDIR "/icono_rakarrack-plus_16x16.png");
+static Fl_PNG_Image i32(ICONDIR "/icono_rakarrack-plus_32x32.png");
+static Fl_PNG_Image i48(ICONDIR "/icono_rakarrack-plus_48x48.png");
+static Fl_PNG_Image i128(ICONDIR "/icono_rakarrack-plus_128x128.png");
+#endif
 
 /**
  * This local RKR pointer is used exclusively with RKRGUI class static function.
@@ -55,8 +63,9 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     // Initialize Gui
     Fl::args(argc, argv);
     fl_open_display();
+#ifdef NTK_SUPPORT
     XpmCreatePixmapFromData(fl_display, DefaultRootWindow(fl_display), (char **) icono_rakarrack_128x128, &p, &mask, NULL);
-
+#endif
     Fl::visual(FL_DOUBLE | FL_RGB);
     fl_register_images();
 
@@ -68,11 +77,11 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     m_process = process_rkr = rkr_;
 
     back = NULL;
-    
+
     memset(FX_Excluded, 0, sizeof (FX_Excluded));
 
     make_window();
-
+#ifdef NTK_SUPPORT
     Principal->icon((char *) p);
     BankWindow->icon((char *) p);
     Order->icon((char *) p);
@@ -81,7 +90,16 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     MIDILearn->icon((char *) p);
     Trigger->icon((char *) p);
     DelayFile->icon((char *) p);
-
+#else
+    put_icon(Principal);
+    put_icon(BankWindow);
+    put_icon(Order);
+    put_icon(Settings);
+    put_icon(AboutWin);
+    put_icon(MIDILearn);
+    put_icon(Trigger);
+    put_icon(DelayFile);
+#endif
     Analy->set_analyzer_ON(m_process->Config.Analyzer_On_Off);
     Sco->set_scope_ON(m_process->Config.Scope_On_Off);
 
@@ -753,6 +771,7 @@ void RKRGUI::font_type_change (int font_type)
 void RKRGUI::put_icon(Fl_Window* window)
 {
     // put icon
+#ifdef NTK_SUPPORT
     if (hints == NULL)
     {
         hints = XGetWMHints(fl_display, fl_xid(window));
@@ -762,6 +781,10 @@ void RKRGUI::put_icon(Fl_Window* window)
     hints->icon_mask = mask;
     hints->flags = IconPixmapHint | IconMaskHint;
     XSetWMHints(fl_display, fl_xid(window), hints);
+#else
+    static const Fl_RGB_Image* icons[] = { &i16, &i32, &i48, &i128 };
+    window->icons(icons, 4);
+#endif
 }
 
 /**
@@ -3204,7 +3227,7 @@ void RKRGUI::Prepare_Order()
 
 void RKRGUI::Show_Reset_Window()
 {
-    Reset_Window w_reset( m_process, p);
+    Reset_Window w_reset(m_process);
     w_reset.show_reset_window();
 
     // Update these as well

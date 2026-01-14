@@ -12,6 +12,7 @@ add_definitions(-D'WEBSITE="github.com.Stazed.rakarrack.plus"')
 add_definitions(-D'PACKAGE="rakarrack-plus"')
 add_definitions(-D'DATADIR="${CMAKE_INSTALL_PREFIX}/share/rakarrack-plus"')
 add_definitions(-D'HELPDIR="${CMAKE_INSTALL_PREFIX}/share/doc/rakarrack-plus"')
+add_definitions(-D'ICONDIR="${CMAKE_INSTALL_PREFIX}/share/pixmaps"')
 
 include(CheckCSourceCompiles)
 include(CheckCXXCompilerFlag)

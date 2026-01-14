@@ -51,13 +51,11 @@ reset_timeout( void* )
     Fl::repeat_timeout ( 0.03f, &reset_timeout );
 }
 
-Reset_Window::Reset_Window(RKR * _rkr, Pixmap pixmap):
+Reset_Window::Reset_Window(RKR * _rkr):
     m_process( _rkr ),
-    m_box( nullptr ),
-    m_pixmap( pixmap )
+    m_box( nullptr )
 {
     g_reset_window = new Fl_Window ( 600, 60, "Resetting" );
-    g_reset_window->icon((char *) m_pixmap);
     m_box = new Fl_Box ( 20, 10, 560, 40, "Re-initializing effects please wait..." );
     m_box->box ( FL_UP_BOX );
     m_box->labelsize ( 12 );
