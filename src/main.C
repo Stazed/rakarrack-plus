@@ -59,7 +59,7 @@ cb_nsm_open ( const char *save_file_path,   // See API Docs 2.2.2
     // single state mode
     nsm_preset_file = save_file_path;
     nsm_preset_file += ".rkr";
-    
+
     jack_client_name = strdup(client_id);
     wait_nsm = 0;
     return ERR_OK;
@@ -67,9 +67,18 @@ cb_nsm_open ( const char *save_file_path,   // See API Docs 2.2.2
                                                                      
 int
 cb_nsm_save ( char **,          // out_msg
-              void *)           // userdata
+              void *userdata)
 {
-    save_preferences = 1;
+    RKRGUI* a_gui = static_cast<RKRGUI*>(userdata);
+
+//    fprintf(stderr,"cb_nsm_save - File = :%s\n", nsm_preset_file.c_str());
+    if (a_gui->get_process()->Config.NSM_single_state && !nsm_preset_file.empty())
+    {
+        a_gui->get_process()->save_preset( nsm_preset_file );
+    }
+
+    a_gui->save_current_state(0);
+
     return ERR_OK;
 }
 
@@ -127,7 +136,7 @@ bool install_signal_handlers()
         fprintf(stderr, "sigaction() failed: \n");
         return false;
     }
-    
+
     return true;
 }
 
@@ -155,7 +164,6 @@ void check_signals(void *usrPtr)
         process->Exit_Program = 1;
     }
 }
-
 
 void
 show_help()
@@ -206,7 +214,7 @@ jack_create_client(uint32_t &JACK_SAMPLE_RATE, uint32_t &JACK_PERIOD)
 
     JACK_SAMPLE_RATE = jack_get_sample_rate(jackclient);
     JACK_PERIOD = jack_get_buffer_size(jackclient);
-    
+
     return 1;
 }
 
@@ -308,22 +316,25 @@ main(int argc, char *argv[])
         }
     }
 
-
     if (exitwithhelp)
     {
         show_help();
         return (0);
     };
-    
+
 #ifdef NSM_SUPPORT
     const char *nsm_url = getenv( "NSM_URL" );
-    
+
     if ( nsm_url )
     {
         nsm = nsm_new();
 
         nsm_set_open_callback( nsm, cb_nsm_open, 0 );
-        nsm_set_save_callback( nsm, cb_nsm_save, 0 );
+        // We set the save callback after the creation of the GUI.
+        // We need it to directly call the save routine
+        // instead of relying on the main loop timer which may be
+        // stopped due to sigint
+//        nsm_set_save_callback( nsm, cb_nsm_save, 0 );
 
         if ( 0 == nsm_init( nsm, nsm_url ) )
         {
@@ -345,7 +356,6 @@ main(int argc, char *argv[])
         {
             nsm_set_show_callback( nsm, cb_nsm_show, 0 );
             nsm_set_hide_callback( nsm, cb_nsm_hide, 0 );
-
         }
 
         gui = 1;    // always load gui with NSM
@@ -389,7 +399,7 @@ main(int argc, char *argv[])
             global_gui_show = CONST_GUI_OFF;
             nsm_send_is_shown ( nsm );
         }
-        
+
         if(process.Config.NSM_single_state)
         {
             if(!process.does_file_exist(nsm_preset_file))
@@ -413,11 +423,11 @@ main(int argc, char *argv[])
     if (needtoloadfile)
     {
         process.File_To_Load = filetoload;
-        
+
         // This will clear process.File_To_Load if bad file
         process.load_preset(filetoload);
     }
-    
+
     // Set command line bank file, if any
     if (needtoloadbank)
     {
@@ -428,7 +438,7 @@ main(int argc, char *argv[])
             process.Command_Line_Bank = banktoload;
         }
     }
-    
+
     // Set preset index from command line, if any
     process.Change_Preset = preset;
 
@@ -445,6 +455,14 @@ main(int argc, char *argv[])
         (void)rgui; // To suppress unused variable compiler warning
     }
 
+#ifdef NSM_SUPPORT
+    if ( nsm_url )
+    {
+        // The gui is always present for NSM
+        nsm_set_save_callback( nsm, cb_nsm_save, (void *) rgui );
+    }
+#endif
+
     if (!process.Gui_Shown)
     {
         process.Active_Preset.FX_Master_Active = 1;
@@ -454,7 +472,7 @@ main(int argc, char *argv[])
     }
 
     mlockall(MCL_CURRENT | MCL_FUTURE);
-    
+
     // For keeping the message about disconnected from repeating
     int jack_disconnected = 0;
 
@@ -467,7 +485,7 @@ main(int argc, char *argv[])
         if (process.Gui_Shown)
         {
             Fl::wait();
-            
+
 #ifdef NSM_SUPPORT
             // We could have NSM_SUPPORT without a session.
             // So the check for nsm_preferences_file.empty() is to ensure that we are
@@ -482,19 +500,17 @@ main(int argc, char *argv[])
                 }
             }
 #endif
-            // This could be from session SIGUSR1, so not necessarily from NSM
+            // This is from session SIGUSR1 (Not NSM)
             if(save_preferences)
             {
                 save_preferences = 0;
                 rgui->save_current_state(0);
-#ifdef NSM_SUPPORT
-                if ( process.Config.NSM_single_state && !nsm_preset_file.empty() )
-                {
-                    process.save_preset( nsm_preset_file );
-                }
-#endif
-                
-                // For session use, the modified checks will not work on save and quit.
+
+                //fprintf(stderr,"Save Preset - File = :%s\n", process.File_To_Load.c_str());
+                if ( !process.File_To_Load.empty() )
+                    process.save_preset(process.File_To_Load);
+
+                // For NSM session use, the modified checks will not work on save and quit.
                 // NSM requires that the client must quit immediately, so the 
                 // shown modal windows are ignored. The user would need to do 
                 // a separate save, then quit.
@@ -524,7 +540,7 @@ main(int argc, char *argv[])
 #endif
                 process.Change_Preset = C_CHANGE_PRESET_OFF;
             }
-            
+
             if (global_error_number > 0)
                 process.Handle_Message(global_error_number);
 
@@ -540,20 +556,16 @@ main(int argc, char *argv[])
                 }
             }
 #endif
-            // This could be from session SIGUSR1, so not necessarily from NSM
+            // This is from session SIGUSR1.
             // We do not check for is_modified, bank or table since they cannot 
-            // be changed if there is no gui. If in NSM session, then the modified
-            // is checked upon gui hide request.
+            // be changed if there is no gui. 
             if(save_preferences)
             {
                 save_preferences = 0;
                 rgui->save_current_state(0);
-#ifdef NSM_SUPPORT
-                if ( process.Config.NSM_single_state && !nsm_preset_file.empty() )
-                {
-                    process.save_preset( nsm_preset_file );
-                }
-#endif
+                //fprintf(stderr,"Save Preset - File = :%s\n", process.File_To_Load.c_str());
+                if ( !process.File_To_Load.empty() )
+                    process.save_preset(process.File_To_Load);
             }
         }
 
@@ -565,7 +577,7 @@ main(int argc, char *argv[])
 
         // Alsa
         process.miramidi();
-    
+
 #ifdef SYSEX_SUPPORT
         if(process.m_have_sysex_message)
         {
@@ -587,6 +599,5 @@ main(int argc, char *argv[])
 #endif
 
     return (0);
-
 }
 

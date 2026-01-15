@@ -736,5 +736,6 @@ public:
   void NSM_gui_hide();
   void LV2_gui_hide();
   void LV2_gui_show();
+  RKR* get_process();
 };
 #endif

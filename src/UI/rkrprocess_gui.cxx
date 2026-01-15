@@ -4617,3 +4617,8 @@ void RKRGUI::LV2_gui_show()
     Fl::add_timeout(.04, this->TimeoutStatic, this);
 #endif
 }
+
+RKR* RKRGUI::get_process()
+{
+    return m_process;
+}
