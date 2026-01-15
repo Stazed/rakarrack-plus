@@ -4528,6 +4528,10 @@ int RKRGUI::NSM_gui_show(int hold_preset)
     return hold_preset;
 }
 
+// For NSM session use, the modified checks will not work on save and quit.
+// NSM requires that the client must quit immediately, so the 
+// shown modal windows are ignored. The user would need to do 
+// a separate save, then quit.
 void RKRGUI::NSM_gui_hide()
 {
 #ifdef NSM_SUPPORT

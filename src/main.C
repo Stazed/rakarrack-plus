@@ -71,7 +71,6 @@ cb_nsm_save ( char **,          // out_msg
 {
     RKRGUI* a_gui = static_cast<RKRGUI*>(userdata);
 
-//    fprintf(stderr,"cb_nsm_save - File = :%s\n", nsm_preset_file.c_str());
     if (a_gui->get_process()->Config.NSM_single_state && !nsm_preset_file.empty())
     {
         a_gui->get_process()->save_preset( nsm_preset_file );
@@ -330,11 +329,6 @@ main(int argc, char *argv[])
         nsm = nsm_new();
 
         nsm_set_open_callback( nsm, cb_nsm_open, 0 );
-        // We set the save callback after the creation of the GUI.
-        // We need it to directly call the save routine
-        // instead of relying on the main loop timer which may be
-        // stopped due to sigint
-//        nsm_set_save_callback( nsm, cb_nsm_save, 0 );
 
         if ( 0 == nsm_init( nsm, nsm_url ) )
         {
@@ -456,6 +450,10 @@ main(int argc, char *argv[])
     }
 
 #ifdef NSM_SUPPORT
+    // We set the save callback after the creation of the GUI.
+    // We need it to directly call the save routine
+    // instead of relying on the main loop timer which may be
+    // stopped due to sigint
     if ( nsm_url )
     {
         // The gui is always present for NSM
@@ -506,14 +504,9 @@ main(int argc, char *argv[])
                 save_preferences = 0;
                 rgui->save_current_state(0);
 
-                //fprintf(stderr,"Save Preset - File = :%s\n", process.File_To_Load.c_str());
                 if ( !process.File_To_Load.empty() )
                     process.save_preset(process.File_To_Load);
 
-                // For NSM session use, the modified checks will not work on save and quit.
-                // NSM requires that the client must quit immediately, so the 
-                // shown modal windows are ignored. The user would need to do 
-                // a separate save, then quit.
                 rgui->is_bank_modified();
                 rgui->is_PG_table_modified();      
             }
@@ -556,14 +549,12 @@ main(int argc, char *argv[])
                 }
             }
 #endif
-            // This is from session SIGUSR1.
-            // We do not check for is_modified, bank or table since they cannot 
-            // be changed if there is no gui. 
+            // This is from session SIGUSR1 (Not NSM)
             if(save_preferences)
             {
                 save_preferences = 0;
                 rgui->save_current_state(0);
-                //fprintf(stderr,"Save Preset - File = :%s\n", process.File_To_Load.c_str());
+
                 if ( !process.File_To_Load.empty() )
                     process.save_preset(process.File_To_Load);
             }
