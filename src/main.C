@@ -498,17 +498,22 @@ main(int argc, char *argv[])
     // For keeping the message about disconnected from repeating
     int jack_disconnected = 0;
 
+    // For check_signals void *usrPtr
+    void *usrPtr = NULL;
+    if ( have_gui )
+    {
+        usrPtr = (void *) rgui;
+    }
+    else
+    {
+        usrPtr = (void *) &process;
+    }
+
     // Main Loop - run until exit requested
     while (!process.Exit_Program)
     {
-        if ( have_gui )
-        {
-            check_signals((void *) rgui);
-        }
-        else
-        {
-            check_signals(&process);
-        }
+
+        check_signals(usrPtr);
 
         // Refresh GUI
         if (process.Gui_Shown)
