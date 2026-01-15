@@ -37,7 +37,7 @@ std::string nsm_preset_file = "";
 // Signal handlers
 static volatile int got_sigint = 0;
 static volatile int got_sigusr1 = 0;
-int save_preferences = 0;
+bool have_gui = 0;
 
 #ifdef NSM_SUPPORT
 #include "nsm.h"
@@ -141,9 +141,22 @@ bool install_signal_handlers()
 
 void check_signals(void *usrPtr)
 {
-    // process signals
     RKR *process = NULL;
-    process = static_cast<RKR *>(usrPtr);
+    RKRGUI *rgui = NULL;
+
+    if ( have_gui )
+    {
+        rgui = static_cast<RKRGUI *>(usrPtr);
+
+        if (!rgui)
+            return;
+
+        process = rgui->get_process();
+    }
+    else
+    {
+        process = static_cast<RKR *>(usrPtr);
+    }
 
     if (!process)
         return;
@@ -151,7 +164,17 @@ void check_signals(void *usrPtr)
     if (got_sigusr1 == SIGUSR1)
     {
         fprintf(stderr, "Got SIGUSR1, saving...\n");
-        save_preferences = 1;
+
+        if ( !process->File_To_Load.empty() )
+            process->save_preset(process->File_To_Load);
+
+        if (rgui)
+        {
+            rgui->save_current_state(0);
+            rgui->is_bank_modified();
+            rgui->is_PG_table_modified();
+        }
+
         got_sigusr1 = 0;
         return;
     }
@@ -369,7 +392,7 @@ main(int argc, char *argv[])
         return (0);
     }
 
-    RKR process(jack_sample_rate, jack_period, gui);
+    RKR process(jack_sample_rate, jack_period, gui);    // gui will set process.Gui_Shown
     process.set_jack_client(jackclient);
     process.initialize();
 
@@ -442,6 +465,7 @@ main(int argc, char *argv[])
     // Launch GUI
     if (process.Gui_Shown)
     {
+        have_gui = process.Gui_Shown;
         rgui = new RKRGUI(argc, argv, &process);
     }
     else
@@ -477,7 +501,14 @@ main(int argc, char *argv[])
     // Main Loop - run until exit requested
     while (!process.Exit_Program)
     {
-        check_signals(&process);
+        if ( have_gui )
+        {
+            check_signals((void *) rgui);
+        }
+        else
+        {
+            check_signals(&process);
+        }
 
         // Refresh GUI
         if (process.Gui_Shown)
@@ -498,18 +529,6 @@ main(int argc, char *argv[])
                 }
             }
 #endif
-            // This is from session SIGUSR1 (Not NSM)
-            if(save_preferences)
-            {
-                save_preferences = 0;
-                rgui->save_current_state(0);
-
-                if ( !process.File_To_Load.empty() )
-                    process.save_preset(process.File_To_Load);
-
-                rgui->is_bank_modified();
-                rgui->is_PG_table_modified();      
-            }
         }
         else
         {
@@ -549,15 +568,6 @@ main(int argc, char *argv[])
                 }
             }
 #endif
-            // This is from session SIGUSR1 (Not NSM)
-            if(save_preferences)
-            {
-                save_preferences = 0;
-                rgui->save_current_state(0);
-
-                if ( !process.File_To_Load.empty() )
-                    process.save_preset(process.File_To_Load);
-            }
         }
 
         if ((!jack_disconnected) && (process.Jack_Shut_Down))
