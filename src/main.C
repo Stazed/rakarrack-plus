@@ -181,7 +181,7 @@ void check_signals(void *usrPtr)
 
     if (got_sigint == SIGINT)
     {
-        fprintf(stderr, "Got SIGTERM, quitting...\n");
+        fprintf(stderr, "Got SIGTINT, quitting...\n");
         got_sigint = 0;
         process->Exit_Program = 1;
     }
@@ -230,7 +230,6 @@ jack_create_client(uint32_t &JACK_SAMPLE_RATE, uint32_t &JACK_PERIOD)
 
     if (jackclient == NULL)
     {
-        fprintf(stderr, "Cannot make a jack client, is jackd running?\n");
         return 0;
     }
 
@@ -385,9 +384,10 @@ main(int argc, char *argv[])
     uint32_t jack_sample_rate, jack_period;
     if(!jack_create_client(jack_sample_rate, jack_period))
     {
-        show_help();
         if(gui)
             fl_message("Cannot make a Jack client. Is JACK running?");
+        else
+            fprintf(stderr, "Cannot make a Jack client. Is JACK running?");
 
         return (0);
     }
@@ -399,7 +399,7 @@ main(int argc, char *argv[])
     if (needtodump)
     {
         process.dump_preset_names();
-        exit(1);
+        return (0);
     }
 
 #ifdef NSM_SUPPORT
