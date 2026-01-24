@@ -1,13 +1,13 @@
 # Maintainer: Your name here <your@email.here>
 # To use: makepkg -p PKGBUILD.rplus -si
 pkgname=rakarrack-plus
-pkgver=1.1.1.10.gd7f44153
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Stereo digital effects processor with Jack support (Continuation of rakarrack, fixes & more, git version)"
 arch=('i686' 'x86_64' 'aarch64')
 url="https://github.com/Stazed/rakarrack-plus"
 license=('GPL3')
-depends=('alsa-utils' 'fftw' 'fltk' 'jack' 'libxpm' 'liblo')
+depends=('alsa-utils' 'zita-resampler' 'fltk' 'jack' 'libxpm' 'liblo')
 makedepends=('git' 'cmake')
 provides=("${pkgname}")
 conflicts=("${pkgname}" 'rakarrack-plus-ALL')

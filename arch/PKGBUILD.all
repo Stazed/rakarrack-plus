@@ -2,13 +2,13 @@
 # To use: makepkg -p PKGBUILD.all -si
 pkgname=rakarrack-plus-ALL
 _gitname=rakarrack-plus
-pkgver=1.1.1.10.gd7f44153
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Stereo digital effects processor with Jack support (Continuation of rakarrack with LV2s, fixes & more, git version)"
 arch=('i686' 'x86_64' 'aarch64')
 url="https://github.com/Stazed/rakarrack-plus"
 license=('GPL3')
-depends=('alsa-utils' 'fftw' 'fltk' 'jack' 'libxpm' 'lv2' 'liblo' 'ntk')
+depends=('alsa-utils' 'zita-resampler' 'fltk' 'jack' 'libxpm' 'lv2' 'liblo' 'ntk')
 makedepends=('git' 'cmake')
 provides=("${pkgname}" 'rakarrack-plus')
 conflicts=("${pkgname}" 'rakarrack-plus' 'rakarrack-plus-LV2s')
