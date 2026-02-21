@@ -58,7 +58,8 @@ RKRGUI::RKRGUI(int argc, char**argv, RKR *rkr_) :
     random_parameters(0),
     efx_always_active(0),
     use_current_active_efx(0),
-    max_random_active(6)
+    max_random_active(6),
+    visor(NULL)
 {
     // Initialize Gui
     Fl::args(argc, argv);
@@ -4568,6 +4569,10 @@ RKRGUI::LV2_gui_hide()
     Trigger->hide();
     DelayFile->hide();
     RandomEdit->hide();
+
+    // Help Dialog
+    if(visor)
+        visor->hide();
 
     /**
      * Principal->hide();   (embedded)
