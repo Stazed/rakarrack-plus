@@ -1,19 +1,19 @@
 project (Rakarrack-Plus)
 
 set(CORE_SOURCES
-    ../Config_fltk.C
-    ../jack.C 
-    ../strlcpy.C
-    ../PresetBankStruct.C
-    ../process.C
-    ../fileio.C
-    ../varios.C
-    ../Limiter.C
-    ../Tuner.C
-    ../RecognizeNote.C
-    ../RecChord.C
-    ../rkrMIDI.C
-    ../metronome.C
+    ${CMAKE_SOURCE_DIR}/src/Config_fltk.C
+    ${CMAKE_SOURCE_DIR}/src/jack.C 
+    ${CMAKE_SOURCE_DIR}/src/strlcpy.C
+    ${CMAKE_SOURCE_DIR}/src/PresetBankStruct.C
+    ${CMAKE_SOURCE_DIR}/src/process.C
+    ${CMAKE_SOURCE_DIR}/src/fileio.C
+    ${CMAKE_SOURCE_DIR}/src/varios.C
+    ${CMAKE_SOURCE_DIR}/src/Limiter.C
+    ${CMAKE_SOURCE_DIR}/src/Tuner.C
+    ${CMAKE_SOURCE_DIR}/src/RecognizeNote.C
+    ${CMAKE_SOURCE_DIR}/src/RecChord.C
+    ${CMAKE_SOURCE_DIR}/src/rkrMIDI.C
+    ${CMAKE_SOURCE_DIR}/src/metronome.C
 )
 
 include(${CMAKE_SOURCE_DIR}/cmake/common_sources.cmake)
@@ -22,7 +22,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/common_ui_sources.cmake)
 set(ProgSources
     RakarrackPlusLV2.cpp
     RakarrackPlusLV2UI.cpp
-    ../FX/Looper.C
+    ${CMAKE_SOURCE_DIR}/src/FX/Looper.C
     ${CORE_SOURCES}
     ${UI_SOURCES}
     ${FX_SOURCES}
@@ -44,9 +44,9 @@ set(ExternLibraries
     ${XPM_LIBRARIES}
     ${FREETYPE_LIBRARIES}
     ${ZLIB_LIBRARIES}
-    dl
-    rt
-    m
+    ${DL_LIBRARY}
+    ${RT_LIBRARY}
+    ${M_LIBRARY}
 )
 
 add_library(Rakarrack-Plus SHARED

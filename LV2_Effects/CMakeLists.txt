@@ -6,10 +6,10 @@ project (rakarrack-plus-lv2)
 
 set(LV2_SOURCES
     rkrlv2.C
-    ../src/strlcpy.C
-    ../src/Limiter.C
-    ../src/RecognizeNote.C
-    ../src/RecChord.C
+    ${CMAKE_SOURCE_DIR}/src/strlcpy.C
+    ${CMAKE_SOURCE_DIR}/src/Limiter.C
+    ${CMAKE_SOURCE_DIR}/src/RecognizeNote.C
+    ${CMAKE_SOURCE_DIR}/src/RecChord.C
 )
 
 include(${CMAKE_SOURCE_DIR}/cmake/common_sources.cmake)

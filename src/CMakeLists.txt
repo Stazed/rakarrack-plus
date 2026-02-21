@@ -45,9 +45,9 @@ set(ExternLibraries
     ${FREETYPE_LIBRARIES}
     ${ZLIB_LIBRARIES}
     ${LIBLO_LIBRARIES}
-    dl
-    rt
-    m
+    ${DL_LIBRARY}
+    ${RT_LIBRARY}
+    ${M_LIBRARY}
 )
 
 add_executable (rakarrack-plus ${ProgSources} main.C)
