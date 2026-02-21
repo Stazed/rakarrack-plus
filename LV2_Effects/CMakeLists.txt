@@ -12,76 +12,7 @@ set(LV2_SOURCES
     ../src/RecChord.C
 )
 
-set(FX_SOURCES
-    ../src/FX/Effect.C
-    ../src/FX/EQ.C
-    ../src/FX/Compressor.C
-    ../src/FX/Distorsion.C
-    ../src/FX/Overdrive.C
-    ../src/FX/Echo.C
-    ../src/FX/Chorus.C
-    ../src/FX/Flanger.C
-    ../src/FX/APhaser.C
-    ../src/FX/Harmonizer.C
-    ../src/FX/Sustainer.C
-    ../src/FX/Exciter.C
-    ../src/FX/Pan.C
-    ../src/FX/Alienwah.C
-    ../src/FX/Reverb.C
-    ../src/FX/Cabinet.C
-    ../src/FX/MusicDelay.C
-    ../src/FX/WahWah.C
-    ../src/FX/Derelict.C
-    ../src/FX/Valve.C
-    ../src/FX/Dual_Flange.C
-    ../src/FX/Ring.C
-    ../src/FX/DistBand.C
-    ../src/FX/Arpie.C
-    ../src/FX/Expander.C
-    ../src/FX/Shuffle.C
-    ../src/FX/Synthfilter.C
-    ../src/FX/VaryBand.C
-    ../src/FX/MuTroMojo.C
-    ../src/FX/Echoverse.C
-    ../src/FX/CoilCrafter.C
-    ../src/FX/ShelfBoost.C
-    ../src/FX/Vocoder.C
-    ../src/FX/Sequence.C
-    ../src/FX/Shifter.C
-    ../src/FX/StompBox.C
-    ../src/FX/Reverbtron.C
-    ../src/FX/Echotron.C
-    ../src/FX/StereoHarm.C
-    ../src/FX/CompBand.C
-    ../src/FX/Opticaltrem.C
-    ../src/FX/Vibe.C
-    ../src/FX/Infinity.C
-    ../src/FX/Phaser.C
-    ../src/FX/Gate.C
-    ../src/FX/Convolotron.C
-    ../src/FX/ParametricEQ.C
-    ../src/FX/ResSolution.C
-    ../src/FX/MIDIConverter.C
-)
-
-set(EFX_COMMON_SOURCES
-    ../src/EFX_common/AnalogFilter.C
-    ../src/EFX_common/Waveshaper.C
-    ../src/EFX_common/Resample.C
-    ../src/EFX_common/FPreset.C
-    ../src/EFX_common/delayline.C
-    ../src/EFX_common/EffectLFO.C
-    ../src/EFX_common/smbPitchShift.C
-    ../src/EFX_common/pffft.C
-    ../src/EFX_common/HarmonicEnhancer.C
-    ../src/EFX_common/Filter.C
-    ../src/EFX_common/FilterParams.C
-    ../src/EFX_common/SVFilter.C
-    ../src/EFX_common/FormantFilter.C
-    ../src/EFX_common/RBFilter.C
-    ../src/EFX_common/beattracker.C
-    ../src/EFX_common/mayer_fft.C
-)
+include(${CMAKE_SOURCE_DIR}/cmake/common_sources.cmake)
 
 add_library(rakarrack-plus-lv2 SHARED
     ${LV2_SOURCES}
