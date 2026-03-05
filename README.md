@@ -69,26 +69,26 @@ To remove:
 ```bash
     make uninstall (as root)
 ```
-Carla presets can be generated and installed by setting the "BuildCarlaPresets"
+Carla presets can be generated and installed by setting the "BUILD_CARLA_PRESETS"
 flag (OFF by default). Use:
 
-    cmake -DBuildCarlaPresets=ON ..
+    cmake -DBUILD_CARLA_PRESETS=ON ..
 
-To build Rakarrack-plus only set "BuildLV2Plugins" to OFF:
+To disable LV2 effects, set "BUILD_LV2_EFFECTS" to OFF:
 
-    cmake -DBuildLV2Plugins=OFF ..
+    cmake -DBUILD_LV2_EFFECTS=OFF ..
     
-To build LV2s only set "BuildRakarrackPlus" to OFF:
+To disable standalone build, set "BUILD_RPLUS_STANDALONE" to OFF:
 
-    cmake -DBuildRakarrackPlus=OFF ..
+    cmake -DBUILD_RPLUS_STANDALONE=OFF ..
 
-To disable NTK embedded LV2 build set "BuildRakarrackPlusLV2" to OFF:
+To disable NTK embedded LV2 build set "BUILD_RPLUS_LV2" to OFF:
 
-    cmake -DBuildRakarrackPlusLV2=OFF ..
+    cmake -DBUILD_RPLUS_LV2=OFF ..
 
-To enable NTK standalone build set "EnableNTK" to ON:
+To enable NTK standalone build set "ENABLE_NTK" to ON:
 
-    cmake -DEnableNTK=ON ..
+    cmake -DENABLE_NTK=ON ..
 
 Rakarrack-plus-1.4.0
 --------------------
@@ -96,7 +96,7 @@ Additional features, enhancements:
 *  With version 1.4.0 the zita-resampler library has been added to replace libsamplerate.
    Zita-resampler has shown to give significant improvement in CPU usage and it is available
    in most distribution repositories.
-   You can optionally use libsamplerate by setting the cmake command : cmake -DEnableZITA=OFF ..
+   You can optionally use libsamplerate by setting the cmake command : cmake -DENABLE_ZITA=OFF ..
 
 Rakarrack-plus-1.3.0
 --------------------

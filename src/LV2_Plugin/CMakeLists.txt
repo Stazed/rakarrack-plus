@@ -78,11 +78,11 @@ target_compile_definitions(Rakarrack-Plus PRIVATE NTK_SUPPORT=1)
 set_target_properties(Rakarrack-Plus PROPERTIES PREFIX "")
 set_target_properties(Rakarrack-Plus PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE )
 
-if (BuildRakarrackPlusLV2)
+if (BUILD_RPLUS_LV2)
     install(TARGETS Rakarrack-Plus
       LIBRARY
       DESTINATION ${LV2_INSTALL_DIR_RKRP} )
 
     install (FILES Rakarrack-Plus.ttl manifest.ttl
         DESTINATION ${LV2_INSTALL_DIR_RKRP} )
-endif (BuildRakarrackPlusLV2)
+endif (BUILD_RPLUS_LV2)

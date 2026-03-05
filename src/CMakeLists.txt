@@ -52,13 +52,13 @@ set(ExternLibraries
 
 add_executable (rakarrack-plus ${ProgSources} main.C)
 
-if (EnableNSM)
+if (ENABLE_NSM)
     if (LIBLO_FOUND)
         target_compile_definitions(rakarrack-plus PRIVATE NSM_SUPPORT=1)
     endif (LIBLO_FOUND)
-endif (EnableNSM)
+endif (ENABLE_NSM)
 
-if(EnableNTK)
+if(ENABLE_NTK)
     target_include_directories (
         rakarrack-plus PRIVATE
         ${NTK_INCLUDE_DIRS}
@@ -80,7 +80,7 @@ if(EnableNTK)
         "${CMAKE_CURRENT_BINARY_DIR}/UI"
     )
 
-else(EnableNTK) # Modern cmake
+else(ENABLE_NTK) # Modern cmake
     if(TARGET fltk::fltk-shared)
         target_include_directories (
             rakarrack-plus PRIVATE
@@ -117,20 +117,20 @@ else(EnableNTK) # Modern cmake
             "${CMAKE_CURRENT_BINARY_DIR}/UI"
     )
     endif()
-endif(EnableNTK)
+endif(ENABLE_NTK)
 
-if(EnableNTK)
+if(ENABLE_NTK)
     target_link_libraries (rakarrack-plus PRIVATE ${NTK_IMAGES_LIBRARIES} ${NTK_LIBRARIES} ${ExternLibraries})
-else(EnableNTK)
+else(ENABLE_NTK)
     if(TARGET fltk::fltk-shared)    # Modern cmake
         target_link_libraries (rakarrack-plus PRIVATE fltk::fltk-shared fltk::images ${ExternLibraries})
     else()                          # Old cmake
         target_link_libraries (rakarrack-plus PRIVATE ${FLTK_LIBRARIES} ${ExternLibraries})
     endif()
-endif(EnableNTK)
+endif(ENABLE_NTK)
 
-if(EnableNTK)
+if(ENABLE_NTK)
     target_compile_definitions(rakarrack-plus PRIVATE NTK_SUPPORT=1)
-endif(EnableNTK)
+endif(ENABLE_NTK)
 
 install (TARGETS rakarrack-plus RUNTIME DESTINATION bin)

@@ -26,13 +26,13 @@ set_target_properties(rakarrack-plus-lv2 PROPERTIES PREFIX "")
 
 set_target_properties(rakarrack-plus-lv2 PROPERTIES BUILD_WITH_INSTALL_RPATH TRUE)
 
-if (EnablePFFFT)
+if (ENABLE_PFFFT)
     target_include_directories (rakarrack-plus-lv2 PRIVATE ${LV2_INCLUDE_DIRS} ${SAMPLERATE_INCLUDE_DIRS} ${ZITA_RESAMPLER_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIRS} ../src)
     target_link_libraries(rakarrack-plus-lv2 PRIVATE ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} ${ZITA_RESAMPLER_LIBRARY} ${SNDFILE_LIBRARIES} )
-else (EnablePFFFT)
+else (ENABLE_PFFFT)
     target_include_directories (rakarrack-plus-lv2 PRIVATE ${LV2_INCLUDE_DIRS} ${SAMPLERATE_INCLUDE_DIRS} ${ZITA_RESAMPLER_INCLUDE_DIR} ${FFTW3_INCLUDE_DIRS} ${SNDFILE_INCLUDE_DIRS} ../src)
     target_link_libraries(rakarrack-plus-lv2 PRIVATE ${LV2_LIBRARIES} ${SAMPLERATE_LIBRARIES} ${ZITA_RESAMPLER_LIBRARY} ${FFTW3_LIBRARIES} ${SNDFILE_LIBRARIES} )
-endif (EnablePFFFT)
+endif (ENABLE_PFFFT)
 
 # config install
 install(TARGETS rakarrack-plus-lv2
@@ -58,8 +58,8 @@ install (DIRECTORY ${CMAKE_BINARY_DIR}/lv2data/
   DESTINATION share/RakarrackPlus.lv2
 )
 
-if(BuildCarlaPresets)
+if(BUILD_CARLA_PRESETS)
     install (DIRECTORY presets/
         DESTINATION share/RakarrackPlus.lv2
     )
-endif(BuildCarlaPresets)
+endif(BUILD_CARLA_PRESETS)
