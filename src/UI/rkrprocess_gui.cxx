@@ -1897,6 +1897,7 @@ void RKRGUI::MiraClientes()
 {
     // Find Audio and midi ports
 #ifndef RKR_PLUS_LV2
+#ifdef ALSA_SUPPORT
     FILE *fp;
 
     Settings->BMidiIn->clear();
@@ -1930,7 +1931,7 @@ void RKRGUI::MiraClientes()
 
         fclose(fp);
     }
-
+#endif
     Settings->JackCo->clear();
 
     const char **ports;
@@ -1994,6 +1995,7 @@ void RKRGUI::MiraConfig()
     Settings->JackCo->deactivate();
     Settings->JackIn->deactivate();
 #else
+#ifdef ALSA_SUPPORT
     {
         int i = 1;
         while (Settings->BMidiIn->text(i) != NULL)
@@ -2005,7 +2007,7 @@ void RKRGUI::MiraConfig()
             i++;
         }
     }
-    
+#endif  // ALSA_SUPPORT
     {
         int i = 1;
         while (Settings->JackCo->text(i) != NULL)
@@ -2156,9 +2158,13 @@ void RKRGUI::MiraConfig()
     Settings->D_IJ_Connect->deactivate();
     Settings->INSTATE->deactivate();    // Always ON for LV2
 #else
-    Settings->D_A_Connect->value(m_process->Config.aconnect_MI);
     Settings->D_J_Connect->value(m_process->Config.aconnect_JA);
     Settings->D_IJ_Connect->value(m_process->Config.aconnect_JIA);
+#ifdef ALSA_SUPPORT
+    Settings->D_A_Connect->value(m_process->Config.aconnect_MI);
+#else   // ALSA NOT used
+    Settings->D_A_Connect->deactivate();
+#endif
 #endif
     
     // For NSM the default setting is Off for auto connect audio and we do not let the user change it.

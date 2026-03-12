@@ -206,7 +206,9 @@ RKR::RKR(uint32_t _sample_rate, uint32_t _period, int gui) :
     MIDI_Table(),
     MIDI_Table_Bank_Preset_Names()
 #ifndef RKR_PLUS_LV2
+#ifdef ALSA_SUPPORT
     ,midi_in(NULL)
+#endif  // ALSA_SUPPORT
 #endif
 #ifdef SYSEX_SUPPORT
     ,m_have_sysex_message(0),
@@ -389,10 +391,12 @@ RKR::~RKR()
     delete_everything();
 
 #ifndef RKR_PLUS_LV2
+#ifdef ALSA_SUPPORT
     if(midi_in)     // alsa
     {
         snd_seq_close(midi_in);
     }
+#endif
 #endif
 };
 

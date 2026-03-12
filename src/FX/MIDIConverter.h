@@ -142,7 +142,9 @@ public:
 #else
     jack_ringbuffer_t   *m_buffSize;
     jack_ringbuffer_t   *m_buffMessage;
+#ifdef ALSA_SUPPORT
     snd_seq_t *port;
+#endif
 #endif
 private:
 #endif

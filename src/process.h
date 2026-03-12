@@ -1285,8 +1285,9 @@ public:
     std::vector<User_Files> Reverbtron_RVB_Files;
 
 #ifndef RKR_PLUS_LV2
-    // Alsa MIDI
+#ifdef ALSA_SUPPORT
     snd_seq_t *midi_in;
+#endif
 #endif
     
 #ifdef SYSEX_SUPPORT

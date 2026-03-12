@@ -653,6 +653,7 @@ void
 RKR::InitMIDI()
 {
 #ifndef RKR_PLUS_LV2
+#ifdef ALSA_SUPPORT
     // Open Alsa Seq
     int err = snd_seq_open(&midi_in, "default", SND_SEQ_OPEN_INPUT, 0);
     if (err < 0)
@@ -669,12 +670,14 @@ RKR::InitMIDI()
                                SND_SEQ_PORT_CAP_SUBS_WRITE,
                                SND_SEQ_PORT_TYPE_SYNTH);
 #endif
+#endif
 }
 
 void
 RKR::miramidi()
 {
 #ifndef RKR_PLUS_LV2
+#ifdef ALSA_SUPPORT
     if (snd_seq_event_input_pending(midi_in, 1))
     {
         do
@@ -684,12 +687,14 @@ RKR::miramidi()
         while (snd_seq_event_input_pending(midi_in, 0));
     }
 #endif
+#endif
 }
 
 void
 RKR::midievents()
 {
 #ifndef RKR_PLUS_LV2
+#ifdef ALSA_SUPPORT
     int i;
     snd_seq_event_t *midievent;
     midievent = NULL;
@@ -907,6 +912,7 @@ RKR::midievents()
         parse_sysex();
     }
 #endif // SYSEX_SUPPORT
+#endif
 #endif // #ifndef RKR_PLUS_LV2
 }
 
