@@ -53,7 +53,7 @@ set (BuildOptions_SSE2
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     MESSAGE("USING CLANG OPTIMIZATIONS")
     set(BuildOptions_Vectorization
-        "-ftree-vectorize"
+        "-ftree-vectorize -fhonor-nans -fhonor-infinities -Wno-vla-cxx-extension"
         CACHE STRING "Vectorization compiler options"
     )
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
