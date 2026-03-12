@@ -27,6 +27,7 @@
 #include <math.h>
 #include "WahWah.h"
 #include <stdio.h>
+#include <unistd.h>	// usleep()
 
 WahWah::WahWah(double sample_rate, uint32_t intermediate_bufsize) :
     Effect(sample_rate, intermediate_bufsize),
