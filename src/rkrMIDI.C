@@ -28,7 +28,8 @@
 #include <FL/Fl_Preferences.H>
 
 #ifdef RKR_PLUS_LV2
-#include<lv2/lv2plug.in/ns/ext/midi/midi.h>
+#include <lv2/lv2plug.in/ns/ext/midi/midi.h>
+#include <unistd.h>		// usleep()
 #endif
 
 /* MIDI control defines (Max - Min) / 127 - parameter ranges  */
