@@ -52,13 +52,13 @@ set (BuildOptions_SSE2
 )
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    MESSAGE("USING CLANG OPTIMIZATIONS")
+    message(STATUS "USING CLANG OPTIMIZATIONS")
     set(BuildOptions_Vectorization
         "-ftree-vectorize -fhonor-nans -fhonor-infinities -Wno-vla-cxx-extension"
         CACHE STRING "Vectorization compiler options"
     )
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    MESSAGE("USING GNU OPTIMIZATIONS")
+    message(STATUS "USING GNU OPTIMIZATIONS")
     set(BuildOptions_Vectorization
         "-ftree-vectorize -fvect-cost-model"
         CACHE STRING "Vectorization compiler options"
@@ -79,6 +79,14 @@ set (BuildOptionsDebug
     "-std=c++11 -Wno-cast-function-type -O0 -g3 -ggdb -Wall -Wextra -Wpointer-arith"
     CACHE STRING "Debug build flags"
 )
+
+if(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
+    message(STATUS "Building on FreeBSD")
+    list(PREPEND CMAKE_PREFIX_PATH "/usr/local")
+    link_directories("/usr/local/lib")
+    include_directories(SYSTEM "/usr/local/include")
+    set (ENABLE_ALSA_MIDI "OFF")
+endif()
 
 find_package (PkgConfig REQUIRED)
 
