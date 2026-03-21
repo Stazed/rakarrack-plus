@@ -2,7 +2,7 @@
 # To use: makepkg -p PKGBUILD.lv2 -si
 pkgname=rakarrack-plus-LV2s
 _gitname=rakarrack-plus
-pkgver=1.4.0
+pkgver=1.4.1
 pkgrel=1
 pkgdesc="Rakarrack-plus LV2s only - git version)"
 arch=('i686' 'x86_64' 'aarch64')
@@ -26,7 +26,7 @@ build(){
   cd "$srcdir/build"
   cmake "$srcdir/${_gitname}" \
         -DCMAKE_BUILD_TYPE=Release \
-        -DBuildRakarrackPlus=OFF \
+        -DBUILD_RPLUS_STANDALONE=OFF \
         -DCMAKE_INSTALL_PREFIX="/usr"
   make
 }
