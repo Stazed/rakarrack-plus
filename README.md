@@ -119,7 +119,6 @@ Additional features, enhancements:
     - For LV2 the AUX port is disabled to allow for insertion with LV2 host stereo tracks.
     - For LV2 the Tap Tempo can be synced to the host by selecting 'Input' to be 'Jack Transport (LV2)'
     - For LV2 all main window rack effects and 'Settings' are saved for each instance.
-    - For LV2 the MIDI Converter FFT option is disabled do to fftw library incompatibility.
 
 Rakarrack-plus-1.2.0
 --------------------
