@@ -3609,16 +3609,19 @@ int RKRGUI::global_shortcuts(int event)
     }
     else
     {
-        if ((Fl::event_key(ASCII_Plus)) || (Fl::event_key(FL_KP + ASCII_Plus))) // +(plus) key
+        if ( !Fl::event_key(FL_Control_L) && !Fl::event_key(FL_Control_R))  // Used by FLTK 1.4 for scaling
         {
-            process_rkr->Gui_Refresh = GUI_Refresh_Plus_Key;
-            return 1;
-        }
+            if ((Fl::event_key(ASCII_Plus)) || (Fl::event_key(FL_KP + ASCII_Plus))) // +(plus) key
+            {
+                process_rkr->Gui_Refresh = GUI_Refresh_Plus_Key;
+                return 1;
+            }
 
-        if ((Fl::event_key(ASCII_Minus)) || (Fl::event_key(FL_KP + ASCII_Minus))) // -(minus) key
-        {
-            process_rkr->Gui_Refresh = GUI_Refresh_Minus_Key;
-            return 1;
+            if ((Fl::event_key(ASCII_Minus)) || (Fl::event_key(FL_KP + ASCII_Minus))) // -(minus) key
+            {
+                process_rkr->Gui_Refresh = GUI_Refresh_Minus_Key;
+                return 1;
+            }
         }
 
         if (Fl::event_key(FL_F + 2)) // F2 key - decrease output volume
