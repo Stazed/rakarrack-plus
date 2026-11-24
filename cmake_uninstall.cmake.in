@@ -33,3 +33,50 @@ foreach(file ${files})
     message(STATUS "File $ENV{DESTDIR}${file} does not exist.")
   endif(IS_SYMLINK "$ENV{DESTDIR}${file}" OR EXISTS "$ENV{DESTDIR}${file}")
 endforeach(file)
+
+# Remove empty directories from package specific locations
+set(package_roots "@UNINSTALL_PACKAGE_ROOTS@")
+
+foreach(file IN LISTS files)
+  set(path "$ENV{DESTDIR}${file}")
+  get_filename_component(dir "${path}" DIRECTORY)
+
+  # Find the package-owned root that contains this file.
+  foreach(root IN LISTS package_roots)
+    set(root_path "$ENV{DESTDIR}${root}")
+
+    # Normalize paths before comparing them.
+    cmake_path(NORMAL_PATH dir)
+    cmake_path(NORMAL_PATH root_path)
+
+    cmake_path(IS_PREFIX root_path "${dir}" NORMALIZE is_within_root)
+    if(NOT is_within_root AND NOT dir STREQUAL root_path)
+      continue()
+    endif()
+
+    # Remove empty directories from the file's parent up through the root.
+    while(TRUE)
+      execute_process(
+        COMMAND rmdir "${dir}"
+        RESULT_VARIABLE rmdir_result
+        ERROR_QUIET
+      )
+
+      if(rmdir_result EQUAL 0)
+        message(STATUS "Removed empty directory ${dir}")
+      endif()
+
+      if(dir STREQUAL root_path)
+        break()
+      endif()
+
+      get_filename_component(parent "${dir}" DIRECTORY)
+      if(parent STREQUAL dir)
+        break()
+      endif()
+      set(dir "${parent}")
+    endwhile()
+
+    break()
+  endforeach()
+endforeach()
