@@ -151,7 +151,7 @@ void RKR_Value_Input::value_damage()
     char buf[128];
     format(buf);
     input.value(buf);
-#if defined FLTK_VERSION_1_4 && !defined NTK_SUPPORT
+#if FL_API_VERSION >= 10400 && !defined NTK_SUPPORT
     input.mark(input.insert_position()); // turn off selection highlight
 #else
     input.mark(input.position()); // turn off selection highlight

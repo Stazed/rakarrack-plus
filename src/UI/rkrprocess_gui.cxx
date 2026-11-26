@@ -1512,7 +1512,7 @@ void RKRGUI::save_current_state(int whati)
     }
     else    // Using NSM
     {
-#if defined FLTK_VERSION_1_4 && !defined NTK_SUPPORT
+#if FL_API_VERSION >= 10400 && !defined NTK_SUPPORT
         Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL, Fl_Preferences::USER_L);
 #else
         Fl_Preferences rakarrack(nsm_preferences_file.c_str(), jack_client_name, NULL);

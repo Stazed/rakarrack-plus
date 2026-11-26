@@ -106,7 +106,6 @@ if(BUILD_RPLUS_STANDALONE)
         find_package(FLTK 1.4 CONFIG)
         if(TARGET fltk::fltk-shared)
             message(STATUS "FLTK CONFIG is available")
-            add_definitions(-D'FLTK_VERSION_1_4=1')
         else()
             # If FLTK version is < 1.4 the CONFIG option does not link, so re-run find_package without it.
             find_package(FLTK REQUIRED)
