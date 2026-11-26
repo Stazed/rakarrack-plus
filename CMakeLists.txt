@@ -26,7 +26,6 @@ option (BUILD_RPLUS_LV2 "Build rakarrack-plus LV2 (Rakarrack-Plus.lv2)" ON)
 option (BUILD_LV2_EFFECTS "Build rakarack-plus lv2 plugin effects (RakarrackPlus.lv2)" ON)
 option (BUILD_CARLA_PRESETS "Build Carla presets for lv2 from default banks" OFF)
 option (BUILD_FOR_DEBUG "Include gdb debugging support" OFF)
-option (ENABLE_NTK "Use NTK toolkit for standalone build" OFF)
 option (ENABLE_NSM "Enable NSM session support" ON)
 option (ENABLE_SYSEX "Enable Sysex preset save support" ON)
 option (ENABLE_OPTIMIZATIONS "Enable optimizations" ON)
@@ -38,6 +37,13 @@ option (ENABLE_PFFFT "Use the PFFFT library instead of FFTW" ON)
 option (ENABLE_ZITA "Use Zita Resampler instead of libsamplerate" ON)
 option (ENABLE_ALSA_MIDI "Enable alsa MIDI support" ON)
 
+SET (StandaloneGuiModule fltk  CACHE STRING "Standalone GUI module, either fltk or ntk.")
+
+if(StandaloneGuiModule STREQUAL ntk)
+    set (ENABLE_NTK TRUE)
+else()
+    message(STATUS "GUI module defaulting to fltk")
+endif()
 
 set(CMAKE_BUILD_TYPE "Release")
 
